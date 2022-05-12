@@ -88,7 +88,7 @@ public class ControlManager : Module
 
     private void writeControlsToPlayerPrefs()
     {
-        PlayerPrefs.SetString(PlayerPrefKeys.JSON_CONTROLS, controls.ToJson());
+        PlayerPrefs.SetString(ModuleManager.get<PlayerPrefKeys>().JSON_CONTROLS, controls.ToJson());
     }
 
     private string stripToEmpty(string str)

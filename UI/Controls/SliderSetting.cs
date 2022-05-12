@@ -20,13 +20,13 @@ public class SliderSetting : MonoBehaviour
         switch (option)
         {
             case SliderOption.Mouse_Sensitivity:
-                pref = PlayerPrefKeys.MOUSE_SENSITIVITY;
+                pref = ModuleManager.get<PlayerPrefKeys>().MOUSE_SENSITIVITY;
                 break;
             case SliderOption.Music:
-                pref = PlayerPrefKeys.MUSIC_VOLUME;
+                pref = ModuleManager.get<PlayerPrefKeys>().MUSIC_VOLUME;
                 break;
             case SliderOption.Sound:
-                pref = PlayerPrefKeys.SOUND_VOLUME;
+                pref = ModuleManager.get<PlayerPrefKeys>().SOUND_VOLUME;
                 break;
         }
         slider = gameObject.GetComponent<Slider>();
