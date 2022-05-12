@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ControlManager : Modul
+public class ControlManager : Module
 {
     [SerializeField] private InputActionAsset controls;
     [SerializeField] private string actionMapName; //Root object in controls

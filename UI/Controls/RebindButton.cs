@@ -22,7 +22,7 @@ public class RebindButton : MonoBehaviour, IPointerClickHandler
     {
         alternateText = "";
         textChild = (Text)gameObject.GetComponentInChildren(typeof(Text));
-        manager = ModulManager.get<ControlManager>();
+        manager = ModuleManager.get<ControlManager>();
     }
     public void OnGUI()
     {

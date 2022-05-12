@@ -33,8 +33,8 @@ public class MenuWheel : MonoBehaviour
             index++;
         }
 
-        ModulManager.get<UIEventManager>().menuWheelNext += moveNext;
-        ModulManager.get<UIEventManager>().menuWheelPrevious += movePrev;
+        ModuleManager.get<UIEventManager>().menuWheelNext += moveNext;
+        ModuleManager.get<UIEventManager>().menuWheelPrevious += movePrev;
     }
     private void Update()
     {

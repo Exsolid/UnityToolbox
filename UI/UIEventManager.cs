@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class UIEventManager : Modul
+public class UIEventManager : Module
 {
     public Action menuWheelPrevious;
     public Action menuWheelNext;
