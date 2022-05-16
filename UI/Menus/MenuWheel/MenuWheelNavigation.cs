@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class MenuWheelNavigation : MonoBehaviour, IPointerUpHandler
+public class MenuWheelNavigation : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] MenuWheelNavigationTypes direction;
-    private void OnMouseUp()
+    public void OnMouseUp()
     {
         switch (direction)
         {
@@ -19,7 +19,7 @@ public class MenuWheelNavigation : MonoBehaviour, IPointerUpHandler
         }
     }
 
-    public void OnPointerUp(PointerEventData data)
+    public void OnPointerClick(PointerEventData data)
     {
         switch (direction)
         {
