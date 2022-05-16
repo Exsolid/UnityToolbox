@@ -27,4 +27,9 @@ public class ModuleManager : MonoBehaviour
     {
         return (T)instance.Moduls.Where(modul => modul.GetType() == typeof(T)).First();
     }
+
+    public static bool isLoaded()
+    {
+        return instance != null;
+    }
 }

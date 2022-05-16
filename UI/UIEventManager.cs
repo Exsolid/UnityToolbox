@@ -8,6 +8,9 @@ public class UIEventManager : Module
     public Action menuWheelPrevious;
     public Action menuWheelNext;
 
+    public Action<bool> togglePauseMenu;
+    private bool isPaused;
+
     public void MenuWheelPrevious()
     {
         if(menuWheelPrevious != null)
@@ -20,6 +23,14 @@ public class UIEventManager : Module
         if (menuWheelNext != null)
         {
             menuWheelNext();
+        }
+    }
+    public void TogglePauseMenu()
+    {
+        isPaused = !isPaused;
+        if (togglePauseMenu != null)
+        {
+            togglePauseMenu(isPaused);
         }
     }
 }
