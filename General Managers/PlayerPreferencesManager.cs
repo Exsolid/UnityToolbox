@@ -4,6 +4,4 @@ using UnityEngine;
 
 public class PlayerPreferencesManager : Module
 {
-    [SerializeField] private string keyword = "";
-    public string Keyword { get { return keyword + "_"; } }
 }

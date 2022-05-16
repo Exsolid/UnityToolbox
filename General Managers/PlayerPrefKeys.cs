@@ -4,11 +4,20 @@ using UnityEngine;
 
 public class PlayerPrefKeys : Module
 {
-    public readonly string JSON_CONTROLS = ModuleManager.get<PlayerPreferencesManager>().Keyword + "Controls";
-    public readonly string MOUSE_SENSITIVITY = ModuleManager.get<PlayerPreferencesManager>().Keyword + "Mouse_Sensitivity";
-    public readonly string SOUND_VOLUME = ModuleManager.get<PlayerPreferencesManager>().Keyword + "Sound_Volume";
-    public readonly string MUSIC_VOLUME = ModuleManager.get<PlayerPreferencesManager>().Keyword + "Music_Volume";
+    [SerializeField] private string keyword = "";
+    public string Keyword { get { return keyword + "_"; } }
 
-    public readonly string PREV_SCENE = ModuleManager.get<PlayerPreferencesManager>().Keyword + "Previous_Scene";
-    public readonly string GAMEPLAY_STATE = ModuleManager.get<PlayerPreferencesManager>().Keyword + "Gameplay_State";
+    public readonly string JSON_CONTROLS = "Controls";
+    public readonly string MOUSE_SENSITIVITY = "Mouse_Sensitivity";
+    public readonly string SOUND_VOLUME = "Sound_Volume";
+    public readonly string MUSIC_VOLUME = "Music_Volume";
+
+    public readonly string PREV_SCENE = "Previous_Scene";
+    public readonly string GAMEPLAY_STATE = "Gameplay_State";
+
+    public override void Awake()
+    {
+
+        base.Awake();
+    }
 }

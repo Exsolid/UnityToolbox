@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 public class ModuleManager : MonoBehaviour
 {
@@ -15,10 +16,10 @@ public class ModuleManager : MonoBehaviour
         moduls = new List<Module>();
     }
 
-    public static bool registerModul<T>(T modul) where T : Module
+    public static bool registerModul<T>(T module) where T : Module
     {
-        if (instance.Moduls.OfType<T>().Any()) return false;
-        instance.Moduls.Add(modul);
+        if (instance.Moduls.Where(mod => mod.GetType().IsEquivalentTo(module.GetType())).Any()) return false;
+        instance.Moduls.Add(module);
         return true;
     }
 
