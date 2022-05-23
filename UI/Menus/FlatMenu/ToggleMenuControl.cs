@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine;
 
-public class ToggleMenuControls : MonoBehaviour
+public class ToggleMenuControl : MonoBehaviour
 {
     [SerializeField] private string actionName;
 

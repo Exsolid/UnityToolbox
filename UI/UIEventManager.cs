@@ -11,6 +11,8 @@ public class UIEventManager : Module
     public Action<bool> togglePauseMenu;
     private bool isPaused;
 
+    public Action<DialogNode> dialogNodeChanged;
+
     public void MenuWheelPrevious()
     {
         if(menuWheelPrevious != null)
@@ -31,6 +33,14 @@ public class UIEventManager : Module
         if (togglePauseMenu != null)
         {
             togglePauseMenu(isPaused);
+        }
+    }
+
+    public void DialogNodeChanged(DialogNode currentNode)
+    {
+        if (dialogNodeChanged != null)
+        {
+            dialogNodeChanged(currentNode);
         }
     }
 }

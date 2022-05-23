@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class GotoMenu : MonoBehaviour, IPointerClickHandler
+public class GotoMenuButton : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private Canvas menu;
 

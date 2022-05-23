@@ -16,6 +16,8 @@ public class PlayerPrefKeys : Module
     public static string PREV_SCENE = "PREV_SCENE";
     public static string GAMEPLAY_STATE = "GAMEPLAY_STATE";
 
+    public static string DEBUG_ORIGINAL_SCENE = "DEBUG_ORIGINAL_SCNENE";
+
     public override void Awake()
     {
         base.Awake();

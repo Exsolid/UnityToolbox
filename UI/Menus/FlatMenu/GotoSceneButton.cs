@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-public class GotoScene : MonoBehaviour, IPointerDownHandler
+public class GotoSceneButton : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField] private string sceneName;
 
