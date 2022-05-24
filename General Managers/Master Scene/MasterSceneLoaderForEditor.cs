@@ -12,7 +12,7 @@ public class MasterSceneLoaderForEditor
         SceneAsset myWantedStartScene = AssetDatabase.LoadAssetAtPath<SceneAsset>("Assets/Scenes/Master.unity");
         if (myWantedStartScene != null)
         {
-            if (EditorSceneManager.playModeStartScene == null || EditorSceneManager.playModeStartScene.Equals(myWantedStartScene)) return;
+            if (EditorSceneManager.playModeStartScene != null && EditorSceneManager.playModeStartScene.Equals(myWantedStartScene)) return;
             EditorSceneManager.playModeStartScene = myWantedStartScene;
             Debug.Log("Setting up 'Master' scene for load priority.");
         }

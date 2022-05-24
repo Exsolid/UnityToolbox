@@ -30,7 +30,7 @@ public class ShowCurrentDialog : MonoBehaviour
             parentCanvas.enabled = true;
             title.text = currentNode.title;
             description.text = currentNode.description;
-            if (currentNode.options.Count > options.Count) Debug.LogWarning("Not all options can be displayed! Missing sufficient textboxes.");
+            if (currentNode.options != null && currentNode.options.Count > options.Count) Debug.LogWarning("Not all options can be displayed! Missing sufficient textboxes.");
             for (int i = 0; i < options.Count; i++)
             {
                 if (currentNode.options.Count > i) options[i].text = currentNode.options[i];
