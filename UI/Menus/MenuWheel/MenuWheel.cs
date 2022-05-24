@@ -36,6 +36,13 @@ public class MenuWheel : MonoBehaviour
         ModuleManager.get<UIEventManager>().menuWheelNext += moveNext;
         ModuleManager.get<UIEventManager>().menuWheelPrevious += movePrev;
     }
+
+    private void OnDestroy()
+    {
+        ModuleManager.get<UIEventManager>().menuWheelNext -= moveNext;
+        ModuleManager.get<UIEventManager>().menuWheelPrevious -= movePrev;
+    }
+
     private void Update()
     {
         if(currentTimer > 0)

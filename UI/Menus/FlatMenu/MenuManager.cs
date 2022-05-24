@@ -18,6 +18,11 @@ public class MenuManager : Module
         ModuleManager.get<UIEventManager>().togglePauseMenu += toggleMenu;
     }
 
+    private void OnDestroy()
+    {
+        ModuleManager.get<UIEventManager>().togglePauseMenu -= toggleMenu;
+    }
+
     public void setActiveMenu(Canvas menu)
     {
         currentActiv.enabled = false;
