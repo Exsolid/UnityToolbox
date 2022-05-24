@@ -7,10 +7,11 @@ using UnityEngine.EventSystems;
 public class ShowOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private GameObject toShow;
+    [SerializeField] private Canvas parentCanvas;
 
     public void OnPointerEnter(PointerEventData data)
     {
-        toShow.GetComponent<Image>().enabled = true;
+        if(parentCanvas.enabled) toShow.GetComponent<Image>().enabled = true;
     }
 
     public void OnPointerExit(PointerEventData data)

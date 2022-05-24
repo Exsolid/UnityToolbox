@@ -5,8 +5,10 @@ using UnityEngine.EventSystems;
 
 public class QuitButton : MonoBehaviour, IPointerDownHandler
 {
+    [SerializeField] private Canvas parentCanvas;
+
     public void OnPointerDown(PointerEventData data)
     {
-        Application.Quit();
+        if (parentCanvas.enabled) Application.Quit();
     }
 }

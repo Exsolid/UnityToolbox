@@ -7,9 +7,10 @@ using UnityEngine.SceneManagement;
 public class GotoSceneButton : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField] private string sceneName;
+    [SerializeField] private Canvas parentCanvas;
 
     public void OnPointerDown(PointerEventData data)
     {
-        SceneManager.LoadScene(sceneName);
+        if (parentCanvas.enabled) SceneManager.LoadScene(sceneName);
     }
 }

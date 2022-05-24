@@ -7,6 +7,7 @@ using System.Linq;
 public class NextDialogButton : MonoBehaviour, IPointerDownHandler
 {
     private bool areOptionsPresent;
+    [SerializeField] private Canvas parentCanvas;
 
     private void Start()
     {
@@ -25,6 +26,6 @@ public class NextDialogButton : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData data)
     {
-        if(!areOptionsPresent) ModuleManager.get<DialogManager>().nextNode();
+        if(!areOptionsPresent && parentCanvas.enabled) ModuleManager.get<DialogManager>().nextNode();
     }
 }
