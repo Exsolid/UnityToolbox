@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using System;
 
+[Serializable]
 public class ModuleManager : MonoBehaviour
 {
     private static ModuleManager instance;
@@ -12,6 +13,11 @@ public class ModuleManager : MonoBehaviour
 
     private void Awake()
     {
+
+        if (!ModuleManager.isLoaded())
+        {
+            DontDestroyOnLoad(this.gameObject);
+        }
         instance = this;
         moduls = new List<Module>();
     }
@@ -20,6 +26,7 @@ public class ModuleManager : MonoBehaviour
     {
         if (instance.Moduls.Where(mod => mod.GetType().IsEquivalentTo(module.GetType())).Any()) return false;
         instance.Moduls.Add(module);
+        Debug.Log("Registered module '" + module.GetType().Name + "'");
         return true;
     }
 

@@ -7,9 +7,5 @@ public class DontDestroyOnLoad : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(GameObject.Find(this.name) == null)
-        {
-            DontDestroyOnLoad(this.gameObject);
-        }
     }
 }
