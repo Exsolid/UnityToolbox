@@ -15,6 +15,8 @@ public class RebindButton : MonoBehaviour, IPointerClickHandler
 
     private Text textChild;
 
+    private bool otherIsSetting;
+
     private ControlManager manager;
     [SerializeField] Canvas parentCanvas;
 
@@ -23,6 +25,7 @@ public class RebindButton : MonoBehaviour, IPointerClickHandler
         alternateText = "";
         textChild = (Text)gameObject.GetComponentInChildren(typeof(Text));
         manager = ModuleManager.get<ControlManager>();
+        ModuleManager.get<UIEventManager>().bindingKey += (isSetting) => { otherIsSetting = isSetting; };
     }
     public void OnGUI()
     {
@@ -50,8 +53,9 @@ public class RebindButton : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (!isSetting && parentCanvas.enabled)
+        if (!isSetting && parentCanvas.enabled && !otherIsSetting)
         {
+            ModuleManager.get<UIEventManager>().BindingKey(true);
             StartCoroutine(setEvent());
             isSetting = true;
         }
@@ -83,6 +87,7 @@ public class RebindButton : MonoBehaviour, IPointerClickHandler
         setKeyToControl(keyPress, isKeyboard ? "<Keyboard>/" : "<Mouse>/");
         yield return new WaitForSeconds(0.3f);
         isSetting = false;
+        ModuleManager.get<UIEventManager>().BindingKey(false);
     }
 
     private string returnKeyCode(string path)

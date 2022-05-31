@@ -13,6 +13,8 @@ public class UIEventManager : Module
 
     public Action<DialogNode> dialogNodeChanged;
 
+    public Action<bool> bindingKey;
+
     public void MenuWheelPrevious()
     {
         if(menuWheelPrevious != null)
@@ -41,6 +43,14 @@ public class UIEventManager : Module
         if (dialogNodeChanged != null)
         {
             dialogNodeChanged(currentNode);
+        }
+    }
+
+    public void BindingKey(bool isBindingKey)
+    {
+        if (bindingKey != null)
+        {
+            bindingKey(isBindingKey);
         }
     }
 }
