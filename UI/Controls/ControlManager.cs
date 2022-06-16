@@ -7,9 +7,6 @@ public class ControlManager : Module
 {
     [SerializeField] private InputActionAsset controls;
     [SerializeField] private string actionMapName; //Root object in controls
-    [SerializeField] private string actionNameMoving; //Child object in controls
-    [SerializeField] private string actionNameReturn; //Child object in controls
-    [SerializeField] private string actionNameInteract; //Child object in controls
 
 
     private Dictionary<string, string> initConToKey;
@@ -22,21 +19,13 @@ public class ControlManager : Module
         //PlayerPrefs.DeleteAll();
         initConToKey = new Dictionary<string, string>();
         currentConToKey = new Dictionary<string, string>();
-
-        foreach (InputBinding bc in controls.FindActionMap(actionMapName).FindAction(actionNameMoving).bindings)
+        foreach (InputAction act in controls.FindActionMap(actionMapName).actions)
         {
-            initConToKey.Add(bc.name.ToLower(), bc.path.ToLower());
-            currentConToKey.Add(bc.name.ToLower(), bc.path.ToLower());
-        }
-        foreach (InputBinding bc in controls.FindActionMap(actionMapName).FindAction(actionNameReturn).bindings)
-        {
-            initConToKey.Add(actionNameReturn.ToLower(), bc.path.ToLower());
-            currentConToKey.Add(actionNameReturn.ToLower(), bc.path.ToLower());
-        }
-        foreach (InputBinding bc in controls.FindActionMap(actionMapName).FindAction(actionNameInteract).bindings)
-        {
-            initConToKey.Add(actionNameInteract.ToLower(), bc.path.ToLower());
-            currentConToKey.Add(actionNameInteract.ToLower(), bc.path.ToLower());
+            foreach (InputBinding bc in act.bindings)
+            {
+                initConToKey.Add(bc.name.Equals("") ? bc.action.ToLower() : bc.name.ToLower(), bc.path.ToLower());
+                currentConToKey.Add(bc.name.Equals("") ? bc.action.ToLower() : bc.name.ToLower(), bc.path.ToLower());
+            }
         }
     }
 
@@ -68,15 +57,24 @@ public class ControlManager : Module
 
     public void resetAllKeys()
     {
-        InputAction ac = controls.FindAction(actionNameMoving);
-        foreach (InputBinding bc in controls.FindActionMap(actionMapName).FindAction(actionNameMoving).bindings)
+        foreach (InputAction act in controls.FindActionMap(actionMapName).actions)
         {
-            if (!bc.name.Equals("Controls"))
+            foreach (InputBinding bc in act.bindings)
             {
-                ac.ChangeBindingWithPath(currentConToKey[bc.name.ToLower()]).WithPath(initConToKey[bc.name.ToLower()]);
-                currentConToKey[bc.name.ToLower()] = initConToKey[bc.name.ToLower()];
+                act.ChangeBindingWithPath(currentConToKey[bc.name.Equals("") ? bc.action.ToLower() : bc.name.ToLower()]).WithPath(initConToKey[bc.name.Equals("") ? bc.action.ToLower() : bc.name.ToLower()]);
+                currentConToKey[bc.name.Equals("") ? bc.action.ToLower() : bc.name.ToLower()] = initConToKey[bc.name.Equals("") ? bc.action.ToLower() : bc.name.ToLower()];
+                    
             }
         }
+        //InputAction ac = controls.FindAction(actionNameMoving);
+        //foreach (InputBinding bc in controls.FindActionMap(actionMapName).FindAction(actionNameMoving).bindings)
+        //{
+        //    if (!bc.name.Equals("Controls"))
+        //    {
+        //        ac.ChangeBindingWithPath(currentConToKey[bc.name.ToLower()]).WithPath(initConToKey[bc.name.ToLower()]);
+        //        currentConToKey[bc.name.ToLower()] = initConToKey[bc.name.ToLower()];
+        //    }
+        //}
     }
 
     public string currentValueOfControl(string control, string actionName)
