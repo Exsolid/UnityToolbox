@@ -23,11 +23,12 @@ public class Movement : MonoBehaviour
         int everyMaskExcept =~ LayerMask.GetMask("Player");
         grounded = Physics2D.Raycast(bottomTransform.position, transform.up * -1, 0.2f, everyMaskExcept);
         move(input.actions[actionName].ReadValue<Vector2>());
+
     }
 
     public void move(Vector3 direction)
     {
         Debug.Log(direction);
-        GetComponent<Rigidbody2D>().AddForce(new Vector3(direction.x * speed, grounded.transform != null ? direction.y * jumpForce : 0, direction.z));
+        GetComponent<Rigidbody2D>().AddForce(new Vector3(direction.x * speed, 0, direction.z * speed));
     }
 }

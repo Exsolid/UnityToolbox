@@ -45,6 +45,7 @@ public class SliderSetting : MonoBehaviour
         if (timer < 0 && timer != -10)
         {
             PlayerPrefs.SetFloat(pref, slider.value / slider.maxValue);
+            ModuleManager.get<ControlManager>().ValueChanged(pref, slider.value / slider.maxValue);
             timer = -10;
         }
     }
@@ -54,6 +55,7 @@ public class SliderSetting : MonoBehaviour
         if (timer < 0)
         {
             PlayerPrefs.SetFloat(pref, slider.value / slider.maxValue);
+            ModuleManager.get<ControlManager>().ValueChanged(pref, slider.value / slider.maxValue);
         }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
 
 public class ControlManager : Module
 {
@@ -9,6 +10,8 @@ public class ControlManager : Module
 
     private Dictionary<string, string> initConToKey;
     private Dictionary<string, string> currentConToKey;
+
+    public Action<string, float> valueChanged;
 
     void Start()
     {
@@ -81,5 +84,13 @@ public class ControlManager : Module
     private string stripToEmpty(string str)
     {
         return str == null ? "" : str;
+    }
+
+    public void ValueChanged(string id, float newValue)
+    {
+        if (valueChanged != null)
+        {
+            valueChanged(id, newValue);
+        }
     }
 }

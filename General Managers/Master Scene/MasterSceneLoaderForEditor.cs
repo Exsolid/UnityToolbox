@@ -9,7 +9,7 @@ public class MasterSceneLoaderForEditor
 {
     static MasterSceneLoaderForEditor()
     {
-        SceneAsset myWantedStartScene = AssetDatabase.LoadAssetAtPath<SceneAsset>("Assets/Scenes/Master.unity");
+        SceneAsset myWantedStartScene = AssetDatabase.LoadAssetAtPath<SceneAsset>("Assets/!Scenes/Master.unity");
         if (myWantedStartScene != null)
         {
             if (EditorSceneManager.playModeStartScene != null && EditorSceneManager.playModeStartScene.Equals(myWantedStartScene)) return;
@@ -25,7 +25,7 @@ public class MasterSceneLoaderForEditor
     [InitializeOnEnterPlayMode]
     static void OnEnterPlaymodeInEditor(EnterPlayModeOptions options)
     {
-        SceneAsset myWantedStartScene = AssetDatabase.LoadAssetAtPath<SceneAsset>("Assets/Scenes/Master.unity");
+        SceneAsset myWantedStartScene = AssetDatabase.LoadAssetAtPath<SceneAsset>("Assets/!Scenes/Master.unity");
         if (myWantedStartScene != null && EditorSceneManager.playModeStartScene != null && EditorSceneManager.playModeStartScene.Equals(myWantedStartScene))
         {
             Debug.Log("'Master' scene has been set up.");
