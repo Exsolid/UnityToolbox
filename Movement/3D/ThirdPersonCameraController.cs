@@ -12,6 +12,8 @@ public class ThirdPersonCameraController : MonoBehaviour
     [SerializeField] private Camera cam;
     [SerializeField] private Collider camCollider;
     [SerializeField] private float camMoveSpeed;
+    [SerializeField] private List<string> collidingLayers;
+    private int layerMask;
     private float currentDistanceFromTarget;
 
     [SerializeField] private string mouseMoveActionName;
@@ -30,6 +32,10 @@ public class ThirdPersonCameraController : MonoBehaviour
         input = GetComponent<PlayerInput>();
         mouseSense = PlayerPrefs.GetFloat(ModuleManager.get<PlayerPrefKeys>().getPrefereceKey(PlayerPrefKeys.MOUSE_SENSITIVITY));
         ModuleManager.get<ControlManager>().valueChanged += (id, newValue) => { if (id.Equals(ModuleManager.get<PlayerPrefKeys>().getPrefereceKey(PlayerPrefKeys.MOUSE_SENSITIVITY))) mouseSense = newValue; };
+        foreach(string layer in collidingLayers)
+        {
+            layerMask = layerMask | LayerMask.GetMask(layer);
+        }
     }
 
     // Update is called once per frame
@@ -64,12 +70,12 @@ public class ThirdPersonCameraController : MonoBehaviour
     {
         float disctancePosition = Vector3.Distance(positionTransform.position, anchorTransform.position);
         float disctanceCamera = Vector3.Distance(cam.transform.position, anchorTransform.position);
-        if (Physics.OverlapBox(cam.transform.position, camCollider.bounds.size / 2, Quaternion.identity, LayerMask.GetMask("Ground")).Any() && disctanceCamera > 1)
+        if (Physics.OverlapBox(cam.transform.position, camCollider.bounds.size / 2, Quaternion.identity, layerMask).Any() && disctanceCamera > 1)
         {
             currentDistanceFromTarget = Vector3.Distance(positionTransform.position + Vector3.Scale(camCollider.bounds.size / 2, cam.transform.forward), targetToFollow.transform.position);
             positionTransform.position = Vector3.Lerp(positionTransform.position + currentDistanceFromTarget * cam.transform.forward, positionTransform.position, 0.9f);
         }
-        else if(!Physics.OverlapBox(cam.transform.position, camCollider.bounds.size / 1.5f, Quaternion.identity, LayerMask.GetMask("Ground")).Any() && disctancePosition > 1)
+        else if(!Physics.OverlapBox(cam.transform.position, camCollider.bounds.size / 1.5f, Quaternion.identity, layerMask).Any() && disctancePosition > 1)
         {
             currentDistanceFromTarget = Vector3.Distance(positionTransform.position + Vector3.Scale(camCollider.bounds.size / 2, cam.transform.forward), targetToFollow.transform.position);
             positionTransform.position = Vector3.Lerp(positionTransform.position - currentDistanceFromTarget * cam.transform.forward, positionTransform.position, 0.9f);
