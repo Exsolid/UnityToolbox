@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Movement : MonoBehaviour
+public class MovementTwoD : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private float jumpForce;
@@ -23,18 +23,17 @@ public class Movement : MonoBehaviour
         int everyMaskExcept =~ LayerMask.GetMask("Player");
         grounded = Physics2D.Raycast(bottomTransform.position, transform.up * -1, 0.08f, everyMaskExcept);
         move(input.actions[actionName].ReadValue<Vector2>());
-        Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y, Camera.main.transform.position.z);
     }
 
     public void move(Vector3 direction)
     {
-        if (direction.x != 0 || direction.y != 0) ModuleManager.get<LevelEventmanager>().Moving(GetComponent<Rigidbody2D>().velocity);
+        ModuleManager.get<PlayerEventmanager>().Move(GetComponent<Rigidbody2D>().velocity);
         GetComponent<Rigidbody2D>().AddForce(new Vector3(direction.x * speed, 0, direction.z * speed));
     }
 
     public void moveWithStrength(Vector3 direction, float strength)
     {
-        if (direction.x != 0 || direction.y != 0) ModuleManager.get<LevelEventmanager>().Moving(GetComponent<Rigidbody2D>().velocity);
+        ModuleManager.get<PlayerEventmanager>().Move(GetComponent<Rigidbody2D>().velocity);
         GetComponent<Rigidbody2D>().AddForce(new Vector3(direction.x * strength, direction.y * strength, direction.z));
     }
 }
