@@ -32,7 +32,9 @@ public class ModuleManager : MonoBehaviour
 
     public static T get<T>() where T : Module
     {
-        return (T)instance.Moduls.Where(modul => modul.GetType() == typeof(T)).First();
+        var toReturn = instance.Moduls.Where(modul => modul.GetType() == typeof(T));
+        if (!toReturn.Any()) throw new Exception("Module of type " + typeof(T).Name + " not registered!");
+        return (T)toReturn.First();
     }
 
     public static bool isLoaded()

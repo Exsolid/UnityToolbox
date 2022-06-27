@@ -14,6 +14,9 @@ public abstract class Item : MonoBehaviour
     [SerializeField] protected Sprite _icon;
     public Sprite Icon { get { return _icon; } set { _icon = value; } }
 
+    [SerializeField] protected GameObject _model;
+    public GameObject Model { get { return _model; } set { _model = value; } }
+
     private string _indentifier;
     public string Indentifier { get { return _indentifier; }
         set {

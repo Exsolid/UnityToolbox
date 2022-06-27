@@ -5,22 +5,23 @@ using UnityEngine;
 
 public class ToggleMenuControl : MonoBehaviour
 {
-    [SerializeField] private string actionName;
+    [SerializeField] private string _actionName;
+    [SerializeField] private MenuType _menuType;
 
-    private PlayerInput input;
+    private PlayerInput _input;
 
-    private bool isBinding;
+    private bool _isBinding;
 
     private void Start()
     {
-        input = GetComponent<PlayerInput>();
-        ModuleManager.get<UIEventManager>().bindingKey += (isSetting) => {isBinding = isSetting; };
+        _input = GetComponent<PlayerInput>();
+        ModuleManager.get<UIEventManager>().bindingKey += (isSetting) => {_isBinding = isSetting; };
     }
     private void Update()
     {
-        if (input != null && input.actions[actionName].triggered && !isBinding)
+        if (_input != null && _input.actions[_actionName].triggered && !_isBinding)
         {
-            ModuleManager.get<UIEventManager>().TogglePauseMenu();
+            ModuleManager.get<UIEventManager>().ToggleMenu(_menuType);
         }   
     }
 }

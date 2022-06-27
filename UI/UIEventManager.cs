@@ -8,8 +8,9 @@ public class UIEventManager : Module
     public Action menuWheelPrevious;
     public Action menuWheelNext;
 
-    public Action<bool> togglePauseMenu;
-    private bool isPaused;
+    public Action<bool, MenuType> toggleMenu;
+    private bool _isPaused;
+    private MenuType _currentPausedType;
 
     public Action<DialogNode> dialogNodeChanged;
 
@@ -29,12 +30,14 @@ public class UIEventManager : Module
             menuWheelNext();
         }
     }
-    public void TogglePauseMenu()
+
+    public void ToggleMenu(MenuType toggledType)
     {
-        isPaused = !isPaused;
-        if (togglePauseMenu != null)
+        if (toggleMenu != null && ((toggledType.Equals(_currentPausedType) && _isPaused) || !_isPaused))
         {
-            togglePauseMenu(isPaused);
+            _isPaused = !_isPaused;
+            _currentPausedType = toggledType;
+            toggleMenu(_isPaused, toggledType);
         }
     }
 
@@ -53,4 +56,10 @@ public class UIEventManager : Module
             bindingKey(isBindingKey);
         }
     }
+}
+
+public enum MenuType
+{
+    Pause,
+    Inventory
 }

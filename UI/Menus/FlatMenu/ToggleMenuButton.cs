@@ -6,11 +6,12 @@ using UnityEngine;
 
 public class ToggleMenuButton : MonoBehaviour, IPointerClickHandler
 {
-    [SerializeField] Canvas parentCanvas;
+    [SerializeField] private Canvas parentCanvas;
+    [SerializeField] private MenuType menuType;
 
     public void OnPointerClick(PointerEventData data)
     {
         if (!parentCanvas.enabled) return;
-        ModuleManager.get<UIEventManager>().TogglePauseMenu();
+        ModuleManager.get<UIEventManager>().ToggleMenu(menuType);
     }
 }
