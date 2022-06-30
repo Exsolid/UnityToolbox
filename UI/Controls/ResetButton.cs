@@ -11,7 +11,7 @@ public class ResetButton : MonoBehaviour, IPointerClickHandler
 
     private void Start()
     {
-        manager = ModuleManager.get<ControlManager>();
+        manager = ModuleManager.GetModule<ControlManager>();
     }
 
     public void OnPointerClick(PointerEventData eventData)

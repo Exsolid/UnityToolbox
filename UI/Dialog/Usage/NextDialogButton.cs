@@ -11,12 +11,12 @@ public class NextDialogButton : MonoBehaviour, IPointerDownHandler
 
     private void Start()
     {
-        ModuleManager.get<UIEventManager>().dialogNodeChanged += changeOptionsPresent;
+        ModuleManager.GetModule<UIEventManager>().dialogNodeChanged += changeOptionsPresent;
     }
 
     private void OnDestroy()
     {
-        ModuleManager.get<UIEventManager>().dialogNodeChanged -= changeOptionsPresent;
+        ModuleManager.GetModule<UIEventManager>().dialogNodeChanged -= changeOptionsPresent;
     }
 
     public void changeOptionsPresent(DialogNode currentNode)
@@ -26,6 +26,6 @@ public class NextDialogButton : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData data)
     {
-        if(!areOptionsPresent && parentCanvas.enabled) ModuleManager.get<DialogManager>().nextNode();
+        if(!areOptionsPresent && parentCanvas.enabled) ModuleManager.GetModule<DialogManager>().nextNode();
     }
 }

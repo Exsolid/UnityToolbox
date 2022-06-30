@@ -24,8 +24,8 @@ public class RebindButton : MonoBehaviour, IPointerClickHandler
     {
         alternateText = "";
         textChild = (Text)gameObject.GetComponentInChildren(typeof(Text));
-        manager = ModuleManager.get<ControlManager>();
-        ModuleManager.get<UIEventManager>().bindingKey += (isSetting) => { otherIsSetting = isSetting; };
+        manager = ModuleManager.GetModule<ControlManager>();
+        ModuleManager.GetModule<UIEventManager>().bindingKey += (isSetting) => { otherIsSetting = isSetting; };
     }
     public void OnGUI()
     {
@@ -55,7 +55,7 @@ public class RebindButton : MonoBehaviour, IPointerClickHandler
     {
         if (!isSetting && parentCanvas.enabled && !otherIsSetting)
         {
-            ModuleManager.get<UIEventManager>().BindingKey(true);
+            ModuleManager.GetModule<UIEventManager>().BindingKey(true);
             StartCoroutine(setEvent());
             isSetting = true;
         }
@@ -87,7 +87,7 @@ public class RebindButton : MonoBehaviour, IPointerClickHandler
         setKeyToControl(keyPress, isKeyboard ? "<Keyboard>/" : "<Mouse>/");
         yield return new WaitForSeconds(0.3f);
         isSetting = false;
-        ModuleManager.get<UIEventManager>().BindingKey(false);
+        ModuleManager.GetModule<UIEventManager>().BindingKey(false);
     }
 
     private string returnKeyCode(string path)

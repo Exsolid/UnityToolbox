@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using System;
 
-public abstract class Item : MonoBehaviour
+public class Item : Saveable
 {
     private Inventory _inventoryOfItem;
     public Inventory Inventory { get { return _inventoryOfItem; } set { _inventoryOfItem = value; } }
@@ -14,21 +15,18 @@ public abstract class Item : MonoBehaviour
     [SerializeField] protected Sprite _icon;
     public Sprite Icon { get { return _icon; } set { _icon = value; } }
 
-    [SerializeField] protected GameObject _model;
-    public GameObject Model { get { return _model; } set { _model = value; } }
-
     private string _indentifier;
     public string Indentifier { get { return _indentifier; }
         set {
             Item item = this.MemberwiseClone() as Item;
             _indentifier = value;
-            _inventoryOfItem.UpdateItem(item, this);
+            if(_inventoryOfItem != null) _inventoryOfItem.UpdateItem(item, this);
         } }
 
     public override bool Equals(object other)
     {
         Type type = other.GetType();
-        if (type.IsSubclassOf(typeof(Item)))
+        if (type.IsSubclassOf(typeof(Item)) || type.Equals(typeof(Item)))
         {
             Item otherAsItem = other as Item;
             string thisIndentifier = _itemName + _indentifier;
@@ -43,5 +41,32 @@ public abstract class Item : MonoBehaviour
     public override int GetHashCode()
     {
         return base.GetHashCode();
+    }
+
+    protected override void LoadData(GameData data)
+    {
+        if (data.GetType().Equals(typeof(ItemData)))
+        {
+            ItemData item = (ItemData)data;
+            _itemName = item.ItemName;
+            if (item.InventoryID != null && !item.InventoryID.Equals(""))
+            {
+                ModuleManager.GetModule<InventoryManager>().GetByID(item.InventoryID).AddItem(this, 1);
+                gameObject.GetComponent<Renderer>().enabled = false;
+            }
+        }
+    }
+
+    protected override List<GameData> SaveData()
+    {
+        ItemData data = new ItemData();
+        data.ItemName = _itemName;
+        if(_inventoryOfItem != null) data.InventoryID = _inventoryOfItem.ID;
+        return new List<GameData>() { data };
+    }
+
+    protected override void OnObjectDeleted()
+    {
+        if(_inventoryOfItem != null) _inventoryOfItem.RemoveItem(this, 1);
     }
 }

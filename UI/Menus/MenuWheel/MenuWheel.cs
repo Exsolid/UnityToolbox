@@ -33,14 +33,14 @@ public class MenuWheel : MonoBehaviour
             index++;
         }
 
-        ModuleManager.get<UIEventManager>().menuWheelNext += moveNext;
-        ModuleManager.get<UIEventManager>().menuWheelPrevious += movePrev;
+        ModuleManager.GetModule<UIEventManager>().menuWheelNext += moveNext;
+        ModuleManager.GetModule<UIEventManager>().menuWheelPrevious += movePrev;
     }
 
     private void OnDestroy()
     {
-        ModuleManager.get<UIEventManager>().menuWheelNext -= moveNext;
-        ModuleManager.get<UIEventManager>().menuWheelPrevious -= movePrev;
+        ModuleManager.GetModule<UIEventManager>().menuWheelNext -= moveNext;
+        ModuleManager.GetModule<UIEventManager>().menuWheelPrevious -= movePrev;
     }
 
     private void Update()

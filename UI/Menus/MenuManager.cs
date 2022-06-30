@@ -26,12 +26,12 @@ public class MenuManager : Module
             }
         }
 
-        ModuleManager.get<UIEventManager>().toggleMenu += toggleMenu;
+        ModuleManager.GetModule<UIEventManager>().toggleMenu += toggleMenu;
     }
 
     private void OnDestroy()
     {
-        ModuleManager.get<UIEventManager>().toggleMenu -= toggleMenu;
+        ModuleManager.GetModule<UIEventManager>().toggleMenu -= toggleMenu;
     }
 
     public void setActiveMenu(Canvas menu)

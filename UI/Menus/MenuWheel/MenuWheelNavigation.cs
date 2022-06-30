@@ -11,10 +11,10 @@ public class MenuWheelNavigation : MonoBehaviour, IPointerClickHandler
         switch (direction)
         {
             case MenuWheelNavigationTypes.Next:
-                ModuleManager.get<UIEventManager>().MenuWheelNext();
+                ModuleManager.GetModule<UIEventManager>().MenuWheelNext();
                 break;
             case MenuWheelNavigationTypes.Previous:
-                ModuleManager.get<UIEventManager>().MenuWheelPrevious();
+                ModuleManager.GetModule<UIEventManager>().MenuWheelPrevious();
                 break;
         }
     }
@@ -24,10 +24,10 @@ public class MenuWheelNavigation : MonoBehaviour, IPointerClickHandler
         switch (direction)
         {
             case MenuWheelNavigationTypes.Next:
-                ModuleManager.get<UIEventManager>().MenuWheelNext();
+                ModuleManager.GetModule<UIEventManager>().MenuWheelNext();
                 break;
             case MenuWheelNavigationTypes.Previous:
-                ModuleManager.get<UIEventManager>().MenuWheelPrevious();
+                ModuleManager.GetModule<UIEventManager>().MenuWheelPrevious();
                 break;
         }
     }

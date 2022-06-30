@@ -10,6 +10,6 @@ public class NextDialogOptionButton: MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData data)
     {
-        if (parentCanvas.enabled) ModuleManager.get<DialogManager>().nextNode(optionID);
+        if (parentCanvas.enabled) ModuleManager.GetModule<DialogManager>().nextNode(optionID);
     }
 }

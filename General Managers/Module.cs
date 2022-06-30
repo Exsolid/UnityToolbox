@@ -6,20 +6,20 @@ public class Module : MonoBehaviour
 {
     public virtual void Awake()
     {
-        if(!ModuleManager.isLoaded()) StartCoroutine(waitTillMasterSceneLoaded());
-        else if(!ModuleManager.registerModul(this))
+        if(!ModuleManager.IsLoaded()) StartCoroutine(WaitTillMasterSceneLoaded());
+        else if(!ModuleManager.RegisterModul(this))
         {
             throw new System.Exception(string.Format("An object of type {0} has already been registered.", this.GetType()));
         }
     }
 
-    IEnumerator waitTillMasterSceneLoaded()
+    IEnumerator WaitTillMasterSceneLoaded()
     {
-        while (!ModuleManager.isLoaded())
+        while (!ModuleManager.IsLoaded())
         {
             yield return null;
         }
-        if (!ModuleManager.registerModul(this))
+        if (!ModuleManager.RegisterModul(this))
         {
             throw new System.Exception(string.Format("An object of type {0} has already been registered.", this.GetType()));
         }

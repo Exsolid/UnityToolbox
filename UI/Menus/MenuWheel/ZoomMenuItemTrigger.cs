@@ -11,8 +11,8 @@ public class ZoomMenuItemTrigger : MonoBehaviour, IPointerClickHandler
 
     private void Start()
     {
-        isMenuActive = ModuleManager.get<MenuManager>().InMenu;
-        ModuleManager.get<MenuManager>().inMenuChanged += (active) => { isMenuActive = active; };
+        isMenuActive = ModuleManager.GetModule<MenuManager>().InMenu;
+        ModuleManager.GetModule<MenuManager>().inMenuChanged += (active) => { isMenuActive = active; };
     }
 
     public void OnPointerClick(PointerEventData data)
@@ -21,7 +21,7 @@ public class ZoomMenuItemTrigger : MonoBehaviour, IPointerClickHandler
         {
             if(inMenu) _zoom.ZoomOut();
             else _zoom.ZoomIn();
-            ModuleManager.get<MenuManager>().InMenu = !isMenuActive;
+            ModuleManager.GetModule<MenuManager>().InMenu = !isMenuActive;
         }
     }
 }

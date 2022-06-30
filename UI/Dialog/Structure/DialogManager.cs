@@ -15,7 +15,7 @@ public class DialogManager : Module
         if (sequence.Any())
         {
             currentNode = (DialogNode)sequence.First();
-            ModuleManager.get<UIEventManager>().DialogNodeChanged(currentNode);
+            ModuleManager.GetModule<UIEventManager>().DialogNodeChanged(currentNode);
         }
         else
         {
@@ -28,7 +28,7 @@ public class DialogManager : Module
         if (currentNode != null && option < currentNode.GetOutputNodes().Count() && option >= 0)
         {
             currentNode = (DialogNode)currentNode.GetOutputNodes().ToList()[option];
-            ModuleManager.get<UIEventManager>().DialogNodeChanged(currentNode);
+            ModuleManager.GetModule<UIEventManager>().DialogNodeChanged(currentNode);
         }
         else
         {
@@ -41,12 +41,12 @@ public class DialogManager : Module
         if (currentNode != null && currentNode.GetOutputNodes().Any())
         {
             currentNode = (DialogNode)currentNode.GetOutputNodes().ToList()[0];
-            ModuleManager.get<UIEventManager>().DialogNodeChanged(currentNode);
+            ModuleManager.GetModule<UIEventManager>().DialogNodeChanged(currentNode);
         }
         else if (currentNode != null)
         {
             currentNode = null;
-            ModuleManager.get<UIEventManager>().DialogNodeChanged(currentNode);
+            ModuleManager.GetModule<UIEventManager>().DialogNodeChanged(currentNode);
         }
     }
 }

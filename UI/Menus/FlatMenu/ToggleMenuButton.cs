@@ -12,6 +12,6 @@ public class ToggleMenuButton : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData data)
     {
         if (!parentCanvas.enabled) return;
-        ModuleManager.get<UIEventManager>().ToggleMenu(menuType);
+        ModuleManager.GetModule<UIEventManager>().ToggleMenu(menuType);
     }
 }

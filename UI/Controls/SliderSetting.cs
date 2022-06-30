@@ -20,13 +20,13 @@ public class SliderSetting : MonoBehaviour
         switch (option)
         {
             case SliderOption.Mouse_Sensitivity:
-                pref = ModuleManager.get<PlayerPrefKeys>().getPrefereceKey(PlayerPrefKeys.MOUSE_SENSITIVITY);
+                pref = ModuleManager.GetModule<PlayerPrefKeys>().getPrefereceKey(PlayerPrefKeys.MOUSE_SENSITIVITY);
                 break;
             case SliderOption.Music:
-                pref = ModuleManager.get<PlayerPrefKeys>().getPrefereceKey(PlayerPrefKeys.MUSIC_VOLUME);
+                pref = ModuleManager.GetModule<PlayerPrefKeys>().getPrefereceKey(PlayerPrefKeys.MUSIC_VOLUME);
                 break;
             case SliderOption.Sound:
-                pref = ModuleManager.get<PlayerPrefKeys>().getPrefereceKey(PlayerPrefKeys.SOUND_VOLUME);
+                pref = ModuleManager.GetModule<PlayerPrefKeys>().getPrefereceKey(PlayerPrefKeys.SOUND_VOLUME);
                 break;
         }
         slider = gameObject.GetComponent<Slider>();
@@ -45,7 +45,7 @@ public class SliderSetting : MonoBehaviour
         if (timer < 0 && timer != -10)
         {
             PlayerPrefs.SetFloat(pref, slider.value / slider.maxValue);
-            ModuleManager.get<ControlManager>().ValueChanged(pref, slider.value / slider.maxValue);
+            ModuleManager.GetModule<ControlManager>().ValueChanged(pref, slider.value / slider.maxValue);
             timer = -10;
         }
     }
@@ -55,7 +55,7 @@ public class SliderSetting : MonoBehaviour
         if (timer < 0)
         {
             PlayerPrefs.SetFloat(pref, slider.value / slider.maxValue);
-            ModuleManager.get<ControlManager>().ValueChanged(pref, slider.value / slider.maxValue);
+            ModuleManager.GetModule<ControlManager>().ValueChanged(pref, slider.value / slider.maxValue);
         }
     }
 }

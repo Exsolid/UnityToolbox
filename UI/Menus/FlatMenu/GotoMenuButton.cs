@@ -11,6 +11,6 @@ public class GotoMenuButton : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData data)
     {
-        if(parentCanvas.enabled) ModuleManager.get<MenuManager>().setActiveMenu(menu);
+        if(parentCanvas.enabled) ModuleManager.GetModule<MenuManager>().setActiveMenu(menu);
     }
 }

@@ -14,7 +14,7 @@ public class ShowCurrentDialog : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        ModuleManager.get<UIEventManager>().dialogNodeChanged += updateDialog;
+        ModuleManager.GetModule<UIEventManager>().dialogNodeChanged += updateDialog;
     }
 
     public void updateDialog(DialogNode currentNode)
@@ -45,6 +45,6 @@ public class ShowCurrentDialog : MonoBehaviour
 
     private void OnDestroy()
     {
-        ModuleManager.get<UIEventManager>().dialogNodeChanged -= updateDialog;
+        ModuleManager.GetModule<UIEventManager>().dialogNodeChanged -= updateDialog;
     }
 }

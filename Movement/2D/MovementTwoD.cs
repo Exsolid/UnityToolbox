@@ -27,13 +27,13 @@ public class MovementTwoD : MonoBehaviour
 
     public void move(Vector3 direction)
     {
-        ModuleManager.get<PlayerEventmanager>().Move(GetComponent<Rigidbody2D>().velocity);
+        ModuleManager.GetModule<PlayerEventmanager>().Move(GetComponent<Rigidbody2D>().velocity);
         GetComponent<Rigidbody2D>().AddForce(new Vector3(direction.x * speed, 0, direction.z * speed));
     }
 
     public void moveWithStrength(Vector3 direction, float strength)
     {
-        ModuleManager.get<PlayerEventmanager>().Move(GetComponent<Rigidbody2D>().velocity);
+        ModuleManager.GetModule<PlayerEventmanager>().Move(GetComponent<Rigidbody2D>().velocity);
         GetComponent<Rigidbody2D>().AddForce(new Vector3(direction.x * strength, direction.y * strength, direction.z));
     }
 }

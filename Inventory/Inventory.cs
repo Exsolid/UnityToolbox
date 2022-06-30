@@ -10,10 +10,13 @@ public class Inventory : MonoBehaviour
     public Dictionary<Item, int> Items { get { return _items; } set { _items = value; } }
 
     public Action InventoryChanged;
+    [SerializeField] [HideInInspector] private string id = ""; //TODO readonly
+    public string ID { get { return id; } }
 
     private void Awake()
     {
         _items = new Dictionary<Item, int>();
+        ModuleManager.GetModule<InventoryManager>().RegisterInventory(this);
     }
 
     public void AddItem(Item item, int count)
@@ -51,4 +54,11 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    private void OnValidate()
+    {
+        if (id.Equals(""))
+        {
+            id = IDManager.GetUniqueID();
+        }
+    }
 }

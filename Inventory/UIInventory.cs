@@ -24,9 +24,10 @@ public class UIInventory : MonoBehaviour
         }
         for (int i = 0; i < _slots.Count; i++)
         {
-            if (_inventory.Items.Count == i)
+            if (_inventory.Items.Count <= i)
             {
-                break;
+                _slots[i].UpdateItem(null, 0);
+                continue;
             }
             _slots[i].UpdateItem(_inventory.Items.Keys.ElementAt(i), _inventory.Items.Values.ElementAt(i));
         }

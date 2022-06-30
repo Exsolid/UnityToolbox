@@ -13,8 +13,9 @@ public class PlayerPrefKeys : Module
     public static string SOUND_VOLUME = "SOUND_VOLUME";
     public static string MUSIC_VOLUME = "MUSIC_VOLUME";
 
-    public static string PREV_SCENE = "PREV_SCENE";
+    public static string GAMEPLAY_SAVEGAME = "GAMEPLAY_SAVEGAME";
     public static string GAMEPLAY_STATE = "GAMEPLAY_STATE";
+    public static string IDS = "IDS";
 
     public static string DEBUG_ORIGINAL_SCENE = "DEBUG_ORIGINAL_SCNENE";
 

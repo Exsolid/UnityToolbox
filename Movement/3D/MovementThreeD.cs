@@ -17,17 +17,17 @@ public class MovementThreeD : MonoBehaviour
     void Start()
     {
         input = GetComponent<PlayerInput>();
-        ModuleManager.get<PlayerEventmanager>().lockMove += (locked) => { isMovementLocked = locked; };
+        ModuleManager.GetModule<PlayerEventmanager>().lockMove += (locked) => { isMovementLocked = locked; };
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         if(!isMovementLocked) move(input.actions[movementActionName].ReadValue<Vector2>());
-        ModuleManager.get<PlayerEventmanager>().Move(GetComponent<Rigidbody>().velocity);
+        ModuleManager.GetModule<PlayerEventmanager>().Move(GetComponent<Rigidbody>().velocity);
         if (input.actions[attackActionName].triggered)
         {
-            ModuleManager.get<PlayerEventmanager>().Attack();
+            ModuleManager.GetModule<PlayerEventmanager>().Attack();
         }
     }
 
