@@ -6,11 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class GotoSceneButton : MonoBehaviour, IPointerDownHandler
 {
-    [SerializeField] private string sceneName;
-    [SerializeField] private Canvas parentCanvas;
+    [SerializeField] private string _sceneName;
+    private bool _isEnabled;
+
+    public void Awake()
+    {
+        GetComponentInParent<MenuEnable>().activeChanged += (isActive) => { _isEnabled = isActive; };
+    }
 
     public void OnPointerDown(PointerEventData data)
     {
-        if (parentCanvas.enabled) SceneManager.LoadScene(sceneName);
+        if (_isEnabled) SceneManager.LoadScene(_sceneName);
     }
 }

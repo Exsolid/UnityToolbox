@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 
 [InitializeOnLoad]
-public class MasterSceneLoaderForEditor
+public class MasterSceneLoaderForEditor: MonoBehaviour
 {
     static MasterSceneLoaderForEditor()
     {

@@ -7,10 +7,15 @@ using UnityEngine.EventSystems;
 public class GotoMenuButton : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private Canvas menu;
-    [SerializeField] private Canvas parentCanvas;
+    private bool _isEnabled;
+
+    public void Awake()
+    {
+        GetComponentInParent<MenuEnable>().activeChanged += (isActive) => { _isEnabled = isActive; };
+    }
 
     public void OnPointerClick(PointerEventData data)
     {
-        if(parentCanvas.enabled) ModuleManager.GetModule<MenuManager>().setActiveMenu(menu);
+        if(_isEnabled) ModuleManager.GetModule<MenuManager>().setActiveMenu(menu);
     }
 }

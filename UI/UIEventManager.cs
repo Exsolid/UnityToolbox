@@ -58,9 +58,3 @@ public class UIEventManager : Module
         }
     }
 }
-
-public enum MenuType
-{
-    Pause,
-    Inventory
-}

@@ -8,10 +8,9 @@ public class MenuManager : Module
 {
     [SerializeField] private List<MenuList> _menuList;
     [SerializeField] private Canvas parent;
+    [SerializeField] private bool hideOverlayOnOtherMenus;
     private Canvas currentActiv;
-
-    public bool InMenu { get { return inMenu; } set { inMenu = value; if (inMenuChanged != null) inMenuChanged(inMenu); } }
-    private bool inMenu;
+    private MenuList overlayMenu;
 
     public Action<bool> inMenuChanged;
 
@@ -20,12 +19,20 @@ public class MenuManager : Module
     {
         foreach (var menuList in _menuList)
         {
+            if(menuList.MenuType.Equals(MenuType.Overlay)) overlayMenu = menuList;
             foreach (var menu in menuList.Menus)
             {
+                if(menu.gameObject.GetComponent<MenuEnable>() == null) menu.gameObject.AddComponent<MenuEnable>();
+                else menu.gameObject.GetComponent<MenuEnable>().IsActive = false;
                 menu.enabled = false;
             }
         }
-
+        if (overlayMenu.Menus != null)
+        {
+            currentActiv = overlayMenu.Menus[0];
+            currentActiv.enabled = true;
+            currentActiv.gameObject.GetComponent<MenuEnable>().IsActive = true;
+        }
         ModuleManager.GetModule<UIEventManager>().toggleMenu += toggleMenu;
     }
 
@@ -38,8 +45,9 @@ public class MenuManager : Module
     {
         currentActiv.enabled = false;
         currentActiv = menu;
-        menu.enabled = true;
-        menu.transform.SetAsLastSibling();
+        currentActiv.enabled = true;
+        currentActiv.gameObject.GetComponent<MenuEnable>().IsActive = true;
+        currentActiv.transform.SetAsLastSibling();
     }
 
     public void toggleMenu(bool isPaused, MenuType type)
@@ -53,6 +61,7 @@ public class MenuManager : Module
 
                 currentActiv = menuList.Menus[0];
                 currentActiv.enabled = true;
+                currentActiv.gameObject.GetComponent<MenuEnable>().IsActive = true;
                 currentActiv.transform.SetAsLastSibling();
             }
         }
@@ -60,7 +69,20 @@ public class MenuManager : Module
         {
             if(currentActiv != null)
             {
-                currentActiv.enabled=false;
+                if (overlayMenu.Menus != null)
+                {
+                    currentActiv.enabled = false;
+                    currentActiv.gameObject.GetComponent<MenuEnable>().IsActive = false;
+                    currentActiv = overlayMenu.Menus[0];
+                    currentActiv.enabled = true;
+                    currentActiv.gameObject.GetComponent<MenuEnable>().IsActive = true;
+                    currentActiv.transform.SetAsLastSibling();
+                }
+                else
+                {
+                    currentActiv.enabled = false;
+                    currentActiv.gameObject.GetComponent<MenuEnable>().IsActive = false;
+                }
             }
         }
     }
@@ -71,4 +93,11 @@ struct MenuList
 {
     public MenuType MenuType;
     public List<Canvas> Menus;
+}
+
+public enum MenuType
+{
+    Pause,
+    Inventory,
+    Overlay
 }

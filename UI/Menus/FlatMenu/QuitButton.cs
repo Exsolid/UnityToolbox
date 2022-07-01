@@ -6,10 +6,15 @@ using UnityEngine.EventSystems;
 
 public class QuitButton : MonoBehaviour, IPointerDownHandler
 {
-    [SerializeField] private Canvas parentCanvas;
+    private bool _isEnabled;
+
+    public void Awake()
+    {
+        GetComponentInParent<MenuEnable>().activeChanged += (isActive) => { _isEnabled = isActive; };
+    }
 
     public void OnPointerDown(PointerEventData data)
     {
-        if (parentCanvas.enabled) Application.Quit();
+        if (_isEnabled) Application.Quit();
     }
 }

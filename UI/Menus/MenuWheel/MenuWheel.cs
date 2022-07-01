@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MenuWheel : MonoBehaviour
 {
+    [SerializeField] private Camera _camera;
     [SerializeField] private List<GameObject> items;
     [SerializeField] private float radius;
     [SerializeField] private float timeToMove;
@@ -20,19 +21,24 @@ public class MenuWheel : MonoBehaviour
     void Start()
     {
         xMin = transform.transform.position.x - radius;
-
+        GameObject closestToCamera = null;
         degrees = new List<float>();
         float current = 0;
         foreach (GameObject item in items)
         {
+            if (item.GetComponent<MenuEnable>() == null) item.AddComponent<MenuEnable>();
+            else item.GetComponent<MenuEnable>().IsActive = false;
             degrees.Add(current);
             if(switchXY) item.transform.position = new Vector3(radius * Mathf.Cos(Mathf.Deg2Rad * degrees[index]), 0, radius * Mathf.Sin(Mathf.Deg2Rad * degrees[index]));
             else item.transform.position = new Vector3(radius * Mathf.Cos(Mathf.Deg2Rad * degrees[index]), radius * Mathf.Sin(Mathf.Deg2Rad * degrees[index]), 0);
             item.transform.position = item.transform.position + new Vector3(0, incline * (item.transform.position.x - xMin), 0);
             current += 360f / items.Count;
-            index++;
+            if (closestToCamera == null || 
+                Vector3.Distance(closestToCamera.transform.position, _camera.transform.position) > Vector3.Distance(item.transform.position, _camera.transform.position))
+                closestToCamera = item;
+                index++;
         }
-
+        closestToCamera.GetComponent<MenuEnable>().IsActive = true;
         ModuleManager.GetModule<UIEventManager>().menuWheelNext += moveNext;
         ModuleManager.GetModule<UIEventManager>().menuWheelPrevious += movePrev;
     }
@@ -55,6 +61,7 @@ public class MenuWheel : MonoBehaviour
     {
         if (currentTimer > 0 || items.Count == 0) return;
         currentTimer = timeToMove;
+        items[index].GetComponent<MenuEnable>().IsActive = false;
         if (index == items.Count-1) index = 0;
         else index++;
         int current = 0;
@@ -144,5 +151,7 @@ public class MenuWheel : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             }
         }
+        if(item.Equals(items[index]))
+            items[index].GetComponent<MenuEnable>().IsActive = true;
     }
 }
