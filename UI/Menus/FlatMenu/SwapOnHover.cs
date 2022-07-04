@@ -6,25 +6,25 @@ using UnityEngine.UI;
 
 public class SwapOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private Sprite spriteSwapOnHover;
-    private Sprite current;
+    [SerializeField] private Sprite _spriteSwapOnHover;
+    private Sprite _original;
     private bool _isEnabled;
 
     public void Awake()
     {
-        GetComponentInParent<MenuEnable>().activeChanged += (isActive) => { _isEnabled = isActive; };
+        GetComponentInParent<Menu>().activeChanged += (isActive) => { _isEnabled = isActive; };
+        _original = GetComponent<Image>().sprite;
     }
 
     public void OnPointerEnter(PointerEventData data)
     {
-        if (spriteSwapOnHover == null || !_isEnabled) return;
-        current = GetComponent<Image>().sprite;
-        GetComponent<Image>().sprite = spriteSwapOnHover;
+        if (_spriteSwapOnHover == null || !_isEnabled) return;
+        GetComponent<Image>().sprite = _spriteSwapOnHover;
     }
 
     public void OnPointerExit(PointerEventData data)
     {
-        if (spriteSwapOnHover == null || !_isEnabled) return;
-        GetComponent<Image>().sprite = current;
+        if (_spriteSwapOnHover == null) return;
+        GetComponent<Image>().sprite = _original;
     }
 }

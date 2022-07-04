@@ -6,10 +6,15 @@ using UnityEngine.EventSystems;
 public class NextDialogOptionButton: MonoBehaviour, IPointerDownHandler
 {
     [SerializeField] private int optionID;
-    [SerializeField] private Canvas parentCanvas;
+    private bool _isEnabled;
+
+    public void Awake()
+    {
+        GetComponentInParent<Menu>().activeChanged += (isActive) => { _isEnabled = isActive; };
+    }
 
     public void OnPointerDown(PointerEventData data)
     {
-        if (parentCanvas.enabled) ModuleManager.GetModule<DialogManager>().nextNode(optionID);
+        if (_isEnabled) ModuleManager.GetModule<DialogManager>().nextNode(optionID);
     }
 }

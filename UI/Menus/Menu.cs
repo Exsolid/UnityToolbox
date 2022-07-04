@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class MenuEnable : MonoBehaviour
+public class Menu : MonoBehaviour
 {
     public bool IsActive { get { return _isActive; } set { _isActive = value; if (activeChanged != null) activeChanged(value); } }
     private bool _isActive;
+    [SerializeField] private bool _mayUserToogle;
+    public bool MayUserToogle { get { return _mayUserToogle; } set { _mayUserToogle = value;} }
 
     public Action<bool> activeChanged;
 }

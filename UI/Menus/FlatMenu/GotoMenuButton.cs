@@ -11,11 +11,11 @@ public class GotoMenuButton : MonoBehaviour, IPointerClickHandler
 
     public void Awake()
     {
-        GetComponentInParent<MenuEnable>().activeChanged += (isActive) => { _isEnabled = isActive; };
+        GetComponentInParent<Menu>().activeChanged += (isActive) => { _isEnabled = isActive; };
     }
 
     public void OnPointerClick(PointerEventData data)
     {
-        if(_isEnabled) ModuleManager.GetModule<MenuManager>().setActiveMenu(menu);
+        if(_isEnabled) ModuleManager.GetModule<MenuManager>().setActiveMenu(GetComponentInParent<Menu>());
     }
 }

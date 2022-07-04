@@ -21,7 +21,7 @@ public class ToggleMenuControl : MonoBehaviour
     {
         if (_input != null && _input.actions[_actionName].triggered && !_isBinding)
         {
-            ModuleManager.GetModule<UIEventManager>().ToggleMenu(_menuType);
+            ModuleManager.GetModule<MenuManager>().ToggleMenu(_menuType, true);
         }   
     }
 }

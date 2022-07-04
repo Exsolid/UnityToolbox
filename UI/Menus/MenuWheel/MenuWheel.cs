@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class MenuWheel : MonoBehaviour
 {
@@ -26,8 +27,7 @@ public class MenuWheel : MonoBehaviour
         float current = 0;
         foreach (GameObject item in items)
         {
-            if (item.GetComponent<MenuEnable>() == null) item.AddComponent<MenuEnable>();
-            else item.GetComponent<MenuEnable>().IsActive = false;
+            item.GetComponent<Menu>().IsActive = false;
             degrees.Add(current);
             if(switchXY) item.transform.position = new Vector3(radius * Mathf.Cos(Mathf.Deg2Rad * degrees[index]), 0, radius * Mathf.Sin(Mathf.Deg2Rad * degrees[index]));
             else item.transform.position = new Vector3(radius * Mathf.Cos(Mathf.Deg2Rad * degrees[index]), radius * Mathf.Sin(Mathf.Deg2Rad * degrees[index]), 0);
@@ -38,7 +38,8 @@ public class MenuWheel : MonoBehaviour
                 closestToCamera = item;
                 index++;
         }
-        closestToCamera.GetComponent<MenuEnable>().IsActive = true;
+        closestToCamera.GetComponent<Menu>().IsActive = true;
+        index = items.IndexOf(closestToCamera);
         ModuleManager.GetModule<UIEventManager>().menuWheelNext += moveNext;
         ModuleManager.GetModule<UIEventManager>().menuWheelPrevious += movePrev;
     }
@@ -59,9 +60,9 @@ public class MenuWheel : MonoBehaviour
 
     public void moveNext()
     {
-        if (currentTimer > 0 || items.Count == 0) return;
+        if (currentTimer > 0 || items.Count == 0 || !items[index].GetComponent<Menu>().IsActive) return;
         currentTimer = timeToMove;
-        items[index].GetComponent<MenuEnable>().IsActive = false;
+        items[index].GetComponent<Menu>().IsActive = false;
         if (index == items.Count-1) index = 0;
         else index++;
         int current = 0;
@@ -93,9 +94,10 @@ public class MenuWheel : MonoBehaviour
 
     public void movePrev()
     {
-        if (currentTimer > 0 || items.Count == 0) return;
+        if (currentTimer > 0 || items.Count == 0 || !items[index].GetComponent<Menu>().IsActive) return;
         currentTimer = timeToMove;
-        if (index < 0) index = items.Count;
+        items[index].GetComponent<Menu>().IsActive = false;
+        if (index == 0) index = items.Count -1;
         else index--;
         int current = 0;
         foreach (GameObject item in items)
@@ -152,6 +154,6 @@ public class MenuWheel : MonoBehaviour
             }
         }
         if(item.Equals(items[index]))
-            items[index].GetComponent<MenuEnable>().IsActive = true;
+            items[index].GetComponent<Menu>().IsActive = true;
     }
 }

@@ -9,7 +9,7 @@ public class DialogManager : Module
     [SerializeField] private BaseGraph dialogGraph;
     private DialogNode currentNode;
 
-    public void startDialog(string referenceID)
+    public void StartDialog(string referenceID)
     {
         var sequence = dialogGraph.nodes.Where(node => node.GetType().Equals(typeof(DialogRootNode)) && ((DialogRootNode)node).referenceID.Equals(referenceID));
         if (sequence.Any())

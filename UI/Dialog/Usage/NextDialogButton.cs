@@ -7,7 +7,13 @@ using System.Linq;
 public class NextDialogButton : MonoBehaviour, IPointerDownHandler
 {
     private bool areOptionsPresent;
-    [SerializeField] private Canvas parentCanvas;
+
+    private bool _isEnabled;
+
+    public void Awake()
+    {
+        GetComponentInParent<Menu>().activeChanged += (isActive) => { _isEnabled = isActive; };
+    }
 
     private void Start()
     {
@@ -26,6 +32,6 @@ public class NextDialogButton : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData data)
     {
-        if(!areOptionsPresent && parentCanvas.enabled) ModuleManager.GetModule<DialogManager>().nextNode();
+        if(!areOptionsPresent && _isEnabled) ModuleManager.GetModule<DialogManager>().nextNode();
     }
 }

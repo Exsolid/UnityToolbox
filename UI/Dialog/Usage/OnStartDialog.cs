@@ -7,6 +7,6 @@ public class OnStartDialog : MonoBehaviour
     [SerializeField] private string referenceID;
     void Start()
     {
-        ModuleManager.GetModule<DialogManager>().startDialog(referenceID);
+        ModuleManager.GetModule<DialogManager>().StartDialog(referenceID);
     }
 }

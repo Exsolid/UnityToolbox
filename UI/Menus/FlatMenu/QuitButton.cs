@@ -10,7 +10,7 @@ public class QuitButton : MonoBehaviour, IPointerDownHandler
 
     public void Awake()
     {
-        GetComponentInParent<MenuEnable>().activeChanged += (isActive) => { _isEnabled = isActive; };
+        GetComponentInParent<Menu>().activeChanged += (isActive) => { _isEnabled = isActive; };
     }
 
     public void OnPointerDown(PointerEventData data)

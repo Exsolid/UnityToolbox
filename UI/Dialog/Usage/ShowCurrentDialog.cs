@@ -8,16 +8,16 @@ public class ShowCurrentDialog : MonoBehaviour
     [SerializeField] private Text title;
     [SerializeField] private Text description;
     [SerializeField] private List<Text> options;
-
-    [SerializeField] private Canvas parentCanvas;
+    private bool _isEnabled;
 
     // Start is called before the first frame update
     void Awake()
     {
-        ModuleManager.GetModule<UIEventManager>().dialogNodeChanged += updateDialog;
+        ModuleManager.GetModule<UIEventManager>().dialogNodeChanged += UpdateDialog;
+        GetComponentInParent<Menu>().activeChanged += (isActive) => { _isEnabled = isActive; };
     }
 
-    public void updateDialog(DialogNode currentNode)
+    public void UpdateDialog(DialogNode currentNode)
     {
         title.text = "";
         description.text = "";
@@ -27,7 +27,7 @@ public class ShowCurrentDialog : MonoBehaviour
         }
         if (currentNode != null)
         {
-            parentCanvas.enabled = true;
+            ModuleManager.GetModule<MenuManager>().ToggleMenu(MenuType.Dialog, true);
             title.text = currentNode.title;
             description.text = currentNode.description;
             if (currentNode.options != null && currentNode.options.Count > options.Count) Debug.LogWarning("Not all options can be displayed! Missing sufficient textboxes.");
@@ -39,12 +39,12 @@ public class ShowCurrentDialog : MonoBehaviour
         }
         else
         {
-            parentCanvas.enabled = false;
+            ModuleManager.GetModule<MenuManager>().ToggleMenu(MenuType.Dialog, false);
         }
     }
 
     private void OnDestroy()
     {
-        ModuleManager.GetModule<UIEventManager>().dialogNodeChanged -= updateDialog;
+        ModuleManager.GetModule<UIEventManager>().dialogNodeChanged -= UpdateDialog;
     }
 }

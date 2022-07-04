@@ -9,9 +9,7 @@ public class UIEventManager : Module
     public Action menuWheelPrevious;
     public Action menuWheelNext;
 
-    public Action<bool, MenuType> toggleMenu;
-    private bool _isPaused;
-    private MenuType _currentPausedType;
+    public Action<bool, MenuType> togglePaused;
 
     public Action<DialogNode> dialogNodeChanged;
 
@@ -32,13 +30,11 @@ public class UIEventManager : Module
         }
     }
 
-    public void ToggleMenu(MenuType toggledType)
+    public void TogglePaused(bool isPaused, MenuType type)
     {
-        if (toggleMenu != null && ((toggledType.Equals(_currentPausedType) && _isPaused) || !_isPaused))
+        if (togglePaused != null)
         {
-            _isPaused = !_isPaused;
-            _currentPausedType = toggledType;
-            toggleMenu(_isPaused, toggledType);
+            togglePaused(isPaused, type);
         }
     }
 

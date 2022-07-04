@@ -17,13 +17,13 @@ public class DisableMenuControl : MonoBehaviour
     {
         input = GetComponent<PlayerInput>();
         ModuleManager.GetModule<UIEventManager>().bindingKey += (isSetting) => { isBinding = isSetting; };
-        ModuleManager.GetModule<UIEventManager>().toggleMenu += (active, toggledType) => { _mayDisable = _menuType.Equals(toggledType) && active; };
+        ModuleManager.GetModule<UIEventManager>().togglePaused += (active, toggledType) => { _mayDisable = _menuType.Equals(toggledType) && active; };
     }
     private void Update()
     {
         if (input != null && input.actions[_actionName].triggered && !isBinding && _mayDisable)
         {
-            ModuleManager.GetModule<UIEventManager>().ToggleMenu(_menuType);
+            ModuleManager.GetModule<MenuManager>().ToggleMenu(_menuType, true);
         }
     }
 }

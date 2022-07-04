@@ -10,7 +10,7 @@ public class MenuWheelNavigation : MonoBehaviour, IPointerClickHandler
 
     public void Awake()
     {
-        GetComponentInParent<MenuEnable>().activeChanged += (isActive) => { _isEnabled = isActive; };
+        GetComponentInParent<Menu>().activeChanged += (isActive) => { _isEnabled = isActive; };
     }
 
     public void OnPointerClick(PointerEventData data)

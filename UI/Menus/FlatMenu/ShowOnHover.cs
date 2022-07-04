@@ -11,7 +11,7 @@ public class ShowOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void Awake()
     {
-        GetComponentInParent<MenuEnable>().activeChanged += (isActive) => { _isEnabled = isActive; };
+        GetComponentInParent<Menu>().activeChanged += (isActive) => { _isEnabled = isActive; };
     }
 
     public void OnPointerEnter(PointerEventData data)
