@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System;
-using Newtonsoft;
+using UnityEngine.SceneManagement;
 using System.Linq;
 
 public class SaveGameManager : Module
@@ -14,6 +14,7 @@ public class SaveGameManager : Module
     private readonly string _dataPath = "/SaveGame.dat";
     private readonly string _spawnDataPath = "/SaveGameObjects.dat";
     private Newtonsoft.Json.JsonSerializerSettings _settings;
+    private HashSet<string> _spawnedIDs;
 
     public void Start()
     {
@@ -29,7 +30,7 @@ public class SaveGameManager : Module
             _spawnData = new Dictionary<string, ResourceData>();
             return;
         }
-
+        _spawnedIDs = new HashSet<string>();
         _settings = new Newtonsoft.Json.JsonSerializerSettings { TypeNameHandling = Newtonsoft.Json.TypeNameHandling.All };
 
         ReadSpawnData();
@@ -38,7 +39,20 @@ public class SaveGameManager : Module
         if(_data == null)_data = new Dictionary<string, List<GameData>>();
         if(_spawnData == null) _spawnData = new Dictionary<string, ResourceData>();
 
+        StartCoroutine(Load());
+    }
+
+    IEnumerator Load()
+    {
+        while(SceneManager.GetActiveScene().name.Equals("Master")) yield return null;
         LoadAllIntoScene();
+        SceneManager.activeSceneChanged += (one, two) => {
+            LoadAllIntoScene();
+        };
+        SceneManager.sceneUnloaded += (scene) =>
+        {
+            _spawnedIDs.RemoveWhere(id => IDManager.GetSceneNameOfID(id).Equals(scene.name)); ;
+        };
     }
 
     public List<GameData> getGameDataForID(string ID)
@@ -98,7 +112,7 @@ public class SaveGameManager : Module
         }
         foreach (string s in checkDeleted)
         {
-            if (!IDManager.IsIDInActiveScene(s)) continue;
+            if (!IDManager.GetSceneNameOfID(s).Equals(SceneManager.GetActiveScene().name)) continue;
             _data.Remove(s);
         }
     }
@@ -107,11 +121,12 @@ public class SaveGameManager : Module
     {
         foreach (KeyValuePair<string, ResourceData> data in _spawnData)
         {
-            if (!IDManager.IsIDInActiveScene(data.Key)) continue;
+            if (!IDManager.GetSceneNameOfID(data.Key).Equals(SceneManager.GetActiveScene().name)) continue;
             try
             {
                 GameObject obj = (GameObject)Instantiate(Resources.Load(data.Value.Path));
                 obj.GetComponent<Saveable>().ID = data.Key;
+                _spawnedIDs.Add(data.Key);
             }
             catch (Exception ex)
             {

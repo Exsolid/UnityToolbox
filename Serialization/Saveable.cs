@@ -22,9 +22,11 @@ public abstract class Saveable : MonoBehaviour
     private bool subbedEvent;
 
     protected bool _isRunning;
+    private PathFetcher _fetcher;
 
     private void Awake()
     {
+        _fetcher = GetComponent<PathFetcher>();
         _isRunning = true;
         if (_id.Equals("") && !_inEditor)
         {
@@ -37,7 +39,7 @@ public abstract class Saveable : MonoBehaviour
         if (!InEditor)
         {
             ResourceData objectData = new ResourceData();
-            objectData.Path = _path.Split("Resources/").LastOrDefault().Split(".prefab").FirstOrDefault();
+            objectData.Path = Path.Split("Resources/").LastOrDefault().Split(".prefab").FirstOrDefault();
             ModuleManager.GetModule<SaveGameManager>().SetDataToSave(objectData, ID, false);
             TransformData transformData = new TransformData(transform);
             ModuleManager.GetModule<SaveGameManager>().SetDataToSave(transformData, ID, false);
@@ -71,9 +73,15 @@ public abstract class Saveable : MonoBehaviour
 
     private void OnValidate()
     {
-        if (!subbedEvent)
+        if (!subbedEvent && gameObject.scene.name == null)
         {
-            GetComponent<PathFetcher>().pathChanged += () => { _path = GetComponent<PathFetcher>().Path; };
+            _fetcher = GetComponent<PathFetcher>();
+            _fetcher.pathChanged += () => { 
+                if(_fetcher.Path != null && !_fetcher.Path.Equals(""))
+                {
+                    _path = String.Copy(GetComponent<PathFetcher>().Path);
+                }
+            };
             subbedEvent = true;
         }
         if (gameObject.scene.name != null && !Application.isPlaying)

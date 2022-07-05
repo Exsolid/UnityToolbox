@@ -65,10 +65,10 @@ public class IDManager: Module
         if (!_usedIds.Add(ID)) throw new Exception("The ID " + ID + " has already been registered!");
     }
 
-    public static bool IsIDInActiveScene(string ID)
+    public static string GetSceneNameOfID(string ID)
     {
         string[] split = ID.Split(_separator);
-        return split.FirstOrDefault().Equals(_currentSceneName);
+        return split.FirstOrDefault();
     } 
 
     private static void logIDs()
