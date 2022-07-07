@@ -9,15 +9,15 @@ using System;
 [RequireComponent(typeof(PathFetcher))]
 public abstract class Saveable : MonoBehaviour
 {
-    [SerializeField] private string _id = ""; //TODO readonly in editor
+    [SerializeField] [ReadOnly] private string _id = "";
     public string ID { get { return _id; } set { IDManager.RegisterID(value); IDManager.RemoveID(_id); _id = value;} }
 
-    [SerializeField] private bool _inEditor; //TODO readonly in editor
+    [SerializeField] [ReadOnly] private bool _inEditor;
     public bool InEditor { get { return _inEditor; } }
 
     //TODO should save bool to exclude
 
-    [SerializeField] protected string _path; //TODO readonly in editor
+    [SerializeField] [ReadOnly] protected string _path;
     public string Path { get { return _path; } set { _path = value; } }
     private bool subbedEvent;
 
@@ -71,7 +71,7 @@ public abstract class Saveable : MonoBehaviour
     protected abstract List<GameData> SaveData();
     protected abstract void OnObjectDeleted();
 
-    private void OnValidate()
+    public void OnValidate()
     {
         if (!subbedEvent && gameObject.scene.name == null)
         {
@@ -79,7 +79,7 @@ public abstract class Saveable : MonoBehaviour
             _fetcher.pathChanged += () => { 
                 if(_fetcher.Path != null && !_fetcher.Path.Equals(""))
                 {
-                    _path = String.Copy(GetComponent<PathFetcher>().Path);
+                    _path = GetComponent<PathFetcher>().Path + "";
                 }
             };
             subbedEvent = true;

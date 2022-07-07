@@ -25,6 +25,10 @@ public class DialogManager : Module
 
     public void nextNode(int option)
     {
+        if (currentNode != null && currentNode.CompletionToSet != null && !currentNode.CompletionToSet.Equals(""))
+        {
+            ModuleManager.GetModule<SaveGameManager>().SetCompletionInfo(currentNode.CompletionToSet, true);
+        }
         if (currentNode != null && option < currentNode.GetOutputNodes().Count() && option >= 0)
         {
             currentNode = (DialogNode)currentNode.GetOutputNodes().ToList()[option];
@@ -38,6 +42,10 @@ public class DialogManager : Module
 
     public void nextNode()
     {
+        if(currentNode != null && currentNode.CompletionToSet != null && !currentNode.CompletionToSet.Equals(""))
+        {
+            ModuleManager.GetModule<SaveGameManager>().SetCompletionInfo(currentNode.CompletionToSet, true);
+        }
         if (currentNode != null && currentNode.GetOutputNodes().Any())
         {
             currentNode = (DialogNode)currentNode.GetOutputNodes().ToList()[0];

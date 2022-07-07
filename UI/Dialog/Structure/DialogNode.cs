@@ -7,11 +7,12 @@ using System.Linq;
 [System.Serializable, NodeMenuItem("Custom/DialogNode")]
 public class DialogNode : BaseNode
 {
-	public string title;
-	public string description;
-	public string soundToPlay;
+	public string Title;
+	public string Description;
+	public string SoundToPlay;
+	public string CompletionToSet;
 
-	public List<string> options;
+	public List<string> Options;
 
 	[Output(name = "Next Node")]
 	public float next;

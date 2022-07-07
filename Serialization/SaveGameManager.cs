@@ -9,12 +9,19 @@ using System.Linq;
 public class SaveGameManager : Module
 {
     [SerializeField] private string _pathToUse;
+
+    private readonly string _dataPath = "/SaveGameData.dat";
+    private readonly string _spawnDataPath = "/SaveGameObjects.dat";
+    private readonly string _completionDataPath = "/SaveGameCompletion.dat";
+
     private Dictionary<string,List<GameData>> _data;
     private Dictionary<string, ResourceData> _spawnData;
-    private readonly string _dataPath = "/SaveGame.dat";
-    private readonly string _spawnDataPath = "/SaveGameObjects.dat";
-    private Newtonsoft.Json.JsonSerializerSettings _settings;
     private HashSet<string> _spawnedIDs;
+    private CompletionData _completionInfo;
+
+    private Newtonsoft.Json.JsonSerializerSettings _settings;
+
+    public Action<string, bool> completionInfoChanged;
 
     public void Start()
     {
@@ -35,9 +42,11 @@ public class SaveGameManager : Module
 
         ReadSpawnData();
         ReadData();
+        ReadCompletionData();
 
-        if(_data == null)_data = new Dictionary<string, List<GameData>>();
+        if (_data == null)_data = new Dictionary<string, List<GameData>>();
         if(_spawnData == null) _spawnData = new Dictionary<string, ResourceData>();
+        if(_completionInfo == null) _completionInfo = new CompletionData();
 
         StartCoroutine(Load());
     }
@@ -53,6 +62,28 @@ public class SaveGameManager : Module
         {
             _spawnedIDs.RemoveWhere(id => IDManager.GetSceneNameOfID(id).Equals(scene.name)); ;
         };
+    }
+
+    public bool GetCompletionInfo(string ID)
+    {
+        if (_completionInfo.IDToCompletion.ContainsKey(ID))
+        {
+            return _completionInfo.IDToCompletion[ID];
+        }
+        else return false;
+    }
+
+    public void SetCompletionInfo(string ID, bool isCompleted)
+    {
+        if (_completionInfo.IDToCompletion.ContainsKey(ID) && _completionInfo.IDToCompletion[ID] != isCompleted)
+        {
+            _completionInfo.IDToCompletion[ID] = isCompleted;
+            if (completionInfoChanged != null) completionInfoChanged(ID, isCompleted);
+        }else if (!_completionInfo.IDToCompletion.ContainsKey(ID))
+        {
+            _completionInfo.IDToCompletion.Add(ID, isCompleted);
+            if (completionInfoChanged != null) completionInfoChanged(ID, isCompleted);
+        }
     }
 
     public List<GameData> getGameDataForID(string ID)
@@ -141,8 +172,10 @@ public class SaveGameManager : Module
         if (!Directory.Exists(_pathToUse)) return;
         string dataToJson = Newtonsoft.Json.JsonConvert.SerializeObject(_data, _settings);
         string spawnDataToJson = Newtonsoft.Json.JsonConvert.SerializeObject(_spawnData, _settings);
+        string completionDataToJson = Newtonsoft.Json.JsonConvert.SerializeObject(_completionInfo, _settings);
         File.WriteAllText(_pathToUse + _dataPath, dataToJson);
         File.WriteAllText(_pathToUse + _spawnDataPath, spawnDataToJson);
+        File.WriteAllText(_pathToUse + _completionDataPath, completionDataToJson);
     }
 
     private void ReadData()
@@ -159,6 +192,14 @@ public class SaveGameManager : Module
         if (!File.Exists(_pathToUse + _spawnDataPath)) return;
         string jsonToData = File.ReadAllText(_pathToUse + _spawnDataPath);
         _spawnData = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, ResourceData>>(jsonToData, _settings);
+    }
+
+    private void ReadCompletionData()
+    {
+        if (!Directory.Exists(_pathToUse)) return;
+        if (!File.Exists(_pathToUse + _completionDataPath)) return;
+        string jsonToData = File.ReadAllText(_pathToUse + _completionDataPath);
+        _completionInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<CompletionData>(jsonToData, _settings);
     }
 
     private void OnDestroy()

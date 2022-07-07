@@ -52,7 +52,6 @@ public class Item : Saveable
             if (item.InventoryID != null && !item.InventoryID.Equals(""))
             {
                 ModuleManager.GetModule<InventoryManager>().GetByID(item.InventoryID).AddItem(this, 1);
-                gameObject.GetComponent<Renderer>().enabled = false;
             }
         }
     }

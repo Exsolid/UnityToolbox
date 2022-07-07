@@ -28,12 +28,12 @@ public class ShowCurrentDialog : MonoBehaviour
         if (currentNode != null)
         {
             ModuleManager.GetModule<MenuManager>().ToggleMenu(MenuType.Dialog, true);
-            title.text = currentNode.title;
-            description.text = currentNode.description;
-            if (currentNode.options != null && currentNode.options.Count > options.Count) Debug.LogWarning("Not all options can be displayed! Missing sufficient textboxes.");
+            title.text = currentNode.Title;
+            description.text = currentNode.Description;
+            if (currentNode.Options != null && currentNode.Options.Count > options.Count) Debug.LogWarning("Not all options can be displayed! Missing sufficient textboxes.");
             for (int i = 0; i < options.Count; i++)
             {
-                if (currentNode.options.Count > i) options[i].text = currentNode.options[i];
+                if (currentNode.Options.Count > i) options[i].text = currentNode.Options[i];
                 else options[i].text = "";
             }
         }

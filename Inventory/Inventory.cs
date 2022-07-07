@@ -25,10 +25,12 @@ public class Inventory : MonoBehaviour
         {
             _items.Add(item, count);
             item.Inventory = this;
+            item.gameObject.GetComponent<Renderer>().enabled = false;
         }
         else
         {
             _items[item] += count;
+            item.gameObject.GetComponent<Renderer>().enabled = false;
         }
         if (InventoryChanged != null) InventoryChanged();
     }    
@@ -41,6 +43,7 @@ public class Inventory : MonoBehaviour
             item.Inventory = null;
             _items.Remove(item);
         }
+        item.gameObject.GetComponent<Renderer>().enabled = true;
         if (InventoryChanged != null) InventoryChanged();
     }
 
