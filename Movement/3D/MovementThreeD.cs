@@ -5,10 +5,11 @@ using UnityEngine.InputSystem;
 
 public class MovementThreeD : MonoBehaviour
 {
-    [SerializeField] private float speed;
-    [SerializeField] private float jumpForce;
-    [SerializeField] private string movementActionName;
-    [SerializeField] private string attackActionName;
+    //TODO abstract movement into 2d/3d
+    [SerializeField] private float _speed;
+    [SerializeField] private float _jumpForce;
+    [SerializeField] private string _movementActionName;
+    [SerializeField] private string _attackActionName;
 
     private PlayerInput input;
     private bool isMovementLocked;
@@ -23,9 +24,9 @@ public class MovementThreeD : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(!isMovementLocked) move(input.actions[movementActionName].ReadValue<Vector2>());
+        if(!isMovementLocked) move(input.actions[_movementActionName].ReadValue<Vector2>());
         ModuleManager.GetModule<PlayerEventmanager>().Move(GetComponent<Rigidbody>().velocity);
-        if (input.actions[attackActionName].triggered)
+        if (input.actions[_attackActionName].triggered)
         {
             ModuleManager.GetModule<PlayerEventmanager>().Attack();
         }
@@ -33,8 +34,8 @@ public class MovementThreeD : MonoBehaviour
 
     public void move(Vector3 direction)
     {
-        GetComponent<Rigidbody>().AddForce(Vector3.Scale(new Vector3(direction.y * speed, 0, direction.y * speed), new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z).normalized));
-        GetComponent<Rigidbody>().AddForce(Vector3.Scale(new Vector3(direction.x * speed, 0, direction.x * speed), new Vector3(Camera.main.transform.right.x, 0, Camera.main.transform.right.z).normalized));
+        GetComponent<Rigidbody>().AddForce(Vector3.Scale(new Vector3(direction.y * _speed, 0, direction.y * _speed), new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z).normalized));
+        GetComponent<Rigidbody>().AddForce(Vector3.Scale(new Vector3(direction.x * _speed, 0, direction.x * _speed), new Vector3(Camera.main.transform.right.x, 0, Camera.main.transform.right.z).normalized));
 
         if(direction.x != 0 || direction.y != 0)
         {

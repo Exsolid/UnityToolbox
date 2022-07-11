@@ -6,16 +6,16 @@ using System.Linq;
 
 public class DialogManager : Module
 {
-    [SerializeField] private BaseGraph dialogGraph;
-    private DialogNode currentNode;
+    [SerializeField] private BaseGraph _dialogGraph;
+    private DialogNode _currentNode;
 
     public void StartDialog(string referenceID)
     {
-        var sequence = dialogGraph.nodes.Where(node => node.GetType().Equals(typeof(DialogRootNode)) && ((DialogRootNode)node).referenceID.Equals(referenceID));
+        var sequence = _dialogGraph.nodes.Where(node => node.GetType().Equals(typeof(DialogRootNode)) && ((DialogRootNode)node).ReferenceID.Equals(referenceID));
         if (sequence.Any())
         {
-            currentNode = (DialogNode)sequence.First();
-            ModuleManager.GetModule<UIEventManager>().DialogNodeChanged(currentNode);
+            _currentNode = (DialogNode)sequence.First();
+            ModuleManager.GetModule<UIEventManager>().DialogNodeChanged(_currentNode);
         }
         else
         {
@@ -23,38 +23,38 @@ public class DialogManager : Module
         }
     }
 
-    public void nextNode(int option)
+    public void NextNode(int option)
     {
-        if (currentNode != null && currentNode.CompletionToSet != null && !currentNode.CompletionToSet.Equals(""))
+        if (_currentNode != null && _currentNode.CompletionToSet != null && !_currentNode.CompletionToSet.Equals(""))
         {
-            ModuleManager.GetModule<SaveGameManager>().SetCompletionInfo(currentNode.CompletionToSet, true);
+            ModuleManager.GetModule<SaveGameManager>().SetCompletionInfo(_currentNode.CompletionToSet, true);
         }
-        if (currentNode != null && option < currentNode.GetOutputNodes().Count() && option >= 0)
+        if (_currentNode != null && option < _currentNode.GetOutputNodes().Count() && option >= 0)
         {
-            currentNode = (DialogNode)currentNode.GetOutputNodes().ToList()[option];
-            ModuleManager.GetModule<UIEventManager>().DialogNodeChanged(currentNode);
+            _currentNode = (DialogNode)_currentNode.GetOutputNodes().ToList()[option];
+            ModuleManager.GetModule<UIEventManager>().DialogNodeChanged(_currentNode);
         }
         else
         {
-            nextNode();
+            NextNode();
         }
     }
 
-    public void nextNode()
+    public void NextNode()
     {
-        if(currentNode != null && currentNode.CompletionToSet != null && !currentNode.CompletionToSet.Equals(""))
+        if(_currentNode != null && _currentNode.CompletionToSet != null && !_currentNode.CompletionToSet.Equals(""))
         {
-            ModuleManager.GetModule<SaveGameManager>().SetCompletionInfo(currentNode.CompletionToSet, true);
+            ModuleManager.GetModule<SaveGameManager>().SetCompletionInfo(_currentNode.CompletionToSet, true);
         }
-        if (currentNode != null && currentNode.GetOutputNodes().Any())
+        if (_currentNode != null && _currentNode.GetOutputNodes().Any())
         {
-            currentNode = (DialogNode)currentNode.GetOutputNodes().ToList()[0];
-            ModuleManager.GetModule<UIEventManager>().DialogNodeChanged(currentNode);
+            _currentNode = (DialogNode)_currentNode.GetOutputNodes().ToList()[0];
+            ModuleManager.GetModule<UIEventManager>().DialogNodeChanged(_currentNode);
         }
-        else if (currentNode != null)
+        else if (_currentNode != null)
         {
-            currentNode = null;
-            ModuleManager.GetModule<UIEventManager>().DialogNodeChanged(currentNode);
+            _currentNode = null;
+            ModuleManager.GetModule<UIEventManager>().DialogNodeChanged(_currentNode);
         }
     }
 }

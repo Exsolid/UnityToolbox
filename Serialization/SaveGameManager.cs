@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System;
-using UnityEngine.SceneManagement;
+using System.Text;
 using System.Linq;
+using System.Security.Cryptography;
+using UnityEngine.SceneManagement;
+using Newtonsoft.Json;
 
 public class SaveGameManager : Module
 {
@@ -19,9 +22,9 @@ public class SaveGameManager : Module
     private HashSet<string> _spawnedIDs;
     private CompletionData _completionInfo;
 
-    private Newtonsoft.Json.JsonSerializerSettings _settings;
+    private JsonSerializerSettings _settings;
 
-    public Action<string, bool> completionInfoChanged;
+    public Action<string, bool> OnCompletionInfoChanged;
 
     public void Start()
     {
@@ -37,27 +40,43 @@ public class SaveGameManager : Module
             _spawnData = new Dictionary<string, ResourceData>();
             return;
         }
+
         _spawnedIDs = new HashSet<string>();
-        _settings = new Newtonsoft.Json.JsonSerializerSettings { TypeNameHandling = Newtonsoft.Json.TypeNameHandling.All };
+        _settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
 
         ReadSpawnData();
         ReadData();
         ReadCompletionData();
 
-        if (_data == null)_data = new Dictionary<string, List<GameData>>();
-        if(_spawnData == null) _spawnData = new Dictionary<string, ResourceData>();
-        if(_completionInfo == null) _completionInfo = new CompletionData();
+        if (_data == null)
+        {
+            _data = new Dictionary<string, List<GameData>>();
+        }
+        if(_spawnData == null)
+        {
+            _spawnData = new Dictionary<string, ResourceData>();
+        } 
+        if(_completionInfo == null)
+        {
+            _completionInfo = new CompletionData();
+        }
 
         StartCoroutine(Load());
     }
 
     IEnumerator Load()
     {
-        while(SceneManager.GetActiveScene().name.Equals("Master")) yield return null;
+        while (SceneManager.GetActiveScene().name.Equals("Master"))
+        {
+            yield return null;
+        }
+
         LoadAllIntoScene();
-        SceneManager.activeSceneChanged += (one, two) => {
+        SceneManager.activeSceneChanged += (one, two) => 
+        {
             LoadAllIntoScene();
         };
+
         SceneManager.sceneUnloaded += (scene) =>
         {
             _spawnedIDs.RemoveWhere(id => IDManager.GetSceneNameOfID(id).Equals(scene.name)); ;
@@ -78,11 +97,12 @@ public class SaveGameManager : Module
         if (_completionInfo.IDToCompletion.ContainsKey(ID) && _completionInfo.IDToCompletion[ID] != isCompleted)
         {
             _completionInfo.IDToCompletion[ID] = isCompleted;
-            if (completionInfoChanged != null) completionInfoChanged(ID, isCompleted);
-        }else if (!_completionInfo.IDToCompletion.ContainsKey(ID))
+            OnCompletionInfoChanged?.Invoke(ID, isCompleted);
+        }
+        else if (!_completionInfo.IDToCompletion.ContainsKey(ID))
         {
             _completionInfo.IDToCompletion.Add(ID, isCompleted);
-            if (completionInfoChanged != null) completionInfoChanged(ID, isCompleted);
+            OnCompletionInfoChanged?.Invoke(ID, isCompleted);
         }
     }
 
@@ -141,9 +161,14 @@ public class SaveGameManager : Module
             save.Load();
             checkDeleted.Remove(save.ID);
         }
+
         foreach (string s in checkDeleted)
         {
-            if (!IDManager.GetSceneNameOfID(s).Equals(SceneManager.GetActiveScene().name)) continue;
+            if (!IDManager.GetSceneNameOfID(s).Equals(SceneManager.GetActiveScene().name))
+            {
+                continue;
+            }
+
             _data.Remove(s);
         }
     }
@@ -152,10 +177,14 @@ public class SaveGameManager : Module
     {
         foreach (KeyValuePair<string, ResourceData> data in _spawnData)
         {
-            if (!IDManager.GetSceneNameOfID(data.Key).Equals(SceneManager.GetActiveScene().name)) continue;
+            if (!IDManager.GetSceneNameOfID(data.Key).Equals(SceneManager.GetActiveScene().name))
+            {
+                continue;
+            }
+
             try
             {
-                GameObject obj = (GameObject)Instantiate(Resources.Load(data.Value.Path));
+                GameObject obj = (GameObject)Instantiate(ModuleManager.GetModule<PrefabManager>().GetPrefabForID(data.Value.PrefabID));
                 obj.GetComponent<Saveable>().ID = data.Key;
                 _spawnedIDs.Add(data.Key);
             }
@@ -169,10 +198,14 @@ public class SaveGameManager : Module
 
     private void WriteData()
     {
-        if (!Directory.Exists(_pathToUse)) return;
-        string dataToJson = Newtonsoft.Json.JsonConvert.SerializeObject(_data, _settings);
-        string spawnDataToJson = Newtonsoft.Json.JsonConvert.SerializeObject(_spawnData, _settings);
-        string completionDataToJson = Newtonsoft.Json.JsonConvert.SerializeObject(_completionInfo, _settings);
+        if (!Directory.Exists(_pathToUse))
+        {
+            return;
+        }
+
+        string dataToJson = JsonConvert.SerializeObject(_data, _settings);
+        string spawnDataToJson = JsonConvert.SerializeObject(_spawnData, _settings);
+        string completionDataToJson = JsonConvert.SerializeObject(_completionInfo, _settings);
         File.WriteAllText(_pathToUse + _dataPath, dataToJson);
         File.WriteAllText(_pathToUse + _spawnDataPath, spawnDataToJson);
         File.WriteAllText(_pathToUse + _completionDataPath, completionDataToJson);
@@ -180,30 +213,102 @@ public class SaveGameManager : Module
 
     private void ReadData()
     {
-        if (!Directory.Exists(_pathToUse)) return;
-        if (!File.Exists(_pathToUse + _dataPath)) return;
+        if (!Directory.Exists(_pathToUse))
+        {
+            return;
+        }
+
+        if (!File.Exists(_pathToUse + _dataPath))
+        {
+            return;
+        }
+
         string jsonToData = File.ReadAllText(_pathToUse + _dataPath);
-        _data = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, List<GameData>>>(jsonToData, _settings);
+        _data = JsonConvert.DeserializeObject<Dictionary<string, List<GameData>>>(jsonToData, _settings);
     }
 
     private void ReadSpawnData()
     {
-        if (!Directory.Exists(_pathToUse)) return;
-        if (!File.Exists(_pathToUse + _spawnDataPath)) return;
+        if (!Directory.Exists(_pathToUse))
+        {
+            return;
+        }
+
+        if (!File.Exists(_pathToUse + _spawnDataPath))
+        {
+            return;
+        }
+
         string jsonToData = File.ReadAllText(_pathToUse + _spawnDataPath);
-        _spawnData = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, ResourceData>>(jsonToData, _settings);
+        _spawnData = JsonConvert.DeserializeObject<Dictionary<string, ResourceData>>(jsonToData, _settings);
     }
 
     private void ReadCompletionData()
     {
-        if (!Directory.Exists(_pathToUse)) return;
-        if (!File.Exists(_pathToUse + _completionDataPath)) return;
+        if (!Directory.Exists(_pathToUse))
+        {
+            return;
+        }
+
+        if (!File.Exists(_pathToUse + _completionDataPath))
+        {
+            return;
+        }
+
         string jsonToData = File.ReadAllText(_pathToUse + _completionDataPath);
-        _completionInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<CompletionData>(jsonToData, _settings);
+        _completionInfo = JsonConvert.DeserializeObject<CompletionData>(jsonToData, _settings);
     }
 
     private void OnDestroy()
     {
         WriteData();
+    }
+
+    private byte[] Encrypt(string plainText, byte[] key, byte[] iv)
+    {
+        //Encoding.ASCII.GetBytes(plainText);
+        //TODO checks && max memory
+        byte[] cypherText;
+        using (Aes aes = Aes.Create())
+        {
+            aes.Key = key;
+            aes.IV = iv;
+            ICryptoTransform encryptor = aes.CreateEncryptor(key, iv);
+            using (MemoryStream ms = new MemoryStream())
+            {
+                using (CryptoStream cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
+                {
+                    using (StreamWriter sw = new StreamWriter(cs))
+                    {
+                        sw.Write(plainText);
+                    }
+                    cypherText = ms.ToArray();
+                }
+            }
+        }
+        return cypherText;
+    }
+
+    private string Decrypt(byte[] cypherText, byte[] key, byte[] iv)
+    {
+        //TODO checks
+        string plainText;
+        using (Aes aes = Aes.Create())
+        {
+            aes.Key = key;
+            aes.IV = iv;
+            ICryptoTransform decryptor = aes.CreateDecryptor(key, iv);
+            using (MemoryStream ms = new MemoryStream())
+            {
+                using (CryptoStream cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Read))
+                {
+                    using (StreamReader sr = new StreamReader(cs))
+                    {
+                        plainText = sr.ReadToEnd();
+                    }
+                }
+            }
+        }
+        return plainText;
     }
 }

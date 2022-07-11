@@ -10,11 +10,17 @@ public class QuitButton : MonoBehaviour, IPointerDownHandler
 
     public void Awake()
     {
-        GetComponentInParent<Menu>().activeChanged += (isActive) => { _isEnabled = isActive; };
+        GetComponentInParent<Menu>().OnActiveChanged += (isActive) => 
+        {
+            _isEnabled = isActive;
+        };
     }
 
     public void OnPointerDown(PointerEventData data)
     {
-        if (_isEnabled) Application.Quit();
+        if (_isEnabled)
+        {
+            Application.Quit();
+        }
     }
 }

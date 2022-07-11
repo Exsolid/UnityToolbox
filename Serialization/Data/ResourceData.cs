@@ -6,5 +6,5 @@ using System;
 [Serializable]
 public class ResourceData: GameData
 {
-    public string Path;
+    public int PrefabID;
 }

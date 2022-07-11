@@ -7,8 +7,14 @@ public class IDInitializer: MonoBehaviour
 {
     static IDInitializer()
     {
-        EditorSceneManager.activeSceneChangedInEditMode += (sceneOne, sceneTwo) => { IDManager.SceneChanged(sceneTwo); };
-        AssemblyReloadEvents.afterAssemblyReload += () => { IDManager.SceneChanged(EditorSceneManager.GetActiveScene()); };
+        EditorSceneManager.activeSceneChangedInEditMode += (sceneOne, sceneTwo) => 
+        {
+            IDManager.SceneChanged(sceneTwo); 
+        };
 
+        AssemblyReloadEvents.afterAssemblyReload += () => 
+        { 
+            IDManager.SceneChanged(EditorSceneManager.GetActiveScene()); 
+        };
     }
 }

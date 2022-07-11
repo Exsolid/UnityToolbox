@@ -12,19 +12,28 @@ public class SwapOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void Awake()
     {
-        GetComponentInParent<Menu>().activeChanged += (isActive) => { _isEnabled = isActive; };
+        GetComponentInParent<Menu>().OnActiveChanged += (isActive) => 
+        {
+            _isEnabled = isActive;
+        };
         _original = GetComponent<Image>().sprite;
     }
 
     public void OnPointerEnter(PointerEventData data)
     {
-        if (_spriteSwapOnHover == null || !_isEnabled) return;
+        if (_spriteSwapOnHover == null || !_isEnabled)
+        {
+            return;
+        }
         GetComponent<Image>().sprite = _spriteSwapOnHover;
     }
 
     public void OnPointerExit(PointerEventData data)
     {
-        if (_spriteSwapOnHover == null) return;
+        if (_spriteSwapOnHover == null)
+        {
+            return;
+        }
         GetComponent<Image>().sprite = _original;
     }
 }

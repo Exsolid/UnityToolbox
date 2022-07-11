@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class OnStartDialog : MonoBehaviour
 {
-    [SerializeField] private string referenceID;
+    [SerializeField] private string _referenceID;
     void Start()
     {
-        ModuleManager.GetModule<DialogManager>().StartDialog(referenceID);
+        ModuleManager.GetModule<DialogManager>().StartDialog(_referenceID);
     }
 }

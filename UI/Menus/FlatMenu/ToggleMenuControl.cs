@@ -15,7 +15,10 @@ public class ToggleMenuControl : MonoBehaviour
     private void Start()
     {
         _input = GetComponent<PlayerInput>();
-        ModuleManager.GetModule<UIEventManager>().bindingKey += (isSetting) => {_isBinding = isSetting; };
+        ModuleManager.GetModule<UIEventManager>().OnBindingKey += (isSetting) => 
+        {
+            _isBinding = isSetting;
+        };
     }
     private void Update()
     {

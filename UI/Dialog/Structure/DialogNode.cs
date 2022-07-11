@@ -15,9 +15,9 @@ public class DialogNode : BaseNode
 	public List<string> Options;
 
 	[Output(name = "Next Node")]
-	public float next;
+	public float Next;
 
-	public override string		name => "DialogNode";
+	public override string Name => "DialogNode";
 
 	protected override void Process()
 	{

@@ -31,7 +31,7 @@ public class ThirdPersonCameraController : MonoBehaviour
         positionTransform.position = targetToFollow.transform.position;
         input = GetComponent<PlayerInput>();
         mouseSense = PlayerPrefs.GetFloat(ModuleManager.GetModule<PlayerPrefKeys>().getPrefereceKey(PlayerPrefKeys.MOUSE_SENSITIVITY));
-        ModuleManager.GetModule<ControlManager>().valueChanged += (id, newValue) => { if (id.Equals(ModuleManager.GetModule<PlayerPrefKeys>().getPrefereceKey(PlayerPrefKeys.MOUSE_SENSITIVITY))) mouseSense = newValue; };
+        ModuleManager.GetModule<ControlManager>().OnValueChanged += (id, newValue) => { if (id.Equals(ModuleManager.GetModule<PlayerPrefKeys>().getPrefereceKey(PlayerPrefKeys.MOUSE_SENSITIVITY))) mouseSense = newValue; };
         foreach(string layer in collidingLayers)
         {
             layerMask = layerMask | LayerMask.GetMask(layer);

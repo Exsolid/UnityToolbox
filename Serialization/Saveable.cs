@@ -6,7 +6,6 @@ using UnityEditor;
 using System;
 
 [DisallowMultipleComponent]
-[RequireComponent(typeof(PathFetcher))]
 public abstract class Saveable : MonoBehaviour
 {
     [SerializeField] [ReadOnly] private string _id = "";
@@ -17,16 +16,12 @@ public abstract class Saveable : MonoBehaviour
 
     //TODO should save bool to exclude
 
-    [SerializeField] [ReadOnly] protected string _path;
-    public string Path { get { return _path; } set { _path = value; } }
-    private bool subbedEvent;
+    [SerializeField] [ReadOnly] public int PrefabID = -1;
 
     protected bool _isRunning;
-    private PathFetcher _fetcher;
 
     private void Awake()
     {
-        _fetcher = GetComponent<PathFetcher>();
         _isRunning = true;
         if (_id.Equals("") && !_inEditor)
         {
@@ -39,7 +34,7 @@ public abstract class Saveable : MonoBehaviour
         if (!InEditor)
         {
             ResourceData objectData = new ResourceData();
-            objectData.Path = Path.Split("Resources/").LastOrDefault().Split(".prefab").FirstOrDefault();
+            objectData.PrefabID = PrefabID;
             ModuleManager.GetModule<SaveGameManager>().SetDataToSave(objectData, ID, false);
             TransformData transformData = new TransformData(transform);
             ModuleManager.GetModule<SaveGameManager>().SetDataToSave(transformData, ID, false);
@@ -73,17 +68,6 @@ public abstract class Saveable : MonoBehaviour
 
     public void OnValidate()
     {
-        if (!subbedEvent && gameObject.scene.name == null)
-        {
-            _fetcher = GetComponent<PathFetcher>();
-            _fetcher.pathChanged += () => { 
-                if(_fetcher.Path != null && !_fetcher.Path.Equals(""))
-                {
-                    _path = GetComponent<PathFetcher>().Path + "";
-                }
-            };
-            subbedEvent = true;
-        }
         if (gameObject.scene.name != null && !Application.isPlaying)
         {
             _inEditor = true;

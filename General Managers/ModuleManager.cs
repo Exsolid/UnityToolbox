@@ -9,7 +9,10 @@ public class ModuleManager : MonoBehaviour
 {
     [SerializeField] private static ModuleManager _instance;
     [SerializeField] private List<Module> _moduls;
-    public List<Module> Moduls { get { return _moduls; } }
+    public List<Module> Moduls 
+    { 
+        get { return _moduls; } 
+    }
 
     private void Awake()
     {
@@ -23,7 +26,12 @@ public class ModuleManager : MonoBehaviour
 
     public static bool RegisterModul<T>(T module) where T : Module
     {
-        if (_instance.Moduls.Where(mod => mod.GetType().IsEquivalentTo(module.GetType())).Any()) return false;
+        bool isTypeAlreadyRegistered = _instance.Moduls.Where(mod => mod.GetType().IsEquivalentTo(module.GetType())).Any();
+        if (isTypeAlreadyRegistered)
+        {
+            Debug.LogError("Module of type '" + module.GetType().Name + "' already registered.");
+            return false;
+        }
         _instance.Moduls.Add(module);
         Debug.Log("Registered module '" + module.GetType().Name + "'");
         return true;

@@ -21,8 +21,11 @@ public class InventoryManager : Module
 
     public Inventory GetByID(string ID)
     {
-        var toReturn = _allInventorys.Where(inv => inv.ID.Equals(ID));
-        if (!toReturn.Any()) Debug.LogWarning("Inventory with ID" + ID + " not found");
-        return toReturn.First();
+        var invWithID = _allInventorys.Where(inv => inv.ID.Equals(ID));
+        if (!invWithID.Any())
+        {
+            Debug.LogWarning("Inventory with ID" + ID + " not found");
+        }
+        return invWithID.First();
     }
 }

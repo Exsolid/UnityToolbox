@@ -6,32 +6,38 @@ using System.Linq;
 
 public class NextDialogButton : MonoBehaviour, IPointerDownHandler
 {
-    private bool areOptionsPresent;
+    private bool _areOptionsPresent;
 
     private bool _isEnabled;
 
     public void Awake()
     {
-        GetComponentInParent<Menu>().activeChanged += (isActive) => { _isEnabled = isActive; };
+        GetComponentInParent<Menu>().OnActiveChanged += (isActive) => { _isEnabled = isActive; };
     }
 
     private void Start()
     {
-        ModuleManager.GetModule<UIEventManager>().dialogNodeChanged += changeOptionsPresent;
+        ModuleManager.GetModule<UIEventManager>().OnDialogNodeChanged += ChangeOptionsPresent;
     }
 
     private void OnDestroy()
     {
-        ModuleManager.GetModule<UIEventManager>().dialogNodeChanged -= changeOptionsPresent;
+        ModuleManager.GetModule<UIEventManager>().OnDialogNodeChanged -= ChangeOptionsPresent;
     }
 
-    public void changeOptionsPresent(DialogNode currentNode)
+    public void ChangeOptionsPresent(DialogNode currentNode)
     {
-        if(currentNode != null)areOptionsPresent = currentNode.GetOutputNodes().ToList().Count > 1;
+        if(currentNode != null)
+        {
+            _areOptionsPresent = currentNode.GetOutputNodes().ToList().Count > 1;
+        }
     }
 
     public void OnPointerDown(PointerEventData data)
     {
-        if(!areOptionsPresent && _isEnabled) ModuleManager.GetModule<DialogManager>().nextNode();
+        if (!_areOptionsPresent && _isEnabled)
+        {
+            ModuleManager.GetModule<DialogManager>().NextNode();
+        }
     }
 }

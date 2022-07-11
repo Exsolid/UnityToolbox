@@ -6,51 +6,37 @@ using System;
 
 public class UIEventManager : Module
 {
-    public Action menuWheelPrevious;
-    public Action menuWheelNext;
+    public event Action OnMenuWheelPrevious;
+    public event Action OnMenuWheelNext;
 
-    public Action<bool, MenuType> togglePaused;
+    public event Action<bool, MenuType> OnTogglePaused;
 
-    public Action<DialogNode> dialogNodeChanged;
+    public event Action<DialogNode> OnDialogNodeChanged;
 
-    public Action<bool> bindingKey;
+    public event Action<bool> OnBindingKey;
 
     public void MenuWheelPrevious()
     {
-        if(menuWheelPrevious != null)
-        {
-            menuWheelPrevious();
-        }
+        OnMenuWheelPrevious?.Invoke();
     }
+
     public void MenuWheelNext()
     {
-        if (menuWheelNext != null)
-        {
-            menuWheelNext();
-        }
+        OnMenuWheelNext?.Invoke();
     }
 
     public void TogglePaused(bool isPaused, MenuType type)
     {
-        if (togglePaused != null)
-        {
-            togglePaused(isPaused, type);
-        }
+        OnTogglePaused?.Invoke(isPaused, type);
     }
 
     public void DialogNodeChanged(DialogNode currentNode)
     {
-        if (dialogNodeChanged != null)
-        {
-            dialogNodeChanged(currentNode);
-        }
+        OnDialogNodeChanged?.Invoke(currentNode);
     }
 
     public void BindingKey(bool isBindingKey)
     {
-        if (bindingKey != null)
-        {
-            bindingKey(isBindingKey);
-        }
+        OnBindingKey?.Invoke(isBindingKey);
     }
 }

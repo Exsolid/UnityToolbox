@@ -5,10 +5,22 @@ using System;
 
 public class Menu : MonoBehaviour
 {
-    public bool IsActive { get { return _isActive; } set { _isActive = value; if (activeChanged != null) activeChanged(value); } }
+    public bool IsActive
+    { 
+        get { return _isActive; } 
+        set { 
+            _isActive = value; 
+            OnActiveChanged?.Invoke(value); 
+        } 
+    }
+
     private bool _isActive;
     [SerializeField] private bool _mayUserToogle;
-    public bool MayUserToogle { get { return _mayUserToogle; } set { _mayUserToogle = value;} }
+    public bool MayUserToogle 
+    { 
+        get { return _mayUserToogle; } 
+        set { _mayUserToogle = value;}
+    }
 
-    public Action<bool> activeChanged;
+    public Action<bool> OnActiveChanged;
 }

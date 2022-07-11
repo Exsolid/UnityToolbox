@@ -7,55 +7,65 @@ public class SliderSetting : MonoBehaviour
 {
     public enum SliderOption { Sound, Music, Mouse_Sensitivity}
 
-    public SliderOption option;
+    public SliderOption _option;
 
-    private Slider slider;
-    private float timer;
+    private Slider _slider;
+    private float _timer;
 
-    private string pref;
-    [SerializeField] Canvas parentCanvas;
+    private string _pref; 
+
+    private bool _isEnabled;
+
+    public void Awake()
+    {
+        GetComponentInParent<Menu>().OnActiveChanged += (isActive) =>
+        {
+            _isEnabled = isActive;
+        };
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        switch (option)
+        switch (_option)
         {
             case SliderOption.Mouse_Sensitivity:
-                pref = ModuleManager.GetModule<PlayerPrefKeys>().getPrefereceKey(PlayerPrefKeys.MOUSE_SENSITIVITY);
+                _pref = ModuleManager.GetModule<PlayerPrefKeys>().getPrefereceKey(PlayerPrefKeys.MOUSE_SENSITIVITY);
                 break;
             case SliderOption.Music:
-                pref = ModuleManager.GetModule<PlayerPrefKeys>().getPrefereceKey(PlayerPrefKeys.MUSIC_VOLUME);
+                _pref = ModuleManager.GetModule<PlayerPrefKeys>().getPrefereceKey(PlayerPrefKeys.MUSIC_VOLUME);
                 break;
             case SliderOption.Sound:
-                pref = ModuleManager.GetModule<PlayerPrefKeys>().getPrefereceKey(PlayerPrefKeys.SOUND_VOLUME);
+                _pref = ModuleManager.GetModule<PlayerPrefKeys>().getPrefereceKey(PlayerPrefKeys.SOUND_VOLUME);
                 break;
         }
-        slider = gameObject.GetComponent<Slider>();
-        if (PlayerPrefs.HasKey(pref)) slider.value = PlayerPrefs.GetFloat(pref) * slider.maxValue;
-        slider.onValueChanged.AddListener(delegate
+        _slider = gameObject.GetComponent<Slider>();
+        if (PlayerPrefs.HasKey(_pref)) _slider.value = PlayerPrefs.GetFloat(_pref) * _slider.maxValue;
+        _slider.onValueChanged.AddListener(delegate
         {
-            timer = 0.5f;
+            _timer = 0.5f;
         });
     }
 
     // Update is called once per frame
     void Update()
     {
-        slider.interactable = parentCanvas.enabled;
-        if (timer > 0) timer -= Time.deltaTime;
-        if (timer < 0 && timer != -10)
+        _slider.interactable = _isEnabled;
+        if (_timer > 0) _timer -= Time.deltaTime;
+        if (_timer < 0 && _timer != -10)
         {
-            PlayerPrefs.SetFloat(pref, slider.value / slider.maxValue);
-            ModuleManager.GetModule<ControlManager>().ValueChanged(pref, slider.value / slider.maxValue);
-            timer = -10;
+            PlayerPrefs.SetFloat(_pref, _slider.value / _slider.maxValue);
+            ModuleManager.GetModule<ControlManager>().ValueChanged(_pref, _slider.value / _slider.maxValue);
+            _timer = -10;
         }
     }
 
     private void OnDestroy()
     {
-        if (timer < 0)
+        if (_timer < 0)
         {
-            PlayerPrefs.SetFloat(pref, slider.value / slider.maxValue);
-            ModuleManager.GetModule<ControlManager>().ValueChanged(pref, slider.value / slider.maxValue);
+            PlayerPrefs.SetFloat(_pref, _slider.value / _slider.maxValue);
+            ModuleManager.GetModule<ControlManager>().ValueChanged(_pref, _slider.value / _slider.maxValue);
         }
     }
 }

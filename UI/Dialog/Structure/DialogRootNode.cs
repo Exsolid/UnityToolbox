@@ -7,12 +7,12 @@ using System.Linq;
 [System.Serializable, NodeMenuItem("Custom/DialogRootNode")]
 public class DialogRootNode : DialogNode
 {
-	public string referenceID;
+	public string ReferenceID;
 
-	private float selectedOption = -1;
-	public float SelectedOption { get { return selectedOption; } set { selectedOption = value; } }
+	private float _selectedOption = -1;
+	public float SelectedOption { get { return _selectedOption; } set { _selectedOption = value; } }
 
-	public override string		name => "DialogRootNode";
+	public override string Name => "DialogRootNode";
 
 	protected override void Process()
 	{

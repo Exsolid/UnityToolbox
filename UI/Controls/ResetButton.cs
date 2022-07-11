@@ -4,10 +4,18 @@ using UnityEngine.EventSystems;
 
 public class ResetButton : MonoBehaviour, IPointerClickHandler
 {
-    [SerializeField] private string control;
-    [SerializeField] private string actionName;
-    [SerializeField] Canvas parentCanvas;
+    [SerializeField] private string _control;
+    [SerializeField] private string _actionName;
     private ControlManager manager;
+    private bool _isEnabled;
+
+    public void Awake()
+    {
+        GetComponentInParent<Menu>().OnActiveChanged += (isActive) =>
+        {
+            _isEnabled = isActive;
+        };
+    }
 
     private void Start()
     {
@@ -16,8 +24,8 @@ public class ResetButton : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(!parentCanvas.enabled) return;
-        if (control.Equals("-")) manager.resetAllKeys();
-        else manager.resetKey(control, actionName);
+        if(!_isEnabled) return;
+        if (_control.Equals("") && _actionName.Equals("")) manager.ResetAllKeys();
+        else manager.ResetKey(_control, _actionName);
     }
 }

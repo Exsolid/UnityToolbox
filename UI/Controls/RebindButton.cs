@@ -6,46 +6,54 @@ using UnityEngine.UI;
 
 public class RebindButton : MonoBehaviour, IPointerClickHandler
 {
-    [SerializeField] private string control;
-    [SerializeField] private string actionName;
-    private string keyPress;
-    private bool isKeyboard;
-    private bool isSetting;
-    private string alternateText;
+    [SerializeField] private string _control;
+    [SerializeField] private string _actionName;
+    private string _keyPress;
+    private bool _isKeyboard;
+    private bool _isSetting;
+    private string _alternateText;
 
-    private Text textChild;
+    private Text _textChild;
 
-    private bool otherIsSetting;
+    private bool _otherIsSetting;
 
-    private ControlManager manager;
-    [SerializeField] Canvas parentCanvas;
+    private ControlManager _manager; 
+    private bool _isEnabled;
+
+    public void Awake()
+    {
+        GetComponentInParent<Menu>().OnActiveChanged += (isActive) =>
+        {
+            _isEnabled = isActive;
+        };
+    }
 
     void Start()
     {
-        alternateText = "";
-        textChild = (Text)gameObject.GetComponentInChildren(typeof(Text));
-        manager = ModuleManager.GetModule<ControlManager>();
-        ModuleManager.GetModule<UIEventManager>().bindingKey += (isSetting) => { otherIsSetting = isSetting; };
+        _alternateText = "";
+        _textChild = (Text)gameObject.GetComponentInChildren(typeof(Text));
+        _manager = ModuleManager.GetModule<ControlManager>();
+        ModuleManager.GetModule<UIEventManager>().OnBindingKey += (isSetting) => { _otherIsSetting = isSetting; };
     }
     public void OnGUI()
     {
-        textChild.text = alternateText.Equals("") ? returnKeyCode(manager.currentValueOfControl(control, actionName)) : alternateText;
+        _textChild.text = _alternateText.Equals("") ? returnKeyCode(_manager.CurrentValueOfControl(_control, _actionName)) : _alternateText;
         Event e = Event.current;
         if (e != null && e.type.Equals(EventType.KeyDown) && e.keyCode != KeyCode.None)
-            keyPress = e.keyCode.ToString(); isKeyboard = true;
+            _keyPress = e.keyCode.ToString(); _isKeyboard = true;
         if (e != null && e.isMouse)
         {
-            isKeyboard = false;
+            _isKeyboard = false;
             switch (e.button)
             {
                 case 0:
-                    keyPress = "leftButton";
+                    _keyPress = "leftButton";
                     break;
                 case 1:
-                    keyPress = "rightButton";
+                    _keyPress = "rightButton";
                     break;
                 case 2:
-                    keyPress = "middleButton";
+                    _keyPress = "middleButton";
                     break;
             }
         }
@@ -53,40 +61,40 @@ public class RebindButton : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (!isSetting && parentCanvas.enabled && !otherIsSetting)
+        if (!_isSetting && _isEnabled && !_otherIsSetting)
         {
             ModuleManager.GetModule<UIEventManager>().BindingKey(true);
             StartCoroutine(setEvent());
-            isSetting = true;
+            _isSetting = true;
         }
     }
 
     private void setKeyToControl(string key, string keyOrMouseCode)
     {
-        alternateText = "";
+        _alternateText = "";
         string keyPath = keyOrMouseCode + key;
         Dictionary<string, string> temp = new Dictionary<string, string>();
-        if (!manager.setKey(control, keyPath, actionName))
+        if (!_manager.SetKey(_control, keyPath, _actionName))
         {
-            alternateText = "Input invalid";
+            _alternateText = "Input invalid";
             StartCoroutine(resetText());
         }
     }
     IEnumerator resetText()
     {
         yield return new WaitForSeconds(3);
-        alternateText = "";
+        _alternateText = "";
     }
     IEnumerator setEvent()
     {
-        keyPress = "";
+        _keyPress = "";
         do
         {
             yield return null;
-        } while (keyPress == "");
-        setKeyToControl(keyPress, isKeyboard ? "<Keyboard>/" : "<Mouse>/");
+        } while (_keyPress == "");
+        setKeyToControl(_keyPress, _isKeyboard ? "<Keyboard>/" : "<Mouse>/");
         yield return new WaitForSeconds(0.3f);
-        isSetting = false;
+        _isSetting = false;
         ModuleManager.GetModule<UIEventManager>().BindingKey(false);
     }
 

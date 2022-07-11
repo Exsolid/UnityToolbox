@@ -8,9 +8,9 @@ using System.Linq;
 public class DialogBranchNode : DialogNode
 {
 	[Input(name = "Previos Node")]
-	public float previous;
+	public float Previous;
 
-	public override string		name => "DialogBranchNode";
+	public override string Name => "DialogBranchNode";
 
 	protected override void Process()
 	{

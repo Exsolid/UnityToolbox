@@ -10,13 +10,18 @@ public class MenuManager : Module
     [SerializeField] private List<MenuList> _menuList;
     private bool _isPaused;
     private bool _isEnabled;
-    public bool IsEnabled { get { return _isEnabled; } }
-    private Menu _currentActivMenu;
-    private MenuList _currentActivMenuList;
-    public MenuList CurrentActiveMenuList { get { return _currentActivMenuList; } }
-    private MenuList _overlayMenu;
+    public bool IsEnabled 
+    { 
+        get { return _isEnabled; } 
+    }
 
-    public Action<bool> inMenuChanged;
+    private Menu _currentActivMenu;
+    private MenuList _overlayMenu;
+    private MenuList _currentActivMenuList;
+    public MenuList CurrentActiveMenuList 
+    { 
+        get { return _currentActivMenuList; } 
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -39,11 +44,12 @@ public class MenuManager : Module
         }
     }
 
-    public void setActiveMenu(Menu menu)
+    public void SetActiveMenu(Menu menu)
     {
         _currentActivMenu.GetComponent<Canvas>().enabled = false;
+        _currentActivMenu.IsActive = false;
         _currentActivMenu = menu;
-        _currentActivMenu.enabled = true;
+        _currentActivMenu.GetComponent<Canvas>().enabled = true;
         _currentActivMenu.IsActive = true;
         _currentActivMenu.transform.SetAsLastSibling();
     }
@@ -63,8 +69,10 @@ public class MenuManager : Module
 
                     if (_overlayMenu.Menus != null)
                     {
-                        if(_hideOverlayOnOtherMenus)
+                        if (_hideOverlayOnOtherMenus)
+                        {
                             _currentActivMenu.GetComponent<Canvas>().enabled = false;
+                        }
                         _currentActivMenu.gameObject.GetComponent<Menu>().IsActive = false;
                     }
                     _currentActivMenu = menuList.Menus[0];

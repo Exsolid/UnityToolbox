@@ -5,36 +5,45 @@ using UnityEngine.UI;
 
 public class ShowCurrentDialog : MonoBehaviour
 {
-    [SerializeField] private Text title;
-    [SerializeField] private Text description;
-    [SerializeField] private List<Text> options;
-    private bool _isEnabled;
+    [SerializeField] private Text _title;
+    [SerializeField] private Text _description;
+    [SerializeField] private List<Text> _options;
 
     // Start is called before the first frame update
     void Awake()
     {
-        ModuleManager.GetModule<UIEventManager>().dialogNodeChanged += UpdateDialog;
-        GetComponentInParent<Menu>().activeChanged += (isActive) => { _isEnabled = isActive; };
+        ModuleManager.GetModule<UIEventManager>().OnDialogNodeChanged += UpdateDialog;
     }
 
     public void UpdateDialog(DialogNode currentNode)
     {
-        title.text = "";
-        description.text = "";
-        for (int i = 0; i < options.Count; i++)
+        _title.text = "";
+        _description.text = "";
+        for (int i = 0; i < _options.Count; i++)
         {
-            options[i].text = "";
+            _options[i].text = "";
         }
+
         if (currentNode != null)
         {
             ModuleManager.GetModule<MenuManager>().ToggleMenu(MenuType.Dialog, true);
-            title.text = currentNode.Title;
-            description.text = currentNode.Description;
-            if (currentNode.Options != null && currentNode.Options.Count > options.Count) Debug.LogWarning("Not all options can be displayed! Missing sufficient textboxes.");
-            for (int i = 0; i < options.Count; i++)
+            _title.text = currentNode.Title;
+            _description.text = currentNode.Description;
+            if (currentNode.Options != null && currentNode.Options.Count > _options.Count)
             {
-                if (currentNode.Options.Count > i) options[i].text = currentNode.Options[i];
-                else options[i].text = "";
+                Debug.LogWarning("Not all options can be displayed! Missing sufficient textboxes.");
+            }
+
+            for (int i = 0; i < _options.Count; i++)
+            {
+                if (currentNode.Options.Count > i)
+                {
+                    _options[i].text = currentNode.Options[i];
+                }
+                else
+                {
+                    _options[i].text = "";
+                } 
             }
         }
         else
@@ -45,6 +54,6 @@ public class ShowCurrentDialog : MonoBehaviour
 
     private void OnDestroy()
     {
-        ModuleManager.GetModule<UIEventManager>().dialogNodeChanged -= UpdateDialog;
+        ModuleManager.GetModule<UIEventManager>().OnDialogNodeChanged -= UpdateDialog;
     }
 }

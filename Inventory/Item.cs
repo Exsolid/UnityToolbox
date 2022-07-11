@@ -7,21 +7,38 @@ using System;
 public class Item : Saveable
 {
     private Inventory _inventoryOfItem;
-    public Inventory Inventory { get { return _inventoryOfItem; } set { _inventoryOfItem = value; } }
+    public Inventory Inventory 
+    { 
+        get { return _inventoryOfItem; } 
+        set { _inventoryOfItem = value; } 
+    }
 
     [SerializeField] protected string _itemName;
-    public string ItemName { get { return _itemName; } set { _itemName = value; } }
+    public string ItemName { 
+        get { return _itemName; } 
+        set { _itemName = value; } 
+    }
 
     [SerializeField] protected Sprite _icon;
-    public Sprite Icon { get { return _icon; } set { _icon = value; } }
+    public Sprite Icon 
+    { 
+        get { return _icon; } 
+        set { _icon = value; } 
+    }
 
     private string _indentifier;
-    public string Indentifier { get { return _indentifier; }
+    public string Indentifier 
+    { 
+        get { return _indentifier; }
         set {
             Item item = this.MemberwiseClone() as Item;
             _indentifier = value;
-            if(_inventoryOfItem != null) _inventoryOfItem.UpdateItem(item, this);
-        } }
+            if(_inventoryOfItem != null)
+            {
+                _inventoryOfItem.UpdateItem(item, this);
+            }
+        }
+    }
 
     public override bool Equals(object other)
     {
@@ -60,12 +77,18 @@ public class Item : Saveable
     {
         ItemData data = new ItemData();
         data.ItemName = _itemName;
-        if(_inventoryOfItem != null) data.InventoryID = _inventoryOfItem.ID;
+        if (_inventoryOfItem != null)
+        {
+            data.InventoryID = _inventoryOfItem.ID;
+        }
         return new List<GameData>() { data };
     }
 
     protected override void OnObjectDeleted()
     {
-        if(_inventoryOfItem != null) _inventoryOfItem.RemoveItem(this, 1);
+        if (_inventoryOfItem != null)
+        {
+            _inventoryOfItem.RemoveItem(this, 1);
+        }
     }
 }

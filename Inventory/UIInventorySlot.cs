@@ -21,8 +21,14 @@ public class UIInventorySlot : MonoBehaviour
         {
             _iconImage.enabled = false;
         }
-        if (_itemCountText != null) _itemCountText.text = "";
-        if (_itemNameText != null) _itemNameText.text = "";
+        if (_itemCountText != null)
+        { 
+            _itemCountText.text = "";
+        }
+        if (_itemNameText != null)
+        {
+            _itemNameText.text = "";
+        }
     }
 
     public void UpdateItem(Item item, int count)
@@ -43,13 +49,25 @@ public class UIInventorySlot : MonoBehaviour
         } 
         if (_itemCountText != null)
         {
-            if (_itemToShow != null) _itemCountText.text = _itemCount.ToString();
-            else _itemCountText.text = "";
+            if (_itemToShow != null)
+            {
+                _itemCountText.text = _itemCount.ToString();
+            }
+            else
+            {
+                _itemCountText.text = "";
+            }
         }
         if (_itemNameText != null)
         {
-            if (_itemNameText != null) _itemNameText.text = _itemToShow.ItemName.ToString();
-            else _itemNameText.text = "";
+            if (_itemNameText != null)
+            {
+                _itemNameText.text = _itemToShow.ItemName.ToString();
+            }
+            else
+            {
+                _itemNameText.text = "";
+            }
         }
     }
 }

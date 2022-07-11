@@ -7,11 +7,18 @@ using System.Linq;
 public class Inventory : MonoBehaviour
 {
     private Dictionary<Item, int> _items;
-    public Dictionary<Item, int> Items { get { return _items; } set { _items = value; } }
+    public Dictionary<Item, int> Items 
+    { 
+        get { return _items; } 
+        set { _items = value; } 
+    }
 
+    [SerializeField] [ReadOnly] private string id = "";
+    public string ID 
+    { 
+        get { return id; }
+    }
     public Action InventoryChanged;
-    [SerializeField] [HideInInspector] private string id = ""; //TODO readonly
-    public string ID { get { return id; } }
 
     private void Awake()
     {
@@ -32,7 +39,11 @@ public class Inventory : MonoBehaviour
             _items[item] += count;
             item.gameObject.GetComponent<Renderer>().enabled = false;
         }
-        if (InventoryChanged != null) InventoryChanged();
+
+        if (InventoryChanged != null)
+        {
+            InventoryChanged();
+        }
     }    
     
     public void RemoveItem(Item item, int count)
@@ -43,6 +54,7 @@ public class Inventory : MonoBehaviour
             item.Inventory = null;
             _items.Remove(item);
         }
+
         item.gameObject.GetComponent<Renderer>().enabled = true;
         if (InventoryChanged != null) InventoryChanged();
     }
@@ -53,7 +65,10 @@ public class Inventory : MonoBehaviour
         {
             RemoveItem(old, 1);
             AddItem(updated, 1);
-            if (InventoryChanged != null) InventoryChanged();
+            if (InventoryChanged != null)
+            {
+                InventoryChanged();
+            }
         }
     }
 

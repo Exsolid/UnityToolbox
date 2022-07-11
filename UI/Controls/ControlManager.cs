@@ -5,92 +5,89 @@ using System;
 
 public class ControlManager : Module
 {
-    [SerializeField] private InputActionAsset controls;
-    [SerializeField] private string actionMapName;
+    [SerializeField] private InputActionAsset _controls;
+    [SerializeField] private string _actionMapName;
 
-    private Dictionary<string, string> initConToKey;
-    private Dictionary<string, string> currentConToKey;
+    private Dictionary<string, string> _initConToKey;
+    private Dictionary<string, string> _currentConToKey;
 
-    public Action<string, float> valueChanged;
+    public Action<string, float> OnValueChanged;
 
     void Start()
     {
-        initConToKey = new Dictionary<string, string>();
-        currentConToKey = new Dictionary<string, string>();
+        _initConToKey = new Dictionary<string, string>();
+        _currentConToKey = new Dictionary<string, string>();
 
-        foreach (InputAction act in controls.FindActionMap(actionMapName).actions)
+        foreach (InputAction act in _controls.FindActionMap(_actionMapName).actions)
         {
             foreach (InputBinding bc in act.bindings)
             {
                 string control = bc.name.Equals("") ? bc.action.ToLower() : bc.name.ToLower();
-                initConToKey.Add(control, bc.path.ToLower());
-                currentConToKey.Add(control, bc.path.ToLower());
+                _initConToKey.Add(control, bc.path.ToLower());
+                _currentConToKey.Add(control, bc.path.ToLower());
             }
         }
     }
 
     void OnDestroy()
     {
-        writeControlsToPlayerPrefs();
+        WriteControlsToPlayerPrefs();
     }
 
     
-    public bool setKey(string control, string path, string actionName)
+    public bool SetKey(string control, string path, string actionName)
     {
-        control = stripToEmpty(control);
+        control = StripToEmpty(control);
         control = control == "" ? actionName.ToLower() : control.ToLower();
-        if (currentConToKey.ContainsValue(path.ToLower())) return false;
+        if (_currentConToKey.ContainsValue(path.ToLower())) return false;
 
-        InputAction ac = controls.FindAction(actionName);
-        ac.ChangeBindingWithPath(currentConToKey[control.ToLower()]).WithPath(path);
-        currentConToKey[control.ToLower()] = path.ToLower();
+        InputAction ac = _controls.FindAction(actionName);
+        ac.ChangeBindingWithPath(_currentConToKey[control.ToLower()]).WithPath(path);
+        _currentConToKey[control.ToLower()] = path.ToLower();
         return true;
     }
 
-    public void resetKey(string control, string actionName)
+    public void ResetKey(string control, string actionName)
     {
-        control = stripToEmpty(control);
+        control = StripToEmpty(control);
         control = control == "" ? actionName.ToLower() : control.ToLower();
-        InputAction ac = controls.FindAction(actionName);
-        ac.ChangeBindingWithPath(currentConToKey[control]).WithPath(initConToKey[control]);
-        currentConToKey[control] = initConToKey[control];
+        InputAction ac = _controls.FindAction(actionName);
+        ac.ChangeBindingWithPath(_currentConToKey[control]).WithPath(_initConToKey[control]);
+        _currentConToKey[control] = _initConToKey[control];
     }
 
-    public void resetAllKeys()
+    public void ResetAllKeys()
     {
-        foreach (InputAction act in controls.FindActionMap(actionMapName).actions)
+        foreach (InputAction act in _controls.FindActionMap(_actionMapName).actions)
         {
             foreach (InputBinding bc in act.bindings)
             {
                 string control = bc.name.Equals("") ? bc.action.ToLower() : bc.name.ToLower();
-                act.ChangeBindingWithPath(currentConToKey[control]).WithPath(initConToKey[control]);
-                currentConToKey[control] = initConToKey[control];
+                act.ChangeBindingWithPath(_currentConToKey[control]).WithPath(_initConToKey[control]);
+                _currentConToKey[control] = _initConToKey[control];
             }
         }
     }
 
-    public string currentValueOfControl(string control, string actionName)
+    public string CurrentValueOfControl(string control, string actionName)
     {
-        control = stripToEmpty(control);
+        control = StripToEmpty(control);
         control = control == "" ? actionName.ToLower() : control.ToLower();
-        return currentConToKey[control.ToLower()];
+        return _currentConToKey[control.ToLower()];
     }
 
-    private void writeControlsToPlayerPrefs()
+    private void WriteControlsToPlayerPrefs()
     {
-        PlayerPrefs.SetString(ModuleManager.GetModule<PlayerPrefKeys>().getPrefereceKey(PlayerPrefKeys.JSON_CONTROLS), controls.ToJson());
+        PlayerPrefs.SetString(ModuleManager.GetModule<PlayerPrefKeys>().getPrefereceKey(PlayerPrefKeys.JSON_CONTROLS), _controls.ToJson());
     }
 
-    private string stripToEmpty(string str)
+    private string StripToEmpty(string str)
     {
         return str == null ? "" : str;
     }
 
     public void ValueChanged(string id, float newValue)
     {
-        if (valueChanged != null)
-        {
-            valueChanged(id, newValue);
-        }
+        OnValueChanged?.Invoke(id, newValue);
     }
 }

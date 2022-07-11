@@ -5,18 +5,18 @@ using UnityEngine.EventSystems;
 
 public class MenuWheelNavigation : MonoBehaviour, IPointerClickHandler
 {
-    [SerializeField] MenuWheelNavigationTypes direction;
+    [SerializeField] MenuWheelNavigationTypes _direction;
     private bool _isEnabled;
 
     public void Awake()
     {
-        GetComponentInParent<Menu>().activeChanged += (isActive) => { _isEnabled = isActive; };
+        GetComponentInParent<Menu>().OnActiveChanged += (isActive) => { _isEnabled = isActive; };
     }
 
     public void OnPointerClick(PointerEventData data)
     {
         if (!_isEnabled) return;
-        switch (direction)
+        switch (_direction)
         {
             case MenuWheelNavigationTypes.Next:
                 ModuleManager.GetModule<UIEventManager>().MenuWheelNext();

@@ -9,6 +9,5 @@ using System;
 public class ItemData: GameData
 {
     public string ItemName;
-    public ResourceData Icon;
     public string InventoryID;
 }
