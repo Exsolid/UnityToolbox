@@ -12,7 +12,7 @@ public class DialogRootNode : DialogNode
 	private float _selectedOption = -1;
 	public float SelectedOption { get { return _selectedOption; } set { _selectedOption = value; } }
 
-	public override string Name => "DialogRootNode";
+	public override string name => "DialogRootNode";
 
 	protected override void Process()
 	{

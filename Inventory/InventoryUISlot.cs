@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System;
 
-public class UIInventorySlot : MonoBehaviour
+public class InventoryUISlot : MonoBehaviour, IPointerClickHandler
 {
     private Item _itemToShow;
     public Item ItemToShow { get { return _itemToShow; } set { _itemToShow = value; } }
     private int _itemCount;
     public int ItemCount { get { return _itemCount; } set { _itemCount = value; } }
+    [HideInInspector] public BoundInventory InventoryOfItem;
+
     [SerializeField] private Image _iconImage;
     [SerializeField] private Text _itemNameText;
     [SerializeField] private Text _itemCountText;
@@ -22,7 +25,7 @@ public class UIInventorySlot : MonoBehaviour
             _iconImage.enabled = false;
         }
         if (_itemCountText != null)
-        { 
+        {
             _itemCountText.text = "";
         }
         if (_itemNameText != null)
@@ -46,7 +49,7 @@ public class UIInventorySlot : MonoBehaviour
             {
                 _iconImage.enabled = false;
             }
-        } 
+        }
         if (_itemCountText != null)
         {
             if (_itemToShow != null)
@@ -69,5 +72,10 @@ public class UIInventorySlot : MonoBehaviour
                 _itemNameText.text = "";
             }
         }
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        ModuleManager.GetModule<HeldInventoryManager>().ManageInventorys(InventoryOfItem, _itemToShow);
     }
 }

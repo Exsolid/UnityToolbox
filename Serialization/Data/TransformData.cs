@@ -14,8 +14,8 @@ public class TransformData: GameData
 
     public TransformData(Transform transform)
     {
-        Position = new VectorData(transform.position);
-        Rotation = new VectorData(transform.rotation.eulerAngles);
+        Position = new VectorData(transform.localPosition);
+        Rotation = new VectorData(transform.localRotation.eulerAngles);
         Scale = new VectorData(transform.localScale);
     }
 

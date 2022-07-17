@@ -10,7 +10,7 @@ public class DialogBranchNode : DialogNode
 	[Input(name = "Previos Node")]
 	public float Previous;
 
-	public override string Name => "DialogBranchNode";
+	public override string name => "DialogBranchNode";
 
 	protected override void Process()
 	{

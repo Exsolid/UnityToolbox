@@ -106,7 +106,7 @@ public class SaveGameManager : Module
         }
     }
 
-    public List<GameData> getGameDataForID(string ID)
+    public List<GameData> GetGameDataForID(string ID)
     {
         List<GameData> data = new List<GameData>();
         if (_data.ContainsKey(ID)) data.AddRange(_data[ID]);

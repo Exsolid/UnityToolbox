@@ -33,6 +33,19 @@ public abstract class Saveable : MonoBehaviour
     {
         if (!InEditor)
         {
+            if (gameObject.transform.parent != null)
+            {
+                if (gameObject.transform.parent.GetComponent<ParentIdentifier>() == null)
+                {
+                    Debug.Log("The object " + gameObject.name + " has a parent without a " + typeof(ParentIdentifier).Name + " and will be save incorrectly!");
+                }
+                else
+                {
+                    ParentData parentData = new ParentData();
+                    parentData.ParentID = gameObject.transform.parent.GetComponent<ParentIdentifier>().ID;
+                    ModuleManager.GetModule<SaveGameManager>().SetDataToSave(parentData, ID, false);
+                }
+            }
             ResourceData objectData = new ResourceData();
             objectData.PrefabID = PrefabID;
             ModuleManager.GetModule<SaveGameManager>().SetDataToSave(objectData, ID, false);
@@ -48,15 +61,24 @@ public abstract class Saveable : MonoBehaviour
 
     public void Load()
     {
-        List<GameData> data = ModuleManager.GetModule<SaveGameManager>().getGameDataForID(ID);
+        List<GameData> data = ModuleManager.GetModule<SaveGameManager>().GetGameDataForID(ID);
         foreach (GameData gameData in data)
         {
             if (gameData.GetType().Equals(typeof(TransformData)))
             {
                 TransformData transformData = gameData as TransformData;
-                transform.position = new Vector3(transformData.Position.x, transformData.Position.y, transformData.Position.z);
-                transform.rotation = Quaternion.Euler(new Vector3(transformData.Rotation.x, transformData.Rotation.y, transformData.Rotation.z));
+                transform.localPosition = new Vector3(transformData.Position.x, transformData.Position.y, transformData.Position.z);
+                transform.localRotation = Quaternion.Euler(new Vector3(transformData.Rotation.x, transformData.Rotation.y, transformData.Rotation.z));
                 transform.localScale = new Vector3(transformData.Scale.x, transformData.Scale.y, transformData.Scale.z);
+            }
+            else if(gameData.GetType().Equals(typeof(ParentData)))
+            {
+                ParentData parentData = gameData as ParentData;
+                ParentIdentifier parent = FindObjectsOfType<ParentIdentifier>().Where(pI => pI.ID.Equals(parentData.ParentID)).FirstOrDefault();
+                if (parent != null)
+                {
+                    transform.SetParent(parent.transform);
+                }
             }
             LoadData(gameData);
         }

@@ -6,26 +6,26 @@ using System.Linq;
 
 public class InventoryManager : Module
 {
-    private List<Inventory> _allInventorys;
+    private List<BoundInventory> _allInventorys;
 
     public override void Awake()
     {
         base.Awake();
-        _allInventorys = new List<Inventory>();
+        _allInventorys = new List<BoundInventory>();
     }
 
-    public void RegisterInventory(Inventory inv)
+    public void RegisterInventory(BoundInventory inv)
     {
        _allInventorys.Add(inv);
     }
 
-    public Inventory GetByID(string ID)
+    public BoundInventory GetByID(string ID)
     {
         var invWithID = _allInventorys.Where(inv => inv.ID.Equals(ID));
         if (!invWithID.Any())
         {
-            Debug.LogWarning("Inventory with ID" + ID + " not found");
+            Debug.LogWarning("Inventory with ID " + ID + " not found");
         }
-        return invWithID.First();
+        return invWithID.FirstOrDefault();
     }
 }

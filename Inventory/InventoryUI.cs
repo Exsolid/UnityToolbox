@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class UIInventory : MonoBehaviour
+public class InventoryUI : MonoBehaviour
 {
-    private List<UIInventorySlot> _slots;
-    [SerializeField] private Inventory _inventory;
+    private List<InventoryUISlot> _slots;
+    [SerializeField] private BoundInventory _inventory;
 
     private void Start()
     {
-        _slots = GetComponentsInChildren<UIInventorySlot>().ToList();
+        _slots = GetComponentsInChildren<InventoryUISlot>().ToList();
         UpdateSlots();
-        _inventory.InventoryChanged += UpdateSlots;
+        _inventory.OnInventoryChanged += UpdateSlots;
     }
 
     private void UpdateSlots()
@@ -24,6 +24,7 @@ public class UIInventory : MonoBehaviour
         }
         for (int i = 0; i < _slots.Count; i++)
         {
+            _slots[i].InventoryOfItem = _inventory;
             if (_inventory.Items.Count <= i)
             {
                 _slots[i].UpdateItem(null, 0);

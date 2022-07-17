@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System;
+using UnityEngine.EventSystems;
 
 public class Item : Saveable
-{
-    private Inventory _inventoryOfItem;
-    public Inventory Inventory 
+{ 
+    private InventoryBase _inventoryOfItem;
+    public InventoryBase Inventory 
     { 
         get { return _inventoryOfItem; } 
         set { _inventoryOfItem = value; } 
@@ -40,14 +41,16 @@ public class Item : Saveable
         }
     }
 
+    public bool Stackable;
+
     public override bool Equals(object other)
     {
         Type type = other.GetType();
         if (type.IsSubclassOf(typeof(Item)) || type.Equals(typeof(Item)))
         {
             Item otherAsItem = other as Item;
-            string thisIndentifier = _itemName + _indentifier;
-            return thisIndentifier.Equals(otherAsItem._itemName + otherAsItem._indentifier);
+            string thisIndentifier = _itemName.Equals("") ? this.name : _itemName + _indentifier;
+            return thisIndentifier.Equals(_itemName.Equals("") ? otherAsItem.name : otherAsItem.ItemName + otherAsItem._indentifier);
         }
         else
         {
@@ -79,7 +82,16 @@ public class Item : Saveable
         data.ItemName = _itemName;
         if (_inventoryOfItem != null)
         {
-            data.InventoryID = _inventoryOfItem.ID;
+            HeldInventoryManager invMan = ModuleManager.GetModule<HeldInventoryManager>();
+            
+            if(invMan == null || !_inventoryOfItem.ID.Equals(invMan.HInventory.ID))
+            {
+                data.InventoryID = _inventoryOfItem.ID;
+            }
+            else
+            {
+                data.InventoryID = invMan.BackUpInventory.ID;
+            }
         }
         return new List<GameData>() { data };
     }
@@ -89,6 +101,15 @@ public class Item : Saveable
         if (_inventoryOfItem != null)
         {
             _inventoryOfItem.RemoveItem(this, 1);
+        }
+    }
+
+    public void Click()
+    {
+        HeldInventoryManager invMan = ModuleManager.GetModule<HeldInventoryManager>();
+        if (invMan.EnablePlacement)
+        {
+            invMan.ManageInventorys(null, this);
         }
     }
 }
