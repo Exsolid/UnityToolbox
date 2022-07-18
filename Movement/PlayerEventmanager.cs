@@ -3,33 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class PlayerEventmanager : Module
+public class PlayerEventManager : Module
 {
-    public Action<Vector3> move;
-    public Action<bool> lockMove;
-    public Action attack;
+    public Action<Vector3, MovementState> OnMove;
+    public Action<bool> OnLockMove;
+    public Action OnAttack;
 
-    public void Move(Vector3 currentVelocity)
+    public void Move(Vector3 currentVelocity, MovementState state)
     {
-        if (move != null)
+        if (OnMove != null)
         {
-            move(currentVelocity);
+            OnMove(currentVelocity, state);
         }
     }
        
     public void LockMove(bool locked)
     {
-        if (lockMove != null)
+        if (OnLockMove != null)
         {
-            lockMove(locked);
+            OnLockMove(locked);
         }
     }
 
     public void Attack()
     {
-        if(attack != null)
+        if(OnAttack != null)
         {
-            attack();
+            OnAttack();
         }
     }
 }
