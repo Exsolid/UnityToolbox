@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Movement2D : MovementBase
 {
-    private RaycastHit2D _grounded;
+    private RaycastHit2D _groundedHit;
     private Rigidbody2D _rb;
     private float _oldGravityScale;
 
@@ -20,19 +20,18 @@ public class Movement2D : MovementBase
     // Update is called once per frame
     void FixedUpdate()
     {
-        Debug.Log(_currentMovementState);
         int everyMaskExcept = ~(1 << gameObject.layer);
-        _grounded = Physics2D.Raycast(_groundedTransform.position, transform.up * -1, 0.01f, everyMaskExcept);
+        _groundedHit = Physics2D.Raycast(_groundedTransform.position, transform.up * -1, 0.01f, everyMaskExcept);
 
         UpdateMovementState();
 
-        if (_grounded.collider != null && !_trueGrounded)
+        if (_groundedHit.collider != null && !base._grounded)
         {
             StartCoroutine(DelayGrounded());
         }
-        else if (_grounded.collider == null)
+        else if (_groundedHit.collider == null)
         {
-            _trueGrounded = false;
+            base._grounded = false;
         }
 
         if (!_isMovementLocked)
@@ -45,7 +44,7 @@ public class Movement2D : MovementBase
 
     public override void Move(Vector3 direction)
     {
-        if(!_trueGrounded && _currentMovementState != MovementState.Climbing)
+        if(!base._grounded && _currentMovementState != MovementState.Climbing)
         {
             direction.y = 0;
         }
@@ -72,14 +71,14 @@ public class Movement2D : MovementBase
     IEnumerator DelayGrounded()
     {
         yield return new WaitForSeconds(0.1f);
-        _trueGrounded = true;
+        base._grounded = true;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if ((1 << other.gameObject.layer).Equals(_climbingMask))
         {
-            _onLadder = true;
+            _climbing = true;
             _oldGravityScale = _rb.gravityScale;
             _rb.gravityScale = 0;
             _rb.drag *= 10;
@@ -92,7 +91,7 @@ public class Movement2D : MovementBase
         {
             _rb.drag /= 10;
             _rb.gravityScale = _oldGravityScale;
-            _onLadder = false;
+            _climbing = false;
         }
     }
 }

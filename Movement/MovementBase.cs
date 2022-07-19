@@ -28,8 +28,17 @@ public abstract class MovementBase : MonoBehaviour
 
     [SerializeField] protected LayerMask _climbingMask;
 
-    protected bool _trueGrounded;
-    protected bool _onLadder;
+    protected bool _grounded;
+    public bool Grounded 
+    {
+        get { return _grounded; } 
+    }
+
+    protected bool _climbing;
+    public bool Climbing 
+    {
+        get { return _climbing; }
+    }
 
     private void Awake()
     {
@@ -44,11 +53,11 @@ public abstract class MovementBase : MonoBehaviour
 
     public void UpdateMovementState()
     {
-        if (_onLadder)
+        if (_climbing)
         {
             _currentMovementState = MovementState.Climbing;
         }
-        else if(!_trueGrounded)
+        else if(!_grounded)
         {
             _currentMovementState = MovementState.Jumping;
         }
