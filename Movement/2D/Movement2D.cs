@@ -31,7 +31,7 @@ public class Movement2D : MovementBase
         }
         else if (_groundedHit.collider == null)
         {
-            base._grounded = false;
+            _grounded = false;
         }
 
         if (!_isMovementLocked)

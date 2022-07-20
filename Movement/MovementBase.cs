@@ -19,6 +19,11 @@ public abstract class MovementBase : MonoBehaviour
 
     [SerializeField] protected PlayerInput _input;
     protected bool _isMovementLocked;
+    public bool IsMovementLocked 
+    { 
+        get { return _isMovementLocked; } 
+        set { _isMovementLocked = value; } 
+    }
 
     protected MovementState _currentMovementState;
     public MovementState CurrentMovementState 
