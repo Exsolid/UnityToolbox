@@ -54,6 +54,9 @@ public class ShowCurrentDialog : MonoBehaviour
 
     private void OnDestroy()
     {
-        ModuleManager.GetModule<UIEventManager>().OnDialogNodeChanged -= UpdateDialog;
+        if(ModuleManager.ModuleRegistered<UIEventManager>())
+        {
+            ModuleManager.GetModule<UIEventManager>().OnDialogNodeChanged -= UpdateDialog;
+        }
     }
 }

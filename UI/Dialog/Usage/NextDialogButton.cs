@@ -22,7 +22,10 @@ public class NextDialogButton : MonoBehaviour, IPointerDownHandler
 
     private void OnDestroy()
     {
-        ModuleManager.GetModule<UIEventManager>().OnDialogNodeChanged -= ChangeOptionsPresent;
+        if (ModuleManager.ModuleRegistered<UIEventManager>())
+        {
+            ModuleManager.GetModule<UIEventManager>().OnDialogNodeChanged -= ChangeOptionsPresent;
+        }
     }
 
     public void ChangeOptionsPresent(DialogNode currentNode)

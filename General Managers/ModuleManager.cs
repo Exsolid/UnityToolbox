@@ -37,6 +37,17 @@ public class ModuleManager : MonoBehaviour
         return true;
     }
 
+    public static void DeregisterModul<T>(T module) where T : Module
+    {
+        _instance.Moduls.Remove(module);
+        Debug.Log("Deregistered module '" + module.GetType().Name + "'");
+    }
+
+    public static bool ModuleRegistered<T>() where T : Module
+    {
+        return _instance.Moduls.Where(mod => mod.GetType().IsEquivalentTo(typeof(T))).Any();
+    }
+
     public static T GetModule<T>() where T : Module
     {
         var toReturn = _instance.Moduls.Where(modul => modul.GetType() == typeof(T));

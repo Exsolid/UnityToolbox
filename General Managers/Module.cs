@@ -25,4 +25,9 @@ public class Module : MonoBehaviour
             throw new System.Exception(string.Format("An object of type {0} has already been registered.", this.GetType()));
         }
     }
+
+    private void OnDestroy()
+    {
+        ModuleManager.DeregisterModul(this);
+    }
 }
