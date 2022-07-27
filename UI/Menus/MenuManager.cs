@@ -133,5 +133,6 @@ public enum MenuType
     Pause,
     Inventory,
     Overlay,
-    Dialog
+    Dialog,
+    GameOver
 }
