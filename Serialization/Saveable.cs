@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using UnityEditor;
+using UnityEngine.SceneManagement;
 using System;
 
 [DisallowMultipleComponent]
@@ -14,15 +14,13 @@ public abstract class Saveable : MonoBehaviour
     [SerializeField] [ReadOnly] private bool _inEditor;
     public bool InEditor { get { return _inEditor; } }
 
+    [SerializeField] protected bool _removeFromSaveOnDelete;
     //TODO should save bool to exclude
 
     [SerializeField] [ReadOnly] public int PrefabID = -1;
 
-    protected bool _isRunning;
-
     private void Awake()
     {
-        _isRunning = true;
         if (_id.Equals("") && !_inEditor)
         {
             _id = IDManager.GetUniqueID();
@@ -104,16 +102,14 @@ public abstract class Saveable : MonoBehaviour
     private void OnDestroy()
     {
         //?
-        if (_isRunning)
+        if (_removeFromSaveOnDelete)
         {
             ModuleManager.GetModule<SaveGameManager>().RemoveDataFromSave(ID);
             OnObjectDeleted();
         }
-    }
-
-    private void OnApplicationQuit()
-    {
-        _isRunning = false;
-        Save();
+        else
+        {
+            Save();
+        }
     }
 }
