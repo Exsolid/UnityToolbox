@@ -6,8 +6,9 @@ using UnityEngine;
 
 public class ToggleMenuButton : MonoBehaviour, IPointerClickHandler
 {
-    [SerializeField] private MenuType _menuType;
     private bool _isEnabled;
+    [SerializeField] [DropDown(nameof(_menuTypes))] private int _menuType;
+    private List<string> _menuTypes;
 
     public void Awake()
     {
@@ -24,5 +25,10 @@ public class ToggleMenuButton : MonoBehaviour, IPointerClickHandler
             return;
         }
         ModuleManager.GetModule<MenuManager>().ToggleMenu(_menuType, true);
+    }
+
+    private void OnValidate()
+    {
+        _menuTypes = MenuManager.MenuTypesForEditor;
     }
 }

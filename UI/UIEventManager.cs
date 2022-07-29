@@ -9,7 +9,7 @@ public class UIEventManager : Module
     public event Action OnMenuWheelPrevious;
     public event Action OnMenuWheelNext;
 
-    public event Action<bool, MenuType> OnTogglePaused;
+    public event Action<bool, int> OnTogglePaused;
 
     public event Action<DialogNode> OnDialogNodeChanged;
 
@@ -25,9 +25,9 @@ public class UIEventManager : Module
         OnMenuWheelNext?.Invoke();
     }
 
-    public void TogglePaused(bool isPaused, MenuType type)
+    public void TogglePaused(bool isPaused, int typeID)
     {
-        OnTogglePaused?.Invoke(isPaused, type);
+        OnTogglePaused?.Invoke(isPaused, typeID);
     }
 
     public void DialogNodeChanged(DialogNode currentNode)

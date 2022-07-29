@@ -9,6 +9,8 @@ public class ShowCurrentDialog : MonoBehaviour
     [SerializeField] private Text _description;
     [SerializeField] private List<Text> _options;
 
+    [SerializeField] [DropDown(nameof(MenuTypes))] private int _menuType;
+    private List<string> MenuTypes;
     // Start is called before the first frame update
     void Awake()
     {
@@ -26,7 +28,7 @@ public class ShowCurrentDialog : MonoBehaviour
 
         if (currentNode != null)
         {
-            ModuleManager.GetModule<MenuManager>().ToggleMenu(MenuType.Dialog, true);
+            ModuleManager.GetModule<MenuManager>().ToggleMenu(_menuType, true);
             _title.text = currentNode.Title;
             _description.text = currentNode.Description;
             if (currentNode.Options != null && currentNode.Options.Count > _options.Count)
@@ -48,7 +50,7 @@ public class ShowCurrentDialog : MonoBehaviour
         }
         else
         {
-            ModuleManager.GetModule<MenuManager>().ToggleMenu(MenuType.Dialog, false);
+            ModuleManager.GetModule<MenuManager>().ToggleMenu(_menuType, false);
         }
     }
 
@@ -58,5 +60,10 @@ public class ShowCurrentDialog : MonoBehaviour
         {
             ModuleManager.GetModule<UIEventManager>().OnDialogNodeChanged -= UpdateDialog;
         }
+    }
+
+    private void OnValidate()
+    {
+        MenuTypes = MenuManager.MenuTypesForEditor;
     }
 }

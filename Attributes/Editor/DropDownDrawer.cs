@@ -16,13 +16,58 @@ public class DropDownDrawer : PropertyDrawer
 
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
+        object instance = null;
+
+        if (!fieldInfo.DeclaringType.Equals(property.serializedObject.targetObject.GetType()))
+        {
+            FieldInfo[] objFields = property.serializedObject.targetObject.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            if(property.propertyPath.Contains('['))
+            {
+                //Find correct object in list
+                var collection = objFields.Where(
+                    field => field.FieldType.GetInterfaces().Any(
+                        i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IList<>) 
+                        && i.GetGenericArguments().Length >= 1 && i.GetGenericArguments()[0].Equals(fieldInfo.DeclaringType)));
+
+                int index = Int32.Parse(property.propertyPath.Split('[').Last().Split(']').First());
+                IList allInstances = (IList)collection.FirstOrDefault().GetValue(property.serializedObject.targetObject);
+
+                for (int i = 0; i < allInstances.Count; i++)
+                {
+                    if (i == index)
+                    {
+                        instance = allInstances[i];
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                FieldInfo objectOfNested = objFields.Where(field => field.FieldType.Equals(fieldInfo.DeclaringType)).FirstOrDefault();
+                instance = objectOfNested.GetValue(property.serializedObject.targetObject);
+            }
+        }
+        else
+        {
+            instance = property.serializedObject.targetObject;
+        }
+        
         if (!fieldInfo.FieldType.Equals(typeof(int)))
         {
             Debug.LogError(fieldInfo.DeclaringType+": Can only generate DropDownAttribute for Type int.");
             return;
         }
 
-        FieldInfo[] objectFields = fieldInfo.DeclaringType.GetFields();
+        FieldInfo[] objectFields;
+        if (((DropDownAttribute)attribute).UseParentNestedForList)
+        {
+            objectFields = property.serializedObject.targetObject.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+        }
+        else
+        {
+            objectFields = instance.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+        }
+
         var hasCollectionOfDefinedName = objectFields.Where(field => field.Name.Equals(((DropDownAttribute)attribute).VariableNameForList) && field.FieldType.GetInterfaces().Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IList<>)));
         if (!hasCollectionOfDefinedName.Any())
         {
@@ -30,7 +75,7 @@ public class DropDownDrawer : PropertyDrawer
             return;
         }
 
-        IList list = (IList)hasCollectionOfDefinedName.FirstOrDefault().GetValue(property.serializedObject.targetObject);
+        IList list = (IList)hasCollectionOfDefinedName.FirstOrDefault().GetValue(((DropDownAttribute)attribute).UseParentNestedForList ? property.serializedObject.targetObject : instance);
         GUIContent dropDownSelect = new GUIContent(fieldInfo.Name);
         if (list == null || list.Count == 0)
         {
@@ -45,14 +90,14 @@ public class DropDownDrawer : PropertyDrawer
 
         try
         {
-            if (fieldInfo.GetValue(property.serializedObject.targetObject) is int index)
+            if (fieldInfo.GetValue(instance) is int index)
             {
-                fieldInfo.SetValue(property.serializedObject.targetObject, EditorGUILayout.Popup(dropDownSelect, index, values));
+                fieldInfo.SetValue(instance, EditorGUI.Popup(position, ObjectNames.NicifyVariableName(fieldInfo.Name), index, values));
             }
         }
         catch (ArgumentException ex)
         {
-            Debug.LogError(ex.GetType()+ ": The DropDown attribute requires a CustomEditor for the DeclaringType " + fieldInfo.DeclaringType + " it is being used on. (It require no functionality)");
+            Debug.LogError(ex);
         }
     }
 }

@@ -6,7 +6,8 @@ using UnityEngine;
 public class ToggleMenuControl : MonoBehaviour
 {
     [SerializeField] private string _actionName;
-    [SerializeField] private MenuType _menuType;
+    [SerializeField] [DropDown(nameof(_menuTypes))] private int _menuType;
+    private List<string> _menuTypes;
 
     private PlayerInput _input;
 
@@ -25,6 +26,11 @@ public class ToggleMenuControl : MonoBehaviour
         if (_input != null && _input.actions[_actionName].triggered && !_isBinding)
         {
             ModuleManager.GetModule<MenuManager>().ToggleMenu(_menuType, true);
-        }   
+        }
+    }
+
+    private void OnValidate()
+    {
+        _menuTypes = MenuManager.MenuTypesForEditor;
     }
 }

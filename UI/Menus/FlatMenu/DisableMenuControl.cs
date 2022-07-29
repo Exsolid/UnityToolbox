@@ -7,7 +7,8 @@ using UnityEngine;
 public class DisableMenuControl : MonoBehaviour
 {
     [SerializeField] private string _actionName;
-    [SerializeField] private MenuType _menuType;
+    [SerializeField] [DropDown(nameof(MenuTypes))] private int _menuType;
+    private List<string> MenuTypes;
     private bool _mayDisable;
 
     private PlayerInput _input;
@@ -32,5 +33,10 @@ public class DisableMenuControl : MonoBehaviour
         {
             ModuleManager.GetModule<MenuManager>().ToggleMenu(_menuType, true);
         }
+    }
+
+    private void OnValidate()
+    {
+        MenuTypes = MenuManager.MenuTypesForEditor;
     }
 }
