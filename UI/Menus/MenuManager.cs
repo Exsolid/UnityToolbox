@@ -44,14 +44,17 @@ public class MenuManager : Module, ISerializationCallbackReceiver
         _isEnabled = true;
         foreach (var menuList in _menuList)
         {
-            if(menuList.MenuTypeID.Equals(OverlayType)) _overlayMenu = menuList;
+            if (menuList.MenuTypeID.Equals(OverlayType))
+            {
+                _overlayMenu = menuList;
+            } 
             foreach (var menu in menuList.Menus)
             {
                 menu.IsActive = false;
                 menu.enabled = false;
             }
         }
-        if (_overlayMenu.Menus != null)
+        if (_overlayMenu != null && _overlayMenu.Menus != null)
         {
             _currentActivMenuList = _overlayMenu;
             _currentActivMenu = _overlayMenu.Menus[0];
@@ -73,7 +76,7 @@ public class MenuManager : Module, ISerializationCallbackReceiver
     public void ToggleMenu(int type, bool userInteraction)
     {
         if (_currentActivMenu != null && (_currentActivMenu.MayUserToogle ^ userInteraction) || !_isEnabled) return;
-        if (type.Equals(_currentActivMenuList.MenuTypeID) && _isPaused || !_isPaused || (OverlayType != 0 && OverlayType.Equals(_currentActivMenuList.MenuTypeID)))
+        if (_currentActivMenuList != null && type.Equals(_currentActivMenuList.MenuTypeID) && _isPaused || !_isPaused || (_currentActivMenuList != null && OverlayType != 0 && OverlayType.Equals(_currentActivMenuList.MenuTypeID)))
         {
             _isPaused = !_isPaused;
             if (_isPaused)
@@ -83,7 +86,7 @@ public class MenuManager : Module, ISerializationCallbackReceiver
                 {
                     MenuList menuList = foundMenuByType.First();
 
-                    if (_overlayMenu.Menus != null)
+                    if (_overlayMenu != null && _overlayMenu.Menus != null)
                     {
                         if (_hideOverlayOnOtherMenus)
                         {
@@ -102,7 +105,7 @@ public class MenuManager : Module, ISerializationCallbackReceiver
             {
                 if(_currentActivMenu != null)
                 {
-                    if (_overlayMenu.Menus != null)
+                    if (_overlayMenu != null && _overlayMenu.Menus != null)
                     {
                         _currentActivMenu.GetComponent<Canvas>().enabled = false;
                         _currentActivMenu.IsActive = false;
@@ -126,12 +129,12 @@ public class MenuManager : Module, ISerializationCallbackReceiver
     public void ToggleMenu(Menu menu, bool userInteraction)
     {
         if (_currentActivMenu != null && (_currentActivMenu.MayUserToogle ^ userInteraction) || !_isEnabled) return;
-        if (menu.Equals(_currentActivMenu) && _isPaused || !_isPaused || (OverlayType != 0 && _overlayMenu.Equals(_currentActivMenu)))
+        if (menu.Equals(_currentActivMenu) && _isPaused || !_isPaused || (OverlayType != 0 && _overlayMenu != null && _overlayMenu.Equals(_currentActivMenu)))
         {
             _isPaused = !_isPaused;
             if (_isPaused)
             {
-                if (_overlayMenu.Menus != null)
+                if (_overlayMenu != null && _overlayMenu.Menus != null)
                 {
                     if (_hideOverlayOnOtherMenus)
                     {
@@ -149,7 +152,7 @@ public class MenuManager : Module, ISerializationCallbackReceiver
             {
                 if (_currentActivMenu != null)
                 {
-                    if (_overlayMenu.Menus != null)
+                    if (_overlayMenu != null && _overlayMenu.Menus != null)
                     {
                         _currentActivMenu.GetComponent<Canvas>().enabled = false;
                         _currentActivMenu.IsActive = false;
@@ -195,7 +198,7 @@ public class MenuManager : Module, ISerializationCallbackReceiver
 }
 
 [Serializable]
-public struct MenuList
+public class MenuList
 {
     [DropDown(nameof(MenuManager._menuTypes), true)] public int MenuTypeID;
     public List<Menu> Menus;

@@ -16,7 +16,7 @@ public class DropDownDrawer : PropertyDrawer
 
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
-        object instance = null;
+        var instance = new object();
 
         if (!fieldInfo.DeclaringType.Equals(property.serializedObject.targetObject.GetType()))
         {
@@ -90,9 +90,11 @@ public class DropDownDrawer : PropertyDrawer
 
         try
         {
-            if (fieldInfo.GetValue(instance) is int index)
+            object boxed = (object) instance;
+            if (fieldInfo.GetValue(boxed) is int index)
             {
-                fieldInfo.SetValue(instance, EditorGUI.Popup(position, ObjectNames.NicifyVariableName(fieldInfo.Name), index, values));
+                int newIndex = EditorGUI.Popup(position, ObjectNames.NicifyVariableName(fieldInfo.Name), index, values);
+                fieldInfo.SetValue(boxed, newIndex);
             }
         }
         catch (ArgumentException ex)
