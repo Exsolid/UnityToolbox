@@ -6,15 +6,22 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Movement2D : MovementBase
 {
+    [SerializeField] private Transform _groundedTransformTwo;
+    public Transform GroundedTransformTwo
+    {
+        get { return _groundedTransformTwo; }
+    }
+
     private RaycastHit2D _groundedHit;
     private Rigidbody2D _rb;
-    private float _oldGravityScale;
+    private float _oldGravityScale; 
 
     // Start is called before the first frame update
     void Start()
     {
         _input = GetComponent<PlayerInput>();
         _rb = GetComponent<Rigidbody2D>();
+        _oldGravityScale = _rb.gravityScale;
     }
 
     // Update is called once per frame
@@ -22,6 +29,11 @@ public class Movement2D : MovementBase
     {
         int everyMaskExcept = ~(1 << gameObject.layer);
         _groundedHit = Physics2D.Raycast(_groundedTransform.position, transform.up * -1, 0.01f, everyMaskExcept);
+        if(_groundedHit.collider == null)
+        {
+            _groundedHit = Physics2D.Raycast(_groundedTransformTwo.position, transform.up * -1, 0.01f, everyMaskExcept);
+        }
+
 
         UpdateMovementState();
 
@@ -32,6 +44,7 @@ public class Movement2D : MovementBase
         else if (_groundedHit.collider == null)
         {
             _grounded = false;
+            _rb.gravityScale = _oldGravityScale;
         }
 
         if (!_isMovementLocked)
@@ -65,6 +78,10 @@ public class Movement2D : MovementBase
 
     public override Vector3 GetCurrentVelocity()
     {
+        if(_rb == null)
+        {
+            return Vector3.zero;
+        }
         return _rb.velocity;
     }
 
@@ -72,6 +89,7 @@ public class Movement2D : MovementBase
     {
         yield return new WaitForSeconds(0.1f);
         base._grounded = true;
+        _rb.gravityScale = 0;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -79,7 +97,6 @@ public class Movement2D : MovementBase
         if ((1 << other.gameObject.layer).Equals(_climbingMask))
         {
             _climbing = true;
-            _oldGravityScale = _rb.gravityScale;
             _rb.gravityScale = 0;
             _rb.drag *= 10;
         }
