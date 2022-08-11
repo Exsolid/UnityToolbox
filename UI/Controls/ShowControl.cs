@@ -9,7 +9,7 @@ public class ShowControl : MonoBehaviour
     [SerializeField] private string _control;
     [SerializeField] private string _actionName;
     [SerializeField] private Text _displayText;
-    private ControlManager _manager;
+    private SettingsManager _manager;
     private bool _isEnabled;
 
     public void Awake()
@@ -22,7 +22,7 @@ public class ShowControl : MonoBehaviour
 
     void Start()
     {
-        _manager = ModuleManager.GetModule<ControlManager>();
+        _manager = ModuleManager.GetModule<SettingsManager>();
     }
 
     private void Update()

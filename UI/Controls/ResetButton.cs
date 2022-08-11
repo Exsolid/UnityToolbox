@@ -6,7 +6,7 @@ public class ResetButton : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private string _control;
     [SerializeField] private string _actionName;
-    private ControlManager manager;
+    private SettingsManager manager;
     private bool _isEnabled;
 
     public void Awake()
@@ -19,7 +19,7 @@ public class ResetButton : MonoBehaviour, IPointerClickHandler
 
     private void Start()
     {
-        manager = ModuleManager.GetModule<ControlManager>();
+        manager = ModuleManager.GetModule<SettingsManager>();
     }
 
     public void OnPointerClick(PointerEventData eventData)

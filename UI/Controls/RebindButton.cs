@@ -17,7 +17,7 @@ public class RebindButton : MonoBehaviour, IPointerClickHandler
 
     private bool _otherIsSetting;
 
-    private ControlManager _manager; 
+    private SettingsManager _manager; 
     private bool _isEnabled;
 
     public void Awake()
@@ -32,7 +32,7 @@ public class RebindButton : MonoBehaviour, IPointerClickHandler
     {
         _alternateText = "";
         _textChild = (Text)gameObject.GetComponentInChildren(typeof(Text));
-        _manager = ModuleManager.GetModule<ControlManager>();
+        _manager = ModuleManager.GetModule<SettingsManager>();
         ModuleManager.GetModule<UIEventManager>().OnBindingKey += (isSetting) => { _otherIsSetting = isSetting; };
     }
     public void OnGUI()

@@ -10,7 +10,7 @@ public class PlayerPrefKeys : Module
 
     public static string JSON_CONTROLS = "JSON_CONTROLS";
     public static string MOUSE_SENSITIVITY = "MOUSE_SENSITIVITY";
-    public static string SOUND_VOLUME = "SOUND_VOLUME";
+    public static string EFFECTS_VOLUME = "SOUND_VOLUME";
     public static string MUSIC_VOLUME = "MUSIC_VOLUME";
 
     public static string GAMEPLAY_SAVEGAME = "GAMEPLAY_SAVEGAME";

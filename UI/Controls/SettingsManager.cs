@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
 
-public class ControlManager : Module
+public class SettingsManager : Module
 {
     [SerializeField] private InputActionAsset _controls;
     [SerializeField] private string _actionMapName;
@@ -11,7 +11,8 @@ public class ControlManager : Module
     private Dictionary<string, string> _initConToKey;
     private Dictionary<string, string> _currentConToKey;
 
-    public Action<string, float> OnValueChanged;
+    public Action<SoundType, float> OnSoundValueChanged;
+    public Action<float> OnSenseValueChanged;
 
     void Start()
     {
@@ -86,8 +87,13 @@ public class ControlManager : Module
         return str == null ? "" : str;
     }
 
-    public void ValueChanged(string id, float newValue)
+    public void SoundValueChanged(SoundType type, float newValue)
     {
-        OnValueChanged?.Invoke(id, newValue);
+        OnSoundValueChanged?.Invoke(type, newValue);
+    }
+
+    public void SenseValueChanged(float newValue)
+    {
+        OnSenseValueChanged?.Invoke(newValue);
     }
 }
