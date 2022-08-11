@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class GotoMenuButton : MonoBehaviour, IPointerClickHandler
 {
+    [SerializeField] private AudioMixer _clickSounds;
     [SerializeField] private Menu _menu;
     private bool _isEnabled;
 
@@ -19,8 +20,14 @@ public class GotoMenuButton : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData data)
     {
+
         if (_isEnabled)
         {
+            if (_clickSounds != null)
+            {
+                _clickSounds.PlayRandomSource();
+            }
+
             ModuleManager.GetModule<MenuManager>().SetActiveMenu(_menu);
         }
     }

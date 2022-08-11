@@ -76,10 +76,14 @@ public class AudioMixer : MonoBehaviour
         }
     }
 
-    public AudioSource GetSource()
+    public void PlayRandomSource()
     {
         float randomSelected = UnityEngine.Random.Range(0, _totalProbability);
-        return _items.Where(a => a.CountedProbability > randomSelected).FirstOrDefault().Source;
+        AudioMixerItem item = _items.Where(a => a.CountedProbability > randomSelected).FirstOrDefault();
+        if (item.Source != null)
+        {
+            item.Source.Play();
+        }
     }
 }
 

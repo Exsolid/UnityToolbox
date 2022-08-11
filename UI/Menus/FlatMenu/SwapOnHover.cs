@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class SwapOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    [SerializeField] private AudioMixer _hoverSounds;
     [SerializeField] private Sprite _spriteSwapOnHover;
     private Sprite _original;
     private bool _isEnabled;
@@ -25,6 +26,12 @@ public class SwapOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         {
             return;
         }
+
+        if(_hoverSounds != null)
+        {
+            _hoverSounds.PlayRandomSource();
+        }
+
         GetComponent<Image>().sprite = _spriteSwapOnHover;
     }
 

@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GotoSceneButton : MonoBehaviour, IPointerDownHandler
 {
+    [SerializeField] private AudioMixer _clickSounds;
     [SerializeField] private string _sceneName;
     private bool _isEnabled;
 
@@ -21,6 +22,11 @@ public class GotoSceneButton : MonoBehaviour, IPointerDownHandler
     {
         if (_isEnabled)
         {
+            if (_clickSounds != null)
+            {
+                _clickSounds.PlayRandomSource();
+            }
+
             SceneManager.LoadScene(_sceneName);
         }
     }

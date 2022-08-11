@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 public class QuitButton : MonoBehaviour, IPointerDownHandler
 {
     private bool _isEnabled;
+    [SerializeField] private AudioMixer _clickSounds;
 
     public void Awake()
     {
@@ -20,6 +21,11 @@ public class QuitButton : MonoBehaviour, IPointerDownHandler
     {
         if (_isEnabled)
         {
+            if (_clickSounds != null)
+            {
+                _clickSounds.PlayRandomSource();
+            }
+
             Application.Quit();
         }
     }

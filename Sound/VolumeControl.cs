@@ -17,6 +17,10 @@ public class VolumeControl : MonoBehaviour
         {
             if(type == _type)
             {
+                foreach (AudioSource source in _audioSources)
+                {
+                    source.volume = newValue;
+                }
             }
         };
 

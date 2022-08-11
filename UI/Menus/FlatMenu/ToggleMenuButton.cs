@@ -7,6 +7,7 @@ using UnityEngine;
 public class ToggleMenuButton : MonoBehaviour, IPointerClickHandler
 {
     private bool _isEnabled;
+    [SerializeField] private AudioMixer _clickSounds;
     [SerializeField] [DropDown(nameof(_menuTypes))] private int _menuType;
     private List<string> _menuTypes;
 
@@ -24,6 +25,12 @@ public class ToggleMenuButton : MonoBehaviour, IPointerClickHandler
         {
             return;
         }
+
+        if (_clickSounds != null)
+        {
+            _clickSounds.PlayRandomSource();
+        }
+
         ModuleManager.GetModule<MenuManager>().ToggleMenu(_menuType, true);
     }
 

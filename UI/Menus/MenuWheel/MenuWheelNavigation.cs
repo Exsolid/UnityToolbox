@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class MenuWheelNavigation : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] MenuWheelNavigationTypes _direction;
+    [SerializeField] private AudioMixer _clickSounds;
     private bool _isEnabled;
 
     public void Awake()
@@ -24,6 +25,11 @@ public class MenuWheelNavigation : MonoBehaviour, IPointerClickHandler
             case MenuWheelNavigationTypes.Previous:
                 ModuleManager.GetModule<UIEventManager>().MenuWheelPrevious();
                 break;
+        }
+
+        if (_clickSounds != null)
+        {
+            _clickSounds.PlayRandomSource();
         }
     }
 }
