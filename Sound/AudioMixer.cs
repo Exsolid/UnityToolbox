@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using System;
 
+[RequireComponent(typeof(AudioSource))]
 public class AudioMixer : MonoBehaviour
 {
     [SerializeField] private bool _isPassive;
@@ -16,12 +17,13 @@ public class AudioMixer : MonoBehaviour
 
     private float _timer;
 
-    private AudioSource _currentPlaying;
+    private AudioSource _audioSource;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         for (int i = 0; i < _items.Count; i++)
         {
             AudioMixerItem item = _items[i];
@@ -45,32 +47,23 @@ public class AudioMixer : MonoBehaviour
             return;
         }
 
-        if(_timer <= 0)
+        if(_timer <= 0 && !_audioSource.isPlaying)
         {
-            if (_currentPlaying == null)
+            float randomSelected = UnityEngine.Random.Range(0, _totalProbability);
+            AudioMixerItem item = _items.Where(a => a.CountedProbability > randomSelected).FirstOrDefault();
+            if (item.Source != null)
             {
-                float randomSelected = UnityEngine.Random.Range(0, _totalProbability);
-                AudioMixerItem item = _items.Where(a => a.CountedProbability > randomSelected).FirstOrDefault();
-                if (item.Source != null)
-                {
-                    _currentPlaying = item.Source;
-                    _currentPlaying.Play();
-                }
-                else
-                {
-                    return;
-                }
+                _audioSource.clip = item.Source;
+                _audioSource.Play();
             }
             else
             {
-                if (_currentPlaying.isPlaying)
-                {
-                    _currentPlaying = null;
-                    _timer = UnityEngine.Random.Range(_minDelayBetweenSounds, _maxDelayBetweenSounds);
-                }
+                return;
             }
+
+            _timer = UnityEngine.Random.Range(_minDelayBetweenSounds, _maxDelayBetweenSounds);
         }
-        else
+        else if(!_audioSource.isPlaying)
         {
             _timer -= Time.deltaTime;
         }
@@ -82,15 +75,16 @@ public class AudioMixer : MonoBehaviour
         AudioMixerItem item = _items.Where(a => a.CountedProbability > randomSelected).FirstOrDefault();
         if (item.Source != null)
         {
-            item.Source.Play();
+            _audioSource.clip = item.Source;
+            _audioSource.Play();
         }
     }
 }
 
 [Serializable]
-public struct AudioMixerItem
+public class AudioMixerItem
 {
-    public AudioSource Source;
-    [Range(0.1f,1)] public float Probability;
+    public AudioClip Source;
+    [Range(0.1f,1)] public float Probability = 1;
     [HideInInspector] public float CountedProbability;
 }
