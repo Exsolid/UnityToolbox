@@ -39,6 +39,21 @@ public class SaveGameManager : Module
         {
             _data = new Dictionary<string, List<GameData>>();
             _spawnData = new Dictionary<string, ResourceData>();
+
+
+            if (_data == null)
+            {
+                _data = new Dictionary<string, List<GameData>>();
+            }
+            if (_spawnData == null)
+            {
+                _spawnData = new Dictionary<string, ResourceData>();
+            }
+            if (_completionInfo == null)
+            {
+                _completionInfo = new CompletionData();
+            }
+
             return;
         }
 
