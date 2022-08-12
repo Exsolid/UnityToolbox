@@ -13,7 +13,8 @@ public class ToggleMenuButton : MonoBehaviour, IPointerClickHandler
 
     public void Awake()
     {
-        GetComponentInParent<Menu>().OnActiveChanged += (isActive) => 
+        Menu menu = GetComponentInParent<Menu>();
+        menu.OnActiveChanged += (isActive) => 
         {
             _isEnabled = isActive; 
         };

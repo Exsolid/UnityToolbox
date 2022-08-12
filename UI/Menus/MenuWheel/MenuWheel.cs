@@ -48,16 +48,16 @@ public class MenuWheel : MonoBehaviour
 
         closestToCamera.GetComponent<Menu>().IsActive = true;
         _index = _items.IndexOf(closestToCamera);
-        ModuleManager.GetModule<UIEventManager>().OnMenuWheelNext += moveNext;
-        ModuleManager.GetModule<UIEventManager>().OnMenuWheelPrevious += movePrev;
+        ModuleManager.GetModule<UIEventManager>().OnMenuWheelNext += MoveNext;
+        ModuleManager.GetModule<UIEventManager>().OnMenuWheelPrevious += MovePrev;
     }
 
     private void OnDestroy()
     {
         if (ModuleManager.ModuleRegistered<UIEventManager>())
         {
-            ModuleManager.GetModule<UIEventManager>().OnMenuWheelNext -= moveNext;
-            ModuleManager.GetModule<UIEventManager>().OnMenuWheelPrevious -= movePrev;
+            ModuleManager.GetModule<UIEventManager>().OnMenuWheelNext -= MovePrev;
+            ModuleManager.GetModule<UIEventManager>().OnMenuWheelPrevious -= MovePrev;
         }
     }
 
@@ -69,13 +69,13 @@ public class MenuWheel : MonoBehaviour
         }
     }
 
-    public void moveNext()
+    public void MovePrev()
     {
         if (_currentTimer > 0 || _items.Count == 0 || !_items[_index].GetComponent<Menu>().IsActive) return;
         _currentTimer = _timeToMove;
         _items[_index].GetComponent<Menu>().IsActive = false;
-        if (_index == _items.Count-1) _index = 0;
-        else _index++;
+        if (_index == 0) _index = _items.Count - 1;
+        else _index--;
         int current = 0;
         foreach (GameObject item in _items)
         {
@@ -103,13 +103,13 @@ public class MenuWheel : MonoBehaviour
         }
     }
 
-    public void movePrev()
+    public void MoveNext()
     {
         if (_currentTimer > 0 || _items.Count == 0 || !_items[_index].GetComponent<Menu>().IsActive) return;
         _currentTimer = _timeToMove;
         _items[_index].GetComponent<Menu>().IsActive = false;
-        if (_index == 0) _index = _items.Count -1;
-        else _index--;
+        if (_index == _items.Count - 1) _index = 0;
+        else _index++;
         int current = 0;
         foreach (GameObject item in _items)
         {
@@ -164,7 +164,9 @@ public class MenuWheel : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             }
         }
-        if(item.Equals(_items[_index]))
+        if (item.Equals(_items[_index]))
+        {
             _items[_index].GetComponent<Menu>().IsActive = true;
+        }
     }
 }
