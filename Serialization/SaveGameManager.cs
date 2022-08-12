@@ -26,8 +26,9 @@ public class SaveGameManager : Module
 
     public Action<string, bool> OnCompletionInfoChanged;
 
-    public void Start()
+    public override void Awake()
     {
+        base.Awake();
         if (!Application.isEditor)
         {
             _pathToUse = Application.dataPath + "/SaveGame";
