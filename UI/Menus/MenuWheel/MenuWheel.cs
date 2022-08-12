@@ -56,7 +56,7 @@ public class MenuWheel : MonoBehaviour
     {
         if (ModuleManager.ModuleRegistered<UIEventManager>())
         {
-            ModuleManager.GetModule<UIEventManager>().OnMenuWheelNext -= MovePrev;
+            ModuleManager.GetModule<UIEventManager>().OnMenuWheelNext -= MoveNext;
             ModuleManager.GetModule<UIEventManager>().OnMenuWheelPrevious -= MovePrev;
         }
     }
