@@ -25,19 +25,27 @@ public class MenuWheel : MonoBehaviour
         GameObject closestToCamera = null;
         _degrees = new List<float>();
         float current = 0;
+
+        if(_items.Count%2 != 0)
+        {
+            current -= 360f / _items.Count / 2;
+        }
+
         foreach (GameObject item in _items)
         {
             item.GetComponent<Menu>().IsActive = false;
             _degrees.Add(current);
-            if(_switchXY) item.transform.position = new Vector3(_radius * Mathf.Cos(Mathf.Deg2Rad * _degrees[_index]), 0, _radius * Mathf.Sin(Mathf.Deg2Rad * _degrees[_index]));
+            if (_switchXY) item.transform.position = new Vector3(_radius * Mathf.Cos(Mathf.Deg2Rad * _degrees[_index]), 0, _radius * Mathf.Sin(Mathf.Deg2Rad * _degrees[_index]));
             else item.transform.position = new Vector3(_radius * Mathf.Cos(Mathf.Deg2Rad * _degrees[_index]), _radius * Mathf.Sin(Mathf.Deg2Rad * _degrees[_index]), 0);
             item.transform.position = item.transform.position + new Vector3(0, _incline * (item.transform.position.x - _xMin), 0);
+
             current += 360f / _items.Count;
             if (closestToCamera == null || 
                 Vector3.Distance(closestToCamera.transform.position, _camera.transform.position) > Vector3.Distance(item.transform.position, _camera.transform.position))
                 closestToCamera = item;
                 _index++;
         }
+
         closestToCamera.GetComponent<Menu>().IsActive = true;
         _index = _items.IndexOf(closestToCamera);
         ModuleManager.GetModule<UIEventManager>().OnMenuWheelNext += moveNext;
