@@ -47,9 +47,10 @@ public abstract class Saveable : MonoBehaviour
             ResourceData objectData = new ResourceData();
             objectData.PrefabID = PrefabID;
             ModuleManager.GetModule<SaveGameManager>().SetDataToSave(objectData, ID, false);
-            TransformData transformData = new TransformData(transform);
-            ModuleManager.GetModule<SaveGameManager>().SetDataToSave(transformData, ID, false);
         }
+
+        TransformData transformData = new TransformData(transform);
+        ModuleManager.GetModule<SaveGameManager>().SetDataToSave(transformData, ID, false);
 
         foreach (GameData gameData in SaveData())
         {

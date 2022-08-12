@@ -38,6 +38,12 @@ public class MenuManager : Module, ISerializationCallbackReceiver
         get { return _currentActivMenuList; } 
     }
 
+    private bool _inMenu;
+    public bool InMenu
+    {
+        get { return _inMenu; }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -99,6 +105,7 @@ public class MenuManager : Module, ISerializationCallbackReceiver
                     _currentActivMenu.IsActive = true;
                     _currentActivMenuList = menuList;
                     _currentActivMenu.transform.SetAsLastSibling();
+                    _inMenu = true;
                 }
             }
             else
@@ -120,6 +127,7 @@ public class MenuManager : Module, ISerializationCallbackReceiver
                         _currentActivMenu.GetComponent<Canvas>().enabled = false;
                         _currentActivMenu.IsActive = false;
                     }
+                    _inMenu = false;
                 }
             }
             ModuleManager.GetModule<UIEventManager>().TogglePaused(_isPaused, type);
@@ -147,6 +155,7 @@ public class MenuManager : Module, ISerializationCallbackReceiver
                 _currentActivMenu.IsActive = true;
                 _currentActivMenuList = new MenuList();
                 _currentActivMenu.transform.SetAsLastSibling();
+                _inMenu = true;
             }
             else
             {
@@ -167,6 +176,7 @@ public class MenuManager : Module, ISerializationCallbackReceiver
                         _currentActivMenu.GetComponent<Canvas>().enabled = false;
                         _currentActivMenu.IsActive = false;
                     }
+                    _inMenu = false;
                 }
             }
 

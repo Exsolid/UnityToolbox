@@ -82,8 +82,13 @@ public class Item : Saveable
         data.ItemName = _itemName;
         if (_inventoryOfItem != null)
         {
-            HeldInventoryManager invMan = ModuleManager.GetModule<HeldInventoryManager>();
-            
+            HeldInventoryManager invMan = null;
+
+            if (ModuleManager.ModuleRegistered<HeldInventoryManager>())
+            {
+                invMan = ModuleManager.GetModule<HeldInventoryManager>();
+            }
+
             if(invMan == null || !_inventoryOfItem.ID.Equals(invMan.HInventory.ID))
             {
                 data.InventoryID = _inventoryOfItem.ID;
