@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 
 public abstract class MovementBase : MonoBehaviour
 {
-    [SerializeField] [Range(0,180)] protected float _maxSlope;
     [SerializeField] protected float _speed;
     [SerializeField] protected float _jumpForce;
     [SerializeField] protected float _climbingForce;
@@ -40,6 +39,11 @@ public abstract class MovementBase : MonoBehaviour
         get { return _grounded; } 
     }
 
+    protected bool _animationGrounded;
+    public bool AnimationGrounded
+    {
+        get { return _animationGrounded; }
+    }
     protected bool _climbing;
     public bool Climbing 
     {

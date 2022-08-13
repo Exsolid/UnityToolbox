@@ -28,12 +28,20 @@ public class Movement2D : MovementBase
     void FixedUpdate()
     {
         int everyMaskExcept = ~(1 << gameObject.layer);
+
+
+        _groundedHit = Physics2D.Raycast(_groundedTransform.position, transform.up * -1, 0.5f, everyMaskExcept);
+        if (_groundedHit.collider == null)
+        {
+            _groundedHit = Physics2D.Raycast(_groundedTransformTwo.position, transform.up * -1, 0.5f, everyMaskExcept);
+        }
+        _animationGrounded = _groundedHit.collider != null;
+
         _groundedHit = Physics2D.Raycast(_groundedTransform.position, transform.up * -1, 0.01f, everyMaskExcept);
         if(_groundedHit.collider == null)
         {
             _groundedHit = Physics2D.Raycast(_groundedTransformTwo.position, transform.up * -1, 0.01f, everyMaskExcept);
         }
-
 
         UpdateMovementState();
 
