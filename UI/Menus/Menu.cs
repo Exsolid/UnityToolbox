@@ -22,5 +22,5 @@ public class Menu : MonoBehaviour
         set { _mayUserToogle = value;}
     }
 
-    public Action<bool> OnActiveChanged;
+    public event Action<bool> OnActiveChanged;
 }
