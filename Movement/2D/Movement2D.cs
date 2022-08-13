@@ -70,7 +70,7 @@ public class Movement2D : MovementBase
             direction.y = 0;
         }
 
-        _rb.AddForce(new Vector3(direction.x * _speed, direction.y 
+        _rb.AddForce(new Vector3(direction.x * (_currentMovementState == MovementState.Climbing ? _climbingForce : _speed), direction.y 
             * (_currentMovementState == MovementState.Climbing ? _climbingForce : _jumpForce) 
             * (direction.x == 0 ? 1 : 1.5f), 0));
     }
@@ -78,7 +78,7 @@ public class Movement2D : MovementBase
     public override void MoveWithStrength(Vector3 direction, Vector3 strength)
     {
         Vector3 scaled = Vector3.Scale(direction, strength);
-        _rb.AddForce(new Vector3(scaled.x * _speed, 
+        _rb.AddForce(new Vector3(scaled.x * (_currentMovementState == MovementState.Climbing ? _climbingForce : _speed), 
             scaled.y
             * (_currentMovementState == MovementState.Climbing ? _climbingForce : _jumpForce)
             * (scaled.x == 0 ? 1 : 1.5f), 0));
@@ -106,7 +106,7 @@ public class Movement2D : MovementBase
         {
             _climbing = true;
             _rb.gravityScale = 0;
-            _rb.drag *= 10;
+            _rb.drag *= 2;
         }
     }
 
@@ -114,7 +114,7 @@ public class Movement2D : MovementBase
     {
         if ((1 << other.gameObject.layer).Equals(_climbingMask))
         {
-            _rb.drag /= 10;
+            _rb.drag /= 2;
             _rb.gravityScale = _oldGravityScale;
             _climbing = false;
         }
