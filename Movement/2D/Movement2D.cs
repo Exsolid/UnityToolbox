@@ -19,7 +19,6 @@ public class Movement2D : MovementBase
     // Start is called before the first frame update
     void Start()
     {
-        _input = GetComponent<PlayerInput>();
         _rb = GetComponent<Rigidbody2D>();
         _oldGravityScale = _rb.gravityScale;
     }

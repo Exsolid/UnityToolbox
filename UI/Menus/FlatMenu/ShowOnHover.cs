@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class ShowOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    [SerializeField] private AudioMixer _hoverSounds;
     [SerializeField] private GameObject toShow;
     private bool _isEnabled;
 
@@ -16,7 +17,15 @@ public class ShowOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerEnter(PointerEventData data)
     {
-        if(_isEnabled) toShow.GetComponent<Image>().enabled = true;
+        if (_isEnabled)
+        {
+            if (_hoverSounds != null)
+            {
+                _hoverSounds.PlayRandomSource();
+            }
+
+            toShow.GetComponent<Image>().enabled = true;
+        }
     }
 
     public void OnPointerExit(PointerEventData data)

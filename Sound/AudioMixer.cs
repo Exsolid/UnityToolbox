@@ -51,7 +51,7 @@ public class AudioMixer : MonoBehaviour
         {
             float randomSelected = UnityEngine.Random.Range(0, _totalProbability);
             AudioMixerItem item = _items.Where(a => a.CountedProbability > randomSelected).FirstOrDefault();
-            if (item.Source != null)
+            if (item != null && item.Source != null)
             {
                 _audioSource.clip = item.Source;
                 _audioSource.Play();
@@ -73,7 +73,7 @@ public class AudioMixer : MonoBehaviour
     {
         float randomSelected = UnityEngine.Random.Range(0, _totalProbability);
         AudioMixerItem item = _items.Where(a => a.CountedProbability > randomSelected).FirstOrDefault();
-        if (item.Source != null)
+        if (item != null && item.Source != null)
         {
             _audioSource.clip = item.Source;
             _audioSource.Play();

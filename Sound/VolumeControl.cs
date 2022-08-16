@@ -13,16 +13,7 @@ public class VolumeControl : MonoBehaviour
     void Start()
     {
         _audioSources = GetComponents<AudioSource>().ToList();
-        ModuleManager.GetModule<SettingsManager>().OnSoundValueChanged += (type, newValue) =>
-        {
-            if(type == _type)
-            {
-                foreach (AudioSource source in _audioSources)
-                {
-                    source.volume = newValue;
-                }
-            }
-        };
+        ModuleManager.GetModule<SettingsManager>().OnSoundValueChanged += OnSoundChanged;
 
         string pref = "";
         switch (_type)
@@ -38,7 +29,29 @@ public class VolumeControl : MonoBehaviour
         float value = PlayerPrefs.HasKey(pref) ? PlayerPrefs.GetFloat(pref) : 0.5f;
         foreach (AudioSource source in _audioSources)
         {
-            source.volume = value;
+            if (source != null)
+            {
+                source.volume = value;
+            }
+        }
+    }
+
+    private void OnDestroy()
+    {
+        ModuleManager.GetModule<SettingsManager>().OnSoundValueChanged -= OnSoundChanged;
+    }
+
+    private void OnSoundChanged(SoundType type, float newValue)
+    {
+        if (type == _type)
+        {
+            foreach (AudioSource source in _audioSources)
+            {
+                if(source != null)
+                {
+                    source.volume = newValue;
+                }
+            }
         }
     }
 }
