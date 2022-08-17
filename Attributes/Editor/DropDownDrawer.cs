@@ -95,6 +95,10 @@ public class DropDownDrawer : PropertyDrawer
             {
                 int newIndex = EditorGUI.Popup(position, ObjectNames.NicifyVariableName(fieldInfo.Name), index, values);
                 fieldInfo.SetValue(boxed, newIndex);
+                if(newIndex != index)
+                {
+                    EditorUtility.SetDirty(property.serializedObject.targetObject);
+                }
             }
         }
         catch (ArgumentException ex)

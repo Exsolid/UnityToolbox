@@ -16,6 +16,8 @@ public class Movement2D : MovementBase
     private Rigidbody2D _rb;
     private float _oldGravityScale; 
 
+    [SerializeField] private LayerMask _layerMasksToIgnore;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +28,7 @@ public class Movement2D : MovementBase
     // Update is called once per frame
     void FixedUpdate()
     {
-        int everyMaskExcept = ~(1 << gameObject.layer);
+        int everyMaskExcept = ~(_layerMasksToIgnore);
 
 
         _groundedHit = Physics2D.Raycast(_groundedTransform.position, transform.up * -1, 0.3f, everyMaskExcept);
