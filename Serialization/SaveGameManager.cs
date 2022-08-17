@@ -212,6 +212,18 @@ public class SaveGameManager : Module
         }
     }
 
+    public void ResetAll()
+    {
+        List<Saveable> allSaveable = FindObjectsOfType<Saveable>().ToList();
+        foreach (Saveable saveable in allSaveable)
+        {
+            DestroyImmediate(saveable.gameObject);
+        }
+        _completionInfo = new CompletionData();
+        _data = new Dictionary<string, List<GameData>>();
+        _spawnData = new Dictionary<string, ResourceData>();
+    }
+
     private void WriteData()
     {
         if (!Directory.Exists(_pathToUse))
