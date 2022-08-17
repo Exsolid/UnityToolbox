@@ -9,7 +9,6 @@ public class ResetSaved : MonoBehaviour, IPointerDownHandler
 {
     private bool _isEnabled;
     [SerializeField] private AudioMixer _clickSounds;
-    [SerializeField] private string _reloadScene;
 
     public void Awake()
     {
