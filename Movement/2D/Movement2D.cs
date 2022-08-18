@@ -14,7 +14,9 @@ public class Movement2D : MovementBase
 
     private RaycastHit2D _groundedHit;
     private Rigidbody2D _rb;
-    private float _oldGravityScale; 
+    private float _oldGravityScale;
+
+    private bool _mayJump;
 
     [SerializeField] private LayerMask _layerMasksToIgnore;
 
@@ -23,13 +25,13 @@ public class Movement2D : MovementBase
     {
         _rb = GetComponent<Rigidbody2D>();
         _oldGravityScale = _rb.gravityScale;
+        _mayJump = true;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         int everyMaskExcept = ~(_layerMasksToIgnore);
-
 
         _groundedHit = Physics2D.Raycast(_groundedTransform.position, transform.up * -1, 0.3f, everyMaskExcept);
         if (_groundedHit.collider == null)
@@ -52,8 +54,7 @@ public class Movement2D : MovementBase
         }
         else if (_groundedHit.collider == null)
         {
-            _grounded = false;
-            _rb.gravityScale = _oldGravityScale;
+            StartCoroutine(DelayUngrounded());
         }
 
         if (!_isMovementLocked)
@@ -72,8 +73,13 @@ public class Movement2D : MovementBase
         }
 
         _rb.AddForce(new Vector3(direction.x * (_currentMovementState == MovementState.Climbing ? _climbingForce : _speed), direction.y 
-            * (_currentMovementState == MovementState.Climbing ? _climbingForce : _jumpForce) 
+            * (_currentMovementState == MovementState.Climbing ? _climbingForce : _mayJump ? _jumpForce : 0) 
             * (direction.x == 0 ? 1 : 1.5f), 0));
+        if(direction.y != 0)
+        {
+            _mayJump = false;
+            StartCoroutine(PauseJumping());
+        }
     }
 
     public override void MoveWithStrength(Vector3 direction, Vector3 strength)
@@ -81,8 +87,13 @@ public class Movement2D : MovementBase
         Vector3 scaled = Vector3.Scale(direction, strength);
         _rb.AddForce(new Vector3(scaled.x * (_currentMovementState == MovementState.Climbing ? _climbingForce : _speed), 
             scaled.y
-            * (_currentMovementState == MovementState.Climbing ? _climbingForce : _jumpForce)
+            * (_currentMovementState == MovementState.Climbing ? _climbingForce : _mayJump ? _jumpForce : 0)
             * (scaled.x == 0 ? 1 : 1.5f), 0));
+        if (direction.y != 0)
+        {
+            _mayJump = false;
+            StartCoroutine(PauseJumping());
+        }
     }
 
     public override Vector3 GetCurrentVelocity()
@@ -99,6 +110,33 @@ public class Movement2D : MovementBase
         yield return new WaitForSeconds(0.1f);
         base._grounded = true;
         _rb.gravityScale = 0;
+    }    
+    
+    IEnumerator DelayUngrounded()
+    {
+        yield return new WaitForSeconds(0.2f);
+
+        int everyMaskExcept = ~(_layerMasksToIgnore);
+
+        RaycastHit2D localGroundedHit = Physics2D.Raycast(_groundedTransform.position, transform.up * -1, 0.3f, everyMaskExcept);
+
+        localGroundedHit = Physics2D.Raycast(_groundedTransform.position, transform.up * -1, 0.01f, everyMaskExcept);
+        if (localGroundedHit.collider == null)
+        {
+            localGroundedHit = Physics2D.Raycast(_groundedTransformTwo.position, transform.up * -1, 0.01f, everyMaskExcept);
+        }
+
+        if (localGroundedHit.collider == null)
+        {
+            _grounded = false;
+            _rb.gravityScale = _oldGravityScale;
+        }
+    }
+
+    IEnumerator PauseJumping()
+    {
+        yield return new WaitForSeconds(0.3f);
+        _mayJump = true;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
