@@ -114,7 +114,7 @@ public class Movement2D : MovementBase
     
     IEnumerator DelayUngrounded()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
 
         int everyMaskExcept = ~(_layerMasksToIgnore);
 
@@ -135,7 +135,7 @@ public class Movement2D : MovementBase
 
     IEnumerator PauseJumping()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
         _mayJump = true;
     }
 
