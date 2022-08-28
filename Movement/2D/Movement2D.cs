@@ -158,4 +158,9 @@ public class Movement2D : MovementBase
             _climbing = false;
         }
     }
+
+    public override void Jump()
+    {
+        throw new System.NotImplementedException();
+    }
 }

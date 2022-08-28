@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class Movement3D : MovementBase
 {
     private Rigidbody _rb;
+    private float _jumpTimer;
 
     void Start()
     {
@@ -23,10 +24,31 @@ public class Movement3D : MovementBase
 
         ModuleManager.GetModule<PlayerEventManager>().Move(GetCurrentVelocity(), _currentMovementState);
 
-        if (_input.actions[_attackActionName].triggered)
+        if (_attackActionName != "" && _input.actions[_attackActionName].triggered)
         {
             ModuleManager.GetModule<PlayerEventManager>().Attack();
         }
+    }
+
+    private void Update()
+    {
+        RaycastHit hit;
+        Physics.Raycast(_groundedTransform.position, transform.up * -1, out hit, 0.3f);
+        if(_jumpTimer > 0)
+        {
+            _jumpTimer -= Time.deltaTime;
+        }
+
+        if (_jumpActionName != "" && _input.actions[_jumpActionName].triggered && hit.collider != null && _jumpTimer <= 0)
+        {
+            Jump();
+            _jumpTimer = 0.3f;
+        }
+    }
+
+    public override void Jump()
+    {
+        _rb.AddForce(new Vector3(0, _jumpForce, 0));
     }
 
     public override void Move(Vector3 direction)

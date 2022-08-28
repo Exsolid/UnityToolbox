@@ -9,6 +9,7 @@ public abstract class MovementBase : MonoBehaviour
     [SerializeField] protected float _jumpForce;
     [SerializeField] protected float _climbingForce;
     [SerializeField] protected string _movementActionName;
+    [SerializeField] protected string _jumpActionName;
     [SerializeField] protected string _attackActionName;
 
     [SerializeField] protected Transform _groundedTransform;
@@ -32,6 +33,7 @@ public abstract class MovementBase : MonoBehaviour
     }
 
     [SerializeField] protected LayerMask _climbingMask;
+    [SerializeField] protected LayerMask _jumpingMask;
 
     protected bool _grounded;
     public bool Grounded 
@@ -78,6 +80,7 @@ public abstract class MovementBase : MonoBehaviour
     }
 
     public abstract void Move(Vector3 direction);
+    public abstract void Jump();
     public abstract void MoveWithStrength(Vector3 direction, Vector3 strength);
     public abstract Vector3 GetCurrentVelocity();
 }
