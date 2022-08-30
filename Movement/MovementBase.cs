@@ -23,9 +23,22 @@ public abstract class MovementBase : MonoBehaviour
     public bool IsMovementLocked 
     { 
         get { return _isMovementLocked; } 
-        set { _isMovementLocked = value; } 
+        set { _isMovementLocked = value; }
     }
 
+    protected bool _isClimbingLocked;
+    public bool IsClimbingLocked
+    {
+        get { return _isClimbingLocked; }
+        set { _isClimbingLocked = value; }
+    }
+
+    protected bool _isJumpingLocked;
+    public bool IsJumpingLocked
+    {
+        get { return _isJumpingLocked; }
+        set { _isJumpingLocked = value; }
+    }
     protected MovementState _currentMovementState;
     public MovementState CurrentMovementState 
     { 

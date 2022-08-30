@@ -33,7 +33,7 @@ public class Movement3D : MovementBase
     private void Update()
     {
         RaycastHit hit;
-        Physics.Raycast(_groundedTransform.position, transform.up * -1, out hit, 0.3f);
+        Physics.Raycast(_groundedTransform.position, transform.up * -1, out hit, 0.3f, _jumpingMask);
         if(_jumpTimer > 0)
         {
             _jumpTimer -= Time.deltaTime;
@@ -48,13 +48,24 @@ public class Movement3D : MovementBase
 
     public override void Jump()
     {
-        _rb.AddForce(new Vector3(0, _jumpForce, 0));
+        if (!IsJumpingLocked)
+        {
+            _rb.AddForce(new Vector3(0, _jumpForce, 0));
+        }
     }
 
     public override void Move(Vector3 direction)
     {
-        _rb.AddForce(Vector3.Scale(new Vector3(direction.y * _speed, 0, direction.y * _speed), new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z).normalized));
-        _rb.AddForce(Vector3.Scale(new Vector3(direction.x * _speed, 0, direction.x * _speed), new Vector3(Camera.main.transform.right.x, 0, Camera.main.transform.right.z).normalized));
+        if (_climbing && !IsClimbingLocked)
+        {
+            _rb.AddForce(Vector3.Scale(new Vector3(0, direction.y * -_speed, 0), new Vector3(0, Camera.main.transform.forward.y, 0)));
+            _rb.AddForce(Vector3.Scale(new Vector3(direction.x * _speed, 0, direction.x * _speed), new Vector3(Camera.main.transform.right.x, 0, Camera.main.transform.right.z).normalized));
+        }
+        else if(!_isMovementLocked)
+        {
+            _rb.AddForce(Vector3.Scale(new Vector3(direction.y * _speed, 0, direction.y * _speed), new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z).normalized));
+            _rb.AddForce(Vector3.Scale(new Vector3(direction.x * _speed, 0, direction.x * _speed), new Vector3(Camera.main.transform.right.x, 0, Camera.main.transform.right.z).normalized));
+        }
 
         if(direction.x != 0 || direction.y != 0)
         {
@@ -74,5 +85,21 @@ public class Movement3D : MovementBase
     public override void MoveWithStrength(Vector3 direction, Vector3 strength)
     {
         throw new System.NotImplementedException();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if ((1 << collision.gameObject.layer).Equals(_climbingMask))
+        {
+            _climbing = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if ((1 << collision.gameObject.layer).Equals(_climbingMask))
+        {
+            _climbing = false;
+        }
     }
 }
