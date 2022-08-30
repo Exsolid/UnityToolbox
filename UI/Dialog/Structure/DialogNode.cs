@@ -9,6 +9,7 @@ public class DialogNode : BaseNode
 {
 	public string Title;
 	public string Description;
+	public Sprite SpriteToShow;
 	public string SoundToPlay;
 	public string CompletionToSet;
 

@@ -7,6 +7,7 @@ public class ShowCurrentDialog : MonoBehaviour
 {
     [SerializeField] private Text _title;
     [SerializeField] private Text _description;
+    [SerializeField] private Image _spriteToShow;
     [SerializeField] private List<Text> _options;
 
     [SerializeField] [DropDown(nameof(MenuTypes))] private int _menuType;
@@ -19,8 +20,14 @@ public class ShowCurrentDialog : MonoBehaviour
 
     public void UpdateDialog(DialogNode currentNode)
     {
-        _title.text = "";
-        _description.text = "";
+        if(_title != null)
+        {
+            _title.text = "";
+        }
+        if(_description != null)
+        {
+            _description.text = "";
+        }
         for (int i = 0; i < _options.Count; i++)
         {
             _options[i].text = "";
@@ -29,8 +36,19 @@ public class ShowCurrentDialog : MonoBehaviour
         if (currentNode != null)
         {
             ModuleManager.GetModule<MenuManager>().ToggleMenu(_menuType, true);
-            _title.text = currentNode.Title;
-            _description.text = currentNode.Description;
+            if (_spriteToShow != null && currentNode.SpriteToShow != null)
+            {
+                _spriteToShow.enabled = true;
+                _spriteToShow.sprite = currentNode.SpriteToShow;
+            }
+            if (_title != null)
+            {
+                _title.text = currentNode.Title;
+            }
+            if (_description != null)
+            {
+                _description.text = currentNode.Description;
+            }
             if (currentNode.Options != null && currentNode.Options.Count > _options.Count)
             {
                 Debug.LogWarning("Not all options can be displayed! Missing sufficient textboxes.");
