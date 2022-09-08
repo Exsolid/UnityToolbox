@@ -36,9 +36,13 @@ public class Movement3D : MovementBase
 
     private void Update()
     {
-        RaycastHit hit;
-        Physics.Raycast(_groundedTransform.position, transform.up * -1, out hit, 0.4f, _jumpingMask);
-        _grounded = hit.collider != null;
+        if (_groundedTransform != null)
+        {
+            RaycastHit hit;
+            Physics.Raycast(_groundedTransform.position, transform.up * -1, out hit, 0.4f, _jumpingMask);
+            _grounded = hit.collider != null;
+        }
+
         if (_jumpTimer > 0)
         {
             _jumpTimer -= Time.deltaTime;
@@ -53,7 +57,7 @@ public class Movement3D : MovementBase
 
     private bool OnSlope()
     {
-        if (Physics.Raycast(_groundedTransform.position, transform.up * -1, out _onSlope, 0.6f))
+        if (_groundedTransform != null && Physics.Raycast(_groundedTransform.position, transform.up * -1, out _onSlope, 0.6f))
         {
             float angle = Vector3.Angle(Vector3.up, _onSlope.normal);
             return angle < _maxSlopeAngle && angle != 0;
@@ -79,7 +83,6 @@ public class Movement3D : MovementBase
         if (OnSlope())
         {
             direction = GetSlopeDirection(direction);
-            Debug.Log(direction);
         }
 
         if (_climbing && !IsClimbingLocked)
