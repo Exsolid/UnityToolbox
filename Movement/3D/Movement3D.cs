@@ -27,11 +27,6 @@ public class Movement3D : MovementBase
         }
 
         ModuleManager.GetModule<PlayerEventManager>().Move(GetCurrentVelocity(), _currentMovementState);
-
-        if (_attackActionName != "" && _input.actions[_attackActionName].triggered)
-        {
-            ModuleManager.GetModule<PlayerEventManager>().Attack();
-        }
     }
 
     private void Update()
@@ -52,6 +47,11 @@ public class Movement3D : MovementBase
         {
             Jump();
             _jumpTimer = 0.3f;
+        }
+
+        if (_attackActionName != "" && _input.actions[_attackActionName].triggered)
+        {
+            ModuleManager.GetModule<PlayerEventManager>().Attack();
         }
     }
 
