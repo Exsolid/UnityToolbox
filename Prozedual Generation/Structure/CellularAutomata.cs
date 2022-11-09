@@ -4,7 +4,7 @@ using System;
 
 public class CellularAutomata
 {
-    public static int[,] Generate(int[,] gridToFill, float fillPercentage, int iterationCount)
+    public static int[,] Generate(int[,] gridToFill, float fillPercentage, int iterationCount, int edgeSize)
     {
         if(fillPercentage > 1 || fillPercentage < 0)
         {
@@ -16,7 +16,14 @@ public class CellularAutomata
         {
             for (int x = 0; x < gridToFill.GetLength(0); x++)
             {
-                gridToFill[y, x] = rand.NextDouble() < fillPercentage ? (int) TerrainValues.Wall : (int) TerrainValues.Floor;
+                if(x < edgeSize || y < edgeSize || x > gridToFill.GetLength(0) - edgeSize - 1 || y > gridToFill.GetLength(1) - edgeSize - 1)
+                {
+                    gridToFill[y, x] = (int) TerrainValues.Wall;
+                }
+                else
+                {
+                    gridToFill[y, x] = rand.NextDouble() < fillPercentage ? (int)TerrainValues.Wall : (int)TerrainValues.Floor;
+                }
             }
         }
 

@@ -31,10 +31,10 @@ public class TerrainDecoration : MonoBehaviour
         _weightedObjects = new List<TerrainDecorationInformation>();
 
         float currentWeight = 0;
-        foreach(TerrainDecorationInformation info in _objectsToPlace)
+        foreach (TerrainDecorationInformation info in _objectsToPlace)
         {
             currentWeight += info.Weight;
-            TerrainDecorationInformation newInfo = (TerrainDecorationInformation) info.Clone();
+            TerrainDecorationInformation newInfo = (TerrainDecorationInformation)info.Clone();
             newInfo.Weight = currentWeight;
             _weightedObjects.Add(newInfo);
         }
@@ -46,7 +46,7 @@ public class TerrainDecoration : MonoBehaviour
         }
         else
         {
-            foreach(GameObject obj in _spawnedObjects)
+            foreach (GameObject obj in _spawnedObjects)
             {
                 DestroyImmediate(obj);
             }
@@ -60,14 +60,15 @@ public class TerrainDecoration : MonoBehaviour
         {
             for (int x = 0; x < grid.GetLength(0); x++)
             {
-                if (CheckPositionType(x,y))
+                if (CheckPositionType(x, y))
                 {
                     float rnd = Random.Range(0f, 1f);
 
-                    if(rnd < _pctForNone)
+                    if (rnd < _pctForNone)
                     {
                         continue;
                     }
+
                     rnd = Random.Range(0, _weightedObjects.Last().Weight);
                     TerrainDecorationInformation selected = _weightedObjects.Where(obj => rnd <= obj.Weight).OrderBy(obj => obj.Weight).FirstOrDefault();
                     Vector3 position = mesh.vertices[grid.GetLength(1) * y + x];
@@ -75,13 +76,53 @@ public class TerrainDecoration : MonoBehaviour
                     if (_raycastPlacement)
                     {
                         _spawnedObjects.Add(Instantiate(selected.Object, position + Vector3.up * 2, Quaternion.Euler(0, Random.Range(0, 350), 0)));
+
                         _spawnedObjects.Last().transform.parent = transform;
-                        RotationPlacementForChildren(_spawnedObjects.Last(), selected.HeightOffset, selected.WidthPlacement);
+
+
+                        if (_spawnedObjects.Last().GetComponent<TerrainDecorationChildInfo>() == null || !_spawnedObjects.Last().GetComponent<TerrainDecorationChildInfo>().RelativeToParent)
+                        {
+                            RotationPlacementForChildren(_spawnedObjects.Last(), selected.HeightOffset, selected.WidthPlacement);
+                        }
+
+                        if (_spawnedObjects.Last().GetComponent<Renderer>() != null)
+                        {
+                            Collider[] collisions = Physics.OverlapBox(_spawnedObjects.Last().transform.position, _spawnedObjects.Last().GetComponent<Renderer>().bounds.extents, _spawnedObjects.Last().transform.rotation);
+
+                            foreach (Collider col in collisions)
+                            {
+                                if (col.gameObject.GetComponent<TerrainDecorationAnchorObject>() != null)
+                                {
+                                    GameObject obj = _spawnedObjects.Last();
+                                    _spawnedObjects.Remove(obj);
+                                    DestroyImmediate(obj);
+                                    break;
+                                }
+                            }
+                        }
+
                     }
                     else
                     {
                         _spawnedObjects.Add(Instantiate(selected.Object, position + Vector3.up * selected.HeightOffset, Quaternion.Euler(0, Random.Range(0, 350), 0)));
                         _spawnedObjects.Last().transform.parent = transform;
+                        
+                        CheckForAnchorsRecursiv(_spawnedObjects.Last().transform);
+                        if (_spawnedObjects.Last().GetComponent<Renderer>() != null)
+                        {
+                            Collider[] collisions = Physics.OverlapBox(_spawnedObjects.Last().transform.position, _spawnedObjects.Last().GetComponent<Renderer>().bounds.extents, _spawnedObjects.Last().transform.rotation);
+
+                            foreach (Collider col in collisions)
+                            {
+                                if (col.gameObject.GetComponent<TerrainDecorationAnchorObject>() != null)
+                                {
+                                    DestroyImmediate(_spawnedObjects.Last());
+                                    _spawnedObjects.Remove(_spawnedObjects.Last());
+                                    break;
+                                }
+                            }
+                        }
+
                     }
                 }
             }
@@ -95,7 +136,7 @@ public class TerrainDecoration : MonoBehaviour
         {
             case TerrainDecorationPositionType.Floor:
             case TerrainDecorationPositionType.CornerFloor:
-                if(grid[x,y] != (int) TerrainValues.Floor)
+                if (grid[x, y] != (int)TerrainValues.Floor)
                 {
                     return false;
                 }
@@ -154,9 +195,9 @@ public class TerrainDecoration : MonoBehaviour
         RaycastHit hit;
         Physics.Raycast(parent.transform.position, Vector3.down, out hit, 10, _groundMask);
 
-        if (parent.transform.GetComponent<Collider>() != null && widthPlacement && hit.collider != null)
+        if (parent.transform.GetComponent<Renderer>() != null && widthPlacement && hit.collider != null)
         {
-            Vector3 bounds = parent.transform.GetComponent<Collider>().bounds.extents;
+            Vector3 bounds = parent.transform.GetComponent<Renderer>().bounds.extents;
             List<RaycastHit> hits = new List<RaycastHit>();
 
             RaycastHit hit1;
@@ -200,14 +241,14 @@ public class TerrainDecoration : MonoBehaviour
         {
             float heightDiff = heightOffset;
 
-            if (parent.transform.GetComponent<Collider>() != null)
+            if (parent.transform.GetComponent<Renderer>() != null)
             {
-                heightDiff += parent.transform.position.y - parent.transform.GetComponent<Collider>().bounds.min.y;
+                heightDiff += parent.transform.position.y - parent.transform.GetComponent<Renderer>().bounds.min.y;
             }
 
             parent.transform.position = hit.point + Vector3.up * heightDiff;
 
-            if (parent.transform.GetComponent<Collider>() != null && parent.transform.GetComponent<Collider>().bounds.size.y < 0.8f)
+            if (parent.transform.GetComponent<Renderer>() != null && parent.transform.GetComponent<Renderer>().bounds.size.y < 0.8f)
             {
                 GameObject pivot = new GameObject();
                 pivot.transform.position = hit.point;
@@ -228,16 +269,28 @@ public class TerrainDecoration : MonoBehaviour
         List<Transform> unchangedChildren = parent.transform.Cast<Transform>().ToList();
         foreach (Transform transform in unchangedChildren)
         {
-            transform.parent = this.transform;
-            _spawnedObjects.Add(transform.gameObject);
-            RotationPlacementForChildrenRecursiv(transform.gameObject, heightOffset, widthPlacement);
+            if (transform.GetComponent<ParticleSystem>() != null || transform.GetComponent<Light>() != null)
+            {
+                continue;
+            }
+
+            if (transform.GetComponent<TerrainDecorationChildInfo>() == null || !transform.GetComponent<TerrainDecorationChildInfo>().RelativeToParent)
+            {
+                RotationPlacementForChildrenRecursiv(transform.gameObject, heightOffset, widthPlacement);
+                transform.parent = this.transform;
+                _spawnedObjects.Add(transform.gameObject);
+            }
+            else
+            {
+                continue;
+            }
 
             RaycastHit hit;
             Physics.Raycast(transform.position, Vector3.down, out hit, 10, _groundMask);
 
-            if (transform.GetComponent<Collider>() != null && widthPlacement && hit.collider != null)
+            if (transform.GetComponent<Renderer>() != null && widthPlacement && hit.collider != null)
             {
-                Vector3 bounds = transform.GetComponent<Collider>().bounds.extents;
+                Vector3 bounds = transform.GetComponent<Renderer>().bounds.extents;
                 List<RaycastHit> hits = new List<RaycastHit>();
 
                 RaycastHit hit1;
@@ -270,7 +323,7 @@ public class TerrainDecoration : MonoBehaviour
 
                 foreach (RaycastHit rHit in hits)
                 {
-                    if(rHit.collider != null && rHit.point.y < hit.point.y)
+                    if (rHit.collider != null && rHit.point.y < hit.point.y)
                     {
                         hit.point = new Vector3(hit.point.x, rHit.point.y, hit.point.z);
                     }
@@ -281,14 +334,14 @@ public class TerrainDecoration : MonoBehaviour
             {
                 float heightDiff = heightOffset;
 
-                if (transform.GetComponent<Collider>() != null)
+                if (transform.GetComponent<Renderer>() != null)
                 {
-                    heightDiff += transform.position.y - transform.GetComponent<Collider>().bounds.min.y;
+                    heightDiff += transform.position.y - transform.GetComponent<Renderer>().bounds.min.y;
                 }
 
                 transform.position = hit.point + Vector3.up * heightDiff;
 
-                if (transform.GetComponent<Collider>() != null && transform.GetComponent<Collider>().bounds.size.y < 0.8f)
+                if (transform.GetComponent<Renderer>() != null && transform.GetComponent<Renderer>().bounds.size.y < 0.8f)
                 {
                     GameObject pivot = new GameObject();
                     pivot.transform.position = hit.point;
@@ -300,7 +353,42 @@ public class TerrainDecoration : MonoBehaviour
             }
             else
             {
-               DestroyImmediate(transform.gameObject);
+                DestroyImmediate(transform.gameObject);
+                continue;
+            }
+
+            if (transform.GetComponent<Renderer>() != null)
+            {
+                Collider[] collisions = Physics.OverlapBox(transform.transform.position, transform.GetComponent<Renderer>().bounds.extents, transform.transform.rotation);
+                foreach (Collider col in collisions)
+                {
+                    if (col.gameObject.GetComponent<TerrainDecorationAnchorObject>() != null)
+                    {
+                        DestroyImmediate(transform.gameObject);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    private void CheckForAnchorsRecursiv(Transform parent)
+    {
+        List<Transform> unchangedChildren = parent.transform.Cast<Transform>().ToList();
+        foreach (Transform transform in unchangedChildren)
+        {
+            CheckForAnchorsRecursiv(transform);
+            if (transform.GetComponent<Renderer>() != null)
+            {
+                Collider[] collisions = Physics.OverlapBox(transform.transform.position, transform.GetComponent<Renderer>().bounds.extents, transform.transform.rotation);
+                foreach (Collider col in collisions)
+                {
+                    if (col.gameObject.GetComponent<TerrainDecorationAnchorObject>() != null)
+                    {
+                        DestroyImmediate(transform.gameObject);
+                        break;
+                    }
+                }
             }
         }
     }

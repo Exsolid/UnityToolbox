@@ -16,6 +16,12 @@ public class TerrainGenerateAllEditor : Editor
         {
             generator.GenerateAll();
         }
+
+        if (GUILayout.Button("Generate Mesh And Decoration With Anchors"))
+        {
+            generator.GenerateAllWithAnchors();
+        }
+
         if (GUILayout.Button("Delete All Decoration"))
         {
             generator.DeleteAllDecoration();

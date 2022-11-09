@@ -16,15 +16,17 @@ public class TerrainGenerator : MonoBehaviour
     public Mesh GeneratedMesh { get { return _mesh; } }
 
     [Header("Generation Settings")]
-    [SerializeField] [Range(2, 125)]private int _length; //TODO generate clusters for bigger lengths
+    [SerializeField] [Range(2, 125)] private int _length; //TODO generate clusters for bigger lengths
     [SerializeField] private int _iterationCount;
     [SerializeField] [Range(0f,1f)] private float _fillPct;
+    [SerializeField] private int _edgeSize;
 
     [Header("Mesh Settings")]
     [SerializeField] private float _height;
     [SerializeField] private float _noiseHeightTop;
     [SerializeField] private float _noiseHeightBottom;
-
+    [SerializeField] private float _sizeBetweenNodes;
+    
     [Header("Material Settings")]
     [SerializeField] private Material _material;
     [SerializeField] private bool _autoUpdate;
@@ -32,27 +34,60 @@ public class TerrainGenerator : MonoBehaviour
     [SerializeField] private TextureFormat _textureFormat;
     [SerializeField] private List<HeightColorTypes> _heightDefinitions;
 
+    [Header("Anchor Settings")]
+    [SerializeField] private List<GameObject> _toPlace;
+    [SerializeField] private LayerMask _groundMask;
+    [SerializeField] [HideInInspector] private List<GameObject> _spawnedObjects;
+
+    private List<PlacementInformation> _toPlacePositions;
+
     private Texture2DArray texture2DArray; //Reference needed so garbage collection doesnt destroy shader texture
 
     public void GenerateViaCellularAutomata()
     {
         _heightDefinitions = _heightDefinitions.OrderBy(x => x.HeightStart).ToList();
 
-        int[,] cAGrid = CellularAutomata.Generate(new int[_length, _length], _fillPct, _iterationCount);
+        int[,] cAGrid = CellularAutomata.Generate(new int[_length, _length], _fillPct, _iterationCount, _edgeSize);
         FillGridWithFillerValues(cAGrid);
         GenerateMesh();
         UpdateMaterial();
     }
 
+    public void GenerateWithAnchorPoints()
+    {
+        _toPlacePositions = new List<PlacementInformation>();
+        _heightDefinitions = _heightDefinitions.OrderBy(x => x.HeightStart).ToList();
+
+        int[,] cAGrid = CellularAutomata.Generate(new int[_length, _length], _fillPct, _iterationCount, _edgeSize);
+
+
+        GenerateAnchorSpace(cAGrid);
+        FillGridWithFillerValues(cAGrid);
+
+        GenerateMesh();
+
+        PlaceObjects();
+
+        UpdateMaterial();
+    }
+
     private void OnValidate()
     {
+        if(_sizeBetweenNodes == 0)
+        {
+            _sizeBetweenNodes = 0.1f;
+        }else if (_sizeBetweenNodes < 0)
+        {
+            _sizeBetweenNodes = Mathf.Abs(_sizeBetweenNodes);
+        }
+
         if (_autoUpdate)
         {
             UpdateMaterial();
         }
     }
 
-    private Texture2DArray GenerateTextureArray(Texture2D[] textures)
+    protected Texture2DArray GenerateTextureArray(Texture2D[] textures)
     {
         texture2DArray = new Texture2DArray((int)_textureSize, (int)_textureSize, textures.Length, _textureFormat, true);
         for (int i = 0; i < textures.Length; i++)
@@ -63,7 +98,7 @@ public class TerrainGenerator : MonoBehaviour
         return texture2DArray;
     }
 
-    private void GenerateMesh()
+    protected void GenerateMesh()
     {
         MeshFilter meshFilter = GetComponent<MeshFilter>();
 
@@ -80,8 +115,8 @@ public class TerrainGenerator : MonoBehaviour
         {
             for (int x = 0; x < _grid.GetLength(0); x++)
             {
-                Vector3 pos = new Vector3(x, (_grid[x, y] == (int)TerrainValues.Wall ? _height - Mathf.PerlinNoise(x * 0.3f, y * 0.3f) * _noiseHeightTop : -Mathf.PerlinNoise(x * 0.3f, y * 0.3f) * _noiseHeightBottom), y);
-                if (_grid[x, y] == 2)
+                Vector3 pos = new Vector3(x * _sizeBetweenNodes, (_grid[x, y] == (int)TerrainValues.Wall ? _height - Mathf.PerlinNoise(x * 0.3f, y * 0.3f) * _noiseHeightTop : -Mathf.PerlinNoise(x * 0.3f, y * 0.3f) * _noiseHeightBottom), y * _sizeBetweenNodes);
+                if (_grid[x, y] == (int)TerrainValues.Filler)
                 {
                     Vector3 all = new Vector3();
                     float counter = 0;
@@ -98,7 +133,7 @@ public class TerrainGenerator : MonoBehaviour
                                 }
                                 else
                                 {
-                                    all = all + new Vector3(x + xN, (_grid[x + xN, y + yN] == (int)TerrainValues.Wall ? _height - Mathf.PerlinNoise(x * 0.3f, y * 0.3f) * _noiseHeightTop : -Mathf.PerlinNoise(x * 0.3f, y * 0.3f) * _noiseHeightBottom), y + yN);
+                                    all = all + new Vector3((x + xN) * _sizeBetweenNodes, (_grid[x + xN, y + yN] == (int)TerrainValues.Wall ? _height - Mathf.PerlinNoise(x * 0.3f, y * 0.3f) * _noiseHeightTop : -Mathf.PerlinNoise(x * 0.3f, y * 0.3f) * _noiseHeightBottom), (y + yN) * _sizeBetweenNodes);
                                 }
                             }
                         }
@@ -156,7 +191,7 @@ public class TerrainGenerator : MonoBehaviour
         meshCollider.sharedMesh = _mesh;
     }
 
-    private void FillGridWithFillerValues(int[,] grid)
+    protected void FillGridWithFillerValues(int[,] grid)
     {
         _grid = new int[_length * 2, _length * 2];
         for (int y = 0; y < _grid.GetLength(1); y++)
@@ -175,7 +210,7 @@ public class TerrainGenerator : MonoBehaviour
         }
     }
 
-    private void UpdateMaterial()
+    protected void UpdateMaterial()
     {
         if (!_heightDefinitions.Any())
         {
@@ -229,5 +264,315 @@ public class TerrainGenerator : MonoBehaviour
 
         _material.SetFloatArray("baseTextureScales", textureScales);
         _material.SetTexture("baseTextures", GenerateTextureArray(textures));
+    }
+
+    private void GenerateAnchorSpace(int[,] cAGrid)
+    {
+        if (_spawnedObjects == null)
+        {
+            _spawnedObjects = new List<GameObject>();
+        }
+        else
+        {
+            foreach (GameObject obj in _spawnedObjects)
+            {
+                DestroyImmediate(obj);
+            }
+            _spawnedObjects = new List<GameObject>();
+        }
+
+        Vector2 lastPos = new Vector2(-1, -1);
+        foreach (GameObject obj in _toPlace)
+        {
+            Bounds bounds = new Bounds(obj.transform.position, Vector3.zero);
+
+            foreach (Renderer r in obj.GetComponentsInChildren<Renderer>())
+            {
+                bounds.Encapsulate(r.bounds);
+            }
+
+            if (bounds.size.x >= cAGrid.GetLength(0) / 2 * _sizeBetweenNodes)
+            {
+                Debug.LogWarning("Structure " + obj.name + "is too big for the generated map, it will be skipped.");
+                continue;
+            }
+
+            Vector2 randomPos = GetNewPosition(bounds, cAGrid);
+
+            for (int y = (int)Mathf.Floor(randomPos.y - bounds.extents.z); y < randomPos.y + bounds.extents.z; y++)
+            {
+                for (int x = (int)Mathf.Floor(randomPos.x - bounds.extents.x / 2 - 2); x < randomPos.x + bounds.extents.x / 2 + 2; x++)
+                {
+                    cAGrid[x, y] = (int)TerrainValues.Floor;
+                }
+            }
+
+            PlacementInformation info = new PlacementInformation();
+            Vector3 diff = bounds.center - obj.transform.position;
+            info.Position = randomPos;
+            info.WholeBounds = bounds;
+            info.ToSpawn = obj;
+            _toPlacePositions.Add(info);
+
+            if (lastPos.x != -1)
+            {
+                List<Vector2> curve = Bezier(lastPos, randomPos);
+                Vector2 lastPoint = lastPos;
+                curve.Add(randomPos);
+                foreach (Vector2 point in curve)
+                {
+                    List<int[]> connectionPoints = Bresenham_Algorithm.Bresenham.runLine((int)lastPoint.x, (int)lastPoint.y, (int)point.x, (int)point.y);
+
+                    foreach (int[] connectionPoint in connectionPoints)
+                    {
+                        for (int y = connectionPoint[1] - 2; y < connectionPoint[1] + 2; y++)
+                        {
+                            for (int x = connectionPoint[0] - 2; x < connectionPoint[0] + 2; x++)
+                            {
+                                if (x < 0 || y < 0 || x >= cAGrid.GetLength(0) || y >= cAGrid.GetLength(1))
+                                {
+                                    continue;
+                                }
+                                cAGrid[x, y] = (int)TerrainValues.Floor;
+                            }
+                        }
+                    }
+                    lastPoint = point;
+                }
+            }
+
+            lastPos = randomPos;
+        }
+    }
+
+    private Vector2 GetNewPosition(Bounds bounds, int[,] cAGrid)
+    {
+        Vector2 randomPos = new Vector2();
+
+        bool foundPos = false;
+        while (!foundPos)
+        {
+            randomPos = new Vector2(UnityEngine.Random.Range(2 + bounds.extents.x, cAGrid.GetLength(0) - 3 - bounds.extents.x), UnityEngine.Random.Range(2 + bounds.extents.z, cAGrid.GetLength(1) - 3 - bounds.extents.z));
+            foundPos = true;
+            foreach (PlacementInformation otherPos in _toPlacePositions)
+            {
+                if ((otherPos.WholeBounds.extents.x + bounds.extents.x) * 1.5f > Vector2.Distance(otherPos.Position, randomPos))
+                {
+                    foundPos = false;
+                    break;
+                }
+            }
+        }
+
+        return randomPos;
+    }
+
+    private void PlaceObjects()
+    {
+        foreach (PlacementInformation info in _toPlacePositions)
+        {
+            GameObject instance = Instantiate(info.ToSpawn, new Vector3(info.Position.x * 2 * _sizeBetweenNodes, transform.position.y + _height + _noiseHeightTop * 2, info.Position.y * 2 * _sizeBetweenNodes), Quaternion.identity);
+
+            _spawnedObjects.Add(instance);
+            instance.transform.parent = transform;
+
+            if (instance.GetComponent<TerrainDecorationChildInfo>() == null || !instance.GetComponent<TerrainDecorationChildInfo>().RelativeToParent)
+            {
+                RotationPlacementForChildren(instance, 0, true);
+            }
+
+        }
+    }
+
+    private List<Vector2> Bezier(Vector2 p1, Vector2 p2)
+    {
+        Vector2 p3 = new Vector2((p1.x + p2.x) / 2 - Vector2.Distance(p1, p2) / 3, (p1.y + p2.y) / 2 - Vector2.Distance(p1, p2) / 3);
+        Vector2 p4 = new Vector2((p1.x + p2.x) / 2 + Vector2.Distance(p1, p2) / 3, (p1.y + p2.y) / 2 + Vector2.Distance(p1, p2) / 3);
+
+        List<Vector2> curve = new List<Vector2>();
+
+        for (float i = 0; i <= 1; i += 0.1f)
+        {
+            curve.Add(Mathf.Pow(1 - i, 3) * p1 + 3 * Mathf.Pow((1 - i), 2) * i * p3 + 3 * (1 - i) * Mathf.Pow(i, 2) * p4 + Mathf.Pow(i, 3) * p2);
+        }
+
+        return curve;
+    }
+
+    private struct PlacementInformation
+    {
+        public GameObject ToSpawn;
+        public Bounds WholeBounds;
+        public Vector2 Position;
+    }
+
+    private void RotationPlacementForChildren(GameObject parent, float heightOffset, bool widthPlacement)
+    {
+        RotationPlacementForChildrenRecursiv(parent, heightOffset, widthPlacement);
+
+        RaycastHit hit;
+        Physics.Raycast(parent.transform.position, Vector3.down, out hit, 10, _groundMask);
+
+        if (parent.transform.GetComponent<Renderer>() != null && widthPlacement && hit.collider != null)
+        {
+            Vector3 bounds = parent.transform.GetComponent<Renderer>().bounds.extents;
+            List<RaycastHit> hits = new List<RaycastHit>();
+
+            RaycastHit hit1;
+            RaycastHit hit2;
+            RaycastHit hit3;
+            RaycastHit hit4;
+            RaycastHit hit5;
+            RaycastHit hit6;
+            RaycastHit hit7;
+            RaycastHit hit8;
+
+            Physics.Raycast(parent.transform.position + new Vector3(bounds.x, 0, bounds.z), Vector3.down, out hit1, 10, _groundMask);
+            Physics.Raycast(parent.transform.position + new Vector3(-bounds.x, 0, bounds.z), Vector3.down, out hit2, 10, _groundMask);
+            Physics.Raycast(parent.transform.position + new Vector3(bounds.x, 0, -bounds.z), Vector3.down, out hit3, 10, _groundMask);
+            Physics.Raycast(parent.transform.position + new Vector3(-bounds.x, 0, -bounds.z), Vector3.down, out hit4, 10, _groundMask);
+
+            Physics.Raycast(parent.transform.position + new Vector3(bounds.x, 0, 0), Vector3.down, out hit5, 10, _groundMask);
+            Physics.Raycast(parent.transform.position + new Vector3(0, 0, bounds.z), Vector3.down, out hit6, 10, _groundMask);
+            Physics.Raycast(parent.transform.position + new Vector3(0, 0, -bounds.z), Vector3.down, out hit7, 10, _groundMask);
+            Physics.Raycast(parent.transform.position + new Vector3(-bounds.x, 0, 0), Vector3.down, out hit8, 10, _groundMask);
+
+            hits.Add(hit1);
+            hits.Add(hit2);
+            hits.Add(hit3);
+            hits.Add(hit4);
+            hits.Add(hit5);
+            hits.Add(hit6);
+            hits.Add(hit7);
+            hits.Add(hit8);
+
+            foreach (RaycastHit rHit in hits)
+            {
+                if (rHit.collider != null && rHit.point.y < hit.point.y)
+                {
+                    hit.point = new Vector3(hit.point.x, rHit.point.y, hit.point.z);
+                }
+            }
+        }
+
+        if (hit.collider != null)
+        {
+            float heightDiff = heightOffset;
+
+            if (parent.transform.GetComponent<Renderer>() != null)
+            {
+                heightDiff += parent.transform.position.y - parent.transform.GetComponent<Renderer>().bounds.min.y;
+            }
+
+            parent.transform.position = hit.point + Vector3.up * heightDiff;
+
+            if (parent.transform.GetComponent<Renderer>() != null && parent.transform.GetComponent<Renderer>().bounds.size.y < 0.8f)
+            {
+                GameObject pivot = new GameObject();
+                pivot.transform.position = hit.point;
+                parent.transform.parent = pivot.transform;
+                pivot.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+                parent.transform.parent = this.transform;
+                DestroyImmediate(pivot);
+            }
+        }
+        else
+        {
+            DestroyImmediate(parent.transform.gameObject);
+        }
+    }
+
+    private void RotationPlacementForChildrenRecursiv(GameObject parent, float heightOffset, bool widthPlacement)
+    {
+        List<Transform> unchangedChildren = parent.transform.Cast<Transform>().ToList();
+        foreach (Transform transform in unchangedChildren)
+        {
+            if (transform.GetComponent<ParticleSystem>() != null || transform.GetComponent<Light>() != null)
+            {
+                continue;
+            }
+
+            if (transform.GetComponent<TerrainDecorationChildInfo>() == null || !transform.GetComponent<TerrainDecorationChildInfo>().RelativeToParent)
+            {
+                RotationPlacementForChildrenRecursiv(transform.gameObject, heightOffset, widthPlacement);
+                transform.parent = this.transform;
+                _spawnedObjects.Add(transform.gameObject);
+            }
+            else
+            {
+                continue;
+            }
+
+            RaycastHit hit;
+            Physics.Raycast(transform.position, Vector3.down, out hit, 10, _groundMask);
+
+            if (transform.GetComponent<Renderer>() != null && widthPlacement && hit.collider != null)
+            {
+                Vector3 bounds = transform.GetComponent<Renderer>().bounds.extents;
+                List<RaycastHit> hits = new List<RaycastHit>();
+
+                RaycastHit hit1;
+                RaycastHit hit2;
+                RaycastHit hit3;
+                RaycastHit hit4;
+                RaycastHit hit5;
+                RaycastHit hit6;
+                RaycastHit hit7;
+                RaycastHit hit8;
+
+                Physics.Raycast(transform.position + new Vector3(bounds.x, 0, bounds.z), Vector3.down, out hit1, 10, _groundMask);
+                Physics.Raycast(transform.position + new Vector3(-bounds.x, 0, bounds.z), Vector3.down, out hit2, 10, _groundMask);
+                Physics.Raycast(transform.position + new Vector3(bounds.x, 0, -bounds.z), Vector3.down, out hit3, 10, _groundMask);
+                Physics.Raycast(transform.position + new Vector3(-bounds.x, 0, -bounds.z), Vector3.down, out hit4, 10, _groundMask);
+
+                Physics.Raycast(transform.position + new Vector3(bounds.x, 0, 0), Vector3.down, out hit5, 10, _groundMask);
+                Physics.Raycast(transform.position + new Vector3(0, 0, bounds.z), Vector3.down, out hit6, 10, _groundMask);
+                Physics.Raycast(transform.position + new Vector3(0, 0, -bounds.z), Vector3.down, out hit7, 10, _groundMask);
+                Physics.Raycast(transform.position + new Vector3(-bounds.x, 0, 0), Vector3.down, out hit8, 10, _groundMask);
+
+                hits.Add(hit1);
+                hits.Add(hit2);
+                hits.Add(hit3);
+                hits.Add(hit4);
+                hits.Add(hit5);
+                hits.Add(hit6);
+                hits.Add(hit7);
+                hits.Add(hit8);
+
+                foreach (RaycastHit rHit in hits)
+                {
+                    if (rHit.collider != null && rHit.point.y < hit.point.y)
+                    {
+                        hit.point = new Vector3(hit.point.x, rHit.point.y, hit.point.z);
+                    }
+                }
+            }
+
+            if (hit.collider != null)
+            {
+                float heightDiff = heightOffset;
+
+                if (transform.GetComponent<Renderer>() != null)
+                {
+                    heightDiff += transform.position.y - transform.GetComponent<Renderer>().bounds.min.y;
+                }
+
+                transform.position = hit.point + Vector3.up * heightDiff;
+
+                if (transform.GetComponent<Renderer>() != null && transform.GetComponent<Renderer>().bounds.size.y < 0.8f)
+                {
+                    GameObject pivot = new GameObject();
+                    pivot.transform.position = hit.point;
+                    transform.parent = pivot.transform;
+                    pivot.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+                    transform.parent = this.transform;
+                    DestroyImmediate(pivot);
+                }
+            }
+            else
+            {
+                DestroyImmediate(transform.gameObject);
+            }
+        }
     }
 }
