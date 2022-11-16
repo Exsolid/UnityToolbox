@@ -85,7 +85,7 @@ public class TerrainDecoration : MonoBehaviour
                             RotationPlacementForChildren(_spawnedObjects.Last(), selected.HeightOffset, selected.WidthPlacement);
                         }
 
-                        if (_spawnedObjects.Last().GetComponent<Renderer>() != null)
+                        if (_spawnedObjects.Count != 0 && _spawnedObjects.Last().GetComponent<Renderer>() != null)
                         {
                             Collider[] collisions = Physics.OverlapBox(_spawnedObjects.Last().transform.position, _spawnedObjects.Last().GetComponent<Renderer>().bounds.extents, _spawnedObjects.Last().transform.rotation);
 
@@ -116,8 +116,9 @@ public class TerrainDecoration : MonoBehaviour
                             {
                                 if (col.gameObject.GetComponent<TerrainDecorationAnchorObject>() != null)
                                 {
-                                    DestroyImmediate(_spawnedObjects.Last());
-                                    _spawnedObjects.Remove(_spawnedObjects.Last());
+                                    GameObject obj = _spawnedObjects.Last();
+                                    _spawnedObjects.Remove(obj);
+                                    DestroyImmediate(obj);
                                     break;
                                 }
                             }
@@ -260,6 +261,7 @@ public class TerrainDecoration : MonoBehaviour
         }
         else
         {
+            _spawnedObjects.Remove(parent.transform.gameObject);
             DestroyImmediate(parent.transform.gameObject);
         }
     }
