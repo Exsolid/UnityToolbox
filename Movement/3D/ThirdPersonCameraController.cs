@@ -75,7 +75,7 @@ public class ThirdPersonCameraController : MonoBehaviour
             currentDistanceFromTarget = Vector3.Distance(positionTransform.position + Vector3.Scale(camCollider.bounds.size / 2, cam.transform.forward), targetToFollow.transform.position);
             positionTransform.position = Vector3.Lerp(positionTransform.position + currentDistanceFromTarget * cam.transform.forward, positionTransform.position, 0.9f);
         }
-        else if(!Physics.OverlapBox(cam.transform.position, camCollider.bounds.size / 1.5f, Quaternion.identity, layerMask).Any() && disctancePosition > 1)
+        else if(!Physics.OverlapBox(cam.transform.position, camCollider.bounds.size / 1.5f, Quaternion.identity, layerMask).Any() && disctancePosition > 0.1f)
         {
             currentDistanceFromTarget = Vector3.Distance(positionTransform.position + Vector3.Scale(camCollider.bounds.size / 2, cam.transform.forward), targetToFollow.transform.position);
             positionTransform.position = Vector3.Lerp(positionTransform.position - currentDistanceFromTarget * cam.transform.forward, positionTransform.position, 0.9f);
