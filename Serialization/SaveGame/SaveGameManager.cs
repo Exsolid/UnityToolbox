@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System;
-using System.Text;
 using System.Linq;
 using System.Security.Cryptography;
 using UnityEngine.SceneManagement;
@@ -31,6 +30,12 @@ public class SaveGameManager : Module
         base.Awake();
         if (!Application.isEditor)
         {
+            if (!Directory.Exists(_pathToUse))
+            {
+                Debug.LogError("The path '" + _pathToUse + "could not be found! The " + nameof(SaveGameManager) + " cannot work without it.");
+                return;
+            }
+
             _pathToUse = Application.dataPath + "/SaveGame";
             if(!Directory.Exists(_pathToUse)) Directory.CreateDirectory(_pathToUse);
         }

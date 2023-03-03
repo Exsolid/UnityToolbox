@@ -95,9 +95,16 @@ public class DropDownDrawer : PropertyDrawer
             {
                 int newIndex = EditorGUI.Popup(position, ObjectNames.NicifyVariableName(fieldInfo.Name), index, values);
                 fieldInfo.SetValue(boxed, newIndex);
-                if(newIndex != index)
+                if (newIndex != index)
                 {
+                    //Make UnityEditor set scene dirty
                     EditorUtility.SetDirty(property.serializedObject.targetObject);
+                    //Execute OnValidate as if a normal change happend
+                    MethodInfo methodInfo = property.serializedObject.targetObject.GetType().GetMethod("OnValidate", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                    if (methodInfo != null)
+                    {
+                        methodInfo.Invoke(property.serializedObject.targetObject, new object[] { });
+                    }
                 }
             }
         }
