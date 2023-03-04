@@ -101,17 +101,7 @@ public class LocalisationManagerWindow : EditorWindow
         }
         else
         {
-            GUILayout.Label("The " + nameof(Localizer) + " could not be initialized. Please enter a valid path below.");
-            _assetPathInProject = GUILayout.TextField(_assetPathInProject);
-            if (GUILayout.Button("Refresh"))
-            {
-                Localizer.Instance.AssetPathInProject = _assetPathInProject;
-                Localizer.Instance.Initialize();
-                if (Localizer.Instance.IsInitialized)
-                {
-                    ProjectPrefs.SetString(_projectPrefPathKey, _assetPathInProject);
-                }
-            }
+            DisplaySettingsTab();
         }
 
         GUILayout.EndVertical();
@@ -120,7 +110,11 @@ public class LocalisationManagerWindow : EditorWindow
     private void DisplaySettingsTab()
     {
         GUILayout.Label("To update the " + nameof(Localizer) + " path. Please enter a valid path below.");
-        _assetPathInProject = GUILayout.TextField(_assetPathInProject);
+        GUILayout.BeginHorizontal();
+        Vector2 textDimensions = GUI.skin.label.CalcSize(new GUIContent(Application.dataPath));
+        GUILayout.Label(Application.dataPath);
+        _assetPathInProject = GUILayout.TextField(_assetPathInProject, GUILayout.Width(585 - textDimensions.x));
+        GUILayout.EndHorizontal();
         if (GUILayout.Button("Refresh"))
         {
             Localizer.Instance.AssetPathInProject = _assetPathInProject;

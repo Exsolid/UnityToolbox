@@ -11,13 +11,19 @@ public class Localizer
     public Action<LocalisationLanguage> LanguageEdited;
     public Action<LocalisationID> LocalisationIDEdited;
 
-    private string _assetPathInProject; //TODO what after change?
+    private string _assetPathInProject;
     public string AssetPathInProject
     {
         set
         {
-            //TODO UPDATE AND CHECK
-            _assetPathInProject = value; 
+            if (value.Contains(Application.dataPath))
+            {
+                _assetPathInProject = value;
+            }
+            else if(!value.Contains(":"))
+            {
+                _assetPathInProject = Application.dataPath + value;
+            }
         }
     }
 
