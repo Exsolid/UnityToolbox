@@ -30,13 +30,13 @@ public class SliderSetting : MonoBehaviour
         switch (_option)
         {
             case SliderOption.Mouse_Sensitivity:
-                _pref = ModuleManager.GetModule<PlayerPrefKeys>().getPrefereceKey(PlayerPrefKeys.MOUSE_SENSITIVITY);
+                _pref = ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.MOUSE_SENSITIVITY);
                 break;
             case SliderOption.Music:
-                _pref = ModuleManager.GetModule<PlayerPrefKeys>().getPrefereceKey(PlayerPrefKeys.MUSIC_VOLUME);
+                _pref = ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.MUSIC_VOLUME);
                 break;
             case SliderOption.Effects:
-                _pref = ModuleManager.GetModule<PlayerPrefKeys>().getPrefereceKey(PlayerPrefKeys.EFFECTS_VOLUME);
+                _pref = ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.EFFECTS_VOLUME);
                 break;
         }
 

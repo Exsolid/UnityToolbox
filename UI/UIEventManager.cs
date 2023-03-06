@@ -9,6 +9,9 @@ public class UIEventManager : Module
     public event Action OnMenuWheelPrevious;
     public event Action OnMenuWheelNext;
 
+    public event Action OnLanguagePrevious;
+    public event Action OnLanguageNext;
+
     public event Action<bool, int> OnTogglePaused;
 
     public event Action<DialogNode> OnDialogNodeChanged;
@@ -23,6 +26,16 @@ public class UIEventManager : Module
     public void MenuWheelNext()
     {
         OnMenuWheelNext?.Invoke();
+    }
+
+    public void LanguagePrevious()
+    {
+        OnLanguagePrevious?.Invoke();
+    }
+
+    public void LanguageNext()
+    {
+        OnLanguageNext?.Invoke();
     }
 
     public void TogglePaused(bool isPaused, int typeID)

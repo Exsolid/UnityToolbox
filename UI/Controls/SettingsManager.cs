@@ -79,7 +79,10 @@ public class SettingsManager : Module
 
     private void WriteControlsToPlayerPrefs()
     {
-        PlayerPrefs.SetString(ModuleManager.GetModule<PlayerPrefKeys>().getPrefereceKey(PlayerPrefKeys.JSON_CONTROLS), _controls.ToJson());
+        if (ModuleManager.ModuleRegistered<PlayerPrefKeys>())
+        {
+            PlayerPrefs.SetString(ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.JSON_CONTROLS), _controls.ToJson());
+        }
     }
 
     private string StripToEmpty(string str)

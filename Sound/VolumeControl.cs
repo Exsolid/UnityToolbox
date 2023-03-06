@@ -19,10 +19,10 @@ public class VolumeControl : MonoBehaviour
         switch (_type)
         {
             case SoundType.Effects:
-                pref = ModuleManager.GetModule<PlayerPrefKeys>().getPrefereceKey(PlayerPrefKeys.EFFECTS_VOLUME);
+                pref = ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.EFFECTS_VOLUME);
                 break;
             case SoundType.Music:
-                pref = ModuleManager.GetModule<PlayerPrefKeys>().getPrefereceKey(PlayerPrefKeys.MUSIC_VOLUME);
+                pref = ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.MUSIC_VOLUME);
                 break;
         }
 

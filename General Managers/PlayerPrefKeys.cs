@@ -12,6 +12,7 @@ public class PlayerPrefKeys : Module
     public static string MOUSE_SENSITIVITY = "MOUSE_SENSITIVITY";
     public static string EFFECTS_VOLUME = "EFFECTS_VOLUME";
     public static string MUSIC_VOLUME = "MUSIC_VOLUME";
+    public static string LANGUAGE = "LANGUAGE";
 
     public static string GAMEPLAY_SAVEGAME = "GAMEPLAY_SAVEGAME";
     public static string GAMEPLAY_STATE = "GAMEPLAY_STATE";
@@ -24,7 +25,7 @@ public class PlayerPrefKeys : Module
         base.Awake();
     }
 
-    public string getPrefereceKey(string id)
+    public string GetPrefereceKey(string id)
     {
         return keyword + "_" + this.GetType().GetField(id).GetValue(this);
     }
