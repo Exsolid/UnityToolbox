@@ -57,6 +57,7 @@ public class LanguageSetting : MonoBehaviour
         }
 
         _displayText.text = _localisationLanguages.ElementAt(_currentLanguage).Name;
+        ModuleManager.GetModule<UIEventManager>().LanguageUpdated(_localisationLanguages.ElementAt(_currentLanguage));
         PlayerPrefs.SetInt(_languagePref, _currentLanguage);
     }
 
@@ -72,6 +73,7 @@ public class LanguageSetting : MonoBehaviour
         }
 
         _displayText.text = _localisationLanguages.ElementAt(_currentLanguage).Name;
+        ModuleManager.GetModule<UIEventManager>().LanguageUpdated(_localisationLanguages.ElementAt(_currentLanguage));
         PlayerPrefs.SetInt(_languagePref, _currentLanguage);
     }
 }

@@ -20,7 +20,6 @@ public class GotoMenuButton : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData data)
     {
-
         if (_isEnabled)
         {
             if (_clickSounds != null)
