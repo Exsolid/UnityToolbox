@@ -7,7 +7,6 @@ using System.Reflection;
 [CustomPropertyDrawer(typeof(LocalisationID))]
 public class LocalisationDrawer : PropertyDrawer
 {
-    private string _searchedValue;
     private LocalisationSelectionWindow _window;
     private SerializedProperty _property;
 

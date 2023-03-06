@@ -15,7 +15,6 @@ public class LocalizedText : MonoBehaviour
     private Text _textToDisplay;
 
     private string _languagePref;
-    private int _currentIngameLanguage;
 
     private void Start()
     {
@@ -26,59 +25,40 @@ public class LocalizedText : MonoBehaviour
             Localizer.Instance.Initialize();
         }
 
+        _allLanguages = Localizer.Instance.LocalisationLanguages.ToList();
         _languagePref = ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.LANGUAGE);
-        _currentIngameLanguage = PlayerPrefs.GetInt(_languagePref);
+        int currentIngameLanguage = PlayerPrefs.GetInt(_languagePref);
 
-        if (_currentIngameLanguage >= _allLanguages.Count)
+        if (currentIngameLanguage >= _allLanguages.Count)
         {
-            _currentIngameLanguage = 0;
+            currentIngameLanguage = 0;
         }
 
-        ModuleManager.GetModule<UIEventManager>().OnLanguageNext += NextLanguage;
-        ModuleManager.GetModule<UIEventManager>().OnLanguagePrevious += PreviousLanguage;
-        UpdateText(_currentIngameLanguage);
+        ModuleManager.GetModule<UIEventManager>().OnLanguageUpdated += UpdateText;
+        UpdateText(currentIngameLanguage);
     }
 
     private void OnDestroy()
     {
         if (ModuleManager.ModuleRegistered<UIEventManager>())
         {
-            ModuleManager.GetModule<UIEventManager>().OnLanguageNext -= NextLanguage;
-            ModuleManager.GetModule<UIEventManager>().OnLanguagePrevious -= PreviousLanguage;
+            ModuleManager.GetModule<UIEventManager>().OnLanguageUpdated -= UpdateText;
         }
-    }
-    private void NextLanguage()
-    {
-        if (_currentIngameLanguage == _allLanguages.Count - 1)
-        {
-            _currentIngameLanguage = 0;
-        }
-        else
-        {
-            _currentIngameLanguage++;
-        }
-
-        UpdateText(_currentIngameLanguage);
-    }
-
-    private void PreviousLanguage()
-    {
-        if (_currentIngameLanguage == 0)
-        {
-            _currentIngameLanguage = _allLanguages.Count - 1;
-        }
-        else
-        {
-            _currentIngameLanguage--;
-        }
-
-        UpdateText(_currentIngameLanguage);
     }
 
     private void UpdateText(int atIndex)
     {
         KeyValuePair<LocalisationID, Dictionary<LocalisationLanguage, string>> temp = Localizer.Instance.LocalisationData.Where(e => e.Key.Equals(_localisationID)).FirstOrDefault();
         _displayedString = temp.Value == null ? "LocalisationID not valid!" : temp.Value[_allLanguages.ElementAt(atIndex)];
+
+        _textToDisplay = GetComponent<Text>();
+        _textToDisplay.text = _displayedString;
+    }
+
+    private void UpdateText(LocalisationLanguage language)
+    {
+        KeyValuePair<LocalisationID, Dictionary<LocalisationLanguage, string>> temp = Localizer.Instance.LocalisationData.Where(e => e.Key.Equals(_localisationID)).FirstOrDefault();
+        _displayedString = temp.Value == null ? "LocalisationID not valid!" : temp.Value[language];
 
         _textToDisplay = GetComponent<Text>();
         _textToDisplay.text = _displayedString;

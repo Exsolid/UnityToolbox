@@ -11,13 +11,20 @@ public class TintImageOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExi
     private Color _original;
     private bool _isEnabled;
 
+    [Header("Optional")]
+    [SerializeField] private Image _toChange;
     public void Awake()
     {
+        if(_toChange == null)
+        {
+            _toChange = GetComponent<Image>();
+        }
+
         GetComponentInParent<Menu>().OnActiveChanged += (isActive) =>
         {
             _isEnabled = isActive;
         };
-        _original = GetComponent<Image>().color;
+        _original = _toChange.color;
     }
 
     public void OnPointerEnter(PointerEventData data)
@@ -32,7 +39,7 @@ public class TintImageOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExi
             _hoverSounds.PlayRandomSource();
         }
 
-        GetComponent<Image>().color = _colorOnHover;
+        _toChange.color = _colorOnHover;
     }
 
     public void OnPointerExit(PointerEventData data)
@@ -41,6 +48,6 @@ public class TintImageOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExi
         {
             return;
         }
-        GetComponent<Image>().color = _original;
+        _toChange.color = _original;
     }
 }

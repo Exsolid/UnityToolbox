@@ -11,6 +11,7 @@ public class UIEventManager : Module
 
     public event Action OnLanguagePrevious;
     public event Action OnLanguageNext;
+    public event Action<LocalisationLanguage> OnLanguageUpdated;
 
     public event Action<bool, int> OnTogglePaused;
 
@@ -36,6 +37,11 @@ public class UIEventManager : Module
     public void LanguageNext()
     {
         OnLanguageNext?.Invoke();
+    }
+
+    public void LanguageUpdated(LocalisationLanguage language)
+    {
+        OnLanguageUpdated?.Invoke(language);
     }
 
     public void TogglePaused(bool isPaused, int typeID)
