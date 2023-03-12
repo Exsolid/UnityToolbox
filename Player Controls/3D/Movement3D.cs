@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody))]
 public class Movement3D : MovementBase
 {
     private Rigidbody _rb;
@@ -11,6 +11,7 @@ public class Movement3D : MovementBase
 
     [SerializeField] private float _maxSlopeAngle;
     private RaycastHit _onSlope;
+    [SerializeField] private bool _firstPerson;
 
     void Start()
     {
@@ -85,24 +86,40 @@ public class Movement3D : MovementBase
             direction = GetSlopeDirection(direction);
         }
 
-        if (_climbing && !IsClimbingLocked)
+        if (!_firstPerson)
         {
-            _rb.AddForce(Vector3.Scale(new Vector3(0, direction.z * -_speed, 0), new Vector3(0, Camera.main.transform.forward.y, 0)));
-            _rb.AddForce(Vector3.Scale(new Vector3(direction.x * _speed, 0, direction.x * _speed), new Vector3(Camera.main.transform.right.x, 0, Camera.main.transform.right.z).normalized));
-        }
-        else if(!_isMovementLocked)
-        {
-            _rb.AddForce(Vector3.Scale(new Vector3(direction.z * _speed, direction.y * _speed, direction.z * _speed), new Vector3(Camera.main.transform.forward.x, Camera.main.transform.forward.y, Camera.main.transform.forward.z).normalized));
-            _rb.AddForce(Vector3.Scale(new Vector3(direction.x * _speed, direction.y * _speed, direction.x * _speed), new Vector3(Camera.main.transform.right.x, Camera.main.transform.right.y, Camera.main.transform.right.z).normalized));
-        }
+            if (_climbing && !IsClimbingLocked)
+            {
+                _rb.AddForce(Vector3.Scale(new Vector3(0, direction.z * -_speed, 0), new Vector3(0, Camera.main.transform.forward.y, 0)));
+                _rb.AddForce(Vector3.Scale(new Vector3(direction.x * _speed, 0, direction.x * _speed), new Vector3(Camera.main.transform.right.x, 0, Camera.main.transform.right.z).normalized));
+            }
+            else if (!_isMovementLocked)
+            {
+                _rb.AddForce(Vector3.Scale(new Vector3(direction.z * _speed, direction.y * _speed, direction.z * _speed), new Vector3(Camera.main.transform.forward.x, Camera.main.transform.forward.y, Camera.main.transform.forward.z).normalized));
+                _rb.AddForce(Vector3.Scale(new Vector3(direction.x * _speed, direction.y * _speed, direction.x * _speed), new Vector3(Camera.main.transform.right.x, Camera.main.transform.right.y, Camera.main.transform.right.z).normalized));
+            }
 
-        if(direction.x != 0 || direction.z != 0)
+            if (direction.x != 0 || direction.z != 0)
+            {
+                Quaternion rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(
+                    (Vector3.Scale(new Vector3(direction.z, 0, direction.z), Camera.main.transform.forward) +
+                    Vector3.Scale(new Vector3(direction.x, 0, direction.x), Camera.main.transform.right)) / 2f
+                    , Vector3.up), 0.5f);
+                transform.rotation = rotation;
+            }
+        }
+        else
         {
-            Quaternion rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(
-                (Vector3.Scale(new Vector3(direction.z, 0, direction.z), Camera.main.transform.forward) +
-                Vector3.Scale(new Vector3(direction.x, 0, direction.x), Camera.main.transform.right))/2f
-                , Vector3.up), 0.5f);
-            transform.rotation = rotation;
+            if (_climbing && !IsClimbingLocked)
+            {
+                _rb.AddForce(Vector3.Scale(new Vector3(0, direction.z * -_speed, 0), new Vector3(0, transform.forward.y, 0)));
+                _rb.AddForce(Vector3.Scale(new Vector3(direction.x * _speed, 0, direction.x * _speed), new Vector3(transform.right.x, 0, transform.right.z).normalized));
+            }
+            else if (!_isMovementLocked)
+            {
+                _rb.AddForce(Vector3.Scale(new Vector3(direction.z * _speed, direction.y * _speed, direction.z * _speed), new Vector3(transform.forward.x, transform.forward.y, transform.forward.z).normalized));
+                _rb.AddForce(Vector3.Scale(new Vector3(direction.x * _speed, direction.y * _speed, direction.x * _speed), new Vector3(transform.right.x, transform.right.y, transform.right.z).normalized));
+            }
         }
     }
 
