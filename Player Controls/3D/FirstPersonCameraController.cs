@@ -9,8 +9,11 @@ public class FirstPersonCameraController : MonoBehaviour
     [SerializeField] private float _mouseSensitivity;
     private float _mouseSensitivityUpdated;
     [SerializeField] private string _viewActionName;
-    [SerializeField] private Camera _camera;
     [SerializeField] private GameObject _playerToRotateInstead;
+    [SerializeField] [Range(-1,180)] private int _maxVerticalAngle;
+    [SerializeField] [Range(-1,180)] private int _maxHorizontalAngle;
+    [SerializeField] private Camera _camera;
+    private Quaternion _initialRotation;
 
     private Vector3 _rotateToPosition;
 
@@ -30,6 +33,7 @@ public class FirstPersonCameraController : MonoBehaviour
 
         ModuleManager.GetModule<PlayerEventManager>().OnLockMove += UpdateMovementLock;
         ModuleManager.GetModule<SettingsManager>().OnSenseValueChanged += UpdateMouseSense;
+        _initialRotation = _camera.transform.rotation;
     }
 
     // Update is called once per frame
@@ -50,19 +54,21 @@ public class FirstPersonCameraController : MonoBehaviour
     private void TurnView()
     {
         Vector2 mouse = _input.actions[_viewActionName].ReadValue<Vector2>();
-        if(_playerToRotateInstead == null)
+
+        if (_playerToRotateInstead == null)
         {
             Quaternion rotation = Quaternion.Lerp(_camera.transform.rotation, Quaternion.Euler(_camera.transform.rotation.eulerAngles.x + mouse.y * -1 / 2, _camera.transform.rotation.eulerAngles.y + mouse.x / 2, 0), _mouseSensitivityUpdated * Time.deltaTime * 10);
-            rotation = Quaternion.Euler((Mathf.Abs(rotation.eulerAngles.x - 180) < 115) ? _camera.transform.rotation.eulerAngles.x : rotation.eulerAngles.x, rotation.eulerAngles.y, 0);
+            rotation = Quaternion.Euler(_maxVerticalAngle != -1 && (Mathf.Abs(rotation.eulerAngles.x - 180) < _maxVerticalAngle) ? _camera.transform.rotation.eulerAngles.x : rotation.eulerAngles.x,
+                _maxHorizontalAngle != -1 && !MayRotateHorizontal(rotation.eulerAngles) ? _camera.transform.rotation.eulerAngles.y : rotation.eulerAngles.y, 0);
             _camera.transform.rotation = rotation;
         }
         else
         {
             Quaternion rotation = Quaternion.Lerp(_playerToRotateInstead.transform.rotation, Quaternion.Euler(_playerToRotateInstead.transform.rotation.eulerAngles.x + mouse.y * -1 / 2, _playerToRotateInstead.transform.rotation.eulerAngles.y + mouse.x / 2, 0), _mouseSensitivityUpdated * Time.deltaTime * 10);
-            rotation = Quaternion.Euler((Mathf.Abs(rotation.eulerAngles.x - 180) < 115) ? _playerToRotateInstead.transform.rotation.eulerAngles.x : rotation.eulerAngles.x, rotation.eulerAngles.y, 0);
+            rotation = Quaternion.Euler(_maxVerticalAngle != -1 && (Mathf.Abs(rotation.eulerAngles.x - 180) < _maxVerticalAngle) ? _playerToRotateInstead.transform.rotation.eulerAngles.x : rotation.eulerAngles.x, rotation.eulerAngles.y, 0);
 
             Quaternion rotationCam = Quaternion.Lerp(_camera.transform.rotation, Quaternion.Euler(_camera.transform.rotation.eulerAngles.x + mouse.y * -1 / 2, _camera.transform.rotation.eulerAngles.y + mouse.x / 2, 0), _mouseSensitivityUpdated * Time.deltaTime * 10);
-            rotationCam = Quaternion.Euler((Mathf.Abs(rotationCam.eulerAngles.x - 180) < 115) ? _camera.transform.rotation.eulerAngles.x : rotationCam.eulerAngles.x, rotationCam.eulerAngles.y, 0);
+            rotationCam = Quaternion.Euler(_maxVerticalAngle != -1 && (Mathf.Abs(rotationCam.eulerAngles.x - 180) < _maxVerticalAngle) ? _camera.transform.rotation.eulerAngles.x : rotationCam.eulerAngles.x, rotationCam.eulerAngles.y, 0);
 
             _camera.transform.rotation = Quaternion.Euler(rotationCam.eulerAngles.x, _camera.transform.rotation.eulerAngles.y, rotationCam.eulerAngles.z);
             _playerToRotateInstead.transform.rotation = Quaternion.Euler(_playerToRotateInstead.transform.rotation.eulerAngles.x, rotation.eulerAngles.y, _playerToRotateInstead.transform.rotation.eulerAngles.z);
@@ -94,5 +100,23 @@ public class FirstPersonCameraController : MonoBehaviour
         {
             ModuleManager.GetModule<SettingsManager>().OnSenseValueChanged += UpdateMouseSense;
         }
+    }
+
+    private bool MayRotateHorizontal(Vector3 currentRotation)
+    {
+        float fromRight = 0;
+        float fromLeft = 0;
+        if (currentRotation.y > _initialRotation.eulerAngles.y)
+        {
+            fromRight = currentRotation.y - _initialRotation.eulerAngles.y;
+            fromLeft = _initialRotation.eulerAngles.y + 360 - currentRotation.y;
+        }
+        else
+        {
+            fromRight = _initialRotation.eulerAngles.y - currentRotation.y;
+            fromLeft = currentRotation.y + 360 - _initialRotation.eulerAngles.y;
+        }
+        Debug.Log(fromLeft + " | " + fromRight);
+        return fromLeft < _maxHorizontalAngle || fromRight < _maxHorizontalAngle;
     }
 }
