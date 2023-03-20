@@ -23,4 +23,12 @@ public class Menu : MonoBehaviour
     }
 
     public event Action<bool> OnActiveChanged;
+
+    public void Start()
+    {
+        if (!ModuleManager.ModuleRegistered<MenuManager>())
+        {
+            IsActive = true;
+        }
+    }
 }

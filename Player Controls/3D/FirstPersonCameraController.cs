@@ -34,6 +34,9 @@ public class FirstPersonCameraController : MonoBehaviour
         ModuleManager.GetModule<PlayerEventManager>().OnLockMove += UpdateMovementLock;
         ModuleManager.GetModule<SettingsManager>().OnSenseValueChanged += UpdateMouseSense;
         _initialRotation = _camera.transform.rotation;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
@@ -41,6 +44,7 @@ public class FirstPersonCameraController : MonoBehaviour
     {
         if (!_lockRotation)
         {
+
             TurnView();
         }
         else if (!_rotateToPosition.Equals(Vector3.zero))
@@ -83,6 +87,8 @@ public class FirstPersonCameraController : MonoBehaviour
     private void UpdateMovementLock(bool locked)
     {
         _lockRotation = locked;
+        Cursor.lockState = locked ? CursorLockMode.Locked : CursorLockMode.Confined;
+        Cursor.visible = !locked;
     }
 
     private void UpdateMouseSense(float newValue)
