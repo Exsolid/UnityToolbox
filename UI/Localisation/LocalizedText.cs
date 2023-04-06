@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 
+/// <summary>
+/// This script is placed on a <see cref="Text"/> component and swaps out the localisation in editor and runtime.
+/// </summary>
 public class LocalizedText : MonoBehaviour
 {
     [SerializeField] private LocalisationID _localisationID;

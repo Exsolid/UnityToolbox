@@ -33,7 +33,7 @@ public class LocalisationManagerWindow : EditorWindow
     private bool _foldoutAdd;
     private bool _foldoutSearch;
 
-    [MenuItem("Window/Localisation")]
+    [MenuItem("UnityToolbox/Localisation System")]
     private static void DisplayWindow()
     {
         LocalisationManagerWindow window =(LocalisationManagerWindow)GetWindowWithRect(typeof(LocalisationManagerWindow), new Rect(0, 0, 600, 400));

@@ -5,6 +5,9 @@ using System.IO;
 using Newtonsoft.Json;
 using System;
 
+/// <summary>
+/// The heart of the localisation system. Every localisation, its serialisation and editing is managed here.
+/// </summary>
 public class Localizer
 {
     public Action<LocalisationScope> ScopeEdited;
@@ -82,6 +85,12 @@ public class Localizer
     public bool IsInitialized { get { return _isInitialized; } }
     private JsonSerializerSettings _settings;
 
+    /// <summary>
+    /// Adds a new localisation to the system.
+    /// </summary>
+    /// <param name="localisationID"></param>
+    /// <param name="localisations"></param>
+    /// <returns></returns>
     public bool AddLocalisation(LocalisationID localisationID, Dictionary<LocalisationLanguage, string> localisations)
     {
         if (!_isInitialized)
@@ -119,6 +128,11 @@ public class Localizer
         return true;
     }
 
+    /// <summary>
+    /// Adds a new <see cref="LocalisationScope"/> to the system.
+    /// </summary>
+    /// <param name="scopeName"></param>
+    /// <returns></returns>
     public bool AddScope(string scopeName)
     {
         if (!_isInitialized)
@@ -145,6 +159,12 @@ public class Localizer
         return true;
     }
 
+    /// <summary>
+    /// Adds a new <see cref="LocalisationLanguage"/> to the system.
+    /// </summary>
+    /// <param name="languageName"></param>
+    /// <param name="languageShortName"></param>
+    /// <returns></returns>
     public bool AddLanguage(string languageName, string languageShortName)
     {
         if (!_isInitialized)
@@ -172,6 +192,10 @@ public class Localizer
         return true;
     }
 
+    /// <summary>
+    /// Removes a <see cref="LocalisationLanguage"/> from the system.
+    /// </summary>
+    /// <param name="language"></param>
     public void RemoveLanguage(LocalisationLanguage language)
     {
         if (!_isInitialized)
@@ -188,6 +212,10 @@ public class Localizer
         _localisationLanguages.Remove(language); 
     }
 
+    /// <summary>
+    /// Removes a <see cref="LocalisationScope"/> from the system.
+    /// </summary>
+    /// <param name="scope"></param>
     public void RemoveScope(LocalisationScope scope)
     {
         if (!_isInitialized)
@@ -215,6 +243,10 @@ public class Localizer
         _localisationScopes.Remove(scope);
     }
 
+    /// <summary>
+    /// Removes a localisation, that is a <see cref="LocalisationID"/> with all its content, from the system.
+    /// </summary>
+    /// <param name="localisationID"></param>
     public void RemoveLocalisation(LocalisationID localisationID)
     {
         if (!_isInitialized)
@@ -226,6 +258,12 @@ public class Localizer
         OnLocalisationEdited(localisationID);
     }
 
+    /// <summary>
+    /// Edits an existing <see cref="LocalisationID"/> by replacing the IDs, but keeping its content.
+    /// </summary>
+    /// <param name="oldID"></param>
+    /// <param name="newID"></param>
+    /// <returns></returns>
     public bool EditLocalisationID(LocalisationID oldID, LocalisationID newID)
     {
         if (!_isInitialized)
@@ -247,6 +285,12 @@ public class Localizer
         return true;
     }
 
+    /// <summary>
+    /// Replaces a <see cref="LocalisationScope"/> with a new one for all available data.
+    /// </summary>
+    /// <param name="oldScope"></param>
+    /// <param name="newScopeName"></param>
+    /// <returns></returns>
     public bool EditScope(LocalisationScope oldScope, string newScopeName)
     {
         if (!_isInitialized)
@@ -285,6 +329,13 @@ public class Localizer
         return true;
     }
 
+    /// <summary>
+    /// Replaces a <see cref="LocalisationLanguage"/> with a new one for all available data.
+    /// </summary>
+    /// <param name="oldLanguage"></param>
+    /// <param name="newLanguageName"></param>
+    /// <param name="newLanguageShortName"></param>
+    /// <returns></returns>
     public bool EditLanguage(LocalisationLanguage oldLanguage, string newLanguageName, string newLanguageShortName)
     {
         if (!_isInitialized)
@@ -322,6 +373,12 @@ public class Localizer
         return true;
     } 
 
+    /// <summary>
+    /// Edits a given localisation found by the <see cref="LocalisationID"/> by replacing the current content with <paramref name="localisations"/>.
+    /// </summary>
+    /// <param name="localisationID"></param>
+    /// <param name="localisations"></param>
+    /// <returns></returns>
     public bool EditLocalisation(LocalisationID localisationID, Dictionary<LocalisationLanguage, string> localisations)
     {
         if (!_isInitialized)
@@ -361,6 +418,9 @@ public class Localizer
         return true;
     }
 
+    /// <summary>
+    /// Writes the data to disk. For this to work, a valid path within the project must be setup.
+    /// </summary>
     public void WriteData()
     {
         if (!Directory.Exists(_assetPathInProject))
@@ -396,6 +456,9 @@ public class Localizer
         }
     }
 
+    /// <summary>
+    /// Initializes the <see cref="Localizer"/>. This is required due to its dependency on a valid path.
+    /// </summary>
     public void Initialize()
     {
         if (_isInitialized)
@@ -445,16 +508,28 @@ public class Localizer
 
     //Events
 
+    /// <summary>
+    /// Callback for when a <see cref="LocalisationScope"/> is edited or removed.
+    /// </summary>
+    /// <param name="oldScope"></param>
     private void OnScopeEdited(LocalisationScope oldScope)
     {
         ScopeEdited?.Invoke(oldScope);
     }
 
+    /// <summary>
+    /// Callback for when a <see cref="LocalisationLanguage"/> is edited or removed.
+    /// </summary>
+    /// <param name="oldLanguage"></param>
     private void OnLanguageEdited(LocalisationLanguage oldLanguage)
     {
         LanguageEdited?.Invoke(oldLanguage);
     }
 
+    /// <summary>
+    /// Callback for when a <see cref="LocalisationID"/> is edited or removed.
+    /// </summary>
+    /// <param name="oldLocalisationID"></param>
     private void OnLocalisationEdited(LocalisationID oldLocalisationID)
     {
         LocalisationIDEdited?.Invoke(oldLocalisationID);

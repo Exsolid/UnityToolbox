@@ -1,16 +1,12 @@
 using UnityEngine;
 
+/// <summary>
+/// This manager soley initializes the Localizer, which is used for every localisation.
+/// </summary>
 public class LocalisationManager : Module
 {
     [Tooltip("Defines the path, of where the localisation data is read from.")]
     [SerializeField] private string _assetPathInProject;
-
-    private LocalisationLanguage _language;
-    public LocalisationLanguage Language
-    {
-        get { return _language; }
-        set { _language = value; }
-    }
 
     private Localizer _localizer;
 
@@ -18,10 +14,5 @@ public class LocalisationManager : Module
     {
         base.Awake();
         _localizer.AssetPathInProject = _assetPathInProject;
-    }
-
-    public string GetLocalizedString(LocalisationID ID)
-    {
-        return _localizer.LocalisationData[ID][_language];
     }
 }

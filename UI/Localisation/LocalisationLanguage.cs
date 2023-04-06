@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+/// <summary>
+/// The language which is used to indentify and serialize localisation data.
+/// </summary>
 [Serializable]
 public struct LocalisationLanguage
 {
