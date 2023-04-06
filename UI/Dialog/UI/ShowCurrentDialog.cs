@@ -18,7 +18,7 @@ public class ShowCurrentDialog : MonoBehaviour
         ModuleManager.GetModule<UIEventManager>().OnDialogNodeChanged += UpdateDialog;
     }
 
-    public void UpdateDialog(DialogNode currentNode)
+    public void UpdateDialog(DialogNodeData currentNode)
     {
         if(_title != null)
         {
@@ -36,10 +36,10 @@ public class ShowCurrentDialog : MonoBehaviour
         if (currentNode != null)
         {
             ModuleManager.GetModule<MenuManager>().ToggleMenu(_menuType, true);
-            if (_spriteToShow != null && currentNode.SpriteToShow != null)
+            if (_spriteToShow != null && currentNode.Avatar != null)
             {
                 _spriteToShow.enabled = true;
-                _spriteToShow.sprite = currentNode.SpriteToShow;
+                _spriteToShow.sprite = Sprite.Create(currentNode.Avatar, new Rect(0,0,currentNode.Avatar.width,currentNode.Avatar.height), new Vector2(0.5f, 0.5f));
             }
             if (_title != null)
             {
@@ -47,7 +47,7 @@ public class ShowCurrentDialog : MonoBehaviour
             }
             if (_description != null)
             {
-                _description.text = currentNode.Description;
+                _description.text = currentNode.Text;
             }
             if (currentNode.Options != null && currentNode.Options.Count > _options.Count)
             {

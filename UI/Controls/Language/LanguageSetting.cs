@@ -20,7 +20,7 @@ public class LanguageSetting : MonoBehaviour
 
         if (!Localizer.Instance.IsInitialized)
         {
-            string assetPathInProject = ProjectPrefs.GetString("LocalisationPath");
+            string assetPathInProject = ProjectPrefs.GetString(ProjectPrefKeys.LOCALISATIONSAVEPATH);
             Localizer.Instance.AssetPathInProject = assetPathInProject;
             Localizer.Instance.Initialize();
         }

@@ -28,11 +28,11 @@ public class NextDialogButton : MonoBehaviour, IPointerDownHandler
         }
     }
 
-    public void ChangeOptionsPresent(DialogNode currentNode)
+    public void ChangeOptionsPresent(DialogNodeData currentNode)
     {
         if(currentNode != null)
         {
-            _areOptionsPresent = currentNode.GetOutputNodes().ToList().Count > 1;
+            _areOptionsPresent = currentNode.OutputIDs.Count > 1;
         }
     }
 

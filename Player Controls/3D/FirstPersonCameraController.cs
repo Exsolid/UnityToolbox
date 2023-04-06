@@ -122,7 +122,7 @@ public class FirstPersonCameraController : MonoBehaviour
             fromRight = _initialRotation.eulerAngles.y - currentRotation.y;
             fromLeft = currentRotation.y + 360 - _initialRotation.eulerAngles.y;
         }
-        Debug.Log(fromLeft + " | " + fromRight);
+
         return fromLeft < _maxHorizontalAngle || fromRight < _maxHorizontalAngle;
     }
 }

@@ -30,7 +30,7 @@ public class LocalisationSelectionWindow : EditorWindow
 
     private void InitializeWindow()
     {
-        string assetPathInProject = ProjectPrefs.GetString("LocalisationPath");
+        string assetPathInProject = ProjectPrefs.GetString(ProjectPrefKeys.LOCALISATIONSAVEPATH);
         Localizer.Instance.AssetPathInProject = assetPathInProject;
         Localizer.Instance.Initialize();
         _searchIDString = "";

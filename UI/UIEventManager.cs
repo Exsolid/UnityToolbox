@@ -15,7 +15,7 @@ public class UIEventManager : Module
 
     public event Action<bool, int> OnTogglePaused;
 
-    public event Action<DialogNode> OnDialogNodeChanged;
+    public event Action<DialogNodeData> OnDialogNodeChanged;
 
     public event Action<bool> OnBindingKey;
 
@@ -49,7 +49,7 @@ public class UIEventManager : Module
         OnTogglePaused?.Invoke(isPaused, typeID);
     }
 
-    public void DialogNodeChanged(DialogNode currentNode)
+    public void DialogNodeChanged(DialogNodeData currentNode)
     {
         OnDialogNodeChanged?.Invoke(currentNode);
     }

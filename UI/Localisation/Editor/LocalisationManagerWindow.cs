@@ -13,7 +13,6 @@ public class LocalisationManagerWindow : EditorWindow
     private const int SETTINGS = 3;
 
     private string _assetPathInProject;
-    private readonly string _projectPrefPathKey = "LocalisationPath";
 
     private string _status;
 
@@ -55,7 +54,7 @@ public class LocalisationManagerWindow : EditorWindow
 
     private void InitializeWindow()
     {
-        _assetPathInProject = ProjectPrefs.GetString(_projectPrefPathKey);
+        _assetPathInProject = ProjectPrefs.GetString(ProjectPrefKeys.LOCALISATIONSAVEPATH);
         Localizer.Instance.AssetPathInProject = _assetPathInProject;
         Localizer.Instance.Initialize();
         _status = "Status: -";
@@ -121,7 +120,7 @@ public class LocalisationManagerWindow : EditorWindow
             Localizer.Instance.Initialize();
             if (Localizer.Instance.IsInitialized)
             {
-                ProjectPrefs.SetString(_projectPrefPathKey, _assetPathInProject);
+                ProjectPrefs.SetString(ProjectPrefKeys.LOCALISATIONSAVEPATH, _assetPathInProject);
             }
         }
     }
