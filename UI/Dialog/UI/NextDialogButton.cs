@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Linq;
 
+/// <summary>
+/// A script which is placed on a UI element to act as a button. When triggered, the next dialog node will be displayed.
+/// Requires <see cref="DialogManager"/>, <see cref="DisplayDialog"/> and <see cref="UIEventManager"/> to work.
+/// </summary>
 public class NextDialogButton : MonoBehaviour, IPointerDownHandler
 {
     private bool _areOptionsPresent;
@@ -28,7 +32,7 @@ public class NextDialogButton : MonoBehaviour, IPointerDownHandler
         }
     }
 
-    public void ChangeOptionsPresent(DialogNodeData currentNode)
+    private void ChangeOptionsPresent(DialogNodeData currentNode)
     {
         if(currentNode != null)
         {

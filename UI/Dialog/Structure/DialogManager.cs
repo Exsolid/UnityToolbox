@@ -6,11 +6,12 @@ using System.IO;
 using Newtonsoft.Json;
 using UnityEditor;
 
+/// <summary>
+/// The <see cref="DialogManager"/> is a <see cref="Module"/> which manages the existing dialogs saved by the dialog graph.
+/// It requires <see cref="DisplayDialog"/> and <see cref="UIEventManager"/> to display the current dialog node on a canavas.
+/// </summary>
 public class DialogManager : Module
 {
-    //[SerializeField] private BaseGraph _dialogGraph;
-    //private DialogNodeDec _currentNode;
-
     private string _fullPath;
     private const string FILENAME = "/DialogData.dat";
     private JsonSerializerSettings _settings;
@@ -59,6 +60,10 @@ public class DialogManager : Module
         }
     }
 
+    /// <summary>
+    /// Starts a dialog with the given <paramref name="dialogID"/>.
+    /// </summary>
+    /// <param name="dialogID"> The ID which is set at a root node within the dialog graph.</param>
     public void StartDialog(string dialogID)
     {
         IEnumerable<DialogNodeData> sequence = _dialogStartNodes.Where(node => node.DialogIndentifier.Equals(dialogID));
@@ -73,6 +78,12 @@ public class DialogManager : Module
         }
     }
 
+    /// <summary>
+    /// Proceeds with the current dialog and selects the next node based on the <paramref name="option"/>.
+    /// If the option cannot be found, the dialog will proceed with <see cref="DialogManager.NextNode()"/>.
+    /// Sets the current nodes completion info as well.
+    /// </summary>
+    /// <param name="option">The selected option of the current dialog node.</param>
     public void NextNode(int option)
     {
         if (_currentNode != null && _currentNode.CompletionToSet != null && !_currentNode.CompletionToSet.Equals(""))
@@ -90,6 +101,10 @@ public class DialogManager : Module
         }
     }
 
+    /// <summary>
+    /// Proceeds with the current dialog and selects the next linear node. If no next node exists the dialog is stopped.
+    /// Sets the current nodes completion info as well.
+    /// </summary>
     public void NextNode()
     {
         if (_currentNode != null && _currentNode.CompletionToSet != null && !_currentNode.CompletionToSet.Equals(""))

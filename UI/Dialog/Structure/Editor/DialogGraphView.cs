@@ -8,6 +8,9 @@ using UnityEngine.UIElements;
 using System.IO;
 using System.Linq;
 
+/// <summary>
+/// The dialog graph used within a window.
+/// </summary>
 public class DialogGraphView : GraphView
 {
     private HashSet<int> _ids;
@@ -37,6 +40,10 @@ public class DialogGraphView : GraphView
         return dialogBaseNode;
     }
 
+    /// <summary>
+    /// Adds a new <see cref="DialogNode"/> to the graph and draws it.
+    /// </summary>
+    /// <param name="node"></param>
     public void AddNode(DialogNode node)
     {
         _ids.Add(node.ID);

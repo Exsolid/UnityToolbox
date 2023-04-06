@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
-public class ShowCurrentDialog : MonoBehaviour
+/// <summary>
+/// Displays all relevant data on a canvas as soon as a dialog is triggered.
+/// Requires <see cref="DialogManager"/> and <see cref="UIEventManager"/> to work.
+/// </summary>
+public class DisplayDialog : MonoBehaviour
 {
     [SerializeField] private Text _title;
     [SerializeField] private Text _description;
@@ -18,6 +21,10 @@ public class ShowCurrentDialog : MonoBehaviour
         ModuleManager.GetModule<UIEventManager>().OnDialogNodeChanged += UpdateDialog;
     }
 
+    /// <summary>
+    /// Updates the UI elements to the information given by the <paramref name="currentNode"/>.
+    /// </summary>
+    /// <param name="currentNode"></param>
     public void UpdateDialog(DialogNodeData currentNode)
     {
         if(_title != null)

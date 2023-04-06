@@ -36,7 +36,7 @@ public class DialogGraphPathSelectionWindow : EditorWindow
         GUILayout.EndVertical();
     }
 
-    public void DisplaySetting()
+    private void DisplaySetting()
     {
         GUILayout.Label("No valid path or data can be found. Please updated to a valid path, otherwise nothing will be saved.");
         GUILayout.Label(_status);

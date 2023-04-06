@@ -7,6 +7,9 @@ using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 using UnityEditor;
 
+/// <summary>
+/// The node which is used within the dialog graph.
+/// </summary>
 public class DialogNode : Node
 {
     private string _dialogIndentifier;
@@ -90,6 +93,10 @@ public class DialogNode : Node
         get { return _outputPort; }
     }
 
+    /// <summary>
+    /// Creates a new node based on a <see cref="DialogNodeData"/>.
+    /// </summary>
+    /// <param name="data"></param>
     public DialogNode(DialogNodeData data)
     {
         _dialogTitel = data.Title;
@@ -114,6 +121,11 @@ public class DialogNode : Node
         SetPosition(new Rect(data.Position.x, data.Position.y, 0, 0));
     }
 
+    /// <summary>
+    /// Creates a node based with a given <paramref name="position"/> within the graph and a given <paramref name="id"/>.
+    /// </summary>
+    /// <param name="position"></param>
+    /// <param name="id"></param>
     public DialogNode(Vector2 position, int id)
     {
         _dialogTitel = "Default Titel";
@@ -127,6 +139,9 @@ public class DialogNode : Node
         SetPosition(new Rect(position, Vector2.zero));
     }
 
+    /// <summary>
+    /// Creates all relevant UI elements to display its data.
+    /// </summary>
     public void Draw()
     {
         _dialogTitelTextField = new TextField()
@@ -277,6 +292,9 @@ public class DialogNode : Node
         _optionFoldout.Insert(0, removeOption);
     }
 
+    /// <summary>
+    /// Updates all variables with the data written within the dialog node UI elements.
+    /// </summary>
     public void UpdateValues()
     {
         _completionToSet = _completionToSetTextField.value;
@@ -323,11 +341,19 @@ public class DialogNode : Node
         inputContainer.Add(_dialogIndentifierTextField);
     }
 
+    /// <summary>
+    /// Updates the label which informs the user which option of the pervious node the current is.
+    /// </summary>
+    /// <param name="optionNumber"></param>
     public void UpdateInputConnectionLabel(int optionNumber)
     {
         _optionNumberOfSelf.text = "Is Option: " + optionNumber;
     }
 
+    /// <summary>
+    /// Reduces the current <paramref name="optionNumber"/> by one. The usecase is the deletion of other nodes.
+    /// </summary>
+    /// <param name="optionNumber"></param>
     public void UpdateHigherInputConnectionLabel(int optionNumber)
     {
         int oldID = int.Parse(_optionNumberOfSelf.text.Replace("Is Option: ", ""));

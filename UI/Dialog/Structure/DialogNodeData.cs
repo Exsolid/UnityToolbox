@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
+/// <summary>
+/// The dialog node data which is used at runtime and to serialize the dialog graph.
+/// </summary>
 [Serializable]
 public class DialogNodeData
 {
