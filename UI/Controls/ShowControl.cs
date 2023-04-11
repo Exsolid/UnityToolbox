@@ -4,6 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 
+/// <summary>
+/// This script displays the current setting for a control.
+/// It requires a <see cref="SettingsManager"/>, as well information about the ActionName and the Control (e.g. "Character Move" & "left").
+/// The control can be left empty if no information is necessary. (e.g. "Character Jump" & "")
+/// </summary>
 public class ShowControl : MonoBehaviour
 {
     [SerializeField] private string _control;

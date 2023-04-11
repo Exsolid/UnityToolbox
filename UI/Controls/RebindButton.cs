@@ -4,6 +4,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+/// <summary>
+/// A script which is placed on a UI element and acts as a button. It will rebind key controls.
+/// It requires the <see cref="UIEventManager"/> and the <see cref="SettingsManager"/>, as well information about the ActionName and the Control (e.g. "Character Move" & "left").
+/// The control can be left empty if no information is necessary. (e.g. "Character Jump" & "")
+/// </summary>
 public class RebindButton : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private string _control;
@@ -35,9 +40,10 @@ public class RebindButton : MonoBehaviour, IPointerClickHandler
         _manager = ModuleManager.GetModule<SettingsManager>();
         ModuleManager.GetModule<UIEventManager>().OnBindingKey += (isSetting) => { _otherIsSetting = isSetting; };
     }
+
     public void OnGUI()
     {
-        _textChild.text = _alternateText.Equals("") ? returnKeyCode(_manager.CurrentValueOfControl(_control, _actionName)) : _alternateText;
+        _textChild.text = _alternateText.Equals("") ? ReturnKeyCode(_manager.CurrentValueOfControl(_control, _actionName)) : _alternateText;
         Event e = Event.current;
         if (e != null && e.type.Equals(EventType.KeyDown) && e.keyCode != KeyCode.None)
             _keyPress = e.keyCode.ToString(); _isKeyboard = true;
@@ -64,12 +70,12 @@ public class RebindButton : MonoBehaviour, IPointerClickHandler
         if (!_isSetting && _isEnabled && !_otherIsSetting)
         {
             ModuleManager.GetModule<UIEventManager>().BindingKey(true);
-            StartCoroutine(setEvent());
+            StartCoroutine(SetEvent());
             _isSetting = true;
         }
     }
 
-    private void setKeyToControl(string key, string keyOrMouseCode)
+    private void SetKeyToControl(string key, string keyOrMouseCode)
     {
         _alternateText = "";
         string keyPath = keyOrMouseCode + key;
@@ -77,28 +83,28 @@ public class RebindButton : MonoBehaviour, IPointerClickHandler
         if (!_manager.SetKey(_control, keyPath, _actionName))
         {
             _alternateText = "Input invalid";
-            StartCoroutine(resetText());
+            StartCoroutine(ResetText());
         }
     }
-    IEnumerator resetText()
+    IEnumerator ResetText()
     {
         yield return new WaitForSeconds(3);
         _alternateText = "";
     }
-    IEnumerator setEvent()
+    IEnumerator SetEvent()
     {
         _keyPress = "";
         do
         {
             yield return null;
         } while (_keyPress == "");
-        setKeyToControl(_keyPress, _isKeyboard ? "<Keyboard>/" : "<Mouse>/");
+        SetKeyToControl(_keyPress, _isKeyboard ? "<Keyboard>/" : "<Mouse>/");
         yield return new WaitForSeconds(0.3f);
         _isSetting = false;
         ModuleManager.GetModule<UIEventManager>().BindingKey(false);
     }
 
-    private string returnKeyCode(string path)
+    private string ReturnKeyCode(string path)
     {
         if (path.Equals("")) return path;
         char[] chars = path.ToCharArray();

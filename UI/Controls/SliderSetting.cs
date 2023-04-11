@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// This script is placed on a slider and sets all changes for a given <see cref="SliderOption"/> to the <see cref="SettingsManager"/>.
+/// </summary>
 public class SliderSetting : MonoBehaviour
 {
     public enum SliderOption { Effects, Music, Mouse_Sensitivity}
 
-    public SliderOption _option;
+    [SerializeField] private SliderOption _option;
 
     private Slider _slider;
     private float _timer;

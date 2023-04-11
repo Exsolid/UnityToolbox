@@ -1,7 +1,11 @@
-
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// A script which is placed on a UI element and acts as a button. It will reset key controls to the last know setting.
+/// It requires a <see cref="SettingsManager"/>, as well information about the ActionName and the Control (e.g. "Character Move" & "left").
+/// The control can be left empty if no information is necessary. (e.g. "Character Jump" & "")
+/// </summary>
 public class ResetButton : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private string _control;

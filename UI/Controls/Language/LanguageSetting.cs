@@ -4,6 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 
+/// <summary>
+/// A script which displays the language settings.
+/// Requires the <see cref="UIEventManager"/> and the <see cref="SettingsManager"/>.
+/// <see cref="LanguageSettingButton"/> is required to change its value.
+/// </summary>
 public class LanguageSetting : MonoBehaviour
 {
     private HashSet<LocalisationLanguage> _localisationLanguages;
