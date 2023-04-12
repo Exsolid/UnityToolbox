@@ -4,8 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 
-
-public class ResetSaved : MonoBehaviour, IPointerDownHandler
+/// <summary>
+/// A button which clears all saved data.
+/// </summary>
+public class ResetSavegameButton : MonoBehaviour, IPointerDownHandler
 {
     private bool _isEnabled;
     [SerializeField] private AudioMixer _clickSounds;

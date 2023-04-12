@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// A button which loads a given scene with a scene name.
+/// </summary>
 public class GotoSceneButton : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField] private AudioMixer _clickSounds;

@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// A button which opens another menu and thereby closes the current.
+/// </summary>
 public class GotoMenuButton : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private AudioMixer _clickSounds;

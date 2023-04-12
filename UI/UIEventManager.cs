@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEditor;
 using System;
 
+/// <summary>
+/// This module manages all UI events and is required for almost all UI related scripts in this toolbox.
+/// </summary>
 public class UIEventManager : Module
 {
     public event Action OnMenuWheelPrevious;

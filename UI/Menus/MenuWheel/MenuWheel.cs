@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+/// <summary>
+/// A menu which is not in context of the <see cref="MenuManager"/>. Instead it works with 3D-GameObjects and rotates them around with given settings.
+/// </summary>
 public class MenuWheel : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
@@ -69,6 +72,9 @@ public class MenuWheel : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Rotates the wheel to the previous item.
+    /// </summary>
     public void MovePrev()
     {
         if (_currentTimer > 0 || _items.Count == 0 || !_items[_index].GetComponent<Menu>().IsActive) return;
@@ -95,14 +101,17 @@ public class MenuWheel : MonoBehaviour
                 if (_switchXY) smooth.Add(new Vector3(_radius * Mathf.Cos(Mathf.Deg2Rad * _degrees[current]), 0, _radius * Mathf.Sin(Mathf.Deg2Rad * _degrees[current])));
                 else smooth.Add(new Vector3(_radius * Mathf.Cos(Mathf.Deg2Rad * _degrees[current]), _radius * Mathf.Sin(Mathf.Deg2Rad * _degrees[current]), 0));
 
-                StartCoroutine(moveToPosition(item, smooth));
+                StartCoroutine(MoveToPosition(item, smooth));
             }
-            else StartCoroutine(moveToPosition(item, _switchXY ? new Vector3(_radius * Mathf.Cos(Mathf.Deg2Rad * _degrees[current]), 0,_radius * Mathf.Sin(Mathf.Deg2Rad * _degrees[current])) : new Vector3(_radius * Mathf.Cos(Mathf.Deg2Rad * _degrees[current]), _radius * Mathf.Sin(Mathf.Deg2Rad * _degrees[current]), 0)));
+            else StartCoroutine(MoveToPosition(item, _switchXY ? new Vector3(_radius * Mathf.Cos(Mathf.Deg2Rad * _degrees[current]), 0,_radius * Mathf.Sin(Mathf.Deg2Rad * _degrees[current])) : new Vector3(_radius * Mathf.Cos(Mathf.Deg2Rad * _degrees[current]), _radius * Mathf.Sin(Mathf.Deg2Rad * _degrees[current]), 0)));
             if (_degrees[current] > 360) _degrees[current] -= 360;
             current++;
         }
     }
 
+    /// <summary>
+    /// Rotates the wheel to the next item.
+    /// </summary>
     public void MoveNext()
     {
         if (_currentTimer > 0 || _items.Count == 0 || !_items[_index].GetComponent<Menu>().IsActive) return;
@@ -129,15 +138,15 @@ public class MenuWheel : MonoBehaviour
                 if (_switchXY) smooth.Add(new Vector3(_radius * Mathf.Cos(Mathf.Deg2Rad * _degrees[current]), 0, _radius * Mathf.Sin(Mathf.Deg2Rad * _degrees[current])));
                 else smooth.Add(new Vector3(_radius * Mathf.Cos(Mathf.Deg2Rad * _degrees[current]), _radius * Mathf.Sin(Mathf.Deg2Rad * _degrees[current]), 0));
 
-                StartCoroutine(moveToPosition(item, smooth));
+                StartCoroutine(MoveToPosition(item, smooth));
             }
-            else StartCoroutine(moveToPosition(item, _switchXY ? new Vector3(_radius * Mathf.Cos(Mathf.Deg2Rad * _degrees[current]), 0, _radius * Mathf.Sin(Mathf.Deg2Rad * _degrees[current])) : new Vector3(_radius * Mathf.Cos(Mathf.Deg2Rad * _degrees[current]), _radius * Mathf.Sin(Mathf.Deg2Rad * _degrees[current]), 0)));
+            else StartCoroutine(MoveToPosition(item, _switchXY ? new Vector3(_radius * Mathf.Cos(Mathf.Deg2Rad * _degrees[current]), 0, _radius * Mathf.Sin(Mathf.Deg2Rad * _degrees[current])) : new Vector3(_radius * Mathf.Cos(Mathf.Deg2Rad * _degrees[current]), _radius * Mathf.Sin(Mathf.Deg2Rad * _degrees[current]), 0)));
             if (_degrees[current] < 0) _degrees[current] += 360;
             current++;
         }
     }
 
-    public IEnumerator moveToPosition(GameObject item, Vector3 newPos)
+    private IEnumerator MoveToPosition(GameObject item, Vector3 newPos)
     {
         float runtime = 0;
         Vector3 startPos = item.transform.position;
@@ -149,7 +158,7 @@ public class MenuWheel : MonoBehaviour
         }
     }
 
-    public IEnumerator moveToPosition(GameObject item, List<Vector3> newPos)
+    private IEnumerator MoveToPosition(GameObject item, List<Vector3> newPos)
     {
         float timeToMoveForEachStep = _timeToMove/newPos.Count;
         Vector3 pastPos = item.transform.position;

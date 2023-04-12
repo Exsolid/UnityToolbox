@@ -4,11 +4,19 @@ using UnityEngine;
 using System;
 using System.Linq;
 
+/// <summary>
+/// This manager takes care of all menu related tasks. That is, sorting within a hierarchy and switching between visible canvases.
+/// The menus are called with types also defined here.
+/// Requires the <see cref="UIEventManager"/>.
+/// </summary>
 public class MenuManager : Module, ISerializationCallbackReceiver
 {
     [SerializeField] private List<MenuList> _menuList;
-    [SerializeField] public List<string> _menuTypes;
+    [SerializeField] private List<string> _menuTypes;
 
+    /// <summary>
+    /// All menu types defined by the manager.
+    /// </summary>
     public static List<string> MenuTypesForEditor = new List<string> 
     {
         "None",
@@ -69,6 +77,10 @@ public class MenuManager : Module, ISerializationCallbackReceiver
         }
     }
 
+    /// <summary>
+    /// Sets the active menu with a given <see cref="Menu". Disables the current if there is one and ignores the hierarchy.
+    /// </summary>
+    /// <param name="menu"></param>
     public void SetActiveMenu(Menu menu)
     {
         _currentActivMenu.GetComponent<Canvas>().enabled = false;
@@ -79,6 +91,11 @@ public class MenuManager : Module, ISerializationCallbackReceiver
         _currentActivMenu.transform.SetAsLastSibling();
     }
 
+    /// <summary>
+    /// Toogles a menu by the given ID which references to a type. See <see cref="MenuManager.MenuTypesForEditor"/>.
+    /// </summary>
+    /// <param name="type">The ID which references to a type.</param>
+    /// <param name="userInteraction">Whether the call came form a player interaction.</param>
     public void ToggleMenu(int type, bool userInteraction)
     {
         if (_currentActivMenu != null && (_currentActivMenu.MayUserToogle ^ userInteraction) || !_isEnabled) return;
@@ -134,7 +151,11 @@ public class MenuManager : Module, ISerializationCallbackReceiver
             ModuleManager.GetModule<UIEventManager>().TogglePaused(_isPaused, type);
         }
     }
-
+    /// <summary>
+    /// Toogles a menu. Disables the current if there is one.
+    /// </summary>
+    /// <param name="menu"></param>
+    /// <param name="userInteraction">Whether the call came form a player interaction.</param>
     public void ToggleMenu(Menu menu, bool userInteraction)
     {
         if (_currentActivMenu != null && (_currentActivMenu.MayUserToogle ^ userInteraction) || !_isEnabled) return;
@@ -186,12 +207,19 @@ public class MenuManager : Module, ISerializationCallbackReceiver
         }
     }
 
+    /// <summary>
+    /// Toogles the <see cref="MenuManager"/>. Useful if UI interaction should be locked.
+    /// </summary>
     public void ToggleMenuManager()
     {
         _isEnabled = !_isEnabled;
         _currentActivMenu.GetComponent<Canvas>().enabled = _isEnabled;
     }
 
+    /// <summary>
+    /// Toogles the <see cref="MenuManager"/>. Useful if UI interaction should be locked.
+    /// </summary>
+    /// <param name="isEnabled"></param>
     public void ToggleMenuManager(bool isEnabled)
     {
         _isEnabled = isEnabled;
@@ -212,6 +240,6 @@ public class MenuManager : Module, ISerializationCallbackReceiver
 [Serializable]
 public class MenuList
 {
-    [DropDown(nameof(MenuManager._menuTypes), true)] public int MenuTypeID;
+    [DropDown(nameof(MenuManager.MenuTypesForEditor), true)] public int MenuTypeID;
     public List<Menu> Menus;
 }

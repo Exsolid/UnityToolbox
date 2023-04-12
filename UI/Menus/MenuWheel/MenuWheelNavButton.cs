@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class MenuWheelNavigation : MonoBehaviour, IPointerClickHandler
+/// <summary>
+/// A button which swaps to the next <see cref="MenuWheel"/> item.
+/// </summary>
+public class MenuWheelNavButton : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] MenuWheelNavigationTypes _direction;
     [SerializeField] private AudioMixer _clickSounds;

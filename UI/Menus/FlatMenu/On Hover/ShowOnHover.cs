@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// A script which displays an <see cref="Image"/> on hover.
+/// </summary>
 public class ShowOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private AudioMixer _hoverSounds;

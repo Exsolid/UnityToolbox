@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+/// <summary>
+/// A script which tints a <see cref="Text"/> on hover.
+/// </summary>
 public class TintTextOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private AudioMixer _hoverSounds;

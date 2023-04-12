@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+/// <summary>
+/// A script which swapes the <see cref="Sprite"/> of an <see cref="Image"/> on hover.
+/// </summary>
 public class SwapOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private AudioMixer _hoverSounds;

@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// A button which quits the application to desktop.
+/// </summary>
 public class QuitButton : MonoBehaviour, IPointerDownHandler
 {
     private bool _isEnabled;
