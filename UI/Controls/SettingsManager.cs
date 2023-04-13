@@ -5,7 +5,7 @@ using System;
 
 /// <summary>
 /// This manager controls all relevant information about settings, that is key, volume and sensitivity controls.
-/// Requires the <see cref="UIEventManager"/>.
+/// Requires the <see cref="UIEventManager"/> and <see cref="PlayerPrefKeys"/>.
 /// </summary>
 public class SettingsManager : Module
 {
@@ -18,7 +18,7 @@ public class SettingsManager : Module
     /// <summary>
     /// The event which is executed as soon as volumes are changed.
     /// </summary>
-    public Action<SoundType, float> OnSoundValueChanged;
+    public Action<AudioType, float> OnSoundValueChanged;
 
     /// <summary>
     /// The event which is executed as soon as the mouse sensitivity is changed.
@@ -129,9 +129,9 @@ public class SettingsManager : Module
     /// <summary>
     /// Executes the <see cref="SettingsManager.OnSoundValueChanged"/> event.
     /// </summary>
-    /// <param name="type">The sound type. (e.g. <see cref="SoundType.Music"/> or <see cref="SoundType.Effects"/>)</param>
+    /// <param name="type">The sound type. (e.g. <see cref="AudioType.Music"/> or <see cref="AudioType.Effects"/>)</param>
     /// <param name="newValue">The new value for the volume, must be between 0-1.</param>
-    public void SoundValueChanged(SoundType type, float newValue)
+    public void SoundValueChanged(AudioType type, float newValue)
     {
         OnSoundValueChanged?.Invoke(type, newValue);
     }

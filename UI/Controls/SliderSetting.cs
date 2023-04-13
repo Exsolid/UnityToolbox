@@ -89,10 +89,10 @@ public class SliderSetting : MonoBehaviour
                 ModuleManager.GetModule<SettingsManager>().SenseValueChanged(_slider.value / _slider.maxValue);
                 break;
             case SliderOption.Music:
-                ModuleManager.GetModule<SettingsManager>().SoundValueChanged(SoundType.Music, _slider.value / _slider.maxValue);
+                ModuleManager.GetModule<SettingsManager>().SoundValueChanged(AudioType.Music, _slider.value / _slider.maxValue);
                 break;
             case SliderOption.Effects:
-                ModuleManager.GetModule<SettingsManager>().SoundValueChanged(SoundType.Effects, _slider.value / _slider.maxValue);
+                ModuleManager.GetModule<SettingsManager>().SoundValueChanged(AudioType.Effects, _slider.value / _slider.maxValue);
                 break;
         }
     }

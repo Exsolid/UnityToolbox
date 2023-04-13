@@ -4,6 +4,9 @@ using UnityEngine;
 using System.Linq;
 using System;
 
+/// <summary>
+/// A audio mixer which plays audio clips and with optional defined volume settings. See <see cref="AudioVolumeSetter"/>.
+/// </summary>
 [RequireComponent(typeof(AudioSource))]
 public class AudioMixer : MonoBehaviour
 {
@@ -18,7 +21,6 @@ public class AudioMixer : MonoBehaviour
     private float _timer;
 
     private AudioSource _audioSource;
-
 
     // Start is called before the first frame update
     void Start()
@@ -69,6 +71,9 @@ public class AudioMixer : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Plays a random sound from the defined list.
+    /// </summary>
     public void PlayRandomSource()
     {
         float randomSelected = UnityEngine.Random.Range(0, _totalProbability);

@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+/// <summary>
+/// This script sets the volume of a <see cref="AudioSource"/> and reads the data from the settings.
+/// For more information on volume settings see <see cref="SettingsManager"/> and <see cref="SliderSetting"/>.
+/// Requires <see cref="PlayerPrefKeys"/> and <see cref="PlayerPrefKeys"/>.
+/// </summary>
 [RequireComponent(typeof(AudioSource))]
-public class VolumeControl : MonoBehaviour
+public class AudioVolumeSetter : MonoBehaviour
 {
-    [SerializeField] private SoundType _type;
+    [SerializeField] private AudioType _type;
     private List<AudioSource> _audioSources;
 
     // Start is called before the first frame update
@@ -18,10 +23,10 @@ public class VolumeControl : MonoBehaviour
         string pref = "";
         switch (_type)
         {
-            case SoundType.Effects:
+            case AudioType.Effects:
                 pref = ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.EFFECTS_VOLUME);
                 break;
-            case SoundType.Music:
+            case AudioType.Music:
                 pref = ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.MUSIC_VOLUME);
                 break;
         }
@@ -41,7 +46,7 @@ public class VolumeControl : MonoBehaviour
         ModuleManager.GetModule<SettingsManager>().OnSoundValueChanged -= OnSoundChanged;
     }
 
-    private void OnSoundChanged(SoundType type, float newValue)
+    private void OnSoundChanged(AudioType type, float newValue)
     {
         if (type == _type)
         {
