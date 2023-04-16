@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// An implementation of <see cref="MovementBase"/> which works for a side scroller.
+/// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
 public class Movement2D : MovementBase
 {

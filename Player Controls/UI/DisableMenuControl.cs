@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine;
 
+/// <summary>
+/// This script disables (closes) an active menu, with the defined key (action name).
+/// </summary>
 [RequireComponent(typeof(PlayerInput))]
 public class DisableMenuControl : MonoBehaviour
 {

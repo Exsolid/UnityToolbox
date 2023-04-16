@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// A <see cref="MovementBase"/> implementation for 3D movment.
+/// Requires the <see cref="PlayerEventManager"/>.
+/// </summary>
 [RequireComponent(typeof(Rigidbody))]
 public class Movement3D : MovementBase
 {

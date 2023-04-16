@@ -4,12 +4,18 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Linq;
 
+/// <summary>
+/// This script is used for interactions with objects with optional tooltips.
+/// </summary>
 public abstract class RaycastInteraction : MonoBehaviour
 {
     [SerializeField] private string _tooltip; //Todo loca?
     [SerializeField] private string _actionName;
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] private Transform _raycastLocation;
+    /// <summary>
+    /// Whether the tooltip module should be used to display text.
+    /// </summary>
     protected bool _tooltipEnabled;
 
     private RaycastHit _raycastHit;
@@ -52,5 +58,9 @@ public abstract class RaycastInteraction : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Execute whatever should happen when the raycast found a valid object to interact with.
+    /// </summary>
+    /// <param name="raycastHit">The raycast data.</param>
     public abstract void OnInteraction(RaycastHit raycastHit);
 }

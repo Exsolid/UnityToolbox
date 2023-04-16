@@ -3,11 +3,19 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine;
 
+/// <summary>
+/// A first person camera controller which moves with mouse movement. Can be set to only rotate to a certain degree.
+/// For it to follow a target, place it as a child object.
+/// Requires the <see cref="PlayerPrefKeys">, <see cref="PlayerEventManager"/> and <see cref="SettingsManager"/>.
+/// </summary>
 public class FirstPersonCameraController : MonoBehaviour
 {
     [SerializeField] private PlayerInput _input;
     [SerializeField] private float _mouseSensitivity;
     private float _mouseSensitivityUpdated;
+    /// <summary>
+    /// The mouse input within the InputControls.
+    /// </summary>
     [SerializeField] private string _viewActionName;
     [SerializeField] private GameObject _playerToRotateInstead;
     [SerializeField] [Range(-1,180)] private int _maxVerticalAngle;
@@ -79,6 +87,10 @@ public class FirstPersonCameraController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Rotates the camera to look at a given position.
+    /// </summary>
+    /// <param name="position">The position to look at.</param>
     public void RotateTo(Vector3 position)
     {
         _rotateToPosition = position;
@@ -104,7 +116,7 @@ public class FirstPersonCameraController : MonoBehaviour
         }  
         if (ModuleManager.ModuleRegistered<SettingsManager>())
         {
-            ModuleManager.GetModule<SettingsManager>().OnSenseValueChanged += UpdateMouseSense;
+            ModuleManager.GetModule<SettingsManager>().OnSenseValueChanged -= UpdateMouseSense;
         }
     }
 

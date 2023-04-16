@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// A simple script which lets a given <see cref="Camera"/> follow the object this script sits on.
+/// </summary>
 public class SimpleCameraFollow : MonoBehaviour
 {
     [SerializeField] private Camera _camera;

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine;
 
+/// <summary>
+/// This script toggles a menu with the defined key (action name).
+/// </summary>
 public class ToggleMenuControl : MonoBehaviour
 {
     [SerializeField] private string _actionName;

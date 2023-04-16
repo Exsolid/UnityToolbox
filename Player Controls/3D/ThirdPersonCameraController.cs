@@ -4,81 +4,101 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// A camera controller which lets the camera follow the player, move it and react on collision.
+/// To understand how it is set up, the the summeries of the position and anchor transform as well as the camera.
+/// Requires the <see cref="PlayerPrefKeys"/> and <see cref="SettingsManager"/>.
+/// </summary>
 public class ThirdPersonCameraController : MonoBehaviour
 {
-    [SerializeField] private Transform targetToFollow;
-    [SerializeField] private Transform positionTransform;
-    [SerializeField] private Transform anchorTransform;
-    [SerializeField] private Camera cam;
-    [SerializeField] private Collider camCollider;
-    [SerializeField] private float camMoveSpeed;
-    [SerializeField] private List<string> collidingLayers;
-    private int layerMask;
-    private float currentDistanceFromTarget;
+    /// <summary>
+    /// The target the camera should follow.
+    /// </summary>
+    [SerializeField] private Transform _targetToFollow;
+    /// <summary>
+    /// Should be set up as the parent transform of the <see cref="_positionTransform"/> with no parent of itself.
+    /// This handels the following of the target.
+    /// </summary>
+    [SerializeField] private Transform _anchorTransform;
+    /// <summary>
+    /// Should have the <see cref="_anchorTransform"/> as its parent and its position and rotation set to all zero.
+    /// The <see cref="_camera"/> should be its child.
+    /// This handels the updated position in case of a collision.
+    /// </summary>
+    [SerializeField] private Transform _positionTransform;
+    /// <summary>
+    /// This needs to be a child of the <see cref="_positionTransform"/> and can be placed anywhere. The perspective set up will be the defined maximum distance to the <see cref="_targetToFollow"/>.
+    /// </summary>
+    [SerializeField] private Camera _camera;
+    [SerializeField] private Collider _camCollider;
+    [SerializeField] private float _camMoveSpeed;
+    [SerializeField] private List<string> _collidingLayers;
+    private int _layerMask;
+    private float _currentDistanceFromTarget;
 
-    [SerializeField] private string mouseMoveActionName;
-    [SerializeField] private string rotateTriggerActionName;
-    [SerializeField] [Range(0,90)] private float maxAngle;
-    private PlayerInput input;
+    [SerializeField] private string _mouseMoveActionName;
+    [SerializeField] private string _rotateTriggerActionName;
+    [SerializeField] [Range(0,90)] private float _maxAngle;
+    private PlayerInput _input;
 
-    private float mouseSense;
+    private float _mouseSense;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        anchorTransform.transform.position = targetToFollow.transform.position;
-        positionTransform.position = targetToFollow.transform.position;
-        input = GetComponent<PlayerInput>();
-        mouseSense = PlayerPrefs.GetFloat(ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.MOUSE_SENSITIVITY));
-        ModuleManager.GetModule<SettingsManager>().OnSenseValueChanged += (newValue) => { mouseSense = newValue; };
-        foreach(string layer in collidingLayers)
+        _anchorTransform.transform.position = _targetToFollow.transform.position;
+        _positionTransform.position = _targetToFollow.transform.position;
+        _input = GetComponent<PlayerInput>();
+        _mouseSense = PlayerPrefs.GetFloat(ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.MOUSE_SENSITIVITY));
+        ModuleManager.GetModule<SettingsManager>().OnSenseValueChanged += (newValue) => { _mouseSense = newValue; };
+        foreach(string layer in _collidingLayers)
         {
-            layerMask = layerMask | LayerMask.GetMask(layer);
+            _layerMask = _layerMask | LayerMask.GetMask(layer);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        followTarget();
-        rotateAroundTarget();
-        handleCollisions();
+        FollowTarget();
+        RotateAroundTarget();
+        HandleCollisions();
     }
 
-    private void followTarget()
+    private void FollowTarget()
     {
-        anchorTransform.transform.position = targetToFollow.transform.position;
+        _anchorTransform.transform.position = _targetToFollow.transform.position;
     }
 
-    private void rotateAroundTarget()
+    private void RotateAroundTarget()
     {
-        if (input.actions[rotateTriggerActionName].IsPressed())
+        if (_input.actions[_rotateTriggerActionName].IsPressed())
         {
-            Vector3 rotationInput = new Vector3(-1 * input.actions[mouseMoveActionName].ReadValue<Vector2>().y, input.actions[mouseMoveActionName].ReadValue<Vector2>().x);
-            Vector3 rotation = Vector3.Lerp(anchorTransform.rotation.eulerAngles, 
-                anchorTransform.rotation.eulerAngles + rotationInput,
-                Time.deltaTime * mouseSense * camMoveSpeed);
-            rotation.x = Mathf.Abs(rotation.x - 180) < Mathf.Abs(maxAngle - 180) ? anchorTransform.rotation.eulerAngles.x : rotation.x;
+            Vector3 rotationInput = new Vector3(-1 * _input.actions[_mouseMoveActionName].ReadValue<Vector2>().y, _input.actions[_mouseMoveActionName].ReadValue<Vector2>().x);
+            Vector3 rotation = Vector3.Lerp(_anchorTransform.rotation.eulerAngles, 
+                _anchorTransform.rotation.eulerAngles + rotationInput,
+                Time.deltaTime * _mouseSense * _camMoveSpeed);
+            rotation.x = Mathf.Abs(rotation.x - 180) < Mathf.Abs(_maxAngle - 180) ? _anchorTransform.rotation.eulerAngles.x : rotation.x;
 
 
-            anchorTransform.rotation = Quaternion.Euler(rotation);
+            _anchorTransform.rotation = Quaternion.Euler(rotation);
         }
     }
 
-    private void handleCollisions()
+    private void HandleCollisions()
     {
-        float disctancePosition = Vector3.Distance(positionTransform.position, anchorTransform.position);
-        float disctanceCamera = Vector3.Distance(cam.transform.position, anchorTransform.position);
-        if (Physics.OverlapBox(cam.transform.position, camCollider.bounds.size / 2, Quaternion.identity, layerMask).Any() && disctanceCamera > 1)
+        float disctancePosition = Vector3.Distance(_positionTransform.position, _anchorTransform.position);
+        float disctanceCamera = Vector3.Distance(_camera.transform.position, _anchorTransform.position);
+        if (Physics.OverlapBox(_camera.transform.position, _camCollider.bounds.size / 2, Quaternion.identity, _layerMask).Any() && disctanceCamera > 1)
         {
-            currentDistanceFromTarget = Vector3.Distance(positionTransform.position + Vector3.Scale(camCollider.bounds.size / 2, cam.transform.forward), targetToFollow.transform.position);
-            positionTransform.position = Vector3.Lerp(positionTransform.position + currentDistanceFromTarget * cam.transform.forward, positionTransform.position, 0.9f);
+            _currentDistanceFromTarget = Vector3.Distance(_positionTransform.position + Vector3.Scale(_camCollider.bounds.size / 2, _camera.transform.forward), _targetToFollow.transform.position);
+            _positionTransform.position = Vector3.Lerp(_positionTransform.position + _currentDistanceFromTarget * _camera.transform.forward, _positionTransform.position, 0.9f);
         }
-        else if(!Physics.OverlapBox(cam.transform.position, camCollider.bounds.size / 1.5f, Quaternion.identity, layerMask).Any() && disctancePosition > 0.1f)
+        else if(!Physics.OverlapBox(_camera.transform.position, _camCollider.bounds.size / 1.5f, Quaternion.identity, _layerMask).Any() && disctancePosition > 0.1f)
         {
-            currentDistanceFromTarget = Vector3.Distance(positionTransform.position + Vector3.Scale(camCollider.bounds.size / 2, cam.transform.forward), targetToFollow.transform.position);
-            positionTransform.position = Vector3.Lerp(positionTransform.position - currentDistanceFromTarget * cam.transform.forward, positionTransform.position, 0.9f);
+            _currentDistanceFromTarget = Vector3.Distance(_positionTransform.position + Vector3.Scale(_camCollider.bounds.size / 2, _camera.transform.forward), _targetToFollow.transform.position);
+            _positionTransform.position = Vector3.Lerp(_positionTransform.position - _currentDistanceFromTarget * _camera.transform.forward, _positionTransform.position, 0.9f);
         }
     }
 }
