@@ -321,7 +321,7 @@ public class TerrainGenerator : MonoBehaviour
                 curve.Add(randomPos);
                 foreach (Vector2 point in curve)
                 {
-                    List<int[]> connectionPoints = Bresenham_Algorithm.Bresenham.runLine((int)lastPoint.x, (int)lastPoint.y, (int)point.x, (int)point.y);
+                    List<int[]> connectionPoints = Bresenham_Algorithm.Bresenham.RunLine((int)lastPoint.x, (int)lastPoint.y, (int)point.x, (int)point.y);
 
                     foreach (int[] connectionPoint in connectionPoints)
                     {
