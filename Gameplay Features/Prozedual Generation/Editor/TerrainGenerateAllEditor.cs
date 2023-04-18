@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+/// <summary>
+/// The editor for <see cref="TerrainGenerateAll"/>, which adds buttons for the generation.
+/// </summary>
 [CustomEditor(typeof(TerrainGenerateAll))]
 public class TerrainGenerateAllEditor : Editor
 {

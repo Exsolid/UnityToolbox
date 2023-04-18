@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+/// <summary>
+/// Defines serializable vector data.
+/// </summary>
 [Serializable]
 public class VectorData : GameData
 {

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+/// <summary>
+/// Defines information on how an object is placed.
+/// </summary>
 [Serializable]
 public class TerrainDecorationInformation : ICloneable
 {

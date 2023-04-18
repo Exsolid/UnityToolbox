@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+/// <summary>
+/// As all data of the <see cref="PrefabManager"/> is changed within OnValidate, the objects need to be SetDirty on changes. This happens here.
+/// </summary>
 [CustomEditor(typeof(PrefabManager))]
 public class PrefabSerializer : Editor
 {

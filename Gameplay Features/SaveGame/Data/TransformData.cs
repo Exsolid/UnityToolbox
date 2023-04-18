@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+/// <summary>
+/// Defines all transform data, that can be serialized.
+/// </summary>
 [Serializable]
 public class TransformData: GameData
 {

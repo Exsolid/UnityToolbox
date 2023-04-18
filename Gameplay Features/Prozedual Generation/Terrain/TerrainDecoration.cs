@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+/// <summary>
+/// A script which places decoration on a generated terrain.
+/// </summary>
 public class TerrainDecoration : MonoBehaviour
 {
     [SerializeField] [Range(0.1f, 1)] private float _pctForNone;
@@ -17,6 +20,9 @@ public class TerrainDecoration : MonoBehaviour
 
     private List<TerrainDecorationInformation> _weightedObjects;
 
+    /// <summary>
+    /// Deletes all spawned objects.
+    /// </summary>
     public void DeleteObjects()
     {
         foreach (GameObject obj in _spawnedObjects)
@@ -26,6 +32,9 @@ public class TerrainDecoration : MonoBehaviour
         _spawnedObjects = new List<GameObject>();
     }
 
+    /// <summary>
+    /// Places all defined objects.
+    /// </summary>
     public void PlaceObjects()
     {
         _weightedObjects = new List<TerrainDecorationInformation>();

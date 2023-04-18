@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Defines an achor object which can serve a specific purpose. (Spawnpoint, Merchant, ...)
+/// </summary>
 public class TerrainDecorationAnchorObject : MonoBehaviour
 {
     private void OnValidate()

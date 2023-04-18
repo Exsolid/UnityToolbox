@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+/// <summary>
+/// Defines how the terrain should look by height within a range.
+/// </summary>
 [Serializable]
 public class HeightColorTypes
 {

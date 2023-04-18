@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+/// <summary>
+/// A tool which saves all possible prefabs for the <see cref="SaveGameManager"/>. Required if new objects should be loaded into the scene on start.
+/// </summary>
 public class PrefabManager : Module
 {
     [Header("Register new Prefab")]
@@ -16,6 +19,11 @@ public class PrefabManager : Module
     [HideInInspector] [SerializeField] private List<GameObject> _prefabs;
     [HideInInspector] [SerializeField] public List<GameObject> ToSerialize;
 
+    /// <summary>
+    /// Trys to find a prefab for the given <paramref name="ID"/>.
+    /// </summary>
+    /// <param name="ID">An ID referencing a prefab.</param>
+    /// <returns>A prefab.</returns>
     public GameObject GetPrefabForID(int ID)
     {
         return _prefabs.Where(prefab => prefab.GetComponent<Saveable>().PrefabID.Equals(ID)).FirstOrDefault();

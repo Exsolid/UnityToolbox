@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 using System.Linq;
 using System;
 
+/// <summary>
+/// A manager which can generate unique IDs. Works in editor and runtime.
+/// </summary>
 public class IDManager: Module
 {
     private static HashSet<string> _usedIds;
@@ -20,6 +23,10 @@ public class IDManager: Module
         };
     }
 
+    /// <summary>
+    /// Is called when the scene changes. See <see cref="IDInitializer"/>.
+    /// </summary>
+    /// <param name="newScene">The new scene.</param>
     public static void SceneChanged(Scene newScene)
     {
         _currentSceneName = newScene.name;
@@ -39,6 +46,10 @@ public class IDManager: Module
         }
     }
 
+    /// <summary>
+    /// Generates a new unique ID.
+    /// </summary>
+    /// <returns>A unique ID.</returns>
     public static string GetUniqueID()
     {
         if (_usedIds == null)
@@ -70,6 +81,10 @@ public class IDManager: Module
         return newID;
     }
 
+    /// <summary>
+    /// Removes an ID from the existing.
+    /// </summary>
+    /// <param name="ID">An existing ID.</param>
     public static void RemoveID(string ID)
     {
         if (_usedIds == null)
@@ -79,6 +94,11 @@ public class IDManager: Module
         _usedIds.Remove(ID);
     }
 
+    /// <summary>
+    /// Registeres a given ID. Throws an error if the ID is already known.
+    /// </summary>
+    /// <param name="ID">The ID to register.</param>
+    /// <exception cref="Exception"></exception>
     public static void RegisterID(string ID)
     {
         if (!_usedIds.Add(ID))
@@ -87,6 +107,11 @@ public class IDManager: Module
         }
     }
 
+    /// <summary>
+    /// Extracts the scene name of the ID.
+    /// </summary>
+    /// <param name="ID">The ID to read its scene from.</param>
+    /// <returns>A scene name.</returns>
     public static string GetSceneNameOfID(string ID)
     {
         string[] split = ID.Split(_separator);

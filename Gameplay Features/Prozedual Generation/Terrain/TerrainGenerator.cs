@@ -4,6 +4,9 @@ using UnityEngine;
 using System;
 using System.Linq;
 
+/// <summary>
+/// The main componant of the terrain generation. It can generate one mesh, with defined settings using <see cref="CellularAutomata"/>.
+/// </summary>
 [RequireComponent(typeof(MeshRenderer))]
 [RequireComponent(typeof(MeshFilter))]
 [RequireComponent(typeof(MeshCollider))]
@@ -43,6 +46,9 @@ public class TerrainGenerator : MonoBehaviour
 
     private Texture2DArray texture2DArray; //Reference needed so garbage collection doesnt destroy shader texture
 
+    /// <summary>
+    /// Starts the generation with cellular automata.
+    /// </summary>
     public void GenerateViaCellularAutomata()
     {
         _heightDefinitions = _heightDefinitions.OrderBy(x => x.HeightStart).ToList();
@@ -53,6 +59,9 @@ public class TerrainGenerator : MonoBehaviour
         UpdateMaterial();
     }
 
+    /// <summary>
+    /// Starts the generation with anchor points. These are carved out in the terrain.
+    /// </summary>
     public void GenerateWithAnchorPoints()
     {
         _toPlacePositions = new List<PlacementInformation>();

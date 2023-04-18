@@ -5,13 +5,24 @@ using System.Linq;
 using UnityEngine.SceneManagement;
 using System;
 
+/// <summary>
+/// The base implementation for all gameobjects that should be saved.
+/// It is able to serialize the transform and parent data with the <see cref="SaveGameManager"/>.
+/// Requires a <see cref="PrefabManager"/> and a<see cref="IDManager"/>, if the objects are not initially found in the scene.
+/// </summary>
 [DisallowMultipleComponent]
 public abstract class Saveable : MonoBehaviour
 {
     [SerializeField] [ReadOnly] private string _id = "";
+    /// <summary>
+    /// A unique ID.
+    /// </summary>
     public string ID { get { return _id; } set { IDManager.RegisterID(value); IDManager.RemoveID(_id); _id = value;} }
 
     [SerializeField] [ReadOnly] private bool _inEditor;
+    /// <summary>
+    /// Whether the gameobject is found in the scene initally. Or created dynamically.
+    /// </summary>
     public bool InEditor { get { return _inEditor; } }
 
     [SerializeField] protected bool _removeFromSaveOnDelete;
@@ -27,6 +38,9 @@ public abstract class Saveable : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Defines all data to be serialized by the <see cref="SaveGameManager"/>.
+    /// </summary>
     public void Save()
     {
         if (!InEditor)
@@ -58,6 +72,9 @@ public abstract class Saveable : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Loads all data, deserialized by the <see cref="SaveGameManager"/>.
+    /// </summary>
     public void Load()
     {
         List<GameData> data = ModuleManager.GetModule<SaveGameManager>().GetGameDataForID(ID);
@@ -83,8 +100,20 @@ public abstract class Saveable : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Is called after the base data is loaded in <see cref="Load"/>. Allows additional data to be deserialized.
+    /// </summary>
+    /// <param name="data">A <see cref="GameData"/> implementation, which holds data to load.</param>
     protected abstract void LoadData(GameData data);
+    /// <summary>
+    /// Is called on <see cref="Save"/>. Allows the definition of all additional <see cref="GameData"/> to be serialized.
+    /// </summary>
+    /// <returns></returns>
     protected abstract List<GameData> SaveData();
+    /// <summary>
+    /// A method called on deletion, that is that the object is removed from the save game and destroyed.
+    /// It is not called when destroyed but saved.
+    /// </summary>
     protected abstract void OnObjectDeleted();
 
     public void OnValidate()

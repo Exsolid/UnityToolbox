@@ -8,6 +8,10 @@ using System.Security.Cryptography;
 using UnityEngine.SceneManagement;
 using Newtonsoft.Json;
 
+/// <summary>
+/// A manager, which is takes care of the (de)serialisation of <see cref="GameObject"/>s and <see cref="CompletionData"/>.
+/// Requires a <see cref="PrefabManager"/> and <see cref="IDManager"/> for objects that are not present initially.
+/// </summary>
 public class SaveGameManager : Module
 {
     [SerializeField] private string _pathToUse;
@@ -104,6 +108,11 @@ public class SaveGameManager : Module
         };
     }
 
+    /// <summary>
+    /// Trys to find completion infos with an ID. Similar to gamestates but not necessarily linear.
+    /// </summary>
+    /// <param name="ID">The ID of the completion info.</param>
+    /// <returns>Whether the the completion info is set or not.</returns>
     public bool GetCompletionInfo(string ID)
     {
         if (_completionInfo.IDToCompletion.ContainsKey(ID))
@@ -113,6 +122,11 @@ public class SaveGameManager : Module
         else return false;
     }
 
+    /// <summary>
+    /// Sets completion info.
+    /// </summary>
+    /// <param name="ID">The ID of the completion.</param>
+    /// <param name="isCompleted">Whether the completion mark is actually completed.</param>
     public void SetCompletionInfo(string ID, bool isCompleted)
     {
         if (_completionInfo.IDToCompletion.ContainsKey(ID) && _completionInfo.IDToCompletion[ID] != isCompleted)
@@ -127,6 +141,11 @@ public class SaveGameManager : Module
         }
     }
 
+    /// <summary>
+    /// Trys to find <see cref="GameData"/> for an ID.
+    /// </summary>
+    /// <param name="ID">The ID of the <see cref="Saveable"/>.</param>
+    /// <returns></returns>
     public List<GameData> GetGameDataForID(string ID)
     {
         List<GameData> data = new List<GameData>();
@@ -134,6 +153,12 @@ public class SaveGameManager : Module
         return data;
     }
 
+    /// <summary>
+    /// Sets data to be seralized.
+    /// </summary>
+    /// <param name="data">The implementation of <see cref="GameData"/>, which stores the serializable data.</param>
+    /// <param name="ID">The ID of the <see cref="Saveable"/>, which this data belongs to.</param>
+    /// <param name="writeImmediate">Should the data be serialized immediately? Serializes ALL data.</param>
     public void SetDataToSave(GameData data, string ID, bool writeImmediate)
     {
         if (data.GetType().Equals(typeof(ResourceData)))
@@ -162,13 +187,17 @@ public class SaveGameManager : Module
         if (writeImmediate) WriteData();
     }
 
+    /// <summary>
+    /// Removes an object from the serialisation data.
+    /// </summary>
+    /// <param name="ID">The ID of the <see cref="Saveable"/> to be removed.</param>
     public void RemoveDataFromSave(string ID)
     {
         _data.Remove(ID);
         _spawnData.Remove(ID);
     }
 
-    public void LoadAllIntoScene()
+    private void LoadAllIntoScene()
     {
         SpawnSaved();
         LoadSaved();
@@ -217,6 +246,9 @@ public class SaveGameManager : Module
         }
     }
 
+    /// <summary>
+    /// Resets all save game data and permanetly removes every data to be serialized.
+    /// </summary>
     public void ResetAll()
     {
         List<Saveable> allSaveable = FindObjectsOfType<Saveable>().ToList();

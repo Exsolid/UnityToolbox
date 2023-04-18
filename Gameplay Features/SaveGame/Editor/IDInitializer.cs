@@ -2,6 +2,9 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
+/// <summary>
+/// Initializes the <see cref="IDManager"/> for scene changes in the editor.
+/// </summary>
 [InitializeOnLoad]
 public class IDInitializer: MonoBehaviour
 {

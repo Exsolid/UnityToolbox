@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+/// <summary>
+/// Defines all data for the completion states of the game.
+/// </summary>
 [Serializable]
 public class CompletionData : GameData
 {
