@@ -19,3 +19,5 @@ A few scripts underlay a naming convetion. These are:
 - ...Control.cs for any input related scripts, that execute on a pressed key.
 
 The documentation excludes private members and EditorWindow implementations.
+
+Dokumentation link: https://exsolid.github.io/UnityToolbox/

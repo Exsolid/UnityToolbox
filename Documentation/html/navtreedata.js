@@ -24,7 +24,7 @@
 */
 var NAVTREE =
 [
-  [ "UnityToolbox Documentation", "index.html", ]
+  [ "UnityToolbox", "index.html", ]
 ];
 
 var NAVTREEINDEX =
