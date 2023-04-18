@@ -17,3 +17,5 @@ A few scripts underlay a naming convetion. These are:
 - ...Interaction.cs for player triggered interactions with GameObjects.
 - ...Button.cs for any UI related buttons.
 - ...Control.cs for any input related scripts, that execute on a pressed key.
+
+The documentation excludes private members and EditorWindow implementations.
