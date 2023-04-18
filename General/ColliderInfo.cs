@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+/// <summary>
+/// A helping script which saves all current colliders, colliding with the current object.
+/// </summary>
 [RequireComponent(typeof(Rigidbody))]
 public class ColliderInfo : MonoBehaviour
 {
@@ -62,6 +65,11 @@ public class ColliderInfo : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Filters all current collisions with a layerMask.
+    /// </summary>
+    /// <param name="layerMask">The layer mask of the wanted collisions.</param>
+    /// <returns>A list of current colliders.</returns>
     public List<Collider> GetAllCollisions(LayerMask layerMask)
     {
         List<Collider> result = new List<Collider>();
@@ -69,6 +77,10 @@ public class ColliderInfo : MonoBehaviour
         return result;
     }
 
+    /// <summary>
+    /// Returns all current colliders.
+    /// </summary>
+    /// <returns>A list of current colliders.</returns>
     public List<Collider> GetAllCollisions()
     {
         return _colliders == null ? new List<Collider>() : _colliders.ToList();

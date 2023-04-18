@@ -4,8 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
+/// <summary>
+/// Sets up the master scene to load initially while the game is running in editor.
+/// </summary>
 [InitializeOnLoad]
-public class MasterSceneLoaderForEditor: MonoBehaviour
+public class MasterSceneLoaderForEditor
 {
     static MasterSceneLoaderForEditor()
     {

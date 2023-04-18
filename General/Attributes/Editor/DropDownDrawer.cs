@@ -6,6 +6,9 @@ using System.Reflection;
 using System.Linq;
 using System;
 
+/// <summary>
+/// Defines a [DropDown(..)] attribute, which creates a drop down menu to select from. See <see cref="DropDownAttribute"/> for the usage.
+/// </summary>
 [CustomPropertyDrawer(typeof(DropDownAttribute))]
 public class DropDownDrawer : PropertyDrawer
 {

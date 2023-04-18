@@ -4,6 +4,10 @@ using UnityEngine;
 using System;
 using System.Globalization;
 using System.Reflection;
+
+/// <summary>
+/// A collection of keys that can be used across projects. A keyword should be defined, which is added to the default key. See <see cref="GetPrefereceKey"/>.
+/// </summary>
 public class PlayerPrefKeys : Module
 {
     [SerializeField] private string keyword;
@@ -25,6 +29,11 @@ public class PlayerPrefKeys : Module
         base.Awake();
     }
 
+    /// <summary>
+    /// Combines a given player pref key with the project keyword set.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns>The combined player pref key, that can be used for the <see cref="PlayerPrefs"/>.</returns>
     public string GetPrefereceKey(string id)
     {
         return keyword + "_" + this.GetType().GetField(id).GetValue(this);

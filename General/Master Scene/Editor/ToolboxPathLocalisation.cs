@@ -3,8 +3,11 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using System.IO;
 
+/// <summary>
+/// Defines the current path of the UnityToolbox within the project within the <see cref="ProjectPrefs"/>.
+/// </summary>
 [InitializeOnLoad]
-public class ToolboxPathLocalizer : MonoBehaviour
+public class ToolboxPathLocalizer
 {
     static ToolboxPathLocalizer()
     {

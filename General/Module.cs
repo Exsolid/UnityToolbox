@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// The base of a module. Required if you want anything to be called from the <see cref="ModuleManager"/>.
+/// </summary>
 public class Module : MonoBehaviour
 {
     public virtual void Awake()
