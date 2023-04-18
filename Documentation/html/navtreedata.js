@@ -24,7 +24,7 @@
 */
 var NAVTREE =
 [
-  [ "UnityToolbox Documentation", "index.html", [
+  [ "UnityToolbox", "index.html", [
     [ "UnityToolbox", "md__r_e_a_d_m_e.html", null ],
     [ "Packages", "namespaces.html", [
       [ "Package List", "namespaces.html", "namespaces_dup" ]
