@@ -20,6 +20,7 @@ public class DialogGraphWindow : EditorWindow
     public static void Open()
     {
         DialogGraphWindow window = GetWindow<DialogGraphWindow>("Dialog Graph");
+        window.OnEnable();
     }
 
     private void AddGraphView()
@@ -31,8 +32,8 @@ public class DialogGraphWindow : EditorWindow
 
     public void UpdateData()
     {
-        _fullPath = Application.dataPath + ProjectPrefs.GetString(ProjectPrefKeys.DIALOGSAVEPATH);
-        if (File.Exists(_fullPath + FILENAME) || !Application.isEditor)
+        _fullPath = Application.dataPath + ProjectPrefs.GetString(ProjectPrefKeys.DIALOGSAVEPATH) + "/";
+        if (File.Exists(_fullPath + FILENAME) && ProjectPrefs.GetString(ProjectPrefKeys.DIALOGSAVEPATH) != null || !Application.isEditor)
         {
             TextAsset text = Resources.Load(ProjectPrefs.GetString(ProjectPrefKeys.DIALOGSAVEPATH).Split("Resources/").Last() + FILENAME.Replace(".txt", "")) as TextAsset;
             if (text == null)
