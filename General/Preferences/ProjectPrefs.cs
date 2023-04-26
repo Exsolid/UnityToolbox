@@ -43,6 +43,7 @@ public class ProjectPrefs
             allExisting.Add(key, value);
         }
 
+        PlayerPrefs.SetString(key, value);
         string toWrite = JsonConvert.SerializeObject(allExisting, _settings);
         File.WriteAllText(_projectSettingsPath, toWrite);
     }
@@ -55,6 +56,11 @@ public class ProjectPrefs
     /// <exception cref="ArgumentException"></exception>
     public static string GetString(string key)
     {
+        if (!Application.isEditor)
+        {
+            return PlayerPrefs.GetString(key);
+        }
+
         Dictionary<string, object> allExisting = new Dictionary<string, object>();
         if (File.Exists(_projectSettingsPath))
         {

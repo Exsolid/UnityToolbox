@@ -108,7 +108,7 @@ public class LocalisationManagerWindow : EditorWindow
 
     private void DisplaySettingsTab()
     {
-        GUILayout.Label("To update the " + nameof(Localizer) + " path. Please enter a valid path below.");
+        GUILayout.Label("To update the " + nameof(Localizer) + " path. Please enter a valid path below. \nIt is required that it containes \"Resources/\".");
         GUILayout.BeginHorizontal();
         Vector2 textDimensions = GUI.skin.label.CalcSize(new GUIContent(Application.dataPath));
         GUILayout.Label(Application.dataPath);
@@ -121,6 +121,10 @@ public class LocalisationManagerWindow : EditorWindow
             if (Localizer.Instance.IsInitialized)
             {
                 ProjectPrefs.SetString(ProjectPrefKeys.LOCALISATIONSAVEPATH, _assetPathInProject);
+            }
+            else
+            {
+                _status = "The given path was not valid, please check the console for more information.";
             }
         }
     }

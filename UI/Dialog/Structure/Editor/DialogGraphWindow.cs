@@ -12,7 +12,7 @@ using System.Linq;
 public class DialogGraphWindow : EditorWindow
 {
     private string _fullPath;
-    private const string FILENAME = "/DialogData.dat";
+    private const string FILENAME = "DialogData.txt";
     private JsonSerializerSettings _settings;
     private DialogGraphView _graphView;
 
@@ -20,14 +20,6 @@ public class DialogGraphWindow : EditorWindow
     public static void Open()
     {
         DialogGraphWindow window = GetWindow<DialogGraphWindow>("Dialog Graph");
-        if(ProjectPrefs.GetString(ProjectPrefKeys.DIALOGSAVEPATH) == null || !File.Exists(Application.dataPath + ProjectPrefs.GetString(ProjectPrefKeys.DIALOGSAVEPATH) + FILENAME))
-        {
-            DialogGraphPathSelectionWindow.Open(window);
-        }
-        else
-        {
-            window.UpdateData();
-        }
     }
 
     private void AddGraphView()
@@ -40,11 +32,15 @@ public class DialogGraphWindow : EditorWindow
     public void UpdateData()
     {
         _fullPath = Application.dataPath + ProjectPrefs.GetString(ProjectPrefKeys.DIALOGSAVEPATH);
-        if (File.Exists(_fullPath + FILENAME))
+        if (File.Exists(_fullPath + FILENAME) || !Application.isEditor)
         {
-            string data = File.ReadAllText(_fullPath + FILENAME);
-            List<DialogNodeData> nodes = JsonConvert.DeserializeObject<List<DialogNodeData>>(data, _settings);
-            List<int> ids = new List<int>();
+            TextAsset text = Resources.Load(ProjectPrefs.GetString(ProjectPrefKeys.DIALOGSAVEPATH).Split("Resources/").Last() + FILENAME.Replace(".txt", "")) as TextAsset;
+            if (text == null)
+            {
+                return;
+            }
+
+            List<DialogNodeData> nodes = JsonConvert.DeserializeObject<List<DialogNodeData>>(text.text, _settings);
 
             foreach (DialogNodeData node in nodes)
             {
@@ -90,12 +86,12 @@ public class DialogGraphWindow : EditorWindow
                 data.DialogIndentifier = dNode.DialogIndentifier;
                 data.CompletionToSet = dNode.CompletionToSet;
 
-                data.AvatarReference = AssetDatabase.AssetPathToGUID(AssetDatabase.GetAssetPath(dNode.Avatar));
+                data.AvatarReference = AssetDatabase.GetAssetPath(dNode.Avatar);
 
                 nodes.Add(data);
             }
             string localisationData = JsonConvert.SerializeObject(nodes, _settings);
-            File.WriteAllText(_fullPath + FILENAME, localisationData);
+            File.WriteAllText(_fullPath + "/" + FILENAME, localisationData);
         }
     }
 
@@ -114,6 +110,24 @@ public class DialogGraphWindow : EditorWindow
         AddGraphView();
         _settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
         _fullPath = Application.dataPath + ProjectPrefs.GetString(ProjectPrefKeys.DIALOGSAVEPATH);
+
+        if (ProjectPrefs.GetString(ProjectPrefKeys.DIALOGSAVEPATH) == null)
+        {
+            DialogGraphPathSelectionWindow.Open(this);
+        }
+        else
+        {
+            TextAsset text = Resources.Load(ProjectPrefs.GetString(ProjectPrefKeys.DIALOGSAVEPATH).Split("Resources/").Last() + FILENAME.Replace(".txt", "")) as TextAsset;
+            if (text != null)
+            {
+                UpdateData();
+            }
+            else
+            {
+                DialogGraphPathSelectionWindow.Open(this);
+            }
+        }
+
         AssemblyReloadEvents.afterAssemblyReload += OnAfterAssemblyReload;
     }
 

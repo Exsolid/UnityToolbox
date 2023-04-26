@@ -12,7 +12,11 @@ using System.Linq;
 public class MenuManager : Module, ISerializationCallbackReceiver
 {
     [SerializeField] private List<MenuList> _menuList;
-    [SerializeField] private List<string> _menuTypes;
+    [SerializeField] public List<string> _menuTypes;
+    public List<string> MenuTypes
+    {
+        get { return _menuTypes.ToList(); }
+    }
 
     /// <summary>
     /// All menu types defined by the manager.
@@ -240,6 +244,6 @@ public class MenuManager : Module, ISerializationCallbackReceiver
 [Serializable]
 public class MenuList
 {
-    [DropDown(nameof(MenuManager.MenuTypesForEditor), true)] public int MenuTypeID;
+    [DropDown(nameof(MenuManager.MenuTypes), true)] public int MenuTypeID;
     public List<Menu> Menus;
 }

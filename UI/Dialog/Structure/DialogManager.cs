@@ -13,7 +13,7 @@ using UnityEditor;
 public class DialogManager : Module
 {
     private string _fullPath;
-    private const string FILENAME = "/DialogData.dat";
+    public const string FILENAME = "DialogData.txt";
     private JsonSerializerSettings _settings;
 
     private Dictionary<DialogNodeData, List<DialogNodeData>> _dialogNodes;
@@ -26,22 +26,22 @@ public class DialogManager : Module
         base.Awake();
 
         _settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
-        _fullPath = Application.dataPath + ProjectPrefs.GetString(ProjectPrefKeys.DIALOGSAVEPATH);
+        _fullPath = ProjectPrefs.GetString(ProjectPrefKeys.DIALOGSAVEPATH);
         _dialogNodes = new Dictionary<DialogNodeData, List<DialogNodeData>>();
         _dialogStartNodes = new HashSet<DialogNodeData>();
 
-        if (File.Exists(_fullPath + FILENAME))
+        TextAsset text = Resources.Load(_fullPath.Split("Resources/").Last() + FILENAME.Replace(".txt", "")) as TextAsset;
+
+        if (text != null)
         {
-            string data = File.ReadAllText(_fullPath + FILENAME);
-            List<DialogNodeData> nodes = JsonConvert.DeserializeObject<List<DialogNodeData>>(data, _settings);
+            List<DialogNodeData> nodes = JsonConvert.DeserializeObject<List<DialogNodeData>>(text.text, _settings);
             List<int> ids = new List<int>();
 
             foreach (DialogNodeData node in nodes)
             {
                 _dialogNodes.Add(node, new List<DialogNodeData>());
 
-                string path = AssetDatabase.GUIDToAssetPath(node.AvatarReference);
-                node.Avatar = AssetDatabase.LoadAssetAtPath(path, typeof(Texture2D)) as Texture2D;
+                node.Avatar = Resources.Load(node.AvatarReference.Split("Resources/").Last()) as Texture2D;
                 
                 if (node.DialogIndentifier != null && !node.DialogIndentifier.Trim().Equals(""))
                 {

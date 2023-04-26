@@ -201,6 +201,7 @@ public class DialogNode : Node
             objectType = typeof(Texture2D),
             value = _avatar
         };
+        _avatarObjectField.RegisterValueChangedCallback(e => ValueChange(e));
 
         foldout.Insert(0, _avatarObjectField);
         container.Add(foldout);
@@ -364,6 +365,19 @@ public class DialogNode : Node
         }
 
         _optionNumberOfSelf.text = "Is Option: " + oldID;
+    }
+
+    private void ValueChange(ChangeEvent<UnityEngine.Object> e)
+    {
+        if(e.newValue != null)
+        {
+            string path = AssetDatabase.GetAssetPath(e.newValue);
+            if (!path.Contains("Resources/"))
+            {
+                _avatarObjectField.value = e.previousValue;
+                Debug.LogError("The dialog node avatar cannot be set to values external to the resource folder.");
+            }
+        }
     }
 
     private class ConnectionListener : IEdgeConnectorListener
