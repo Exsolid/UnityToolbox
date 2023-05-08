@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.SceneManagement;
 using System;
+using UnityEditor;
 
 /// <summary>
 /// The base implementation for all gameobjects that should be saved.
@@ -28,7 +29,10 @@ public abstract class Saveable : MonoBehaviour
     [SerializeField] protected bool _removeFromSaveOnDelete;
     //TODO should save bool to exclude
 
-    [SerializeField] [ReadOnly] public int PrefabID = -1;
+    /// <summary>
+    /// The date which is used to serialize a reference to the <see cref="Prefab"/>.
+    /// </summary>
+    [ReadOnly] public ResourceData PrefabData;
 
     private void Awake()
     {
@@ -58,9 +62,13 @@ public abstract class Saveable : MonoBehaviour
                     ModuleManager.GetModule<SaveGameManager>().SetDataToSave(parentData, ID, false);
                 }
             }
-            ResourceData objectData = new ResourceData();
-            objectData.PrefabID = PrefabID;
-            ModuleManager.GetModule<SaveGameManager>().SetDataToSave(objectData, ID, false);
+
+            if(PrefabData == null)
+            {
+                throw new Exception("The game object " + this.name + " cannot be saved, without a prefab set.");
+            }
+
+            ModuleManager.GetModule<SaveGameManager>().SetDataToSave(PrefabData, ID, false);
         }
 
         TransformData transformData = new TransformData(transform);

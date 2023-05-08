@@ -3,6 +3,7 @@ using UnityEditor;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 
 public class LocalisationManagerWindow : EditorWindow
 {
@@ -74,12 +75,12 @@ public class LocalisationManagerWindow : EditorWindow
     {
         GUILayout.BeginVertical();
 
+        DrawLineHorizontal();
+        GUILayout.Label(_status);
+        DrawLineHorizontal();
+
         if (Localizer.Instance.IsInitialized)
         {
-            DrawLineHorizontal();
-            GUILayout.Label(_status);
-            DrawLineHorizontal();
-
             _selectedTab = GUILayout.Toolbar(_selectedTab, new string[] { "IDs", "Languages", "Scopes", "Settings" });
             DrawLineHorizontal();
             switch (_selectedTab)
@@ -109,6 +110,7 @@ public class LocalisationManagerWindow : EditorWindow
     private void DisplaySettingsTab()
     {
         GUILayout.Label("To update the " + nameof(Localizer) + " path. Please enter a valid path below. \nIt is required that it containes \"Resources/\".");
+        DrawLineHorizontal();
         GUILayout.BeginHorizontal();
         Vector2 textDimensions = GUI.skin.label.CalcSize(new GUIContent(Application.dataPath));
         GUILayout.Label(Application.dataPath);
@@ -116,15 +118,27 @@ public class LocalisationManagerWindow : EditorWindow
         GUILayout.EndHorizontal();
         if (GUILayout.Button("Refresh"))
         {
-            Localizer.Instance.AssetPathInProject = _assetPathInProject;
-            Localizer.Instance.Initialize();
-            if (Localizer.Instance.IsInitialized)
+            if (!Directory.Exists(Application.dataPath + _assetPathInProject))
             {
-                ProjectPrefs.SetString(ProjectPrefKeys.LOCALISATIONSAVEPATH, _assetPathInProject);
+                UpdateStatus("The path \"" + _assetPathInProject + "\" could not be found!");
+            }
+            else if (!_assetPathInProject.Contains("Resources/"))
+            {
+                UpdateStatus("The path \"" + _assetPathInProject + "\" is not a \"Resources/\" directory.");
             }
             else
             {
-                _status = "The given path was not valid, please check the console for more information.";
+                Localizer.Instance.AssetPathInProject = _assetPathInProject;
+                Localizer.Instance.Initialize();
+                if (Localizer.Instance.IsInitialized)
+                {
+                    ProjectPrefs.SetString(ProjectPrefKeys.LOCALISATIONSAVEPATH, _assetPathInProject);
+                    UpdateStatus("Path updated.");
+                }
+                else
+                {
+                    UpdateStatus("The given path was not valid, please check the console for more information.");
+                }
             }
         }
     }
@@ -240,46 +254,53 @@ public class LocalisationManagerWindow : EditorWindow
 
         if (_foldoutAdd)
         {
-            GUILayout.BeginHorizontal();
-            GUILayout.Label("ID: ");
-            _IDName = GUILayout.TextField(_IDName, GUILayout.Width(200));
-            GUILayout.Label(LocalisationID.DEVIDER.ToString(), GUILayout.Width(10));
-            string[] scopes = Localizer.Instance.LocalisationScopes.Select(x => x.Name).ToArray();
-            _selectedScope = EditorGUILayout.Popup("", _selectedScope, scopes);
-            if (GUILayout.Button("+", GUILayout.Width(20)))
-            {
-                LocalisationID newID = new LocalisationID();
-                newID.Name = _IDName;
-                newID.Scope = Localizer.Instance.LocalisationScopes.ElementAt(_selectedScope);
-
-                if (Localizer.Instance.AddLocalisation(newID, _newLocalisations.ToDictionary(entry => entry.Key, entry => entry.Value)))
-                {
-                    Localizer.Instance.WriteData();
-                    UpdateStatus("Successfully added a new localisation.");
-                }
-                else
-                {
-                    UpdateStatus("Could not add the new localisation, does it already exist?");
-                }
-            }
-            GUILayout.EndHorizontal();
-
-            foreach (LocalisationLanguage language in Localizer.Instance.LocalisationLanguages)
+            if(Localizer.Instance.LocalisationLanguages.Count != 0)
             {
                 GUILayout.BeginHorizontal();
-                GUILayout.Label("Translate " + language.Name + ":");
-                if (_newLocalisations.ContainsKey(language))
+                GUILayout.Label("ID: ");
+                _IDName = GUILayout.TextField(_IDName, GUILayout.Width(200));
+                GUILayout.Label(LocalisationID.DEVIDER.ToString(), GUILayout.Width(10));
+                string[] scopes = Localizer.Instance.LocalisationScopes.Select(x => x.Name).ToArray();
+                _selectedScope = EditorGUILayout.Popup("", _selectedScope, scopes);
+                if (GUILayout.Button("+", GUILayout.Width(20)))
                 {
-                    _newLocalisations[language] = GUILayout.TextField(_newLocalisations[language], GUILayout.Width(447));
-                }
-                else
-                {
-                    _newLocalisations.Add(language, GUILayout.TextField("", GUILayout.Width(200)));
+                    LocalisationID newID = new LocalisationID();
+                    newID.Name = _IDName;
+                    newID.Scope = Localizer.Instance.LocalisationScopes.ElementAt(_selectedScope);
+
+                    if (Localizer.Instance.AddLocalisation(newID, _newLocalisations.ToDictionary(entry => entry.Key, entry => entry.Value)))
+                    {
+                        Localizer.Instance.WriteData();
+                        UpdateStatus("Successfully added a new localisation.");
+                    }
+                    else
+                    {
+                        UpdateStatus("Could not add the new localisation, does it already exist?");
+                    }
                 }
                 GUILayout.EndHorizontal();
+
+
+                foreach (LocalisationLanguage language in Localizer.Instance.LocalisationLanguages)
+                {
+                    GUILayout.BeginHorizontal();
+                    GUILayout.Label("Translate " + language.Name + ":");
+                    if (_newLocalisations.ContainsKey(language))
+                    {
+                        _newLocalisations[language] = GUILayout.TextField(_newLocalisations[language], GUILayout.Width(447));
+                    }
+                    else
+                    {
+                        _newLocalisations.Add(language, GUILayout.TextField("", GUILayout.Width(200)));
+                    }
+                    GUILayout.EndHorizontal();
+                }
+            }
+            else
+            {
+                GUILayout.Label("Add a language first, to be able to add new IDs.");
             }
         }
-
         DrawLineHorizontal();
 
         GUILayout.BeginHorizontal();
@@ -385,5 +406,10 @@ public class LocalisationManagerWindow : EditorWindow
     public void OnAfterAssemblyReload()
     {
         InitializeWindow();
+    }
+
+    private bool IsPathValid(string path)
+    {
+        return Directory.Exists(path) && path.Contains("Resources/");
     }
 }

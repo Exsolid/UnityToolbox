@@ -234,7 +234,7 @@ public class SaveGameManager : Module
 
             try
             {
-                GameObject obj = (GameObject)Instantiate(ModuleManager.GetModule<PrefabManager>().GetPrefabForID(data.Value.PrefabID));
+                GameObject obj = (GameObject) Instantiate(Resources.Load(data.Value.ResourcePath));
                 obj.GetComponent<Saveable>().ID = data.Key;
                 _spawnedIDs.Add(data.Key);
             }

@@ -10,4 +10,5 @@ public static class ProjectPrefKeys
     public readonly static string UNITYTOOLBOXPATH = "UnityToolboxPath";
     public readonly static string LOCALISATIONSAVEPATH = "LocalisationSavePath";
     public readonly static string DIALOGSAVEPATH = "DialogSavePath";
+    public readonly static string ITEMDATASAVEPATH = "ItemDataSavePath";
 }

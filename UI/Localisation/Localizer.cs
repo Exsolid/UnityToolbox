@@ -461,11 +461,6 @@ public class Localizer
     /// </summary>
     public void Initialize()
     {
-        if (_isInitialized)
-        {
-            return;
-        }
-
         _settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
         _localisationData = new Dictionary<LocalisationID, Dictionary<LocalisationLanguage, string>>();
 
@@ -479,12 +474,14 @@ public class Localizer
         if (!Directory.Exists(_assetPathInProject))
         {
             Debug.LogError("The path '" + _assetPathInProject + "' could not be found! The " + nameof(Localizer) + " cannot work without it.");
+            _isInitialized = false;
             return;
         }
 
         if (!_assetPathInProject.Contains("Resources/"))
         {
             Debug.LogError("The path '" + _assetPathInProject + "' is not a \"Resources/\" directory.");
+            _isInitialized = false;
             return;
         }
 
