@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
 /// <summary>
 /// A button which loads a given scene with a scene name.
@@ -10,7 +11,7 @@ using UnityEngine.SceneManagement;
 public class GotoSceneButton : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField] private AudioMixer _clickSounds;
-    [SerializeField] private string _sceneName;
+    [SerializeField] private SceneAsset _scene;
     private bool _isEnabled;
 
     public void Awake()
@@ -30,7 +31,7 @@ public class GotoSceneButton : MonoBehaviour, IPointerDownHandler
                 _clickSounds.PlayRandomSource();
             }
 
-            SceneManager.LoadScene(_sceneName);
+            SceneManager.LoadScene(_scene.name);
         }
     }
 }
