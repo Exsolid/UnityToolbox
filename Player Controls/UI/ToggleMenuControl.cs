@@ -12,13 +12,12 @@ public class ToggleMenuControl : MonoBehaviour
     [SerializeField] [DropDown(nameof(_menuTypes))] private int _menuType;
     private List<string> _menuTypes;
 
-    private PlayerInput _input;
+    [SerializeField] private PlayerInput _input;
 
     private bool _isBinding;
 
     private void Start()
     {
-        _input = GetComponent<PlayerInput>();
         ModuleManager.GetModule<UIEventManager>().OnBindingKey += (isSetting) => 
         {
             _isBinding = isSetting;

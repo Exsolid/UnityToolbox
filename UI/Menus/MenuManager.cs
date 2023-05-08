@@ -244,6 +244,6 @@ public class MenuManager : Module, ISerializationCallbackReceiver
 [Serializable]
 public class MenuList
 {
-    [DropDown(nameof(MenuManager.MenuTypes), true)] public int MenuTypeID;
+    [DropDown(nameof(MenuManager._menuTypes), true)] public int MenuTypeID;
     public List<Menu> Menus;
 }

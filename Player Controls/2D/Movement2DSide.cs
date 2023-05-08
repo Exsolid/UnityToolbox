@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 /// An implementation of <see cref="MovementBase"/> which works for a side scroller.
 /// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
-public class Movement2D : MovementBase
+public class Movement2DSide : MovementBase
 {
     [SerializeField] private Transform _groundedTransformTwo;
     public Transform GroundedTransformTwo
