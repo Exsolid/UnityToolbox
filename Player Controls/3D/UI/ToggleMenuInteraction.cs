@@ -15,4 +15,12 @@ public class ToggleMenuInteraction : RaycastInteraction
             ModuleManager.GetModule<MenuManager>().ToggleMenu(raycastHit.collider.GetComponent<ToggleMenuInteractionInfo>().MenuType, true);
         }
     }
+
+    public override void OnInteraction(RaycastHit2D raycastHit)
+    {
+        if (raycastHit.collider.GetComponent<ToggleMenuInteractionInfo>() != null)
+        {
+            ModuleManager.GetModule<MenuManager>().ToggleMenu(raycastHit.collider.GetComponent<ToggleMenuInteractionInfo>().MenuType, true);
+        }
+    }
 }

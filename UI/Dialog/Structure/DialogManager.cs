@@ -74,7 +74,7 @@ public class DialogManager : Module
         }
         else
         {
-            Debug.LogError("No dialog node found for" + nameof(dialogID) + ": " + dialogID);
+            Debug.LogError("No dialog node found for " + nameof(dialogID) + ": " + dialogID);
         }
     }
 
@@ -95,10 +95,6 @@ public class DialogManager : Module
             _currentNode = _dialogNodes[_currentNode][option];
             ModuleManager.GetModule<UIEventManager>().DialogNodeChanged(_currentNode);
         }
-        else
-        {
-            NextNode();
-        }
     }
 
     /// <summary>
@@ -107,10 +103,16 @@ public class DialogManager : Module
     /// </summary>
     public void NextNode()
     {
+        if(_currentNode.Options.Count > 0)
+        {
+            return;
+        }
+
         if (_currentNode != null && _currentNode.CompletionToSet != null && !_currentNode.CompletionToSet.Equals(""))
         {
             ModuleManager.GetModule<SaveGameManager>().SetCompletionInfo(_currentNode.CompletionToSet, true);
         }
+
         if (_currentNode != null && _dialogNodes[_currentNode].Any())
         {
             _currentNode = _dialogNodes[_currentNode][0];

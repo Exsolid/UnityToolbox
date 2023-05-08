@@ -32,7 +32,7 @@ public class DialogGraphWindow : EditorWindow
 
     public void UpdateData()
     {
-        _fullPath = Application.dataPath + ProjectPrefs.GetString(ProjectPrefKeys.DIALOGSAVEPATH) + "/";
+        _fullPath = Application.dataPath + "/" + ProjectPrefs.GetString(ProjectPrefKeys.DIALOGSAVEPATH) + "/";
         if (File.Exists(_fullPath + FILENAME) && ProjectPrefs.GetString(ProjectPrefKeys.DIALOGSAVEPATH) != null || !Application.isEditor)
         {
             TextAsset text = Resources.Load(ProjectPrefs.GetString(ProjectPrefKeys.DIALOGSAVEPATH).Split("Resources/").Last() + FILENAME.Replace(".txt", "")) as TextAsset;
@@ -93,6 +93,7 @@ public class DialogGraphWindow : EditorWindow
             }
             string localisationData = JsonConvert.SerializeObject(nodes, _settings);
             File.WriteAllText(_fullPath + "/" + FILENAME, localisationData);
+            AssetDatabase.Refresh();
         }
     }
 

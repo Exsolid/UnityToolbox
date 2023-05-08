@@ -9,9 +9,13 @@ using UnityEngine.UI;
 public class DisplayDialog : MonoBehaviour
 {
     [SerializeField] private Text _title;
+    [SerializeField] private Image _titleBackground;
     [SerializeField] private Text _description;
+    [SerializeField] private Image _descriptionBackground;
     [SerializeField] private Image _spriteToShow;
     [SerializeField] private List<Text> _options;
+    [SerializeField] private List<Image> _optionBackgrounds;
+    [SerializeField] private Image _nextDialogBackground;
 
     [SerializeField] [DropDown(nameof(MenuTypes))] private int _menuType;
     private List<string> MenuTypes;
@@ -30,32 +34,77 @@ public class DisplayDialog : MonoBehaviour
         if(_title != null)
         {
             _title.text = "";
+            _titleBackground.enabled = false;
         }
-        if(_description != null)
+
+        if (_titleBackground != null)
+        {
+            _titleBackground.enabled = false;
+        }
+
+        if (_description != null)
         {
             _description.text = "";
         }
+
+        if (_descriptionBackground != null)
+        {
+            _descriptionBackground.enabled = false;
+        }
+
         for (int i = 0; i < _options.Count; i++)
         {
             _options[i].text = "";
+
+            if (_optionBackgrounds[i] != null)
+            {
+                _optionBackgrounds[i].enabled = false;
+            }
+        }
+
+        if (_nextDialogBackground != null)
+        {
+            _nextDialogBackground.enabled = false;
+        }
+
+        if (_spriteToShow != null)
+        {
+            _spriteToShow.enabled = false;
         }
 
         if (currentNode != null)
         {
-            ModuleManager.GetModule<MenuManager>().ToggleMenu(_menuType, true);
+            if(ModuleManager.GetModule<MenuManager>().CurrentActiveMenuList == null)
+            {
+                ModuleManager.GetModule<MenuManager>().ToggleMenu(_menuType, true);
+            }
+
             if (_spriteToShow != null && currentNode.Avatar != null)
             {
                 _spriteToShow.enabled = true;
                 _spriteToShow.sprite = Sprite.Create(currentNode.Avatar, new Rect(0,0,currentNode.Avatar.width,currentNode.Avatar.height), new Vector2(0.5f, 0.5f));
             }
+
             if (_title != null)
             {
                 _title.text = currentNode.Title;
             }
+
+            if (_titleBackground != null)
+            {
+                _titleBackground.enabled = true;
+            }
+
             if (_description != null)
             {
                 _description.text = currentNode.Text;
             }
+
+            if (_descriptionBackground != null)
+            {
+                _descriptionBackground.enabled = true;
+            }
+
             if (currentNode.Options != null && currentNode.Options.Count > _options.Count)
             {
                 Debug.LogWarning("Not all options can be displayed! Missing sufficient textboxes.");
@@ -66,16 +115,21 @@ public class DisplayDialog : MonoBehaviour
                 if (currentNode.Options.Count > i)
                 {
                     _options[i].text = currentNode.Options[i];
-                }
-                else
-                {
-                    _options[i].text = "";
+                    _optionBackgrounds[i].enabled = true;
                 } 
+            }
+
+            if(_nextDialogBackground != null && currentNode.Options.Count == 0)
+            {
+                _nextDialogBackground.enabled = true;
             }
         }
         else
         {
-            ModuleManager.GetModule<MenuManager>().ToggleMenu(_menuType, false);
+            if (ModuleManager.GetModule<MenuManager>().CurrentActiveMenuList != null && ModuleManager.GetModule<MenuManager>().CurrentActiveMenuList.MenuTypeID == _menuType)
+            {
+                ModuleManager.GetModule<MenuManager>().ToggleMenu(_menuType, true);
+            }
         }
     }
 

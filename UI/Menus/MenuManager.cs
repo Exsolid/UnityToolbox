@@ -148,6 +148,7 @@ public class MenuManager : Module, ISerializationCallbackReceiver
                         _currentActivMenu.GetComponent<Canvas>().enabled = false;
                         _currentActivMenu.IsActive = false;
                         _currentActivMenu = null;
+                        _currentActivMenuList = null;
                     }
                     _inMenu = false;
                 }
@@ -202,6 +203,7 @@ public class MenuManager : Module, ISerializationCallbackReceiver
                         _currentActivMenu.GetComponent<Canvas>().enabled = false;
                         _currentActivMenu.IsActive = false;
                         _currentActivMenu = null;
+                        _currentActivMenuList = null;
                     }
                     _inMenu = false;
                 }

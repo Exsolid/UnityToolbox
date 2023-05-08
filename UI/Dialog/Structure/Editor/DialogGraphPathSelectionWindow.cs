@@ -43,12 +43,12 @@ public class DialogGraphPathSelectionWindow : EditorWindow
         GUILayout.Label(_status);
         GUILayout.BeginHorizontal();
         Vector2 textDimensions = GUI.skin.label.CalcSize(new GUIContent(Application.dataPath));
-        GUILayout.Label(Application.dataPath);
+        GUILayout.Label(Application.dataPath + "/");
         _assetPathInProject = GUILayout.TextField(_assetPathInProject, GUILayout.Width(585 - textDimensions.x));
         GUILayout.EndHorizontal();
         if (GUILayout.Button("Refresh"))
         {
-            if (Directory.Exists(Application.dataPath+_assetPathInProject) && _assetPathInProject.Contains("Resources/"))
+            if (Directory.Exists(Application.dataPath + "/" + _assetPathInProject) && _assetPathInProject.Contains("Resources/"))
             {
                 ProjectPrefs.SetString(ProjectPrefKeys.DIALOGSAVEPATH, _assetPathInProject);
                 _graph.UpdateData();

@@ -15,6 +15,17 @@ public class StartDialogInteraction : RaycastInteraction
 
     public override void OnInteraction(RaycastHit raycastHit)
     {
-        ModuleManager.GetModule<DialogManager>().StartDialog(_referenceID);
+        if(raycastHit.collider != null)
+        {
+            ModuleManager.GetModule<DialogManager>().StartDialog(_referenceID);
+        }
+    }
+
+    public override void OnInteraction(RaycastHit2D raycastHit)
+    {
+        if (raycastHit.collider != null)
+        {
+            ModuleManager.GetModule<DialogManager>().StartDialog(_referenceID);
+        }
     }
 }
