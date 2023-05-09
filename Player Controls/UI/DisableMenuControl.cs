@@ -10,8 +10,10 @@ using UnityEngine;
 public class DisableMenuControl : MonoBehaviour
 {
     [SerializeField] private string _actionName;
-    [SerializeField] [DropDown(nameof(MenuTypes))] private int _menuType;
-    private List<string> MenuTypes;
+    [SerializeField] [DropDown(nameof(_menuTypes))] private int _menuType;
+    [SerializeField] [DropDown(nameof(_menusOfType))] private int _menuOfType;
+    private List<string> _menuTypes;
+    private List<string> _menusOfType;
     private bool _mayDisable;
 
     private PlayerInput _input;
@@ -34,12 +36,13 @@ public class DisableMenuControl : MonoBehaviour
     {
         if (_input != null && _input.actions[_actionName].triggered && !_isBinding && _mayDisable)
         {
-            ModuleManager.GetModule<MenuManager>().ToggleMenu(_menuType, true);
+            ModuleManager.GetModule<MenuManager>().ToggleMenu(_menuType, _menuOfType);
         }
     }
 
     private void OnValidate()
     {
-        MenuTypes = MenuManager.MenuTypesForEditor;
+        _menuTypes = MenuManager.MenuTypeNamesForEditor;
+        _menusOfType = MenuManager.GetAllMenusOfType(_menuType);
     }
 }

@@ -18,16 +18,6 @@ public class Menu : MonoBehaviour
     }
 
     private bool _isActive;
-    [SerializeField] private bool _mayToggleWithControl;
-
-    /// <summary>
-    /// Defines whether the player is able to activate the menu by themselves. (e.g. Interaction)
-    /// </summary>
-    public bool MayUserToogle 
-    { 
-        get { return _mayToggleWithControl; } 
-        set { _mayToggleWithControl = value;}
-    }
 
     public event Action<bool> OnActiveChanged;
 

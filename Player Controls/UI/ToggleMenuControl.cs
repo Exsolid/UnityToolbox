@@ -10,7 +10,9 @@ public class ToggleMenuControl : MonoBehaviour
 {
     [SerializeField] private string _actionName;
     [SerializeField] [DropDown(nameof(_menuTypes))] private int _menuType;
+    [SerializeField] [DropDown(nameof(_menusOfType))] private int _menuOfType;
     private List<string> _menuTypes;
+    private List<string> _menusOfType;
 
     [SerializeField] private PlayerInput _input;
 
@@ -27,12 +29,13 @@ public class ToggleMenuControl : MonoBehaviour
     {
         if (_input != null && _input.actions[_actionName].triggered && !_isBinding)
         {
-            ModuleManager.GetModule<MenuManager>().ToggleMenu(_menuType, true);
+            ModuleManager.GetModule<MenuManager>().ToggleMenu(_menuType, _menuOfType);
         }
     }
 
     private void OnValidate()
     {
-        _menuTypes = MenuManager.MenuTypesForEditor;
+        _menuTypes = MenuManager.MenuTypeNamesForEditor;
+        _menusOfType = MenuManager.GetAllMenusOfType(_menuType);
     }
 }

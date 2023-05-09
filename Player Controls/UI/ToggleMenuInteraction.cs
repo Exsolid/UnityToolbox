@@ -12,7 +12,7 @@ public class ToggleMenuInteraction : RaycastInteraction
     {
         if (raycastHit.collider.GetComponent<ToggleMenuInteractionInfo>() != null)
         {
-            ModuleManager.GetModule<MenuManager>().ToggleMenu(raycastHit.collider.GetComponent<ToggleMenuInteractionInfo>().MenuType, true);
+            ModuleManager.GetModule<MenuManager>().ToggleMenu(raycastHit.collider.GetComponent<ToggleMenuInteractionInfo>().MenuType, raycastHit.collider.GetComponent<ToggleMenuInteractionInfo>().MenuOfType);
         }
     }
 
@@ -20,7 +20,7 @@ public class ToggleMenuInteraction : RaycastInteraction
     {
         if (raycastHit.collider.GetComponent<ToggleMenuInteractionInfo>() != null)
         {
-            ModuleManager.GetModule<MenuManager>().ToggleMenu(raycastHit.collider.GetComponent<ToggleMenuInteractionInfo>().MenuType, true);
+            ModuleManager.GetModule<MenuManager>().ToggleMenu(raycastHit.collider.GetComponent<ToggleMenuInteractionInfo>().MenuType, raycastHit.collider.GetComponent<ToggleMenuInteractionInfo>().MenuOfType);
         }
     }
 }

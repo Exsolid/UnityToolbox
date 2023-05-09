@@ -9,7 +9,9 @@ public class ToggleMenuButton : MonoBehaviour, IPointerClickHandler
     private bool _isEnabled;
     [SerializeField] private AudioMixer _clickSounds;
     [SerializeField] [DropDown(nameof(_menuTypes))] private int _menuType;
+    [SerializeField] [DropDown(nameof(_menusOfType))] private int _menuOfType;
     private List<string> _menuTypes;
+    private List<string> _menusOfType;
 
     public void Awake()
     {
@@ -32,11 +34,12 @@ public class ToggleMenuButton : MonoBehaviour, IPointerClickHandler
             _clickSounds.PlayRandomSource();
         }
 
-        ModuleManager.GetModule<MenuManager>().ToggleMenu(_menuType, true);
+        ModuleManager.GetModule<MenuManager>().ToggleMenu(_menuType, _menuOfType);
     }
 
     private void OnValidate()
     {
-        _menuTypes = MenuManager.MenuTypesForEditor;
+        _menuTypes = MenuManager.MenuTypeNamesForEditor;
+        _menusOfType = MenuManager.GetAllMenusOfType(_menuType);
     }
 }

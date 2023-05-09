@@ -11,31 +11,20 @@ using System.Linq;
 /// </summary>
 public class MenuManager : Module, ISerializationCallbackReceiver
 {
-    [SerializeField] private List<MenuList> _menuList;
-    [SerializeField] public List<string> _menuTypes;
-    public List<string> MenuTypes
-    {
-        get { return _menuTypes.ToList(); }
-    }
+    [SerializeField] private List<MenuType> _menuList;
+    [SerializeField] private List<string> _menuTypes;
+    public List<string> MenuTypes;
 
     /// <summary>
     /// All menu types defined by the manager.
     /// </summary>
-    public static List<string> MenuTypesForEditor = new List<string> 
-    {
-        "None",
-        "Pause",
-        "Inventory",
-        "Overlay",
-        "Dialog",
-        "GameOver"
-    };
+    public static List<MenuType> MenuTypesForEditor = new List<MenuType>();
+    public static List<string> MenuTypeNamesForEditor = new List<string>();
 
     [DropDown(nameof(_menuTypes))] public int OverlayType;
 
     [SerializeField] private bool _hideOverlayOnOtherMenus;
 
-    private bool _isPaused;
     private bool _isEnabled;
     public bool IsEnabled 
     { 
@@ -43,18 +32,14 @@ public class MenuManager : Module, ISerializationCallbackReceiver
     }
 
     private Menu _currentActivMenu;
-    private MenuList _overlayMenu;
-    private MenuList _currentActivMenuList;
-    public MenuList CurrentActiveMenuList 
+    private MenuType _overlayMenuType;
+    private MenuType _currentActivMenuType;
+    public MenuType CurrentActiveMenuType 
     { 
-        get { return _currentActivMenuList; } 
+        get { return _currentActivMenuType; } 
     }
 
-    private bool _inMenu;
-    public bool InMenu
-    {
-        get { return _inMenu; }
-    }
+    private const string NONETYPENAME = "None";
 
     // Start is called before the first frame update
     void Start()
@@ -64,153 +49,91 @@ public class MenuManager : Module, ISerializationCallbackReceiver
         {
             if (menuList.MenuTypeID.Equals(OverlayType))
             {
-                _overlayMenu = menuList;
-            } 
-            foreach (var menu in menuList.Menus)
+                _overlayMenuType = menuList;
+            }
+            foreach (Menu menu in menuList.Menus)
             {
                 menu.IsActive = false;
                 menu.enabled = false;
             }
         }
-        if (_overlayMenu != null && _overlayMenu.Menus != null)
-        {
-            _currentActivMenuList = _overlayMenu;
-            _currentActivMenu = _overlayMenu.Menus[0];
-            _currentActivMenu.GetComponent<Canvas>().enabled = true;
-            _currentActivMenu.IsActive = true;
-        }
+
+        SetActiveMenu(null);
     }
 
     /// <summary>
-    /// Sets the active menu with a given <see cref="Menu". Disables the current if there is one and ignores the hierarchy.
+    /// Sets the active menu with a given <see cref="Menu". Disables the current if there is one.
+    /// Null will disable any active menu and enable the overlay if there is one set.
     /// </summary>
     /// <param name="menu"></param>
     public void SetActiveMenu(Menu menu)
     {
-        _currentActivMenu.GetComponent<Canvas>().enabled = false;
-        _currentActivMenu.IsActive = false;
+        if(menu == null)
+        {
+            menu = _overlayMenuType.Menus.FirstOrDefault();
+            _currentActivMenuType = _overlayMenuType;
+        }
+
+        if(_currentActivMenu != null)
+        {
+            _currentActivMenu.GetComponent<Canvas>().enabled = false;
+            _currentActivMenu.IsActive = false;
+        }
+
         _currentActivMenu = menu;
-        _currentActivMenu.GetComponent<Canvas>().enabled = true;
-        _currentActivMenu.IsActive = true;
-        _currentActivMenu.transform.SetAsLastSibling();
+
+        if (_currentActivMenu != null)
+        {
+            _currentActivMenu.GetComponent<Canvas>().enabled = true;
+            _currentActivMenu.IsActive = true;
+            _currentActivMenu.transform.SetAsLastSibling();
+        }
+        
     }
 
     /// <summary>
-    /// Toogles a menu by the given ID which references to a type. See <see cref="MenuManager.MenuTypesForEditor"/>.
+    /// Toggles a menu by the given ID which references to a type. See <see cref="MenuManager.MenuTypesForEditor"/>.
+    /// A menu can only be activated if there is no current already active.
     /// </summary>
     /// <param name="type">The ID which references to a type.</param>
-    /// <param name="userInteraction">Whether the call came form a player interaction.</param>
-    public void ToggleMenu(int type, bool userInteraction)
+    public void ToggleMenu(int type, int menuIndex)
     {
-        if (_currentActivMenu != null && (_currentActivMenu.MayUserToogle ^ userInteraction) || !_isEnabled) return;
-        if (_currentActivMenuList != null && type.Equals(_currentActivMenuList.MenuTypeID) && _isPaused || !_isPaused || (_currentActivMenuList != null && OverlayType != 0 && OverlayType.Equals(_currentActivMenuList.MenuTypeID)))
+        MenuType menuTypeToCall = _menuList[type];
+        if(menuTypeToCall == null || !_currentActivMenuType.MenuTypeID.Equals(0) && !menuTypeToCall.Equals(_currentActivMenuType))
         {
-            _isPaused = !_isPaused;
-            if (_isPaused)
-            {
-                var foundMenuByType = _menuList.Where(list => list.MenuTypeID.Equals(type));
-                if (foundMenuByType.Any())
-                {
-                    MenuList menuList = foundMenuByType.First();
-
-                    if (_overlayMenu != null && _overlayMenu.Menus != null)
-                    {
-                        if (_hideOverlayOnOtherMenus)
-                        {
-                            _currentActivMenu.GetComponent<Canvas>().enabled = false;
-                        }
-                        _currentActivMenu.gameObject.GetComponent<Menu>().IsActive = false;
-                    }
-                    _currentActivMenu = menuList.Menus[0];
-                    _currentActivMenu.GetComponent<Canvas>().enabled = true;
-                    _currentActivMenu.IsActive = true;
-                    _currentActivMenuList = menuList;
-                    _currentActivMenu.transform.SetAsLastSibling();
-                    _inMenu = true;
-                }
-            }
-            else
-            {
-                if(_currentActivMenu != null)
-                {
-                    if (_overlayMenu != null && _overlayMenu.Menus != null)
-                    {
-                        _currentActivMenu.GetComponent<Canvas>().enabled = false;
-                        _currentActivMenu.IsActive = false;
-                        _currentActivMenu = _overlayMenu.Menus[0];
-                        _currentActivMenu.GetComponent<Canvas>().enabled = true;
-                        _currentActivMenu.IsActive = true;
-                        _currentActivMenuList = _overlayMenu;
-                        _currentActivMenu.transform.SetAsLastSibling();
-                    }
-                    else
-                    {
-                        _currentActivMenu.GetComponent<Canvas>().enabled = false;
-                        _currentActivMenu.IsActive = false;
-                        _currentActivMenu = null;
-                        _currentActivMenuList = null;
-                    }
-                    _inMenu = false;
-                }
-            }
-            ModuleManager.GetModule<UIEventManager>().TogglePaused(_isPaused, type);
+            return;
         }
+
+        Menu menuToCall = menuTypeToCall.Menus[menuIndex];
+        if(menuToCall == null)
+        {
+            return;
+        }
+
+        if (!menuToCall.Equals(_currentActivMenu))
+        {
+            SetActiveMenu(menuToCall);
+            _currentActivMenuType = menuTypeToCall;
+        }
+        else
+        {
+            SetActiveMenu(null);
+        }
+
+        ModuleManager.GetModule<UIEventManager>().TogglePaused(_currentActivMenuType == _overlayMenuType, type);
     }
-    /// <summary>
-    /// Toogles a menu. Disables the current if there is one.
-    /// </summary>
-    /// <param name="menu"></param>
-    /// <param name="userInteraction">Whether the call came form a player interaction.</param>
-    public void ToggleMenu(Menu menu, bool userInteraction)
-    {
-        if (_currentActivMenu != null && (_currentActivMenu.MayUserToogle ^ userInteraction) || !_isEnabled) return;
-        if (menu.Equals(_currentActivMenu) && _isPaused || !_isPaused || (OverlayType != 0 && _overlayMenu != null && _overlayMenu.Equals(_currentActivMenu)))
-        {
-            _isPaused = !_isPaused;
-            if (_isPaused)
-            {
-                if (_overlayMenu != null && _overlayMenu.Menus != null)
-                {
-                    if (_hideOverlayOnOtherMenus)
-                    {
-                        _currentActivMenu.GetComponent<Canvas>().enabled = false;
-                    }
-                    _currentActivMenu.gameObject.GetComponent<Menu>().IsActive = false;
-                }
-                _currentActivMenu = menu;
-                _currentActivMenu.GetComponent<Canvas>().enabled = true;
-                _currentActivMenu.IsActive = true;
-                _currentActivMenuList = new MenuList();
-                _currentActivMenu.transform.SetAsLastSibling();
-                _inMenu = true;
-            }
-            else
-            {
-                if (_currentActivMenu != null)
-                {
-                    if (_overlayMenu != null && _overlayMenu.Menus != null)
-                    {
-                        _currentActivMenu.GetComponent<Canvas>().enabled = false;
-                        _currentActivMenu.IsActive = false;
-                        _currentActivMenu = _overlayMenu.Menus[0];
-                        _currentActivMenu.GetComponent<Canvas>().enabled = true;
-                        _currentActivMenu.IsActive = true;
-                        _currentActivMenuList = _overlayMenu;
-                        _currentActivMenu.transform.SetAsLastSibling();
-                    }
-                    else
-                    {
-                        _currentActivMenu.GetComponent<Canvas>().enabled = false;
-                        _currentActivMenu.IsActive = false;
-                        _currentActivMenu = null;
-                        _currentActivMenuList = null;
-                    }
-                    _inMenu = false;
-                }
-            }
 
-            ModuleManager.GetModule<UIEventManager>().TogglePaused(_isPaused, -1);
+    public static List<string> GetAllMenusOfType(int type)
+    {
+        List<string> result = new List<string>();
+        MenuType menuType = MenuTypesForEditor.Where(menuType => menuType.MenuTypeID.Equals(type)).FirstOrDefault();
+        
+        if(menuType != null)
+        {
+            result = menuType.Menus.Select(menu => menu.gameObject.name).ToList();
         }
+
+        return result;
     }
 
     /// <summary>
@@ -234,18 +157,56 @@ public class MenuManager : Module, ISerializationCallbackReceiver
 
     public void OnBeforeSerialize()
     {
-        _menuTypes = MenuTypesForEditor;
+        _menuList = MenuTypesForEditor;
+        _menuTypes = MenuTypeNamesForEditor;
+
     }
 
     public void OnAfterDeserialize()
     {
-        MenuTypesForEditor = _menuTypes;
+        MenuTypesForEditor = _menuList;
+        MenuTypeNamesForEditor = _menuTypes;
+    }
+
+    private void OnValidate()
+    {
+        if (!_menuTypes.Contains(NONETYPENAME))
+        {
+            _menuTypes.Insert(0, NONETYPENAME);
+        }
+
+        if (!_menuTypes[0].Equals(NONETYPENAME))
+        {
+            _menuTypes.Remove(NONETYPENAME);
+            _menuTypes.Insert(0, NONETYPENAME);
+        }
+
+        if (!_menuList.Where(menuType => menuType.MenuTypeID.Equals(0)).Any())
+        {
+            _menuList.Insert(0, new MenuType()
+            {
+                MenuTypeID = 0,
+                Menus = new List<Menu>()
+            });
+        }
+
+        if(_menuList[0].MenuTypeID != 0)
+        {
+            MenuType noneType = _menuList.Where(menuType => menuType.MenuTypeID.Equals(0)).FirstOrDefault();
+            _menuList.Remove(noneType);
+            _menuList.Insert(0, noneType);
+        }
+
+        if(_menuList[0].Menus.Count != 0)
+        {
+            _menuList[0].Menus = new List<Menu>();
+        }
     }
 }
 
 [Serializable]
-public class MenuList
+public class MenuType
 {
-    [DropDown(nameof(MenuManager._menuTypes), true)] public int MenuTypeID;
+    [DropDown(nameof(MenuManager.MenuTypeNamesForEditor), true)] public int MenuTypeID;
     public List<Menu> Menus;
 }

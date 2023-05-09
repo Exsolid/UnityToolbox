@@ -66,6 +66,11 @@ public class DialogManager : Module
     /// <param name="dialogID"> The ID which is set at a root node within the dialog graph.</param>
     public void StartDialog(string dialogID)
     {
+        if(_currentNode != null)
+        {
+            return;
+        }
+
         IEnumerable<DialogNodeData> sequence = _dialogStartNodes.Where(node => node.DialogIndentifier.Equals(dialogID));
         if (sequence.Any())
         {

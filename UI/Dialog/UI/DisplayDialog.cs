@@ -17,8 +17,10 @@ public class DisplayDialog : MonoBehaviour
     [SerializeField] private List<Image> _optionBackgrounds;
     [SerializeField] private Image _nextDialogBackground;
 
-    [SerializeField] [DropDown(nameof(MenuTypes))] private int _menuType;
-    private List<string> MenuTypes;
+    [SerializeField] [DropDown(nameof(_menuTypes))] private int _menuType;
+    [SerializeField] [DropDown(nameof(_menusOfType))] private int _menuOfType;
+    private List<string> _menuTypes;
+    private List<string> _menusOfType;
     // Start is called before the first frame update
     void Awake()
     {
@@ -74,9 +76,9 @@ public class DisplayDialog : MonoBehaviour
 
         if (currentNode != null)
         {
-            if(ModuleManager.GetModule<MenuManager>().CurrentActiveMenuList == null)
+            if(ModuleManager.GetModule<MenuManager>().CurrentActiveMenuType.MenuTypeID != _menuType)
             {
-                ModuleManager.GetModule<MenuManager>().ToggleMenu(_menuType, true);
+                ModuleManager.GetModule<MenuManager>().ToggleMenu(_menuType, _menuOfType);
             }
 
             if (_spriteToShow != null && currentNode.Avatar != null)
@@ -126,9 +128,9 @@ public class DisplayDialog : MonoBehaviour
         }
         else
         {
-            if (ModuleManager.GetModule<MenuManager>().CurrentActiveMenuList != null && ModuleManager.GetModule<MenuManager>().CurrentActiveMenuList.MenuTypeID == _menuType)
+            if (ModuleManager.GetModule<MenuManager>().CurrentActiveMenuType.MenuTypeID == _menuType)
             {
-                ModuleManager.GetModule<MenuManager>().ToggleMenu(_menuType, true);
+                ModuleManager.GetModule<MenuManager>().ToggleMenu(_menuType, _menuOfType);
             }
         }
     }
@@ -143,6 +145,7 @@ public class DisplayDialog : MonoBehaviour
 
     private void OnValidate()
     {
-        MenuTypes = MenuManager.MenuTypesForEditor;
+        _menuTypes = MenuManager.MenuTypeNamesForEditor;
+        _menusOfType = MenuManager.GetAllMenusOfType(_menuType);
     }
 }

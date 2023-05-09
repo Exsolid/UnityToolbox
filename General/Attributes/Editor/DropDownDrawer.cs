@@ -64,11 +64,11 @@ public class DropDownDrawer : PropertyDrawer
         FieldInfo[] objectFields;
         if (((DropDownAttribute)attribute).UseParentNestedForList)
         {
-            objectFields = property.serializedObject.targetObject.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            objectFields = property.serializedObject.targetObject.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
         }
         else
         {
-            objectFields = instance.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            objectFields = instance.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
         }
 
         var hasCollectionOfDefinedName = objectFields.Where(field => field.Name.Equals(((DropDownAttribute)attribute).VariableNameForList) && field.FieldType.GetInterfaces().Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IList<>)));

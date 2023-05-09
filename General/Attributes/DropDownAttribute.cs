@@ -11,7 +11,7 @@ public class DropDownAttribute : PropertyAttribute
 
     /// <summary>
     /// Creates a dropdown menu from a <see cref="List{T>}"/> of type <see cref="string"/> found by <paramref name="variableNameForList"/>.
-    /// Use <paramref name="useParentNestedForList"/> if the object which should be displaying a dropdown is nested within a collection. See <see cref="MenuList"/> for an implementation.
+    /// Use <paramref name="useParentNestedForList"/> if the object which should be displaying a dropdown is nested within a collection. See <see cref="MenuType"/> for an implementation.
     /// </summary>
     /// <param name="variableNameForList">The name of the <see cref="List{T>}"/> of type <see cref="string"/>.</param>
     /// <param name="useParentNestedForList">Whether the object is nested within a collection.</param>
