@@ -7,5 +7,6 @@ var searchData=
   ['rebindbutton_2ecs_4',['RebindButton.cs',['../_rebind_button_8cs.html',1,'']]],
   ['resetbutton_2ecs_5',['ResetButton.cs',['../_reset_button_8cs.html',1,'']]],
   ['resetsavegamebutton_2ecs_6',['ResetSavegameButton.cs',['../_reset_savegame_button_8cs.html',1,'']]],
-  ['resourcedata_2ecs_7',['ResourceData.cs',['../_resource_data_8cs.html',1,'']]]
+  ['resourcedata_2ecs_7',['ResourceData.cs',['../_resource_data_8cs.html',1,'']]],
+  ['resourcesutil_2ecs_8',['ResourcesUtil.cs',['../_resources_util_8cs.html',1,'']]]
 ];

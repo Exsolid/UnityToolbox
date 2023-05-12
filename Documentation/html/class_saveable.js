@@ -11,7 +11,7 @@ var class_saveable =
     [ "_id", "class_saveable.html#aa81032ce85a2b66f7324ce699880ef0f", null ],
     [ "_inEditor", "class_saveable.html#ae2fc0544e2c22f21faca57d0a84299e9", null ],
     [ "_removeFromSaveOnDelete", "class_saveable.html#af2aa03f9f3e9c2b2e04b70b17dba7f3a", null ],
-    [ "PrefabID", "class_saveable.html#adffb61f24ce788287d4dd98eaedc8e0e", null ],
+    [ "PrefabData", "class_saveable.html#a54b51a265cb0557d4303a888ff4751cf", null ],
     [ "ID", "class_saveable.html#a949dfb167c404fc147e49db779f27bff", null ],
     [ "InEditor", "class_saveable.html#a2342768356304c4d31c44038bb2255a9", null ]
 ];

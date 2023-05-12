@@ -5,5 +5,6 @@ var dir_31c2500c25d0b570f9d116670e5783cb =
     [ "Preferences", "dir_de34a743e3f2cb92cba76cfd55b3f685.html", "dir_de34a743e3f2cb92cba76cfd55b3f685" ],
     [ "ColliderInfo.cs", "_collider_info_8cs.html", "_collider_info_8cs" ],
     [ "Module.cs", "_module_8cs.html", "_module_8cs" ],
-    [ "ModuleManager.cs", "_module_manager_8cs.html", "_module_manager_8cs" ]
+    [ "ModuleManager.cs", "_module_manager_8cs.html", "_module_manager_8cs" ],
+    [ "ResourcesUtil.cs", "_resources_util_8cs.html", "_resources_util_8cs" ]
 ];

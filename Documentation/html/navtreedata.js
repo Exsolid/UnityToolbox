@@ -55,11 +55,11 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_audio_mixer_8cs.html",
-"class_dialog_node.html#a8c630e9f7c2e0eaa0f2319f880d60d03",
-"class_localisation_manager.html#adccc52328453d9396cc39e4151f26eca",
-"class_player_event_manager.html",
-"class_terrain_generator.html#abfef4c88396c88af4bd3672f30e3a32a",
-"struct_terrain_generator_1_1_placement_information.html#a99c4764d00d682dcae14fa2b39c7eb6b"
+"class_dialog_node.html#a84f2c314025261dfe9a9f440c4aa92a7",
+"class_item_definition.html#a41a5642b767789dcac49df6d474f6c38",
+"class_menu_wheel.html#a28c99b389aa1ca80974c9d981e45f187",
+"class_settings_manager.html#a59c37ac882ba1492c090685ab8d26bd3",
+"dir_5d967199df8ca5d25c11103eb203d102.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

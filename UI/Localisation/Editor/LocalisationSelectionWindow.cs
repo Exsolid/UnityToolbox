@@ -30,8 +30,6 @@ public class LocalisationSelectionWindow : EditorWindow
 
     private void InitializeWindow()
     {
-        string assetPathInProject = ProjectPrefs.GetString(ProjectPrefKeys.LOCALISATIONSAVEPATH);
-        Localizer.Instance.AssetPathInProject = assetPathInProject;
         Localizer.Instance.Initialize();
         _searchIDString = "";
     }
@@ -117,6 +115,7 @@ public class LocalisationSelectionWindow : EditorWindow
                 {
                     Localizer.Instance.RemoveLocalisation(pair.Key);
                     Localizer.Instance.WriteData();
+                    AssetDatabase.Refresh();
                 }
             }
 

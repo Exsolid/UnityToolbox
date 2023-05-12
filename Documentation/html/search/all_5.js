@@ -8,5 +8,5 @@ var searchData=
   ['effects_5fvolume_5',['EFFECTS_VOLUME',['../class_player_pref_keys.html#a56554545c4f3c500066d7b5ea4bb8298',1,'PlayerPrefKeys']]],
   ['enableplacement_6',['EnablePlacement',['../class_held_inventory_manager.html#a651bd1576ff53235b7bf10c7a25f8d66',1,'HeldInventoryManager']]],
   ['encrypt_7',['Encrypt',['../class_save_game_manager.html#af5b30c8c484bf2fd3d0918003523c612',1,'SaveGameManager']]],
-  ['equals_8',['Equals',['../class_item.html#a44434f143e53c878691f57fac05f24b8',1,'Item.Equals()'],['../struct_localisation_i_d.html#afe59173aaaebbc6700bfb167819badcd',1,'LocalisationID.Equals()'],['../struct_localisation_language.html#afdf1f4e8a4c925f526206177d5201f54',1,'LocalisationLanguage.Equals()'],['../struct_localisation_scope.html#aecea29bdfb8d7545796d19a2b786c6fc',1,'LocalisationScope.Equals()']]]
+  ['equals_8',['Equals',['../class_item_scope.html#a2486a9b0cbe31532c826a5cc9ef005c9',1,'ItemScope.Equals()'],['../class_item_instance.html#a4a35f2d4944d8c48ab9577ef9c5cfd50',1,'ItemInstance.Equals()'],['../struct_localisation_i_d.html#afe59173aaaebbc6700bfb167819badcd',1,'LocalisationID.Equals()'],['../struct_localisation_language.html#afdf1f4e8a4c925f526206177d5201f54',1,'LocalisationLanguage.Equals()'],['../struct_localisation_scope.html#aecea29bdfb8d7545796d19a2b786c6fc',1,'LocalisationScope.Equals()']]]
 ];

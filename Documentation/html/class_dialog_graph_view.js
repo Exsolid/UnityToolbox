@@ -6,7 +6,6 @@ var class_dialog_graph_view =
     [ "AddNode", "class_dialog_graph_view.html#a52945cd8071d88620bbf52927a7c1142", null ],
     [ "AddStyle", "class_dialog_graph_view.html#a6a85a559b728b9fb3dd558937292f8b0", null ],
     [ "CreateGroup", "class_dialog_graph_view.html#af8a0a9004619e1da49fc83d3766e2e13", null ],
-    [ "CreateGroupManipulator", "class_dialog_graph_view.html#ad67e67e8a377d697d6914b3a9d8c7386", null ],
     [ "CreateNode", "class_dialog_graph_view.html#a3f0d2a58b85580a4760b167c52084edf", null ],
     [ "CreateNodeManipulator", "class_dialog_graph_view.html#a061ae2ec7faed7231032d79e3c089e8a", null ],
     [ "GetCompatiblePorts", "class_dialog_graph_view.html#a63e0b06cd3079f0a044ea9034404acb1", null ],

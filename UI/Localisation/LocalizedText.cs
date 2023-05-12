@@ -23,8 +23,6 @@ public class LocalizedText : MonoBehaviour
     {
         if (!Localizer.Instance.IsInitialized)
         {
-            string assetPathInProject = ProjectPrefs.GetString(ProjectPrefKeys.LOCALISATIONSAVEPATH);
-            Localizer.Instance.AssetPathInProject = assetPathInProject;
             Localizer.Instance.Initialize();
         }
 
@@ -71,8 +69,6 @@ public class LocalizedText : MonoBehaviour
     {
         if (!Localizer.Instance.IsInitialized)
         {
-            string assetPathInProject = ProjectPrefs.GetString(ProjectPrefKeys.LOCALISATIONSAVEPATH);
-            Localizer.Instance.AssetPathInProject = assetPathInProject;
             Localizer.Instance.Initialize();
         }
         if (_allLanguages == null || Localizer.Instance.LocalisationLanguages.Count != _allLanguages.Count)

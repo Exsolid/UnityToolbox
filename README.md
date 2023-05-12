@@ -5,6 +5,7 @@ Currently this includes:
 - Localisation system | See Localizer and the toolbar of Unity
 - Dialog system | See DialogManager and the toolbar of Unity
 - Savegame management (Checkpoint data and saving of objects at runtime) | See SaveGameManager
+- Gamestate management | See GamestateManager
 - Procedual terrain generation | See TerrainGenerator
 - Player controls for 2D and 3D | See MovementBase
 - Settings management (Controls, volume and languages) | See SettingsManager

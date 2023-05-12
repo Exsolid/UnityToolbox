@@ -98,11 +98,13 @@ $(document).ready(function(){initNavTree('class_menu_manager.html',''); initResi
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="#properties">Properties</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
 <a href="class_menu_manager-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">MenuManager Class Reference</div></div>
 </div><!--header-->
@@ -123,14 +125,11 @@ Inheritance diagram for MenuManager:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ac4a20d1f6ce5182503b3f2cd3ded0351"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_menu_manager.html#ac4a20d1f6ce5182503b3f2cd3ded0351">SetActiveMenu</a> (<a class="el" href="class_menu.html">Menu</a> menu)</td></tr>
-<tr class="memdesc:ac4a20d1f6ce5182503b3f2cd3ded0351"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the active menu with a given &lt;see cref="Menu". Disables the current if there is one and ignores the hierarchy.  <br /></td></tr>
+<tr class="memdesc:ac4a20d1f6ce5182503b3f2cd3ded0351"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the active menu with a given &lt;see cref="Menu". Disables the current if there is one. Null will disable any active menu and enable the overlay if there is one set.  <br /></td></tr>
 <tr class="separator:ac4a20d1f6ce5182503b3f2cd3ded0351"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a61babc4fc2fb3f36a9085448c67c729a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_menu_manager.html#a61babc4fc2fb3f36a9085448c67c729a">ToggleMenu</a> (int type, bool userInteraction)</td></tr>
-<tr class="memdesc:a61babc4fc2fb3f36a9085448c67c729a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Toogles a menu by the given ID which references to a type. See <a class="el" href="class_menu_manager.html#acbeec98393148d04357dd593ffa3bdff" title="All menu types defined by the manager.">MenuManager.MenuTypesForEditor</a>.  <br /></td></tr>
-<tr class="separator:a61babc4fc2fb3f36a9085448c67c729a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8b46e85dd80f29e5140231df4b31f2b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_menu_manager.html#a8b46e85dd80f29e5140231df4b31f2b4">ToggleMenu</a> (<a class="el" href="class_menu.html">Menu</a> menu, bool userInteraction)</td></tr>
-<tr class="memdesc:a8b46e85dd80f29e5140231df4b31f2b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Toogles a menu. Disables the current if there is one.  <br /></td></tr>
-<tr class="separator:a8b46e85dd80f29e5140231df4b31f2b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab99548897f194fa67b98282d6031b841"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_menu_manager.html#ab99548897f194fa67b98282d6031b841">ToggleMenu</a> (int type, int menuIndex)</td></tr>
+<tr class="memdesc:ab99548897f194fa67b98282d6031b841"><td class="mdescLeft">&#160;</td><td class="mdescRight">Toggles a menu by the given ID which references to a type. See <a class="el" href="class_menu_manager.html#a17f80d115ad041c5579ca4e3f491f35b" title="All menu types defined by the manager.">MenuManager.MenuTypesForEditor</a>. A menu can only be activated if there is no current already active.  <br /></td></tr>
+<tr class="separator:ab99548897f194fa67b98282d6031b841"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a543791a2ec0270c049527a25198be170"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_menu_manager.html#a543791a2ec0270c049527a25198be170">ToggleMenuManager</a> ()</td></tr>
 <tr class="memdesc:a543791a2ec0270c049527a25198be170"><td class="mdescLeft">&#160;</td><td class="mdescRight">Toogles the <a class="el" href="class_menu_manager.html" title="This manager takes care of all menu related tasks. That is, sorting within a hierarchy and switching ...">MenuManager</a>. Useful if UI interaction should be locked.  <br /></td></tr>
 <tr class="separator:a543791a2ec0270c049527a25198be170"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -145,53 +144,93 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae904a4e92b931cdce3d63ac36c54062b inherit pub_methods_class_module"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_module.html#ae904a4e92b931cdce3d63ac36c54062b">Awake</a> ()</td></tr>
 <tr class="separator:ae904a4e92b931cdce3d63ac36c54062b inherit pub_methods_class_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a35402511cae506e5b911c5d63892e7a3"><td class="memItemLeft" align="right" valign="top">static List&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_menu_manager.html#a35402511cae506e5b911c5d63892e7a3">GetAllMenusOfType</a> (int type)</td></tr>
+<tr class="separator:a35402511cae506e5b911c5d63892e7a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
+<tr class="memitem:ad7a7eb26bb2c5f9616f3c274e0907df8"><td class="memItemLeft" align="right" valign="top">List&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_menu_manager.html#ad7a7eb26bb2c5f9616f3c274e0907df8">MenuTypes</a></td></tr>
+<tr class="separator:ad7a7eb26bb2c5f9616f3c274e0907df8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6114a906fe0cdae9e7de373d2dc69516"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_menu_manager.html#a6114a906fe0cdae9e7de373d2dc69516">OverlayType</a></td></tr>
 <tr class="separator:a6114a906fe0cdae9e7de373d2dc69516"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
-<tr class="memitem:acbeec98393148d04357dd593ffa3bdff"><td class="memItemLeft" align="right" valign="top">static List&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_menu_manager.html#acbeec98393148d04357dd593ffa3bdff">MenuTypesForEditor</a></td></tr>
-<tr class="memdesc:acbeec98393148d04357dd593ffa3bdff"><td class="mdescLeft">&#160;</td><td class="mdescRight">All menu types defined by the manager.  <br /></td></tr>
-<tr class="separator:acbeec98393148d04357dd593ffa3bdff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17f80d115ad041c5579ca4e3f491f35b"><td class="memItemLeft" align="right" valign="top">static List&lt; <a class="el" href="class_menu_type.html">MenuType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_menu_manager.html#a17f80d115ad041c5579ca4e3f491f35b">MenuTypesForEditor</a> = new List&lt;<a class="el" href="class_menu_type.html">MenuType</a>&gt;()</td></tr>
+<tr class="memdesc:a17f80d115ad041c5579ca4e3f491f35b"><td class="mdescLeft">&#160;</td><td class="mdescRight">All menu types defined by the manager.  <br /></td></tr>
+<tr class="separator:a17f80d115ad041c5579ca4e3f491f35b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35f3265b2657067f8bb4ae21ee57a742"><td class="memItemLeft" align="right" valign="top">static List&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_menu_manager.html#a35f3265b2657067f8bb4ae21ee57a742">MenuTypeNamesForEditor</a> = new List&lt;string&gt;()</td></tr>
+<tr class="separator:a35f3265b2657067f8bb4ae21ee57a742"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="properties" name="properties"></a>
 Properties</h2></td></tr>
 <tr class="memitem:acebabc2246c8969e3224db86c77e8c73"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_menu_manager.html#acebabc2246c8969e3224db86c77e8c73">IsEnabled</a><code> [get]</code></td></tr>
 <tr class="separator:acebabc2246c8969e3224db86c77e8c73"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65268543eb050e1e10c6c6ccd8257c4d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_menu_list.html">MenuList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_menu_manager.html#a65268543eb050e1e10c6c6ccd8257c4d">CurrentActiveMenuList</a><code> [get]</code></td></tr>
-<tr class="separator:a65268543eb050e1e10c6c6ccd8257c4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7cb147612d906b3160623500a327543d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_menu_manager.html#a7cb147612d906b3160623500a327543d">InMenu</a><code> [get]</code></td></tr>
-<tr class="separator:a7cb147612d906b3160623500a327543d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d8e7e644c3d28c71c4751a5f28d7863"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_menu_type.html">MenuType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_menu_manager.html#a8d8e7e644c3d28c71c4751a5f28d7863">CurrentActiveMenuType</a><code> [get]</code></td></tr>
+<tr class="separator:a8d8e7e644c3d28c71c4751a5f28d7863"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:a479846feaf36055dc2dbb44cb374f015"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_menu_manager.html#a479846feaf36055dc2dbb44cb374f015">Start</a> ()</td></tr>
 <tr class="separator:a479846feaf36055dc2dbb44cb374f015"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2bfb060dd6551d62351a778b786456ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_menu_manager.html#a2bfb060dd6551d62351a778b786456ed">OnValidate</a> ()</td></tr>
+<tr class="separator:a2bfb060dd6551d62351a778b786456ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a2b7a9cbc7e5845a60600cb0f09614192"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_menu_list.html">MenuList</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_menu_manager.html#a2b7a9cbc7e5845a60600cb0f09614192">_menuList</a></td></tr>
-<tr class="separator:a2b7a9cbc7e5845a60600cb0f09614192"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a566e781f6b6f3740a455214d5d02f6b1"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_menu_type.html">MenuType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_menu_manager.html#a566e781f6b6f3740a455214d5d02f6b1">_menuList</a></td></tr>
+<tr class="separator:a566e781f6b6f3740a455214d5d02f6b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37b43e7e6b613169545504d2ec4d9206"><td class="memItemLeft" align="right" valign="top">List&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_menu_manager.html#a37b43e7e6b613169545504d2ec4d9206">_menuTypes</a></td></tr>
 <tr class="separator:a37b43e7e6b613169545504d2ec4d9206"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3feb5caca2394b9c717c168f8927d090"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_menu_manager.html#a3feb5caca2394b9c717c168f8927d090">_hideOverlayOnOtherMenus</a></td></tr>
 <tr class="separator:a3feb5caca2394b9c717c168f8927d090"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abab1d26d60f05800137273226b036d20"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_menu_manager.html#abab1d26d60f05800137273226b036d20">_isPaused</a></td></tr>
-<tr class="separator:abab1d26d60f05800137273226b036d20"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d9c63601455a42c7692647dd1f4f7a2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_menu_manager.html#a7d9c63601455a42c7692647dd1f4f7a2">_isEnabled</a></td></tr>
 <tr class="separator:a7d9c63601455a42c7692647dd1f4f7a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a665025fb64e5d6fd99ba0b29c763b2a9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_menu.html">Menu</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_menu_manager.html#a665025fb64e5d6fd99ba0b29c763b2a9">_currentActivMenu</a></td></tr>
 <tr class="separator:a665025fb64e5d6fd99ba0b29c763b2a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4dd5e1b3cd3b430eb6485fe0d0c18c41"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_menu_list.html">MenuList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_menu_manager.html#a4dd5e1b3cd3b430eb6485fe0d0c18c41">_overlayMenu</a></td></tr>
-<tr class="separator:a4dd5e1b3cd3b430eb6485fe0d0c18c41"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a926887ed5328a4014cbef8d1bd5484e7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_menu_list.html">MenuList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_menu_manager.html#a926887ed5328a4014cbef8d1bd5484e7">_currentActivMenuList</a></td></tr>
-<tr class="separator:a926887ed5328a4014cbef8d1bd5484e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abdc1ff41c968bcc2487acacdefdeec49"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_menu_manager.html#abdc1ff41c968bcc2487acacdefdeec49">_inMenu</a></td></tr>
-<tr class="separator:abdc1ff41c968bcc2487acacdefdeec49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae79f360b2e1cb4a2008608e758c5ad33"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_menu_type.html">MenuType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_menu_manager.html#ae79f360b2e1cb4a2008608e758c5ad33">_overlayMenuType</a></td></tr>
+<tr class="separator:ae79f360b2e1cb4a2008608e758c5ad33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69da4cd3b2f9f72b144f7acd61952bd0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_menu_type.html">MenuType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_menu_manager.html#a69da4cd3b2f9f72b144f7acd61952bd0">_currentActivMenuType</a></td></tr>
+<tr class="separator:a69da4cd3b2f9f72b144f7acd61952bd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-static-attribs" name="pri-static-attribs"></a>
+Static Private Attributes</h2></td></tr>
+<tr class="memitem:ac13ee0bcebc526a992af5146ff4dc595"><td class="memItemLeft" align="right" valign="top">const string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_menu_manager.html#ac13ee0bcebc526a992af5146ff4dc595">NONETYPENAME</a> = &quot;None&quot;</td></tr>
+<tr class="separator:ac13ee0bcebc526a992af5146ff4dc595"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a35402511cae506e5b911c5d63892e7a3" name="a35402511cae506e5b911c5d63892e7a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35402511cae506e5b911c5d63892e7a3">&#9670;&#160;</a></span>GetAllMenusOfType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static List&lt; string &gt; MenuManager.GetAllMenusOfType </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="reference">References <a class="el" href="class_menu_type.html#a9642d7e39f361f261aba4d704696842f">MenuType.Menus</a>, <a class="el" href="class_menu_type.html#a230bebd4a00b13eb0ec5375c5cc539a5">MenuType.MenuTypeID</a>, and <a class="el" href="class_menu_manager.html#a17f80d115ad041c5579ca4e3f491f35b">MenuTypesForEditor</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="class_disable_menu_control.html#a3bd6e2bd431237facc24d52951f6a615">DisableMenuControl.OnValidate()</a>, <a class="el" href="class_toggle_menu_control.html#a69c7bd845bd4ba401f92a38d366c1b03">ToggleMenuControl.OnValidate()</a>, <a class="el" href="class_toggle_menu_interaction_info.html#ab2e7a805e9dc121de4f81c3b2b0be5f3">ToggleMenuInteractionInfo.OnValidate()</a>, <a class="el" href="class_display_dialog.html#ab3aeabf0f04ae39123b22a3874981996">DisplayDialog.OnValidate()</a>, and <a class="el" href="class_toggle_menu_button.html#aadacd2bf214b3dcdee48323ea8bd2cb6">ToggleMenuButton.OnValidate()</a>.</p>
+
+</div>
+</div>
 <a id="af33876522bf95cd861aeb707bb07786d" name="af33876522bf95cd861aeb707bb07786d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af33876522bf95cd861aeb707bb07786d">&#9670;&#160;</a></span>OnAfterDeserialize()</h2>
 
@@ -207,7 +246,7 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="reference">References <a class="el" href="class_menu_manager.html#a37b43e7e6b613169545504d2ec4d9206">_menuTypes</a>, and <a class="el" href="class_menu_manager.html#acbeec98393148d04357dd593ffa3bdff">MenuTypesForEditor</a>.</p>
+<p class="reference">References <a class="el" href="class_menu_manager.html#a566e781f6b6f3740a455214d5d02f6b1">_menuList</a>, <a class="el" href="class_menu_manager.html#a37b43e7e6b613169545504d2ec4d9206">_menuTypes</a>, <a class="el" href="class_menu_manager.html#a35f3265b2657067f8bb4ae21ee57a742">MenuTypeNamesForEditor</a>, and <a class="el" href="class_menu_manager.html#a17f80d115ad041c5579ca4e3f491f35b">MenuTypesForEditor</a>.</p>
 
 </div>
 </div>
@@ -226,7 +265,34 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="reference">References <a class="el" href="class_menu_manager.html#a37b43e7e6b613169545504d2ec4d9206">_menuTypes</a>, and <a class="el" href="class_menu_manager.html#acbeec98393148d04357dd593ffa3bdff">MenuTypesForEditor</a>.</p>
+<p class="reference">References <a class="el" href="class_menu_manager.html#a566e781f6b6f3740a455214d5d02f6b1">_menuList</a>, <a class="el" href="class_menu_manager.html#a37b43e7e6b613169545504d2ec4d9206">_menuTypes</a>, <a class="el" href="class_menu_manager.html#a35f3265b2657067f8bb4ae21ee57a742">MenuTypeNamesForEditor</a>, and <a class="el" href="class_menu_manager.html#a17f80d115ad041c5579ca4e3f491f35b">MenuTypesForEditor</a>.</p>
+
+</div>
+</div>
+<a id="a2bfb060dd6551d62351a778b786456ed" name="a2bfb060dd6551d62351a778b786456ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2bfb060dd6551d62351a778b786456ed">&#9670;&#160;</a></span>OnValidate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MenuManager.OnValidate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="reference">References <a class="el" href="class_menu_manager.html#a566e781f6b6f3740a455214d5d02f6b1">_menuList</a>, <a class="el" href="class_menu_manager.html#a37b43e7e6b613169545504d2ec4d9206">_menuTypes</a>, and <a class="el" href="class_menu_manager.html#ac13ee0bcebc526a992af5146ff4dc595">NONETYPENAME</a>.</p>
 
 </div>
 </div>
@@ -252,7 +318,9 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="reference">References <a class="el" href="class_menu_manager.html#a665025fb64e5d6fd99ba0b29c763b2a9">_currentActivMenu</a>.</p>
+<p class="reference">References <a class="el" href="class_menu_manager.html#a665025fb64e5d6fd99ba0b29c763b2a9">_currentActivMenu</a>, <a class="el" href="class_menu_manager.html#a69da4cd3b2f9f72b144f7acd61952bd0">_currentActivMenuType</a>, <a class="el" href="class_menu_manager.html#ae79f360b2e1cb4a2008608e758c5ad33">_overlayMenuType</a>, and <a class="el" href="class_menu_type.html#a9642d7e39f361f261aba4d704696842f">MenuType.Menus</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="class_menu_manager.html#a479846feaf36055dc2dbb44cb374f015">Start()</a>, and <a class="el" href="class_menu_manager.html#ab99548897f194fa67b98282d6031b841">ToggleMenu()</a>.</p>
 
 </div>
 </div>
@@ -279,12 +347,12 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">References <a class="el" href="class_menu_manager.html#a665025fb64e5d6fd99ba0b29c763b2a9">_currentActivMenu</a>, <a class="el" href="class_menu_manager.html#a926887ed5328a4014cbef8d1bd5484e7">_currentActivMenuList</a>, <a class="el" href="class_menu_manager.html#a7d9c63601455a42c7692647dd1f4f7a2">_isEnabled</a>, <a class="el" href="class_menu_manager.html#a2b7a9cbc7e5845a60600cb0f09614192">_menuList</a>, <a class="el" href="class_menu_manager.html#a4dd5e1b3cd3b430eb6485fe0d0c18c41">_overlayMenu</a>, <a class="el" href="class_menu_list.html#a87d85ef6e77b2c9e72bb64cac79808ad">MenuList.Menus</a>, and <a class="el" href="class_menu_manager.html#a6114a906fe0cdae9e7de373d2dc69516">OverlayType</a>.</p>
+<p class="reference">References <a class="el" href="class_menu_manager.html#a7d9c63601455a42c7692647dd1f4f7a2">_isEnabled</a>, <a class="el" href="class_menu_manager.html#a566e781f6b6f3740a455214d5d02f6b1">_menuList</a>, <a class="el" href="class_menu_manager.html#ae79f360b2e1cb4a2008608e758c5ad33">_overlayMenuType</a>, <a class="el" href="class_menu_manager.html#a6114a906fe0cdae9e7de373d2dc69516">OverlayType</a>, and <a class="el" href="class_menu_manager.html#ac4a20d1f6ce5182503b3f2cd3ded0351">SetActiveMenu()</a>.</p>
 
 </div>
 </div>
-<a id="a61babc4fc2fb3f36a9085448c67c729a" name="a61babc4fc2fb3f36a9085448c67c729a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a61babc4fc2fb3f36a9085448c67c729a">&#9670;&#160;</a></span>ToggleMenu() <span class="overload">[1/2]</span></h2>
+<a id="ab99548897f194fa67b98282d6031b841" name="ab99548897f194fa67b98282d6031b841"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab99548897f194fa67b98282d6031b841">&#9670;&#160;</a></span>ToggleMenu()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -298,8 +366,8 @@ Private Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>userInteraction</em>&#160;</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>menuIndex</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -311,49 +379,11 @@ Private Attributes</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">type</td><td>The ID which references to a type.</td></tr>
-    <tr><td class="paramname">userInteraction</td><td>Whether the call came form a player interaction.</td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="reference">References <a class="el" href="class_menu_manager.html#a665025fb64e5d6fd99ba0b29c763b2a9">_currentActivMenu</a>, <a class="el" href="class_menu_manager.html#a926887ed5328a4014cbef8d1bd5484e7">_currentActivMenuList</a>, <a class="el" href="class_menu_manager.html#a3feb5caca2394b9c717c168f8927d090">_hideOverlayOnOtherMenus</a>, <a class="el" href="class_menu_manager.html#abdc1ff41c968bcc2487acacdefdeec49">_inMenu</a>, <a class="el" href="class_menu_manager.html#a7d9c63601455a42c7692647dd1f4f7a2">_isEnabled</a>, <a class="el" href="class_menu_manager.html#abab1d26d60f05800137273226b036d20">_isPaused</a>, <a class="el" href="class_menu_manager.html#a2b7a9cbc7e5845a60600cb0f09614192">_menuList</a>, <a class="el" href="class_menu_manager.html#a4dd5e1b3cd3b430eb6485fe0d0c18c41">_overlayMenu</a>, <a class="el" href="class_menu.html#ab2ce668b7a219b2127dbfbf092ae3e23">Menu.MayUserToogle</a>, <a class="el" href="class_menu_list.html#a87d85ef6e77b2c9e72bb64cac79808ad">MenuList.Menus</a>, <a class="el" href="class_menu_list.html#a65c38a4b5bbb1bf2d2bc2d615e5d40cc">MenuList.MenuTypeID</a>, and <a class="el" href="class_menu_manager.html#a6114a906fe0cdae9e7de373d2dc69516">OverlayType</a>.</p>
-
-</div>
-</div>
-<a id="a8b46e85dd80f29e5140231df4b31f2b4" name="a8b46e85dd80f29e5140231df4b31f2b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8b46e85dd80f29e5140231df4b31f2b4">&#9670;&#160;</a></span>ToggleMenu() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void MenuManager.ToggleMenu </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_menu.html">Menu</a>&#160;</td>
-          <td class="paramname"><em>menu</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>userInteraction</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">menu</td><td></td></tr>
-    <tr><td class="paramname">userInteraction</td><td>Whether the call came form a player interaction.</td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="reference">References <a class="el" href="class_menu_manager.html#a665025fb64e5d6fd99ba0b29c763b2a9">_currentActivMenu</a>, <a class="el" href="class_menu_manager.html#a926887ed5328a4014cbef8d1bd5484e7">_currentActivMenuList</a>, <a class="el" href="class_menu_manager.html#a3feb5caca2394b9c717c168f8927d090">_hideOverlayOnOtherMenus</a>, <a class="el" href="class_menu_manager.html#abdc1ff41c968bcc2487acacdefdeec49">_inMenu</a>, <a class="el" href="class_menu_manager.html#a7d9c63601455a42c7692647dd1f4f7a2">_isEnabled</a>, <a class="el" href="class_menu_manager.html#abab1d26d60f05800137273226b036d20">_isPaused</a>, <a class="el" href="class_menu_manager.html#a4dd5e1b3cd3b430eb6485fe0d0c18c41">_overlayMenu</a>, <a class="el" href="class_menu.html#ab2ce668b7a219b2127dbfbf092ae3e23">Menu.MayUserToogle</a>, <a class="el" href="class_menu_list.html#a87d85ef6e77b2c9e72bb64cac79808ad">MenuList.Menus</a>, and <a class="el" href="class_menu_manager.html#a6114a906fe0cdae9e7de373d2dc69516">OverlayType</a>.</p>
+<p class="reference">References <a class="el" href="class_menu_manager.html#a665025fb64e5d6fd99ba0b29c763b2a9">_currentActivMenu</a>, <a class="el" href="class_menu_manager.html#a69da4cd3b2f9f72b144f7acd61952bd0">_currentActivMenuType</a>, <a class="el" href="class_menu_manager.html#a566e781f6b6f3740a455214d5d02f6b1">_menuList</a>, <a class="el" href="class_menu_manager.html#ae79f360b2e1cb4a2008608e758c5ad33">_overlayMenuType</a>, <a class="el" href="class_menu_type.html#a9642d7e39f361f261aba4d704696842f">MenuType.Menus</a>, <a class="el" href="class_menu_type.html#a230bebd4a00b13eb0ec5375c5cc539a5">MenuType.MenuTypeID</a>, and <a class="el" href="class_menu_manager.html#ac4a20d1f6ce5182503b3f2cd3ded0351">SetActiveMenu()</a>.</p>
 
 </div>
 </div>
@@ -423,12 +453,12 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="class_menu_manager.html#ac4a20d1f6ce5182503b3f2cd3ded0351">SetActiveMenu()</a>, <a class="el" href="class_menu_manager.html#a479846feaf36055dc2dbb44cb374f015">Start()</a>, <a class="el" href="class_menu_manager.html#a61babc4fc2fb3f36a9085448c67c729a">ToggleMenu()</a>, and <a class="el" href="class_menu_manager.html#a543791a2ec0270c049527a25198be170">ToggleMenuManager()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="class_menu_manager.html#ac4a20d1f6ce5182503b3f2cd3ded0351">SetActiveMenu()</a>, <a class="el" href="class_menu_manager.html#ab99548897f194fa67b98282d6031b841">ToggleMenu()</a>, and <a class="el" href="class_menu_manager.html#a543791a2ec0270c049527a25198be170">ToggleMenuManager()</a>.</p>
 
 </div>
 </div>
-<a id="a926887ed5328a4014cbef8d1bd5484e7" name="a926887ed5328a4014cbef8d1bd5484e7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a926887ed5328a4014cbef8d1bd5484e7">&#9670;&#160;</a></span>_currentActivMenuList</h2>
+<a id="a69da4cd3b2f9f72b144f7acd61952bd0" name="a69da4cd3b2f9f72b144f7acd61952bd0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69da4cd3b2f9f72b144f7acd61952bd0">&#9670;&#160;</a></span>_currentActivMenuType</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -437,7 +467,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_menu_list.html">MenuList</a> MenuManager._currentActivMenuList</td>
+          <td class="memname"><a class="el" href="class_menu_type.html">MenuType</a> MenuManager._currentActivMenuType</td>
         </tr>
       </table>
   </td>
@@ -447,7 +477,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="class_menu_manager.html#a479846feaf36055dc2dbb44cb374f015">Start()</a>, and <a class="el" href="class_menu_manager.html#a61babc4fc2fb3f36a9085448c67c729a">ToggleMenu()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="class_menu_manager.html#ac4a20d1f6ce5182503b3f2cd3ded0351">SetActiveMenu()</a>, and <a class="el" href="class_menu_manager.html#ab99548897f194fa67b98282d6031b841">ToggleMenu()</a>.</p>
 
 </div>
 </div>
@@ -471,32 +501,6 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="class_menu_manager.html#a61babc4fc2fb3f36a9085448c67c729a">ToggleMenu()</a>.</p>
-
-</div>
-</div>
-<a id="abdc1ff41c968bcc2487acacdefdeec49" name="abdc1ff41c968bcc2487acacdefdeec49"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abdc1ff41c968bcc2487acacdefdeec49">&#9670;&#160;</a></span>_inMenu</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool MenuManager._inMenu</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="reference">Referenced by <a class="el" href="class_menu_manager.html#a61babc4fc2fb3f36a9085448c67c729a">ToggleMenu()</a>.</p>
-
 </div>
 </div>
 <a id="a7d9c63601455a42c7692647dd1f4f7a2" name="a7d9c63601455a42c7692647dd1f4f7a2"></a>
@@ -519,12 +523,12 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="class_menu_manager.html#a479846feaf36055dc2dbb44cb374f015">Start()</a>, <a class="el" href="class_menu_manager.html#a61babc4fc2fb3f36a9085448c67c729a">ToggleMenu()</a>, and <a class="el" href="class_menu_manager.html#a543791a2ec0270c049527a25198be170">ToggleMenuManager()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="class_menu_manager.html#a479846feaf36055dc2dbb44cb374f015">Start()</a>, and <a class="el" href="class_menu_manager.html#a543791a2ec0270c049527a25198be170">ToggleMenuManager()</a>.</p>
 
 </div>
 </div>
-<a id="abab1d26d60f05800137273226b036d20" name="abab1d26d60f05800137273226b036d20"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abab1d26d60f05800137273226b036d20">&#9670;&#160;</a></span>_isPaused</h2>
+<a id="a566e781f6b6f3740a455214d5d02f6b1" name="a566e781f6b6f3740a455214d5d02f6b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a566e781f6b6f3740a455214d5d02f6b1">&#9670;&#160;</a></span>_menuList</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -533,7 +537,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool MenuManager._isPaused</td>
+          <td class="memname">List&lt;<a class="el" href="class_menu_type.html">MenuType</a>&gt; MenuManager._menuList</td>
         </tr>
       </table>
   </td>
@@ -543,31 +547,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="class_menu_manager.html#a61babc4fc2fb3f36a9085448c67c729a">ToggleMenu()</a>.</p>
-
-</div>
-</div>
-<a id="a2b7a9cbc7e5845a60600cb0f09614192" name="a2b7a9cbc7e5845a60600cb0f09614192"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2b7a9cbc7e5845a60600cb0f09614192">&#9670;&#160;</a></span>_menuList</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">List&lt;<a class="el" href="class_menu_list.html">MenuList</a>&gt; MenuManager._menuList</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="reference">Referenced by <a class="el" href="class_menu_manager.html#a479846feaf36055dc2dbb44cb374f015">Start()</a>, and <a class="el" href="class_menu_manager.html#a61babc4fc2fb3f36a9085448c67c729a">ToggleMenu()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="class_menu_manager.html#af33876522bf95cd861aeb707bb07786d">OnAfterDeserialize()</a>, <a class="el" href="class_menu_manager.html#ac3029418bd43553195149799f48bb596">OnBeforeSerialize()</a>, <a class="el" href="class_menu_manager.html#a2bfb060dd6551d62351a778b786456ed">OnValidate()</a>, <a class="el" href="class_menu_manager.html#a479846feaf36055dc2dbb44cb374f015">Start()</a>, and <a class="el" href="class_menu_manager.html#ab99548897f194fa67b98282d6031b841">ToggleMenu()</a>.</p>
 
 </div>
 </div>
@@ -591,12 +571,12 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="class_menu_manager.html#af33876522bf95cd861aeb707bb07786d">OnAfterDeserialize()</a>, and <a class="el" href="class_menu_manager.html#ac3029418bd43553195149799f48bb596">OnBeforeSerialize()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="class_menu_manager.html#af33876522bf95cd861aeb707bb07786d">OnAfterDeserialize()</a>, <a class="el" href="class_menu_manager.html#ac3029418bd43553195149799f48bb596">OnBeforeSerialize()</a>, and <a class="el" href="class_menu_manager.html#a2bfb060dd6551d62351a778b786456ed">OnValidate()</a>.</p>
 
 </div>
 </div>
-<a id="a4dd5e1b3cd3b430eb6485fe0d0c18c41" name="a4dd5e1b3cd3b430eb6485fe0d0c18c41"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4dd5e1b3cd3b430eb6485fe0d0c18c41">&#9670;&#160;</a></span>_overlayMenu</h2>
+<a id="ae79f360b2e1cb4a2008608e758c5ad33" name="ae79f360b2e1cb4a2008608e758c5ad33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae79f360b2e1cb4a2008608e758c5ad33">&#9670;&#160;</a></span>_overlayMenuType</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -605,7 +585,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_menu_list.html">MenuList</a> MenuManager._overlayMenu</td>
+          <td class="memname"><a class="el" href="class_menu_type.html">MenuType</a> MenuManager._overlayMenuType</td>
         </tr>
       </table>
   </td>
@@ -615,12 +595,12 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="class_menu_manager.html#a479846feaf36055dc2dbb44cb374f015">Start()</a>, and <a class="el" href="class_menu_manager.html#a61babc4fc2fb3f36a9085448c67c729a">ToggleMenu()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="class_menu_manager.html#ac4a20d1f6ce5182503b3f2cd3ded0351">SetActiveMenu()</a>, <a class="el" href="class_menu_manager.html#a479846feaf36055dc2dbb44cb374f015">Start()</a>, and <a class="el" href="class_menu_manager.html#ab99548897f194fa67b98282d6031b841">ToggleMenu()</a>.</p>
 
 </div>
 </div>
-<a id="acbeec98393148d04357dd593ffa3bdff" name="acbeec98393148d04357dd593ffa3bdff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acbeec98393148d04357dd593ffa3bdff">&#9670;&#160;</a></span>MenuTypesForEditor</h2>
+<a id="a35f3265b2657067f8bb4ae21ee57a742" name="a35f3265b2657067f8bb4ae21ee57a742"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35f3265b2657067f8bb4ae21ee57a742">&#9670;&#160;</a></span>MenuTypeNamesForEditor</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -629,7 +609,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">List&lt;string&gt; MenuManager.MenuTypesForEditor</td>
+          <td class="memname">List&lt;string&gt; MenuManager.MenuTypeNamesForEditor = new List&lt;string&gt;()</td>
         </tr>
       </table>
   </td>
@@ -638,17 +618,70 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= <span class="keyword">new</span> List&lt;string&gt; </div>
-<div class="line">    {</div>
-<div class="line">        <span class="stringliteral">&quot;None&quot;</span>,</div>
-<div class="line">        <span class="stringliteral">&quot;Pause&quot;</span>,</div>
-<div class="line">        <span class="stringliteral">&quot;Inventory&quot;</span>,</div>
-<div class="line">        <span class="stringliteral">&quot;Overlay&quot;</span>,</div>
-<div class="line">        <span class="stringliteral">&quot;Dialog&quot;</span>,</div>
-<div class="line">        <span class="stringliteral">&quot;GameOver&quot;</span></div>
-<div class="line">    }</div>
-</div><!-- fragment -->
-<p class="reference">Referenced by <a class="el" href="class_menu_manager.html#af33876522bf95cd861aeb707bb07786d">OnAfterDeserialize()</a>, <a class="el" href="class_menu_manager.html#ac3029418bd43553195149799f48bb596">OnBeforeSerialize()</a>, <a class="el" href="class_toggle_menu_interaction_info.html#ab2e7a805e9dc121de4f81c3b2b0be5f3">ToggleMenuInteractionInfo.OnValidate()</a>, <a class="el" href="class_disable_menu_control.html#a3bd6e2bd431237facc24d52951f6a615">DisableMenuControl.OnValidate()</a>, <a class="el" href="class_toggle_menu_control.html#a69c7bd845bd4ba401f92a38d366c1b03">ToggleMenuControl.OnValidate()</a>, <a class="el" href="class_display_dialog.html#ab3aeabf0f04ae39123b22a3874981996">DisplayDialog.OnValidate()</a>, and <a class="el" href="class_toggle_menu_button.html#aadacd2bf214b3dcdee48323ea8bd2cb6">ToggleMenuButton.OnValidate()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="class_menu_manager.html#af33876522bf95cd861aeb707bb07786d">OnAfterDeserialize()</a>, <a class="el" href="class_menu_manager.html#ac3029418bd43553195149799f48bb596">OnBeforeSerialize()</a>, <a class="el" href="class_disable_menu_control.html#a3bd6e2bd431237facc24d52951f6a615">DisableMenuControl.OnValidate()</a>, <a class="el" href="class_toggle_menu_control.html#a69c7bd845bd4ba401f92a38d366c1b03">ToggleMenuControl.OnValidate()</a>, <a class="el" href="class_toggle_menu_interaction_info.html#ab2e7a805e9dc121de4f81c3b2b0be5f3">ToggleMenuInteractionInfo.OnValidate()</a>, <a class="el" href="class_display_dialog.html#ab3aeabf0f04ae39123b22a3874981996">DisplayDialog.OnValidate()</a>, and <a class="el" href="class_toggle_menu_button.html#aadacd2bf214b3dcdee48323ea8bd2cb6">ToggleMenuButton.OnValidate()</a>.</p>
+
+</div>
+</div>
+<a id="ad7a7eb26bb2c5f9616f3c274e0907df8" name="ad7a7eb26bb2c5f9616f3c274e0907df8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7a7eb26bb2c5f9616f3c274e0907df8">&#9670;&#160;</a></span>MenuTypes</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">List&lt;string&gt; MenuManager.MenuTypes</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a17f80d115ad041c5579ca4e3f491f35b" name="a17f80d115ad041c5579ca4e3f491f35b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17f80d115ad041c5579ca4e3f491f35b">&#9670;&#160;</a></span>MenuTypesForEditor</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">List&lt;<a class="el" href="class_menu_type.html">MenuType</a>&gt; MenuManager.MenuTypesForEditor = new List&lt;<a class="el" href="class_menu_type.html">MenuType</a>&gt;()</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="class_menu_manager.html#a35402511cae506e5b911c5d63892e7a3">GetAllMenusOfType()</a>, <a class="el" href="class_menu_manager.html#af33876522bf95cd861aeb707bb07786d">OnAfterDeserialize()</a>, and <a class="el" href="class_menu_manager.html#ac3029418bd43553195149799f48bb596">OnBeforeSerialize()</a>.</p>
+
+</div>
+</div>
+<a id="ac13ee0bcebc526a992af5146ff4dc595" name="ac13ee0bcebc526a992af5146ff4dc595"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac13ee0bcebc526a992af5146ff4dc595">&#9670;&#160;</a></span>NONETYPENAME</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const string MenuManager.NONETYPENAME = &quot;None&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="class_menu_manager.html#a2bfb060dd6551d62351a778b786456ed">OnValidate()</a>.</p>
 
 </div>
 </div>
@@ -664,13 +697,13 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="class_menu_manager.html#a479846feaf36055dc2dbb44cb374f015">Start()</a>, and <a class="el" href="class_menu_manager.html#a61babc4fc2fb3f36a9085448c67c729a">ToggleMenu()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="class_menu_manager.html#a479846feaf36055dc2dbb44cb374f015">Start()</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Property Documentation</h2>
-<a id="a65268543eb050e1e10c6c6ccd8257c4d" name="a65268543eb050e1e10c6c6ccd8257c4d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a65268543eb050e1e10c6c6ccd8257c4d">&#9670;&#160;</a></span>CurrentActiveMenuList</h2>
+<a id="a8d8e7e644c3d28c71c4751a5f28d7863" name="a8d8e7e644c3d28c71c4751a5f28d7863"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d8e7e644c3d28c71c4751a5f28d7863">&#9670;&#160;</a></span>CurrentActiveMenuType</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -679,7 +712,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_menu_list.html">MenuList</a> MenuManager.CurrentActiveMenuList</td>
+          <td class="memname"><a class="el" href="class_menu_type.html">MenuType</a> MenuManager.CurrentActiveMenuType</td>
         </tr>
       </table>
   </td>
@@ -689,27 +722,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<a id="a7cb147612d906b3160623500a327543d" name="a7cb147612d906b3160623500a327543d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7cb147612d906b3160623500a327543d">&#9670;&#160;</a></span>InMenu</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool MenuManager.InMenu</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
+<p class="reference">Referenced by <a class="el" href="class_display_dialog.html#a5e2f28e77c886dbc04c34ecaa9fb814c">DisplayDialog.UpdateDialog()</a>.</p>
 
 </div>
 </div>

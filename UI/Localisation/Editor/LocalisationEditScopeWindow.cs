@@ -56,6 +56,7 @@ public class LocalisationEditScopeWindow : EditorWindow
             {
                 Localizer.Instance.ScopeEdited -= ScopeEdited;
                 Localizer.Instance.WriteData();
+                AssetDatabase.Refresh();
                 Close();
             }
             _status = "Could not edit the scope, does the name already exist?";

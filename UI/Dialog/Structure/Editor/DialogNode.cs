@@ -19,11 +19,18 @@ public class DialogNode : Node
         set { _dialogIndentifier = value; }
     }
 
-    private string _completionToSet;
-    public string CompletionToSet
+    private string _stateForDialogIndentifier;
+    public string StateForDialogIndentifier
     {
-        get { return _completionToSet; }
-        set { _completionToSet = value; }
+        get { return _stateForDialogIndentifier; }
+        set { _stateForDialogIndentifier = value; }
+    }
+
+    private string _gamestateToComplete;
+    public string GamestateToComplete
+    {
+        get { return _gamestateToComplete; }
+        set { _gamestateToComplete = value; }
     }
 
     private string _dialogTitel;
@@ -79,6 +86,7 @@ public class DialogNode : Node
     private TextField _completionToSetTextField;
     private TextField _dialogTitelTextField;
     private TextField _dialogIndentifierTextField;
+    private TextField _stateForDialogIndentifierTextField;
     private TextField _dialogTextTextField;
     private List<TextField> _optionsTextFields;
     private Port _inputPort;
@@ -113,7 +121,8 @@ public class DialogNode : Node
         _inputIDs = data.InputIDs;
         _id = data.ID;
         _dialogIndentifier = data.DialogIndentifier;
-        _completionToSet = data.CompletionToSet;
+        _gamestateToComplete = data.GamestateToComplete;
+        _stateForDialogIndentifier = data.StateForDialogIndentifier;
 
         string path = AssetDatabase.GUIDToAssetPath(data.AvatarReference);
         _avatar = AssetDatabase.LoadAssetAtPath(path, typeof(Texture2D)) as Texture2D;
@@ -224,8 +233,8 @@ public class DialogNode : Node
 
         _completionToSetTextField = new TextField()
         {
-            label = "Completion To Set:",
-            value = _completionToSet
+            label = "Gamestate To Complete:",
+            value = _gamestateToComplete
         };
 
         foldout = new Foldout()
@@ -239,6 +248,7 @@ public class DialogNode : Node
         UpdateOptionFoldout();
 
         container.Add(foldout);
+        extensionContainer.Add(_completionToSetTextField);
         extensionContainer.Add(container);
 
         RefreshExpandedState();
@@ -298,12 +308,13 @@ public class DialogNode : Node
     /// </summary>
     public void UpdateValues()
     {
-        _completionToSet = _completionToSetTextField.value;
+        _gamestateToComplete = _completionToSetTextField.value;
         _dialogTitel = _dialogTitelTextField.value;
         _dialogText = _dialogTextTextField.value;
         if(_dialogIndentifierTextField != null)
         {
             _dialogIndentifier = _dialogIndentifierTextField.value;
+            _stateForDialogIndentifier = _stateForDialogIndentifierTextField.value;
         }
 
         _avatar = (Texture2D) _avatarObjectField.value;
@@ -337,9 +348,19 @@ public class DialogNode : Node
         _inputIDs.Clear();
         _dialogIndentifierTextField = new TextField()
         {
-            value = _dialogIndentifier
+            value = _dialogIndentifier,
+            label = "Dialog Indentifier: "
         };
+
+        _stateForDialogIndentifierTextField = new TextField()
+        {
+            value = _stateForDialogIndentifier,
+            label = "State At Dialog: "
+
+        };
+
         inputContainer.Add(_dialogIndentifierTextField);
+        inputContainer.Add(_stateForDialogIndentifierTextField);
     }
 
     /// <summary>

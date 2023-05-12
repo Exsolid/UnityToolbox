@@ -11,9 +11,7 @@ using System.Linq;
 
 public class DialogGraphWindow : EditorWindow
 {
-    private string _fullPath;
     private const string FILENAME = "DialogData.txt";
-    private JsonSerializerSettings _settings;
     private DialogGraphView _graphView;
 
     [MenuItem("UnityToolbox/Dialog Graph")]
@@ -32,17 +30,12 @@ public class DialogGraphWindow : EditorWindow
 
     public void UpdateData()
     {
-        _fullPath = Application.dataPath + "/" + ProjectPrefs.GetString(ProjectPrefKeys.DIALOGSAVEPATH) + "/";
-        if (File.Exists(_fullPath + FILENAME) && ProjectPrefs.GetString(ProjectPrefKeys.DIALOGSAVEPATH) != null || !Application.isEditor)
+        _graphView.DeleteElements(_graphView.nodes.ToList());
+
+        List<DialogNodeData> nodes = ResourcesUtil.GetFileData<List<DialogNodeData>>(ProjectPrefKeys.DIALOGSAVEPATH, FILENAME);
+
+        if(nodes != null)
         {
-            TextAsset text = Resources.Load(ProjectPrefs.GetString(ProjectPrefKeys.DIALOGSAVEPATH).Split("Resources/").Last() + FILENAME.Replace(".txt", "")) as TextAsset;
-            if (text == null)
-            {
-                return;
-            }
-
-            List<DialogNodeData> nodes = JsonConvert.DeserializeObject<List<DialogNodeData>>(text.text, _settings);
-
             foreach (DialogNodeData node in nodes)
             {
                 DialogNode dNode = new DialogNode(node);
@@ -52,9 +45,9 @@ public class DialogGraphWindow : EditorWindow
             foreach (Node node in _graphView.nodes.ToList())
             {
                 DialogNode dNode = (DialogNode)node;
-                foreach(int i in dNode.OutputIDs)
+                foreach (int i in dNode.OutputIDs)
                 {
-                    DialogNode nextNode = (DialogNode) _graphView.nodes.ToList().Where(n => ((DialogNode)n).ID == i).FirstOrDefault();
+                    DialogNode nextNode = (DialogNode)_graphView.nodes.ToList().Where(n => ((DialogNode)n).ID == i).FirstOrDefault();
                     int number = dNode.OutputPort.connections.Count();
                     nextNode.UpdateInputConnectionLabel(number);
 
@@ -65,9 +58,9 @@ public class DialogGraphWindow : EditorWindow
         }
     }
 
-    public void WriteData()
+    private void WriteData()
     {
-        if (Directory.Exists(_fullPath))
+        if (Directory.Exists(ResourcesUtil.GetLocalPath(ProjectPrefKeys.DIALOGSAVEPATH)))
         {
             List<DialogNodeData> nodes = new List<DialogNodeData>();
 
@@ -85,14 +78,14 @@ public class DialogGraphWindow : EditorWindow
                 data.InputIDs = dNode.InputIDs;
                 data.OutputIDs = dNode.OutputIDs;
                 data.DialogIndentifier = dNode.DialogIndentifier;
-                data.CompletionToSet = dNode.CompletionToSet;
+                data.StateForDialogIndentifier = dNode.StateForDialogIndentifier;
+                data.GamestateToComplete = dNode.GamestateToComplete;
 
                 data.AvatarReference = AssetDatabase.GetAssetPath(dNode.Avatar);
 
                 nodes.Add(data);
             }
-            string localisationData = JsonConvert.SerializeObject(nodes, _settings);
-            File.WriteAllText(_fullPath + "/" + FILENAME, localisationData);
+            ResourcesUtil.WriteFile(ProjectPrefKeys.DIALOGSAVEPATH, FILENAME, nodes);
             AssetDatabase.Refresh();
         }
     }
@@ -110,17 +103,15 @@ public class DialogGraphWindow : EditorWindow
     private void OnEnable()
     {
         AddGraphView();
-        _settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
-        _fullPath = Application.dataPath + ProjectPrefs.GetString(ProjectPrefKeys.DIALOGSAVEPATH);
 
-        if (ProjectPrefs.GetString(ProjectPrefKeys.DIALOGSAVEPATH) == null)
+        if (ProjectPrefs.GetString(ProjectPrefKeys.DIALOGSAVEPATH) == null || ProjectPrefs.GetString(ProjectPrefKeys.DIALOGSAVEPATH).Equals(""))
         {
             DialogGraphPathSelectionWindow.Open(this);
         }
         else
         {
-            TextAsset text = Resources.Load(ProjectPrefs.GetString(ProjectPrefKeys.DIALOGSAVEPATH).Split("Resources/").Last() + FILENAME.Replace(".txt", "")) as TextAsset;
-            if (text != null)
+            List<DialogNodeData> nodes = ResourcesUtil.GetFileData<List<DialogNodeData>>(ProjectPrefKeys.DIALOGSAVEPATH, FILENAME);
+            if (nodes != null)
             {
                 UpdateData();
             }

@@ -9,12 +9,11 @@ using UnityEditor;
 /// <summary>
 /// The <see cref="DialogManager"/> is a <see cref="Module"/> which manages the existing dialogs saved by the dialog graph.
 /// It requires <see cref="DisplayDialog"/> and <see cref="UIEventManager"/> to display the current dialog node on a canavas.
+/// Requires <see cref="SaveGameManager"/> if game states are used for the dialogs.
 /// </summary>
 public class DialogManager : Module
 {
-    private string _fullPath;
     public const string FILENAME = "DialogData.txt";
-    private JsonSerializerSettings _settings;
 
     private Dictionary<DialogNodeData, List<DialogNodeData>> _dialogNodes;
     private HashSet<DialogNodeData> _dialogStartNodes;
@@ -25,18 +24,13 @@ public class DialogManager : Module
     {
         base.Awake();
 
-        _settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
-        _fullPath = ProjectPrefs.GetString(ProjectPrefKeys.DIALOGSAVEPATH);
         _dialogNodes = new Dictionary<DialogNodeData, List<DialogNodeData>>();
         _dialogStartNodes = new HashSet<DialogNodeData>();
 
-        TextAsset text = Resources.Load(_fullPath.Split("Resources/").Last() + FILENAME.Replace(".txt", "")) as TextAsset;
+        List<DialogNodeData> nodes = ResourcesUtil.GetFileData<List<DialogNodeData>>(ProjectPrefKeys.DIALOGSAVEPATH, FILENAME);
 
-        if (text != null)
+        if (nodes != null)
         {
-            List<DialogNodeData> nodes = JsonConvert.DeserializeObject<List<DialogNodeData>>(text.text, _settings);
-            List<int> ids = new List<int>();
-
             foreach (DialogNodeData node in nodes)
             {
                 _dialogNodes.Add(node, new List<DialogNodeData>());
@@ -72,14 +66,22 @@ public class DialogManager : Module
         }
 
         IEnumerable<DialogNodeData> sequence = _dialogStartNodes.Where(node => node.DialogIndentifier.Equals(dialogID));
-        if (sequence.Any())
+        
+        if (sequence.Count() == 0)
+        {
+            throw new System.Exception("No dialog node found for " + nameof(dialogID) + ": " + dialogID);
+        }
+
+        sequence = sequence.Where(node => node.StateForDialogIndentifier == null || node.StateForDialogIndentifier.Equals("")
+            || ModuleManager.GetModule<GamestateManager>().IsStateActive(node.StateForDialogIndentifier));
+        if (sequence.Count() == 1)
         {
             _currentNode = sequence.First();
+
             ModuleManager.GetModule<UIEventManager>().DialogNodeChanged(_currentNode);
-        }
-        else
+        }else if (sequence.Count() < 1)
         {
-            Debug.LogError("No dialog node found for " + nameof(dialogID) + ": " + dialogID);
+            throw new System.Exception("Multiple dialog nodes found for " + nameof(dialogID) + ": " + dialogID + " at the same gamestate.");
         }
     }
 
@@ -91,9 +93,9 @@ public class DialogManager : Module
     /// <param name="option">The selected option of the current dialog node.</param>
     public void NextNode(int option)
     {
-        if (_currentNode != null && _currentNode.CompletionToSet != null && !_currentNode.CompletionToSet.Equals(""))
+        if (_currentNode != null && _currentNode.GamestateToComplete != null && !_currentNode.GamestateToComplete.Equals(""))
         {
-            ModuleManager.GetModule<SaveGameManager>().SetCompletionInfo(_currentNode.CompletionToSet, true);
+            ModuleManager.GetModule<GamestateManager>().GoToNextState(_currentNode.GamestateToComplete, option);
         }
         if (_currentNode != null && option < _dialogNodes[_currentNode].Count() && option >= 0)
         {
@@ -113,9 +115,9 @@ public class DialogManager : Module
             return;
         }
 
-        if (_currentNode != null && _currentNode.CompletionToSet != null && !_currentNode.CompletionToSet.Equals(""))
+        if (_currentNode != null && _currentNode.GamestateToComplete != null && !_currentNode.GamestateToComplete.Equals(""))
         {
-            ModuleManager.GetModule<SaveGameManager>().SetCompletionInfo(_currentNode.CompletionToSet, true);
+            ModuleManager.GetModule<GamestateManager>().GoToNextState(_currentNode.GamestateToComplete, 0);
         }
 
         if (_currentNode != null && _dialogNodes[_currentNode].Any())

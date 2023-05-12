@@ -7,7 +7,6 @@ var searchData=
   ['text_4',['Text',['../class_dialog_node_data.html#a56a5265e846527d30d3139ad49ea62ac',1,'DialogNodeData']]],
   ['texture2darray_5',['texture2DArray',['../class_terrain_generator.html#ae36e3078b685a1a5a072ca9f5f774564',1,'TerrainGenerator']]],
   ['title_6',['Title',['../class_dialog_node_data.html#af2048fa934591cace8283020bcb961b7',1,'DialogNodeData']]],
-  ['toserialize_7',['ToSerialize',['../class_prefab_manager.html#a69bc4883fbe012f4c3074c29f91b53a9',1,'PrefabManager']]],
-  ['toshow_8',['toShow',['../class_show_on_hover.html#ac99c2508ae2facf12cc939f7afa9f0ab',1,'ShowOnHover']]],
-  ['tospawn_9',['ToSpawn',['../struct_terrain_generator_1_1_placement_information.html#a99c4764d00d682dcae14fa2b39c7eb6b',1,'TerrainGenerator::PlacementInformation']]]
+  ['toshow_7',['toShow',['../class_show_on_hover.html#ac99c2508ae2facf12cc939f7afa9f0ab',1,'ShowOnHover']]],
+  ['tospawn_8',['ToSpawn',['../struct_terrain_generator_1_1_placement_information.html#a99c4764d00d682dcae14fa2b39c7eb6b',1,'TerrainGenerator::PlacementInformation']]]
 ];

@@ -69,7 +69,6 @@ public class DialogGraphView : GraphView
     {
         this.AddManipulator(new ContentDragger());
         this.AddManipulator(CreateNodeManipulator());
-        this.AddManipulator(CreateGroupManipulator());
         this.AddManipulator(new SelectionDragger());
         this.AddManipulator(new RectangleSelector());
         SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale);
@@ -79,14 +78,6 @@ public class DialogGraphView : GraphView
     {
         ContextualMenuManipulator contextualMenuManipulator = new ContextualMenuManipulator(
             e => e.menu.AppendAction("Add Node", action => AddElement(CreateNode(action.eventInfo.localMousePosition)))
-            );
-        return contextualMenuManipulator;
-    }
-
-    private IManipulator CreateGroupManipulator()
-    {
-        ContextualMenuManipulator contextualMenuManipulator = new ContextualMenuManipulator(
-            e => e.menu.AppendAction("Add Group", action => AddElement(CreateGroup("Dialog Group",action.eventInfo.localMousePosition)))
             );
         return contextualMenuManipulator;
     }

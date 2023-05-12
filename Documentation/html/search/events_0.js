@@ -12,5 +12,6 @@ var searchData=
   ['onmenuwheelnext_9',['OnMenuWheelNext',['../class_u_i_event_manager.html#a3e0351c96fcbbe9a5d92bfdf1693f099',1,'UIEventManager']]],
   ['onmenuwheelprevious_10',['OnMenuWheelPrevious',['../class_u_i_event_manager.html#ada7c89f88ebe5902d9ce6780e74a249c',1,'UIEventManager']]],
   ['onmove_11',['OnMove',['../class_player_event_manager.html#a0e3b98bdbd6800943e758864d728f990',1,'PlayerEventManager']]],
-  ['ontogglepaused_12',['OnTogglePaused',['../class_u_i_event_manager.html#a516af8fab885cece7627779377149bfc',1,'UIEventManager']]]
+  ['onscopeedited_12',['OnScopeEdited',['../class_item_manager.html#a2a83c719cdbd8438deef4a9fbf526849',1,'ItemManager']]],
+  ['ontogglepaused_13',['OnTogglePaused',['../class_u_i_event_manager.html#a516af8fab885cece7627779377149bfc',1,'UIEventManager']]]
 ];

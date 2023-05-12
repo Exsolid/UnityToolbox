@@ -55,9 +55,8 @@ public class LocalisationManagerWindow : EditorWindow
 
     private void InitializeWindow()
     {
-        _assetPathInProject = ProjectPrefs.GetString(ProjectPrefKeys.LOCALISATIONSAVEPATH);
-        Localizer.Instance.AssetPathInProject = _assetPathInProject;
         Localizer.Instance.Initialize();
+        _assetPathInProject = ResourcesUtil.GetProjectPath(ProjectPrefKeys.LOCALISATIONSAVEPATH);
         _status = "Status: -";
         _searchIDString = "";
         _scrollPosScope = Vector2.zero;
@@ -109,36 +108,30 @@ public class LocalisationManagerWindow : EditorWindow
 
     private void DisplaySettingsTab()
     {
-        GUILayout.Label("To update the " + nameof(Localizer) + " path. Please enter a valid path below. \nIt is required that it containes \"Resources/\".");
+        GUILayout.Label("To update the " + nameof(Localizer) + " path. Please enter a valid path below. \nIt is required that it containes \"Resources\".");
         DrawLineHorizontal();
         GUILayout.BeginHorizontal();
         Vector2 textDimensions = GUI.skin.label.CalcSize(new GUIContent(Application.dataPath));
-        GUILayout.Label(Application.dataPath);
+        GUILayout.Label(Application.dataPath + "/");
         _assetPathInProject = GUILayout.TextField(_assetPathInProject, GUILayout.Width(585 - textDimensions.x));
         GUILayout.EndHorizontal();
         if (GUILayout.Button("Refresh"))
         {
-            if (!Directory.Exists(Application.dataPath + _assetPathInProject))
+            if (ResourcesUtil.TrySetValidPath(Application.dataPath + "/" + _assetPathInProject, ProjectPrefKeys.LOCALISATIONSAVEPATH))
             {
-                UpdateStatus("The path \"" + _assetPathInProject + "\" could not be found!");
-            }
-            else if (!_assetPathInProject.Contains("Resources/"))
-            {
-                UpdateStatus("The path \"" + _assetPathInProject + "\" is not a \"Resources/\" directory.");
-            }
-            else
-            {
-                Localizer.Instance.AssetPathInProject = _assetPathInProject;
                 Localizer.Instance.Initialize();
                 if (Localizer.Instance.IsInitialized)
                 {
-                    ProjectPrefs.SetString(ProjectPrefKeys.LOCALISATIONSAVEPATH, _assetPathInProject);
                     UpdateStatus("Path updated.");
                 }
                 else
                 {
-                    UpdateStatus("The given path was not valid, please check the console for more information.");
+                    UpdateStatus("The given path was not valid.");
                 }
+            }
+            else
+            {
+                UpdateStatus("The given path was not valid.");
             }
         }
     }
@@ -153,6 +146,7 @@ public class LocalisationManagerWindow : EditorWindow
             if (Localizer.Instance.AddScope(_scopeName))
             {
                 Localizer.Instance.WriteData();
+                AssetDatabase.Refresh();
                 UpdateStatus("Successfully added a new scope.");
             }
             else
@@ -182,6 +176,7 @@ public class LocalisationManagerWindow : EditorWindow
                     {
                         Localizer.Instance.RemoveScope(scope);
                         Localizer.Instance.WriteData();
+                        AssetDatabase.Refresh();
                         UpdateStatus("Successfully removed the scope '" + scope.Name +"'.");
                     }
                 }
@@ -207,6 +202,7 @@ public class LocalisationManagerWindow : EditorWindow
             if (Localizer.Instance.AddLanguage(_languageName, _languageShortName))
             {
                 Localizer.Instance.WriteData();
+                AssetDatabase.Refresh();
                 UpdateStatus("Successfully added a new language.");
             }
             else
@@ -236,6 +232,7 @@ public class LocalisationManagerWindow : EditorWindow
                 {
                     Localizer.Instance.RemoveLanguage(language);
                     Localizer.Instance.WriteData();
+                    AssetDatabase.Refresh();
                     UpdateStatus("Successfully removed the language '" + language.Name + "'.");
                 }
             }
@@ -271,6 +268,7 @@ public class LocalisationManagerWindow : EditorWindow
                     if (Localizer.Instance.AddLocalisation(newID, _newLocalisations.ToDictionary(entry => entry.Key, entry => entry.Value)))
                     {
                         Localizer.Instance.WriteData();
+                        AssetDatabase.Refresh();
                         UpdateStatus("Successfully added a new localisation.");
                     }
                     else
@@ -369,6 +367,7 @@ public class LocalisationManagerWindow : EditorWindow
                 {
                     Localizer.Instance.RemoveLocalisation(pair.Key);
                     Localizer.Instance.WriteData();
+                    AssetDatabase.Refresh();
                     UpdateStatus("Successfully removed the scope '" + pair.Key.Name + LocalisationID.DEVIDER + pair.Key.Scope.Name + "'.");
                 }
             }

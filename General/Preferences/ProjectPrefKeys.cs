@@ -11,4 +11,5 @@ public static class ProjectPrefKeys
     public readonly static string LOCALISATIONSAVEPATH = "LocalisationSavePath";
     public readonly static string DIALOGSAVEPATH = "DialogSavePath";
     public readonly static string ITEMDATASAVEPATH = "ItemDataSavePath";
+    public readonly static string GAMESTATEDATASAVEPATH = "GamestateDataSavePath";
 }

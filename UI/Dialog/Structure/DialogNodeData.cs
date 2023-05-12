@@ -10,7 +10,8 @@ public class DialogNodeData
 {
     public int ID;
     public string DialogIndentifier;
-    public string CompletionToSet;
+    public string StateForDialogIndentifier;
+    public string GamestateToComplete;
     public string AvatarReference;
     [NonSerialized] public Texture2D Avatar;
     public string Title;

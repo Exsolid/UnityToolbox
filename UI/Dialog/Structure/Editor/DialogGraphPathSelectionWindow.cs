@@ -16,7 +16,7 @@ public class DialogGraphPathSelectionWindow : EditorWindow
 
     private void OnEnable()
     {
-        _assetPathInProject = ProjectPrefs.GetString(ProjectPrefKeys.DIALOGSAVEPATH);
+        _assetPathInProject = ResourcesUtil.GetProjectPath(ProjectPrefKeys.DIALOGSAVEPATH);
     }
 
     public static void Open(DialogGraphWindow graph)
@@ -38,7 +38,7 @@ public class DialogGraphPathSelectionWindow : EditorWindow
 
     private void DisplaySetting()
     {
-        GUILayout.Label("No valid path or data can be found. Please updated to a valid path, otherwise nothing will be saved. \nIt is required that it containes \"Resources/\".");
+        GUILayout.Label("No valid path or data can be found. Please updated to a valid path, otherwise nothing will be saved. \nIt is required that it containes \"Resources\".");
 
         GUILayout.Label(_status);
         GUILayout.BeginHorizontal();
@@ -48,9 +48,8 @@ public class DialogGraphPathSelectionWindow : EditorWindow
         GUILayout.EndHorizontal();
         if (GUILayout.Button("Refresh"))
         {
-            if (Directory.Exists(Application.dataPath + "/" + _assetPathInProject) && _assetPathInProject.Contains("Resources/"))
+            if (ResourcesUtil.TrySetValidPath(Application.dataPath + "/" + _assetPathInProject, ProjectPrefKeys.DIALOGSAVEPATH))
             {
-                ProjectPrefs.SetString(ProjectPrefKeys.DIALOGSAVEPATH, _assetPathInProject);
                 _graph.UpdateData();
                 this.Close();
             }

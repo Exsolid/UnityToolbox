@@ -98,7 +98,7 @@ $(document).ready(function(){initNavTree('class_save_game_manager.html',''); ini
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#properties">Properties</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_save_game_manager-members.html">List of all members</a>  </div>
@@ -106,7 +106,7 @@ $(document).ready(function(){initNavTree('class_save_game_manager.html',''); ini
 </div><!--header-->
 <div class="contents">
 
-<p>A manager, which is takes care of the (de)serialisation of GameObjects and <a class="el" href="class_completion_data.html" title="Defines all data for the completion states of the game.">CompletionData</a>. Requires a <a class="el" href="class_prefab_manager.html" title="A tool which saves all possible prefabs for the SaveGameManager. Required if new objects should be lo...">PrefabManager</a> and <a class="el" href="class_i_d_manager.html" title="A manager which can generate unique IDs. Works in editor and runtime.">IDManager</a> for objects that are not present initially.  
+<p>A manager, which is takes care of the (de)serialization of GameObjects and GamestateData. Requires a PrefabManager and <a class="el" href="class_i_d_manager.html" title="A manager which can generate unique IDs. Works in editor and runtime.">IDManager</a> for objects that are not present initially.  
 </p>
 <div class="dynheader">
 Inheritance diagram for SaveGameManager:</div>
@@ -122,12 +122,6 @@ Inheritance diagram for SaveGameManager:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:af0339cbc0d9dd490f82dc8bbd475d410"><td class="memItemLeft" align="right" valign="top">override void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_save_game_manager.html#af0339cbc0d9dd490f82dc8bbd475d410">Awake</a> ()</td></tr>
 <tr class="separator:af0339cbc0d9dd490f82dc8bbd475d410"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a513cca8de4bf1ebf6a0445f9bea1537d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_save_game_manager.html#a513cca8de4bf1ebf6a0445f9bea1537d">GetCompletionInfo</a> (string ID)</td></tr>
-<tr class="memdesc:a513cca8de4bf1ebf6a0445f9bea1537d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trys to find completion infos with an ID. Similar to gamestates but not necessarily linear.  <br /></td></tr>
-<tr class="separator:a513cca8de4bf1ebf6a0445f9bea1537d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0ad1e3200ac49a35ecf1fc2c5d62efd7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_save_game_manager.html#a0ad1e3200ac49a35ecf1fc2c5d62efd7">SetCompletionInfo</a> (string ID, bool isCompleted)</td></tr>
-<tr class="memdesc:a0ad1e3200ac49a35ecf1fc2c5d62efd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets completion info.  <br /></td></tr>
-<tr class="separator:a0ad1e3200ac49a35ecf1fc2c5d62efd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf9c15be6a3635d2839521de0e753f3a"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_game_data.html">GameData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_save_game_manager.html#abf9c15be6a3635d2839521de0e753f3a">GetGameDataForID</a> (string ID)</td></tr>
 <tr class="memdesc:abf9c15be6a3635d2839521de0e753f3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trys to find <a class="el" href="class_game_data.html" title="Defines a base for all serializable data. SaveGameManager and Saveable for more infos.">GameData</a> for an ID.  <br /></td></tr>
 <tr class="separator:abf9c15be6a3635d2839521de0e753f3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -143,10 +137,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae904a4e92b931cdce3d63ac36c54062b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_module.html#ae904a4e92b931cdce3d63ac36c54062b">Awake</a> ()</td></tr>
 <tr class="separator:ae904a4e92b931cdce3d63ac36c54062b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a27140f69411cbc394307d78896e8bfd0"><td class="memItemLeft" align="right" valign="top">Action&lt; string, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_save_game_manager.html#a27140f69411cbc394307d78896e8bfd0">OnCompletionInfoChanged</a></td></tr>
-<tr class="separator:a27140f69411cbc394307d78896e8bfd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="properties" name="properties"></a>
+Properties</h2></td></tr>
+<tr class="memitem:a4ed2207e673f95c86a5a737a911c5464"><td class="memItemLeft" align="right" valign="top">HashSet&lt; <a class="el" href="class_gamestate_node_data.html">GamestateNodeData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_save_game_manager.html#a4ed2207e673f95c86a5a737a911c5464">ActiveGamestates</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a4ed2207e673f95c86a5a737a911c5464"><td class="mdescLeft">&#160;</td><td class="mdescRight">All the active gamestates.  <br /></td></tr>
+<tr class="separator:a4ed2207e673f95c86a5a737a911c5464"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
@@ -172,25 +167,29 @@ Private Member Functions</h2></td></tr>
 <tr class="separator:af5b30c8c484bf2fd3d0918003523c612"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac41e706433b27511f82041bc0f796bd2"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_save_game_manager.html#ac41e706433b27511f82041bc0f796bd2">Decrypt</a> (byte[] cypherText, byte[] key, byte[] iv)</td></tr>
 <tr class="separator:ac41e706433b27511f82041bc0f796bd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afca2e660d0615e45c82a1e90a6188367"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_save_game_manager.html#afca2e660d0615e45c82a1e90a6188367">OnValidate</a> ()</td></tr>
+<tr class="separator:afca2e660d0615e45c82a1e90a6188367"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:a6b1858bb7bc387a5da9b7885d2eeb7e5"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_save_game_manager.html#a6b1858bb7bc387a5da9b7885d2eeb7e5">_pathToUse</a></td></tr>
 <tr class="separator:a6b1858bb7bc387a5da9b7885d2eeb7e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11b93960812aa1f8bdb72745ff850508"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_save_game_manager.html#a11b93960812aa1f8bdb72745ff850508">_fullPath</a></td></tr>
+<tr class="separator:a11b93960812aa1f8bdb72745ff850508"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d56ce023305d2209af7f22d9cb4a7de"><td class="memItemLeft" align="right" valign="top">readonly string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_save_game_manager.html#a4d56ce023305d2209af7f22d9cb4a7de">_dataPath</a> = &quot;/SaveGameData.dat&quot;</td></tr>
 <tr class="separator:a4d56ce023305d2209af7f22d9cb4a7de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a992a4564ea4a22fa1ac5252d72a9c80b"><td class="memItemLeft" align="right" valign="top">readonly string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_save_game_manager.html#a992a4564ea4a22fa1ac5252d72a9c80b">_spawnDataPath</a> = &quot;/SaveGameObjects.dat&quot;</td></tr>
 <tr class="separator:a992a4564ea4a22fa1ac5252d72a9c80b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a391177e988e637b08f0995c7a9832add"><td class="memItemLeft" align="right" valign="top">readonly string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_save_game_manager.html#a391177e988e637b08f0995c7a9832add">_completionDataPath</a> = &quot;/SaveGameCompletion.dat&quot;</td></tr>
-<tr class="separator:a391177e988e637b08f0995c7a9832add"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a07182ee9a7c02aa5088f173753b900d5"><td class="memItemLeft" align="right" valign="top">Dictionary&lt; string, List&lt; <a class="el" href="class_game_data.html">GameData</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_save_game_manager.html#a07182ee9a7c02aa5088f173753b900d5">_data</a></td></tr>
-<tr class="separator:a07182ee9a7c02aa5088f173753b900d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3301278a7a8fb329853844caa386f0c8"><td class="memItemLeft" align="right" valign="top">readonly string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_save_game_manager.html#a3301278a7a8fb329853844caa386f0c8">_gamestateDataPath</a> = &quot;/SaveGameCompletion.dat&quot;</td></tr>
+<tr class="separator:a3301278a7a8fb329853844caa386f0c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f92aca9ff7fe2710b8039c6dbebf2d5"><td class="memItemLeft" align="right" valign="top">Dictionary&lt; string, List&lt; <a class="el" href="class_game_data.html">GameData</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_save_game_manager.html#a1f92aca9ff7fe2710b8039c6dbebf2d5">_data</a></td></tr>
+<tr class="separator:a1f92aca9ff7fe2710b8039c6dbebf2d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed62487d0dc93fccd35c372d7e2fddb3"><td class="memItemLeft" align="right" valign="top">Dictionary&lt; string, <a class="el" href="class_resource_data.html">ResourceData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_save_game_manager.html#aed62487d0dc93fccd35c372d7e2fddb3">_spawnData</a></td></tr>
 <tr class="separator:aed62487d0dc93fccd35c372d7e2fddb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c10e572c4a2b3ce87f1ed35eb83e220"><td class="memItemLeft" align="right" valign="top">HashSet&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_save_game_manager.html#a9c10e572c4a2b3ce87f1ed35eb83e220">_spawnedIDs</a></td></tr>
 <tr class="separator:a9c10e572c4a2b3ce87f1ed35eb83e220"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8319a1e2fd3b8c2a122bd290c8fddf1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_completion_data.html">CompletionData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_save_game_manager.html#af8319a1e2fd3b8c2a122bd290c8fddf1">_completionInfo</a></td></tr>
-<tr class="separator:af8319a1e2fd3b8c2a122bd290c8fddf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca0f5bc9defdfe44aa205ef208f6accf"><td class="memItemLeft" align="right" valign="top">HashSet&lt; <a class="el" href="class_gamestate_node_data.html">GamestateNodeData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_save_game_manager.html#aca0f5bc9defdfe44aa205ef208f6accf">_activeGamestates</a></td></tr>
+<tr class="separator:aca0f5bc9defdfe44aa205ef208f6accf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aceb50b9c68285ba76762e92d409f5c5a"><td class="memItemLeft" align="right" valign="top">JsonSerializerSettings&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_save_game_manager.html#aceb50b9c68285ba76762e92d409f5c5a">_settings</a></td></tr>
 <tr class="separator:aceb50b9c68285ba76762e92d409f5c5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -220,7 +219,7 @@ Private Attributes</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_module.html#ae904a4e92b931cdce3d63ac36c54062b">Module</a>.</p>
 
-<p class="reference">References <a class="el" href="class_save_game_manager.html#af8319a1e2fd3b8c2a122bd290c8fddf1">_completionInfo</a>, <a class="el" href="class_save_game_manager.html#a07182ee9a7c02aa5088f173753b900d5">_data</a>, <a class="el" href="class_save_game_manager.html#a6b1858bb7bc387a5da9b7885d2eeb7e5">_pathToUse</a>, <a class="el" href="class_save_game_manager.html#aceb50b9c68285ba76762e92d409f5c5a">_settings</a>, <a class="el" href="class_save_game_manager.html#aed62487d0dc93fccd35c372d7e2fddb3">_spawnData</a>, <a class="el" href="class_save_game_manager.html#a9c10e572c4a2b3ce87f1ed35eb83e220">_spawnedIDs</a>, <a class="el" href="class_save_game_manager.html#a5a52739c0588063569c44788c4ffe7a0">Load()</a>, <a class="el" href="class_save_game_manager.html#ad33288ec097389f64bf4920a0396128f">ReadCompletionData()</a>, <a class="el" href="class_save_game_manager.html#a0e607c4bf8fa962f04ab8a7980172ab3">ReadData()</a>, and <a class="el" href="class_save_game_manager.html#a589ffd9e27307492ec57f74b50c5ee1b">ReadSpawnData()</a>.</p>
+<p class="reference">References <a class="el" href="class_save_game_manager.html#aca0f5bc9defdfe44aa205ef208f6accf">_activeGamestates</a>, <a class="el" href="class_save_game_manager.html#a1f92aca9ff7fe2710b8039c6dbebf2d5">_data</a>, <a class="el" href="class_save_game_manager.html#a11b93960812aa1f8bdb72745ff850508">_fullPath</a>, <a class="el" href="class_save_game_manager.html#a6b1858bb7bc387a5da9b7885d2eeb7e5">_pathToUse</a>, <a class="el" href="class_save_game_manager.html#aceb50b9c68285ba76762e92d409f5c5a">_settings</a>, <a class="el" href="class_save_game_manager.html#aed62487d0dc93fccd35c372d7e2fddb3">_spawnData</a>, <a class="el" href="class_save_game_manager.html#a9c10e572c4a2b3ce87f1ed35eb83e220">_spawnedIDs</a>, <a class="el" href="class_save_game_manager.html#a5a52739c0588063569c44788c4ffe7a0">Load()</a>, <a class="el" href="class_save_game_manager.html#ad33288ec097389f64bf4920a0396128f">ReadCompletionData()</a>, <a class="el" href="class_save_game_manager.html#a0e607c4bf8fa962f04ab8a7980172ab3">ReadData()</a>, and <a class="el" href="class_save_game_manager.html#a589ffd9e27307492ec57f74b50c5ee1b">ReadSpawnData()</a>.</p>
 
 </div>
 </div>
@@ -308,33 +307,6 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a513cca8de4bf1ebf6a0445f9bea1537d" name="a513cca8de4bf1ebf6a0445f9bea1537d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a513cca8de4bf1ebf6a0445f9bea1537d">&#9670;&#160;</a></span>GetCompletionInfo()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool SaveGameManager.GetCompletionInfo </td>
-          <td>(</td>
-          <td class="paramtype">string&#160;</td>
-          <td class="paramname"><em>ID</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ID</td><td>The ID of the completion info.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Whether the the completion info is set or not.</dd></dl>
-
-<p class="reference">References <a class="el" href="class_save_game_manager.html#af8319a1e2fd3b8c2a122bd290c8fddf1">_completionInfo</a>, and <a class="el" href="class_completion_data.html#ac992b10ed7a833fa823dd86613797367">CompletionData.IDToCompletion</a>.</p>
-
-</div>
-</div>
 <a id="abf9c15be6a3635d2839521de0e753f3a" name="abf9c15be6a3635d2839521de0e753f3a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abf9c15be6a3635d2839521de0e753f3a">&#9670;&#160;</a></span>GetGameDataForID()</h2>
 
@@ -358,7 +330,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
-<p class="reference">References <a class="el" href="class_save_game_manager.html#a07182ee9a7c02aa5088f173753b900d5">_data</a>.</p>
+<p class="reference">References <a class="el" href="class_save_game_manager.html#a1f92aca9ff7fe2710b8039c6dbebf2d5">_data</a>.</p>
 
 </div>
 </div>
@@ -443,7 +415,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">References <a class="el" href="class_save_game_manager.html#a07182ee9a7c02aa5088f173753b900d5">_data</a>, <a class="el" href="class_i_d_manager.html#ab5f17d20d54b30cdbb7f21b4b3fb5551">IDManager.GetSceneNameOfID()</a>, <a class="el" href="class_saveable.html#a949dfb167c404fc147e49db779f27bff">Saveable.ID</a>, and <a class="el" href="class_saveable.html#ab9430e7e8e4b16bdcfa9724ff525cba3">Saveable.Load()</a>.</p>
+<p class="reference">References <a class="el" href="class_save_game_manager.html#a1f92aca9ff7fe2710b8039c6dbebf2d5">_data</a>, <a class="el" href="class_i_d_manager.html#ab5f17d20d54b30cdbb7f21b4b3fb5551">IDManager.GetSceneNameOfID()</a>, <a class="el" href="class_saveable.html#a949dfb167c404fc147e49db779f27bff">Saveable.ID</a>, and <a class="el" href="class_saveable.html#ab9430e7e8e4b16bdcfa9724ff525cba3">Saveable.Load()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="class_save_game_manager.html#a6599356ff38669668f5616b9e28de650">LoadAllIntoScene()</a>.</p>
 
@@ -476,6 +448,33 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="afca2e660d0615e45c82a1e90a6188367" name="afca2e660d0615e45c82a1e90a6188367"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afca2e660d0615e45c82a1e90a6188367">&#9670;&#160;</a></span>OnValidate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SaveGameManager.OnValidate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="reference">References <a class="el" href="class_save_game_manager.html#a6b1858bb7bc387a5da9b7885d2eeb7e5">_pathToUse</a>.</p>
+
+</div>
+</div>
 <a id="ad33288ec097389f64bf4920a0396128f" name="ad33288ec097389f64bf4920a0396128f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad33288ec097389f64bf4920a0396128f">&#9670;&#160;</a></span>ReadCompletionData()</h2>
 
@@ -499,7 +498,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">References <a class="el" href="class_save_game_manager.html#a391177e988e637b08f0995c7a9832add">_completionDataPath</a>, <a class="el" href="class_save_game_manager.html#af8319a1e2fd3b8c2a122bd290c8fddf1">_completionInfo</a>, <a class="el" href="class_save_game_manager.html#a6b1858bb7bc387a5da9b7885d2eeb7e5">_pathToUse</a>, and <a class="el" href="class_save_game_manager.html#aceb50b9c68285ba76762e92d409f5c5a">_settings</a>.</p>
+<p class="reference">References <a class="el" href="class_save_game_manager.html#aca0f5bc9defdfe44aa205ef208f6accf">_activeGamestates</a>, <a class="el" href="class_save_game_manager.html#a11b93960812aa1f8bdb72745ff850508">_fullPath</a>, <a class="el" href="class_save_game_manager.html#a3301278a7a8fb329853844caa386f0c8">_gamestateDataPath</a>, and <a class="el" href="class_save_game_manager.html#aceb50b9c68285ba76762e92d409f5c5a">_settings</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="class_save_game_manager.html#af0339cbc0d9dd490f82dc8bbd475d410">Awake()</a>.</p>
 
@@ -528,7 +527,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">References <a class="el" href="class_save_game_manager.html#a07182ee9a7c02aa5088f173753b900d5">_data</a>, <a class="el" href="class_save_game_manager.html#a4d56ce023305d2209af7f22d9cb4a7de">_dataPath</a>, <a class="el" href="class_save_game_manager.html#a6b1858bb7bc387a5da9b7885d2eeb7e5">_pathToUse</a>, and <a class="el" href="class_save_game_manager.html#aceb50b9c68285ba76762e92d409f5c5a">_settings</a>.</p>
+<p class="reference">References <a class="el" href="class_save_game_manager.html#a1f92aca9ff7fe2710b8039c6dbebf2d5">_data</a>, <a class="el" href="class_save_game_manager.html#a4d56ce023305d2209af7f22d9cb4a7de">_dataPath</a>, <a class="el" href="class_save_game_manager.html#a11b93960812aa1f8bdb72745ff850508">_fullPath</a>, and <a class="el" href="class_save_game_manager.html#aceb50b9c68285ba76762e92d409f5c5a">_settings</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="class_save_game_manager.html#af0339cbc0d9dd490f82dc8bbd475d410">Awake()</a>.</p>
 
@@ -557,7 +556,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">References <a class="el" href="class_save_game_manager.html#a6b1858bb7bc387a5da9b7885d2eeb7e5">_pathToUse</a>, <a class="el" href="class_save_game_manager.html#aceb50b9c68285ba76762e92d409f5c5a">_settings</a>, <a class="el" href="class_save_game_manager.html#aed62487d0dc93fccd35c372d7e2fddb3">_spawnData</a>, and <a class="el" href="class_save_game_manager.html#a992a4564ea4a22fa1ac5252d72a9c80b">_spawnDataPath</a>.</p>
+<p class="reference">References <a class="el" href="class_save_game_manager.html#a11b93960812aa1f8bdb72745ff850508">_fullPath</a>, <a class="el" href="class_save_game_manager.html#aceb50b9c68285ba76762e92d409f5c5a">_settings</a>, <a class="el" href="class_save_game_manager.html#aed62487d0dc93fccd35c372d7e2fddb3">_spawnData</a>, and <a class="el" href="class_save_game_manager.html#a992a4564ea4a22fa1ac5252d72a9c80b">_spawnDataPath</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="class_save_game_manager.html#af0339cbc0d9dd490f82dc8bbd475d410">Awake()</a>.</p>
 
@@ -585,7 +584,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="reference">References <a class="el" href="class_save_game_manager.html#a07182ee9a7c02aa5088f173753b900d5">_data</a>, and <a class="el" href="class_save_game_manager.html#aed62487d0dc93fccd35c372d7e2fddb3">_spawnData</a>.</p>
+<p class="reference">References <a class="el" href="class_save_game_manager.html#a1f92aca9ff7fe2710b8039c6dbebf2d5">_data</a>, and <a class="el" href="class_save_game_manager.html#aed62487d0dc93fccd35c372d7e2fddb3">_spawnData</a>.</p>
 
 </div>
 </div>
@@ -604,44 +603,7 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="reference">References <a class="el" href="class_save_game_manager.html#af8319a1e2fd3b8c2a122bd290c8fddf1">_completionInfo</a>, <a class="el" href="class_save_game_manager.html#a07182ee9a7c02aa5088f173753b900d5">_data</a>, and <a class="el" href="class_save_game_manager.html#aed62487d0dc93fccd35c372d7e2fddb3">_spawnData</a>.</p>
-
-</div>
-</div>
-<a id="a0ad1e3200ac49a35ecf1fc2c5d62efd7" name="a0ad1e3200ac49a35ecf1fc2c5d62efd7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0ad1e3200ac49a35ecf1fc2c5d62efd7">&#9670;&#160;</a></span>SetCompletionInfo()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void SaveGameManager.SetCompletionInfo </td>
-          <td>(</td>
-          <td class="paramtype">string&#160;</td>
-          <td class="paramname"><em>ID</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>isCompleted</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ID</td><td>The ID of the completion.</td></tr>
-    <tr><td class="paramname">isCompleted</td><td>Whether the completion mark is actually completed.</td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="reference">References <a class="el" href="class_save_game_manager.html#af8319a1e2fd3b8c2a122bd290c8fddf1">_completionInfo</a>, <a class="el" href="class_completion_data.html#ac992b10ed7a833fa823dd86613797367">CompletionData.IDToCompletion</a>, and <a class="el" href="class_save_game_manager.html#a27140f69411cbc394307d78896e8bfd0">OnCompletionInfoChanged</a>.</p>
+<p class="reference">References <a class="el" href="class_save_game_manager.html#aca0f5bc9defdfe44aa205ef208f6accf">_activeGamestates</a>, <a class="el" href="class_save_game_manager.html#a1f92aca9ff7fe2710b8039c6dbebf2d5">_data</a>, and <a class="el" href="class_save_game_manager.html#aed62487d0dc93fccd35c372d7e2fddb3">_spawnData</a>.</p>
 
 </div>
 </div>
@@ -685,7 +647,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="reference">References <a class="el" href="class_save_game_manager.html#a07182ee9a7c02aa5088f173753b900d5">_data</a>, <a class="el" href="class_save_game_manager.html#aed62487d0dc93fccd35c372d7e2fddb3">_spawnData</a>, and <a class="el" href="class_save_game_manager.html#a29071e2e16909af3740bc102b5425fcb">WriteData()</a>.</p>
+<p class="reference">References <a class="el" href="class_save_game_manager.html#a1f92aca9ff7fe2710b8039c6dbebf2d5">_data</a>, <a class="el" href="class_save_game_manager.html#aed62487d0dc93fccd35c372d7e2fddb3">_spawnData</a>, and <a class="el" href="class_save_game_manager.html#a29071e2e16909af3740bc102b5425fcb">WriteData()</a>.</p>
 
 </div>
 </div>
@@ -712,7 +674,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">References <a class="el" href="class_save_game_manager.html#aed62487d0dc93fccd35c372d7e2fddb3">_spawnData</a>, <a class="el" href="class_save_game_manager.html#a9c10e572c4a2b3ce87f1ed35eb83e220">_spawnedIDs</a>, <a class="el" href="class_prefab_manager.html#a4a882480219a8775ff144b13940c355b">PrefabManager.GetPrefabForID()</a>, and <a class="el" href="class_i_d_manager.html#ab5f17d20d54b30cdbb7f21b4b3fb5551">IDManager.GetSceneNameOfID()</a>.</p>
+<p class="reference">References <a class="el" href="class_save_game_manager.html#aed62487d0dc93fccd35c372d7e2fddb3">_spawnData</a>, <a class="el" href="class_save_game_manager.html#a9c10e572c4a2b3ce87f1ed35eb83e220">_spawnedIDs</a>, and <a class="el" href="class_i_d_manager.html#ab5f17d20d54b30cdbb7f21b4b3fb5551">IDManager.GetSceneNameOfID()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="class_save_game_manager.html#a6599356ff38669668f5616b9e28de650">LoadAllIntoScene()</a>.</p>
 
@@ -741,15 +703,15 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">References <a class="el" href="class_save_game_manager.html#a391177e988e637b08f0995c7a9832add">_completionDataPath</a>, <a class="el" href="class_save_game_manager.html#af8319a1e2fd3b8c2a122bd290c8fddf1">_completionInfo</a>, <a class="el" href="class_save_game_manager.html#a07182ee9a7c02aa5088f173753b900d5">_data</a>, <a class="el" href="class_save_game_manager.html#a4d56ce023305d2209af7f22d9cb4a7de">_dataPath</a>, <a class="el" href="class_save_game_manager.html#a6b1858bb7bc387a5da9b7885d2eeb7e5">_pathToUse</a>, <a class="el" href="class_save_game_manager.html#aceb50b9c68285ba76762e92d409f5c5a">_settings</a>, <a class="el" href="class_save_game_manager.html#aed62487d0dc93fccd35c372d7e2fddb3">_spawnData</a>, and <a class="el" href="class_save_game_manager.html#a992a4564ea4a22fa1ac5252d72a9c80b">_spawnDataPath</a>.</p>
+<p class="reference">References <a class="el" href="class_save_game_manager.html#aca0f5bc9defdfe44aa205ef208f6accf">_activeGamestates</a>, <a class="el" href="class_save_game_manager.html#a1f92aca9ff7fe2710b8039c6dbebf2d5">_data</a>, <a class="el" href="class_save_game_manager.html#a4d56ce023305d2209af7f22d9cb4a7de">_dataPath</a>, <a class="el" href="class_save_game_manager.html#a11b93960812aa1f8bdb72745ff850508">_fullPath</a>, <a class="el" href="class_save_game_manager.html#a3301278a7a8fb329853844caa386f0c8">_gamestateDataPath</a>, <a class="el" href="class_save_game_manager.html#aceb50b9c68285ba76762e92d409f5c5a">_settings</a>, <a class="el" href="class_save_game_manager.html#aed62487d0dc93fccd35c372d7e2fddb3">_spawnData</a>, and <a class="el" href="class_save_game_manager.html#a992a4564ea4a22fa1ac5252d72a9c80b">_spawnDataPath</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="class_save_game_manager.html#a833dcc682b6475e8a80c9eed712337b3">OnDestroy()</a>, and <a class="el" href="class_save_game_manager.html#a21c9437b480ae42e381646e7f93caacc">SetDataToSave()</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a391177e988e637b08f0995c7a9832add" name="a391177e988e637b08f0995c7a9832add"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a391177e988e637b08f0995c7a9832add">&#9670;&#160;</a></span>_completionDataPath</h2>
+<a id="aca0f5bc9defdfe44aa205ef208f6accf" name="aca0f5bc9defdfe44aa205ef208f6accf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca0f5bc9defdfe44aa205ef208f6accf">&#9670;&#160;</a></span>_activeGamestates</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -758,7 +720,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">readonly string SaveGameManager._completionDataPath = &quot;/SaveGameCompletion.dat&quot;</td>
+          <td class="memname">HashSet&lt;<a class="el" href="class_gamestate_node_data.html">GamestateNodeData</a>&gt; SaveGameManager._activeGamestates</td>
         </tr>
       </table>
   </td>
@@ -768,12 +730,12 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="class_save_game_manager.html#ad33288ec097389f64bf4920a0396128f">ReadCompletionData()</a>, and <a class="el" href="class_save_game_manager.html#a29071e2e16909af3740bc102b5425fcb">WriteData()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="class_save_game_manager.html#af0339cbc0d9dd490f82dc8bbd475d410">Awake()</a>, <a class="el" href="class_save_game_manager.html#ad33288ec097389f64bf4920a0396128f">ReadCompletionData()</a>, <a class="el" href="class_save_game_manager.html#aa9b39221f462f438cc864e18b993dc34">ResetAll()</a>, and <a class="el" href="class_save_game_manager.html#a29071e2e16909af3740bc102b5425fcb">WriteData()</a>.</p>
 
 </div>
 </div>
-<a id="af8319a1e2fd3b8c2a122bd290c8fddf1" name="af8319a1e2fd3b8c2a122bd290c8fddf1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af8319a1e2fd3b8c2a122bd290c8fddf1">&#9670;&#160;</a></span>_completionInfo</h2>
+<a id="a1f92aca9ff7fe2710b8039c6dbebf2d5" name="a1f92aca9ff7fe2710b8039c6dbebf2d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f92aca9ff7fe2710b8039c6dbebf2d5">&#9670;&#160;</a></span>_data</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -782,31 +744,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_completion_data.html">CompletionData</a> SaveGameManager._completionInfo</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="reference">Referenced by <a class="el" href="class_save_game_manager.html#af0339cbc0d9dd490f82dc8bbd475d410">Awake()</a>, <a class="el" href="class_save_game_manager.html#a513cca8de4bf1ebf6a0445f9bea1537d">GetCompletionInfo()</a>, <a class="el" href="class_save_game_manager.html#ad33288ec097389f64bf4920a0396128f">ReadCompletionData()</a>, <a class="el" href="class_save_game_manager.html#aa9b39221f462f438cc864e18b993dc34">ResetAll()</a>, <a class="el" href="class_save_game_manager.html#a0ad1e3200ac49a35ecf1fc2c5d62efd7">SetCompletionInfo()</a>, and <a class="el" href="class_save_game_manager.html#a29071e2e16909af3740bc102b5425fcb">WriteData()</a>.</p>
-
-</div>
-</div>
-<a id="a07182ee9a7c02aa5088f173753b900d5" name="a07182ee9a7c02aa5088f173753b900d5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a07182ee9a7c02aa5088f173753b900d5">&#9670;&#160;</a></span>_data</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">Dictionary&lt;string,List&lt;<a class="el" href="class_game_data.html">GameData</a>&gt; &gt; SaveGameManager._data</td>
+          <td class="memname">Dictionary&lt;string, List&lt;<a class="el" href="class_game_data.html">GameData</a>&gt; &gt; SaveGameManager._data</td>
         </tr>
       </table>
   </td>
@@ -844,6 +782,54 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a11b93960812aa1f8bdb72745ff850508" name="a11b93960812aa1f8bdb72745ff850508"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11b93960812aa1f8bdb72745ff850508">&#9670;&#160;</a></span>_fullPath</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">string SaveGameManager._fullPath</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="class_save_game_manager.html#af0339cbc0d9dd490f82dc8bbd475d410">Awake()</a>, <a class="el" href="class_save_game_manager.html#ad33288ec097389f64bf4920a0396128f">ReadCompletionData()</a>, <a class="el" href="class_save_game_manager.html#a0e607c4bf8fa962f04ab8a7980172ab3">ReadData()</a>, <a class="el" href="class_save_game_manager.html#a589ffd9e27307492ec57f74b50c5ee1b">ReadSpawnData()</a>, and <a class="el" href="class_save_game_manager.html#a29071e2e16909af3740bc102b5425fcb">WriteData()</a>.</p>
+
+</div>
+</div>
+<a id="a3301278a7a8fb329853844caa386f0c8" name="a3301278a7a8fb329853844caa386f0c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3301278a7a8fb329853844caa386f0c8">&#9670;&#160;</a></span>_gamestateDataPath</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">readonly string SaveGameManager._gamestateDataPath = &quot;/SaveGameCompletion.dat&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="class_save_game_manager.html#ad33288ec097389f64bf4920a0396128f">ReadCompletionData()</a>, and <a class="el" href="class_save_game_manager.html#a29071e2e16909af3740bc102b5425fcb">WriteData()</a>.</p>
+
+</div>
+</div>
 <a id="a6b1858bb7bc387a5da9b7885d2eeb7e5" name="a6b1858bb7bc387a5da9b7885d2eeb7e5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6b1858bb7bc387a5da9b7885d2eeb7e5">&#9670;&#160;</a></span>_pathToUse</h2>
 
@@ -864,7 +850,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="class_save_game_manager.html#af0339cbc0d9dd490f82dc8bbd475d410">Awake()</a>, <a class="el" href="class_save_game_manager.html#ad33288ec097389f64bf4920a0396128f">ReadCompletionData()</a>, <a class="el" href="class_save_game_manager.html#a0e607c4bf8fa962f04ab8a7980172ab3">ReadData()</a>, <a class="el" href="class_save_game_manager.html#a589ffd9e27307492ec57f74b50c5ee1b">ReadSpawnData()</a>, and <a class="el" href="class_save_game_manager.html#a29071e2e16909af3740bc102b5425fcb">WriteData()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="class_save_game_manager.html#af0339cbc0d9dd490f82dc8bbd475d410">Awake()</a>, and <a class="el" href="class_save_game_manager.html#afca2e660d0615e45c82a1e90a6188367">OnValidate()</a>.</p>
 
 </div>
 </div>
@@ -964,19 +950,26 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a27140f69411cbc394307d78896e8bfd0" name="a27140f69411cbc394307d78896e8bfd0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a27140f69411cbc394307d78896e8bfd0">&#9670;&#160;</a></span>OnCompletionInfoChanged</h2>
+<h2 class="groupheader">Property Documentation</h2>
+<a id="a4ed2207e673f95c86a5a737a911c5464" name="a4ed2207e673f95c86a5a737a911c5464"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ed2207e673f95c86a5a737a911c5464">&#9670;&#160;</a></span>ActiveGamestates</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">Action&lt;string, bool&gt; SaveGameManager.OnCompletionInfoChanged</td>
+          <td class="memname">HashSet&lt;<a class="el" href="class_gamestate_node_data.html">GamestateNodeData</a>&gt; SaveGameManager.ActiveGamestates</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
-
-<p class="reference">Referenced by <a class="el" href="class_save_game_manager.html#a0ad1e3200ac49a35ecf1fc2c5d62efd7">SetCompletionInfo()</a>.</p>
 
 </div>
 </div>

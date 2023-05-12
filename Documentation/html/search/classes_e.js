@@ -6,5 +6,6 @@ var searchData=
   ['rebindbutton_3',['RebindButton',['../class_rebind_button.html',1,'']]],
   ['resetbutton_4',['ResetButton',['../class_reset_button.html',1,'']]],
   ['resetsavegamebutton_5',['ResetSavegameButton',['../class_reset_savegame_button.html',1,'']]],
-  ['resourcedata_6',['ResourceData',['../class_resource_data.html',1,'']]]
+  ['resourcedata_6',['ResourceData',['../class_resource_data.html',1,'']]],
+  ['resourcesutil_7',['ResourcesUtil',['../class_resources_util.html',1,'']]]
 ];

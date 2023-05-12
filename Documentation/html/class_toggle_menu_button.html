@@ -131,8 +131,12 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a30680f5d105a9b3a8447024ae6c5ddda"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64cc4997619112aee0798a1432bcbab2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_toggle_menu_button.html#a64cc4997619112aee0798a1432bcbab2">_menuType</a></td></tr>
 <tr class="separator:a64cc4997619112aee0798a1432bcbab2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a707f3cbbfce14073dc2bf65f652af2e5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_toggle_menu_button.html#a707f3cbbfce14073dc2bf65f652af2e5">_menuOfType</a></td></tr>
+<tr class="separator:a707f3cbbfce14073dc2bf65f652af2e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af3ea00862f291e013c5053acd66d0560"><td class="memItemLeft" align="right" valign="top">List&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_toggle_menu_button.html#af3ea00862f291e013c5053acd66d0560">_menuTypes</a></td></tr>
 <tr class="separator:af3ea00862f291e013c5053acd66d0560"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ff78b6166902fb3fc00ba10cab8bc42"><td class="memItemLeft" align="right" valign="top">List&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_toggle_menu_button.html#a0ff78b6166902fb3fc00ba10cab8bc42">_menusOfType</a></td></tr>
+<tr class="separator:a0ff78b6166902fb3fc00ba10cab8bc42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="af2009a926e65772f52eaf712fc0afc4e" name="af2009a926e65772f52eaf712fc0afc4e"></a>
@@ -170,7 +174,7 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="reference">References <a class="el" href="class_toggle_menu_button.html#a30680f5d105a9b3a8447024ae6c5ddda">_clickSounds</a>, <a class="el" href="class_toggle_menu_button.html#afa7f49923436988bc48d392d22766bc2">_isEnabled</a>, <a class="el" href="class_toggle_menu_button.html#a64cc4997619112aee0798a1432bcbab2">_menuType</a>, and <a class="el" href="class_audio_mixer.html#a7fa672291974cb9bb7fbfdcd02427ea0">AudioMixer.PlayRandomSource()</a>.</p>
+<p class="reference">References <a class="el" href="class_toggle_menu_button.html#a30680f5d105a9b3a8447024ae6c5ddda">_clickSounds</a>, <a class="el" href="class_toggle_menu_button.html#afa7f49923436988bc48d392d22766bc2">_isEnabled</a>, <a class="el" href="class_toggle_menu_button.html#a707f3cbbfce14073dc2bf65f652af2e5">_menuOfType</a>, <a class="el" href="class_toggle_menu_button.html#a64cc4997619112aee0798a1432bcbab2">_menuType</a>, and <a class="el" href="class_audio_mixer.html#a7fa672291974cb9bb7fbfdcd02427ea0">AudioMixer.PlayRandomSource()</a>.</p>
 
 </div>
 </div>
@@ -197,7 +201,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">References <a class="el" href="class_toggle_menu_button.html#af3ea00862f291e013c5053acd66d0560">_menuTypes</a>, and <a class="el" href="class_menu_manager.html#acbeec98393148d04357dd593ffa3bdff">MenuManager.MenuTypesForEditor</a>.</p>
+<p class="reference">References <a class="el" href="class_toggle_menu_button.html#a0ff78b6166902fb3fc00ba10cab8bc42">_menusOfType</a>, <a class="el" href="class_toggle_menu_button.html#a64cc4997619112aee0798a1432bcbab2">_menuType</a>, <a class="el" href="class_toggle_menu_button.html#af3ea00862f291e013c5053acd66d0560">_menuTypes</a>, <a class="el" href="class_menu_manager.html#a35402511cae506e5b911c5d63892e7a3">MenuManager.GetAllMenusOfType()</a>, and <a class="el" href="class_menu_manager.html#a35f3265b2657067f8bb4ae21ee57a742">MenuManager.MenuTypeNamesForEditor</a>.</p>
 
 </div>
 </div>
@@ -250,6 +254,54 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a707f3cbbfce14073dc2bf65f652af2e5" name="a707f3cbbfce14073dc2bf65f652af2e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a707f3cbbfce14073dc2bf65f652af2e5">&#9670;&#160;</a></span>_menuOfType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ToggleMenuButton._menuOfType</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="class_toggle_menu_button.html#a37a0713c7c2a36c14d16daeeea877b5e">OnPointerClick()</a>.</p>
+
+</div>
+</div>
+<a id="a0ff78b6166902fb3fc00ba10cab8bc42" name="a0ff78b6166902fb3fc00ba10cab8bc42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ff78b6166902fb3fc00ba10cab8bc42">&#9670;&#160;</a></span>_menusOfType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">List&lt;string&gt; ToggleMenuButton._menusOfType</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="class_toggle_menu_button.html#aadacd2bf214b3dcdee48323ea8bd2cb6">OnValidate()</a>.</p>
+
+</div>
+</div>
 <a id="a64cc4997619112aee0798a1432bcbab2" name="a64cc4997619112aee0798a1432bcbab2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a64cc4997619112aee0798a1432bcbab2">&#9670;&#160;</a></span>_menuType</h2>
 
@@ -270,7 +322,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="class_toggle_menu_button.html#a37a0713c7c2a36c14d16daeeea877b5e">OnPointerClick()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="class_toggle_menu_button.html#a37a0713c7c2a36c14d16daeeea877b5e">OnPointerClick()</a>, and <a class="el" href="class_toggle_menu_button.html#aadacd2bf214b3dcdee48323ea8bd2cb6">OnValidate()</a>.</p>
 
 </div>
 </div>

@@ -63,6 +63,7 @@ public class LocalisationEditLanguageWindow :EditorWindow
             {
                 Localizer.Instance.LanguageEdited -= LanguageEdited;
                 Localizer.Instance.WriteData();
+                AssetDatabase.Refresh();
                 Close();
             }
             _status = "Could not edit the language, does the name already exist?";

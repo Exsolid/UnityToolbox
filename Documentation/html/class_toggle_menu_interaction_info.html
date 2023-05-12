@@ -118,6 +118,8 @@ Inheritance diagram for ToggleMenuInteractionInfo:</div>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a9bb52bd1959f5a005508255fcce80124"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_toggle_menu_interaction_info.html#a9bb52bd1959f5a005508255fcce80124">MenuType</a></td></tr>
 <tr class="separator:a9bb52bd1959f5a005508255fcce80124"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37412f944ee733a170d98aab518a463a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_toggle_menu_interaction_info.html#a37412f944ee733a170d98aab518a463a">MenuOfType</a></td></tr>
+<tr class="separator:a37412f944ee733a170d98aab518a463a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
@@ -128,6 +130,8 @@ Private Member Functions</h2></td></tr>
 Private Attributes</h2></td></tr>
 <tr class="memitem:a670f5203739c0b276363a975f25ddc0d"><td class="memItemLeft" align="right" valign="top">List&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_toggle_menu_interaction_info.html#a670f5203739c0b276363a975f25ddc0d">_menuTypes</a></td></tr>
 <tr class="separator:a670f5203739c0b276363a975f25ddc0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf6685264bb0c6c9e5b6d1727b626e10"><td class="memItemLeft" align="right" valign="top">List&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_toggle_menu_interaction_info.html#aaf6685264bb0c6c9e5b6d1727b626e10">_menusOfType</a></td></tr>
+<tr class="separator:aaf6685264bb0c6c9e5b6d1727b626e10"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="ab2e7a805e9dc121de4f81c3b2b0be5f3" name="ab2e7a805e9dc121de4f81c3b2b0be5f3"></a>
@@ -153,11 +157,35 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">References <a class="el" href="class_toggle_menu_interaction_info.html#a670f5203739c0b276363a975f25ddc0d">_menuTypes</a>, and <a class="el" href="class_menu_manager.html#acbeec98393148d04357dd593ffa3bdff">MenuManager.MenuTypesForEditor</a>.</p>
+<p class="reference">References <a class="el" href="class_toggle_menu_interaction_info.html#aaf6685264bb0c6c9e5b6d1727b626e10">_menusOfType</a>, <a class="el" href="class_toggle_menu_interaction_info.html#a670f5203739c0b276363a975f25ddc0d">_menuTypes</a>, <a class="el" href="class_menu_manager.html#a35402511cae506e5b911c5d63892e7a3">MenuManager.GetAllMenusOfType()</a>, and <a class="el" href="class_menu_manager.html#a35f3265b2657067f8bb4ae21ee57a742">MenuManager.MenuTypeNamesForEditor</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="aaf6685264bb0c6c9e5b6d1727b626e10" name="aaf6685264bb0c6c9e5b6d1727b626e10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf6685264bb0c6c9e5b6d1727b626e10">&#9670;&#160;</a></span>_menusOfType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">List&lt;string&gt; ToggleMenuInteractionInfo._menusOfType</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="class_toggle_menu_interaction_info.html#ab2e7a805e9dc121de4f81c3b2b0be5f3">OnValidate()</a>.</p>
+
+</div>
+</div>
 <a id="a670f5203739c0b276363a975f25ddc0d" name="a670f5203739c0b276363a975f25ddc0d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a670f5203739c0b276363a975f25ddc0d">&#9670;&#160;</a></span>_menuTypes</h2>
 
@@ -179,6 +207,20 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="reference">Referenced by <a class="el" href="class_toggle_menu_interaction_info.html#ab2e7a805e9dc121de4f81c3b2b0be5f3">OnValidate()</a>.</p>
+
+</div>
+</div>
+<a id="a37412f944ee733a170d98aab518a463a" name="a37412f944ee733a170d98aab518a463a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37412f944ee733a170d98aab518a463a">&#9670;&#160;</a></span>MenuOfType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ToggleMenuInteractionInfo.MenuOfType</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>

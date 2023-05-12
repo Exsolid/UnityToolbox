@@ -148,6 +148,8 @@ Private Member Functions</h2></td></tr>
 <tr class="separator:ad986e9406c3b482bfe6615903b02517d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28e28c16ab5d47ee3d7b169473873375"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_localisation_manager_window.html#a28e28c16ab5d47ee3d7b169473873375">OnDisable</a> ()</td></tr>
 <tr class="separator:a28e28c16ab5d47ee3d7b169473873375"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a495b6ba25ba54440af70d61ab99d4d1f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_localisation_manager_window.html#a495b6ba25ba54440af70d61ab99d4d1f">IsPathValid</a> (string path)</td></tr>
+<tr class="separator:a495b6ba25ba54440af70d61ab99d4d1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-static-methods" name="pri-static-methods"></a>
 Static Private Member Functions</h2></td></tr>
@@ -340,7 +342,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">References <a class="el" href="class_localisation_manager_window.html#a2dd101f65b67af101d325ba2841fb9db">_assetPathInProject</a>, <a class="el" href="class_localizer.html#aa162942b73fccd45fe981ba5ba44695b">Localizer.Initialize()</a>, <a class="el" href="class_localizer.html#a492f2a7ec70ab427d64fba49c9700ff1">Localizer.Instance</a>, <a class="el" href="class_localizer.html#aea01054b2fa9de5a5607bc0bdbf79c5d">Localizer.IsInitialized</a>, and <a class="el" href="class_project_prefs.html#a81449f98e582bc750ff8d10aa1458eaa">ProjectPrefs.SetString()</a>.</p>
+<p class="reference">References <a class="el" href="class_localisation_manager_window.html#a2dd101f65b67af101d325ba2841fb9db">_assetPathInProject</a>, <a class="el" href="class_localisation_manager_window.html#a058cf23a33c697943b82bcd3d2f69b13">DrawLineHorizontal()</a>, <a class="el" href="class_localizer.html#aa162942b73fccd45fe981ba5ba44695b">Localizer.Initialize()</a>, <a class="el" href="class_localizer.html#a492f2a7ec70ab427d64fba49c9700ff1">Localizer.Instance</a>, <a class="el" href="class_localizer.html#aea01054b2fa9de5a5607bc0bdbf79c5d">Localizer.IsInitialized</a>, <a class="el" href="class_resources_util.html#a7aa6c81491faf571dc052357a6b80cad">ResourcesUtil.TrySetValidPath()</a>, and <a class="el" href="class_localisation_manager_window.html#adebc849e5fe2b2b3e88d84f261fe1b0a">UpdateStatus()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="class_localisation_manager_window.html#aea448b432b2d681891dff6dbdda422bc">OnGUI()</a>.</p>
 
@@ -394,7 +396,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="class_localisation_manager_window.html#a84dd174694706d1fe4bf838f959052a1">DisplayIDsTab()</a>, <a class="el" href="class_localisation_manager_window.html#a0fda60899058cf1d48166f7d04627601">DisplayLanguagesTab()</a>, <a class="el" href="class_localisation_manager_window.html#af8cadbfa5b7fa38ce9f6c5dab5d592b1">DisplayScopesTab()</a>, and <a class="el" href="class_localisation_manager_window.html#aea448b432b2d681891dff6dbdda422bc">OnGUI()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="class_localisation_manager_window.html#a84dd174694706d1fe4bf838f959052a1">DisplayIDsTab()</a>, <a class="el" href="class_localisation_manager_window.html#a0fda60899058cf1d48166f7d04627601">DisplayLanguagesTab()</a>, <a class="el" href="class_localisation_manager_window.html#af8cadbfa5b7fa38ce9f6c5dab5d592b1">DisplayScopesTab()</a>, <a class="el" href="class_localisation_manager_window.html#afb16dd0da0d756072831ba3e197cae55">DisplaySettingsTab()</a>, and <a class="el" href="class_localisation_manager_window.html#aea448b432b2d681891dff6dbdda422bc">OnGUI()</a>.</p>
 
 </div>
 </div>
@@ -421,9 +423,35 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">References <a class="el" href="class_localisation_manager_window.html#a2dd101f65b67af101d325ba2841fb9db">_assetPathInProject</a>, <a class="el" href="class_localisation_manager_window.html#a560ef1e41eedca66befa869944d5e030">_newLocalisations</a>, <a class="el" href="class_localisation_manager_window.html#a2ffc7cbd42975c5897a5a22f7d07100c">_scrollPosID</a>, <a class="el" href="class_localisation_manager_window.html#a0022e750dea280c57e38c8098e116f52">_scrollPosLanguage</a>, <a class="el" href="class_localisation_manager_window.html#aaeda82edc2c59c228bfc72aed0b870c8">_scrollPosScope</a>, <a class="el" href="class_localisation_manager_window.html#aa9dfc32dabed073ed304978dcee1f1c5">_searchIDString</a>, <a class="el" href="class_localisation_manager_window.html#ad2e665048d4396e800f4148f0250603b">_status</a>, <a class="el" href="class_project_prefs.html#a10b8650bf9e9575e68ad969a87ea1065">ProjectPrefs.GetString()</a>, <a class="el" href="class_localizer.html#aa162942b73fccd45fe981ba5ba44695b">Localizer.Initialize()</a>, and <a class="el" href="class_localizer.html#a492f2a7ec70ab427d64fba49c9700ff1">Localizer.Instance</a>.</p>
+<p class="reference">References <a class="el" href="class_localisation_manager_window.html#a2dd101f65b67af101d325ba2841fb9db">_assetPathInProject</a>, <a class="el" href="class_localisation_manager_window.html#a560ef1e41eedca66befa869944d5e030">_newLocalisations</a>, <a class="el" href="class_localisation_manager_window.html#a2ffc7cbd42975c5897a5a22f7d07100c">_scrollPosID</a>, <a class="el" href="class_localisation_manager_window.html#a0022e750dea280c57e38c8098e116f52">_scrollPosLanguage</a>, <a class="el" href="class_localisation_manager_window.html#aaeda82edc2c59c228bfc72aed0b870c8">_scrollPosScope</a>, <a class="el" href="class_localisation_manager_window.html#aa9dfc32dabed073ed304978dcee1f1c5">_searchIDString</a>, <a class="el" href="class_localisation_manager_window.html#ad2e665048d4396e800f4148f0250603b">_status</a>, <a class="el" href="class_resources_util.html#a4da21cac1ccbb0d3afbb39bc39555ea6">ResourcesUtil.GetProjectPath()</a>, <a class="el" href="class_localizer.html#aa162942b73fccd45fe981ba5ba44695b">Localizer.Initialize()</a>, and <a class="el" href="class_localizer.html#a492f2a7ec70ab427d64fba49c9700ff1">Localizer.Instance</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="class_localisation_manager_window.html#abb5f03fce61066efbdbee6f2048c5399">Awake()</a>, and <a class="el" href="class_localisation_manager_window.html#a0cf110f4726716d2fa374499bfd00312">OnAfterAssemblyReload()</a>.</p>
+
+</div>
+</div>
+<a id="a495b6ba25ba54440af70d61ab99d4d1f" name="a495b6ba25ba54440af70d61ab99d4d1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a495b6ba25ba54440af70d61ab99d4d1f">&#9670;&#160;</a></span>IsPathValid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool LocalisationManagerWindow.IsPathValid </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>path</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -580,7 +608,7 @@ Static Private Attributes</h2></td></tr>
 
 <p class="reference">References <a class="el" href="class_localisation_manager_window.html#ad2e665048d4396e800f4148f0250603b">_status</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="class_localisation_manager_window.html#a84dd174694706d1fe4bf838f959052a1">DisplayIDsTab()</a>, <a class="el" href="class_localisation_manager_window.html#a0fda60899058cf1d48166f7d04627601">DisplayLanguagesTab()</a>, and <a class="el" href="class_localisation_manager_window.html#af8cadbfa5b7fa38ce9f6c5dab5d592b1">DisplayScopesTab()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="class_localisation_manager_window.html#a84dd174694706d1fe4bf838f959052a1">DisplayIDsTab()</a>, <a class="el" href="class_localisation_manager_window.html#a0fda60899058cf1d48166f7d04627601">DisplayLanguagesTab()</a>, <a class="el" href="class_localisation_manager_window.html#af8cadbfa5b7fa38ce9f6c5dab5d592b1">DisplayScopesTab()</a>, and <a class="el" href="class_localisation_manager_window.html#afb16dd0da0d756072831ba3e197cae55">DisplaySettingsTab()</a>.</p>
 
 </div>
 </div>

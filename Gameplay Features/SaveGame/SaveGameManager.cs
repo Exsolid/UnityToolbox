@@ -9,42 +9,57 @@ using UnityEngine.SceneManagement;
 using Newtonsoft.Json;
 
 /// <summary>
-/// A manager, which is takes care of the (de)serialisation of <see cref="GameObject"/>s and <see cref="CompletionData"/>.
+/// A manager, which is takes care of the (de)serialization of <see cref="GameObject"/>s and <see cref="GamestateData"/>.
 /// Requires a <see cref="PrefabManager"/> and <see cref="IDManager"/> for objects that are not present initially.
 /// </summary>
 public class SaveGameManager : Module
 {
     [SerializeField] private string _pathToUse;
+    private string _fullPath;
 
     private readonly string _dataPath = "/SaveGameData.dat";
     private readonly string _spawnDataPath = "/SaveGameObjects.dat";
-    private readonly string _completionDataPath = "/SaveGameCompletion.dat";
+    private readonly string _gamestateDataPath = "/SaveGameCompletion.dat";
 
-    private Dictionary<string,List<GameData>> _data;
+    private Dictionary<string, List<GameData>> _data;
     private Dictionary<string, ResourceData> _spawnData;
     private HashSet<string> _spawnedIDs;
-    private CompletionData _completionInfo;
+    private HashSet<GamestateNodeData> _activeGamestates;
+    /// <summary>
+    /// All the active gamestates.
+    /// </summary>
+    public HashSet<GamestateNodeData> ActiveGamestates
+    {
+        get
+        {
+            return _activeGamestates.ToHashSet();
+        }
+        set
+        {
+            if(value != null)
+            {
+                _activeGamestates = value;
+            }
+        }
+    }
+    
 
     private JsonSerializerSettings _settings;
-
-    public Action<string, bool> OnCompletionInfoChanged;
 
     public override void Awake()
     {
         base.Awake();
         if (!Application.isEditor)
         {
-            if (!Directory.Exists(_pathToUse))
-            {
-                Debug.LogError("The path '" + _pathToUse + "could not be found! The " + nameof(SaveGameManager) + " cannot work without it.");
-                return;
-            }
-
-            _pathToUse = Application.dataPath + "/SaveGame";
+            _fullPath = Application.dataPath + "/SaveGame";
             if(!Directory.Exists(_pathToUse)) Directory.CreateDirectory(_pathToUse);
         }
+        else
+        {
+            _fullPath = Application.dataPath + _pathToUse;
+        }
 
-        if (!Directory.Exists(_pathToUse))
+        if (!Directory.Exists(_fullPath))
         {
             _data = new Dictionary<string, List<GameData>>();
             _spawnData = new Dictionary<string, ResourceData>();
@@ -58,9 +73,9 @@ public class SaveGameManager : Module
             {
                 _spawnData = new Dictionary<string, ResourceData>();
             }
-            if (_completionInfo == null)
+            if (_activeGamestates == null)
             {
-                _completionInfo = new CompletionData();
+                _activeGamestates = new HashSet<GamestateNodeData>();
             }
 
             return;
@@ -81,9 +96,9 @@ public class SaveGameManager : Module
         {
             _spawnData = new Dictionary<string, ResourceData>();
         } 
-        if(_completionInfo == null)
+        if(_activeGamestates == null)
         {
-            _completionInfo = new CompletionData();
+            _activeGamestates = new HashSet<GamestateNodeData>();
         }
 
         StartCoroutine(Load());
@@ -106,39 +121,6 @@ public class SaveGameManager : Module
         {
             _spawnedIDs.RemoveWhere(id => IDManager.GetSceneNameOfID(id).Equals(scene.name)); ;
         };
-    }
-
-    /// <summary>
-    /// Trys to find completion infos with an ID. Similar to gamestates but not necessarily linear.
-    /// </summary>
-    /// <param name="ID">The ID of the completion info.</param>
-    /// <returns>Whether the the completion info is set or not.</returns>
-    public bool GetCompletionInfo(string ID)
-    {
-        if (_completionInfo.IDToCompletion.ContainsKey(ID))
-        {
-            return _completionInfo.IDToCompletion[ID];
-        }
-        else return false;
-    }
-
-    /// <summary>
-    /// Sets completion info.
-    /// </summary>
-    /// <param name="ID">The ID of the completion.</param>
-    /// <param name="isCompleted">Whether the completion mark is actually completed.</param>
-    public void SetCompletionInfo(string ID, bool isCompleted)
-    {
-        if (_completionInfo.IDToCompletion.ContainsKey(ID) && _completionInfo.IDToCompletion[ID] != isCompleted)
-        {
-            _completionInfo.IDToCompletion[ID] = isCompleted;
-            OnCompletionInfoChanged?.Invoke(ID, isCompleted);
-        }
-        else if (!_completionInfo.IDToCompletion.ContainsKey(ID))
-        {
-            _completionInfo.IDToCompletion.Add(ID, isCompleted);
-            OnCompletionInfoChanged?.Invoke(ID, isCompleted);
-        }
     }
 
     /// <summary>
@@ -256,72 +238,72 @@ public class SaveGameManager : Module
         {
             DestroyImmediate(saveable.gameObject);
         }
-        _completionInfo = new CompletionData();
+        _activeGamestates = new HashSet<GamestateNodeData>();
         _data = new Dictionary<string, List<GameData>>();
         _spawnData = new Dictionary<string, ResourceData>();
     }
 
     private void WriteData()
     {
-        if (!Directory.Exists(_pathToUse))
+        if (!Directory.Exists(_fullPath))
         {
             return;
         }
 
         string dataToJson = JsonConvert.SerializeObject(_data, _settings);
         string spawnDataToJson = JsonConvert.SerializeObject(_spawnData, _settings);
-        string completionDataToJson = JsonConvert.SerializeObject(_completionInfo, _settings);
-        File.WriteAllText(_pathToUse + _dataPath, dataToJson);
-        File.WriteAllText(_pathToUse + _spawnDataPath, spawnDataToJson);
-        File.WriteAllText(_pathToUse + _completionDataPath, completionDataToJson);
+        string completionDataToJson = JsonConvert.SerializeObject(_activeGamestates, _settings);
+        File.WriteAllText(_fullPath + _dataPath, dataToJson);
+        File.WriteAllText(_fullPath + _spawnDataPath, spawnDataToJson);
+        File.WriteAllText(_fullPath + _gamestateDataPath, completionDataToJson);
     }
 
     private void ReadData()
     {
-        if (!Directory.Exists(_pathToUse))
+        if (!Directory.Exists(_fullPath))
         {
             return;
         }
 
-        if (!File.Exists(_pathToUse + _dataPath))
+        if (!File.Exists(_fullPath + _dataPath))
         {
             return;
         }
 
-        string jsonToData = File.ReadAllText(_pathToUse + _dataPath);
+        string jsonToData = File.ReadAllText(_fullPath + _dataPath);
         _data = JsonConvert.DeserializeObject<Dictionary<string, List<GameData>>>(jsonToData, _settings);
     }
 
     private void ReadSpawnData()
     {
-        if (!Directory.Exists(_pathToUse))
+        if (!Directory.Exists(_fullPath))
         {
             return;
         }
 
-        if (!File.Exists(_pathToUse + _spawnDataPath))
+        if (!File.Exists(_fullPath + _spawnDataPath))
         {
             return;
         }
 
-        string jsonToData = File.ReadAllText(_pathToUse + _spawnDataPath);
+        string jsonToData = File.ReadAllText(_fullPath + _spawnDataPath);
         _spawnData = JsonConvert.DeserializeObject<Dictionary<string, ResourceData>>(jsonToData, _settings);
     }
 
     private void ReadCompletionData()
     {
-        if (!Directory.Exists(_pathToUse))
+        if (!Directory.Exists(_fullPath))
         {
             return;
         }
 
-        if (!File.Exists(_pathToUse + _completionDataPath))
+        if (!File.Exists(_fullPath + _gamestateDataPath))
         {
             return;
         }
 
-        string jsonToData = File.ReadAllText(_pathToUse + _completionDataPath);
-        _completionInfo = JsonConvert.DeserializeObject<CompletionData>(jsonToData, _settings);
+        string jsonToData = File.ReadAllText(_fullPath + _gamestateDataPath);
+        _activeGamestates = JsonConvert.DeserializeObject<HashSet<GamestateNodeData>>(jsonToData, _settings);
     }
 
     private void OnDestroy()
@@ -375,5 +357,17 @@ public class SaveGameManager : Module
             }
         }
         return plainText;
+    }
+
+    private void OnValidate()
+    {
+        if (Directory.Exists(_pathToUse) && !Path.GetFullPath(_pathToUse).Contains(Path.GetFullPath(Application.dataPath)) && !_pathToUse.Equals("Use a project path!"))
+        {
+            _pathToUse = "Use a project path!";
+        }
+        else if(Directory.Exists(_pathToUse) && Path.GetFullPath(_pathToUse).Contains(Path.GetFullPath(Application.dataPath)))
+        {
+            _pathToUse = Path.GetFullPath(_pathToUse).Replace(Path.GetFullPath(Application.dataPath), "");
+        }
     }
 }

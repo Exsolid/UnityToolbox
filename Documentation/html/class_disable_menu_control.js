@@ -7,6 +7,8 @@ var class_disable_menu_control =
     [ "_input", "class_disable_menu_control.html#ae26284551187ec0edd60816ca51a4122", null ],
     [ "_isBinding", "class_disable_menu_control.html#aada29439e4cdfa547f23d51efec0c33e", null ],
     [ "_mayDisable", "class_disable_menu_control.html#a8a7412c9b01294f2343779e0f901e81b", null ],
+    [ "_menuOfType", "class_disable_menu_control.html#ab9181aa5eca506bedefdb5be1655cc9e", null ],
+    [ "_menusOfType", "class_disable_menu_control.html#aca399e2469f82596237e767a9a5852fa", null ],
     [ "_menuType", "class_disable_menu_control.html#ae2823e1fa9331a28bb3b02063c7c0fa5", null ],
-    [ "MenuTypes", "class_disable_menu_control.html#ab9f92ba49fcf34421a7f8d16eac4fc9f", null ]
+    [ "_menuTypes", "class_disable_menu_control.html#a261b5722bcff1c469a8e4d397427c0c5", null ]
 ];

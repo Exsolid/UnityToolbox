@@ -11,7 +11,7 @@ using UnityEditor;
 public class GotoSceneButton : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField] private AudioMixer _clickSounds;
-    [SerializeField] private SceneAsset _scene;
+    [SerializeField] private string _sceneName;
     private bool _isEnabled;
 
     public void Awake()
@@ -31,7 +31,7 @@ public class GotoSceneButton : MonoBehaviour, IPointerDownHandler
                 _clickSounds.PlayRandomSource();
             }
 
-            SceneManager.LoadScene(_scene.name);
+            SceneManager.LoadScene(_sceneName);
         }
     }
 }

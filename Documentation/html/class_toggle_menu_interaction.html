@@ -120,9 +120,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad6359e8c6c84c8b6ca525c9c74068af2"><td class="memItemLeft" align="right" valign="top">override void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_toggle_menu_interaction.html#ad6359e8c6c84c8b6ca525c9c74068af2">OnInteraction</a> (RaycastHit raycastHit)</td></tr>
 <tr class="memdesc:ad6359e8c6c84c8b6ca525c9c74068af2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute whatever should happen when the raycast found a valid object to interact with.  <br /></td></tr>
 <tr class="separator:ad6359e8c6c84c8b6ca525c9c74068af2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac93785fa120e53749c8beb2126e007bd"><td class="memItemLeft" align="right" valign="top">override void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_toggle_menu_interaction.html#ac93785fa120e53749c8beb2126e007bd">OnInteraction</a> (RaycastHit2D raycastHit)</td></tr>
+<tr class="memdesc:ac93785fa120e53749c8beb2126e007bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute whatever should happen when the raycast found a valid object to interact with.  <br /></td></tr>
+<tr class="separator:ac93785fa120e53749c8beb2126e007bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abdb9c1097ed51cb0467e9954ff4be5f0"><td class="memItemLeft" align="right" valign="top">abstract void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raycast_interaction.html#abdb9c1097ed51cb0467e9954ff4be5f0">OnInteraction</a> (RaycastHit raycastHit)</td></tr>
 <tr class="memdesc:abdb9c1097ed51cb0467e9954ff4be5f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute whatever should happen when the raycast found a valid object to interact with.  <br /></td></tr>
 <tr class="separator:abdb9c1097ed51cb0467e9954ff4be5f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac401c5db0d5bb345ac9a3db61dd81820"><td class="memItemLeft" align="right" valign="top">abstract void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_raycast_interaction.html#ac401c5db0d5bb345ac9a3db61dd81820">OnInteraction</a> (RaycastHit2D raycastHit)</td></tr>
+<tr class="memdesc:ac401c5db0d5bb345ac9a3db61dd81820"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute whatever should happen when the raycast found a valid object to interact with.  <br /></td></tr>
+<tr class="separator:ac401c5db0d5bb345ac9a3db61dd81820"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -133,7 +139,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="ad6359e8c6c84c8b6ca525c9c74068af2" name="ad6359e8c6c84c8b6ca525c9c74068af2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad6359e8c6c84c8b6ca525c9c74068af2">&#9670;&#160;</a></span>OnInteraction()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6359e8c6c84c8b6ca525c9c74068af2">&#9670;&#160;</a></span>OnInteraction() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -163,6 +169,42 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 
 <p>Implements <a class="el" href="class_raycast_interaction.html#abdb9c1097ed51cb0467e9954ff4be5f0">RaycastInteraction</a>.</p>
+
+<p class="reference">References <a class="el" href="class_toggle_menu_interaction_info.html#a9bb52bd1959f5a005508255fcce80124">ToggleMenuInteractionInfo.MenuType</a>.</p>
+
+</div>
+</div>
+<a id="ac93785fa120e53749c8beb2126e007bd" name="ac93785fa120e53749c8beb2126e007bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac93785fa120e53749c8beb2126e007bd">&#9670;&#160;</a></span>OnInteraction() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">override void ToggleMenuInteraction.OnInteraction </td>
+          <td>(</td>
+          <td class="paramtype">RaycastHit2D&#160;</td>
+          <td class="paramname"><em>raycastHit</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">raycastHit</td><td>The raycast data.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="class_raycast_interaction.html#ac401c5db0d5bb345ac9a3db61dd81820">RaycastInteraction</a>.</p>
 
 <p class="reference">References <a class="el" href="class_toggle_menu_interaction_info.html#a9bb52bd1959f5a005508255fcce80124">ToggleMenuInteractionInfo.MenuType</a>.</p>
 

@@ -104,6 +104,7 @@ public class LocalisationEditIDWindow : EditorWindow
             if (success)
             {
                 Localizer.Instance.WriteData();
+                AssetDatabase.Refresh();
                 Close();
             }
         }

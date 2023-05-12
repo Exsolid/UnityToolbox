@@ -10,11 +10,10 @@ var searchData=
   ['localisationeditscopewindow_7',['LocalisationEditScopeWindow',['../class_localisation_edit_scope_window.html',1,'']]],
   ['localisationid_8',['LocalisationID',['../struct_localisation_i_d.html',1,'']]],
   ['localisationlanguage_9',['LocalisationLanguage',['../struct_localisation_language.html',1,'']]],
-  ['localisationmanager_10',['LocalisationManager',['../class_localisation_manager.html',1,'']]],
-  ['localisationmanagerwindow_11',['LocalisationManagerWindow',['../class_localisation_manager_window.html',1,'']]],
-  ['localisationscope_12',['LocalisationScope',['../struct_localisation_scope.html',1,'']]],
-  ['localisationselectionwindow_13',['LocalisationSelectionWindow',['../class_localisation_selection_window.html',1,'']]],
-  ['localizedtext_14',['LocalizedText',['../class_localized_text.html',1,'']]],
-  ['localizer_15',['Localizer',['../class_localizer.html',1,'']]],
-  ['lockmovement_16',['LockMovement',['../class_lock_movement.html',1,'']]]
+  ['localisationmanagerwindow_10',['LocalisationManagerWindow',['../class_localisation_manager_window.html',1,'']]],
+  ['localisationscope_11',['LocalisationScope',['../struct_localisation_scope.html',1,'']]],
+  ['localisationselectionwindow_12',['LocalisationSelectionWindow',['../class_localisation_selection_window.html',1,'']]],
+  ['localizedtext_13',['LocalizedText',['../class_localized_text.html',1,'']]],
+  ['localizer_14',['Localizer',['../class_localizer.html',1,'']]],
+  ['lockmovement_15',['LockMovement',['../class_lock_movement.html',1,'']]]
 ];

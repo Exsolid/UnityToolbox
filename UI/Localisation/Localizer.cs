@@ -14,22 +14,6 @@ public class Localizer
     public Action<LocalisationLanguage> LanguageEdited;
     public Action<LocalisationID> LocalisationIDEdited;
 
-    private string _assetPathInProject;
-    public string AssetPathInProject
-    {
-        set
-        {
-            if (value.Contains(Application.dataPath))
-            {
-                _assetPathInProject = value;
-            }
-            else if(!value.Contains(":"))
-            {
-                _assetPathInProject = Application.dataPath + value;
-            }
-        }
-    }
-
     private static Localizer _instance;
     public static Localizer Instance
     {
@@ -77,9 +61,9 @@ public class Localizer
     }
 
 
-    private readonly string _dataPath = "/LocalisationData.txt";
-    private readonly string _languagesDataPath = "/LocalisationLanguages.txt";
-    private readonly string _scopesDataPath = "/LocalisationScopes.txt";
+    private readonly string _dataPath = "LocalisationData.txt";
+    private readonly string _languagesDataPath = "LocalisationLanguages.txt";
+    private readonly string _scopesDataPath = "LocalisationScopes.txt";
 
     private bool _isInitialized;
     public bool IsInitialized { get { return _isInitialized; } }
@@ -423,12 +407,6 @@ public class Localizer
     /// </summary>
     public void WriteData()
     {
-        if (!Directory.Exists(_assetPathInProject))
-        {
-            Debug.LogError("The path '" + _assetPathInProject + "could not be found! The " + nameof(Localizer) + " cannot work without it.");
-            return;
-        }
-
         if (!_isInitialized)
         {
             Initialize();
@@ -446,13 +424,9 @@ public class Localizer
                     serializableDictionary[serializableDictionary.Count-1].Value.Add(locaPair);
                 }
             }
-
-            string localisationData = JsonConvert.SerializeObject(serializableDictionary, _settings);
-            string localisationLanguages = JsonConvert.SerializeObject(_localisationLanguages, _settings);
-            string localisationScopes = JsonConvert.SerializeObject(_localisationScopes, _settings);
-            File.WriteAllText(_assetPathInProject + _dataPath, localisationData);
-            File.WriteAllText(_assetPathInProject + _languagesDataPath, localisationLanguages);
-            File.WriteAllText(_assetPathInProject + _scopesDataPath, localisationScopes);
+            ResourcesUtil.WriteFile(ProjectPrefKeys.LOCALISATIONSAVEPATH, _dataPath, serializableDictionary);
+            ResourcesUtil.WriteFile(ProjectPrefKeys.LOCALISATIONSAVEPATH, _languagesDataPath, _localisationLanguages);
+            ResourcesUtil.WriteFile(ProjectPrefKeys.LOCALISATIONSAVEPATH, _scopesDataPath, _localisationScopes);
         }
     }
 
@@ -471,34 +445,24 @@ public class Localizer
 
         _localisationLanguages = new HashSet<LocalisationLanguage>();
 
-        if (!Directory.Exists(_assetPathInProject))
+        if (ProjectPrefs.GetString(ProjectPrefKeys.LOCALISATIONSAVEPATH) == null || ProjectPrefs.GetString(ProjectPrefKeys.LOCALISATIONSAVEPATH).Equals(""))
         {
-            Debug.LogError("The path '" + _assetPathInProject + "' could not be found! The " + nameof(Localizer) + " cannot work without it.");
-            _isInitialized = false;
-            return;
-        }
-
-        if (!_assetPathInProject.Contains("Resources/"))
-        {
-            Debug.LogError("The path '" + _assetPathInProject + "' is not a \"Resources/\" directory.");
             _isInitialized = false;
             return;
         }
 
         _isInitialized = true;
 
-        if (!File.Exists(_assetPathInProject + _dataPath))
+        _localisationLanguages = ResourcesUtil.GetFileData<HashSet<LocalisationLanguage>>(ProjectPrefKeys.LOCALISATIONSAVEPATH, _languagesDataPath);
+
+        if (_localisationLanguages == null)
         {
             return;
         }
 
-        TextAsset localisationData = Resources.Load(_assetPathInProject.Split("Resources/").Last() + _dataPath.Replace(".txt", "")) as TextAsset;
-        TextAsset localisationLanguages = Resources.Load(_assetPathInProject.Split("Resources/").Last() + _languagesDataPath.Replace(".txt", "")) as TextAsset;
-        TextAsset localisationScopes = Resources.Load(_assetPathInProject.Split("Resources/").Last() + _scopesDataPath.Replace(".txt", "")) as TextAsset;
-
-        List<KeyValuePair<LocalisationID, List<KeyValuePair<LocalisationLanguage, string>>>> serializableDictionary = JsonConvert.DeserializeObject<List<KeyValuePair<LocalisationID, List<KeyValuePair<LocalisationLanguage, string>>>>>(localisationData.text, _settings);
-        _localisationLanguages = JsonConvert.DeserializeObject<HashSet<LocalisationLanguage>>(localisationLanguages.text, _settings);
-        _localisationScopes = JsonConvert.DeserializeObject<HashSet<LocalisationScope>>(localisationScopes.text, _settings);
+        List<KeyValuePair<LocalisationID, List<KeyValuePair<LocalisationLanguage, string>>>> serializableDictionary 
+            = ResourcesUtil.GetFileData<List<KeyValuePair<LocalisationID, List<KeyValuePair<LocalisationLanguage, string>>>>>(ProjectPrefKeys.LOCALISATIONSAVEPATH, _dataPath);
+        _localisationScopes = ResourcesUtil.GetFileData<HashSet<LocalisationScope>>(ProjectPrefKeys.LOCALISATIONSAVEPATH, _scopesDataPath);
 
         foreach (KeyValuePair<LocalisationID, List<KeyValuePair<LocalisationLanguage, string>>> pair in serializableDictionary)
         {

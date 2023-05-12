@@ -7,7 +7,5 @@ var class_dialog_graph_window =
     [ "OnEnable", "class_dialog_graph_window.html#a9e30688407c9bba8160ea8bb1dc5bf18", null ],
     [ "UpdateData", "class_dialog_graph_window.html#ab07e9928eec7f1631a41935f3f18f03f", null ],
     [ "WriteData", "class_dialog_graph_window.html#af5edf68ca2c4b1de2f3378f9d7a38559", null ],
-    [ "_fullPath", "class_dialog_graph_window.html#a7091a7254a3a1bfe5c05a54b59a90839", null ],
-    [ "_graphView", "class_dialog_graph_window.html#a53361fdda8a86e93e0d1e768525f031c", null ],
-    [ "_settings", "class_dialog_graph_window.html#afd11165e4e000e7265fc588829d41bd9", null ]
+    [ "_graphView", "class_dialog_graph_window.html#a53361fdda8a86e93e0d1e768525f031c", null ]
 ];

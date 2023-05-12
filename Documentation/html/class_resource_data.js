@@ -1,4 +1,4 @@
 var class_resource_data =
 [
-    [ "PrefabID", "class_resource_data.html#a205ec3036db062ad02de3af721471fc1", null ]
+    [ "ResourcePath", "class_resource_data.html#a8cf3904fb86ba2cacf42ae6b456b1f29", null ]
 ];

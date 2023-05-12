@@ -98,83 +98,172 @@ $(document).ready(function(){initNavTree('class_gamestate_manager.html',''); ini
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#properties">Properties</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_gamestate_manager-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">GamestateManager Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>A module which can manage liniear gamestates.  
+<p>This module manages all gamestates. The <a class="el" href="class_save_game_manager.html" title="A manager, which is takes care of the (de)serialization of GameObjects and GamestateData....">SaveGameManager</a> is required for it to keep track of the players progress.  
 </p>
 <div class="dynheader">
 Inheritance diagram for GamestateManager:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="class_gamestate_manager.png" alt=""/>
- </div></div>
+  <img src="class_gamestate_manager.png" usemap="#GamestateManager_map" alt=""/>
+  <map id="GamestateManager_map" name="GamestateManager_map">
+<area href="class_module.html" title="The base of a module. Required if you want anything to be called from the ModuleManager." alt="Module" shape="rect" coords="0,56,121,80"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a83a6f06d02a95f4ac266b040b48d3eb1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gamestate_manager.html#a83a6f06d02a95f4ac266b040b48d3eb1">NextState</a> ()</td></tr>
-<tr class="memdesc:a83a6f06d02a95f4ac266b040b48d3eb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Proceeds to the next gamestate.  <br /></td></tr>
-<tr class="separator:a83a6f06d02a95f4ac266b040b48d3eb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a40e99da07519f7012f85941712de30a0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gamestate_manager.html#a40e99da07519f7012f85941712de30a0">GetIndexOfValue</a> (string value)</td></tr>
-<tr class="memdesc:a40e99da07519f7012f85941712de30a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the index value of a given gamestate.  <br /></td></tr>
-<tr class="separator:a40e99da07519f7012f85941712de30a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1449bd94de0e40da724580f4cef2cb9b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gamestate_manager.html#a1449bd94de0e40da724580f4cef2cb9b">Start</a> ()</td></tr>
+<tr class="separator:a1449bd94de0e40da724580f4cef2cb9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff504fb62ccc28293f6161ad6475e251"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gamestate_manager.html#aff504fb62ccc28293f6161ad6475e251">IsStateActive</a> (string stateName)</td></tr>
+<tr class="memdesc:aff504fb62ccc28293f6161ad6475e251"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether a given state name is active or not.  <br /></td></tr>
+<tr class="separator:aff504fb62ccc28293f6161ad6475e251"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f7d4b94a58b5607accabe1fa153fce5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gamestate_manager.html#a6f7d4b94a58b5607accabe1fa153fce5">GoToNextState</a> (string currentState, int option)</td></tr>
+<tr class="memdesc:a6f7d4b94a58b5607accabe1fa153fce5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Proceeds to the next state if possible. Sets the current state to inactive.  <br /></td></tr>
+<tr class="separator:a6f7d4b94a58b5607accabe1fa153fce5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_class_module"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_module')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_module.html">Module</a></td></tr>
+<tr class="memitem:ae904a4e92b931cdce3d63ac36c54062b inherit pub_methods_class_module"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_module.html#ae904a4e92b931cdce3d63ac36c54062b">Awake</a> ()</td></tr>
+<tr class="separator:ae904a4e92b931cdce3d63ac36c54062b inherit pub_methods_class_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="properties" name="properties"></a>
-Properties</h2></td></tr>
-<tr class="memitem:ac5354b115e0891dba1eb9045a48ec53e"><td class="memItemLeft" align="right" valign="top">List&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gamestate_manager.html#ac5354b115e0891dba1eb9045a48ec53e">Gamestates</a><code> [get]</code></td></tr>
-<tr class="memdesc:ac5354b115e0891dba1eb9045a48ec53e"><td class="mdescLeft">&#160;</td><td class="mdescRight">All gamestates.  <br /></td></tr>
-<tr class="separator:ac5354b115e0891dba1eb9045a48ec53e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7069c4ec17649526a89defc1112f58fe"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gamestate_manager.html#a7069c4ec17649526a89defc1112f58fe">CurrentState</a><code> [get]</code></td></tr>
-<tr class="memdesc:a7069c4ec17649526a89defc1112f58fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">The current gamestate.  <br /></td></tr>
-<tr class="separator:a7069c4ec17649526a89defc1112f58fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:ad85fd5b233d464063dc0181c5fdccc59"><td class="memItemLeft" align="right" valign="top">const string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gamestate_manager.html#ad85fd5b233d464063dc0181c5fdccc59">FILENAME</a> = &quot;GamestateData.txt&quot;</td></tr>
+<tr class="separator:ad85fd5b233d464063dc0181c5fdccc59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:aab3aa9f31c1d39d209fcaaf18fceae17"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gamestate_manager.html#aab3aa9f31c1d39d209fcaaf18fceae17">CheckNodeValid</a> (string stateName)</td></tr>
+<tr class="separator:aab3aa9f31c1d39d209fcaaf18fceae17"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a2c048f7d6aa39617ef48430258bba03a"><td class="memItemLeft" align="right" valign="top">List&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gamestate_manager.html#a2c048f7d6aa39617ef48430258bba03a">_gamestates</a></td></tr>
-<tr class="separator:a2c048f7d6aa39617ef48430258bba03a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaecc85afb7660052e17c334578313c6d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gamestate_manager.html#aaecc85afb7660052e17c334578313c6d">_currentState</a></td></tr>
-<tr class="separator:aaecc85afb7660052e17c334578313c6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5dffa6a953590cae0d5f65bfe71f7e7"><td class="memItemLeft" align="right" valign="top">Dictionary&lt; <a class="el" href="class_gamestate_node_data.html">GamestateNodeData</a>, List&lt; <a class="el" href="class_gamestate_node_data.html">GamestateNodeData</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gamestate_manager.html#ae5dffa6a953590cae0d5f65bfe71f7e7">_stateNodeConnections</a></td></tr>
+<tr class="separator:ae5dffa6a953590cae0d5f65bfe71f7e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab898e727b5d95efe67aa3bc99a1ca289"><td class="memItemLeft" align="right" valign="top">Dictionary&lt; string, <a class="el" href="class_gamestate_node_data.html">GamestateNodeData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gamestate_manager.html#ab898e727b5d95efe67aa3bc99a1ca289">_stateNodes</a></td></tr>
+<tr class="separator:ab898e727b5d95efe67aa3bc99a1ca289"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0defb27c653415f9aa653cee2e462c76"><td class="memItemLeft" align="right" valign="top">HashSet&lt; <a class="el" href="class_gamestate_node_data.html">GamestateNodeData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gamestate_manager.html#a0defb27c653415f9aa653cee2e462c76">_activeNodes</a></td></tr>
+<tr class="separator:a0defb27c653415f9aa653cee2e462c76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19e06f7a2f63088b4431fd38b81c62ab"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_gamestate_node_data.html">GamestateNodeData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gamestate_manager.html#a19e06f7a2f63088b4431fd38b81c62ab">_startNode</a></td></tr>
+<tr class="separator:a19e06f7a2f63088b4431fd38b81c62ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a40e99da07519f7012f85941712de30a0" name="a40e99da07519f7012f85941712de30a0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a40e99da07519f7012f85941712de30a0">&#9670;&#160;</a></span>GetIndexOfValue()</h2>
+<a id="aab3aa9f31c1d39d209fcaaf18fceae17" name="aab3aa9f31c1d39d209fcaaf18fceae17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab3aa9f31c1d39d209fcaaf18fceae17">&#9670;&#160;</a></span>CheckNodeValid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GamestateManager.CheckNodeValid </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>stateName</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="reference">References <a class="el" href="class_gamestate_manager.html#ab898e727b5d95efe67aa3bc99a1ca289">_stateNodes</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="class_gamestate_manager.html#a6f7d4b94a58b5607accabe1fa153fce5">GoToNextState()</a>, and <a class="el" href="class_gamestate_manager.html#aff504fb62ccc28293f6161ad6475e251">IsStateActive()</a>.</p>
+
+</div>
+</div>
+<a id="a6f7d4b94a58b5607accabe1fa153fce5" name="a6f7d4b94a58b5607accabe1fa153fce5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f7d4b94a58b5607accabe1fa153fce5">&#9670;&#160;</a></span>GoToNextState()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int GamestateManager.GetIndexOfValue </td>
+          <td class="memname">void GamestateManager.GoToNextState </td>
           <td>(</td>
           <td class="paramtype">string&#160;</td>
-          <td class="paramname"><em>value</em></td><td>)</td>
+          <td class="paramname"><em>currentState</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>option</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">currentState</td><td>The current gamestate.</td></tr>
+    <tr><td class="paramname">option</td><td>Which path the gamestate should take within the tree. Input 0 if it is linear.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">ArgumentException</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">References <a class="el" href="class_gamestate_manager.html#a0defb27c653415f9aa653cee2e462c76">_activeNodes</a>, <a class="el" href="class_gamestate_manager.html#ae5dffa6a953590cae0d5f65bfe71f7e7">_stateNodeConnections</a>, <a class="el" href="class_gamestate_manager.html#ab898e727b5d95efe67aa3bc99a1ca289">_stateNodes</a>, <a class="el" href="class_gamestate_manager.html#aab3aa9f31c1d39d209fcaaf18fceae17">CheckNodeValid()</a>, and <a class="el" href="class_gamestate_node_data.html#adf6908e51abd1d06f8e1f760b3708192">GamestateNodeData.Name</a>.</p>
+
+</div>
+</div>
+<a id="aff504fb62ccc28293f6161ad6475e251" name="aff504fb62ccc28293f6161ad6475e251"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff504fb62ccc28293f6161ad6475e251">&#9670;&#160;</a></span>IsStateActive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GamestateManager.IsStateActive </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>stateName</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">value</td><td>The gamestate.</td></tr>
+    <tr><td class="paramname">stateName</td><td>The unique name of the state.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The index of the gamestate.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Whether the gamestate is active.</dd></dl>
 
-<p class="reference">References <a class="el" href="class_gamestate_manager.html#a2c048f7d6aa39617ef48430258bba03a">_gamestates</a>.</p>
+<p class="reference">References <a class="el" href="class_gamestate_manager.html#a0defb27c653415f9aa653cee2e462c76">_activeNodes</a>, and <a class="el" href="class_gamestate_manager.html#aab3aa9f31c1d39d209fcaaf18fceae17">CheckNodeValid()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="class_dialog_manager.html#a6fba7e3734d394f7dc85d782d802b69e">DialogManager.StartDialog()</a>.</p>
 
 </div>
 </div>
-<a id="a83a6f06d02a95f4ac266b040b48d3eb1" name="a83a6f06d02a95f4ac266b040b48d3eb1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a83a6f06d02a95f4ac266b040b48d3eb1">&#9670;&#160;</a></span>NextState()</h2>
+<a id="a1449bd94de0e40da724580f4cef2cb9b" name="a1449bd94de0e40da724580f4cef2cb9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1449bd94de0e40da724580f4cef2cb9b">&#9670;&#160;</a></span>Start()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void GamestateManager.NextState </td>
+          <td class="memname">void GamestateManager.Start </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -182,13 +271,13 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="reference">References <a class="el" href="class_gamestate_manager.html#aaecc85afb7660052e17c334578313c6d">_currentState</a>, and <a class="el" href="class_gamestate_manager.html#a2c048f7d6aa39617ef48430258bba03a">_gamestates</a>.</p>
+<p class="reference">References <a class="el" href="class_gamestate_manager.html#a0defb27c653415f9aa653cee2e462c76">_activeNodes</a>, <a class="el" href="class_gamestate_manager.html#a19e06f7a2f63088b4431fd38b81c62ab">_startNode</a>, <a class="el" href="class_gamestate_manager.html#ae5dffa6a953590cae0d5f65bfe71f7e7">_stateNodeConnections</a>, <a class="el" href="class_gamestate_manager.html#ab898e727b5d95efe67aa3bc99a1ca289">_stateNodes</a>, <a class="el" href="class_gamestate_manager.html#ad85fd5b233d464063dc0181c5fdccc59">FILENAME</a>, <a class="el" href="class_gamestate_node_data.html#a9c13f718d1a7f939e63e4ea0baf13cf5">GamestateNodeData.InputIDs</a>, <a class="el" href="class_gamestate_node_data.html#adf6908e51abd1d06f8e1f760b3708192">GamestateNodeData.Name</a>, and <a class="el" href="class_gamestate_node_data.html#aef6b6110da84940bb703bd81043dfccf">GamestateNodeData.OutputIDs</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="aaecc85afb7660052e17c334578313c6d" name="aaecc85afb7660052e17c334578313c6d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaecc85afb7660052e17c334578313c6d">&#9670;&#160;</a></span>_currentState</h2>
+<a id="a0defb27c653415f9aa653cee2e462c76" name="a0defb27c653415f9aa653cee2e462c76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0defb27c653415f9aa653cee2e462c76">&#9670;&#160;</a></span>_activeNodes</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -197,7 +286,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int GamestateManager._currentState</td>
+          <td class="memname">HashSet&lt;<a class="el" href="class_gamestate_node_data.html">GamestateNodeData</a>&gt; GamestateManager._activeNodes</td>
         </tr>
       </table>
   </td>
@@ -207,12 +296,12 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="class_gamestate_manager.html#a83a6f06d02a95f4ac266b040b48d3eb1">NextState()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="class_gamestate_manager.html#a6f7d4b94a58b5607accabe1fa153fce5">GoToNextState()</a>, <a class="el" href="class_gamestate_manager.html#aff504fb62ccc28293f6161ad6475e251">IsStateActive()</a>, and <a class="el" href="class_gamestate_manager.html#a1449bd94de0e40da724580f4cef2cb9b">Start()</a>.</p>
 
 </div>
 </div>
-<a id="a2c048f7d6aa39617ef48430258bba03a" name="a2c048f7d6aa39617ef48430258bba03a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2c048f7d6aa39617ef48430258bba03a">&#9670;&#160;</a></span>_gamestates</h2>
+<a id="a19e06f7a2f63088b4431fd38b81c62ab" name="a19e06f7a2f63088b4431fd38b81c62ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19e06f7a2f63088b4431fd38b81c62ab">&#9670;&#160;</a></span>_startNode</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -221,7 +310,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">List&lt;string&gt; GamestateManager._gamestates</td>
+          <td class="memname"><a class="el" href="class_gamestate_node_data.html">GamestateNodeData</a> GamestateManager._startNode</td>
         </tr>
       </table>
   </td>
@@ -231,35 +320,12 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="class_gamestate_manager.html#a40e99da07519f7012f85941712de30a0">GetIndexOfValue()</a>, and <a class="el" href="class_gamestate_manager.html#a83a6f06d02a95f4ac266b040b48d3eb1">NextState()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="class_gamestate_manager.html#a1449bd94de0e40da724580f4cef2cb9b">Start()</a>.</p>
 
 </div>
 </div>
-<h2 class="groupheader">Property Documentation</h2>
-<a id="a7069c4ec17649526a89defc1112f58fe" name="a7069c4ec17649526a89defc1112f58fe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7069c4ec17649526a89defc1112f58fe">&#9670;&#160;</a></span>CurrentState</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int GamestateManager.CurrentState</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ac5354b115e0891dba1eb9045a48ec53e" name="ac5354b115e0891dba1eb9045a48ec53e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac5354b115e0891dba1eb9045a48ec53e">&#9670;&#160;</a></span>Gamestates</h2>
+<a id="ae5dffa6a953590cae0d5f65bfe71f7e7" name="ae5dffa6a953590cae0d5f65bfe71f7e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5dffa6a953590cae0d5f65bfe71f7e7">&#9670;&#160;</a></span>_stateNodeConnections</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -268,15 +334,65 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">List&lt;string&gt; GamestateManager.Gamestates</td>
+          <td class="memname">Dictionary&lt;<a class="el" href="class_gamestate_node_data.html">GamestateNodeData</a>, List&lt;<a class="el" href="class_gamestate_node_data.html">GamestateNodeData</a>&gt; &gt; GamestateManager._stateNodeConnections</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span></span>  </td>
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="class_gamestate_manager.html#a6f7d4b94a58b5607accabe1fa153fce5">GoToNextState()</a>, and <a class="el" href="class_gamestate_manager.html#a1449bd94de0e40da724580f4cef2cb9b">Start()</a>.</p>
+
+</div>
+</div>
+<a id="ab898e727b5d95efe67aa3bc99a1ca289" name="ab898e727b5d95efe67aa3bc99a1ca289"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab898e727b5d95efe67aa3bc99a1ca289">&#9670;&#160;</a></span>_stateNodes</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Dictionary&lt;string, <a class="el" href="class_gamestate_node_data.html">GamestateNodeData</a>&gt; GamestateManager._stateNodes</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="class_gamestate_manager.html#aab3aa9f31c1d39d209fcaaf18fceae17">CheckNodeValid()</a>, <a class="el" href="class_gamestate_manager.html#a6f7d4b94a58b5607accabe1fa153fce5">GoToNextState()</a>, and <a class="el" href="class_gamestate_manager.html#a1449bd94de0e40da724580f4cef2cb9b">Start()</a>.</p>
+
+</div>
+</div>
+<a id="ad85fd5b233d464063dc0181c5fdccc59" name="ad85fd5b233d464063dc0181c5fdccc59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad85fd5b233d464063dc0181c5fdccc59">&#9670;&#160;</a></span>FILENAME</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const string GamestateManager.FILENAME = &quot;GamestateData.txt&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="class_gamestate_manager.html#a1449bd94de0e40da724580f4cef2cb9b">Start()</a>.</p>
 
 </div>
 </div>

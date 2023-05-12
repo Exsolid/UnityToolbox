@@ -6,6 +6,8 @@ var class_toggle_menu_control =
     [ "_actionName", "class_toggle_menu_control.html#ac350b7eef7bd5b2a09666c4676176caa", null ],
     [ "_input", "class_toggle_menu_control.html#adbd1986c9305fd029d09ff8cfefcc7cf", null ],
     [ "_isBinding", "class_toggle_menu_control.html#ab5c7de0bfab0a51f9fa5d8424c295e38", null ],
+    [ "_menuOfType", "class_toggle_menu_control.html#a4a953b454565c8daad5639f60f8d725f", null ],
+    [ "_menusOfType", "class_toggle_menu_control.html#a88e5a2aaa43d15ce6e47dde837ecf26f", null ],
     [ "_menuType", "class_toggle_menu_control.html#aeaba8e62c4410f1c5fadde79e2a13227", null ],
     [ "_menuTypes", "class_toggle_menu_control.html#a224e9e34cb13fb3b57a1e4cd6f48115d", null ]
 ];

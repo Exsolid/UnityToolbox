@@ -7,6 +7,7 @@ var class_localisation_manager_window =
     [ "DisplaySettingsTab", "class_localisation_manager_window.html#afb16dd0da0d756072831ba3e197cae55", null ],
     [ "DrawLineHorizontal", "class_localisation_manager_window.html#a058cf23a33c697943b82bcd3d2f69b13", null ],
     [ "InitializeWindow", "class_localisation_manager_window.html#a85faa5b11bda287c3bbafa6965ca0754", null ],
+    [ "IsPathValid", "class_localisation_manager_window.html#a495b6ba25ba54440af70d61ab99d4d1f", null ],
     [ "OnAfterAssemblyReload", "class_localisation_manager_window.html#a0cf110f4726716d2fa374499bfd00312", null ],
     [ "OnDisable", "class_localisation_manager_window.html#a28e28c16ab5d47ee3d7b169473873375", null ],
     [ "OnEnable", "class_localisation_manager_window.html#ad986e9406c3b482bfe6615903b02517d", null ],

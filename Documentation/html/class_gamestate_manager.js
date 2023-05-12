@@ -1,9 +1,11 @@
 var class_gamestate_manager =
 [
-    [ "GetIndexOfValue", "class_gamestate_manager.html#a40e99da07519f7012f85941712de30a0", null ],
-    [ "NextState", "class_gamestate_manager.html#a83a6f06d02a95f4ac266b040b48d3eb1", null ],
-    [ "_currentState", "class_gamestate_manager.html#aaecc85afb7660052e17c334578313c6d", null ],
-    [ "_gamestates", "class_gamestate_manager.html#a2c048f7d6aa39617ef48430258bba03a", null ],
-    [ "CurrentState", "class_gamestate_manager.html#a7069c4ec17649526a89defc1112f58fe", null ],
-    [ "Gamestates", "class_gamestate_manager.html#ac5354b115e0891dba1eb9045a48ec53e", null ]
+    [ "CheckNodeValid", "class_gamestate_manager.html#aab3aa9f31c1d39d209fcaaf18fceae17", null ],
+    [ "GoToNextState", "class_gamestate_manager.html#a6f7d4b94a58b5607accabe1fa153fce5", null ],
+    [ "IsStateActive", "class_gamestate_manager.html#aff504fb62ccc28293f6161ad6475e251", null ],
+    [ "Start", "class_gamestate_manager.html#a1449bd94de0e40da724580f4cef2cb9b", null ],
+    [ "_activeNodes", "class_gamestate_manager.html#a0defb27c653415f9aa653cee2e462c76", null ],
+    [ "_startNode", "class_gamestate_manager.html#a19e06f7a2f63088b4431fd38b81c62ab", null ],
+    [ "_stateNodeConnections", "class_gamestate_manager.html#ae5dffa6a953590cae0d5f65bfe71f7e7", null ],
+    [ "_stateNodes", "class_gamestate_manager.html#ab898e727b5d95efe67aa3bc99a1ca289", null ]
 ];
