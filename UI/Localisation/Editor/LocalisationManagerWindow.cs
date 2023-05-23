@@ -37,7 +37,10 @@ public class LocalisationManagerWindow : EditorWindow
     [MenuItem("UnityToolbox/Localisation System")]
     private static void DisplayWindow()
     {
-        LocalisationManagerWindow window =(LocalisationManagerWindow)GetWindowWithRect(typeof(LocalisationManagerWindow), new Rect(0, 0, 600, 400));
+        LocalisationManagerWindow window =(LocalisationManagerWindow)GetWindow(typeof(LocalisationManagerWindow));
+        window.maxSize = new Vector2(600, 400);
+        window.minSize = new Vector2(600, 400);
+
         window.titleContent = new GUIContent("Localisation Manager");
         window.ShowUtility();
     }

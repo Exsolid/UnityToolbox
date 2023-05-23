@@ -4,6 +4,8 @@ using UnityEditor;
 using UnityEngine;
 using System.Linq;
 using System.IO;
+using System;
+using System.Reflection;
 
 public class ItemManagerWindow : EditorWindow
 {
@@ -13,33 +15,70 @@ public class ItemManagerWindow : EditorWindow
     private const int SETTINGS = 2;
 
     private string _assetPathInProject;
-    private bool _isValidPath;
+
+    private Vector2 _scrollPosScope;
+    private string _scopeName;
+
+    private Vector2 _scrollPosItemDefinition;
+    private string _itemDefinitionName; 
+    private int _selectedScope;
+    private Texture2D _itemDefinitionIcon;
+    private GameObject _itemDefinitionPrefab;
+    private int _maxStackCount;
+    private int _selectedType;
+    private List<Type> _itemDefinitionTypes;
+
+    private Vector2 _scrollPosCreation;
+    private List<bool> _selectionBoolValues;
+    private List<string> _selectionStringValues;
+    private List<float> _selectionFloatValues;
+    private List<int> _selectionIntValues;  
+    private List<FieldInfo> _selectionFields;  
+
+    private string _searchIDString;
+    private int _selectedSearch;
+    private bool _foldoutAdd;
+    private bool _foldoutSearch;
 
     private string _status;
 
     [MenuItem("UnityToolbox/Item Manager")]
     private static void DisplayWindow()
     {
-        ItemManagerWindow window = (ItemManagerWindow) GetWindowWithRect(typeof(ItemManagerWindow), new Rect(0, 0, 600, 400));
+        ItemManagerWindow window = (ItemManagerWindow) GetWindow(typeof(ItemManagerWindow));
         window.titleContent = new GUIContent("Item Manager");
+        window.maxSize = new Vector2(600, 400);
+        window.minSize = new Vector2(600, 400);
         window.ShowUtility();
     }
 
     public static void Open()
     {
         LocalisationManagerWindow window = (LocalisationManagerWindow)GetWindow(typeof(LocalisationManagerWindow));
-        window.titleContent = new GUIContent("Localisation Manager");
+        window.titleContent = new GUIContent("Item Manager");
 
         Vector2 mouse = GUIUtility.GUIToScreenPoint(Event.current.mousePosition);
         Rect r = new Rect(mouse.x - 450, mouse.y + 10, 10, 10);
+
+        window.maxSize = new Vector2(600, 400);
+        window.minSize = new Vector2(600, 400);
 
         window.ShowAsDropDown(r, new Vector2(600, 400));
     }
 
     private void InitializeWindow()
     {
-        _assetPathInProject = ProjectPrefs.GetString(ProjectPrefKeys.ITEMDATASAVEPATH);
-        _isValidPath = IsPathValid(Application.dataPath + _assetPathInProject);
+        _itemDefinitionTypes = new List<Type>();
+        _assetPathInProject = ResourcesUtil.GetProjectPath(ProjectPrefKeys.ITEMDATASAVEPATH);
+        _searchIDString = "";
+        _itemDefinitionTypes.Clear();
+        _itemDefinitionTypes.Add(typeof(ItemDefinition));
+        _selectedType = 0;
+        if (Itemizer.Instance.Initialized)
+        {
+            _itemDefinitionTypes.AddRange(Itemizer.Instance.GetAllInheritedItemDefinitionTypes());
+        }
+        SetupListsForItemType(_itemDefinitionTypes[_selectedType]);
         UpdateStatus("");
     }
 
@@ -55,7 +94,7 @@ public class ItemManagerWindow : EditorWindow
         DrawLineHorizontal();
         GUILayout.Label(_status);
         DrawLineHorizontal();
-        if (_isValidPath)
+        if (Itemizer.Instance.Initialized)
         {
             _selectedTab = GUILayout.Toolbar(_selectedTab, new string[] { "Items", "Scopes", "Settings" });
             DrawLineHorizontal();
@@ -82,26 +121,26 @@ public class ItemManagerWindow : EditorWindow
 
     private void DisplaySettingsTab()
     {
-        GUILayout.Label("To update the " + nameof(ItemManager) + " path. Please enter a valid path below. \nIt is required that it containes \"Resources/\".");
+        GUILayout.Label("To update the " + nameof(Itemizer) + " path, please enter a valid path below. \nIt is required that it containes \"Resources\".");
         DrawLineHorizontal();
         GUILayout.BeginHorizontal();
         Vector2 textDimensions = GUI.skin.label.CalcSize(new GUIContent(Application.dataPath));
-        GUILayout.Label(Application.dataPath);
+        GUILayout.Label(Application.dataPath + "/");
         _assetPathInProject = GUILayout.TextField(_assetPathInProject, GUILayout.Width(585 - textDimensions.x));
         GUILayout.EndHorizontal();
         if (GUILayout.Button("Refresh"))
         {
-            if (!Directory.Exists(Application.dataPath + _assetPathInProject))
+            if (!ResourcesUtil.TrySetValidPath(Application.dataPath + "/" + _assetPathInProject, ProjectPrefKeys.ITEMDATASAVEPATH))
             {
-                UpdateStatus("The path \"" + _assetPathInProject + "\" could not be found!");
-            }else if (!_assetPathInProject.Contains("Resources/"))
-            {
-                UpdateStatus("The path \"" + _assetPathInProject + "\" is not a \"Resources/\" directory.");
+                UpdateStatus("\"" + Path.GetFullPath(Application.dataPath + "/" + _assetPathInProject) + "\" is not valid.");
             }
             else
             {
-                ProjectPrefs.SetString(ProjectPrefKeys.ITEMDATASAVEPATH, _assetPathInProject);
-                _isValidPath = true;
+                Itemizer.Instance.Initialize();
+                _itemDefinitionTypes.Clear();
+                _itemDefinitionTypes.Add(typeof(ItemDefinition));
+                _itemDefinitionTypes.AddRange(Itemizer.Instance.GetAllInheritedItemDefinitionTypes());
+                SetupListsForItemType(_itemDefinitionTypes[_selectedType]);
                 UpdateStatus("Path updated.");
             }
         }
@@ -109,13 +148,68 @@ public class ItemManagerWindow : EditorWindow
 
     private void DisplayScopesTab()
     {
-        
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Add scope with name: ");
+        _scopeName = GUILayout.TextField(_scopeName, GUILayout.Width(200));
+        if (GUILayout.Button("+", GUILayout.Width(20)))
+        {
+            try
+            {
+                Itemizer.Instance.AddItemScope(_scopeName);
+                Itemizer.Instance.WriteData();
+                AssetDatabase.Refresh();
+                UpdateStatus("Successfully added a new scope.");
+            }
+            catch(Exception e)
+            {
+                UpdateStatus(e.Message);
+            }
+        }
+        GUILayout.EndHorizontal();
+        DrawLineHorizontal();
+
+        DrawListScopes();
     }
 
     private void DisplayItemsTab()
     {
-        
-        
+        GUILayout.BeginHorizontal();
+        _foldoutAdd = EditorGUILayout.Foldout(_foldoutAdd, "Add Item Definition");
+        GUILayout.EndHorizontal();
+
+        if (_foldoutAdd)
+        {
+            DrawCreationFields();
+            DrawAddDefinedItem();
+        }
+
+        DrawLineHorizontal();
+
+        GUILayout.BeginHorizontal();
+        _foldoutSearch = EditorGUILayout.Foldout(_foldoutSearch, "Search");
+        GUILayout.EndHorizontal();
+
+        if (_foldoutSearch)
+        {
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.Label("Contains:");
+            _searchIDString = EditorGUILayout.TextField(_searchIDString, GUILayout.Width(400));
+            GUILayout.EndHorizontal();
+
+            EditorGUILayout.BeginHorizontal();
+            List<string> typeSelection = new List<string>();
+            typeSelection.Add("All");
+            typeSelection.AddRange(_itemDefinitionTypes.Select(t => t.Name));
+            if (_selectedSearch >= typeSelection.Count())
+            {
+                _selectedSearch = 0;
+            }
+            GUILayout.Label("Of Type:");
+            _selectedSearch = EditorGUILayout.Popup(_selectedSearch, typeSelection.ToArray(), GUILayout.Width(402));
+            GUILayout.EndHorizontal();
+        }
+
+        DrawListItems();
     }
 
     private void DrawLineHorizontal()
@@ -133,6 +227,283 @@ public class ItemManagerWindow : EditorWindow
         _status = "Status:     " + status;
     }
 
+    private void SetupListsForItemType(Type type)
+    {
+        _selectionBoolValues = new List<bool>();
+        _selectionFloatValues = new List<float>();
+        _selectionIntValues = new List<int>();
+        _selectionStringValues = new List<string>();
+        _selectionFields = new List<FieldInfo>();
+
+        if (type.Equals(typeof(ItemDefinition)))
+        {
+            return;
+        }
+
+        foreach (FieldInfo field in type.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly))
+        {
+            if (field.FieldType.Equals(typeof(int)))
+            {
+                _selectionIntValues.Add(0);
+            }
+            else if (field.FieldType.Equals(typeof(float)))
+            {
+                _selectionFloatValues.Add(0);
+            }
+            else if (field.FieldType.Equals(typeof(bool)))
+            {
+                _selectionBoolValues.Add(false);
+            }
+            else if (field.FieldType.Equals(typeof(string)))
+            {
+                _selectionStringValues.Add("");
+            }
+            _selectionFields.Add(field);
+        }
+    }
+
+    private void DrawListScopes()
+    {
+        GUILayout.BeginVertical();
+        _scrollPosScope = GUILayout.BeginScrollView(_scrollPosScope);
+        foreach (ItemScope scope in Itemizer.Instance.ItemScopes)
+        {
+            GUILayout.BeginHorizontal("Box");
+            GUILayout.Label(scope.Name);
+            if (!scope.Equals(Itemizer.Instance.DefaultScope))
+            {
+                if (GUILayout.Button("*", GUILayout.Width(20)))
+                {
+                    ItemScopeEditWindow.Open(scope);
+                }
+
+                if (GUILayout.Button("-", GUILayout.Width(20)))
+                {
+                    if (EditorUtility.DisplayDialog("Remove Scope", "Are you sure you want to delete the scope '" + scope.Name + "'? \nItem Definitions using this scope will have it replaced with the default scope.", "Yes"))
+                    {
+                        try
+                        {
+                            Itemizer.Instance.RemoveItemScope(scope);
+                            Itemizer.Instance.WriteData();
+                            AssetDatabase.Refresh();
+                            UpdateStatus("Successfully removed the scope '" + scope.Name + "'.");
+                        }
+                        catch (Exception e)
+                        {
+                            UpdateStatus(e.Message);
+                        }
+                    }
+                }
+            }
+            GUILayout.EndHorizontal();
+        }
+        GUILayout.EndScrollView();
+        GUILayout.EndVertical();
+    }
+
+    private void DrawCreationFields()
+    {
+        GUILayout.BeginVertical(GUILayout.Height(110));
+        _scrollPosCreation = GUILayout.BeginScrollView(_scrollPosCreation);
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Item type: ");
+
+        int changeCheck = _selectedType;
+        _selectedType = EditorGUILayout.Popup("", _selectedType, _itemDefinitionTypes.Select(type => type.Name).ToArray(), GUILayout.Width(402));
+
+        if (_selectedType >= _itemDefinitionTypes.Count())
+        {
+            _selectedType = 0;
+        }
+
+        if (changeCheck != _selectedType)
+        {
+            SetupListsForItemType(_itemDefinitionTypes[_selectedType]);
+        }
+
+        GUILayout.EndHorizontal();
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Item name: ");
+        _itemDefinitionName = GUILayout.TextField(_itemDefinitionName, GUILayout.Width(200));
+        GUILayout.Label(ItemDefinition.DEVIDER.ToString(), GUILayout.Width(10));
+        string[] scopes = Itemizer.Instance.ItemScopes.Select(x => x.Name).ToArray();
+        _selectedScope = EditorGUILayout.Popup("", _selectedScope, scopes, GUILayout.Width(182));
+
+        if (_selectedScope >= scopes.Count())
+        {
+            _selectedScope = 0;
+        }
+        GUILayout.EndHorizontal();
+
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Max Stack Count: ");
+        _maxStackCount = EditorGUILayout.IntField(_maxStackCount, GUILayout.Width(400));
+        GUILayout.EndHorizontal();
+
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Icon: ");
+        _itemDefinitionIcon = (Texture2D)EditorGUILayout.ObjectField(_itemDefinitionIcon, typeof(Texture2D), false, GUILayout.Width(400));
+        GUILayout.EndHorizontal();
+
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Prefab: ");
+        _itemDefinitionPrefab = (GameObject)EditorGUILayout.ObjectField(_itemDefinitionPrefab, typeof(GameObject), false, GUILayout.Width(400));
+        GUILayout.EndHorizontal();
+
+        int ints = 0;
+        int strings = 0;
+        int bools = 0;
+        int floats = 0;
+        foreach (FieldInfo field in _selectionFields)
+        {
+            GUILayout.BeginHorizontal();
+            if (field.FieldType.Equals(typeof(int)))
+            {
+                GUILayout.Label(ObjectNames.NicifyVariableName(field.Name) + ": ");
+                _selectionIntValues[ints] = EditorGUILayout.IntField(_selectionIntValues[ints], GUILayout.Width(400));
+                ints++;
+            }
+            else if (field.FieldType.Equals(typeof(float)))
+            {
+                GUILayout.Label(ObjectNames.NicifyVariableName(field.Name) + ": ");
+                _selectionFloatValues[floats] = EditorGUILayout.FloatField(_selectionFloatValues[floats], GUILayout.Width(400));
+                floats++;
+            }
+            else if (field.FieldType.Equals(typeof(bool)))
+            {
+                GUILayout.Label(ObjectNames.NicifyVariableName(field.Name) + ": ");
+                _selectionBoolValues[bools] = EditorGUILayout.Toggle(_selectionBoolValues[bools], GUILayout.Width(400));
+                bools++;
+            }
+            else if (field.FieldType.Equals(typeof(string)))
+            {
+                GUILayout.Label(ObjectNames.NicifyVariableName(field.Name) + ": ");
+                _selectionStringValues[strings] = EditorGUILayout.TextField(_selectionStringValues[strings], GUILayout.Width(400));
+                strings++;
+            }
+            GUILayout.EndHorizontal();
+        }
+        GUILayout.EndScrollView();
+        GUILayout.EndVertical();
+    }
+
+    private void DrawListItems()
+    {
+        DrawLineHorizontal();
+        HashSet<ItemDefinition> filtered = Itemizer.Instance.ItemDefinitions;
+        if (!_searchIDString.Trim().Equals(""))
+        {
+            filtered = filtered.Where(itemDefinition => itemDefinition.GetQualifiedName().ToLower().Contains(_searchIDString.Trim().ToLower())).ToHashSet();
+        }
+
+        if(_selectedSearch != 0)
+        {
+            filtered = filtered.Where(itemDefinition => itemDefinition.GetType().Name.Equals(_itemDefinitionTypes[_selectedSearch - 1].Name)).ToHashSet();
+        }
+
+        GUILayout.BeginVertical();
+        _scrollPosItemDefinition = GUILayout.BeginScrollView(_scrollPosItemDefinition);
+
+        foreach (ItemDefinition itemDefinition in filtered)
+        {
+            GUILayout.BeginHorizontal("Box");
+
+            GUILayout.Label(itemDefinition.GetQualifiedName(), GUILayout.Width((EditorGUIUtility.currentViewWidth - 68) / 2));
+            GUILayout.Label(itemDefinition.GetType().Name, GUILayout.Width((EditorGUIUtility.currentViewWidth - 68) / 2));
+
+            if (GUILayout.Button("*", GUILayout.Width(20)))
+            {
+                ItemDefinitionEditWindow.Open(itemDefinition);
+            }
+
+            if (GUILayout.Button("-", GUILayout.Width(20)))
+            {
+                if (EditorUtility.DisplayDialog("Remove ItemDefinition", "Are you sure you want to delete the Item Definition \"" + itemDefinition.GetQualifiedName() + "\"?", "Yes"))
+                {
+                    Itemizer.Instance.RemoveItemDefinition(itemDefinition);
+                    Itemizer.Instance.WriteData();
+                    AssetDatabase.Refresh();
+                    UpdateStatus("Successfully removed the Item Definition \"" + itemDefinition.GetQualifiedName() + "\".");
+                }
+            }
+
+            GUILayout.EndHorizontal();
+        }
+
+        GUILayout.EndScrollView();
+        GUILayout.EndVertical();
+    }
+
+    private void DrawAddDefinedItem()
+    {
+        GUILayout.BeginHorizontal();
+        int ints = 0;
+        int strings = 0;
+        int bools = 0;
+        int floats = 0;
+        if (GUILayout.Button("+", GUILayout.Width(20)))
+        {
+            try
+            {
+                if (_selectedType == 0)
+                {
+                    Itemizer.Instance.AddItemDefinition(Itemizer.Instance.ItemScopes.ElementAt(_selectedScope), _itemDefinitionName, _maxStackCount,
+                        AssetDatabase.GetAssetPath(_itemDefinitionIcon).Split("Resources/").Last(), AssetDatabase.GetAssetPath(_itemDefinitionPrefab).Split("Resources/").Last());
+                }
+                else
+                {
+                    HashSet<ItemField> itemFields = new HashSet<ItemField>();
+
+                    foreach (FieldInfo field in _selectionFields)
+                    {
+                        if (field.FieldType.Equals(typeof(int)))
+                        {
+                            itemFields.Add(new ItemField(field.Name, _selectionIntValues[ints]));
+                            ints++;
+                        }
+                        else if (field.FieldType.Equals(typeof(float)))
+                        {
+                            itemFields.Add(new ItemField(field.Name, _selectionFloatValues[floats]));
+                            floats++;
+                        }
+                        else if (field.FieldType.Equals(typeof(bool)))
+                        {
+                            itemFields.Add(new ItemField(field.Name, _selectionBoolValues[bools]));
+                            bools++;
+                        }
+                        else if (field.FieldType.Equals(typeof(string)))
+                        {
+                            itemFields.Add(new ItemField(field.Name, _selectionStringValues[strings]));
+                            strings++;
+                        }
+                    }
+
+                    object[] paramArray = new object[]
+                    {
+                            Itemizer.Instance.ItemScopes.ElementAt(_selectedScope),
+                            _itemDefinitionName,
+                            _maxStackCount,
+                            AssetDatabase.GetAssetPath(_itemDefinitionIcon).Split("Resources/").Last(),
+                            AssetDatabase.GetAssetPath(_itemDefinitionPrefab).Split("Resources/").Last(),
+                            itemFields
+                    };
+
+                    MethodInfo info = typeof(Itemizer).GetMethod(nameof(Itemizer.AddInheritedItemDefinition)).MakeGenericMethod(new Type[] { _itemDefinitionTypes[_selectedType] });
+                    info.Invoke(Itemizer.Instance, paramArray);
+                }
+
+                Itemizer.Instance.WriteData();
+                AssetDatabase.Refresh();
+                UpdateStatus("Successfully added a new Item Definition.");
+            }
+            catch (Exception e)
+            {
+                UpdateStatus(e.Message);
+            }
+        }
+        GUILayout.EndHorizontal();
+    }
+
     void OnEnable()
     {
         AssemblyReloadEvents.afterAssemblyReload += OnAfterAssemblyReload;
@@ -146,10 +517,5 @@ public class ItemManagerWindow : EditorWindow
     public void OnAfterAssemblyReload()
     {
         InitializeWindow();
-    }
-
-    private bool IsPathValid(string path)
-    {
-        return Directory.Exists(path) && path.Contains("Resources/");
     }
 }

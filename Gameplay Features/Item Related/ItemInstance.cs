@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 using System;
-using UnityEngine.EventSystems;
+using System.Linq;
 
 /// <summary>
 /// An instanciated item, created from an <see cref="ItemDefinition"/>.
@@ -46,7 +45,30 @@ public class ItemInstance : Saveable
         }
     }
 
-    public bool Stackable;
+    public int MaxStackCount;
+
+    private HashSet<ItemField> _itemFields;
+    public HashSet<ItemField> ItemFields
+    {
+        get { return _itemFields; }
+        set { _itemFields = value; }
+    }
+
+    public dynamic GetValueForField(string fieldName)
+    {
+        if(_itemFields == null)
+        {
+            throw new ArgumentException("This item does not have additional defined field.");
+        }
+
+        IEnumerable<ItemField> foundField = _itemFields.Where(field => field.FieldName.Equals(fieldName));
+        if (!foundField.Any())
+        {
+            throw new ArgumentException("The given field name \"" + fieldName + "\" cannot be found.");
+        }
+
+        return foundField.First();
+    }
 
     public override bool Equals(object other)
     {
@@ -83,6 +105,7 @@ public class ItemInstance : Saveable
             {
                 _icon = Resources.Load<Sprite>(item.IconPath);
             }
+            _itemFields = item.Fields;
         }
     }
 
@@ -90,6 +113,7 @@ public class ItemInstance : Saveable
     {
         ItemData data = new ItemData();
         data.ItemName = _itemName;
+        data.Fields = _itemFields;
         if (_inventoryOfItem != null)
         {
             HeldInventoryManager invMan = null;

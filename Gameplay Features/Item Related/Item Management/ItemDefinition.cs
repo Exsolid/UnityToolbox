@@ -2,50 +2,31 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using Newtonsoft.Json;
 
 /// <summary>
-/// The base definition for all items created.
+/// The base definition for all items.
 /// </summary>
 [Serializable]
 public class ItemDefinition
 {
-    protected ItemScope _itemScope;
-    public ItemScope ItemScope
-    {
-        get { return _itemScope; }
-        set { _itemScope = value; }
-    }
-
-    protected string _itemName;
-    public string ItemName
-    {
-        get { return _itemName; }
-        set { _itemName = value; }
-    }
-
-    public bool Stackable;
-
+    [JsonIgnore]
     [NonSerialized]
-    protected Sprite _icon;
-    public Sprite Icon
-    {
-        get { return _icon; }
-        set 
-        {
-            _icon = value;
-        }
-    }
+    public static char DEVIDER = '_';
 
+    public ItemScope Scope;
+
+    public string Name;
+
+    public int MaxStackCount;
+
+    [JsonIgnore]
     [NonSerialized]
-    protected GameObject _prefab;
-    public GameObject Prefab
-    {
-        get { return _prefab; }
-        set 
-        {
-            _prefab = value;
-        }
-    }
+    public Texture2D Icon;
+
+    [JsonIgnore]
+    [NonSerialized]
+    public GameObject Prefab;
 
     public string PrefabPath;
     public string IconPath;
@@ -57,42 +38,48 @@ public class ItemDefinition
     {
         if(IconPath != null)
         {
-            _icon = (Sprite) Resources.Load(IconPath);
+            Icon = (Texture2D) Resources.Load(IconPath);
         }
 
         if(PrefabPath != null)
         {
-            _prefab = (GameObject) Resources.Load(PrefabPath);
+            Prefab = (GameObject) Resources.Load(PrefabPath);
         }
         else
         {
-            Debug.LogError("The deserialized " + nameof(ItemDefinition) + " \"" + _itemName + "\" does not contain a prefab. It cannot be instantiated this way.");
+            Debug.LogError("The deserialized " + nameof(ItemDefinition) + " \"" + Name + "\" does not contain a prefab. It cannot be instantiated this way.");
         }
     }
 
-    //private bool IsPrefabValid(GameObject newObj, GameObject oldObj)
-    //{
-    //    string path = AssetDatabase.GetAssetPath(newObj);
-    //    if (!path.Contains("Resources/"))
-    //    {
-    //        Debug.LogError("The object cannot be set to values external to the resources folder.");
-    //        return false;
-    //    }
+    public string GetQualifiedName()
+    {
+        return Scope.Name + DEVIDER + Name;
+    }
 
-    //    PrefabPath = path;
-    //    return true;
-    //}
+    public override bool Equals(object obj)
+    {
+        if (obj == null)
+        {
+            return false;
+        }
 
-    //private bool IsIconValid(Sprite newObj, Sprite oldObj)
-    //{
-    //    string path = AssetDatabase.GetAssetPath(newObj);
-    //    if (!path.Contains("Resources/"))
-    //    {
-    //        Debug.LogError("The object cannot be set to values external to the resources folder.");
-    //        return false;
-    //    }
+        if (obj.GetType().Equals(typeof(ItemDefinition)) || obj.GetType().IsSubclassOf(typeof(ItemDefinition)))
+        {
+            ItemDefinition other = (ItemDefinition)obj;
+            return other.GetQualifiedName().Equals(GetQualifiedName());
+        }
+        else if (obj.GetType().Equals(typeof(string)))
+        {
+            return GetQualifiedName().Equals(obj);
+        }
+        else
+        {
+            return false;
+        }
+    }
 
-    //    IconPath = path;
-    //    return true;
-    //}
+    public override int GetHashCode()
+    {
+        return GetQualifiedName().GetHashCode();
+    }
 }

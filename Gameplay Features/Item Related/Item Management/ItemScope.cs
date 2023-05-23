@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+/// <summary>
+/// The scope which is used to indentify and serialize item data.
+/// </summary>
 [Serializable]
-public class ItemScope : MonoBehaviour
+public class ItemScope
 {
     public string Name;
 
@@ -23,6 +26,6 @@ public class ItemScope : MonoBehaviour
 
     public override int GetHashCode()
     {
-        return base.GetHashCode();
+        return Name.GetHashCode();
     }
 }

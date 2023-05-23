@@ -10,9 +10,9 @@ using System;
 /// </summary>
 public class Localizer
 {
-    public Action<LocalisationScope> ScopeEdited;
-    public Action<LocalisationLanguage> LanguageEdited;
-    public Action<LocalisationID> LocalisationIDEdited;
+    public event Action<LocalisationScope> ScopeEdited;
+    public event Action<LocalisationLanguage> LanguageEdited;
+    public event Action<LocalisationID> LocalisationIDEdited;
 
     private static Localizer _instance;
     public static Localizer Instance
@@ -437,13 +437,11 @@ public class Localizer
     {
         _settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
         _localisationData = new Dictionary<LocalisationID, Dictionary<LocalisationLanguage, string>>();
+        _localisationScopes = new HashSet<LocalisationScope>();
 
         _defaultScope = new LocalisationScope();
         _defaultScope.Name = "DefaultScope";
-        _localisationScopes = new HashSet<LocalisationScope>();
         _localisationScopes.Add(_defaultScope);
-
-        _localisationLanguages = new HashSet<LocalisationLanguage>();
 
         if (ProjectPrefs.GetString(ProjectPrefKeys.LOCALISATIONSAVEPATH) == null || ProjectPrefs.GetString(ProjectPrefKeys.LOCALISATIONSAVEPATH).Equals(""))
         {
@@ -457,6 +455,7 @@ public class Localizer
 
         if (_localisationLanguages == null)
         {
+            _localisationLanguages = new HashSet<LocalisationLanguage>();
             return;
         }
 

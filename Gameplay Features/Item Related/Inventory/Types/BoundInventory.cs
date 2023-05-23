@@ -27,7 +27,7 @@ public class BoundInventory : InventoryBase
 
     public override bool AddItem(ItemInstance item, int count)
     {
-        if(MaxSlotCount <= _items.Count && (!_items.ContainsKey(item) || !item.Stackable))
+        if(MaxSlotCount <= _items.Count && (!_items.ContainsKey(item) || item.MaxStackCount < count))
         {
             return false;
         }

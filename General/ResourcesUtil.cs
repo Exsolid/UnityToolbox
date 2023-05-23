@@ -18,7 +18,7 @@ public class ResourcesUtil
     /// <returns>Whether a path is a valid resources path.</returns>
     public static bool IsFullPathValid(string path)
     {
-        if (!Directory.Exists(path))
+        if (!Directory.Exists(path) && !File.Exists(path))
         {
             return false;
         }

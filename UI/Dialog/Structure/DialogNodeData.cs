@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using Newtonsoft.Json;
 
 /// <summary>
 /// The dialog node data which is used at runtime and to serialize the dialog graph.
@@ -13,7 +14,7 @@ public class DialogNodeData
     public string StateForDialogIndentifier;
     public string GamestateToComplete;
     public string AvatarReference;
-    [NonSerialized] public Texture2D Avatar;
+    [JsonIgnore] [NonSerialized] public Texture2D Avatar;
     public string Title;
     public string Text;
     public List<string> Options;

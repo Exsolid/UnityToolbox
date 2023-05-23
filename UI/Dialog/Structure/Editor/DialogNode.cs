@@ -124,8 +124,7 @@ public class DialogNode : Node
         _gamestateToComplete = data.GamestateToComplete;
         _stateForDialogIndentifier = data.StateForDialogIndentifier;
 
-        string path = AssetDatabase.GUIDToAssetPath(data.AvatarReference);
-        _avatar = AssetDatabase.LoadAssetAtPath(path, typeof(Texture2D)) as Texture2D;
+        _avatar = AssetDatabase.LoadAssetAtPath(data.AvatarReference, typeof(Texture2D)) as Texture2D;
 
         SetPosition(new Rect(data.Position.x, data.Position.y, 0, 0));
     }
