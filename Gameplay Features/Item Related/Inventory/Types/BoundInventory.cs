@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
+using Item;
 
 public class BoundInventory : InventoryBase
 {

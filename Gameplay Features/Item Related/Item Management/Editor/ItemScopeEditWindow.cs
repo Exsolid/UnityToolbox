@@ -4,101 +4,104 @@ using UnityEngine;
 using UnityEditor;
 using System;
 
-public class ItemScopeEditWindow : EditorWindow
+namespace Item.Management
 {
-    private ItemScope _scope;
-    public ItemScope Scope
+    public class ItemScopeEditWindow : EditorWindow
     {
-        set
+        private ItemScope _scope;
+        public ItemScope Scope
         {
-            _scope = value;
-            _newScopeName = value.Name;
-        }
-    }
-
-    private string _newScopeName;
-
-    private string _status;
-
-    public static void Open(ItemScope scope)
-    {
-        ItemScopeEditWindow window = (ItemScopeEditWindow) GetWindow(typeof(ItemScopeEditWindow));
-        window.titleContent = new GUIContent("Edit Scope");
-        window.ShowUtility();
-        window.minSize = new Vector2(400, 100);
-        window.maxSize = new Vector2(400, 100);
-        window.Scope = scope;
-    }
-
-    private void Awake()
-    {
-        UpdateStatus("");
-        Itemizer.Instance.OnItemScopeEdited += ScopeEdited;
-    }
-
-    public void OnGUI()
-    {
-        GUILayout.BeginVertical();
-
-        DrawLineHorizontal();
-        GUILayout.Label(_status);
-        DrawLineHorizontal();
-
-        GUILayout.BeginHorizontal();
-        GUILayout.Label("Scope name to edit: ");
-        _newScopeName = GUILayout.TextField(_newScopeName, GUILayout.Width(200));
-        GUILayout.EndHorizontal();
-
-        DrawLineHorizontal();
-
-        GUILayout.BeginHorizontal();
-        if (GUILayout.Button("Cancel"))
-        {
-            Itemizer.Instance.OnItemScopeEdited -= ScopeEdited;
-            Close();
-        }
-
-        if (GUILayout.Button("Save"))
-        {
-            Itemizer.Instance.OnItemScopeEdited -= ScopeEdited;
-            try
+            set
             {
-                Itemizer.Instance.EditItemScope(_scope, _newScopeName);
-                Itemizer.Instance.WriteData();
-                AssetDatabase.Refresh();
+                _scope = value;
+                _newScopeName = value.Name;
+            }
+        }
+
+        private string _newScopeName;
+
+        private string _status;
+
+        public static void Open(ItemScope scope)
+        {
+            ItemScopeEditWindow window = (ItemScopeEditWindow)GetWindow(typeof(ItemScopeEditWindow));
+            window.titleContent = new GUIContent("Edit Scope");
+            window.ShowUtility();
+            window.minSize = new Vector2(400, 100);
+            window.maxSize = new Vector2(400, 100);
+            window.Scope = scope;
+        }
+
+        private void Awake()
+        {
+            UpdateStatus("");
+            Itemizer.Instance.OnItemScopeEdited += ScopeEdited;
+        }
+
+        public void OnGUI()
+        {
+            GUILayout.BeginVertical();
+
+            DrawLineHorizontal();
+            GUILayout.Label(_status);
+            DrawLineHorizontal();
+
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Scope name to edit: ");
+            _newScopeName = GUILayout.TextField(_newScopeName, GUILayout.Width(200));
+            GUILayout.EndHorizontal();
+
+            DrawLineHorizontal();
+
+            GUILayout.BeginHorizontal();
+            if (GUILayout.Button("Cancel"))
+            {
+                Itemizer.Instance.OnItemScopeEdited -= ScopeEdited;
                 Close();
             }
-            catch (Exception e)
+
+            if (GUILayout.Button("Save"))
             {
-                UpdateStatus(e.Message);
+                Itemizer.Instance.OnItemScopeEdited -= ScopeEdited;
+                try
+                {
+                    Itemizer.Instance.EditItemScope(_scope, _newScopeName);
+                    Itemizer.Instance.WriteData();
+                    AssetDatabase.Refresh();
+                    Close();
+                }
+                catch (Exception e)
+                {
+                    UpdateStatus(e.Message);
+                }
+            }
+
+            GUILayout.EndHorizontal();
+            GUILayout.EndVertical();
+        }
+
+        private void ScopeEdited(ItemScope scope, ItemScope newScope)
+        {
+            if (_scope.Equals(scope))
+            {
+                Itemizer.Instance.OnItemScopeEdited -= ScopeEdited;
+                Close();
             }
         }
 
-        GUILayout.EndHorizontal();
-        GUILayout.EndVertical();
-    }
-
-    private void ScopeEdited(ItemScope scope, ItemScope newScope)
-    {
-        if (_scope.Equals(scope))
+        private void DrawLineHorizontal()
         {
-            Itemizer.Instance.OnItemScopeEdited -= ScopeEdited;
-            Close();
+            EditorGUILayout.Space();
+            Rect rect = EditorGUILayout.BeginHorizontal();
+            Handles.color = Color.gray;
+            Handles.DrawLine(new Vector2(rect.x - 15, rect.y), new Vector2(rect.width + 15, rect.y));
+            EditorGUILayout.EndHorizontal();
+            EditorGUILayout.Space();
         }
-    }
 
-    private void DrawLineHorizontal()
-    {
-        EditorGUILayout.Space();
-        Rect rect = EditorGUILayout.BeginHorizontal();
-        Handles.color = Color.gray;
-        Handles.DrawLine(new Vector2(rect.x - 15, rect.y), new Vector2(rect.width + 15, rect.y));
-        EditorGUILayout.EndHorizontal();
-        EditorGUILayout.Space();
-    }
-
-    private void UpdateStatus(string status)
-    {
-        _status = "Status:     " + status;
+        private void UpdateStatus(string status)
+        {
+            _status = "Status:     " + status;
+        }
     }
 }

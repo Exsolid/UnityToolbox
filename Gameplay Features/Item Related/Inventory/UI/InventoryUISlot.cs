@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System;
+using Item;
 
 public class InventoryUISlot : MonoBehaviour, IPointerClickHandler
 {
