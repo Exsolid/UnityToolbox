@@ -1,5 +1,20 @@
 var annotated_dup =
 [
+    [ "Item", "namespace_item.html", [
+      [ "Management", "namespace_item_1_1_management.html", [
+        [ "ItemDefinitionDrawer", "class_item_1_1_management_1_1_item_definition_drawer.html", "class_item_1_1_management_1_1_item_definition_drawer" ],
+        [ "ItemDefinitionEditWindow", "class_item_1_1_management_1_1_item_definition_edit_window.html", "class_item_1_1_management_1_1_item_definition_edit_window" ],
+        [ "ItemDefinitionSelectionWindow", "class_item_1_1_management_1_1_item_definition_selection_window.html", "class_item_1_1_management_1_1_item_definition_selection_window" ],
+        [ "ItemField", "class_item_1_1_management_1_1_item_field.html", "class_item_1_1_management_1_1_item_field" ],
+        [ "Itemizer", "class_item_1_1_management_1_1_itemizer.html", "class_item_1_1_management_1_1_itemizer" ],
+        [ "ItemManagerWindow", "class_item_1_1_management_1_1_item_manager_window.html", "class_item_1_1_management_1_1_item_manager_window" ],
+        [ "ItemScope", "class_item_1_1_management_1_1_item_scope.html", "class_item_1_1_management_1_1_item_scope" ],
+        [ "ItemScopeEditWindow", "class_item_1_1_management_1_1_item_scope_edit_window.html", "class_item_1_1_management_1_1_item_scope_edit_window" ]
+      ] ],
+      [ "ItemDefinition", "class_item_1_1_item_definition.html", "class_item_1_1_item_definition" ],
+      [ "ItemInstance", "class_item_1_1_item_instance.html", "class_item_1_1_item_instance" ],
+      [ "ItemManager", "class_item_1_1_item_manager.html", "class_item_1_1_item_manager" ]
+    ] ],
     [ "AudioMixer", "class_audio_mixer.html", "class_audio_mixer" ],
     [ "AudioMixerItem", "class_audio_mixer_item.html", "class_audio_mixer_item" ],
     [ "AudioVolumeSetter", "class_audio_volume_setter.html", "class_audio_volume_setter" ],
@@ -37,13 +52,6 @@ var annotated_dup =
     [ "InventoryUI", "class_inventory_u_i.html", "class_inventory_u_i" ],
     [ "InventoryUISlot", "class_inventory_u_i_slot.html", "class_inventory_u_i_slot" ],
     [ "ItemData", "class_item_data.html", "class_item_data" ],
-    [ "ItemDefinition", "class_item_definition.html", "class_item_definition" ],
-    [ "ItemInstance", "class_item_instance.html", "class_item_instance" ],
-    [ "Itemizer", "class_itemizer.html", "class_itemizer" ],
-    [ "ItemManager", "class_item_manager.html", "class_item_manager" ],
-    [ "ItemManagerWindow", "class_item_manager_window.html", "class_item_manager_window" ],
-    [ "ItemScope", "class_item_scope.html", "class_item_scope" ],
-    [ "ItemScopeEditWindow", "class_item_scope_edit_window.html", "class_item_scope_edit_window" ],
     [ "LanguageSetting", "class_language_setting.html", "class_language_setting" ],
     [ "LanguageSettingButton", "class_language_setting_button.html", "class_language_setting_button" ],
     [ "LoadFirstScene", "class_load_first_scene.html", "class_load_first_scene" ],

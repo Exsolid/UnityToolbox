@@ -1,4 +1,4 @@
 var _item_manager_8cs =
 [
-    [ "ItemManager", "class_item_manager.html", "class_item_manager" ]
+    [ "Item.ItemManager", "class_item_1_1_item_manager.html", "class_item_1_1_item_manager" ]
 ];

@@ -1,8 +1,27 @@
 var searchData=
 [
-  ['language_0',['Language',['../class_localisation_edit_language_window.html#a1cf80d0c6fdc9ecee0e36c0e49c076f5',1,'LocalisationEditLanguageWindow']]],
-  ['localisationdata_1',['LocalisationData',['../class_localizer.html#a4ca0dd50c5f5ba0f9b40e856e1e5cff4',1,'Localizer']]],
-  ['localisationid_2',['LocalisationID',['../class_localisation_edit_i_d_window.html#a294c6aaa70ee7d55a80fa2549d06ff8f',1,'LocalisationEditIDWindow']]],
-  ['localisationlanguages_3',['LocalisationLanguages',['../class_localizer.html#a4746d3b0b4b03dd4e000f034c68dc2f9',1,'Localizer']]],
-  ['localisationscopes_4',['LocalisationScopes',['../class_localizer.html#a7d98c438a34f1a1c04ab122ed8276a3d',1,'Localizer']]]
+  ['icon_0',['Icon',['../class_item_1_1_item_instance.html#aed74dfda94e1c2c57edf1b14cafc0c75',1,'Item::ItemInstance']]],
+  ['id_1',['ID',['../class_gamestate_node.html#a77a3b2c10c4955c381fe2645d9dfecad',1,'GamestateNode.ID()'],['../class_inventory_base.html#a99cb3424e90eb83f92180979c1154f42',1,'InventoryBase.ID()'],['../class_parent_identifier.html#a2f80dd60e91dd8ab0b6b8ffdccb271d9',1,'ParentIdentifier.ID()'],['../class_saveable.html#a949dfb167c404fc147e49db779f27bff',1,'Saveable.ID()'],['../class_dialog_node.html#ace3cb91ce02f114512fb18e986a861b1',1,'DialogNode.ID()']]],
+  ['ids_2',['IDS',['../class_gamestate_graph_view.html#a2c3e4d27ca53381847f9be42ded17138',1,'GamestateGraphView.IDS()'],['../class_dialog_graph_view.html#a2e031ceffef04852a455bcba4350f15f',1,'DialogGraphView.IDS()']]],
+  ['indentifier_3',['Indentifier',['../class_item_1_1_item_instance.html#ab486c0cf17c56d6db2a65c08315dd0f9',1,'Item::ItemInstance']]],
+  ['ineditor_4',['InEditor',['../class_saveable.html#a2342768356304c4d31c44038bb2255a9',1,'Saveable']]],
+  ['initialized_5',['Initialized',['../class_item_1_1_management_1_1_itemizer.html#a44d31bfa241b2e2b343a5b883f2a9ea9',1,'Item::Management::Itemizer']]],
+  ['inputids_6',['InputIDs',['../class_gamestate_node.html#a965dd61f6b81ba97886e4ce6607aa576',1,'GamestateNode.InputIDs()'],['../class_dialog_node.html#aff63371974fe088984bc5cf865eca9b6',1,'DialogNode.InputIDs()']]],
+  ['inputport_7',['InputPort',['../class_gamestate_node.html#a5216e25eb0fec5f288c99a23bb29a711',1,'GamestateNode.InputPort()'],['../class_dialog_node.html#a3283e9c24447c9d3710f3f67892f5e62',1,'DialogNode.InputPort()']]],
+  ['instance_8',['Instance',['../class_item_1_1_management_1_1_itemizer.html#a87562f1037d3d28b3e5fb380436b28ed',1,'Item.Management.Itemizer.Instance()'],['../class_localizer.html#a492f2a7ec70ab427d64fba49c9700ff1',1,'Localizer.Instance()']]],
+  ['inventory_9',['Inventory',['../class_item_1_1_item_instance.html#abfdfe2bf19c7e8342f410a1d84da28de',1,'Item::ItemInstance']]],
+  ['isactive_10',['IsActive',['../class_menu.html#a200ee083906693be274aced2751e7a0a',1,'Menu']]],
+  ['isclimbinglocked_11',['IsClimbingLocked',['../class_movement_base.html#a534cbe7174ae31d707babe64251d48d9',1,'MovementBase']]],
+  ['isenabled_12',['IsEnabled',['../class_held_inventory_manager.html#a1661f52d86a61ad14089274404b66da2',1,'HeldInventoryManager.IsEnabled()'],['../class_menu_manager.html#acebabc2246c8969e3224db86c77e8c73',1,'MenuManager.IsEnabled()']]],
+  ['isinitialized_13',['IsInitialized',['../class_localizer.html#aea01054b2fa9de5a5607bc0bdbf79c5d',1,'Localizer']]],
+  ['isjumpinglocked_14',['IsJumpingLocked',['../class_movement_base.html#aa909f1ab3d3e826c672342c17caf2819',1,'MovementBase']]],
+  ['ismovementlocked_15',['IsMovementLocked',['../class_movement_base.html#a4c41e2183f36fcd8dce75bce5e29aa46',1,'MovementBase']]],
+  ['itemcount_16',['ItemCount',['../class_inventory_u_i_slot.html#aa00d2742664e9e7952bc2589a5d5bf62',1,'InventoryUISlot']]],
+  ['itemdefinitions_17',['ItemDefinitions',['../class_item_1_1_management_1_1_itemizer.html#a4aac342bf07e7516ed1992819c2809c7',1,'Item::Management::Itemizer']]],
+  ['itemfields_18',['ItemFields',['../class_item_1_1_item_instance.html#aba8324a39c4303b6994e19b883b07e81',1,'Item::ItemInstance']]],
+  ['itemheld_19',['ItemHeld',['../class_held_inventory.html#ac1d180301451851dbec0f1c2116f1bdd',1,'HeldInventory']]],
+  ['itemname_20',['ItemName',['../class_item_1_1_item_instance.html#a819509a414c47cec6690b649d30e7a38',1,'Item::ItemInstance']]],
+  ['items_21',['Items',['../class_bound_inventory.html#a3a8b590de982debee976c13676363ec9',1,'BoundInventory']]],
+  ['itemscopes_22',['ItemScopes',['../class_item_1_1_management_1_1_itemizer.html#a1bfa5836d6dc49a2d79f144ac801e38b',1,'Item::Management::Itemizer']]],
+  ['itemtoshow_23',['ItemToShow',['../class_inventory_u_i_slot.html#a288048ac83409ec5cf511ecdb3748158',1,'InventoryUISlot']]]
 ];

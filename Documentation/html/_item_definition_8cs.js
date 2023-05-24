@@ -1,4 +1,4 @@
 var _item_definition_8cs =
 [
-    [ "ItemDefinition", "class_item_definition.html", "class_item_definition" ]
+    [ "Item.ItemDefinition", "class_item_1_1_item_definition.html", "class_item_1_1_item_definition" ]
 ];

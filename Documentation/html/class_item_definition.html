@@ -99,14 +99,13 @@ $(document).ready(function(){initNavTree('class_item_definition.html',''); initR
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="#properties">Properties</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="class_item_definition-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">ItemDefinition Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>The base definition for all items created.  
+<p>The base definition for all items.  
 </p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -114,37 +113,34 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2c719e2a82569c39a1e41e80ead84178"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_item_definition.html#a2c719e2a82569c39a1e41e80ead84178">Deserialize</a> ()</td></tr>
 <tr class="memdesc:a2c719e2a82569c39a1e41e80ead84178"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads all data from the resources with the <a class="el" href="class_item_definition.html#a9cd3c03de7a75ca34caa21e6a8c363c8">PrefabPath</a> &amp; <a class="el" href="class_item_definition.html#a2b0503f4a8aa2d6acaaf277ae1a508e2">IconPath</a>.  <br /></td></tr>
 <tr class="separator:a2c719e2a82569c39a1e41e80ead84178"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a726452df996c324f350705b128b10550"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_item_definition.html#a726452df996c324f350705b128b10550">GetQualifiedName</a> ()</td></tr>
+<tr class="separator:a726452df996c324f350705b128b10550"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46ce7106d4a72c839e5879bc031c76c0"><td class="memItemLeft" align="right" valign="top">override bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_item_definition.html#a46ce7106d4a72c839e5879bc031c76c0">Equals</a> (object obj)</td></tr>
+<tr class="separator:a46ce7106d4a72c839e5879bc031c76c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c764cc54f2c82c28fcc32698d703a67"><td class="memItemLeft" align="right" valign="top">override int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_item_definition.html#a7c764cc54f2c82c28fcc32698d703a67">GetHashCode</a> ()</td></tr>
+<tr class="separator:a7c764cc54f2c82c28fcc32698d703a67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a41a5642b767789dcac49df6d474f6c38"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_item_definition.html#a41a5642b767789dcac49df6d474f6c38">Stackable</a></td></tr>
-<tr class="separator:a41a5642b767789dcac49df6d474f6c38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6206fe600c2058ea5ecfb5c70d8522a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_item_scope.html">ItemScope</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_item_definition.html#af6206fe600c2058ea5ecfb5c70d8522a">Scope</a></td></tr>
+<tr class="separator:af6206fe600c2058ea5ecfb5c70d8522a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6369ff6ce9926aa79774982ac0bc3e3"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_item_definition.html#ac6369ff6ce9926aa79774982ac0bc3e3">Name</a></td></tr>
+<tr class="separator:ac6369ff6ce9926aa79774982ac0bc3e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a648967808394ba7db9cec2bc4255a9ea"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_item_definition.html#a648967808394ba7db9cec2bc4255a9ea">MaxStackCount</a></td></tr>
+<tr class="separator:a648967808394ba7db9cec2bc4255a9ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67388c64effaeb9975ef4bf9e307b5fc"><td class="memItemLeft" align="right" valign="top">Texture2D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_item_definition.html#a67388c64effaeb9975ef4bf9e307b5fc">Icon</a></td></tr>
+<tr class="separator:a67388c64effaeb9975ef4bf9e307b5fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a593ce240304028b812c355d01a541239"><td class="memItemLeft" align="right" valign="top">GameObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_item_definition.html#a593ce240304028b812c355d01a541239">Prefab</a></td></tr>
+<tr class="separator:a593ce240304028b812c355d01a541239"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9cd3c03de7a75ca34caa21e6a8c363c8"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_item_definition.html#a9cd3c03de7a75ca34caa21e6a8c363c8">PrefabPath</a></td></tr>
 <tr class="separator:a9cd3c03de7a75ca34caa21e6a8c363c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b0503f4a8aa2d6acaaf277ae1a508e2"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_item_definition.html#a2b0503f4a8aa2d6acaaf277ae1a508e2">IconPath</a></td></tr>
 <tr class="separator:a2b0503f4a8aa2d6acaaf277ae1a508e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:adae559f02b2ad1b0ca5b32b46caf79b7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_item_scope.html">ItemScope</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_item_definition.html#adae559f02b2ad1b0ca5b32b46caf79b7">_itemScope</a></td></tr>
-<tr class="separator:adae559f02b2ad1b0ca5b32b46caf79b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8167f33f747e9bc3e125201236940e9e"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_item_definition.html#a8167f33f747e9bc3e125201236940e9e">_itemName</a></td></tr>
-<tr class="separator:a8167f33f747e9bc3e125201236940e9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ef3cc05960ac0387a5f62fd2c82a092"><td class="memItemLeft" align="right" valign="top">Sprite&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_item_definition.html#a5ef3cc05960ac0387a5f62fd2c82a092">_icon</a></td></tr>
-<tr class="separator:a5ef3cc05960ac0387a5f62fd2c82a092"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad909fb5d682640c0d3017f32a47f4172"><td class="memItemLeft" align="right" valign="top">GameObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_item_definition.html#ad909fb5d682640c0d3017f32a47f4172">_prefab</a></td></tr>
-<tr class="separator:ad909fb5d682640c0d3017f32a47f4172"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="properties" name="properties"></a>
-Properties</h2></td></tr>
-<tr class="memitem:a57551f637bfd4b2e6bfff87bdf6d68b1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_item_scope.html">ItemScope</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_item_definition.html#a57551f637bfd4b2e6bfff87bdf6d68b1">ItemScope</a><code> [get, set]</code></td></tr>
-<tr class="separator:a57551f637bfd4b2e6bfff87bdf6d68b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a796a5de0fd1ffb8b533939b8c762c993"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_item_definition.html#a796a5de0fd1ffb8b533939b8c762c993">ItemName</a><code> [get, set]</code></td></tr>
-<tr class="separator:a796a5de0fd1ffb8b533939b8c762c993"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a97266a65c5c2c9f406c79d038c536e73"><td class="memItemLeft" align="right" valign="top">Sprite&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_item_definition.html#a97266a65c5c2c9f406c79d038c536e73">Icon</a><code> [get, set]</code></td></tr>
-<tr class="separator:a97266a65c5c2c9f406c79d038c536e73"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a593ce240304028b812c355d01a541239"><td class="memItemLeft" align="right" valign="top">GameObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_item_definition.html#a593ce240304028b812c355d01a541239">Prefab</a><code> [get, set]</code></td></tr>
-<tr class="separator:a593ce240304028b812c355d01a541239"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:a062f76c6acedfada474c8f84dc85cd7c"><td class="memItemLeft" align="right" valign="top">static char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_item_definition.html#a062f76c6acedfada474c8f84dc85cd7c">DEVIDER</a> = '_'</td></tr>
+<tr class="separator:a062f76c6acedfada474c8f84dc85cd7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a2c719e2a82569c39a1e41e80ead84178" name="a2c719e2a82569c39a1e41e80ead84178"></a>
@@ -162,15 +158,75 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="reference">References <a class="el" href="class_item_definition.html#a5ef3cc05960ac0387a5f62fd2c82a092">_icon</a>, <a class="el" href="class_item_definition.html#a8167f33f747e9bc3e125201236940e9e">_itemName</a>, <a class="el" href="class_item_definition.html#ad909fb5d682640c0d3017f32a47f4172">_prefab</a>, <a class="el" href="class_item_definition.html#a2b0503f4a8aa2d6acaaf277ae1a508e2">IconPath</a>, and <a class="el" href="class_item_definition.html#a9cd3c03de7a75ca34caa21e6a8c363c8">PrefabPath</a>.</p>
+<p class="reference">References <a class="el" href="class_item_definition.html#a67388c64effaeb9975ef4bf9e307b5fc">Icon</a>, <a class="el" href="class_item_definition.html#a2b0503f4a8aa2d6acaaf277ae1a508e2">IconPath</a>, <a class="el" href="class_item_definition.html#ac6369ff6ce9926aa79774982ac0bc3e3">Name</a>, <a class="el" href="class_item_definition.html#a593ce240304028b812c355d01a541239">Prefab</a>, and <a class="el" href="class_item_definition.html#a9cd3c03de7a75ca34caa21e6a8c363c8">PrefabPath</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="class_item_manager.html#a5e0bfe64403ad7927f5a1f827c8fb244">ItemManager.ReadItemData()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="class_itemizer.html#a711ea35b28a1edc6e5d551850a1c3b3d">Itemizer.ReadItemData()</a>.</p>
+
+</div>
+</div>
+<a id="a46ce7106d4a72c839e5879bc031c76c0" name="a46ce7106d4a72c839e5879bc031c76c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46ce7106d4a72c839e5879bc031c76c0">&#9670;&#160;</a></span>Equals()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">override bool ItemDefinition.Equals </td>
+          <td>(</td>
+          <td class="paramtype">object&#160;</td>
+          <td class="paramname"><em>obj</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="reference">References <a class="el" href="class_item_definition.html#a726452df996c324f350705b128b10550">GetQualifiedName()</a>.</p>
+
+</div>
+</div>
+<a id="a7c764cc54f2c82c28fcc32698d703a67" name="a7c764cc54f2c82c28fcc32698d703a67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c764cc54f2c82c28fcc32698d703a67">&#9670;&#160;</a></span>GetHashCode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">override int ItemDefinition.GetHashCode </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="reference">References <a class="el" href="class_item_definition.html#a726452df996c324f350705b128b10550">GetQualifiedName()</a>.</p>
+
+</div>
+</div>
+<a id="a726452df996c324f350705b128b10550" name="a726452df996c324f350705b128b10550"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a726452df996c324f350705b128b10550">&#9670;&#160;</a></span>GetQualifiedName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string ItemDefinition.GetQualifiedName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="reference">References <a class="el" href="class_item_definition.html#a062f76c6acedfada474c8f84dc85cd7c">DEVIDER</a>, and <a class="el" href="class_item_definition.html#ac6369ff6ce9926aa79774982ac0bc3e3">Name</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="class_itemizer.html#a538ee4753d5a321f096e3cd18deb211b">Itemizer.AddItemDefinition()</a>, <a class="el" href="class_item_manager_window.html#a7dcc53f0410a3f5c01022246c7776664">ItemManagerWindow.DrawListItems()</a>, <a class="el" href="class_item_definition.html#a46ce7106d4a72c839e5879bc031c76c0">Equals()</a>, <a class="el" href="class_item_definition.html#a7c764cc54f2c82c28fcc32698d703a67">GetHashCode()</a>, <a class="el" href="class_itemizer.html#a5f527edd4d3d27626b1a39766ccff9b8">Itemizer.InternalRemoveItemDefinition()</a>, <a class="el" href="class_item_definition_selection_window.html#a0bc6da8895fc1736a6ab0592f52f971b">ItemDefinitionSelectionWindow.OnGUI()</a>, and <a class="el" href="class_itemizer.html#a5cdd6011d5d28e59fb531471263be0d9">Itemizer.RemoveItemDefinition()</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a5ef3cc05960ac0387a5f62fd2c82a092" name="a5ef3cc05960ac0387a5f62fd2c82a092"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5ef3cc05960ac0387a5f62fd2c82a092">&#9670;&#160;</a></span>_icon</h2>
+<a id="a062f76c6acedfada474c8f84dc85cd7c" name="a062f76c6acedfada474c8f84dc85cd7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a062f76c6acedfada474c8f84dc85cd7c">&#9670;&#160;</a></span>DEVIDER</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -179,87 +235,33 @@ Properties</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">Sprite ItemDefinition._icon</td>
+          <td class="memname">char ItemDefinition.DEVIDER = '_'</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="class_item_definition.html#a2c719e2a82569c39a1e41e80ead84178">Deserialize()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="class_item_definition_edit_window.html#a09242313b72bb257186fe0481f026a35">ItemDefinitionEditWindow.DrawCreationFields()</a>, <a class="el" href="class_item_manager_window.html#ad7e14056f1e5e923d060998012201f58">ItemManagerWindow.DrawCreationFields()</a>, <a class="el" href="class_item_definition.html#a726452df996c324f350705b128b10550">GetQualifiedName()</a>, and <a class="el" href="class_item_definition_drawer.html#afa74906ec09ed4d14d151efcd3491833">ItemDefinitionDrawer.OnGUI()</a>.</p>
 
 </div>
 </div>
-<a id="a8167f33f747e9bc3e125201236940e9e" name="a8167f33f747e9bc3e125201236940e9e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8167f33f747e9bc3e125201236940e9e">&#9670;&#160;</a></span>_itemName</h2>
+<a id="a67388c64effaeb9975ef4bf9e307b5fc" name="a67388c64effaeb9975ef4bf9e307b5fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67388c64effaeb9975ef4bf9e307b5fc">&#9670;&#160;</a></span>Icon</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">string ItemDefinition._itemName</td>
+          <td class="memname">Texture2D ItemDefinition.Icon</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="class_item_definition.html#a2c719e2a82569c39a1e41e80ead84178">Deserialize()</a>.</p>
-
-</div>
-</div>
-<a id="adae559f02b2ad1b0ca5b32b46caf79b7" name="adae559f02b2ad1b0ca5b32b46caf79b7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adae559f02b2ad1b0ca5b32b46caf79b7">&#9670;&#160;</a></span>_itemScope</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_item_scope.html">ItemScope</a> ItemDefinition._itemScope</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ad909fb5d682640c0d3017f32a47f4172" name="ad909fb5d682640c0d3017f32a47f4172"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad909fb5d682640c0d3017f32a47f4172">&#9670;&#160;</a></span>_prefab</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">GameObject ItemDefinition._prefab</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="reference">Referenced by <a class="el" href="class_item_definition.html#a2c719e2a82569c39a1e41e80ead84178">Deserialize()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="class_item_definition.html#a2c719e2a82569c39a1e41e80ead84178">Deserialize()</a>, and <a class="el" href="class_item_manager.html#a801f8bd1bb3432ac90a05b0355c61f44">ItemManager.SpawnItemInstance()</a>.</p>
 
 </div>
 </div>
@@ -275,7 +277,55 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="class_item_definition.html#a2c719e2a82569c39a1e41e80ead84178">Deserialize()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="class_item_definition.html#a2c719e2a82569c39a1e41e80ead84178">Deserialize()</a>, <a class="el" href="class_itemizer.html#ab382de3c34e9b2a83850dff8730972fa">Itemizer.EditItemScope()</a>, <a class="el" href="class_item_definition_edit_window.html#a546ee353bd4eb4d1e2b1b32286dc2b86">ItemDefinitionEditWindow.Init()</a>, <a class="el" href="class_itemizer.html#a546cf714dea1f7c528642c10f6edeeb7">Itemizer.RemoveItemScope()</a>, and <a class="el" href="class_item_manager.html#a801f8bd1bb3432ac90a05b0355c61f44">ItemManager.SpawnItemInstance()</a>.</p>
+
+</div>
+</div>
+<a id="a648967808394ba7db9cec2bc4255a9ea" name="a648967808394ba7db9cec2bc4255a9ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a648967808394ba7db9cec2bc4255a9ea">&#9670;&#160;</a></span>MaxStackCount</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ItemDefinition.MaxStackCount</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="class_itemizer.html#ab382de3c34e9b2a83850dff8730972fa">Itemizer.EditItemScope()</a>, <a class="el" href="class_item_definition_edit_window.html#a546ee353bd4eb4d1e2b1b32286dc2b86">ItemDefinitionEditWindow.Init()</a>, <a class="el" href="class_itemizer.html#a546cf714dea1f7c528642c10f6edeeb7">Itemizer.RemoveItemScope()</a>, and <a class="el" href="class_item_manager.html#a801f8bd1bb3432ac90a05b0355c61f44">ItemManager.SpawnItemInstance()</a>.</p>
+
+</div>
+</div>
+<a id="ac6369ff6ce9926aa79774982ac0bc3e3" name="ac6369ff6ce9926aa79774982ac0bc3e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6369ff6ce9926aa79774982ac0bc3e3">&#9670;&#160;</a></span>Name</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string ItemDefinition.Name</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="class_item_definition.html#a2c719e2a82569c39a1e41e80ead84178">Deserialize()</a>, <a class="el" href="class_item_manager_window.html#a7dcc53f0410a3f5c01022246c7776664">ItemManagerWindow.DrawListItems()</a>, <a class="el" href="class_itemizer.html#ab382de3c34e9b2a83850dff8730972fa">Itemizer.EditItemScope()</a>, <a class="el" href="class_item_definition.html#a726452df996c324f350705b128b10550">GetQualifiedName()</a>, <a class="el" href="class_item_definition_edit_window.html#a546ee353bd4eb4d1e2b1b32286dc2b86">ItemDefinitionEditWindow.Init()</a>, <a class="el" href="class_item_definition_drawer.html#afa74906ec09ed4d14d151efcd3491833">ItemDefinitionDrawer.OnGUI()</a>, <a class="el" href="class_itemizer.html#a546cf714dea1f7c528642c10f6edeeb7">Itemizer.RemoveItemScope()</a>, and <a class="el" href="class_item_manager.html#a801f8bd1bb3432ac90a05b0355c61f44">ItemManager.SpawnItemInstance()</a>.</p>
+
+</div>
+</div>
+<a id="a593ce240304028b812c355d01a541239" name="a593ce240304028b812c355d01a541239"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a593ce240304028b812c355d01a541239">&#9670;&#160;</a></span>Prefab</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GameObject ItemDefinition.Prefab</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="class_item_definition.html#a2c719e2a82569c39a1e41e80ead84178">Deserialize()</a>, and <a class="el" href="class_item_manager.html#a801f8bd1bb3432ac90a05b0355c61f44">ItemManager.SpawnItemInstance()</a>.</p>
 
 </div>
 </div>
@@ -291,110 +341,23 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="class_item_definition.html#a2c719e2a82569c39a1e41e80ead84178">Deserialize()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="class_item_definition.html#a2c719e2a82569c39a1e41e80ead84178">Deserialize()</a>, <a class="el" href="class_itemizer.html#ab382de3c34e9b2a83850dff8730972fa">Itemizer.EditItemScope()</a>, <a class="el" href="class_item_definition_edit_window.html#a546ee353bd4eb4d1e2b1b32286dc2b86">ItemDefinitionEditWindow.Init()</a>, <a class="el" href="class_itemizer.html#a546cf714dea1f7c528642c10f6edeeb7">Itemizer.RemoveItemScope()</a>, and <a class="el" href="class_item_manager.html#a801f8bd1bb3432ac90a05b0355c61f44">ItemManager.SpawnItemInstance()</a>.</p>
 
 </div>
 </div>
-<a id="a41a5642b767789dcac49df6d474f6c38" name="a41a5642b767789dcac49df6d474f6c38"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a41a5642b767789dcac49df6d474f6c38">&#9670;&#160;</a></span>Stackable</h2>
+<a id="af6206fe600c2058ea5ecfb5c70d8522a" name="af6206fe600c2058ea5ecfb5c70d8522a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6206fe600c2058ea5ecfb5c70d8522a">&#9670;&#160;</a></span>Scope</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool ItemDefinition.Stackable</td>
+          <td class="memname"><a class="el" href="class_item_scope.html">ItemScope</a> ItemDefinition.Scope</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<h2 class="groupheader">Property Documentation</h2>
-<a id="a97266a65c5c2c9f406c79d038c536e73" name="a97266a65c5c2c9f406c79d038c536e73"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a97266a65c5c2c9f406c79d038c536e73">&#9670;&#160;</a></span>Icon</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">Sprite ItemDefinition.Icon</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a796a5de0fd1ffb8b533939b8c762c993" name="a796a5de0fd1ffb8b533939b8c762c993"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a796a5de0fd1ffb8b533939b8c762c993">&#9670;&#160;</a></span>ItemName</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">string ItemDefinition.ItemName</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a57551f637bfd4b2e6bfff87bdf6d68b1" name="a57551f637bfd4b2e6bfff87bdf6d68b1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a57551f637bfd4b2e6bfff87bdf6d68b1">&#9670;&#160;</a></span>ItemScope</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_item_scope.html">ItemScope</a> ItemDefinition.ItemScope</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a593ce240304028b812c355d01a541239" name="a593ce240304028b812c355d01a541239"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a593ce240304028b812c355d01a541239">&#9670;&#160;</a></span>Prefab</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">GameObject ItemDefinition.Prefab</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
+<p class="reference">Referenced by <a class="el" href="class_item_definition_drawer.html#afa74906ec09ed4d14d151efcd3491833">ItemDefinitionDrawer.OnGUI()</a>.</p>
 
 </div>
 </div>

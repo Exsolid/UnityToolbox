@@ -24,12 +24,12 @@ var class_localizer =
     [ "_localisationScopes", "class_localizer.html#a71be059ce9c14452511aefd2e7e50552", null ],
     [ "_scopesDataPath", "class_localizer.html#a24e13dbee9e445659641249a3339fb59", null ],
     [ "_settings", "class_localizer.html#a58dd82785cfd9f21dd7bbf9d27c6d858", null ],
-    [ "LanguageEdited", "class_localizer.html#aac0a3a38a69390c556d5dbb236b9843f", null ],
-    [ "LocalisationIDEdited", "class_localizer.html#aa31b84acc42dd8bf67e97c5d00c80d4f", null ],
-    [ "ScopeEdited", "class_localizer.html#adc5d35dba2d5e5fed378c1bb3c4c9bee", null ],
     [ "DefaultScope", "class_localizer.html#a1f4db780fb89e27b773e36bc77956d06", null ],
     [ "IsInitialized", "class_localizer.html#aea01054b2fa9de5a5607bc0bdbf79c5d", null ],
     [ "LocalisationData", "class_localizer.html#a4ca0dd50c5f5ba0f9b40e856e1e5cff4", null ],
     [ "LocalisationLanguages", "class_localizer.html#a4746d3b0b4b03dd4e000f034c68dc2f9", null ],
-    [ "LocalisationScopes", "class_localizer.html#a7d98c438a34f1a1c04ab122ed8276a3d", null ]
+    [ "LocalisationScopes", "class_localizer.html#a7d98c438a34f1a1c04ab122ed8276a3d", null ],
+    [ "LanguageEdited", "class_localizer.html#aac0a3a38a69390c556d5dbb236b9843f", null ],
+    [ "LocalisationIDEdited", "class_localizer.html#aa31b84acc42dd8bf67e97c5d00c80d4f", null ],
+    [ "ScopeEdited", "class_localizer.html#adc5d35dba2d5e5fed378c1bb3c4c9bee", null ]
 ];

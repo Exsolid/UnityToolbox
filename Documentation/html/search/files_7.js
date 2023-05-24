@@ -8,10 +8,14 @@ var searchData=
   ['inventoryuislot_2ecs_5',['InventoryUISlot.cs',['../_inventory_u_i_slot_8cs.html',1,'']]],
   ['itemdata_2ecs_6',['ItemData.cs',['../_item_data_8cs.html',1,'']]],
   ['itemdefinition_2ecs_7',['ItemDefinition.cs',['../_item_definition_8cs.html',1,'']]],
-  ['iteminstance_2ecs_8',['ItemInstance.cs',['../_item_instance_8cs.html',1,'']]],
-  ['itemizer_2ecs_9',['Itemizer.cs',['../_itemizer_8cs.html',1,'']]],
-  ['itemmanager_2ecs_10',['ItemManager.cs',['../_item_manager_8cs.html',1,'']]],
-  ['itemmanagerwindow_2ecs_11',['ItemManagerWindow.cs',['../_item_manager_window_8cs.html',1,'']]],
-  ['itemscope_2ecs_12',['ItemScope.cs',['../_item_scope_8cs.html',1,'']]],
-  ['itemscopeeditwindow_2ecs_13',['ItemScopeEditWindow.cs',['../_item_scope_edit_window_8cs.html',1,'']]]
+  ['itemdefinitiondrawer_2ecs_8',['ItemDefinitionDrawer.cs',['../_item_definition_drawer_8cs.html',1,'']]],
+  ['itemdefinitioneditwindow_2ecs_9',['ItemDefinitionEditWindow.cs',['../_item_definition_edit_window_8cs.html',1,'']]],
+  ['itemdefinitionselectionwindow_2ecs_10',['ItemDefinitionSelectionWindow.cs',['../_item_definition_selection_window_8cs.html',1,'']]],
+  ['itemfield_2ecs_11',['ItemField.cs',['../_item_field_8cs.html',1,'']]],
+  ['iteminstance_2ecs_12',['ItemInstance.cs',['../_item_instance_8cs.html',1,'']]],
+  ['itemizer_2ecs_13',['Itemizer.cs',['../_itemizer_8cs.html',1,'']]],
+  ['itemmanager_2ecs_14',['ItemManager.cs',['../_item_manager_8cs.html',1,'']]],
+  ['itemmanagerwindow_2ecs_15',['ItemManagerWindow.cs',['../_item_manager_window_8cs.html',1,'']]],
+  ['itemscope_2ecs_16',['ItemScope.cs',['../_item_scope_8cs.html',1,'']]],
+  ['itemscopeeditwindow_2ecs_17',['ItemScopeEditWindow.cs',['../_item_scope_edit_window_8cs.html',1,'']]]
 ];

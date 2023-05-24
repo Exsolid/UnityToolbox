@@ -1,4 +1,4 @@
 var _itemizer_8cs =
 [
-    [ "Itemizer", "class_itemizer.html", "class_itemizer" ]
+    [ "Item.Management.Itemizer", "class_item_1_1_management_1_1_itemizer.html", "class_item_1_1_management_1_1_itemizer" ]
 ];

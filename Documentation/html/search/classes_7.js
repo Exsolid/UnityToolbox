@@ -7,11 +7,15 @@ var searchData=
   ['inventoryui_4',['InventoryUI',['../class_inventory_u_i.html',1,'']]],
   ['inventoryuislot_5',['InventoryUISlot',['../class_inventory_u_i_slot.html',1,'']]],
   ['itemdata_6',['ItemData',['../class_item_data.html',1,'']]],
-  ['itemdefinition_7',['ItemDefinition',['../class_item_definition.html',1,'']]],
-  ['iteminstance_8',['ItemInstance',['../class_item_instance.html',1,'']]],
-  ['itemizer_9',['Itemizer',['../class_itemizer.html',1,'']]],
-  ['itemmanager_10',['ItemManager',['../class_item_manager.html',1,'']]],
-  ['itemmanagerwindow_11',['ItemManagerWindow',['../class_item_manager_window.html',1,'']]],
-  ['itemscope_12',['ItemScope',['../class_item_scope.html',1,'']]],
-  ['itemscopeeditwindow_13',['ItemScopeEditWindow',['../class_item_scope_edit_window.html',1,'']]]
+  ['itemdefinition_7',['ItemDefinition',['../class_item_1_1_item_definition.html',1,'Item']]],
+  ['itemdefinitiondrawer_8',['ItemDefinitionDrawer',['../class_item_1_1_management_1_1_item_definition_drawer.html',1,'Item::Management']]],
+  ['itemdefinitioneditwindow_9',['ItemDefinitionEditWindow',['../class_item_1_1_management_1_1_item_definition_edit_window.html',1,'Item::Management']]],
+  ['itemdefinitionselectionwindow_10',['ItemDefinitionSelectionWindow',['../class_item_1_1_management_1_1_item_definition_selection_window.html',1,'Item::Management']]],
+  ['itemfield_11',['ItemField',['../class_item_1_1_management_1_1_item_field.html',1,'Item::Management']]],
+  ['iteminstance_12',['ItemInstance',['../class_item_1_1_item_instance.html',1,'Item']]],
+  ['itemizer_13',['Itemizer',['../class_item_1_1_management_1_1_itemizer.html',1,'Item::Management']]],
+  ['itemmanager_14',['ItemManager',['../class_item_1_1_item_manager.html',1,'Item']]],
+  ['itemmanagerwindow_15',['ItemManagerWindow',['../class_item_1_1_management_1_1_item_manager_window.html',1,'Item::Management']]],
+  ['itemscope_16',['ItemScope',['../class_item_1_1_management_1_1_item_scope.html',1,'Item::Management']]],
+  ['itemscopeeditwindow_17',['ItemScopeEditWindow',['../class_item_1_1_management_1_1_item_scope_edit_window.html',1,'Item::Management']]]
 ];

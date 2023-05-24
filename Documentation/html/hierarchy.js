@@ -13,8 +13,10 @@ var hierarchy =
       [ "DialogGraphWindow", "class_dialog_graph_window.html", null ],
       [ "GamestateGraphPathSelectionWindow", "class_gamestate_graph_path_selection_window.html", null ],
       [ "GamestateGraphWindow", "class_gamestate_graph_window.html", null ],
-      [ "ItemManagerWindow", "class_item_manager_window.html", null ],
-      [ "ItemScopeEditWindow", "class_item_scope_edit_window.html", null ],
+      [ "Item.Management.ItemDefinitionEditWindow", "class_item_1_1_management_1_1_item_definition_edit_window.html", null ],
+      [ "Item.Management.ItemDefinitionSelectionWindow", "class_item_1_1_management_1_1_item_definition_selection_window.html", null ],
+      [ "Item.Management.ItemManagerWindow", "class_item_1_1_management_1_1_item_manager_window.html", null ],
+      [ "Item.Management.ItemScopeEditWindow", "class_item_1_1_management_1_1_item_scope_edit_window.html", null ],
       [ "LocalisationEditIDWindow", "class_localisation_edit_i_d_window.html", null ],
       [ "LocalisationEditLanguageWindow", "class_localisation_edit_language_window.html", null ],
       [ "LocalisationEditScopeWindow", "class_localisation_edit_scope_window.html", null ],
@@ -70,7 +72,10 @@ var hierarchy =
     [ "ISerializationCallbackReceiver", null, [
       [ "MenuManager", "class_menu_manager.html", null ]
     ] ],
-    [ "ItemDefinition", "class_item_definition.html", null ],
+    [ "Item.ItemDefinition", "class_item_1_1_item_definition.html", null ],
+    [ "Item.Management.ItemField", "class_item_1_1_management_1_1_item_field.html", null ],
+    [ "Item.Management.Itemizer", "class_item_1_1_management_1_1_itemizer.html", null ],
+    [ "Item.Management.ItemScope", "class_item_1_1_management_1_1_item_scope.html", null ],
     [ "LocalisationID", "struct_localisation_i_d.html", null ],
     [ "LocalisationLanguage", "struct_localisation_language.html", null ],
     [ "LocalisationScope", "struct_localisation_scope.html", null ],
@@ -93,8 +98,6 @@ var hierarchy =
       ] ],
       [ "InventoryUI", "class_inventory_u_i.html", null ],
       [ "InventoryUISlot", "class_inventory_u_i_slot.html", null ],
-      [ "ItemScope", "class_item_scope.html", null ],
-      [ "Itemizer", "class_itemizer.html", null ],
       [ "LanguageSetting", "class_language_setting.html", null ],
       [ "LanguageSettingButton", "class_language_setting_button.html", null ],
       [ "LoadFirstScene", "class_load_first_scene.html", null ],
@@ -110,7 +113,7 @@ var hierarchy =
         [ "HeldInventoryManager", "class_held_inventory_manager.html", null ],
         [ "IDManager", "class_i_d_manager.html", null ],
         [ "InventoryManager", "class_inventory_manager.html", null ],
-        [ "ItemManager", "class_item_manager.html", null ],
+        [ "Item.ItemManager", "class_item_1_1_item_manager.html", null ],
         [ "MenuManager", "class_menu_manager.html", null ],
         [ "PlayerEventManager", "class_player_event_manager.html", null ],
         [ "PlayerPrefKeys", "class_player_pref_keys.html", null ],
@@ -138,7 +141,7 @@ var hierarchy =
       [ "ResetButton", "class_reset_button.html", null ],
       [ "ResetSavegameButton", "class_reset_savegame_button.html", null ],
       [ "Saveable", "class_saveable.html", [
-        [ "ItemInstance", "class_item_instance.html", null ]
+        [ "Item.ItemInstance", "class_item_1_1_item_instance.html", null ]
       ] ],
       [ "ShowControl", "class_show_control.html", null ],
       [ "ShowOnHover", "class_show_on_hover.html", null ],
@@ -169,6 +172,7 @@ var hierarchy =
     ] ],
     [ "PropertyDrawer", null, [
       [ "DropDownDrawer", "class_drop_down_drawer.html", null ],
+      [ "Item.Management.ItemDefinitionDrawer", "class_item_1_1_management_1_1_item_definition_drawer.html", null ],
       [ "LocalisationDrawer", "class_localisation_drawer.html", null ],
       [ "ReadOnlyDrawer", "class_read_only_drawer.html", null ]
     ] ],
