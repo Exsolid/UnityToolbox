@@ -72,7 +72,7 @@ namespace UnityToolbox.Item
                 throw new ArgumentException("The given field name \"" + fieldName + "\" cannot be found.");
             }
 
-            return foundField.First();
+            return foundField.First().GetValue();
         }
 
         public override bool Equals(object other)

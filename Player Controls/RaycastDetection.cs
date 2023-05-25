@@ -7,7 +7,7 @@ using System.Linq;
 /// <summary>
 /// This script is used for interactions with objects with optional tooltips.
 /// </summary>
-public abstract class RaycastInteraction : MonoBehaviour
+public abstract class RaycastDetection : MonoBehaviour
 {
     [SerializeField] private bool _is2D;
     [SerializeField] private string _tooltip; //Todo loca?

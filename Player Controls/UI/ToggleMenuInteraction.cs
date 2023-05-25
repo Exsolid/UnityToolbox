@@ -6,7 +6,7 @@ using UnityEngine;
 /// This script toggles a menu. An object with the right layer needs the <see cref="ToggleMenuInteractionInfo"/> for this to work.
 /// Requires the <see cref="MenuManager"/>.
 /// </summary>
-public class ToggleMenuInteraction : RaycastInteraction
+public class ToggleMenuInteraction : RaycastDetection
 {
     public override void OnHit(RaycastHit raycastHit)
     {

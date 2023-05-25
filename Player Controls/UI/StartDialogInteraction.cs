@@ -6,7 +6,7 @@ using UnityEngine;
 /// This script starts a dialog when interacted with the correct layer.
 /// Requires the <see cref="DialogManager"/>
 /// </summary>
-public class StartDialogInteraction : RaycastInteraction
+public class StartDialogInteraction : RaycastDetection
 {
     /// <summary>
     /// The ID which is used to indentify the root object within the <see cref="DialogManager"/>.
