@@ -11,6 +11,7 @@ public abstract class RaycastInteraction : MonoBehaviour
 {
     [SerializeField] private bool _is2D;
     [SerializeField] private string _tooltip; //Todo loca?
+    protected string _appendedTooltip; //Todo loca?
     [SerializeField] private string _actionName;
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] private Transform _raycastLocation;
@@ -49,7 +50,7 @@ public abstract class RaycastInteraction : MonoBehaviour
         {
             if (_tooltipEnabled && ModuleManager.ModuleRegistered<TooltipManager>())
             {
-                ModuleManager.GetModule<TooltipManager>().UpdateTooltip(ModuleManager.GetModule<SettingsManager>().CurrentValueOfControl("", _actionName).Split("/").Last().ToUpper(), _tooltip, this);
+                ModuleManager.GetModule<TooltipManager>().UpdateTooltip(ModuleManager.GetModule<SettingsManager>().CurrentValueOfControl("", _actionName).Split("/").Last().ToUpper(), _appendedTooltip == null || _appendedTooltip.Trim().Equals("") ? _tooltip : _tooltip + " " +_appendedTooltip, this);
             }
             else if (ModuleManager.ModuleRegistered<TooltipManager>())
             {
@@ -61,6 +62,9 @@ public abstract class RaycastInteraction : MonoBehaviour
                 OnInteraction(_raycastHit);
                 OnInteraction(_raycastHit2D);
             }
+
+            OnHit(_raycastHit);
+            OnHit(_raycastHit2D);
         }
         else if(ModuleManager.ModuleRegistered<TooltipManager>())
         {
@@ -79,4 +83,16 @@ public abstract class RaycastInteraction : MonoBehaviour
     /// </summary>
     /// <param name="raycastHit">The raycast data.</param>
     public abstract void OnInteraction(RaycastHit2D raycastHit);
+
+    /// <summary>
+    /// Execute whatever should happen when the raycast found a valid object.
+    /// </summary>
+    /// <param name="raycastHit">The raycast data.</param>
+    public abstract void OnHit(RaycastHit raycastHit);
+
+    /// <summary>
+    /// Execute whatever should happen when the raycast found a valid object.
+    /// </summary>
+    /// <param name="raycastHit">The raycast data.</param>
+    public abstract void OnHit(RaycastHit2D raycastHit);
 }

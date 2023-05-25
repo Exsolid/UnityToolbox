@@ -13,6 +13,14 @@ public class StartDialogInteraction : RaycastInteraction
     /// </summary>
     [SerializeField] private string _referenceID;
 
+    public override void OnHit(RaycastHit raycastHit)
+    {
+    }
+
+    public override void OnHit(RaycastHit2D raycastHit)
+    {
+    }
+
     public override void OnInteraction(RaycastHit raycastHit)
     {
         if(raycastHit.collider != null)

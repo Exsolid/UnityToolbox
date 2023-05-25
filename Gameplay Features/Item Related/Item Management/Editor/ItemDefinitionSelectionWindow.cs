@@ -5,7 +5,7 @@ using UnityEditor;
 using System.Linq;
 using System;
 
-namespace Item.Management
+namespace UnityToolbox.Item.Management
 {
     public class ItemDefinitionSelectionWindow : EditorWindow
     {

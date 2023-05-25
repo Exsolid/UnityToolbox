@@ -8,6 +8,14 @@ using UnityEngine;
 /// </summary>
 public class ToggleMenuInteraction : RaycastInteraction
 {
+    public override void OnHit(RaycastHit raycastHit)
+    {
+    }
+
+    public override void OnHit(RaycastHit2D raycastHit)
+    {
+    }
+
     public override void OnInteraction(RaycastHit raycastHit)
     {
         if (raycastHit.collider.GetComponent<ToggleMenuInteractionInfo>() != null)

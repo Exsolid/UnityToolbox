@@ -5,7 +5,7 @@ using System.Linq;
 using System;
 using System.Reflection;
 
-namespace Item.Management
+namespace UnityToolbox.Item.Management
 {
     /// <summary>
     /// The core of the item managment system. It takes care of the (de)serialization and changes to all data.
@@ -51,7 +51,14 @@ namespace Item.Management
         {
             get
             {
-                return _itemDefinitions.ToHashSet();
+                if (_initialized)
+                {
+                    return _itemDefinitions.ToHashSet();
+                }
+                else
+                {
+                    return new HashSet<ItemDefinition>();
+                }
             }
         }
 
@@ -61,7 +68,17 @@ namespace Item.Management
         /// </summary>
         public HashSet<ItemScope> ItemScopes
         {
-            get { return _itemScopes.ToHashSet(); }
+            get 
+            {
+                if (_initialized)
+                {
+                    return _itemScopes.ToHashSet();
+                }
+                else
+                {
+                    return new HashSet<ItemScope>();
+                }
+            }
         }
 
         private ItemScope _defaultScope;

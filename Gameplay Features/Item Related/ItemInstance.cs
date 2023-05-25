@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
-using Item.Management;
+using UnityToolbox.Item.Management;
 
-namespace Item
+namespace UnityToolbox.Item
 {
     /// <summary>
     /// An instanciated item, created from an <see cref="ItemDefinition"/>.

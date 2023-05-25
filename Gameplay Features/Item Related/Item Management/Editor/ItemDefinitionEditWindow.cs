@@ -6,7 +6,7 @@ using System.Linq;
 using System;
 using System.Reflection;
 
-namespace Item.Management
+namespace UnityToolbox.Item.Management
 {
     public class ItemDefinitionEditWindow : EditorWindow
     {

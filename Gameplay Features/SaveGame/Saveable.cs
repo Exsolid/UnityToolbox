@@ -147,7 +147,10 @@ public abstract class Saveable : MonoBehaviour
         }
         else
         {
-            Save();
+            if (ModuleManager.ModuleRegistered<SaveGameManager>())
+            {
+                Save();
+            }
         }
     }
 }

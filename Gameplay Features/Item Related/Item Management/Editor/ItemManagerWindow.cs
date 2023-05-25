@@ -8,7 +8,7 @@ using System;
 using System.Reflection;
 
 
-namespace Item.Management
+namespace UnityToolbox.Item.Management
 {
     public class ItemManagerWindow : EditorWindow
     {

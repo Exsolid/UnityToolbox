@@ -18,8 +18,8 @@ public class FirstPersonCameraController : MonoBehaviour
     /// </summary>
     [SerializeField] private string _viewActionName;
     [SerializeField] private GameObject _playerToRotateInstead;
-    [SerializeField] [Range(-1,180)] private int _maxVerticalAngle;
-    [SerializeField] [Range(-1,180)] private int _maxHorizontalAngle;
+    [SerializeField] [Range(-1, 180)] private int _maxVerticalAngle;
+    [SerializeField] [Range(-1, 180)] private int _maxHorizontalAngle;
     [SerializeField] private Camera _camera;
     private Quaternion _initialRotation;
 
@@ -113,7 +113,7 @@ public class FirstPersonCameraController : MonoBehaviour
         if (ModuleManager.ModuleRegistered<PlayerEventManager>())
         {
             ModuleManager.GetModule<PlayerEventManager>().OnLockMove -= UpdateMovementLock;
-        }  
+        }
         if (ModuleManager.ModuleRegistered<SettingsManager>())
         {
             ModuleManager.GetModule<SettingsManager>().OnSenseValueChanged -= UpdateMouseSense;

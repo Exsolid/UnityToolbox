@@ -3,12 +3,18 @@ using UnityEngine;
 using System.Linq;
 using System;
 using System.Reflection;
-using Item.Management;
+using UnityToolbox.Item.Management;
 
-namespace Item
+namespace UnityToolbox.Item
 {
     public class ItemManager : Module
     {
+        public override void Awake()
+        {
+            base.Awake();
+            Itemizer.Instance.Initialize();    
+        }
+
         /// <summary>
         /// Creates a new <see cref="ItemInstance"/> into the scene.
         /// </summary>

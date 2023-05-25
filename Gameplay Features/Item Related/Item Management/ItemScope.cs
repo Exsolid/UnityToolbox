@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-namespace Item.Management
+namespace UnityToolbox.Item.Management
 {
     /// <summary>
     /// The scope which is used to indentify and serialize item data.

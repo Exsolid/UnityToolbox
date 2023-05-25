@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using Newtonsoft.Json;
-using Item.Management;
+using UnityToolbox.Item.Management;
 
-namespace Item { 
+namespace UnityToolbox.Item { 
     /// <summary>
     /// The base definition for all items.
     /// </summary>

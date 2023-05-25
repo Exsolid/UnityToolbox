@@ -8,9 +8,9 @@ using UnityEngine;
 /// Using the <see cref="ItemDefinition"/> as a variable in a seperate <see cref="MonoBehaviour"/> will present a selection field for all defined items.
 /// At runtime, the <see cref="ItemManager"/> is able to create item instances.
 /// </summary>
-namespace Item { }
+namespace UnityToolbox.Item { }
 
 /// <summary>
 /// The namespace for everything related to item management. It is not built to be used within scripts.
 /// </summary>
-namespace Item.Management { }
+namespace UnityToolbox.Item.Management { }

@@ -5,7 +5,7 @@ using UnityEngine;
 using System.Reflection;
 
 
-namespace Item.Management
+namespace UnityToolbox.Item.Management
 {
     /// <summary>
     /// This class enables a selection field for the <see cref="ItemDefinition"/> within the inspector.
