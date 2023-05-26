@@ -99,7 +99,7 @@ public class MenuManager : Module, ISerializationCallbackReceiver
     public void ToggleMenu(int type, int menuIndex)
     {
         MenuType menuTypeToCall = _menuList[type];
-        if(menuTypeToCall == null || !_currentActivMenuType.MenuTypeID.Equals(0) && !menuTypeToCall.Equals(_currentActivMenuType))
+        if(menuTypeToCall == null || !(_currentActivMenuType.MenuTypeID.Equals(0) || _currentActivMenuType.MenuTypeID.Equals(_overlayMenuType.MenuTypeID)) && !menuTypeToCall.Equals(_currentActivMenuType))
         {
             return;
         }
