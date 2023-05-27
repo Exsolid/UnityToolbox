@@ -7,8 +7,6 @@ using UnityEngine;
 /// </summary>
 public class LockMovement : MonoBehaviour
 {
-    [SerializeField] private MovementBase _movement;
-
     public void Awake()
     {
         GetComponentInParent<Menu>().OnActiveChanged += UpdateMovement;
@@ -17,6 +15,6 @@ public class LockMovement : MonoBehaviour
 
     private void UpdateMovement(bool active)
     {
-        _movement.IsMovementLocked = active;
+        ModuleManager.GetModule<PlayerEventManager>().LockMove(active);
     }
 }

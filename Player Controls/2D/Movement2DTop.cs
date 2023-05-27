@@ -32,16 +32,31 @@ public class Movement2DTop : MovementBase
 
     public override void Move(Vector3 direction)
     {
-        _rb.AddForce(new Vector3(direction.x * _speed,
-            direction.y * _speed)); 
+        if (_input.actions[_toggleSpeedActionName].IsPressed())
+        {
+            _rb.AddForce(new Vector3(direction.x * _toggledSpeed,
+                direction.y * _toggledSpeed));
+        }
+        else
+        {
+            _rb.AddForce(new Vector3(direction.x * _speed,
+                direction.y * _speed));
+        }
     }
 
     public override void MoveWithStrength(Vector3 direction, Vector3 strength)
     {
         Vector3 scaled = Vector3.Scale(direction, strength);
-
-        _rb.AddForce(new Vector3(scaled.x * _speed,
-            scaled.y * _speed));
+        if (_input.actions[_toggleSpeedActionName].IsPressed())
+        {
+            _rb.AddForce(new Vector3(scaled.x * _toggledSpeed,
+                scaled.y * _toggledSpeed));
+        }
+        else
+        {
+            _rb.AddForce(new Vector3(scaled.x * _speed,
+                scaled.y * _speed));
+        }
     }
 
     public override Vector3 GetCurrentVelocity()

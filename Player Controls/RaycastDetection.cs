@@ -12,10 +12,10 @@ public abstract class RaycastDetection : MonoBehaviour
     [SerializeField] private bool _is2D;
     [SerializeField] private string _tooltip; //Todo loca?
     protected string _appendedTooltip; //Todo loca?
-    [SerializeField] private string _actionName;
+    [SerializeField] private string _interactActionName;
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] private Transform _raycastLocation;
-    [SerializeField] private PlayerInput _input;
+    [SerializeField] protected PlayerInput _input;
     /// <summary>
     /// Whether the tooltip module should be used to display text.
     /// </summary>
@@ -24,7 +24,7 @@ public abstract class RaycastDetection : MonoBehaviour
     private RaycastHit _raycastHit;
     private RaycastHit2D _raycastHit2D;
 
-    private bool _isBinding;
+    protected bool _isBinding;
 
     private void Start()
     {
@@ -35,7 +35,7 @@ public abstract class RaycastDetection : MonoBehaviour
         };
     }
 
-    private void Update()
+    public void Update()
     {
         if (_is2D)
         {
@@ -50,14 +50,14 @@ public abstract class RaycastDetection : MonoBehaviour
         {
             if (_tooltipEnabled && ModuleManager.ModuleRegistered<TooltipManager>())
             {
-                ModuleManager.GetModule<TooltipManager>().UpdateTooltip(ModuleManager.GetModule<SettingsManager>().CurrentValueOfControl("", _actionName).Split("/").Last().ToUpper(), _appendedTooltip == null || _appendedTooltip.Trim().Equals("") ? _tooltip : _tooltip + " " +_appendedTooltip, this);
+                ModuleManager.GetModule<TooltipManager>().UpdateTooltip(ModuleManager.GetModule<SettingsManager>().CurrentValueOfControl("", _interactActionName).Split("/").Last().ToUpper(), _appendedTooltip == null || _appendedTooltip.Trim().Equals("") ? _tooltip : _tooltip + " " +_appendedTooltip, this);
             }
             else if (ModuleManager.ModuleRegistered<TooltipManager>())
             {
                 ModuleManager.GetModule<TooltipManager>().UpdateTooltip("", "", this);
             }
 
-            if (_input != null && _input.actions[_actionName].triggered && !_isBinding)
+            if (_input != null && _input.actions[_interactActionName].triggered && !_isBinding)
             {
                 OnInteraction(_raycastHit);
                 OnInteraction(_raycastHit2D);

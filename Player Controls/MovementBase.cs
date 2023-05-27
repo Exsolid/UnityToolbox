@@ -13,6 +13,10 @@ public abstract class MovementBase : MonoBehaviour
     /// </summary>
     [SerializeField] protected float _speed;
     /// <summary>
+    /// Defines the toggledSpeed of the player.
+    /// </summary>
+    [SerializeField] protected float _toggledSpeed;
+    /// <summary>
     /// Defines the amount of force (speed) for a jump.
     /// </summary>
     [SerializeField] protected float _jumpForce;
@@ -24,6 +28,10 @@ public abstract class MovementBase : MonoBehaviour
     /// The action name for the movement controls. Needs to be defined as a Vector2D.
     /// </summary>
     [SerializeField] protected string _movementActionName;
+    /// <summary>
+    /// The action name for the changing the players speed.
+    /// </summary>
+    [SerializeField] protected string _toggleSpeedActionName;
     /// <summary>
     /// The action name for the jump control.
     /// </summary>
