@@ -9,7 +9,10 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Movement2DTop : MovementBase
 {
+    [SerializeField] private Camera _camera;
     private Rigidbody2D _rb;
+    [SerializeField] private bool _rotateToMouse;
+    [SerializeField] private float _turnSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +30,23 @@ public class Movement2DTop : MovementBase
             Move(_input.actions[_movementActionName].ReadValue<Vector2>());
         }
 
+        if (!_isMovementLocked && _rotateToMouse)
+        {
+            RotateToMouse();
+        }
+
         ModuleManager.GetModule<PlayerEventManager>().Move(_rb.velocity, _currentMovementState);
+    }
+
+    private void RotateToMouse()
+    {
+        Vector3 goal = _camera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        goal.z = transform.position.z;
+
+        Vector3 rotatedVectorToTarget = Quaternion.Euler(0, 0, 90) * (goal - transform.position);
+
+        Quaternion rotation = Quaternion.LookRotation(Vector3.forward, rotatedVectorToTarget);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, _turnSpeed * Time.deltaTime);
     }
 
     public override void Move(Vector3 direction)
