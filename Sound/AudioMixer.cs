@@ -105,7 +105,6 @@ public class AudioMixer : MonoBehaviour
             return;
         }
 
-        Debug.Log(_audioSource.clip.length - _audioSource.time);
         if (_audioSource.clip.length - _audioSource.time < 3)
         {
             foreach (Coroutine c in _coroutines)
