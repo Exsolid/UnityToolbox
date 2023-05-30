@@ -11,6 +11,8 @@ using UnityEngine.UI;
 /// </summary>
 public class RebindButton : MonoBehaviour, IPointerClickHandler
 {
+    [SerializeField] private AudioMixer _clickSounds;
+    [SerializeField] private AudioMixer _errorSounds;
     [SerializeField] private string _control;
     [SerializeField] private string _actionName;
     private string _keyPress;
@@ -72,6 +74,11 @@ public class RebindButton : MonoBehaviour, IPointerClickHandler
             ModuleManager.GetModule<UIEventManager>().BindingKey(true);
             StartCoroutine(SetEvent());
             _isSetting = true;
+
+            if (_clickSounds != null)
+            {
+                _clickSounds.PlayRandomSource();
+            }
         }
     }
 
@@ -83,12 +90,17 @@ public class RebindButton : MonoBehaviour, IPointerClickHandler
         if (!_manager.SetKey(_control, keyPath, _actionName))
         {
             _alternateText = "Input invalid";
+
+            if (_errorSounds != null)
+            {
+                _errorSounds.PlayRandomSource();
+            }
             StartCoroutine(ResetText());
         }
     }
     IEnumerator ResetText()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
         _alternateText = "";
     }
     IEnumerator SetEvent()

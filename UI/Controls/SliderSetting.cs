@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 /// <summary>
@@ -8,12 +9,12 @@ using UnityEngine.UI;
 /// </summary>
 public class SliderSetting : MonoBehaviour
 {
+    [SerializeField] private AudioMixer _clickSounds;
     public enum SliderOption { Effects, Music, Mouse_Sensitivity}
 
     [SerializeField] private SliderOption _option;
 
     private Slider _slider;
-    private float _timer;
 
     private string _pref; 
 
@@ -52,37 +53,43 @@ public class SliderSetting : MonoBehaviour
         {
             _slider.value = _slider.maxValue / 2f;
         }
-
-        _slider.onValueChanged.AddListener(delegate
-        {
-            _timer = 0.5f;
-        });
     }
 
     // Update is called once per frame
     void Update()
     {
         _slider.interactable = _isEnabled;
-        if (_timer > 0) _timer -= Time.deltaTime;
-        if (_timer < 0 && _timer != -10)
-        {
-            PlayerPrefs.SetFloat(_pref, _slider.value / _slider.maxValue);
-            UpdateValuesToManager();
-             _timer = -10;
-        }
     }
 
     private void OnDestroy()
     {
-        if (_timer < 0)
+        PlayerPrefs.SetFloat(_pref, _slider.value / _slider.maxValue);
+        switch (_option)
         {
-            PlayerPrefs.SetFloat(_pref, _slider.value / _slider.maxValue);
-            UpdateValuesToManager();
+            case SliderOption.Mouse_Sensitivity:
+                ModuleManager.GetModule<SettingsManager>().SenseValueChanged(_slider.value / _slider.maxValue);
+                break;
+            case SliderOption.Music:
+                ModuleManager.GetModule<SettingsManager>().SoundValueChanged(AudioType.Music, _slider.value / _slider.maxValue);
+                break;
+            case SliderOption.Effects:
+                ModuleManager.GetModule<SettingsManager>().SoundValueChanged(AudioType.Effects, _slider.value / _slider.maxValue);
+                break;
         }
     }
 
-    private void UpdateValuesToManager()
+    /// <summary>
+    /// Updates the values set with the slider to the preferences and manager.
+    /// To set up the slider, set a <see cref="EventTrigger"/> to execute this on end drag.
+    /// </summary>
+    public void UpdateValues()
     {
+        if (_clickSounds != null)
+        {
+            _clickSounds.PlayRandomSource();
+        }
+
+        PlayerPrefs.SetFloat(_pref, _slider.value / _slider.maxValue);
         switch (_option)
         {
             case SliderOption.Mouse_Sensitivity:

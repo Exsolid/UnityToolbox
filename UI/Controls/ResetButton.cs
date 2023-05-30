@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 /// </summary>
 public class ResetButton : MonoBehaviour, IPointerClickHandler
 {
+    [SerializeField] private AudioMixer _clickSounds;
     [SerializeField] private string _control;
     [SerializeField] private string _actionName;
     private SettingsManager manager;
@@ -28,8 +29,23 @@ public class ResetButton : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(!_isEnabled) return;
-        if (_control.Equals("") && _actionName.Equals("")) manager.ResetAllKeys();
-        else manager.ResetKey(_control, _actionName);
+        if (!_isEnabled)
+        {
+            return;
+        }
+
+        if (_control.Equals("") && _actionName.Equals(""))
+        {
+            manager.ResetAllKeys();
+        }
+        else
+        {
+            manager.ResetKey(_control, _actionName);
+        }
+
+        if (_clickSounds != null)
+        {
+            _clickSounds.PlayRandomSource();
+        }
     }
 }

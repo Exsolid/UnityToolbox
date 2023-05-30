@@ -11,12 +11,18 @@ using System;
 public class AudioMixer : MonoBehaviour
 {
     [SerializeField] private bool _isPassive;
+    [SerializeField] private bool _fadePlay;
 
     [SerializeField] private float _minDelayBetweenSounds;
     [SerializeField] private float _maxDelayBetweenSounds;
 
     [SerializeField] private List<AudioMixerItem> _items;
+
+    private bool _internalPause;
+
     private float _totalProbability;
+
+    private List<Coroutine> _coroutines;
 
     private float _timer;
 
@@ -25,6 +31,7 @@ public class AudioMixer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _coroutines = new List<Coroutine>();
         _audioSource = GetComponent<AudioSource>();
         for (int i = 0; i < _items.Count; i++)
         {
@@ -49,23 +56,20 @@ public class AudioMixer : MonoBehaviour
             return;
         }
 
-        if(_timer <= 0 && !_audioSource.isPlaying)
+        if(_timer <= 0 && !_audioSource.isPlaying && !_internalPause)
         {
-            float randomSelected = UnityEngine.Random.Range(0, _totalProbability);
-            AudioMixerItem item = _items.Where(a => a.CountedProbability > randomSelected).FirstOrDefault();
-            if (item != null && item.Source != null)
+            if (_fadePlay)
             {
-                _audioSource.clip = item.Source;
-                _audioSource.Play();
+                FadePlayRandomSource();
             }
             else
             {
-                return;
+                PlayRandomSource();
             }
 
             _timer = UnityEngine.Random.Range(_minDelayBetweenSounds, _maxDelayBetweenSounds);
         }
-        else if(!_audioSource.isPlaying)
+        else if(!_audioSource.isPlaying && !_internalPause)
         {
             _timer -= Time.deltaTime;
         }
@@ -76,6 +80,7 @@ public class AudioMixer : MonoBehaviour
     /// </summary>
     public void PlayRandomSource()
     {
+        _internalPause = false;
         float randomSelected = UnityEngine.Random.Range(0, _totalProbability);
         AudioMixerItem item = _items.Where(a => a.CountedProbability > randomSelected).FirstOrDefault();
         if (item != null && item.Source != null)
@@ -83,6 +88,61 @@ public class AudioMixer : MonoBehaviour
             _audioSource.clip = item.Source;
             _audioSource.Play();
         }
+    }
+
+    public void FadePlayRandomSource()
+    {
+        _internalPause = false;
+        float randomSelected = UnityEngine.Random.Range(0, _totalProbability);
+        AudioMixerItem item = _items.Where(a => a.CountedProbability > randomSelected).FirstOrDefault();
+        if (item != null && item.Source != null)
+        {
+            _audioSource.clip = item.Source;
+            FadeResume();
+        }
+    }
+
+    public void FadePause()
+    {
+        _internalPause = true;
+        foreach (Coroutine c in _coroutines)
+        {
+            StopCoroutine(c);
+        }
+        _coroutines.Add(StartCoroutine(FadeOut()));
+    }
+
+    public void FadeResume()
+    {
+        _audioSource.volume = 0;
+        _internalPause = false;
+        float value = PlayerPrefs.HasKey(ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.MUSIC_VOLUME)) ? PlayerPrefs.GetFloat(ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.MUSIC_VOLUME)) : 0.5f;
+        foreach (Coroutine c in _coroutines)
+        {
+            StopCoroutine(c);
+        }
+        _coroutines.Add(StartCoroutine(FadeIn(value)));
+    }
+
+    IEnumerator FadeIn(float value)
+    {
+        _audioSource.Play();
+        while (_audioSource.volume < value-0.1f)
+        {
+            _audioSource.volume = _audioSource.volume + 0.1f * Time.deltaTime;
+            yield return null;
+        }
+        _audioSource.volume = value;
+    }
+
+    IEnumerator FadeOut()
+    {
+        while(_audioSource.volume != 0)
+        {
+            _audioSource.volume = _audioSource.volume - 0.1f * Time.deltaTime;
+            yield return null;
+        }
+        _audioSource.Pause();
     }
 }
 
