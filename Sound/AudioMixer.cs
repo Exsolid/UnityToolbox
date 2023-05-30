@@ -11,6 +11,12 @@ using System;
 public class AudioMixer : MonoBehaviour
 {
     [SerializeField] private bool _isPassive;
+    public bool IsPassive
+    {
+        get { return _isPassive; }
+        set { _isPassive = value; }
+    }
+
     [SerializeField] private bool _fadeIn;
     [SerializeField] private bool _fadeOut;
 
