@@ -11,7 +11,8 @@ using System;
 public class AudioMixer : MonoBehaviour
 {
     [SerializeField] private bool _isPassive;
-    [SerializeField] private bool _fadePlay;
+    [SerializeField] private bool _fadeIn;
+    [SerializeField] private bool _fadeOut;
 
     [SerializeField] private float _minDelayBetweenSounds;
     [SerializeField] private float _maxDelayBetweenSounds;
@@ -51,6 +52,7 @@ public class AudioMixer : MonoBehaviour
 
     private void Update()
     {
+        FadeEnd();
         if (_isPassive)
         {
             return;
@@ -58,14 +60,7 @@ public class AudioMixer : MonoBehaviour
 
         if(_timer <= 0 && !_audioSource.isPlaying && !_internalPause)
         {
-            if (_fadePlay)
-            {
-                FadePlayRandomSource();
-            }
-            else
-            {
-                PlayRandomSource();
-            }
+            PlayRandomSource();
 
             _timer = UnityEngine.Random.Range(_minDelayBetweenSounds, _maxDelayBetweenSounds);
         }
@@ -86,19 +81,32 @@ public class AudioMixer : MonoBehaviour
         if (item != null && item.Source != null)
         {
             _audioSource.clip = item.Source;
-            _audioSource.Play();
+            if (_fadeIn)
+            {
+                FadeResume();
+            }
+            else
+            {
+                _audioSource.Play();
+            }
         }
     }
 
-    public void FadePlayRandomSource()
+    private void FadeEnd()
     {
-        _internalPause = false;
-        float randomSelected = UnityEngine.Random.Range(0, _totalProbability);
-        AudioMixerItem item = _items.Where(a => a.CountedProbability > randomSelected).FirstOrDefault();
-        if (item != null && item.Source != null)
+        if(_audioSource.clip == null)
         {
-            _audioSource.clip = item.Source;
-            FadeResume();
+            return;
+        }
+
+        Debug.Log(_audioSource.clip.length - _audioSource.time);
+        if (_audioSource.clip.length - _audioSource.time < 3)
+        {
+            foreach (Coroutine c in _coroutines)
+            {
+                StopCoroutine(c);
+            }
+            _coroutines.Add(StartCoroutine(FadeOut()));
         }
     }
 
@@ -109,7 +117,7 @@ public class AudioMixer : MonoBehaviour
         {
             StopCoroutine(c);
         }
-        _coroutines.Add(StartCoroutine(FadeOut()));
+        _coroutines.Add(StartCoroutine(FadeOutPause()));
     }
 
     public void FadeResume()
@@ -135,7 +143,7 @@ public class AudioMixer : MonoBehaviour
         _audioSource.volume = value;
     }
 
-    IEnumerator FadeOut()
+    IEnumerator FadeOutPause()
     {
         while(_audioSource.volume != 0)
         {
@@ -143,6 +151,18 @@ public class AudioMixer : MonoBehaviour
             yield return null;
         }
         _audioSource.Pause();
+    }
+
+    IEnumerator FadeOut()
+    {
+        float time = 0;
+        float step = _audioSource.volume / Time.deltaTime;
+        while (time < 3)
+        {
+            time += Time.deltaTime;
+            _audioSource.volume = Mathf.Lerp(_audioSource.volume, 0, time / 3);
+            yield return null;
+        }
     }
 }
 
