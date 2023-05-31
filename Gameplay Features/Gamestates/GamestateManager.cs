@@ -78,7 +78,7 @@ public class GamestateManager : Module
         CheckNodeValid(currentState);
         if (!_activeNodes.Where(node => node.Name.Equals(currentState) && node.IsActive).Any())
         {
-            Debug.LogError("The given state \"" + currentState + "\" is not active and therefore cannot proceed even further.");
+            Debug.LogWarning("The given state \"" + currentState + "\" is not active and therefore cannot proceed further.");
         }
         GamestateNodeData node = _stateNodes[currentState];
 

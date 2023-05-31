@@ -60,12 +60,23 @@ public abstract class RaycastDetection : MonoBehaviour
 
             if (_input != null && _input.actions[_interactActionName].triggered && !_isBinding)
             {
-                OnInteraction(_raycastHit);
-                OnInteraction(_raycastHit2D);
+                if(_raycastHit.collider != null)
+                {
+                    OnInteraction(_raycastHit);
+                }
+                if (_raycastHit2D.collider != null)
+                {
+                    OnInteraction(_raycastHit2D);
+                }
             }
-
-            OnHit(_raycastHit);
-            OnHit(_raycastHit2D);
+            if (_raycastHit.collider != null)
+            {
+                OnHit(_raycastHit);
+            }
+            if (_raycastHit2D.collider != null)
+            {
+                OnHit(_raycastHit2D);
+            }
         }
         else if(ModuleManager.ModuleRegistered<TooltipManager>())
         {
