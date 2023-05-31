@@ -16,6 +16,7 @@ public abstract class RaycastDetection : MonoBehaviour
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] private Transform _raycastLocation;
     [SerializeField] protected PlayerInput _input;
+    [SerializeField] private float _maxDistance = 2;
     /// <summary>
     /// Whether the tooltip module should be used to display text.
     /// </summary>
@@ -26,7 +27,7 @@ public abstract class RaycastDetection : MonoBehaviour
 
     protected bool _isBinding;
 
-    private void Start()
+    public void Start()
     {
         _tooltipEnabled = true;
         ModuleManager.GetModule<UIEventManager>().OnBindingKey += (isSetting) =>
@@ -39,11 +40,11 @@ public abstract class RaycastDetection : MonoBehaviour
     {
         if (_is2D)
         {
-            _raycastHit2D = Physics2D.Raycast(_raycastLocation.position, _raycastLocation.transform.right, 4, _layerMask);
+            _raycastHit2D = Physics2D.Raycast(_raycastLocation.position, _raycastLocation.transform.right, _maxDistance, _layerMask);
         }
         else
         {
-            Physics.Raycast(_raycastLocation.position, _raycastLocation.transform.forward, out _raycastHit, 4, _layerMask);
+            Physics.Raycast(_raycastLocation.position, _raycastLocation.transform.forward, out _raycastHit, _maxDistance, _layerMask);
         }
 
         if (_raycastHit2D.collider != null || _raycastHit.collider != null)
