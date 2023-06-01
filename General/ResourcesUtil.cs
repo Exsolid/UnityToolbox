@@ -105,7 +105,7 @@ public class ResourcesUtil
     /// <returns>The cast values of the file.</returns>
     public static T GetFileData<T>(string key, string filename)
     {
-        if(!File.Exists(GetLocalPath(key) + filename))
+        if(!File.Exists(GetLocalPath(key) + filename) && Application.isEditor)
         {
             return default(T);
         }

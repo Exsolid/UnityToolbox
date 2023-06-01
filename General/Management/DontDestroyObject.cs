@@ -13,6 +13,11 @@ public class DontDestroyObject : MonoBehaviour
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
+        if (ModuleManager.GetModule<DontDestroyManager>().GetObject(_identifier) != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
         ModuleManager.GetModule<DontDestroyManager>().RegisterObject(this);
     }
 }
