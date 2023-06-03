@@ -52,6 +52,13 @@ namespace UnityToolbox.Item
 
         public int MaxStackCount;
 
+        private Type _itemType;
+        public Type ItemType
+        {
+            get { return _itemType; }
+            set { _itemType = value; }
+        }
+
         private HashSet<ItemField> _itemFields;
         public HashSet<ItemField> ItemFields
         {
@@ -101,6 +108,7 @@ namespace UnityToolbox.Item
             {
                 ItemData item = (ItemData)data;
                 _itemName = item.ItemName;
+                _itemType = item.ItemType;
                 if (item.InventoryID != null && !item.InventoryID.Equals(""))
                 {
                     ModuleManager.GetModule<InventoryManager>().GetByID(item.InventoryID).AddItem(this, 1);
@@ -119,6 +127,7 @@ namespace UnityToolbox.Item
             ItemData data = new ItemData();
             data.ItemName = _itemName;
             data.Fields = _itemFields;
+            data.ItemType = _itemType;
             if (_inventoryOfItem != null)
             {
                 HeldInventoryManager invMan = null;

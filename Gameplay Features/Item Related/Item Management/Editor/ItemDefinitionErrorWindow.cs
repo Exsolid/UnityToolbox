@@ -8,8 +8,10 @@ using System.Reflection;
 
 namespace UnityToolbox.Item.Management
 {
-    public class ItemDefinitionSelectionWindow : EditorWindow
+    public class ItemDefinitionErrorWindow : EditorWindow
     {
+        public event Action OnClose;
+
         private Vector2 _scrollPos;
         private string _searchString;
         private bool _foldoutSearch;
@@ -21,16 +23,13 @@ namespace UnityToolbox.Item.Management
         private List<int> _selectionIntValues;
         private List<string> _selectionStringValues;
         private List<FieldInfo> _selectionFields;
-        private ItemDefinitionErrorWindow _errorWindow;
 
-        public event Action<ItemDefinition> OnItemDefinitionSelected;
-
-        public static ItemDefinitionSelectionWindow Open()
+        public static ItemDefinitionErrorWindow Open()
         {
-            ItemDefinitionSelectionWindow window = (ItemDefinitionSelectionWindow)GetWindow(typeof(ItemDefinitionSelectionWindow));
+            ItemDefinitionErrorWindow window = (ItemDefinitionErrorWindow)GetWindow(typeof(ItemDefinitionErrorWindow));
             window.minSize = new Vector2(600, 400);
             window.maxSize = new Vector2(600, 400);
-            window.titleContent = new GUIContent("Dropdown Selection");
+            window.titleContent = new GUIContent("Faulty ItemDefinitons");
 
             Vector2 mouse = GUIUtility.GUIToScreenPoint(Event.current.mousePosition);
             Rect rect = new Rect(mouse.x - 550, mouse.y + 10, 10, 10);
@@ -59,27 +58,20 @@ namespace UnityToolbox.Item.Management
 
         private void OnGUI()
         {
-            if (Itemizer.Instance.FaultyItemDefinitions.Count != 0 && _errorWindow == null)
+            if(Itemizer.Instance.FaultyItemDefinitions.Count == 0)
             {
-                _errorWindow = ItemDefinitionErrorWindow.Open();
-                _errorWindow.OnClose += delegate
-                {
-                    _errorWindow = null;
-                    UpdateStatus("All faulty ItemDefinitions were fixed.");
-                };
+                Close();
+            }
 
-                UpdateStatus("Fix the faulty ItemDefinitions first!");
-            }
-            else if (_errorWindow == null)
-            {
-                DisplayItemsTab();
-            }
+            DisplayItemsTab();
         }
 
         private void DisplayItemsTab()
         {
             DrawLineHorizontal();
             GUILayout.Label(_status);
+            DrawLineHorizontal();
+            GUILayout.Label("All objects listed here are faulty. Were the prefab or icon moved? They need to be fixed!");
             DrawLineHorizontal();
 
             GUILayout.BeginHorizontal();
@@ -112,7 +104,7 @@ namespace UnityToolbox.Item.Management
         private void DrawListItems()
         {
             DrawLineHorizontal();
-            HashSet<ItemDefinition> filtered = Itemizer.Instance.ItemDefinitions;
+            HashSet<ItemDefinition> filtered = Itemizer.Instance.FaultyItemDefinitions;
             if (!_searchString.Trim().Equals(""))
             {
                 filtered = filtered.Where(itemDefinition => itemDefinition.GetQualifiedName().ToLower().Contains(_searchString.Trim().ToLower())).ToHashSet();
@@ -132,11 +124,6 @@ namespace UnityToolbox.Item.Management
 
                 GUILayout.Label(itemDefinition.GetQualifiedName(), GUILayout.Width((EditorGUIUtility.currentViewWidth - 68) / 2));
                 GUILayout.Label(itemDefinition.GetType().Name);
-
-                if (GUILayout.Button("^", GUILayout.Width(20)))
-                {
-                    OnItemDefinitionSelected?.Invoke(itemDefinition);
-                }
 
                 if (GUILayout.Button("*", GUILayout.Width(20)))
                 {
@@ -209,6 +196,12 @@ namespace UnityToolbox.Item.Management
         private void UpdateStatus(string status)
         {
             _status = "Status:     " + status;
+        }
+
+        public new void Close()
+        {
+            base.Close();
+            OnClose?.Invoke();
         }
     }
 }

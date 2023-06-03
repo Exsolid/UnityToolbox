@@ -11,5 +11,6 @@ public class ItemData: GameData
     public string ItemName;
     public string InventoryID;
     public string IconPath;
+    public Type ItemType;
     public HashSet<ItemField> Fields;
 }

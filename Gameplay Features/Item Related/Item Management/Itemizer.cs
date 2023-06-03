@@ -62,6 +62,25 @@ namespace UnityToolbox.Item.Management
             }
         }
 
+        private HashSet<ItemDefinition> _faultyItemDefinitions;
+        /// <summary>
+        /// All defined items which are faulty.
+        /// </summary>
+        public HashSet<ItemDefinition> FaultyItemDefinitions
+        {
+            get
+            {
+                if (_initialized)
+                {
+                    return _faultyItemDefinitions.ToHashSet();
+                }
+                else
+                {
+                    return new HashSet<ItemDefinition>();
+                }
+            }
+        }
+
         private HashSet<ItemScope> _itemScopes;
         /// <summary>
         /// All defined item scopes.
@@ -110,7 +129,7 @@ namespace UnityToolbox.Item.Management
                 return _initialized;
             }
 
-            ReadDataLocally();
+            ReadData();
 
             if (_itemDefinitions == null)
             {
@@ -135,26 +154,26 @@ namespace UnityToolbox.Item.Management
         /// <param name="resourceIconPath">The path to where the icon can be found. Has to be a resources path.</param>
         /// <param name="resourcePrefabPath">The path to where the prefab can be found. Has to be a resources path.</param>
         /// <returns>The created <see cref="ItemDefinition"/>.</returns>
-        /// <exception cref="ArgumentException"></exception>
-        public ItemDefinition AddItemDefinition(ItemScope scope, string name, int maxStackCount, string resourceIconPath, string resourcePrefabPath)
+        /// <exception cref="ItemDefinitionException"></exception>
+        public ItemDefinition AddItemDefinition(ItemScope scope, string name, int maxStackCount, string resourceIconPath, string resourcePrefabPath, string iconGUID, string prefabGUID)
         {
             CheckInitialized();
 
             if (name == null || name.Equals(""))
             {
-                throw new ArgumentException("The name cannot be undefined.");
+                throw new ItemDefinitionException("The name cannot be undefined.");
             }
             resourcePrefabPath = resourcePrefabPath.Split(".").First();
             resourceIconPath = resourceIconPath.Split(".").First();
 
             if (Resources.Load(resourcePrefabPath) == null)
             {
-                throw new ArgumentException("The prefab of this item must be defined from a valid \"Resources\" directory.");
+                throw new ItemDefinitionException("The prefab of this item must be defined from a valid \"Resources\" directory.");
             }
 
             if (!_itemScopes.Contains(scope))
             {
-                throw new ArgumentException("The given scope is not defined within the manager.");
+                throw new ItemDefinitionException("The given scope is not defined within the manager.");
             }
 
             ItemDefinition itemDefinition = new ItemDefinition()
@@ -163,12 +182,14 @@ namespace UnityToolbox.Item.Management
                 Scope = scope,
                 MaxStackCount = maxStackCount,
                 IconPath = resourceIconPath,
-                PrefabPath = resourcePrefabPath
+                PrefabPath = resourcePrefabPath,
+                IconGUID = iconGUID,
+                PrefabGUID = prefabGUID
             };
 
             if (!_itemDefinitions.Add(itemDefinition))
             {
-                throw new ArgumentException("\"" + itemDefinition.GetQualifiedName() + "\" is not unique.");
+                throw new ItemDefinitionException("\"" + itemDefinition.GetQualifiedName() + "\" is not unique.");
             }
 
             return itemDefinition;
@@ -185,26 +206,26 @@ namespace UnityToolbox.Item.Management
         /// <param name="resourcePrefabPath">The path to where the prefab can be found. Has to be a resources path.</param>
         /// <param name="itemFields">All additional field values defined for type <typeparamref name="T"/>.</param>
         /// <returns>The created <see cref="ItemDefinition"/>.</returns>
-        /// <exception cref="ArgumentException"></exception>
-        public T AddInheritedItemDefinition<T>(ItemScope scope, string name, int maxStackCount, string resourceIconPath, string resourcePrefabPath, HashSet<ItemField> itemFields) where T : ItemDefinition
+        /// <exception cref="ItemDefinitionException"></exception>
+        public T AddInheritedItemDefinition<T>(ItemScope scope, string name, int maxStackCount, string resourceIconPath, string resourcePrefabPath, string iconGUID, string prefabGUID, HashSet<ItemField> itemFields) where T : ItemDefinition
         {
             CheckInitialized();
 
             if (name == null || name.Equals(""))
             {
-                throw new ArgumentException("The name cannot be undefined.");
+                throw new ItemDefinitionException("The name cannot be undefined.");
             }
             resourcePrefabPath = resourcePrefabPath.Split(".").First();
             resourceIconPath = resourceIconPath.Split(".").First();
 
             if (Resources.Load(resourcePrefabPath) == null)
             {
-                throw new ArgumentException("The prefab of this item must be defined from a valid \"Resources\" directory.");
+                throw new ItemDefinitionException("The prefab of this item must be defined from a valid \"Resources\" directory.");
             }
 
             if (!_itemScopes.Contains(scope))
             {
-                throw new ArgumentException("The given scope is not defined within the manager.");
+                throw new ItemDefinitionException("The given scope is not defined within the manager.");
             }
 
             FieldInfo[] allTFields = typeof(T).GetFields(BindingFlags.Public | BindingFlags.Instance);
@@ -215,13 +236,15 @@ namespace UnityToolbox.Item.Management
             itemDefinition.MaxStackCount = maxStackCount;
             itemDefinition.IconPath = resourceIconPath;
             itemDefinition.PrefabPath = resourcePrefabPath;
+            itemDefinition.IconGUID = iconGUID;
+            itemDefinition.PrefabGUID = prefabGUID;
 
             foreach (ItemField field in itemFields)
             {
                 FieldInfo referenceField = allTFields.Where(f => f.Name.Equals(field.FieldName) && f.FieldType.Equals(field.FieldType)).FirstOrDefault();
                 if (referenceField == null)
                 {
-                    throw new ArgumentException("The type " + typeof(T).Name + " does not contain the field " + field.FieldName + " of type " + field.FieldType.Name + ".");
+                    throw new ItemDefinitionException("The type " + typeof(T).Name + " does not contain the field " + field.FieldName + " of type " + field.FieldType.Name + ".");
                 }
                 else
                 {
@@ -231,7 +254,7 @@ namespace UnityToolbox.Item.Management
 
             if (!_itemDefinitions.Add(itemDefinition))
             {
-                throw new ArgumentException("\"" + itemDefinition.GetQualifiedName() + "\" is not unique.");
+                throw new ItemDefinitionException("\"" + itemDefinition.GetQualifiedName() + "\" is not unique.");
             }
 
             return itemDefinition;
@@ -241,16 +264,17 @@ namespace UnityToolbox.Item.Management
         /// Removes an <see cref="ItemDefinition"/> from the mangement.
         /// </summary>
         /// <param name="itemDefinition">The <see cref="ItemDefinition"/> to be removed.</param>
-        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="ItemDefinitionException"></exception>
         public void RemoveItemDefinition(ItemDefinition itemDefinition)
         {
             CheckInitialized();
 
             if (!_itemDefinitions.Remove(itemDefinition))
             {
-                throw new ArgumentException("\"" + itemDefinition.GetQualifiedName() + "\" does not exist.");
+                throw new ItemDefinitionException("\"" + itemDefinition.GetQualifiedName() + "\" does not exist.");
             }
 
+            _faultyItemDefinitions.Remove(itemDefinition);
             ItemDefinitionEdited(itemDefinition, null);
         }
 
@@ -260,7 +284,7 @@ namespace UnityToolbox.Item.Management
 
             if (!_itemDefinitions.Remove(itemDefinition))
             {
-                throw new ArgumentException("\"" + itemDefinition.GetQualifiedName() + "\" does not exist.");
+                throw new ItemDefinitionException("\"" + itemDefinition.GetQualifiedName() + "\" does not exist.");
             }
         }
 
@@ -276,15 +300,15 @@ namespace UnityToolbox.Item.Management
         /// <param name="resourcePrefabPath">The new path to where the prefab can be found. Has to be a resources path.</param>
         /// <param name="itemFields">All additional new field values defined for type <typeparamref name="T"/>.</param>
         /// <returns>The created <see cref="ItemDefinition"/>.</returns>
-        /// <exception cref="ArgumentException"></exception>
-        public void EditInheritedItemDefinition<T>(ItemDefinition itemDefinition, ItemScope scope, string name, int maxStackCount, string resourceIconPath, string resourcePrefabPath, HashSet<ItemField> itemFields) where T : ItemDefinition
+        /// <exception cref="ItemDefinitionException"></exception>
+        public void EditInheritedItemDefinition<T>(ItemDefinition itemDefinition, ItemScope scope, string name, int maxStackCount, string resourceIconPath, string resourcePrefabPath, string iconGUID, string prefabGUID, HashSet<ItemField> itemFields) where T : ItemDefinition
         {
             InternalRemoveItemDefinition(itemDefinition);
             T newItemDefinition;
 
             try
             {
-                newItemDefinition = AddInheritedItemDefinition<T>(scope, name, maxStackCount, resourceIconPath, resourcePrefabPath, itemFields);
+                newItemDefinition = AddInheritedItemDefinition<T>(scope, name, maxStackCount, resourceIconPath, resourcePrefabPath, iconGUID, prefabGUID, itemFields);
             }
             catch (Exception ex)
             {
@@ -292,6 +316,7 @@ namespace UnityToolbox.Item.Management
                 throw ex;
             }
 
+            _faultyItemDefinitions.Remove(itemDefinition);
             ItemDefinitionEdited(itemDefinition, newItemDefinition);
         }
 
@@ -305,21 +330,23 @@ namespace UnityToolbox.Item.Management
         /// <param name="resourceIconPath">The new path to where the icon can be found. Has to be a resources path.</param>
         /// <param name="resourcePrefabPath">The new path to where the prefab can be found. Has to be a resources path.</param>
         /// <returns>The created <see cref="ItemDefinition"/>.</returns>
-        /// <exception cref="ArgumentException"></exception>
-        public void EditItemDefinition(ItemDefinition itemDefinition, ItemScope scope, string name, int maxStackCount, string resourceIconPath, string resourcePrefabPath)
+        /// <exception cref="ItemDefinitionException"></exception>
+        public void EditItemDefinition(ItemDefinition itemDefinition, ItemScope scope, string name, int maxStackCount, string resourceIconPath, string resourcePrefabPath, string iconGUID, string prefabGUID)
         {
             InternalRemoveItemDefinition(itemDefinition);
             ItemDefinition newItemDefinition;
 
             try
             {
-                newItemDefinition = AddItemDefinition(scope, name, maxStackCount, resourceIconPath, resourcePrefabPath);
+                newItemDefinition = AddItemDefinition(scope, name, maxStackCount, resourceIconPath, resourcePrefabPath, iconGUID, prefabGUID);
             }
             catch (Exception ex)
             {
                 _itemDefinitions.Add(itemDefinition);
                 throw ex;
             }
+
+            _faultyItemDefinitions.Remove(itemDefinition);
 
             ItemDefinitionEdited(itemDefinition, newItemDefinition);
         }
@@ -329,7 +356,7 @@ namespace UnityToolbox.Item.Management
         /// </summary>
         /// <param name="name">The unique name of the scope to create.</param>
         /// <returns>The created <see cref="ItemScope"/>.</returns>
-        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="ItemDefinitionException"></exception>
         public ItemScope AddItemScope(string name)
         {
             CheckInitialized();
@@ -341,12 +368,12 @@ namespace UnityToolbox.Item.Management
 
             if (name == null || name.Equals(""))
             {
-                throw new ArgumentException("The name cannot be undefined.");
+                throw new ItemDefinitionException("The name cannot be undefined.");
             }
 
             if (!_itemScopes.Add(scope))
             {
-                throw new ArgumentException("\"" + name + "\" is not unique.");
+                throw new ItemDefinitionException("\"" + name + "\" is not unique.");
             }
 
             return scope;
@@ -356,14 +383,14 @@ namespace UnityToolbox.Item.Management
         /// Removes a given <see cref="ItemScope"/>. Replaces the given scope used for the <see cref="ItemDefinition"/> with the <see cref="DefaultScope"/>.
         /// </summary>
         /// <param name="scope">The <see cref="ItemScope"/> to remove.</param>
-        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="ItemDefinitionException"></exception>
         public void RemoveItemScope(ItemScope scope)
         {
             CheckInitialized();
 
             if (_defaultScope.Equals(scope))
             {
-                throw new ArgumentException("Cannot make changes to the default scope.");
+                throw new ItemDefinitionException("Cannot make changes to the default scope.");
             }
 
             List<ItemDefinition> definitionsToChange = _itemDefinitions.Where(def => def.Scope.Equals(scope)).ToList();
@@ -373,7 +400,7 @@ namespace UnityToolbox.Item.Management
             {
                 foreach (ItemDefinition def in definitionsToChange)
                 {
-                    definitionsToRedo.Add(AddItemDefinition(_defaultScope, def.Name, def.MaxStackCount, def.IconPath, def.PrefabPath));
+                    definitionsToRedo.Add(AddItemDefinition(_defaultScope, def.Name, def.MaxStackCount, def.IconPath, def.PrefabPath, def.IconGUID, def.PrefabGUID));
                 }
 
                 foreach (ItemDefinition def in definitionsToChange)
@@ -392,7 +419,7 @@ namespace UnityToolbox.Item.Management
 
             if (!_itemScopes.Remove(scope))
             {
-                throw new ArgumentException("\"" + scope.Name + "\" does not exist.");
+                throw new ItemDefinitionException("\"" + scope.Name + "\" does not exist.");
             }
 
             ItemScopeEdited(scope, null);
@@ -403,14 +430,14 @@ namespace UnityToolbox.Item.Management
         /// </summary>
         /// <param name="scope">The <see cref="ItemScope"/> to edit.</param>
         /// <param name="name">The new unique name of the scope.</param>
-        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="ItemDefinitionException"></exception>
         public void EditItemScope(ItemScope scope, string name)
         {
             CheckInitialized();
 
             if (_defaultScope.Equals(scope))
             {
-                throw new ArgumentException("Cannot make changes to the default scope.");
+                throw new ItemDefinitionException("Cannot make changes to the default scope.");
             }
 
             ItemScope newScope = AddItemScope(name);
@@ -418,7 +445,7 @@ namespace UnityToolbox.Item.Management
             if (!_itemScopes.Remove(scope))
             {
                 _itemScopes.Remove(newScope);
-                throw new ArgumentException("\"" + scope.Name + "\" does not exist.");
+                throw new ItemDefinitionException("\"" + scope.Name + "\" does not exist.");
             }
 
             List<ItemDefinition> definitionsToChange = _itemDefinitions.Where(def => def.Scope.Equals(scope)).ToList();
@@ -428,7 +455,7 @@ namespace UnityToolbox.Item.Management
             {
                 foreach (ItemDefinition def in definitionsToChange)
                 {
-                    definitionsToRedo.Add(AddItemDefinition(newScope, def.Name, def.MaxStackCount, def.IconPath, def.PrefabPath));
+                    definitionsToRedo.Add(AddItemDefinition(newScope, def.Name, def.MaxStackCount, def.IconPath, def.PrefabPath, def.IconGUID, def.PrefabGUID));
                 }
 
                 foreach (ItemDefinition def in definitionsToChange)
@@ -459,31 +486,39 @@ namespace UnityToolbox.Item.Management
             }
         }
 
-        private void ReadDataLocally()
+        private void ReadData()
         {
-            _itemDefinitions = _instance.ReadItemData();
-            _itemScopes = _instance.ReadItemScopes();
+            ReadItemData();
+            ReadItemScopes();
         }
 
-        private HashSet<ItemDefinition> ReadItemData()
+        private void ReadItemData()
         {
             HashSet<ItemDefinition> readItemData = ResourcesUtil.GetFileData<HashSet<ItemDefinition>>(ProjectPrefKeys.ITEMDATASAVEPATH, FILENAMEITEMS);
+            _faultyItemDefinitions = new HashSet<ItemDefinition>();
 
             if (readItemData != null)
             {
                 foreach (ItemDefinition def in readItemData)
                 {
-                    def.Deserialize();
+                    try
+                    {
+                        def.Deserialize();
+                    }
+                    catch
+                    {
+                        _faultyItemDefinitions.Add(def);
+                    }
                 }
             }
 
-            return readItemData;
+            _itemDefinitions = readItemData;
         }
 
-        private HashSet<ItemScope> ReadItemScopes()
+        private void ReadItemScopes()
         {
             HashSet<ItemScope> readScopes = ResourcesUtil.GetFileData<HashSet<ItemScope>>(ProjectPrefKeys.ITEMDATASAVEPATH, FILENAMESCOPES);
-            return readScopes;
+            _itemScopes = readScopes;
         }
 
         /// <summary>

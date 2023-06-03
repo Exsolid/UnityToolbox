@@ -227,7 +227,8 @@ namespace UnityToolbox.Item.Management
                     if (_type.Equals(typeof(ItemDefinition)))
                     {
                         Itemizer.Instance.EditItemDefinition(_currentItemDefinition, Itemizer.Instance.ItemScopes.ElementAt(_newSelectedScope), _newItemDefinitionName, _newMaxStackCount,
-                            AssetDatabase.GetAssetPath(_newItemDefinitionIcon).Split("Resources/").Last(), AssetDatabase.GetAssetPath(_newItemDefinitionPrefab).Split("Resources/").Last());
+                            AssetDatabase.GetAssetPath(_newItemDefinitionIcon).Split("Resources/").Last(), AssetDatabase.GetAssetPath(_newItemDefinitionPrefab).Split("Resources/").Last(),
+                            AssetDatabase.GUIDFromAssetPath(AssetDatabase.GetAssetPath(_newItemDefinitionIcon)).ToString(), AssetDatabase.GUIDFromAssetPath(AssetDatabase.GetAssetPath(_newItemDefinitionPrefab)).ToString());
                     }
                     else
                     {
@@ -264,6 +265,8 @@ namespace UnityToolbox.Item.Management
                         _newItemDefinitionName, _newMaxStackCount,
                         AssetDatabase.GetAssetPath(_newItemDefinitionIcon).Split("Resources/").Last(),
                         AssetDatabase.GetAssetPath(_newItemDefinitionPrefab).Split("Resources/").Last(),
+                        AssetDatabase.GUIDFromAssetPath(AssetDatabase.GetAssetPath(_newItemDefinitionIcon)).ToString(),
+                        AssetDatabase.GUIDFromAssetPath(AssetDatabase.GetAssetPath(_newItemDefinitionPrefab)).ToString(),
                         itemFields
                         };
 
@@ -273,12 +276,21 @@ namespace UnityToolbox.Item.Management
 
                     Itemizer.Instance.WriteData();
                     AssetDatabase.Refresh();
-                    UpdateStatus("Successfully added a new Item Definition.");
                 }
                 catch (Exception e)
                 {
-                    UpdateStatus(e.Message);
-                    throw e;
+                    if (e.InnerException != null && e.InnerException.GetType().Equals(typeof(ItemDefinitionException)))
+                    {
+                        UpdateStatus(e.InnerException.Message);
+                    }
+                    else if (e.GetType().Equals(typeof(ItemDefinitionException)))
+                    {
+                        UpdateStatus(e.Message);
+                    }
+                    else
+                    {
+                        throw e;
+                    }
                 }
             }
             GUILayout.EndHorizontal();

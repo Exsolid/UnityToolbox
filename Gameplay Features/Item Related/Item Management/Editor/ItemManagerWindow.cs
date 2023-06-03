@@ -45,6 +45,8 @@ namespace UnityToolbox.Item.Management
 
         private string _status;
 
+        private ItemDefinitionErrorWindow _errorWindow;
+
         [MenuItem("UnityToolbox/Item Manager")]
         private static void DisplayWindow()
         {
@@ -57,7 +59,7 @@ namespace UnityToolbox.Item.Management
 
         public static void Open()
         {
-            LocalisationManagerWindow window = (LocalisationManagerWindow)GetWindow(typeof(LocalisationManagerWindow));
+            ItemManagerWindow window = (ItemManagerWindow)GetWindow(typeof(ItemManagerWindow));
             window.titleContent = new GUIContent("Item Manager");
 
             Vector2 mouse = GUIUtility.GUIToScreenPoint(Event.current.mousePosition);
@@ -77,6 +79,7 @@ namespace UnityToolbox.Item.Management
             _itemDefinitionTypes.Clear();
             _itemDefinitionTypes.Add(typeof(ItemDefinition));
             _selectedType = 0;
+            Itemizer.Instance.Initialize();
             if (Itemizer.Instance.Initialized)
             {
                 _itemDefinitionTypes.AddRange(Itemizer.Instance.GetAllInheritedItemDefinitionTypes());
@@ -99,19 +102,33 @@ namespace UnityToolbox.Item.Management
             DrawLineHorizontal();
             if (Itemizer.Instance.Initialized)
             {
-                _selectedTab = GUILayout.Toolbar(_selectedTab, new string[] { "Items", "Scopes", "Settings" });
-                DrawLineHorizontal();
-                switch (_selectedTab)
+                if (Itemizer.Instance.FaultyItemDefinitions.Count != 0 && _errorWindow == null)
                 {
-                    case IDS:
-                        DisplayItemsTab();
-                        break;
-                    case SCOPES:
-                        DisplayScopesTab();
-                        break;
-                    case SETTINGS:
-                        DisplaySettingsTab();
-                        break;
+                    _errorWindow = ItemDefinitionErrorWindow.Open();
+                    _errorWindow.OnClose += delegate
+                    {
+                        _errorWindow = null;
+                        UpdateStatus("All faulty ItemDefinitions were fixed.");
+                    };
+
+                    UpdateStatus("Fix the faulty ItemDefinitions first!");
+                }
+                else if(_errorWindow == null)
+                {
+                    _selectedTab = GUILayout.Toolbar(_selectedTab, new string[] { "Items", "Scopes", "Settings" });
+                    DrawLineHorizontal();
+                    switch (_selectedTab)
+                    {
+                        case IDS:
+                            DisplayItemsTab();
+                            break;
+                        case SCOPES:
+                            DisplayScopesTab();
+                            break;
+                        case SETTINGS:
+                            DisplaySettingsTab();
+                            break;
+                    }
                 }
             }
             else
@@ -163,7 +180,7 @@ namespace UnityToolbox.Item.Management
                     AssetDatabase.Refresh();
                     UpdateStatus("Successfully added a new scope.");
                 }
-                catch (Exception e)
+                catch (ItemDefinitionException e)
                 {
                     UpdateStatus(e.Message);
                 }
@@ -291,7 +308,7 @@ namespace UnityToolbox.Item.Management
                                 AssetDatabase.Refresh();
                                 UpdateStatus("Successfully removed the scope '" + scope.Name + "'.");
                             }
-                            catch (Exception e)
+                            catch (ItemDefinitionException e)
                             {
                                 UpdateStatus(e.Message);
                             }
@@ -412,7 +429,7 @@ namespace UnityToolbox.Item.Management
                 GUILayout.BeginHorizontal("Box");
 
                 GUILayout.Label(itemDefinition.GetQualifiedName(), GUILayout.Width((EditorGUIUtility.currentViewWidth - 68) / 2));
-                GUILayout.Label(itemDefinition.GetType().Name, GUILayout.Width((EditorGUIUtility.currentViewWidth - 68) / 2));
+                GUILayout.Label(itemDefinition.GetType().Name);
 
                 if (GUILayout.Button("*", GUILayout.Width(20)))
                 {
@@ -451,7 +468,8 @@ namespace UnityToolbox.Item.Management
                     if (_selectedType == 0)
                     {
                         Itemizer.Instance.AddItemDefinition(Itemizer.Instance.ItemScopes.ElementAt(_selectedScope), _itemDefinitionName, _maxStackCount,
-                            AssetDatabase.GetAssetPath(_itemDefinitionIcon).Split("Resources/").Last(), AssetDatabase.GetAssetPath(_itemDefinitionPrefab).Split("Resources/").Last());
+                            AssetDatabase.GetAssetPath(_itemDefinitionIcon).Split("Resources/").Last(), AssetDatabase.GetAssetPath(_itemDefinitionPrefab).Split("Resources/").Last(),
+                            AssetDatabase.GUIDFromAssetPath(AssetDatabase.GetAssetPath(_itemDefinitionIcon)).ToString(), AssetDatabase.GUIDFromAssetPath(AssetDatabase.GetAssetPath(_itemDefinitionPrefab)).ToString());
                     }
                     else
                     {
@@ -488,6 +506,8 @@ namespace UnityToolbox.Item.Management
                             _maxStackCount,
                             AssetDatabase.GetAssetPath(_itemDefinitionIcon).Split("Resources/").Last(),
                             AssetDatabase.GetAssetPath(_itemDefinitionPrefab).Split("Resources/").Last(),
+                            AssetDatabase.GUIDFromAssetPath(AssetDatabase.GetAssetPath(_itemDefinitionIcon)).ToString(),
+                            AssetDatabase.GUIDFromAssetPath(AssetDatabase.GetAssetPath(_itemDefinitionPrefab)).ToString(),
                             itemFields
                         };
 
@@ -501,7 +521,18 @@ namespace UnityToolbox.Item.Management
                 }
                 catch (Exception e)
                 {
-                    UpdateStatus(e.Message);
+                    if(e.InnerException != null && e.InnerException.GetType().Equals(typeof(ItemDefinitionException)))
+                    {
+                        UpdateStatus(e.InnerException.Message);
+                    }
+                    else if (e.GetType().Equals(typeof(ItemDefinitionException)))
+                    {
+                        UpdateStatus(e.Message);
+                    }
+                    else
+                    {
+                        throw e;
+                    }
                 }
             }
             GUILayout.EndHorizontal();

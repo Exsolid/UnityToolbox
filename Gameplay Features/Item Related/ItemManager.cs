@@ -62,6 +62,7 @@ namespace UnityToolbox.Item
 
             itemInstance.IconPath = itemDefinition.IconPath;
             itemInstance.MaxStackCount = itemDefinition.MaxStackCount;
+            itemInstance.ItemType = itemDefinition.GetType();
 
             FieldInfo[] allFields = itemDefinition.GetType().GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
 
