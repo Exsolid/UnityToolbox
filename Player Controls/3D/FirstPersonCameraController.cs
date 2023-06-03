@@ -27,6 +27,9 @@ public class FirstPersonCameraController : MonoBehaviour
 
     [SerializeField] private bool _lockRotation;
 
+    private Quaternion _goalRotationCamera;
+    private Quaternion _goalRotationPlayer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,12 +50,21 @@ public class FirstPersonCameraController : MonoBehaviour
         Cursor.visible = false;
     }
 
+    private void Update()
+    {
+        Vector2 mouse = _input.actions[_viewActionName].ReadValue<Vector2>();
+        _goalRotationCamera = Quaternion.Euler(_camera.transform.rotation.eulerAngles.x + mouse.y * -1 / 2, _camera.transform.rotation.eulerAngles.y + mouse.x / 2, 0);
+        if(_playerToRotateInstead != null)
+        {
+            _goalRotationPlayer = Quaternion.Euler(_playerToRotateInstead.transform.rotation.eulerAngles.x + mouse.y * -1 / 2, _playerToRotateInstead.transform.rotation.eulerAngles.y + mouse.x / 2, 0);
+        }
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
         if (!_lockRotation)
         {
-
             TurnView();
         }
         else if (!_rotateToPosition.Equals(Vector3.zero))
@@ -65,25 +77,40 @@ public class FirstPersonCameraController : MonoBehaviour
 
     private void TurnView()
     {
-        Vector2 mouse = _input.actions[_viewActionName].ReadValue<Vector2>();
-
         if (_playerToRotateInstead == null)
         {
-            Quaternion rotation = Quaternion.Lerp(_camera.transform.rotation, Quaternion.Euler(_camera.transform.rotation.eulerAngles.x + mouse.y * -1 / 2, _camera.transform.rotation.eulerAngles.y + mouse.x / 2, 0), _mouseSensitivityUpdated * Time.deltaTime * 10);
-            rotation = Quaternion.Euler(_maxVerticalAngle != -1 && (Mathf.Abs(rotation.eulerAngles.x - 180) < _maxVerticalAngle) ? _camera.transform.rotation.eulerAngles.x : rotation.eulerAngles.x,
-                _maxHorizontalAngle != -1 && !MayRotateHorizontal(rotation.eulerAngles) ? _camera.transform.rotation.eulerAngles.y : rotation.eulerAngles.y, 0);
-            _camera.transform.rotation = rotation;
+            Quaternion lerpedRotationCamera = Quaternion.Slerp(_camera.transform.rotation, _goalRotationCamera, _mouseSensitivityUpdated * Time.fixedDeltaTime * 10);
+            Quaternion clampedRotationCamera = Quaternion.Euler(
+                _maxVerticalAngle != -1 && (Mathf.Abs(lerpedRotationCamera.eulerAngles.x - 180) < _maxVerticalAngle) 
+                    ? _camera.transform.rotation.eulerAngles.x 
+                    : lerpedRotationCamera.eulerAngles.x,
+                _maxHorizontalAngle != -1 && !MayRotateHorizontal(lerpedRotationCamera.eulerAngles) 
+                    ? _camera.transform.rotation.eulerAngles.y 
+                    : lerpedRotationCamera.eulerAngles.y, 
+                0);
+
+            _camera.transform.rotation = clampedRotationCamera;
         }
         else
         {
-            Quaternion rotation = Quaternion.Lerp(_playerToRotateInstead.transform.rotation, Quaternion.Euler(_playerToRotateInstead.transform.rotation.eulerAngles.x + mouse.y * -1 / 2, _playerToRotateInstead.transform.rotation.eulerAngles.y + mouse.x / 2, 0), _mouseSensitivityUpdated * Time.deltaTime * 10);
-            rotation = Quaternion.Euler(_maxVerticalAngle != -1 && (Mathf.Abs(rotation.eulerAngles.x - 180) < _maxVerticalAngle) ? _playerToRotateInstead.transform.rotation.eulerAngles.x : rotation.eulerAngles.x, rotation.eulerAngles.y, 0);
+            Quaternion lerpedRotationPlayer = Quaternion.Slerp(_playerToRotateInstead.transform.rotation, _goalRotationPlayer, _mouseSensitivityUpdated * Time.fixedDeltaTime * 10);
+            Quaternion clampedRotationPlayer = Quaternion.Euler(
+                _maxVerticalAngle != -1 && (Mathf.Abs(lerpedRotationPlayer.eulerAngles.x - 180) < _maxVerticalAngle) 
+                    ? _playerToRotateInstead.transform.rotation.eulerAngles.x 
+                    : lerpedRotationPlayer.eulerAngles.x,
+                lerpedRotationPlayer.eulerAngles.y, 
+                0);
 
-            Quaternion rotationCam = Quaternion.Lerp(_camera.transform.rotation, Quaternion.Euler(_camera.transform.rotation.eulerAngles.x + mouse.y * -1 / 2, _camera.transform.rotation.eulerAngles.y + mouse.x / 2, 0), _mouseSensitivityUpdated * Time.deltaTime * 10);
-            rotationCam = Quaternion.Euler(_maxVerticalAngle != -1 && (Mathf.Abs(rotationCam.eulerAngles.x - 180) < _maxVerticalAngle) ? _camera.transform.rotation.eulerAngles.x : rotationCam.eulerAngles.x, rotationCam.eulerAngles.y, 0);
+            Quaternion lerpedRotationCamera = Quaternion.Slerp(_camera.transform.rotation, _goalRotationCamera, _mouseSensitivityUpdated * Time.fixedDeltaTime * 10);
+            Quaternion clampedRotationCamera = Quaternion.Euler(
+                _maxVerticalAngle != -1 && (Mathf.Abs(lerpedRotationCamera.eulerAngles.x - 180) < _maxVerticalAngle) 
+                    ? _camera.transform.rotation.eulerAngles.x 
+                    : lerpedRotationCamera.eulerAngles.x,
+                lerpedRotationCamera.eulerAngles.y, 
+                0);
 
-            _camera.transform.rotation = Quaternion.Euler(rotationCam.eulerAngles.x, _camera.transform.rotation.eulerAngles.y, rotationCam.eulerAngles.z);
-            _playerToRotateInstead.transform.rotation = Quaternion.Euler(_playerToRotateInstead.transform.rotation.eulerAngles.x, rotation.eulerAngles.y, _playerToRotateInstead.transform.rotation.eulerAngles.z);
+            _camera.transform.rotation = Quaternion.Euler(clampedRotationCamera.eulerAngles.x, _camera.transform.rotation.eulerAngles.y, clampedRotationCamera.eulerAngles.z);
+            _playerToRotateInstead.transform.rotation = Quaternion.Euler(_playerToRotateInstead.transform.rotation.eulerAngles.x, clampedRotationPlayer.eulerAngles.y, _playerToRotateInstead.transform.rotation.eulerAngles.z);
         }
     }
 
