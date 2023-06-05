@@ -74,8 +74,8 @@ public class Localizer
     /// </summary>
     /// <param name="localisationID"></param>
     /// <param name="localisations"></param>
-    /// <returns></returns>
-    public bool AddLocalisation(LocalisationID localisationID, Dictionary<LocalisationLanguage, string> localisations)
+    /// <exception cref="LocalisationException"></exception>
+    public void AddLocalisation(LocalisationID localisationID, Dictionary<LocalisationLanguage, string> localisations)
     {
         if (!_isInitialized)
         {
@@ -84,40 +84,35 @@ public class Localizer
 
         if (localisations == null)
         {
-            Debug.LogError("The " + nameof(Localizer) + " cannot add null as " + nameof(localisations));
-            return false;
+            throw new LocalisationException("The " + nameof(Localizer) + " cannot add null as " + nameof(localisations));
         }
 
         if(_localisationLanguages.Count != localisations.Count)
         {
-            Debug.LogError("The " + nameof(Localizer) + " knows " + _localisationLanguages.Count + " languages, but " + localisations.Count + " were given.");
-            return false;
+            throw new LocalisationException("The " + nameof(Localizer) + " knows " + _localisationLanguages.Count + " languages, but " + localisations.Count + " were given.");
         }
 
         if (_localisationData.ContainsKey(localisationID))
         {
-            Debug.LogError("The " + nameof(Localizer) + " already contains localisations for the ID " + localisationID +".");
-            return false;
+            throw new LocalisationException("The " + nameof(Localizer) + " already contains localisations for the ID " + localisationID +".");
         }
 
         foreach(LocalisationLanguage langInData in _localisationLanguages)
         {
-            if (!localisations.ContainsKey(langInData))
+            if (!localisations.ContainsKey(langInData) || localisations[langInData] == null || localisations[langInData].Trim().Equals(""))
             {
-                Debug.LogError("The " + nameof(Localizer) + " did not find the localisation for the language '" + langInData.Name);
-                return false;
+                throw new LocalisationException("The localisation for the language \"" + langInData.Name + "\" cannot be empty!");
             }
         }
         _localisationData.Add(localisationID, localisations);
-        return true;
     }
 
     /// <summary>
     /// Adds a new <see cref="LocalisationScope"/> to the system.
     /// </summary>
     /// <param name="scopeName"></param>
-    /// <returns></returns>
-    public bool AddScope(string scopeName)
+    /// <exception cref="LocalisationException"></exception>
+    public void AddScope(string scopeName)
     {
         if (!_isInitialized)
         {
@@ -126,7 +121,7 @@ public class Localizer
 
         if(scopeName == null || scopeName.Trim() == "")
         {
-            return false;
+            throw new LocalisationException("The given scope cannot be empty!");
         }
 
         LocalisationScope newScope = new LocalisationScope();
@@ -134,13 +129,12 @@ public class Localizer
 
         if (newScope.Equals(_defaultScope) || _localisationScopes.Contains(newScope))
         {
-            return false;
+            throw new LocalisationException("The given scope already exists!");
         }
         else
         {
             _localisationScopes.Add(newScope);
         }
-        return true;
     }
 
     /// <summary>
@@ -148,8 +142,8 @@ public class Localizer
     /// </summary>
     /// <param name="languageName"></param>
     /// <param name="languageShortName"></param>
-    /// <returns></returns>
-    public bool AddLanguage(string languageName, string languageShortName)
+    /// <exception cref="LocalisationException"></exception>
+    public void AddLanguage(string languageName, string languageShortName)
     {
         if (!_isInitialized)
         {
@@ -158,7 +152,7 @@ public class Localizer
 
         if (languageName == null || languageName.Trim() == "" || languageShortName == null || languageShortName.Trim() == "")
         {
-            return false;
+            throw new LocalisationException("The given language name and shortname cannot be empty!");
         }
 
         LocalisationLanguage newLang = new LocalisationLanguage();
@@ -167,24 +161,29 @@ public class Localizer
 
         if (_localisationLanguages.Contains(newLang))
         {
-            return false;
+            throw new LocalisationException("The given language already exists!");
         }
         else
         {
             _localisationLanguages.Add(newLang);
         }
-        return true;
     }
 
     /// <summary>
     /// Removes a <see cref="LocalisationLanguage"/> from the system.
     /// </summary>
     /// <param name="language"></param>
+    /// <exception cref="LocalisationException"></exception>
     public void RemoveLanguage(LocalisationLanguage language)
     {
         if (!_isInitialized)
         {
             Initialize();
+        }
+
+        if(_localisationLanguages.Count <= 1)
+        {
+            throw new LocalisationException("At least one language must persist!");
         }
 
         foreach (KeyValuePair<LocalisationID, Dictionary<LocalisationLanguage, string>> pair
@@ -200,6 +199,7 @@ public class Localizer
     /// Removes a <see cref="LocalisationScope"/> from the system.
     /// </summary>
     /// <param name="scope"></param>
+    /// <exception cref="LocalisationException"></exception>
     public void RemoveScope(LocalisationScope scope)
     {
         if (!_isInitialized)
@@ -209,7 +209,7 @@ public class Localizer
 
         if (scope.Equals(_defaultScope))
         {
-            return;
+            throw new LocalisationException("The default scope cannot be removed.");
         }
 
         foreach (KeyValuePair<LocalisationID, Dictionary<LocalisationLanguage, string>> pair
@@ -247,8 +247,8 @@ public class Localizer
     /// </summary>
     /// <param name="oldID"></param>
     /// <param name="newID"></param>
-    /// <returns></returns>
-    public bool EditLocalisationID(LocalisationID oldID, LocalisationID newID)
+    /// <exception cref="LocalisationException"></exception>
+    public void EditLocalisationID(LocalisationID oldID, LocalisationID newID)
     {
         if (!_isInitialized)
         {
@@ -262,11 +262,10 @@ public class Localizer
         }
         else
         {
-            return false;
+            throw new LocalisationException("The edited localisation ID already exists!");
         }
 
         OnLocalisationEdited(oldID);
-        return true;
     }
 
     /// <summary>
@@ -274,8 +273,8 @@ public class Localizer
     /// </summary>
     /// <param name="oldScope"></param>
     /// <param name="newScopeName"></param>
-    /// <returns></returns>
-    public bool EditScope(LocalisationScope oldScope, string newScopeName)
+    /// <exception cref="LocalisationException"></exception>
+    public void EditScope(LocalisationScope oldScope, string newScopeName)
     {
         if (!_isInitialized)
         {
@@ -284,7 +283,7 @@ public class Localizer
 
         if(newScopeName == null || newScopeName.Trim() == "")
         {
-            return false;
+            throw new LocalisationException("The edited scope cannot be empty!");
         }
 
         LocalisationScope newScope = new LocalisationScope();
@@ -292,7 +291,7 @@ public class Localizer
 
         if (newScope.Equals(_defaultScope) || _localisationScopes.Contains(newScope) || !_localisationScopes.Contains(oldScope))
         {
-            return false;
+            throw new LocalisationException("The edited scope already exists!");
         }
         else
         {
@@ -310,7 +309,6 @@ public class Localizer
                 _localisationData.Add(newID, pair.Value);
             }
         }
-        return true;
     }
 
     /// <summary>
@@ -319,8 +317,8 @@ public class Localizer
     /// <param name="oldLanguage"></param>
     /// <param name="newLanguageName"></param>
     /// <param name="newLanguageShortName"></param>
-    /// <returns></returns>
-    public bool EditLanguage(LocalisationLanguage oldLanguage, string newLanguageName, string newLanguageShortName)
+    /// <exception cref="LocalisationException"></exception>
+    public void EditLanguage(LocalisationLanguage oldLanguage, string newLanguageName, string newLanguageShortName)
     {
         if (!_isInitialized)
         {
@@ -329,7 +327,7 @@ public class Localizer
 
         if (newLanguageName == null || newLanguageName.Trim() == "" || newLanguageShortName == null || newLanguageShortName.Trim() == "" || !_localisationLanguages.Contains(oldLanguage))
         {
-            return false;
+            throw new LocalisationException("The edited language name and shortname cannot be empty!");
         }
 
         LocalisationLanguage newLang = new LocalisationLanguage();
@@ -338,7 +336,7 @@ public class Localizer
 
         if (_localisationLanguages.Contains(newLang))
         {
-            return false;
+            throw new LocalisationException("The edited language already exists!");
         }
         else
         {
@@ -353,17 +351,15 @@ public class Localizer
             }
             OnLanguageEdited(oldLanguage);
         }
-
-        return true;
-    } 
+    }
 
     /// <summary>
     /// Edits a given localisation found by the <see cref="LocalisationID"/> by replacing the current content with <paramref name="localisations"/>.
     /// </summary>
     /// <param name="localisationID"></param>
     /// <param name="localisations"></param>
-    /// <returns></returns>
-    public bool EditLocalisation(LocalisationID localisationID, Dictionary<LocalisationLanguage, string> localisations)
+    /// <exception cref="LocalisationException"></exception>
+    public void EditLocalisation(LocalisationID localisationID, Dictionary<LocalisationLanguage, string> localisations)
     {
         if (!_isInitialized)
         {
@@ -372,34 +368,29 @@ public class Localizer
 
         if (localisations == null)
         {
-            Debug.LogError("The " + nameof(Localizer) + " cannot edit null as " + nameof(localisations));
-            return false;
+            throw new LocalisationException("The " + nameof(Localizer) + " cannot edit null as " + nameof(localisations));
         }
 
         if (_localisationLanguages.Count != localisations.Count)
         {
-            Debug.LogError("The " + nameof(Localizer) + " knows " + _localisationLanguages.Count + " languages, but " + localisations.Count + " were given.");
-            return false;
+            throw new LocalisationException("The " + nameof(Localizer) + " knows " + _localisationLanguages.Count + " languages, but " + localisations.Count + " were given.");
         }
 
         if (!_localisationData.ContainsKey(localisationID))
         {
-            Debug.LogError("The " + nameof(Localizer) + " does not contain localisations for the ID " + localisationID + ".");
-            return false;
+            throw new LocalisationException("The " + nameof(Localizer) + " does not contain localisations for the ID " + localisationID + ".");
         }
 
         foreach (LocalisationLanguage langInData in _localisationLanguages)
         {
-            if (!localisations.ContainsKey(langInData))
+            if (!localisations.ContainsKey(langInData) || localisations[langInData] == null || localisations[langInData].Trim().Equals(""))
             {
-                Debug.LogError("The " + nameof(Localizer) + " did not find the localisation for the language '" + langInData.Name);
-                return false;
+                throw new LocalisationException("The localisation for the language \"" + langInData.Name + "\" cannot be empty!");
             }
         }
 
         _localisationData[localisationID] = localisations;
         OnLocalisationEdited(localisationID);
-        return true;
     }
 
     /// <summary>
@@ -443,7 +434,8 @@ public class Localizer
         _defaultScope.Name = "DefaultScope";
         _localisationScopes.Add(_defaultScope);
 
-        if (ProjectPrefs.GetString(ProjectPrefKeys.LOCALISATIONSAVEPATH) == null || ProjectPrefs.GetString(ProjectPrefKeys.LOCALISATIONSAVEPATH).Equals(""))
+        if (ProjectPrefs.GetString(ProjectPrefKeys.LOCALISATIONSAVEPATH) == null || ProjectPrefs.GetString(ProjectPrefKeys.LOCALISATIONSAVEPATH).Equals("")
+            || (Application.isEditor && !ResourcesUtil.IsFullPathValid(Application.dataPath + "/" + ProjectPrefs.GetString(ProjectPrefKeys.LOCALISATIONSAVEPATH))))
         {
             _isInitialized = false;
             return;

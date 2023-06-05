@@ -156,6 +156,7 @@ namespace UnityToolbox.Item.Management
                 }
                 else
                 {
+                    AssetDatabase.Refresh();
                     Itemizer.Instance.Initialize();
                     _itemDefinitionTypes.Clear();
                     _itemDefinitionTypes.Add(typeof(ItemDefinition));

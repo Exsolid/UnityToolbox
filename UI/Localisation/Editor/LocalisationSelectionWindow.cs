@@ -87,7 +87,7 @@ public class LocalisationSelectionWindow : EditorWindow
         {
             GUILayout.BeginHorizontal("Box");
 
-            GUILayout.Label(pair.Key.Name + LocalisationID.DEVIDER + pair.Key.Scope.Name, GUILayout.Width(EditorGUIUtility.currentViewWidth / 3)); 
+            GUILayout.Label(pair.Key.GetQualifiedName(), GUILayout.Width(EditorGUIUtility.currentViewWidth / 3)); 
             GUILayout.Label(pair.Value.ContainsKey(Localizer.Instance.LocalisationLanguages.ElementAt(_selectedLanguage)) ? pair.Value[Localizer.Instance.LocalisationLanguages.ElementAt(_selectedLanguage)] : "", GUILayout.Width(EditorGUIUtility.currentViewWidth / 3));
 
             if (pair.Value.Count != Localizer.Instance.LocalisationLanguages.Count)
@@ -111,7 +111,7 @@ public class LocalisationSelectionWindow : EditorWindow
 
             if (GUILayout.Button("-", GUILayout.Width(20)))
             {
-                if (EditorUtility.DisplayDialog("Remove Localisation", "Are you sure you want to delete the localisation '" + pair.Key.Name + LocalisationID.DEVIDER + pair.Key.Scope.Name + "'?", "Yes"))
+                if (EditorUtility.DisplayDialog("Remove Localisation", "Are you sure you want to delete the localisation '" + pair.Key.GetQualifiedName() + "'?", "Yes"))
                 {
                     Localizer.Instance.RemoveLocalisation(pair.Key);
                     Localizer.Instance.WriteData();

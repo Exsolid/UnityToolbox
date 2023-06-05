@@ -12,16 +12,25 @@ public struct LocalisationID
     [NonSerialized]
     public static char DEVIDER = '_';
 
+    /// <summary>
+    /// Creates and returns the name in syntax of <see cref="LocalisationScope.Name"/> + <see cref="DEVIDER"/> + <see cref="Name"/>
+    /// </summary>
+    /// <returns>A qualified name.</returns>
+    public string GetQualifiedName()
+    {
+        return Scope.Name + DEVIDER + Name;
+    }
+
     public override bool Equals(object obj)
     {
         if (obj.GetType().Equals(typeof(LocalisationID)))
         {
             LocalisationID other = (LocalisationID)obj;
-            return other.Scope.Name + DEVIDER + other.Name == Scope.Name + DEVIDER + Name;
+            return other.GetQualifiedName().Equals(GetQualifiedName());
         }
         else if (obj.GetType().Equals(typeof(string)))
         {
-            return Scope.Name + DEVIDER + Name == (string) obj;
+            return GetQualifiedName().Equals((string)obj);
         }
         else
         {
@@ -31,6 +40,6 @@ public struct LocalisationID
 
     public override int GetHashCode()
     {
-        return base.GetHashCode();
+        return GetQualifiedName().GetHashCode();
     }
 }

@@ -26,18 +26,25 @@ public class LocalisationEditLanguageWindow :EditorWindow
         LocalisationEditLanguageWindow window = (LocalisationEditLanguageWindow) GetWindow(typeof(LocalisationEditLanguageWindow));
         window.titleContent = new GUIContent("Edit Language");
         window.ShowUtility();
-        window.minSize = new Vector2(100, 100);
+        window.minSize = new Vector2(450, 120);
+        window.maxSize = new Vector2(450, 120);
         window.Language = language;
     }
 
     private void Awake()
     {
         Localizer.Instance.LanguageEdited += LanguageEdited;
+        UpdateStatus("");
     }
 
     public void OnGUI()
     {
         GUILayout.BeginVertical();
+
+        DrawLine();
+        GUILayout.Label(_status);
+        DrawLine();
+
         GUILayout.BeginHorizontal();
         GUILayout.Label("Language name to edit: ");
         _newLanguageName = GUILayout.TextField(_newLanguageName, GUILayout.Width(200));
@@ -48,7 +55,7 @@ public class LocalisationEditLanguageWindow :EditorWindow
         _newLanguageShort = GUILayout.TextField(_newLanguageShort, GUILayout.Width(200));
         GUILayout.EndHorizontal();
 
-        GUILayout.Label(_status);
+        DrawLine();
 
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("Cancel"))
@@ -59,18 +66,37 @@ public class LocalisationEditLanguageWindow :EditorWindow
 
         if (GUILayout.Button("Save"))
         {
-            if (Localizer.Instance.EditLanguage(_language, _newLanguageName, _newLanguageShort))
+            try
             {
+                Localizer.Instance.EditLanguage(_language, _newLanguageName, _newLanguageShort);
                 Localizer.Instance.LanguageEdited -= LanguageEdited;
                 Localizer.Instance.WriteData();
                 AssetDatabase.Refresh();
                 Close();
             }
-            _status = "Could not edit the language, does the name already exist?";
+            catch(LocalisationException ex)
+            {
+                UpdateStatus(ex.Message);
+            }
         }
 
         GUILayout.EndHorizontal();
         GUILayout.EndVertical();
+    }
+
+    private void UpdateStatus(string status)
+    {
+        _status = "Status:     " + status;
+    }
+
+    private void DrawLine()
+    {
+        EditorGUILayout.Space();
+        Rect rect = EditorGUILayout.BeginHorizontal();
+        Handles.color = Color.gray;
+        Handles.DrawLine(new Vector2(rect.x - 15, rect.y), new Vector2(rect.width + 15, rect.y));
+        EditorGUILayout.EndHorizontal();
+        EditorGUILayout.Space();
     }
 
     private void LanguageEdited(LocalisationLanguage language)

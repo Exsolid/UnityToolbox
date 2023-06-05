@@ -71,6 +71,7 @@ public class LocalisationManagerWindow : EditorWindow
     private void Awake()
     {
         InitializeWindow();
+        Localizer.Instance.Initialize();
     }
 
     private void OnGUI()
@@ -122,6 +123,7 @@ public class LocalisationManagerWindow : EditorWindow
         {
             if (ResourcesUtil.TrySetValidPath(Application.dataPath + "/" + _assetPathInProject, ProjectPrefKeys.LOCALISATIONSAVEPATH))
             {
+                AssetDatabase.Refresh();
                 Localizer.Instance.Initialize();
                 if (Localizer.Instance.IsInitialized)
                 {
@@ -146,15 +148,16 @@ public class LocalisationManagerWindow : EditorWindow
         _scopeName = GUILayout.TextField(_scopeName, GUILayout.Width(200));
         if (GUILayout.Button("+", GUILayout.Width(20)))
         {
-            if (Localizer.Instance.AddScope(_scopeName))
+            try
             {
+                Localizer.Instance.AddScope(_scopeName);
                 Localizer.Instance.WriteData();
                 AssetDatabase.Refresh();
                 UpdateStatus("Successfully added a new scope.");
             }
-            else
+            catch(LocalisationException ex)
             {
-                UpdateStatus("Could not add the new scope, does it already exist?");
+                UpdateStatus(ex.Message);
             }
         }
         GUILayout.EndHorizontal();
@@ -175,12 +178,12 @@ public class LocalisationManagerWindow : EditorWindow
 
                 if (GUILayout.Button("-", GUILayout.Width(20)))
                 {
-                    if(EditorUtility.DisplayDialog("Remove Scope", "Are you sure you want to delete the scope '" + scope.Name+"'? \nIDs using this scope will have it replaced with the default scope.", "Yes"))
+                    if(EditorUtility.DisplayDialog("Remove Scope", "Are you sure you want to delete the scope \"" + scope.Name+ "\"? \nIDs using this scope will have it replaced with the default scope.", "Yes"))
                     {
                         Localizer.Instance.RemoveScope(scope);
                         Localizer.Instance.WriteData();
                         AssetDatabase.Refresh();
-                        UpdateStatus("Successfully removed the scope '" + scope.Name +"'.");
+                        UpdateStatus("Successfully removed the scope \"" + scope.Name + "\".");
                     }
                 }
             }
@@ -202,15 +205,16 @@ public class LocalisationManagerWindow : EditorWindow
 
         if (GUILayout.Button("+", GUILayout.Width(20)))
         {
-            if (Localizer.Instance.AddLanguage(_languageName, _languageShortName))
+            try
             {
+                Localizer.Instance.AddLanguage(_languageName, _languageShortName);
                 Localizer.Instance.WriteData();
                 AssetDatabase.Refresh();
                 UpdateStatus("Successfully added a new language.");
             }
-            else
+            catch(LocalisationException ex)
             {
-                UpdateStatus("Could not add the new language, does it already exist?");
+                UpdateStatus(ex.Message);
             }
         }
         GUILayout.EndHorizontal();
@@ -231,12 +235,19 @@ public class LocalisationManagerWindow : EditorWindow
 
             if (GUILayout.Button("-", GUILayout.Width(20)))
             {
-                if (EditorUtility.DisplayDialog("Remove Language", "Are you sure you want to delete the language '" + language.Name + "'? \nThis will also delete every translation associated with it!", "Yes"))
+                if (EditorUtility.DisplayDialog("Remove Language", "Are you sure you want to delete the language \"'" + language.Name + "\"? \nThis will also delete every translation associated with it!", "Yes"))
                 {
-                    Localizer.Instance.RemoveLanguage(language);
-                    Localizer.Instance.WriteData();
-                    AssetDatabase.Refresh();
-                    UpdateStatus("Successfully removed the language '" + language.Name + "'.");
+                    try
+                    {
+                        Localizer.Instance.RemoveLanguage(language);
+                        Localizer.Instance.WriteData();
+                        AssetDatabase.Refresh();
+                        UpdateStatus("Successfully removed the language \"" + language.Name + "\".");
+                    }
+                    catch(LocalisationException ex)
+                    {
+                        UpdateStatus(ex.Message);
+                    }
                 }
             }
 
@@ -248,62 +259,12 @@ public class LocalisationManagerWindow : EditorWindow
 
     private void DisplayIDsTab()
     {
-        GUILayout.BeginHorizontal();
-        _foldoutAdd = EditorGUILayout.Foldout(_foldoutAdd, "Add localisation ID");
-        GUILayout.EndHorizontal();
+        DrawLocaIDCreation();
+        DrawLocaIDList();
+    }
 
-        if (_foldoutAdd)
-        {
-            if(Localizer.Instance.LocalisationLanguages.Count != 0)
-            {
-                GUILayout.BeginHorizontal();
-                GUILayout.Label("ID: ");
-                _IDName = GUILayout.TextField(_IDName, GUILayout.Width(200));
-                GUILayout.Label(LocalisationID.DEVIDER.ToString(), GUILayout.Width(10));
-                string[] scopes = Localizer.Instance.LocalisationScopes.Select(x => x.Name).ToArray();
-                _selectedScope = EditorGUILayout.Popup("", _selectedScope, scopes);
-                if (GUILayout.Button("+", GUILayout.Width(20)))
-                {
-                    LocalisationID newID = new LocalisationID();
-                    newID.Name = _IDName;
-                    newID.Scope = Localizer.Instance.LocalisationScopes.ElementAt(_selectedScope);
-
-                    if (Localizer.Instance.AddLocalisation(newID, _newLocalisations.ToDictionary(entry => entry.Key, entry => entry.Value)))
-                    {
-                        Localizer.Instance.WriteData();
-                        AssetDatabase.Refresh();
-                        UpdateStatus("Successfully added a new localisation.");
-                    }
-                    else
-                    {
-                        UpdateStatus("Could not add the new localisation, does it already exist?");
-                    }
-                }
-                GUILayout.EndHorizontal();
-
-
-                foreach (LocalisationLanguage language in Localizer.Instance.LocalisationLanguages)
-                {
-                    GUILayout.BeginHorizontal();
-                    GUILayout.Label("Translate " + language.Name + ":");
-                    if (_newLocalisations.ContainsKey(language))
-                    {
-                        _newLocalisations[language] = GUILayout.TextField(_newLocalisations[language], GUILayout.Width(447));
-                    }
-                    else
-                    {
-                        _newLocalisations.Add(language, GUILayout.TextField("", GUILayout.Width(200)));
-                    }
-                    GUILayout.EndHorizontal();
-                }
-            }
-            else
-            {
-                GUILayout.Label("Add a language first, to be able to add new IDs.");
-            }
-        }
-        DrawLineHorizontal();
-
+    private void DrawLocaIDList()
+    {
         GUILayout.BeginHorizontal();
         _foldoutSearch = EditorGUILayout.Foldout(_foldoutSearch, "Search");
         GUILayout.EndHorizontal();
@@ -315,13 +276,14 @@ public class LocalisationManagerWindow : EditorWindow
         if (_foldoutSearch)
         {
             EditorGUILayout.BeginHorizontal();
-            _selectedLanguage = EditorGUILayout.Popup("Show Language:", _selectedLanguage, languages);
+            GUILayout.Label("Show Language:");
+            _selectedLanguage = EditorGUILayout.Popup(_selectedLanguage, languages, GUILayout.Width(400));
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.BeginHorizontal();
             GUILayout.Label("Contains:");
-            _searchIDString = EditorGUILayout.TextField(_searchIDString);
-            GUILayout.Label("in");
-            _selectedSearch = EditorGUILayout.Popup("", _selectedSearch, searchScopes);
+            _searchIDString = EditorGUILayout.TextField(_searchIDString, GUILayout.Width(200));
+            GUILayout.Label("in", GUILayout.Width(14));
+            _selectedSearch = EditorGUILayout.Popup("", _selectedSearch, searchScopes, GUILayout.Width(178));
             EditorGUILayout.EndHorizontal();
         }
 
@@ -348,7 +310,7 @@ public class LocalisationManagerWindow : EditorWindow
         {
             GUILayout.BeginHorizontal("Box");
 
-            GUILayout.Label(pair.Key.Name+LocalisationID.DEVIDER+ pair.Key.Scope.Name, GUILayout.Width(EditorGUIUtility.currentViewWidth / 3));
+            GUILayout.Label(pair.Key.GetQualifiedName(), GUILayout.Width(EditorGUIUtility.currentViewWidth / 3));
             GUILayout.Label(pair.Value.ContainsKey(Localizer.Instance.LocalisationLanguages.ElementAt(_selectedLanguage)) ? pair.Value[Localizer.Instance.LocalisationLanguages.ElementAt(_selectedLanguage)] : "", GUILayout.Width(EditorGUIUtility.currentViewWidth / 3));
             if (pair.Value.Count != Localizer.Instance.LocalisationLanguages.Count)
             {
@@ -366,18 +328,79 @@ public class LocalisationManagerWindow : EditorWindow
 
             if (GUILayout.Button("-", GUILayout.Width(20)))
             {
-                if (EditorUtility.DisplayDialog("Remove Localisation", "Are you sure you want to delete the localisation '" + pair.Key.Name + LocalisationID.DEVIDER + pair.Key.Scope.Name + "'?", "Yes"))
+                if (EditorUtility.DisplayDialog("Remove Localisation", "Are you sure you want to delete the localisation \"" + pair.Key.GetQualifiedName() + "\"?", "Yes"))
                 {
                     Localizer.Instance.RemoveLocalisation(pair.Key);
                     Localizer.Instance.WriteData();
                     AssetDatabase.Refresh();
-                    UpdateStatus("Successfully removed the scope '" + pair.Key.Name + LocalisationID.DEVIDER + pair.Key.Scope.Name + "'.");
+                    UpdateStatus("Successfully removed the scope \"" + pair.Key.GetQualifiedName() + "\".");
                 }
             }
             GUILayout.EndHorizontal();
         }
         GUILayout.EndScrollView();
         GUILayout.EndVertical();
+    }
+
+    private void DrawLocaIDCreation()
+    {
+        GUILayout.BeginHorizontal();
+        _foldoutAdd = EditorGUILayout.Foldout(_foldoutAdd, "Add localisation ID");
+        GUILayout.EndHorizontal();
+
+        if (_foldoutAdd)
+        {
+            if (Localizer.Instance.LocalisationLanguages.Count != 0)
+            {
+                GUILayout.BeginHorizontal();
+                GUILayout.Label("ID: ");
+                _IDName = GUILayout.TextField(_IDName, GUILayout.Width(189));
+                GUILayout.Label(LocalisationID.DEVIDER.ToString(), GUILayout.Width(10));
+                string[] scopes = Localizer.Instance.LocalisationScopes.Select(x => x.Name).ToArray();
+                _selectedScope = EditorGUILayout.Popup("", _selectedScope, scopes, GUILayout.Width(170));
+
+                if (GUILayout.Button("+", GUILayout.Width(20)))
+                {
+                    LocalisationID newID = new LocalisationID();
+                    newID.Name = _IDName;
+                    newID.Scope = Localizer.Instance.LocalisationScopes.ElementAt(_selectedScope);
+
+                    try
+                    {
+                        Localizer.Instance.AddLocalisation(newID, _newLocalisations.ToDictionary(entry => entry.Key, entry => entry.Value));
+                        Localizer.Instance.WriteData();
+                        AssetDatabase.Refresh();
+                        UpdateStatus("Successfully added a new localisation.");
+                    }
+                    catch(LocalisationException ex)
+                    {
+                        UpdateStatus(ex.Message);
+                    }
+                }
+                GUILayout.EndHorizontal();
+
+
+                foreach (LocalisationLanguage language in Localizer.Instance.LocalisationLanguages)
+                {
+                    GUILayout.BeginHorizontal();
+                    GUILayout.Label("Translate " + language.Name + ":");
+                    if (_newLocalisations.ContainsKey(language))
+                    {
+                        _newLocalisations[language] = GUILayout.TextField(_newLocalisations[language], GUILayout.Width(400));
+                    }
+                    else
+                    {
+                        _newLocalisations.Add(language, GUILayout.TextField("", GUILayout.Width(400)));
+                    }
+                    GUILayout.EndHorizontal();
+                }
+            }
+            else
+            {
+                GUILayout.Label("Add a language first, to be able to add new IDs.");
+            }
+        }
+        DrawLineHorizontal();
     }
 
     private void DrawLineHorizontal()

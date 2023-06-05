@@ -17,12 +17,12 @@ public class LocalisationEditIDWindow : EditorWindow
             int i = 0;
             foreach(LocalisationScope scope in Localizer.Instance.LocalisationScopes)
             {
-                i++;
                 if (scope.Equals(value.Scope))
                 {
                     _newSelectedScope = i;
                     break;
                 }
+                i++;
             }
         }
     }
@@ -38,7 +38,7 @@ public class LocalisationEditIDWindow : EditorWindow
         LocalisationEditIDWindow window = (LocalisationEditIDWindow) GetWindow(typeof(LocalisationEditIDWindow));
         window.titleContent = new GUIContent("Edit Language");
         window.ShowUtility();
-        window.minSize = new Vector2(100, 100);
+        window.minSize = new Vector2(600, 120);
         window.LocalisationID = localisationID;
     }
 
@@ -47,11 +47,16 @@ public class LocalisationEditIDWindow : EditorWindow
         Localizer.Instance.LanguageEdited += LanguageEdited;
         Localizer.Instance.ScopeEdited += ScopeEdited;
         Localizer.Instance.LocalisationIDEdited += LocalisationIDEdited;
+        UpdateStatus("");
     }
 
     public void OnGUI()
     {
         GUILayout.BeginVertical();
+        DrawLine();
+        GUILayout.Label(_status);
+        DrawLine();
+
         GUILayout.BeginHorizontal();
         GUILayout.Label("Add localisation with ID: ");
         _newIDName = GUILayout.TextField(_newIDName, GUILayout.Width(200));
@@ -74,7 +79,8 @@ public class LocalisationEditIDWindow : EditorWindow
             }
             GUILayout.EndHorizontal();
         }
-        GUILayout.Label(_status);
+
+        DrawLine();
 
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("Cancel"))
@@ -84,33 +90,35 @@ public class LocalisationEditIDWindow : EditorWindow
 
         if (GUILayout.Button("Save"))
         {
-            bool success = true;
-
-            LocalisationID newID = new LocalisationID();
-            newID.Name = _newIDName;
-            newID.Scope = Localizer.Instance.LocalisationScopes.ElementAt(_newSelectedScope);
-
-            if (!newID.Equals(_localisationID))
+            try
             {
-                if (!Localizer.Instance.EditLocalisationID(_localisationID, newID))
+                LocalisationID newID = new LocalisationID();
+                newID.Name = _newIDName;
+                newID.Scope = Localizer.Instance.LocalisationScopes.ElementAt(_newSelectedScope);
+                if (!newID.Equals(_localisationID))
                 {
-                    success = false;
-                    _status = "Could not edit the localisation ID, does the ID already exist?";
+                    Localizer.Instance.EditLocalisationID(_localisationID, newID);
                 }
-            }
 
-            Localizer.Instance.EditLocalisation(newID, _newLocalisations);
+                Localizer.Instance.EditLocalisation(newID, _newLocalisations);
 
-            if (success)
-            {
                 Localizer.Instance.WriteData();
                 AssetDatabase.Refresh();
                 Close();
+            }
+            catch(LocalisationException ex)
+            {
+                UpdateStatus(ex.Message);
             }
         }
 
         GUILayout.EndHorizontal();
         GUILayout.EndVertical();
+    }
+
+    private void UpdateStatus(string status)
+    {
+        _status = "Status:     " + status;
     }
 
     private void DrawLine()
