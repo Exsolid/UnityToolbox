@@ -21,7 +21,14 @@ public class GamestateManager : Module
 
     public void Start()
     {
-        _activeNodes = ModuleManager.GetModule<SaveGameManager>().ActiveGamestates;
+        if (ModuleManager.ModuleRegistered<SaveGameManager>())
+        {
+            _activeNodes = ModuleManager.GetModule<SaveGameManager>().ActiveGamestates;
+        }
+        else
+        {
+            _activeNodes = new HashSet<GamestateNodeData>();
+        }
         _stateNodeConnections = new Dictionary<GamestateNodeData, List<GamestateNodeData>>();
         _stateNodes = new Dictionary<string, GamestateNodeData>();
 
@@ -95,7 +102,10 @@ public class GamestateManager : Module
 
         Debug.Log("Completed gamestate \"" + node.Name + "\" and proceeded to gamestate \"" + _stateNodeConnections[node][option] + "\"");
 
-        ModuleManager.GetModule<SaveGameManager>().ActiveGamestates = _activeNodes;
+        if (ModuleManager.ModuleRegistered<SaveGameManager>())
+        {
+            ModuleManager.GetModule<SaveGameManager>().ActiveGamestates = _activeNodes;
+        }
     }
 
     private void CheckNodeValid(string stateName)

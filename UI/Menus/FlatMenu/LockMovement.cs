@@ -7,6 +7,8 @@ using UnityEngine;
 /// </summary>
 public class LockMovement : MonoBehaviour
 {
+    [SerializeField] private bool _lateUpdateUnlock;
+
     public void Awake()
     {
         GetComponentInParent<Menu>().OnActiveChanged += UpdateMovement;
@@ -15,6 +17,19 @@ public class LockMovement : MonoBehaviour
 
     private void UpdateMovement(bool active)
     {
+        if (!_lateUpdateUnlock || active)
+        {
+            ModuleManager.GetModule<PlayerEventManager>().LockMove(active);
+        }
+        else
+        {
+            StartCoroutine(LateUpdateUnlock(active));
+        }
+    }
+
+    IEnumerator LateUpdateUnlock(bool active)
+    {
+        yield return new WaitForEndOfFrame();
         ModuleManager.GetModule<PlayerEventManager>().LockMove(active);
     }
 }

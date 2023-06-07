@@ -14,6 +14,7 @@ public class FirstPersonMouseInput : InputSystemUIInputModule
     {
         var lockState = Cursor.lockState;
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = lockState.Equals(CursorLockMode.Locked) ? false : true;
         base.Process();
         Cursor.lockState = lockState;
     }

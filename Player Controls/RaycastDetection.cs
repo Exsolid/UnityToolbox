@@ -27,12 +27,19 @@ public abstract class RaycastDetection : MonoBehaviour
 
     protected bool _isBinding;
 
+    private bool _inputLocked;
+
     public void Start()
     {
         _tooltipEnabled = true;
         ModuleManager.GetModule<UIEventManager>().OnBindingKey += (isSetting) =>
         {
             _isBinding = isSetting;
+        };
+
+        ModuleManager.GetModule<PlayerEventManager>().OnLockMove += (isLocked) =>
+        {
+            _inputLocked = isLocked;
         };
     }
 
@@ -58,7 +65,7 @@ public abstract class RaycastDetection : MonoBehaviour
                 ModuleManager.GetModule<TooltipManager>().UpdateTooltip("", "", this);
             }
 
-            if (_input != null && _input.actions[_interactActionName].triggered && !_isBinding)
+            if (_input != null && _input.actions[_interactActionName].triggered && !_isBinding && !_inputLocked)
             {
                 if(_raycastHit.collider != null)
                 {

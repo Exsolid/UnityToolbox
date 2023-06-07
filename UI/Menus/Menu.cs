@@ -17,7 +17,7 @@ public class Menu : MonoBehaviour
         } 
     }
 
-    private bool _isActive;
+    [SerializeField] [ReadOnly] private bool _isActive;
 
     public event Action<bool> OnActiveChanged;
 

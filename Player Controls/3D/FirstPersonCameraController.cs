@@ -27,6 +27,8 @@ public class FirstPersonCameraController : MonoBehaviour
 
     [SerializeField] private bool _lockRotation;
 
+    private Quaternion _initialRotation;
+
     private Vector2 _rotation = Vector2.zero;
     // Start is called before the first frame update
     void Start()
@@ -45,6 +47,8 @@ public class FirstPersonCameraController : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        _initialRotation = _camera.transform.rotation;
     }
 
     private void Update()
@@ -77,7 +81,7 @@ public class FirstPersonCameraController : MonoBehaviour
 
             if (_maxHorizontalAngle != -1)
             {
-                _rotation.x = Mathf.Clamp(_rotation.x, -_maxHorizontalAngle, _maxHorizontalAngle);
+                _rotation.x = Mathf.Clamp(_rotation.x, -_maxHorizontalAngle + _initialRotation.eulerAngles.y, _maxHorizontalAngle + _initialRotation.eulerAngles.y);
             }
 
             var xQuat = Quaternion.AngleAxis(_rotation.x, Vector3.up);
@@ -91,7 +95,7 @@ public class FirstPersonCameraController : MonoBehaviour
 
             if (_maxHorizontalAngle != -1)
             {
-                _rotation.x = Mathf.Clamp(_rotation.x, -_maxHorizontalAngle, _maxHorizontalAngle);
+                _rotation.x = Mathf.Clamp(_rotation.x, -_maxHorizontalAngle + _initialRotation.eulerAngles.y, _maxHorizontalAngle + _initialRotation.eulerAngles.y);
             }
 
             Quaternion xQuat = Quaternion.AngleAxis(_rotation.x, Vector3.up);
@@ -114,7 +118,7 @@ public class FirstPersonCameraController : MonoBehaviour
     private void UpdateMovementLock(bool locked)
     {
         _lockRotation = locked;
-        Cursor.lockState = locked ? CursorLockMode.Locked : CursorLockMode.Confined;
+        Cursor.lockState = locked ? CursorLockMode.Confined : CursorLockMode.Locked;
         Cursor.visible = !locked;
     }
 
