@@ -50,6 +50,7 @@ public class DialogGraphPathSelectionWindow : EditorWindow
         {
             if (ResourcesUtil.TrySetValidPath(Application.dataPath + "/" + _assetPathInProject, ProjectPrefKeys.DIALOGSAVEPATH))
             {
+                AssetDatabase.Refresh();
                 _graph.UpdateData();
                 this.Close();
             }
