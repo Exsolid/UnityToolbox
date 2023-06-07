@@ -13,7 +13,6 @@ public class MenuManager : Module, ISerializationCallbackReceiver
 {
     [SerializeField] private List<MenuType> _menuList;
     [SerializeField] private List<string> _menuTypes;
-    public List<string> MenuTypes;
 
     /// <summary>
     /// All menu types defined by the manager.
@@ -170,6 +169,11 @@ public class MenuManager : Module, ISerializationCallbackReceiver
 
     private void OnValidate()
     {
+        if(_menuTypes == null)
+        {
+            return;
+        }
+
         if (!_menuTypes.Contains(NONETYPENAME))
         {
             _menuTypes.Insert(0, NONETYPENAME);
