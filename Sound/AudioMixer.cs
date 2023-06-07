@@ -100,7 +100,7 @@ public class AudioMixer : MonoBehaviour
 
     private void FadeEnd()
     {
-        if(_audioSource.clip == null)
+        if(!_fadeOut)
         {
             return;
         }
