@@ -94,8 +94,6 @@ public class FirstPersonCameraController : MonoBehaviour
                 _rotation.x = Mathf.Clamp(_rotation.x, -_maxHorizontalAngle, _maxHorizontalAngle);
             }
 
-            Debug.Log(_rotation);
-
             Quaternion xQuat = Quaternion.AngleAxis(_rotation.x, Vector3.up);
             Quaternion yQuat = Quaternion.AngleAxis(_rotation.y, Vector3.left);
 
