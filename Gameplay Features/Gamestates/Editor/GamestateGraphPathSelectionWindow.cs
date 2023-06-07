@@ -50,6 +50,7 @@ public class GamestateGraphPathSelectionWindow : EditorWindow
         {
             if (ResourcesUtil.TrySetValidPath(Application.dataPath + "/" + _assetPathInProject, ProjectPrefKeys.GAMESTATEDATASAVEPATH))
             {
+                AssetDatabase.Refresh();
                 _graph.UpdateData();
                 this.Close();
             }
