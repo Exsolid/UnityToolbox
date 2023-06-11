@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class TooltipManager : Module
 {
     [SerializeField] private Text _tooltipText;
+    [SerializeField] private List<Image> _tooltipBackgrounds;
     private Object _callContext;
     // Start is called before the first frame update
     void Start()
@@ -18,6 +19,11 @@ public class TooltipManager : Module
             _tooltipText = GetComponent<Text>();
         } 
         _tooltipText.text = "";
+        
+        foreach(Image image in _tooltipBackgrounds)
+        {
+            image.enabled = false;
+        }
     }
 
     /// <summary>
@@ -39,10 +45,21 @@ public class TooltipManager : Module
             {
                 _tooltipText.text = text;
             }
+
+            foreach (Image image in _tooltipBackgrounds)
+            {
+                image.enabled = true;
+            }
         }
         else if (callContext.Equals(_callContext))
         {
             _callContext = null;
+
+            foreach (Image image in _tooltipBackgrounds)
+            {
+                image.enabled = false;
+            }
+
             _tooltipText.text = "";
         }
     }

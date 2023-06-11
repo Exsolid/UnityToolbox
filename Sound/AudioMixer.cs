@@ -17,6 +17,12 @@ public class AudioMixer : MonoBehaviour
         set { _isPassive = value; }
     }
 
+    private bool _isPlaying;
+    public bool IsPlaying
+    {
+        get { return _isPlaying; }
+    }
+
     [SerializeField] private bool _fadeIn;
     [SerializeField] private bool _fadeOut;
 
@@ -59,6 +65,7 @@ public class AudioMixer : MonoBehaviour
     private void Update()
     {
         FadeEnd();
+        _isPlaying = _audioSource.isPlaying;
         if (_isPassive)
         {
             return;
@@ -81,6 +88,7 @@ public class AudioMixer : MonoBehaviour
     /// </summary>
     public void PlayRandomSource()
     {
+        _isPlaying = true;
         _internalPause = false;
         float randomSelected = UnityEngine.Random.Range(0, _totalProbability);
         AudioMixerItem item = _items.Where(a => a.CountedProbability > randomSelected).FirstOrDefault();
@@ -100,7 +108,7 @@ public class AudioMixer : MonoBehaviour
 
     private void FadeEnd()
     {
-        if(!_fadeOut)
+        if(!_fadeOut || _audioSource.clip == null)
         {
             return;
         }
@@ -109,8 +117,12 @@ public class AudioMixer : MonoBehaviour
         {
             foreach (Coroutine c in _coroutines)
             {
-                StopCoroutine(c);
+                if (c != null)
+                {
+                    StopCoroutine(c);
+                }
             }
+            _coroutines.Clear();
             _coroutines.Add(StartCoroutine(FadeOut()));
         }
     }
@@ -132,8 +144,12 @@ public class AudioMixer : MonoBehaviour
         float value = PlayerPrefs.HasKey(ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.MUSIC_VOLUME)) ? PlayerPrefs.GetFloat(ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.MUSIC_VOLUME)) : 0.5f;
         foreach (Coroutine c in _coroutines)
         {
-            StopCoroutine(c);
+            if(c != null)
+            {
+                StopCoroutine(c);
+            }
         }
+        _coroutines.Clear();
         _coroutines.Add(StartCoroutine(FadeIn(value)));
     }
 
