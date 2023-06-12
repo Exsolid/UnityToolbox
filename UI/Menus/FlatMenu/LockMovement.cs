@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class LockMovement : MonoBehaviour
 {
-    [SerializeField] private bool _lateUpdateUnlock;
+    [SerializeField] private bool _lateUpdateLocking;
 
     public void Awake()
     {
@@ -17,7 +17,7 @@ public class LockMovement : MonoBehaviour
 
     private void UpdateMovement(bool active)
     {
-        if (!_lateUpdateUnlock || active)
+        if (!_lateUpdateLocking)
         {
             ModuleManager.GetModule<PlayerEventManager>().LockMove(active);
         }

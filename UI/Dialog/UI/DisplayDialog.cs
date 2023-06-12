@@ -92,7 +92,7 @@ public class DisplayDialog : MonoBehaviour
                 _title.text = currentNode.Title;
             }
 
-            if (_titleBackground != null)
+            if (_titleBackground != null && _title != null && !_title.text.Trim().Equals(""))
             {
                 _titleBackground.enabled = true;
             }
