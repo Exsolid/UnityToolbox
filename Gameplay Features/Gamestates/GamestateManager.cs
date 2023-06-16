@@ -19,6 +19,11 @@ public class GamestateManager : Module
 
     private GamestateNodeData _startNode;
 
+    /// <summary>
+    /// An event which is triggered once the gamestate with the given string ID is completed;
+    /// </summary>
+    public event Action<string> OnGamestateCompleted;
+
     public void Start()
     {
         if (ModuleManager.ModuleRegistered<SaveGameManager>())
@@ -100,7 +105,8 @@ public class GamestateManager : Module
         _activeNodes.Remove(node);
         _activeNodes.Add(_stateNodeConnections[node][option]);
 
-        Debug.Log("Completed gamestate \"" + node.Name + "\" and proceeded to gamestate \"" + _stateNodeConnections[node][option] + "\"");
+        Debug.Log("Completed gamestate \"" + node.Name + "\" and proceeded to gamestate \"" + _stateNodeConnections[node][option].Name + "\"");
+        OnGamestateCompleted?.Invoke(node.Name);
 
         if (ModuleManager.ModuleRegistered<SaveGameManager>())
         {

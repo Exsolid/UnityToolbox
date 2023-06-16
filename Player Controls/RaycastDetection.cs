@@ -10,9 +10,9 @@ using System.Linq;
 public abstract class RaycastDetection : MonoBehaviour
 {
     [SerializeField] private bool _is2D;
-    [SerializeField] private string _tooltip; //Todo loca?
+    [SerializeField] protected string _tooltip; //Todo loca?
     protected string _appendedTooltip; //Todo loca?
-    [SerializeField] private string _interactActionName;
+    [SerializeField] protected string _interactActionName;
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] private Transform _raycastLocation;
     [SerializeField] protected PlayerInput _input;
