@@ -53,9 +53,12 @@ public class FirstPersonCameraController : MonoBehaviour
 
     private void Update()
     {
-        Vector2 mouse = _input.actions[_viewActionName].ReadValue<Vector2>();
-        _rotation.x += mouse.x * _mouseSensitivityUpdated * Time.deltaTime * 2;
-        _rotation.y += mouse.y * _mouseSensitivityUpdated * Time.deltaTime * 2;
+        if (!_lockRotation)
+        {
+            Vector2 mouse = _input.actions[_viewActionName].ReadValue<Vector2>();
+            _rotation.x += mouse.x * _mouseSensitivityUpdated * Time.deltaTime * 2;
+            _rotation.y += mouse.y * _mouseSensitivityUpdated * Time.deltaTime * 2;
+        }
     }
 
     // Update is called once per frame
@@ -77,7 +80,7 @@ public class FirstPersonCameraController : MonoBehaviour
     {
         if (_playerToRotateInstead == null)
         {
-            _rotation.y = Mathf.Clamp(_rotation.y, -_maxVerticalAngle, _maxVerticalAngle);
+            _rotation.y = Mathf.Clamp(_rotation.y, -_maxVerticalAngle - _initialRotation.eulerAngles.x, _maxVerticalAngle - _initialRotation.eulerAngles.x);
 
             if (_maxHorizontalAngle != -1)
             {
@@ -91,7 +94,7 @@ public class FirstPersonCameraController : MonoBehaviour
         }
         else
         {
-            _rotation.y = Mathf.Clamp(_rotation.y, -_maxVerticalAngle, _maxVerticalAngle);
+            _rotation.y = Mathf.Clamp(_rotation.y, -_maxVerticalAngle - _initialRotation.eulerAngles.x, _maxVerticalAngle - _initialRotation.eulerAngles.x);
 
             if (_maxHorizontalAngle != -1)
             {
