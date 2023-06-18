@@ -14,7 +14,7 @@ public abstract class RaycastDetection : MonoBehaviour
     protected string _appendedTooltip; //Todo loca?
     [SerializeField] protected string _interactActionName;
     [SerializeField] private LayerMask _layerMask;
-    [SerializeField] private Transform _raycastLocation;
+    [SerializeField] protected Transform _raycastLocation;
     [SerializeField] protected PlayerInput _input;
     [SerializeField] private float _maxDistance = 2;
     /// <summary>
