@@ -131,6 +131,12 @@ public abstract class MovementBase : MonoBehaviour
         get { return _climbing; }
     }
 
+    protected bool _isToggledMoving;
+    public bool IsToggledMoving
+    {
+        get { return _isToggledMoving; }
+    }
+
     private void Awake()
     {
         if(ModuleManager.GetModule<PlayerEventManager>() != null)
@@ -155,9 +161,13 @@ public abstract class MovementBase : MonoBehaviour
         {
             _currentMovementState = MovementState.Jumping;
         }
-        else
+        else if(!_isToggledMoving)
         {
             _currentMovementState = MovementState.Moving;
+        }
+        else
+        {
+            _currentMovementState = MovementState.ToggleMoving;
         }
     }
 
@@ -184,6 +194,7 @@ public abstract class MovementBase : MonoBehaviour
 
 public enum MovementState{
     Moving,
+    ToggleMoving,
     Climbing,
     Jumping
 }

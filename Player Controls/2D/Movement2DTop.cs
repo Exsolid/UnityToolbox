@@ -18,11 +18,13 @@ public class Movement2DTop : MovementBase
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _grounded = true;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        _isToggledMoving = _input.actions[_toggleSpeedActionName].IsPressed();
         UpdateMovementState();
 
         if (!_isMovementLocked)
@@ -51,7 +53,7 @@ public class Movement2DTop : MovementBase
 
     public override void Move(Vector3 direction)
     {
-        if (_input.actions[_toggleSpeedActionName].IsPressed())
+        if (_isToggledMoving)
         {
             _rb.AddForce(new Vector3(direction.x * _toggledSpeed,
                 direction.y * _toggledSpeed));
