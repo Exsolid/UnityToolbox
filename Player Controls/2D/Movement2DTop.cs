@@ -13,12 +13,14 @@ public class Movement2DTop : MovementBase
     private Rigidbody2D _rb;
     [SerializeField] private bool _rotateToMouse;
     [SerializeField] private float _turnSpeed;
+    private Quaternion _baseRotation;
 
     // Start is called before the first frame update
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _grounded = true;
+        _baseRotation = transform.rotation;
     }
 
     // Update is called once per frame
@@ -45,7 +47,7 @@ public class Movement2DTop : MovementBase
         Vector3 goal = _camera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         goal.z = transform.position.z;
 
-        Vector3 rotatedVectorToTarget = Quaternion.Euler(0, 0, 90) * (goal - transform.position);
+        Vector3 rotatedVectorToTarget = Quaternion.Euler(0, 0, _baseRotation.eulerAngles.z) * (goal - transform.position);
 
         Quaternion rotation = Quaternion.LookRotation(Vector3.forward, rotatedVectorToTarget);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, _turnSpeed * Time.deltaTime);
