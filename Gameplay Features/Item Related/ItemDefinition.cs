@@ -42,45 +42,45 @@ namespace UnityToolbox.Item {
         /// </summary>
         public void Deserialize()
         {
-            if(IconPath != null && !IconPath.Trim().Equals(""))
-            {
-                Icon = (Texture2D) Resources.Load(IconPath);
-                if (Icon == null)
-                {
-                    string newPath = Path.ChangeExtension(AssetDatabase.GUIDToAssetPath(IconGUID), null).Split("Resources/").Last();
-                    Icon = (Texture2D)Resources.Load(newPath);
-                    if(Icon != null)
-                    {
-                        IconPath = newPath;
-                    }
-                    else
-                    {
-                        throw new SystemException("The deserialized " + nameof(ItemDefinition) + " \"" + Name + "\" does not contain an icon. Was it moved or deleted?");
-                    }
-                }
-            }
+            //if(IconPath != null && !IconPath.Trim().Equals(""))
+            //{
+            //    Icon = (Texture2D) Resources.Load(IconPath);
+            //    if (Icon == null)
+            //    {
+            //        string newPath = Path.ChangeExtension(AssetDatabase.GUIDToAssetPath(IconGUID), null).Split("Resources/").Last();
+            //        Icon = (Texture2D)Resources.Load(newPath);
+            //        if(Icon != null)
+            //        {
+            //            IconPath = newPath;
+            //        }
+            //        else
+            //        {
+            //            throw new SystemException("The deserialized " + nameof(ItemDefinition) + " \"" + Name + "\" does not contain an icon. Was it moved or deleted?");
+            //        }
+            //    }
+            //}
 
-            if(PrefabPath != null && !PrefabPath.Trim().Equals(""))
-            {
-                Prefab = (GameObject) Resources.Load(PrefabPath);
-                if(Prefab == null)
-                {
-                    string newPath = Path.ChangeExtension(AssetDatabase.GUIDToAssetPath(PrefabGUID), null).Split("Resources/").Last();
-                    Prefab = (GameObject) Resources.Load(newPath);
-                    if (Prefab != null)
-                    {
-                        PrefabPath = newPath;
-                    }
-                    else
-                    {
-                        throw new SystemException("The deserialized " + nameof(ItemDefinition) + " \"" + Name + "\" does not contain a prefab. Was it moved or deleted?");
-                    }
-                }
-            }
-            else
-            {
-                throw new SystemException("The deserialized " + nameof(ItemDefinition) + " \"" + Name + "\" does not contain a prefab. It cannot be instantiated this way.");
-            }
+            //if(PrefabPath != null && !PrefabPath.Trim().Equals(""))
+            //{
+            //    Prefab = (GameObject) Resources.Load(PrefabPath);
+            //    if(Prefab == null)
+            //    {
+            //        string newPath = Path.ChangeExtension(AssetDatabase.GUIDToAssetPath(PrefabGUID), null).Split("Resources/").Last();
+            //        Prefab = (GameObject) Resources.Load(newPath);
+            //        if (Prefab != null)
+            //        {
+            //            PrefabPath = newPath;
+            //        }
+            //        else
+            //        {
+            //            throw new SystemException("The deserialized " + nameof(ItemDefinition) + " \"" + Name + "\" does not contain a prefab. Was it moved or deleted?");
+            //        }
+            //    }
+            //}
+            //else
+            //{
+            //    throw new SystemException("The deserialized " + nameof(ItemDefinition) + " \"" + Name + "\" does not contain a prefab. It cannot be instantiated this way.");
+            //}
         }
 
         /// <summary>

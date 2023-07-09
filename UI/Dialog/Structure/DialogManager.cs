@@ -34,8 +34,8 @@ public class DialogManager : Module
             foreach (DialogNodeData node in nodes)
             {
                 _dialogNodes.Add(node, new List<DialogNodeData>());
-
-                node.Avatar = Resources.Load(node.AvatarReference.Split("Resources/").Last()) as Texture2D;
+                string s = System.IO.Path.ChangeExtension(node.AvatarReference, null).Split("Resources/").Last();
+                node.Avatar = Resources.Load(s) as Texture2D;
                 
                 if (node.DialogIndentifier != null && !node.DialogIndentifier.Trim().Equals(""))
                 {
