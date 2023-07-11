@@ -45,6 +45,8 @@ namespace UnityToolbox.Item.Management
 
         private string _status;
 
+        private bool _waitReinitForRepaint;
+
         private ItemDefinitionErrorWindow _errorWindow;
 
         [MenuItem("UnityToolbox/Item Manager")]
@@ -86,6 +88,8 @@ namespace UnityToolbox.Item.Management
             }
             SetupListsForItemType(_itemDefinitionTypes[_selectedType]);
             UpdateStatus("");
+
+            FixFaultyItemsByGUID();
         }
 
         private void Awake()
@@ -113,7 +117,7 @@ namespace UnityToolbox.Item.Management
 
                     UpdateStatus("Fix the faulty ItemDefinitions first!");
                 }
-                else if(_errorWindow == null)
+                else if (_errorWindow == null)
                 {
                     _selectedTab = GUILayout.Toolbar(_selectedTab, new string[] { "Items", "Scopes", "Settings" });
                     DrawLineHorizontal();
@@ -137,6 +141,105 @@ namespace UnityToolbox.Item.Management
             }
 
             GUILayout.EndVertical();
+        }
+
+        private void FixFaultyItemsByGUID()
+        {
+            foreach (ItemDefinition def in Itemizer.Instance.FaultyItemDefinitions)
+            {
+                bool prefabCorrect = false;
+                bool iconCorrect = false;
+                if (def.Prefab == null && def.PrefabPath != null && !def.PrefabPath.Equals(""))
+                {
+                    string newPath = Path.ChangeExtension(AssetDatabase.GUIDToAssetPath(def.PrefabGUID), null).Split("Resources/").Last();
+                    def.Prefab = (GameObject)Resources.Load(newPath);
+                    if (def.Prefab != null)
+                    {
+                        def.PrefabPath = newPath;
+                        prefabCorrect = true;
+                    }
+                }
+                else
+                {
+                    prefabCorrect = true;
+                }
+
+                if (def.Icon == null && def.IconPath != null && !def.IconPath.Equals(""))
+                {
+                    string newPath = Path.ChangeExtension(AssetDatabase.GUIDToAssetPath(def.IconGUID), null).Split("Resources/").Last();
+                    def.Icon = (Texture2D)Resources.Load(newPath);
+                    if (def.Icon != null)
+                    {
+                        def.IconPath = newPath;
+                        iconCorrect = true;
+                    }
+                }
+                else
+                {
+                    iconCorrect = true;
+                }
+
+                if (iconCorrect && prefabCorrect)
+                {
+                    try
+                    {
+                        if (def.GetType().Equals(typeof(ItemDefinition)))
+                        {
+                            Itemizer.Instance.EditItemDefinition(def, def.Scope, def.Name, def.MaxStackCount,
+                                def.IconPath, def.PrefabPath, def.IconGUID, def.PrefabGUID);
+                        }
+                        else
+                        {
+                            HashSet<ItemField> itemFields = new HashSet<ItemField>();
+                            foreach (FieldInfo field in def.GetType().GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly))
+                            {
+                                if (field.FieldType.Equals(typeof(int)))
+                                {
+                                    itemFields.Add(new ItemField(field.Name, (int)field.GetValue(def)));
+                                }
+                                else if (field.FieldType.Equals(typeof(float)))
+                                {
+                                    itemFields.Add(new ItemField(field.Name, (float)field.GetValue(def)));
+                                }
+                                else if (field.FieldType.Equals(typeof(bool)))
+                                {
+                                    itemFields.Add(new ItemField(field.Name, (bool)field.GetValue(def)));
+                                }
+                                else if (field.FieldType.Equals(typeof(string)))
+                                {
+                                    itemFields.Add(new ItemField(field.Name, (string)field.GetValue(def)));
+                                }
+                            }
+                            object[] paramArray = new object[]
+                            {def, def.Scope, def.Name, def.MaxStackCount,
+                                def.IconPath, def.PrefabPath, def.IconGUID, def.PrefabGUID,
+                            itemFields
+                            };
+
+                            MethodInfo info = typeof(Itemizer).GetMethod(nameof(Itemizer.EditInheritedItemDefinition)).MakeGenericMethod(new Type[] { def.GetType() });
+                            info.Invoke(Itemizer.Instance, paramArray);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        if (e.InnerException != null && e.InnerException.GetType().Equals(typeof(ItemDefinitionException)))
+                        {
+                            UpdateStatus(e.InnerException.Message);
+                        }
+                        else if (e.GetType().Equals(typeof(ItemDefinitionException)))
+                        {
+                            UpdateStatus(e.Message);
+                        }
+                        else
+                        {
+                            throw e;
+                        }
+                    }
+
+                    Itemizer.Instance.WriteData();
+                    AssetDatabase.Refresh();
+                }
+            }
         }
 
         private void DisplaySettingsTab()
@@ -522,7 +625,7 @@ namespace UnityToolbox.Item.Management
                 }
                 catch (Exception e)
                 {
-                    if(e.InnerException != null && e.InnerException.GetType().Equals(typeof(ItemDefinitionException)))
+                    if (e.InnerException != null && e.InnerException.GetType().Equals(typeof(ItemDefinitionException)))
                     {
                         UpdateStatus(e.InnerException.Message);
                     }
