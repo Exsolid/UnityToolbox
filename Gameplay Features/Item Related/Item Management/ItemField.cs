@@ -63,7 +63,7 @@ namespace UnityToolbox.Item.Management
         /// Returns the value of the field. The type is equal to the <see cref="FieldType"/>.
         /// </summary>
         /// <returns></returns>
-        public dynamic GetValue()
+        public object GetValue()
         {
             if (_fieldType.Equals(typeof(int)))
             {

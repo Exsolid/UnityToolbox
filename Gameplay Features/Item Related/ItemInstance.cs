@@ -66,7 +66,7 @@ namespace UnityToolbox.Item
             set { _itemFields = value; }
         }
 
-        public dynamic GetValueForField(string fieldName)
+        public object GetValueForField(string fieldName)
         {
             if (_itemFields == null)
             {
