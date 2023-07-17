@@ -1,19 +1,36 @@
 var annotated_dup =
 [
-    [ "Item", "namespace_item.html", [
-      [ "Management", "namespace_item_1_1_management.html", [
-        [ "ItemDefinitionDrawer", "class_item_1_1_management_1_1_item_definition_drawer.html", "class_item_1_1_management_1_1_item_definition_drawer" ],
-        [ "ItemDefinitionEditWindow", "class_item_1_1_management_1_1_item_definition_edit_window.html", "class_item_1_1_management_1_1_item_definition_edit_window" ],
-        [ "ItemDefinitionSelectionWindow", "class_item_1_1_management_1_1_item_definition_selection_window.html", "class_item_1_1_management_1_1_item_definition_selection_window" ],
-        [ "ItemField", "class_item_1_1_management_1_1_item_field.html", "class_item_1_1_management_1_1_item_field" ],
-        [ "Itemizer", "class_item_1_1_management_1_1_itemizer.html", "class_item_1_1_management_1_1_itemizer" ],
-        [ "ItemManagerWindow", "class_item_1_1_management_1_1_item_manager_window.html", "class_item_1_1_management_1_1_item_manager_window" ],
-        [ "ItemScope", "class_item_1_1_management_1_1_item_scope.html", "class_item_1_1_management_1_1_item_scope" ],
-        [ "ItemScopeEditWindow", "class_item_1_1_management_1_1_item_scope_edit_window.html", "class_item_1_1_management_1_1_item_scope_edit_window" ]
+    [ "UnityToolbox", "namespace_unity_toolbox.html", [
+      [ "Achievments", "namespace_unity_toolbox_1_1_achievments.html", [
+        [ "AchievementData", "class_unity_toolbox_1_1_achievments_1_1_achievement_data.html", "class_unity_toolbox_1_1_achievments_1_1_achievement_data" ],
+        [ "AchievementDataEditor", "class_unity_toolbox_1_1_achievments_1_1_achievement_data_editor.html", "class_unity_toolbox_1_1_achievments_1_1_achievement_data_editor" ],
+        [ "AchievementEvent", "class_unity_toolbox_1_1_achievments_1_1_achievement_event.html", null ],
+        [ "AchievementManager", "class_unity_toolbox_1_1_achievments_1_1_achievement_manager.html", "class_unity_toolbox_1_1_achievments_1_1_achievement_manager" ],
+        [ "AchievementManagerEditor", "class_unity_toolbox_1_1_achievments_1_1_achievement_manager_editor.html", "class_unity_toolbox_1_1_achievments_1_1_achievement_manager_editor" ],
+        [ "AchievementTrigger", "class_unity_toolbox_1_1_achievments_1_1_achievement_trigger.html", null ]
       ] ],
-      [ "ItemDefinition", "class_item_1_1_item_definition.html", "class_item_1_1_item_definition" ],
-      [ "ItemInstance", "class_item_1_1_item_instance.html", "class_item_1_1_item_instance" ],
-      [ "ItemManager", "class_item_1_1_item_manager.html", "class_item_1_1_item_manager" ]
+      [ "Events", "namespace_unity_toolbox_1_1_events.html", [
+        [ "EventAggregator", "class_unity_toolbox_1_1_events_1_1_event_aggregator.html", "class_unity_toolbox_1_1_events_1_1_event_aggregator" ],
+        [ "PubSubEvent", "class_unity_toolbox_1_1_events_1_1_pub_sub_event.html", "class_unity_toolbox_1_1_events_1_1_pub_sub_event" ],
+        [ "PubSubEventBase", "class_unity_toolbox_1_1_events_1_1_pub_sub_event_base.html", null ]
+      ] ],
+      [ "Item", "namespace_unity_toolbox_1_1_item.html", [
+        [ "Management", "namespace_unity_toolbox_1_1_item_1_1_management.html", [
+          [ "ItemDefinitionDrawer", "class_unity_toolbox_1_1_item_1_1_management_1_1_item_definition_drawer.html", "class_unity_toolbox_1_1_item_1_1_management_1_1_item_definition_drawer" ],
+          [ "ItemDefinitionEditWindow", "class_unity_toolbox_1_1_item_1_1_management_1_1_item_definition_edit_window.html", "class_unity_toolbox_1_1_item_1_1_management_1_1_item_definition_edit_window" ],
+          [ "ItemDefinitionErrorWindow", "class_unity_toolbox_1_1_item_1_1_management_1_1_item_definition_error_window.html", "class_unity_toolbox_1_1_item_1_1_management_1_1_item_definition_error_window" ],
+          [ "ItemDefinitionException", "class_unity_toolbox_1_1_item_1_1_management_1_1_item_definition_exception.html", "class_unity_toolbox_1_1_item_1_1_management_1_1_item_definition_exception" ],
+          [ "ItemDefinitionSelectionWindow", "class_unity_toolbox_1_1_item_1_1_management_1_1_item_definition_selection_window.html", "class_unity_toolbox_1_1_item_1_1_management_1_1_item_definition_selection_window" ],
+          [ "ItemField", "class_unity_toolbox_1_1_item_1_1_management_1_1_item_field.html", "class_unity_toolbox_1_1_item_1_1_management_1_1_item_field" ],
+          [ "Itemizer", "class_unity_toolbox_1_1_item_1_1_management_1_1_itemizer.html", "class_unity_toolbox_1_1_item_1_1_management_1_1_itemizer" ],
+          [ "ItemManagerWindow", "class_unity_toolbox_1_1_item_1_1_management_1_1_item_manager_window.html", "class_unity_toolbox_1_1_item_1_1_management_1_1_item_manager_window" ],
+          [ "ItemScope", "class_unity_toolbox_1_1_item_1_1_management_1_1_item_scope.html", "class_unity_toolbox_1_1_item_1_1_management_1_1_item_scope" ],
+          [ "ItemScopeEditWindow", "class_unity_toolbox_1_1_item_1_1_management_1_1_item_scope_edit_window.html", "class_unity_toolbox_1_1_item_1_1_management_1_1_item_scope_edit_window" ]
+        ] ],
+        [ "ItemDefinition", "class_unity_toolbox_1_1_item_1_1_item_definition.html", "class_unity_toolbox_1_1_item_1_1_item_definition" ],
+        [ "ItemInstance", "class_unity_toolbox_1_1_item_1_1_item_instance.html", "class_unity_toolbox_1_1_item_1_1_item_instance" ],
+        [ "ItemManager", "class_unity_toolbox_1_1_item_1_1_item_manager.html", "class_unity_toolbox_1_1_item_1_1_item_manager" ]
+      ] ]
     ] ],
     [ "AudioMixer", "class_audio_mixer.html", "class_audio_mixer" ],
     [ "AudioMixerItem", "class_audio_mixer_item.html", "class_audio_mixer_item" ],
@@ -29,6 +46,8 @@ var annotated_dup =
     [ "DialogNodeData", "class_dialog_node_data.html", "class_dialog_node_data" ],
     [ "DisableMenuControl", "class_disable_menu_control.html", "class_disable_menu_control" ],
     [ "DisplayDialog", "class_display_dialog.html", "class_display_dialog" ],
+    [ "DontDestroyManager", "class_dont_destroy_manager.html", "class_dont_destroy_manager" ],
+    [ "DontDestroyObject", "class_dont_destroy_object.html", "class_dont_destroy_object" ],
     [ "DropDownAttribute", "class_drop_down_attribute.html", "class_drop_down_attribute" ],
     [ "DropDownDrawer", "class_drop_down_drawer.html", "class_drop_down_drawer" ],
     [ "FirstPersonCameraController", "class_first_person_camera_controller.html", "class_first_person_camera_controller" ],
@@ -60,6 +79,7 @@ var annotated_dup =
     [ "LocalisationEditIDWindow", "class_localisation_edit_i_d_window.html", "class_localisation_edit_i_d_window" ],
     [ "LocalisationEditLanguageWindow", "class_localisation_edit_language_window.html", "class_localisation_edit_language_window" ],
     [ "LocalisationEditScopeWindow", "class_localisation_edit_scope_window.html", "class_localisation_edit_scope_window" ],
+    [ "LocalisationException", "class_localisation_exception.html", "class_localisation_exception" ],
     [ "LocalisationID", "struct_localisation_i_d.html", "struct_localisation_i_d" ],
     [ "LocalisationLanguage", "struct_localisation_language.html", "struct_localisation_language" ],
     [ "LocalisationManagerWindow", "class_localisation_manager_window.html", "class_localisation_manager_window" ],
@@ -89,7 +109,7 @@ var annotated_dup =
     [ "PlayerPrefKeys", "class_player_pref_keys.html", "class_player_pref_keys" ],
     [ "ProjectPrefs", "class_project_prefs.html", null ],
     [ "QuitButton", "class_quit_button.html", "class_quit_button" ],
-    [ "RaycastInteraction", "class_raycast_interaction.html", "class_raycast_interaction" ],
+    [ "RaycastDetection", "class_raycast_detection.html", "class_raycast_detection" ],
     [ "ReadOnlyAttribute", "class_read_only_attribute.html", null ],
     [ "ReadOnlyDrawer", "class_read_only_drawer.html", "class_read_only_drawer" ],
     [ "RebindButton", "class_rebind_button.html", "class_rebind_button" ],
@@ -105,6 +125,7 @@ var annotated_dup =
     [ "SimpleCameraFollow", "class_simple_camera_follow.html", "class_simple_camera_follow" ],
     [ "SliderSetting", "class_slider_setting.html", "class_slider_setting" ],
     [ "StartDialogInteraction", "class_start_dialog_interaction.html", "class_start_dialog_interaction" ],
+    [ "SubscriptionToken", "struct_subscription_token.html", "struct_subscription_token" ],
     [ "SwapOnHover", "class_swap_on_hover.html", "class_swap_on_hover" ],
     [ "TerrainDecoration", "class_terrain_decoration.html", "class_terrain_decoration" ],
     [ "TerrainDecorationAnchorObject", "class_terrain_decoration_anchor_object.html", "class_terrain_decoration_anchor_object" ],
@@ -125,6 +146,7 @@ var annotated_dup =
     [ "ToolboxPathLocalizer", "class_toolbox_path_localizer.html", null ],
     [ "TooltipManager", "class_tooltip_manager.html", "class_tooltip_manager" ],
     [ "TransformData", "class_transform_data.html", "class_transform_data" ],
+    [ "TriggerDetection", "class_trigger_detection.html", "class_trigger_detection" ],
     [ "UIEventManager", "class_u_i_event_manager.html", "class_u_i_event_manager" ],
     [ "VectorData", "class_vector_data.html", "class_vector_data" ]
 ];

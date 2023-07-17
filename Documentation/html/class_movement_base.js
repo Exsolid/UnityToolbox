@@ -18,11 +18,14 @@ var class_movement_base =
     [ "_isClimbingLocked", "class_movement_base.html#adc6fe9263006376bf669c8eece12ccea", null ],
     [ "_isJumpingLocked", "class_movement_base.html#a83ee53188164068cda6305832930dd3d", null ],
     [ "_isMovementLocked", "class_movement_base.html#acd387ffae8df94975f020a1d57744fb9", null ],
+    [ "_isToggledMoving", "class_movement_base.html#a78e3cee06b44360087fb3945ca2b989b", null ],
     [ "_jumpActionName", "class_movement_base.html#ae97b3fb739c33d175ead99b21f17b079", null ],
     [ "_jumpForce", "class_movement_base.html#aa99cce8a3c0a009a974dbb25ab619b3b", null ],
     [ "_jumpingMask", "class_movement_base.html#a656631b5e85678aaf077b4b9e9cc435a", null ],
     [ "_movementActionName", "class_movement_base.html#a23060afeca52b154f306de661aacf7a3", null ],
     [ "_speed", "class_movement_base.html#afa816c25c8bf57709f3b0493b6bbe83e", null ],
+    [ "_toggledSpeed", "class_movement_base.html#a523b82877534ed2e19d02ed11de4fc2f", null ],
+    [ "_toggleSpeedActionName", "class_movement_base.html#af5140f3b4890f3066e71b6e9d05a0753", null ],
     [ "AnimationGrounded", "class_movement_base.html#a4ae7b604111dd009c5a41fe513e0fd22", null ],
     [ "Climbing", "class_movement_base.html#a56b8e91be7b1517c52f39f1d2f54c18c", null ],
     [ "CurrentMovementState", "class_movement_base.html#a4811bc7c57fa5497820cbec2bdef3db1", null ],
@@ -30,5 +33,6 @@ var class_movement_base =
     [ "GroundedTransform", "class_movement_base.html#a56dd5335c602a8226c3dd7fc01529dea", null ],
     [ "IsClimbingLocked", "class_movement_base.html#a534cbe7174ae31d707babe64251d48d9", null ],
     [ "IsJumpingLocked", "class_movement_base.html#aa909f1ab3d3e826c672342c17caf2819", null ],
-    [ "IsMovementLocked", "class_movement_base.html#a4c41e2183f36fcd8dce75bce5e29aa46", null ]
+    [ "IsMovementLocked", "class_movement_base.html#a4c41e2183f36fcd8dce75bce5e29aa46", null ],
+    [ "IsToggledMoving", "class_movement_base.html#a68144af7b4acac4577ac6dd9320f77e5", null ]
 ];

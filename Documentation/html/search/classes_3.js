@@ -8,6 +8,8 @@ var searchData=
   ['dialognodedata_5',['DialogNodeData',['../class_dialog_node_data.html',1,'']]],
   ['disablemenucontrol_6',['DisableMenuControl',['../class_disable_menu_control.html',1,'']]],
   ['displaydialog_7',['DisplayDialog',['../class_display_dialog.html',1,'']]],
-  ['dropdownattribute_8',['DropDownAttribute',['../class_drop_down_attribute.html',1,'']]],
-  ['dropdowndrawer_9',['DropDownDrawer',['../class_drop_down_drawer.html',1,'']]]
+  ['dontdestroymanager_8',['DontDestroyManager',['../class_dont_destroy_manager.html',1,'']]],
+  ['dontdestroyobject_9',['DontDestroyObject',['../class_dont_destroy_object.html',1,'']]],
+  ['dropdownattribute_10',['DropDownAttribute',['../class_drop_down_attribute.html',1,'']]],
+  ['dropdowndrawer_11',['DropDownDrawer',['../class_drop_down_drawer.html',1,'']]]
 ];

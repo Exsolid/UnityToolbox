@@ -1,13 +1,26 @@
 var class_audio_mixer =
 [
+    [ "FadeEnd", "class_audio_mixer.html#a27c0fccda006859563384385a877ee69", null ],
+    [ "FadeIn", "class_audio_mixer.html#af02098477c3cd42523500d7010468353", null ],
+    [ "FadeOut", "class_audio_mixer.html#a7c0901c05a72607f62c40083e625d82c", null ],
+    [ "FadeOutPause", "class_audio_mixer.html#a66b9c7deea08596d54f939d4e27bd0d2", null ],
+    [ "FadePause", "class_audio_mixer.html#a42d6c85aedd053abb81490e2548d6230", null ],
+    [ "FadeResume", "class_audio_mixer.html#abae233c028e101211236ea5ac7505780", null ],
     [ "PlayRandomSource", "class_audio_mixer.html#a7fa672291974cb9bb7fbfdcd02427ea0", null ],
     [ "Start", "class_audio_mixer.html#a67755ee54f2c7ed6ec84dcebace43992", null ],
     [ "Update", "class_audio_mixer.html#acd08957ca10b4e073bfea0d6f5084a2f", null ],
     [ "_audioSource", "class_audio_mixer.html#a13fb6e0f2cd32dabdd88ffb96f6a949f", null ],
+    [ "_coroutines", "class_audio_mixer.html#a616a3cc847ef498fb5ddf1a3e942ec62", null ],
+    [ "_fadeIn", "class_audio_mixer.html#a9d6209b52f3d01ece8872354d3cf2533", null ],
+    [ "_fadeOut", "class_audio_mixer.html#a6c9e8603c275dccc5cf0bca7b2510b60", null ],
+    [ "_internalPause", "class_audio_mixer.html#a96a8b12762233c6e49f920c4700934d5", null ],
     [ "_isPassive", "class_audio_mixer.html#a10388a49aa3b631ed4025023fcddf483", null ],
+    [ "_isPlaying", "class_audio_mixer.html#a8dfad2cf7a29662dc5e8fe422a324262", null ],
     [ "_items", "class_audio_mixer.html#abb2dad711a59b0ae310115a87e78df8d", null ],
     [ "_maxDelayBetweenSounds", "class_audio_mixer.html#a7a82eeb1e2c7ca781508bf7db74389ef", null ],
     [ "_minDelayBetweenSounds", "class_audio_mixer.html#ad380703c8a4474b72fc2486963209619", null ],
     [ "_timer", "class_audio_mixer.html#aafe018f922d44d19dec85bd2ae838fb4", null ],
-    [ "_totalProbability", "class_audio_mixer.html#acaec04e0c38ba3a234af1a686adbd1cd", null ]
+    [ "_totalProbability", "class_audio_mixer.html#acaec04e0c38ba3a234af1a686adbd1cd", null ],
+    [ "IsPassive", "class_audio_mixer.html#a3714e69d019f109eb9d27556b743d736", null ],
+    [ "IsPlaying", "class_audio_mixer.html#a7aed04e0fe5cf63c94ecb9a7f7b69042", null ]
 ];

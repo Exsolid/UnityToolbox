@@ -15,7 +15,6 @@ var class_menu_manager =
     [ "_menuList", "class_menu_manager.html#a566e781f6b6f3740a455214d5d02f6b1", null ],
     [ "_menuTypes", "class_menu_manager.html#a37b43e7e6b613169545504d2ec4d9206", null ],
     [ "_overlayMenuType", "class_menu_manager.html#ae79f360b2e1cb4a2008608e758c5ad33", null ],
-    [ "MenuTypes", "class_menu_manager.html#ad7a7eb26bb2c5f9616f3c274e0907df8", null ],
     [ "OverlayType", "class_menu_manager.html#a6114a906fe0cdae9e7de373d2dc69516", null ],
     [ "CurrentActiveMenuType", "class_menu_manager.html#a8d8e7e644c3d28c71c4751a5f28d7863", null ],
     [ "IsEnabled", "class_menu_manager.html#acebabc2246c8969e3224db86c77e8c73", null ]

@@ -99,6 +99,7 @@ $(document).ready(function(){initNavTree('class_gamestate_manager.html',''); ini
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#events">Events</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_gamestate_manager-members.html">List of all members</a>  </div>
@@ -136,6 +137,12 @@ Public Member Functions</h2></td></tr>
 Static Public Attributes</h2></td></tr>
 <tr class="memitem:ad85fd5b233d464063dc0181c5fdccc59"><td class="memItemLeft" align="right" valign="top">const string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gamestate_manager.html#ad85fd5b233d464063dc0181c5fdccc59">FILENAME</a> = &quot;GamestateData.txt&quot;</td></tr>
 <tr class="separator:ad85fd5b233d464063dc0181c5fdccc59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="events" name="events"></a>
+Events</h2></td></tr>
+<tr class="memitem:a5a546f869b9747a92b3bf9777217a487"><td class="memItemLeft" align="right" valign="top">Action&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gamestate_manager.html#a5a546f869b9747a92b3bf9777217a487">OnGamestateCompleted</a></td></tr>
+<tr class="memdesc:a5a546f869b9747a92b3bf9777217a487"><td class="mdescLeft">&#160;</td><td class="mdescRight">An event which is triggered once the gamestate with the given string ID is completed;.  <br /></td></tr>
+<tr class="separator:a5a546f869b9747a92b3bf9777217a487"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
@@ -223,7 +230,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="reference">References <a class="el" href="class_gamestate_manager.html#a0defb27c653415f9aa653cee2e462c76">_activeNodes</a>, <a class="el" href="class_gamestate_manager.html#ae5dffa6a953590cae0d5f65bfe71f7e7">_stateNodeConnections</a>, <a class="el" href="class_gamestate_manager.html#ab898e727b5d95efe67aa3bc99a1ca289">_stateNodes</a>, <a class="el" href="class_gamestate_manager.html#aab3aa9f31c1d39d209fcaaf18fceae17">CheckNodeValid()</a>, and <a class="el" href="class_gamestate_node_data.html#adf6908e51abd1d06f8e1f760b3708192">GamestateNodeData.Name</a>.</p>
+<p class="reference">References <a class="el" href="class_gamestate_manager.html#a0defb27c653415f9aa653cee2e462c76">_activeNodes</a>, <a class="el" href="class_gamestate_manager.html#ae5dffa6a953590cae0d5f65bfe71f7e7">_stateNodeConnections</a>, <a class="el" href="class_gamestate_manager.html#ab898e727b5d95efe67aa3bc99a1ca289">_stateNodes</a>, <a class="el" href="class_gamestate_manager.html#aab3aa9f31c1d39d209fcaaf18fceae17">CheckNodeValid()</a>, <a class="el" href="class_gamestate_node_data.html#adf6908e51abd1d06f8e1f760b3708192">GamestateNodeData.Name</a>, and <a class="el" href="class_gamestate_manager.html#a5a546f869b9747a92b3bf9777217a487">OnGamestateCompleted</a>.</p>
 
 </div>
 </div>
@@ -393,6 +400,23 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="reference">Referenced by <a class="el" href="class_gamestate_manager.html#a1449bd94de0e40da724580f4cef2cb9b">Start()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Event Documentation</h2>
+<a id="a5a546f869b9747a92b3bf9777217a487" name="a5a546f869b9747a92b3bf9777217a487"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a546f869b9747a92b3bf9777217a487">&#9670;&#160;</a></span>OnGamestateCompleted</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Action&lt;string&gt; GamestateManager.OnGamestateCompleted</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="class_gamestate_manager.html#a6f7d4b94a58b5607accabe1fa153fce5">GoToNextState()</a>.</p>
 
 </div>
 </div>

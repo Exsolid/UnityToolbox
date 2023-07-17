@@ -7,5 +7,6 @@ var class_gamestate_manager =
     [ "_activeNodes", "class_gamestate_manager.html#a0defb27c653415f9aa653cee2e462c76", null ],
     [ "_startNode", "class_gamestate_manager.html#a19e06f7a2f63088b4431fd38b81c62ab", null ],
     [ "_stateNodeConnections", "class_gamestate_manager.html#ae5dffa6a953590cae0d5f65bfe71f7e7", null ],
-    [ "_stateNodes", "class_gamestate_manager.html#ab898e727b5d95efe67aa3bc99a1ca289", null ]
+    [ "_stateNodes", "class_gamestate_manager.html#ab898e727b5d95efe67aa3bc99a1ca289", null ],
+    [ "OnGamestateCompleted", "class_gamestate_manager.html#a5a546f869b9747a92b3bf9777217a487", null ]
 ];

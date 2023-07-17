@@ -124,6 +124,8 @@ Public Member Functions</h2></td></tr>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:a4853a611a9a934cc715a0780c97cac52"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_first_person_camera_controller.html#a4853a611a9a934cc715a0780c97cac52">Start</a> ()</td></tr>
 <tr class="separator:a4853a611a9a934cc715a0780c97cac52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a7611358c649f06be906ce0a433ae93"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_first_person_camera_controller.html#a1a7611358c649f06be906ce0a433ae93">Update</a> ()</td></tr>
+<tr class="separator:a1a7611358c649f06be906ce0a433ae93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae470efcf9a90e2e1a7c6bf1590c9e72"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_first_person_camera_controller.html#aae470efcf9a90e2e1a7c6bf1590c9e72">FixedUpdate</a> ()</td></tr>
 <tr class="separator:aae470efcf9a90e2e1a7c6bf1590c9e72"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a722312c85e98f63066f7defe68213be9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_first_person_camera_controller.html#a722312c85e98f63066f7defe68213be9">TurnView</a> ()</td></tr>
@@ -134,8 +136,6 @@ Private Member Functions</h2></td></tr>
 <tr class="separator:a0af0ae8ca466daca315aa3b3f0184c6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af7520adfa38201b47470440df75b34ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_first_person_camera_controller.html#af7520adfa38201b47470440df75b34ec">OnDestroy</a> ()</td></tr>
 <tr class="separator:af7520adfa38201b47470440df75b34ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ca368957b16cd6b6143cbaac6be272d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_first_person_camera_controller.html#a6ca368957b16cd6b6143cbaac6be272d">MayRotateHorizontal</a> (Vector3 currentRotation)</td></tr>
-<tr class="separator:a6ca368957b16cd6b6143cbaac6be272d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -152,16 +152,20 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a1df45a81bf15b88510e8925c21892ef4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d7e24fc5306001a5bf3e6bcfb63aa8d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_first_person_camera_controller.html#a9d7e24fc5306001a5bf3e6bcfb63aa8d">_maxVerticalAngle</a></td></tr>
 <tr class="separator:a9d7e24fc5306001a5bf3e6bcfb63aa8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac592ccf1a199688270ebaac66bccb5b0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_first_person_camera_controller.html#ac592ccf1a199688270ebaac66bccb5b0">_maxHorizontalAngle</a></td></tr>
+<tr class="memitem:ac592ccf1a199688270ebaac66bccb5b0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_first_person_camera_controller.html#ac592ccf1a199688270ebaac66bccb5b0">_maxHorizontalAngle</a> = -1</td></tr>
 <tr class="separator:ac592ccf1a199688270ebaac66bccb5b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a506134097200c3930be282633dc39175"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_first_person_camera_controller.html#a506134097200c3930be282633dc39175">_slerpModifier</a> = 6</td></tr>
+<tr class="separator:a506134097200c3930be282633dc39175"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7fa45a9bc1ccf2ae4788ed06fd32538"><td class="memItemLeft" align="right" valign="top">Camera&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_first_person_camera_controller.html#aa7fa45a9bc1ccf2ae4788ed06fd32538">_camera</a></td></tr>
 <tr class="separator:aa7fa45a9bc1ccf2ae4788ed06fd32538"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3cb10138b561d9fc35f905ed71eb9cd"><td class="memItemLeft" align="right" valign="top">Quaternion&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_first_person_camera_controller.html#aa3cb10138b561d9fc35f905ed71eb9cd">_initialRotation</a></td></tr>
-<tr class="separator:aa3cb10138b561d9fc35f905ed71eb9cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a09ee31f02ee685c88427b5746ce08771"><td class="memItemLeft" align="right" valign="top">Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_first_person_camera_controller.html#a09ee31f02ee685c88427b5746ce08771">_rotateToPosition</a></td></tr>
 <tr class="separator:a09ee31f02ee685c88427b5746ce08771"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ddd7109cd65b1b850ab7f9e564fcaa8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_first_person_camera_controller.html#a4ddd7109cd65b1b850ab7f9e564fcaa8">_lockRotation</a></td></tr>
 <tr class="separator:a4ddd7109cd65b1b850ab7f9e564fcaa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3cb10138b561d9fc35f905ed71eb9cd"><td class="memItemLeft" align="right" valign="top">Quaternion&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_first_person_camera_controller.html#aa3cb10138b561d9fc35f905ed71eb9cd">_initialRotation</a></td></tr>
+<tr class="separator:aa3cb10138b561d9fc35f905ed71eb9cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc5a1c1de4510ca3ffd30fc56f20b0e4"><td class="memItemLeft" align="right" valign="top">Vector2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_first_person_camera_controller.html#acc5a1c1de4510ca3ffd30fc56f20b0e4">_rotation</a> = Vector2.zero</td></tr>
+<tr class="separator:acc5a1c1de4510ca3ffd30fc56f20b0e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="aae470efcf9a90e2e1a7c6bf1590c9e72" name="aae470efcf9a90e2e1a7c6bf1590c9e72"></a>
@@ -188,36 +192,6 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="reference">References <a class="el" href="class_first_person_camera_controller.html#aa7fa45a9bc1ccf2ae4788ed06fd32538">_camera</a>, <a class="el" href="class_first_person_camera_controller.html#a4ddd7109cd65b1b850ab7f9e564fcaa8">_lockRotation</a>, <a class="el" href="class_first_person_camera_controller.html#a1df45a81bf15b88510e8925c21892ef4">_playerToRotateInstead</a>, <a class="el" href="class_first_person_camera_controller.html#a09ee31f02ee685c88427b5746ce08771">_rotateToPosition</a>, and <a class="el" href="class_first_person_camera_controller.html#a722312c85e98f63066f7defe68213be9">TurnView()</a>.</p>
-
-</div>
-</div>
-<a id="a6ca368957b16cd6b6143cbaac6be272d" name="a6ca368957b16cd6b6143cbaac6be272d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6ca368957b16cd6b6143cbaac6be272d">&#9670;&#160;</a></span>MayRotateHorizontal()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool FirstPersonCameraController.MayRotateHorizontal </td>
-          <td>(</td>
-          <td class="paramtype">Vector3&#160;</td>
-          <td class="paramname"><em>currentRotation</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="reference">References <a class="el" href="class_first_person_camera_controller.html#aa3cb10138b561d9fc35f905ed71eb9cd">_initialRotation</a>, and <a class="el" href="class_first_person_camera_controller.html#ac592ccf1a199688270ebaac66bccb5b0">_maxHorizontalAngle</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="class_first_person_camera_controller.html#a722312c85e98f63066f7defe68213be9">TurnView()</a>.</p>
 
 </div>
 </div>
@@ -324,9 +298,36 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">References <a class="el" href="class_first_person_camera_controller.html#aa7fa45a9bc1ccf2ae4788ed06fd32538">_camera</a>, <a class="el" href="class_first_person_camera_controller.html#ab9c4aa5ab7d838418161b11ce4debe2e">_input</a>, <a class="el" href="class_first_person_camera_controller.html#ac592ccf1a199688270ebaac66bccb5b0">_maxHorizontalAngle</a>, <a class="el" href="class_first_person_camera_controller.html#a9d7e24fc5306001a5bf3e6bcfb63aa8d">_maxVerticalAngle</a>, <a class="el" href="class_first_person_camera_controller.html#a313c1c2968ac0cd498a2ea758f4ea1ab">_mouseSensitivityUpdated</a>, <a class="el" href="class_first_person_camera_controller.html#a1df45a81bf15b88510e8925c21892ef4">_playerToRotateInstead</a>, <a class="el" href="class_first_person_camera_controller.html#aee5b8cb0b58c590a2b6a76ed85769fc1">_viewActionName</a>, and <a class="el" href="class_first_person_camera_controller.html#a6ca368957b16cd6b6143cbaac6be272d">MayRotateHorizontal()</a>.</p>
+<p class="reference">References <a class="el" href="class_first_person_camera_controller.html#aa7fa45a9bc1ccf2ae4788ed06fd32538">_camera</a>, <a class="el" href="class_first_person_camera_controller.html#aa3cb10138b561d9fc35f905ed71eb9cd">_initialRotation</a>, <a class="el" href="class_first_person_camera_controller.html#ac592ccf1a199688270ebaac66bccb5b0">_maxHorizontalAngle</a>, <a class="el" href="class_first_person_camera_controller.html#a9d7e24fc5306001a5bf3e6bcfb63aa8d">_maxVerticalAngle</a>, <a class="el" href="class_first_person_camera_controller.html#a1df45a81bf15b88510e8925c21892ef4">_playerToRotateInstead</a>, <a class="el" href="class_first_person_camera_controller.html#acc5a1c1de4510ca3ffd30fc56f20b0e4">_rotation</a>, and <a class="el" href="class_first_person_camera_controller.html#a506134097200c3930be282633dc39175">_slerpModifier</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="class_first_person_camera_controller.html#aae470efcf9a90e2e1a7c6bf1590c9e72">FixedUpdate()</a>.</p>
+
+</div>
+</div>
+<a id="a1a7611358c649f06be906ce0a433ae93" name="a1a7611358c649f06be906ce0a433ae93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a7611358c649f06be906ce0a433ae93">&#9670;&#160;</a></span>Update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FirstPersonCameraController.Update </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="reference">References <a class="el" href="class_first_person_camera_controller.html#ab9c4aa5ab7d838418161b11ce4debe2e">_input</a>, <a class="el" href="class_first_person_camera_controller.html#a4ddd7109cd65b1b850ab7f9e564fcaa8">_lockRotation</a>, <a class="el" href="class_first_person_camera_controller.html#a313c1c2968ac0cd498a2ea758f4ea1ab">_mouseSensitivityUpdated</a>, and <a class="el" href="class_first_person_camera_controller.html#aee5b8cb0b58c590a2b6a76ed85769fc1">_viewActionName</a>.</p>
 
 </div>
 </div>
@@ -435,7 +436,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="class_first_person_camera_controller.html#a6ca368957b16cd6b6143cbaac6be272d">MayRotateHorizontal()</a>, and <a class="el" href="class_first_person_camera_controller.html#a4853a611a9a934cc715a0780c97cac52">Start()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="class_first_person_camera_controller.html#a4853a611a9a934cc715a0780c97cac52">Start()</a>, and <a class="el" href="class_first_person_camera_controller.html#a722312c85e98f63066f7defe68213be9">TurnView()</a>.</p>
 
 </div>
 </div>
@@ -459,7 +460,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="class_first_person_camera_controller.html#a722312c85e98f63066f7defe68213be9">TurnView()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="class_first_person_camera_controller.html#a1a7611358c649f06be906ce0a433ae93">Update()</a>.</p>
 
 </div>
 </div>
@@ -483,7 +484,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="class_first_person_camera_controller.html#aae470efcf9a90e2e1a7c6bf1590c9e72">FixedUpdate()</a>, and <a class="el" href="class_first_person_camera_controller.html#ad62580f1719278e015b454edb5f62d08">UpdateMovementLock()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="class_first_person_camera_controller.html#aae470efcf9a90e2e1a7c6bf1590c9e72">FixedUpdate()</a>, <a class="el" href="class_first_person_camera_controller.html#a1a7611358c649f06be906ce0a433ae93">Update()</a>, and <a class="el" href="class_first_person_camera_controller.html#ad62580f1719278e015b454edb5f62d08">UpdateMovementLock()</a>.</p>
 
 </div>
 </div>
@@ -497,7 +498,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int FirstPersonCameraController._maxHorizontalAngle</td>
+          <td class="memname">int FirstPersonCameraController._maxHorizontalAngle = -1</td>
         </tr>
       </table>
   </td>
@@ -507,7 +508,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="class_first_person_camera_controller.html#a6ca368957b16cd6b6143cbaac6be272d">MayRotateHorizontal()</a>, and <a class="el" href="class_first_person_camera_controller.html#a722312c85e98f63066f7defe68213be9">TurnView()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="class_first_person_camera_controller.html#a722312c85e98f63066f7defe68213be9">TurnView()</a>.</p>
 
 </div>
 </div>
@@ -579,7 +580,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="class_first_person_camera_controller.html#a4853a611a9a934cc715a0780c97cac52">Start()</a>, <a class="el" href="class_first_person_camera_controller.html#a722312c85e98f63066f7defe68213be9">TurnView()</a>, and <a class="el" href="class_first_person_camera_controller.html#a0af0ae8ca466daca315aa3b3f0184c6b">UpdateMouseSense()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="class_first_person_camera_controller.html#a4853a611a9a934cc715a0780c97cac52">Start()</a>, <a class="el" href="class_first_person_camera_controller.html#a1a7611358c649f06be906ce0a433ae93">Update()</a>, and <a class="el" href="class_first_person_camera_controller.html#a0af0ae8ca466daca315aa3b3f0184c6b">UpdateMouseSense()</a>.</p>
 
 </div>
 </div>
@@ -631,6 +632,54 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="acc5a1c1de4510ca3ffd30fc56f20b0e4" name="acc5a1c1de4510ca3ffd30fc56f20b0e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc5a1c1de4510ca3ffd30fc56f20b0e4">&#9670;&#160;</a></span>_rotation</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector2 FirstPersonCameraController._rotation = Vector2.zero</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="class_first_person_camera_controller.html#a722312c85e98f63066f7defe68213be9">TurnView()</a>.</p>
+
+</div>
+</div>
+<a id="a506134097200c3930be282633dc39175" name="a506134097200c3930be282633dc39175"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a506134097200c3930be282633dc39175">&#9670;&#160;</a></span>_slerpModifier</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float FirstPersonCameraController._slerpModifier = 6</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="class_first_person_camera_controller.html#a722312c85e98f63066f7defe68213be9">TurnView()</a>.</p>
+
+</div>
+</div>
 <a id="aee5b8cb0b58c590a2b6a76ed85769fc1" name="aee5b8cb0b58c590a2b6a76ed85769fc1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aee5b8cb0b58c590a2b6a76ed85769fc1">&#9670;&#160;</a></span>_viewActionName</h2>
 
@@ -651,7 +700,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="class_first_person_camera_controller.html#a722312c85e98f63066f7defe68213be9">TurnView()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="class_first_person_camera_controller.html#a1a7611358c649f06be906ce0a433ae93">Update()</a>.</p>
 
 </div>
 </div>

@@ -127,6 +127,9 @@ Public Types</h2></td></tr>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a8fb228ffb27bea2e2d9ec74e053bda97"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_slider_setting.html#a8fb228ffb27bea2e2d9ec74e053bda97">Awake</a> ()</td></tr>
 <tr class="separator:a8fb228ffb27bea2e2d9ec74e053bda97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bd06615540a10b74abdfea029768ae6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_slider_setting.html#a5bd06615540a10b74abdfea029768ae6">UpdateValues</a> ()</td></tr>
+<tr class="memdesc:a5bd06615540a10b74abdfea029768ae6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the values set with the slider to the preferences and manager. To set up the slider, set a EventTrigger to execute this on end drag.  <br /></td></tr>
+<tr class="separator:a5bd06615540a10b74abdfea029768ae6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
@@ -136,17 +139,15 @@ Private Member Functions</h2></td></tr>
 <tr class="separator:a598ab4d0d393a8503ca816124b2b2c5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab338b5d6f8c40ea46ea1c25cb2e9f1c0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_slider_setting.html#ab338b5d6f8c40ea46ea1c25cb2e9f1c0">OnDestroy</a> ()</td></tr>
 <tr class="separator:ab338b5d6f8c40ea46ea1c25cb2e9f1c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a564f50b565d3f96f6c47b534a9fc5124"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_slider_setting.html#a564f50b565d3f96f6c47b534a9fc5124">UpdateValuesToManager</a> ()</td></tr>
-<tr class="separator:a564f50b565d3f96f6c47b534a9fc5124"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
+<tr class="memitem:a9a4090c79a3629f5cb6aa682a0018705"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_audio_mixer.html">AudioMixer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_slider_setting.html#a9a4090c79a3629f5cb6aa682a0018705">_clickSounds</a></td></tr>
+<tr class="separator:a9a4090c79a3629f5cb6aa682a0018705"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9faf688f6a2887a00376eb13361f6998"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_slider_setting.html#a54e8b28c3dab89dce6f2d5a3a2ab87db">SliderOption</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_slider_setting.html#a9faf688f6a2887a00376eb13361f6998">_option</a></td></tr>
 <tr class="separator:a9faf688f6a2887a00376eb13361f6998"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a60de96c672456a181ffaaeb278399de9"><td class="memItemLeft" align="right" valign="top">Slider&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_slider_setting.html#a60de96c672456a181ffaaeb278399de9">_slider</a></td></tr>
 <tr class="separator:a60de96c672456a181ffaaeb278399de9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e133177ac809b7cec365340c27bc46c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_slider_setting.html#a6e133177ac809b7cec365340c27bc46c">_timer</a></td></tr>
-<tr class="separator:a6e133177ac809b7cec365340c27bc46c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a8f213de40a8946e93dbc68231d85ec"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_slider_setting.html#a2a8f213de40a8946e93dbc68231d85ec">_pref</a></td></tr>
 <tr class="separator:a2a8f213de40a8946e93dbc68231d85ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3cb021ffcc000aa3b43f6602f9228d67"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_slider_setting.html#a3cb021ffcc000aa3b43f6602f9228d67">_isEnabled</a></td></tr>
@@ -215,7 +216,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">References <a class="el" href="class_slider_setting.html#a2a8f213de40a8946e93dbc68231d85ec">_pref</a>, <a class="el" href="class_slider_setting.html#a60de96c672456a181ffaaeb278399de9">_slider</a>, <a class="el" href="class_slider_setting.html#a6e133177ac809b7cec365340c27bc46c">_timer</a>, and <a class="el" href="class_slider_setting.html#a564f50b565d3f96f6c47b534a9fc5124">UpdateValuesToManager()</a>.</p>
+<p class="reference">References <a class="el" href="class_slider_setting.html#a9faf688f6a2887a00376eb13361f6998">_option</a>, <a class="el" href="class_slider_setting.html#a2a8f213de40a8946e93dbc68231d85ec">_pref</a>, and <a class="el" href="class_slider_setting.html#a60de96c672456a181ffaaeb278399de9">_slider</a>.</p>
 
 </div>
 </div>
@@ -242,7 +243,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">References <a class="el" href="class_slider_setting.html#a9faf688f6a2887a00376eb13361f6998">_option</a>, <a class="el" href="class_slider_setting.html#a2a8f213de40a8946e93dbc68231d85ec">_pref</a>, <a class="el" href="class_slider_setting.html#a60de96c672456a181ffaaeb278399de9">_slider</a>, <a class="el" href="class_slider_setting.html#a6e133177ac809b7cec365340c27bc46c">_timer</a>, <a class="el" href="class_player_pref_keys.html#a56554545c4f3c500066d7b5ea4bb8298">PlayerPrefKeys.EFFECTS_VOLUME</a>, <a class="el" href="class_player_pref_keys.html#a6b427b516c07bd719064b1db1a3400c2">PlayerPrefKeys.MOUSE_SENSITIVITY</a>, and <a class="el" href="class_player_pref_keys.html#a0c4ca1b83df4395477545611f1640de2">PlayerPrefKeys.MUSIC_VOLUME</a>.</p>
+<p class="reference">References <a class="el" href="class_slider_setting.html#a9faf688f6a2887a00376eb13361f6998">_option</a>, <a class="el" href="class_slider_setting.html#a2a8f213de40a8946e93dbc68231d85ec">_pref</a>, <a class="el" href="class_slider_setting.html#a60de96c672456a181ffaaeb278399de9">_slider</a>, <a class="el" href="class_player_pref_keys.html#a56554545c4f3c500066d7b5ea4bb8298">PlayerPrefKeys.EFFECTS_VOLUME</a>, <a class="el" href="class_player_pref_keys.html#a6b427b516c07bd719064b1db1a3400c2">PlayerPrefKeys.MOUSE_SENSITIVITY</a>, and <a class="el" href="class_player_pref_keys.html#a0c4ca1b83df4395477545611f1640de2">PlayerPrefKeys.MUSIC_VOLUME</a>.</p>
 
 </div>
 </div>
@@ -269,12 +270,32 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">References <a class="el" href="class_slider_setting.html#a3cb021ffcc000aa3b43f6602f9228d67">_isEnabled</a>, <a class="el" href="class_slider_setting.html#a2a8f213de40a8946e93dbc68231d85ec">_pref</a>, <a class="el" href="class_slider_setting.html#a60de96c672456a181ffaaeb278399de9">_slider</a>, <a class="el" href="class_slider_setting.html#a6e133177ac809b7cec365340c27bc46c">_timer</a>, and <a class="el" href="class_slider_setting.html#a564f50b565d3f96f6c47b534a9fc5124">UpdateValuesToManager()</a>.</p>
+<p class="reference">References <a class="el" href="class_slider_setting.html#a3cb021ffcc000aa3b43f6602f9228d67">_isEnabled</a>.</p>
 
 </div>
 </div>
-<a id="a564f50b565d3f96f6c47b534a9fc5124" name="a564f50b565d3f96f6c47b534a9fc5124"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a564f50b565d3f96f6c47b534a9fc5124">&#9670;&#160;</a></span>UpdateValuesToManager()</h2>
+<a id="a5bd06615540a10b74abdfea029768ae6" name="a5bd06615540a10b74abdfea029768ae6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bd06615540a10b74abdfea029768ae6">&#9670;&#160;</a></span>UpdateValues()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SliderSetting.UpdateValues </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="reference">References <a class="el" href="class_slider_setting.html#a9a4090c79a3629f5cb6aa682a0018705">_clickSounds</a>, <a class="el" href="class_slider_setting.html#a9faf688f6a2887a00376eb13361f6998">_option</a>, <a class="el" href="class_slider_setting.html#a2a8f213de40a8946e93dbc68231d85ec">_pref</a>, <a class="el" href="class_slider_setting.html#a60de96c672456a181ffaaeb278399de9">_slider</a>, and <a class="el" href="class_audio_mixer.html#a7fa672291974cb9bb7fbfdcd02427ea0">AudioMixer.PlayRandomSource()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a9a4090c79a3629f5cb6aa682a0018705" name="a9a4090c79a3629f5cb6aa682a0018705"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a4090c79a3629f5cb6aa682a0018705">&#9670;&#160;</a></span>_clickSounds</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -283,10 +304,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void SliderSetting.UpdateValuesToManager </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td class="memname"><a class="el" href="class_audio_mixer.html">AudioMixer</a> SliderSetting._clickSounds</td>
         </tr>
       </table>
   </td>
@@ -296,13 +314,10 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">References <a class="el" href="class_slider_setting.html#a9faf688f6a2887a00376eb13361f6998">_option</a>, and <a class="el" href="class_slider_setting.html#a60de96c672456a181ffaaeb278399de9">_slider</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="class_slider_setting.html#ab338b5d6f8c40ea46ea1c25cb2e9f1c0">OnDestroy()</a>, and <a class="el" href="class_slider_setting.html#a598ab4d0d393a8503ca816124b2b2c5f">Update()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="class_slider_setting.html#a5bd06615540a10b74abdfea029768ae6">UpdateValues()</a>.</p>
 
 </div>
 </div>
-<h2 class="groupheader">Member Data Documentation</h2>
 <a id="a3cb021ffcc000aa3b43f6602f9228d67" name="a3cb021ffcc000aa3b43f6602f9228d67"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3cb021ffcc000aa3b43f6602f9228d67">&#9670;&#160;</a></span>_isEnabled</h2>
 
@@ -347,7 +362,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="class_slider_setting.html#aaeffaf1647e532f617982338f7aca7bd">Start()</a>, and <a class="el" href="class_slider_setting.html#a564f50b565d3f96f6c47b534a9fc5124">UpdateValuesToManager()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="class_slider_setting.html#ab338b5d6f8c40ea46ea1c25cb2e9f1c0">OnDestroy()</a>, <a class="el" href="class_slider_setting.html#aaeffaf1647e532f617982338f7aca7bd">Start()</a>, and <a class="el" href="class_slider_setting.html#a5bd06615540a10b74abdfea029768ae6">UpdateValues()</a>.</p>
 
 </div>
 </div>
@@ -371,7 +386,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="class_slider_setting.html#ab338b5d6f8c40ea46ea1c25cb2e9f1c0">OnDestroy()</a>, <a class="el" href="class_slider_setting.html#aaeffaf1647e532f617982338f7aca7bd">Start()</a>, and <a class="el" href="class_slider_setting.html#a598ab4d0d393a8503ca816124b2b2c5f">Update()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="class_slider_setting.html#ab338b5d6f8c40ea46ea1c25cb2e9f1c0">OnDestroy()</a>, <a class="el" href="class_slider_setting.html#aaeffaf1647e532f617982338f7aca7bd">Start()</a>, and <a class="el" href="class_slider_setting.html#a5bd06615540a10b74abdfea029768ae6">UpdateValues()</a>.</p>
 
 </div>
 </div>
@@ -395,31 +410,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="class_slider_setting.html#ab338b5d6f8c40ea46ea1c25cb2e9f1c0">OnDestroy()</a>, <a class="el" href="class_slider_setting.html#aaeffaf1647e532f617982338f7aca7bd">Start()</a>, <a class="el" href="class_slider_setting.html#a598ab4d0d393a8503ca816124b2b2c5f">Update()</a>, and <a class="el" href="class_slider_setting.html#a564f50b565d3f96f6c47b534a9fc5124">UpdateValuesToManager()</a>.</p>
-
-</div>
-</div>
-<a id="a6e133177ac809b7cec365340c27bc46c" name="a6e133177ac809b7cec365340c27bc46c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6e133177ac809b7cec365340c27bc46c">&#9670;&#160;</a></span>_timer</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">float SliderSetting._timer</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="reference">Referenced by <a class="el" href="class_slider_setting.html#ab338b5d6f8c40ea46ea1c25cb2e9f1c0">OnDestroy()</a>, <a class="el" href="class_slider_setting.html#aaeffaf1647e532f617982338f7aca7bd">Start()</a>, and <a class="el" href="class_slider_setting.html#a598ab4d0d393a8503ca816124b2b2c5f">Update()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="class_slider_setting.html#ab338b5d6f8c40ea46ea1c25cb2e9f1c0">OnDestroy()</a>, <a class="el" href="class_slider_setting.html#aaeffaf1647e532f617982338f7aca7bd">Start()</a>, and <a class="el" href="class_slider_setting.html#a5bd06615540a10b74abdfea029768ae6">UpdateValues()</a>.</p>
 
 </div>
 </div>

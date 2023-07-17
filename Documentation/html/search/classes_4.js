@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['firstpersoncameracontroller_0',['FirstPersonCameraController',['../class_first_person_camera_controller.html',1,'']]],
-  ['firstpersonmouseinput_1',['FirstPersonMouseInput',['../class_first_person_mouse_input.html',1,'']]]
+  ['eventaggregator_0',['EventAggregator',['../class_unity_toolbox_1_1_events_1_1_event_aggregator.html',1,'UnityToolbox::Events']]]
 ];

@@ -6,22 +6,29 @@ var hierarchy =
     [ "Editor", null, [
       [ "TerrainDecorationEditor", "class_terrain_decoration_editor.html", null ],
       [ "TerrainGenerateAllEditor", "class_terrain_generate_all_editor.html", null ],
-      [ "TerrainGeneratorEditor", "class_terrain_generator_editor.html", null ]
+      [ "TerrainGeneratorEditor", "class_terrain_generator_editor.html", null ],
+      [ "UnityToolbox.Achievments.AchievementDataEditor", "class_unity_toolbox_1_1_achievments_1_1_achievement_data_editor.html", null ],
+      [ "UnityToolbox.Achievments.AchievementManagerEditor", "class_unity_toolbox_1_1_achievments_1_1_achievement_manager_editor.html", null ]
     ] ],
     [ "EditorWindow", null, [
       [ "DialogGraphPathSelectionWindow", "class_dialog_graph_path_selection_window.html", null ],
       [ "DialogGraphWindow", "class_dialog_graph_window.html", null ],
       [ "GamestateGraphPathSelectionWindow", "class_gamestate_graph_path_selection_window.html", null ],
       [ "GamestateGraphWindow", "class_gamestate_graph_window.html", null ],
-      [ "Item.Management.ItemDefinitionEditWindow", "class_item_1_1_management_1_1_item_definition_edit_window.html", null ],
-      [ "Item.Management.ItemDefinitionSelectionWindow", "class_item_1_1_management_1_1_item_definition_selection_window.html", null ],
-      [ "Item.Management.ItemManagerWindow", "class_item_1_1_management_1_1_item_manager_window.html", null ],
-      [ "Item.Management.ItemScopeEditWindow", "class_item_1_1_management_1_1_item_scope_edit_window.html", null ],
       [ "LocalisationEditIDWindow", "class_localisation_edit_i_d_window.html", null ],
       [ "LocalisationEditLanguageWindow", "class_localisation_edit_language_window.html", null ],
       [ "LocalisationEditScopeWindow", "class_localisation_edit_scope_window.html", null ],
       [ "LocalisationManagerWindow", "class_localisation_manager_window.html", null ],
-      [ "LocalisationSelectionWindow", "class_localisation_selection_window.html", null ]
+      [ "LocalisationSelectionWindow", "class_localisation_selection_window.html", null ],
+      [ "UnityToolbox.Item.Management.ItemDefinitionEditWindow", "class_unity_toolbox_1_1_item_1_1_management_1_1_item_definition_edit_window.html", null ],
+      [ "UnityToolbox.Item.Management.ItemDefinitionErrorWindow", "class_unity_toolbox_1_1_item_1_1_management_1_1_item_definition_error_window.html", null ],
+      [ "UnityToolbox.Item.Management.ItemDefinitionSelectionWindow", "class_unity_toolbox_1_1_item_1_1_management_1_1_item_definition_selection_window.html", null ],
+      [ "UnityToolbox.Item.Management.ItemManagerWindow", "class_unity_toolbox_1_1_item_1_1_management_1_1_item_manager_window.html", null ],
+      [ "UnityToolbox.Item.Management.ItemScopeEditWindow", "class_unity_toolbox_1_1_item_1_1_management_1_1_item_scope_edit_window.html", null ]
+    ] ],
+    [ "Exception", null, [
+      [ "LocalisationException", "class_localisation_exception.html", null ],
+      [ "UnityToolbox.Item.Management.ItemDefinitionException", "class_unity_toolbox_1_1_item_1_1_management_1_1_item_definition_exception.html", null ]
     ] ],
     [ "GameData", "class_game_data.html", [
       [ "ItemData", "class_item_data.html", null ],
@@ -70,12 +77,13 @@ var hierarchy =
       [ "TintTextOnHover", "class_tint_text_on_hover.html", null ]
     ] ],
     [ "ISerializationCallbackReceiver", null, [
-      [ "MenuManager", "class_menu_manager.html", null ]
+      [ "MenuManager", "class_menu_manager.html", null ],
+      [ "UnityToolbox.Achievments.AchievementManager", "class_unity_toolbox_1_1_achievments_1_1_achievement_manager.html", null ]
     ] ],
-    [ "Item.ItemDefinition", "class_item_1_1_item_definition.html", null ],
-    [ "Item.Management.ItemField", "class_item_1_1_management_1_1_item_field.html", null ],
-    [ "Item.Management.Itemizer", "class_item_1_1_management_1_1_itemizer.html", null ],
-    [ "Item.Management.ItemScope", "class_item_1_1_management_1_1_item_scope.html", null ],
+    [ "UnityToolbox.Item.ItemDefinition", "class_unity_toolbox_1_1_item_1_1_item_definition.html", null ],
+    [ "UnityToolbox.Item.Management.ItemField", "class_unity_toolbox_1_1_item_1_1_management_1_1_item_field.html", null ],
+    [ "UnityToolbox.Item.Management.Itemizer", "class_unity_toolbox_1_1_item_1_1_management_1_1_itemizer.html", null ],
+    [ "UnityToolbox.Item.Management.ItemScope", "class_unity_toolbox_1_1_item_1_1_management_1_1_item_scope.html", null ],
     [ "LocalisationID", "struct_localisation_i_d.html", null ],
     [ "LocalisationLanguage", "struct_localisation_language.html", null ],
     [ "LocalisationScope", "struct_localisation_scope.html", null ],
@@ -88,6 +96,7 @@ var hierarchy =
       [ "ColliderInfo", "class_collider_info.html", null ],
       [ "DisableMenuControl", "class_disable_menu_control.html", null ],
       [ "DisplayDialog", "class_display_dialog.html", null ],
+      [ "DontDestroyObject", "class_dont_destroy_object.html", null ],
       [ "FirstPersonCameraController", "class_first_person_camera_controller.html", null ],
       [ "GotoMenuButton", "class_goto_menu_button.html", null ],
       [ "GotoSceneButton", "class_goto_scene_button.html", null ],
@@ -109,18 +118,21 @@ var hierarchy =
       [ "MenuWheelNavButton", "class_menu_wheel_nav_button.html", null ],
       [ "Module", "class_module.html", [
         [ "DialogManager", "class_dialog_manager.html", null ],
+        [ "DontDestroyManager", "class_dont_destroy_manager.html", null ],
         [ "GamestateManager", "class_gamestate_manager.html", null ],
         [ "HeldInventoryManager", "class_held_inventory_manager.html", null ],
         [ "IDManager", "class_i_d_manager.html", null ],
         [ "InventoryManager", "class_inventory_manager.html", null ],
-        [ "Item.ItemManager", "class_item_1_1_item_manager.html", null ],
         [ "MenuManager", "class_menu_manager.html", null ],
         [ "PlayerEventManager", "class_player_event_manager.html", null ],
         [ "PlayerPrefKeys", "class_player_pref_keys.html", null ],
         [ "SaveGameManager", "class_save_game_manager.html", null ],
         [ "SettingsManager", "class_settings_manager.html", null ],
         [ "TooltipManager", "class_tooltip_manager.html", null ],
-        [ "UIEventManager", "class_u_i_event_manager.html", null ]
+        [ "UIEventManager", "class_u_i_event_manager.html", null ],
+        [ "UnityToolbox.Achievments.AchievementManager", "class_unity_toolbox_1_1_achievments_1_1_achievement_manager.html", null ],
+        [ "UnityToolbox.Events.EventAggregator", "class_unity_toolbox_1_1_events_1_1_event_aggregator.html", null ],
+        [ "UnityToolbox.Item.ItemManager", "class_unity_toolbox_1_1_item_1_1_item_manager.html", null ]
       ] ],
       [ "ModuleManager", "class_module_manager.html", null ],
       [ "MovementBase", "class_movement_base.html", [
@@ -133,7 +145,7 @@ var hierarchy =
       [ "OnStartDialog", "class_on_start_dialog.html", null ],
       [ "ParentIdentifier", "class_parent_identifier.html", null ],
       [ "QuitButton", "class_quit_button.html", null ],
-      [ "RaycastInteraction", "class_raycast_interaction.html", [
+      [ "RaycastDetection", "class_raycast_detection.html", [
         [ "StartDialogInteraction", "class_start_dialog_interaction.html", null ],
         [ "ToggleMenuInteraction", "class_toggle_menu_interaction.html", null ]
       ] ],
@@ -141,7 +153,7 @@ var hierarchy =
       [ "ResetButton", "class_reset_button.html", null ],
       [ "ResetSavegameButton", "class_reset_savegame_button.html", null ],
       [ "Saveable", "class_saveable.html", [
-        [ "Item.ItemInstance", "class_item_1_1_item_instance.html", null ]
+        [ "UnityToolbox.Item.ItemInstance", "class_unity_toolbox_1_1_item_1_1_item_instance.html", null ]
       ] ],
       [ "ShowControl", "class_show_control.html", null ],
       [ "ShowOnHover", "class_show_on_hover.html", null ],
@@ -158,7 +170,9 @@ var hierarchy =
       [ "TintTextOnHover", "class_tint_text_on_hover.html", null ],
       [ "ToggleMenuButton", "class_toggle_menu_button.html", null ],
       [ "ToggleMenuControl", "class_toggle_menu_control.html", null ],
-      [ "ToggleMenuInteractionInfo", "class_toggle_menu_interaction_info.html", null ]
+      [ "ToggleMenuInteractionInfo", "class_toggle_menu_interaction_info.html", null ],
+      [ "TriggerDetection", "class_trigger_detection.html", null ],
+      [ "UnityToolbox.Achievments.AchievementTrigger", "class_unity_toolbox_1_1_achievments_1_1_achievement_trigger.html", null ]
     ] ],
     [ "Node", null, [
       [ "DialogNode", "class_dialog_node.html", null ],
@@ -172,11 +186,20 @@ var hierarchy =
     ] ],
     [ "PropertyDrawer", null, [
       [ "DropDownDrawer", "class_drop_down_drawer.html", null ],
-      [ "Item.Management.ItemDefinitionDrawer", "class_item_1_1_management_1_1_item_definition_drawer.html", null ],
       [ "LocalisationDrawer", "class_localisation_drawer.html", null ],
-      [ "ReadOnlyDrawer", "class_read_only_drawer.html", null ]
+      [ "ReadOnlyDrawer", "class_read_only_drawer.html", null ],
+      [ "UnityToolbox.Item.Management.ItemDefinitionDrawer", "class_unity_toolbox_1_1_item_1_1_management_1_1_item_definition_drawer.html", null ]
+    ] ],
+    [ "UnityToolbox.Events.PubSubEventBase", "class_unity_toolbox_1_1_events_1_1_pub_sub_event_base.html", [
+      [ "UnityToolbox.Events.PubSubEvent< T >", "class_unity_toolbox_1_1_events_1_1_pub_sub_event.html", [
+        [ "UnityToolbox.Achievments.AchievementEvent< T >", "class_unity_toolbox_1_1_achievments_1_1_achievement_event.html", null ]
+      ] ]
     ] ],
     [ "ResourcesUtil", "class_resources_util.html", null ],
+    [ "ScriptableObject", null, [
+      [ "UnityToolbox.Achievments.AchievementData", "class_unity_toolbox_1_1_achievments_1_1_achievement_data.html", null ]
+    ] ],
+    [ "SubscriptionToken", "struct_subscription_token.html", null ],
     [ "ToolboxPathLocalizer", "class_toolbox_path_localizer.html", null ],
     [ "GraphView", null, [
       [ "DialogGraphView", "class_dialog_graph_view.html", null ],

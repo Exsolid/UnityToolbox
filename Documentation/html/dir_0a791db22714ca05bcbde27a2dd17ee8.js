@@ -5,6 +5,7 @@ var dir_0a791db22714ca05bcbde27a2dd17ee8 =
     [ "UI", "dir_ba97c6a3fce87c644c6f450492d2ff3d.html", "dir_ba97c6a3fce87c644c6f450492d2ff3d" ],
     [ "MovementBase.cs", "_movement_base_8cs.html", "_movement_base_8cs" ],
     [ "PlayerEventManager.cs", "_player_event_manager_8cs.html", "_player_event_manager_8cs" ],
-    [ "RaycastInteraction.cs", "_raycast_interaction_8cs.html", "_raycast_interaction_8cs" ],
-    [ "SimpleCameraFollow.cs", "_simple_camera_follow_8cs.html", "_simple_camera_follow_8cs" ]
+    [ "RaycastDetection.cs", "_raycast_detection_8cs.html", "_raycast_detection_8cs" ],
+    [ "SimpleCameraFollow.cs", "_simple_camera_follow_8cs.html", "_simple_camera_follow_8cs" ],
+    [ "TriggerDetection.cs", "_trigger_detection_8cs.html", "_trigger_detection_8cs" ]
 ];

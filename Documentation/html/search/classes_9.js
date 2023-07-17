@@ -1,15 +1,20 @@
 var searchData=
 [
-  ['mastersceneloaderforeditor_0',['MasterSceneLoaderForEditor',['../class_master_scene_loader_for_editor.html',1,'']]],
-  ['menu_1',['Menu',['../class_menu.html',1,'']]],
-  ['menumanager_2',['MenuManager',['../class_menu_manager.html',1,'']]],
-  ['menutype_3',['MenuType',['../class_menu_type.html',1,'']]],
-  ['menuwheel_4',['MenuWheel',['../class_menu_wheel.html',1,'']]],
-  ['menuwheelnavbutton_5',['MenuWheelNavButton',['../class_menu_wheel_nav_button.html',1,'']]],
-  ['module_6',['Module',['../class_module.html',1,'']]],
-  ['modulemanager_7',['ModuleManager',['../class_module_manager.html',1,'']]],
-  ['movement2dside_8',['Movement2DSide',['../class_movement2_d_side.html',1,'']]],
-  ['movement2dtop_9',['Movement2DTop',['../class_movement2_d_top.html',1,'']]],
-  ['movement3d_10',['Movement3D',['../class_movement3_d.html',1,'']]],
-  ['movementbase_11',['MovementBase',['../class_movement_base.html',1,'']]]
+  ['languagesetting_0',['LanguageSetting',['../class_language_setting.html',1,'']]],
+  ['languagesettingbutton_1',['LanguageSettingButton',['../class_language_setting_button.html',1,'']]],
+  ['loadfirstscene_2',['LoadFirstScene',['../class_load_first_scene.html',1,'']]],
+  ['loadoriginalsceneforeditor_3',['LoadOriginalSceneForEditor',['../class_load_original_scene_for_editor.html',1,'']]],
+  ['localisationdrawer_4',['LocalisationDrawer',['../class_localisation_drawer.html',1,'']]],
+  ['localisationeditidwindow_5',['LocalisationEditIDWindow',['../class_localisation_edit_i_d_window.html',1,'']]],
+  ['localisationeditlanguagewindow_6',['LocalisationEditLanguageWindow',['../class_localisation_edit_language_window.html',1,'']]],
+  ['localisationeditscopewindow_7',['LocalisationEditScopeWindow',['../class_localisation_edit_scope_window.html',1,'']]],
+  ['localisationexception_8',['LocalisationException',['../class_localisation_exception.html',1,'']]],
+  ['localisationid_9',['LocalisationID',['../struct_localisation_i_d.html',1,'']]],
+  ['localisationlanguage_10',['LocalisationLanguage',['../struct_localisation_language.html',1,'']]],
+  ['localisationmanagerwindow_11',['LocalisationManagerWindow',['../class_localisation_manager_window.html',1,'']]],
+  ['localisationscope_12',['LocalisationScope',['../struct_localisation_scope.html',1,'']]],
+  ['localisationselectionwindow_13',['LocalisationSelectionWindow',['../class_localisation_selection_window.html',1,'']]],
+  ['localizedtext_14',['LocalizedText',['../class_localized_text.html',1,'']]],
+  ['localizer_15',['Localizer',['../class_localizer.html',1,'']]],
+  ['lockmovement_16',['LockMovement',['../class_lock_movement.html',1,'']]]
 ];

@@ -1,6 +1,7 @@
 var dir_158effeb33bd144cfb0e2a057543d6e0 =
 [
     [ "Editor", "dir_f0da1b332762cd86f501018bce82eaaf.html", "dir_f0da1b332762cd86f501018bce82eaaf" ],
+    [ "LocalisationException.cs", "_localisation_exception_8cs.html", "_localisation_exception_8cs" ],
     [ "LocalisationID.cs", "_localisation_i_d_8cs.html", "_localisation_i_d_8cs" ],
     [ "LocalisationLanguage.cs", "_localisation_language_8cs.html", "_localisation_language_8cs" ],
     [ "LocalisationScope.cs", "_localisation_scope_8cs.html", "_localisation_scope_8cs" ],

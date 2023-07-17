@@ -1,14 +1,20 @@
 var searchData=
 [
-  ['mastersceneloaderforeditor_2ecs_0',['MasterSceneLoaderForEditor.cs',['../_master_scene_loader_for_editor_8cs.html',1,'']]],
-  ['menu_2ecs_1',['Menu.cs',['../_menu_8cs.html',1,'']]],
-  ['menumanager_2ecs_2',['MenuManager.cs',['../_menu_manager_8cs.html',1,'']]],
-  ['menuwheel_2ecs_3',['MenuWheel.cs',['../_menu_wheel_8cs.html',1,'']]],
-  ['menuwheelnavbutton_2ecs_4',['MenuWheelNavButton.cs',['../_menu_wheel_nav_button_8cs.html',1,'']]],
-  ['module_2ecs_5',['Module.cs',['../_module_8cs.html',1,'']]],
-  ['modulemanager_2ecs_6',['ModuleManager.cs',['../_module_manager_8cs.html',1,'']]],
-  ['movement2dside_2ecs_7',['Movement2DSide.cs',['../_movement2_d_side_8cs.html',1,'']]],
-  ['movement2dtop_2ecs_8',['Movement2DTop.cs',['../_movement2_d_top_8cs.html',1,'']]],
-  ['movement3d_2ecs_9',['Movement3D.cs',['../_movement3_d_8cs.html',1,'']]],
-  ['movementbase_2ecs_10',['MovementBase.cs',['../_movement_base_8cs.html',1,'']]]
+  ['languagesetting_2ecs_0',['LanguageSetting.cs',['../_language_setting_8cs.html',1,'']]],
+  ['languagesettingbutton_2ecs_1',['LanguageSettingButton.cs',['../_language_setting_button_8cs.html',1,'']]],
+  ['loadfirstscene_2ecs_2',['LoadFirstScene.cs',['../_load_first_scene_8cs.html',1,'']]],
+  ['loadoriginalsceneforeditor_2ecs_3',['LoadOriginalSceneForEditor.cs',['../_load_original_scene_for_editor_8cs.html',1,'']]],
+  ['localisationdrawer_2ecs_4',['LocalisationDrawer.cs',['../_localisation_drawer_8cs.html',1,'']]],
+  ['localisationeditidwindow_2ecs_5',['LocalisationEditIDWindow.cs',['../_localisation_edit_i_d_window_8cs.html',1,'']]],
+  ['localisationeditlanguagewindow_2ecs_6',['LocalisationEditLanguageWindow.cs',['../_localisation_edit_language_window_8cs.html',1,'']]],
+  ['localisationeditscopewindow_2ecs_7',['LocalisationEditScopeWindow.cs',['../_localisation_edit_scope_window_8cs.html',1,'']]],
+  ['localisationexception_2ecs_8',['LocalisationException.cs',['../_localisation_exception_8cs.html',1,'']]],
+  ['localisationid_2ecs_9',['LocalisationID.cs',['../_localisation_i_d_8cs.html',1,'']]],
+  ['localisationlanguage_2ecs_10',['LocalisationLanguage.cs',['../_localisation_language_8cs.html',1,'']]],
+  ['localisationmanagerwindow_2ecs_11',['LocalisationManagerWindow.cs',['../_localisation_manager_window_8cs.html',1,'']]],
+  ['localisationscope_2ecs_12',['LocalisationScope.cs',['../_localisation_scope_8cs.html',1,'']]],
+  ['localisationselectionwindow_2ecs_13',['LocalisationSelectionWindow.cs',['../_localisation_selection_window_8cs.html',1,'']]],
+  ['localizedtext_2ecs_14',['LocalizedText.cs',['../_localized_text_8cs.html',1,'']]],
+  ['localizer_2ecs_15',['Localizer.cs',['../_localizer_8cs.html',1,'']]],
+  ['lockmovement_2ecs_16',['LockMovement.cs',['../_lock_movement_8cs.html',1,'']]]
 ];

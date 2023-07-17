@@ -7,6 +7,7 @@ var class_localisation_edit_i_d_window =
     [ "LocalisationIDEdited", "class_localisation_edit_i_d_window.html#a0cd471bcd60339c80bb2408f56436d7b", null ],
     [ "OnGUI", "class_localisation_edit_i_d_window.html#a20a4c48040ce992dec18e60672c5e507", null ],
     [ "ScopeEdited", "class_localisation_edit_i_d_window.html#a1384e15f45da05455c029e28e2030d2f", null ],
+    [ "UpdateStatus", "class_localisation_edit_i_d_window.html#a9057db53dbd4ca8ae1d003a8e5bb610c", null ],
     [ "_localisationID", "class_localisation_edit_i_d_window.html#a141b2e8bcd36675da75546947fc07875", null ],
     [ "_newIDName", "class_localisation_edit_i_d_window.html#aac60a600d38f090d020baab64f976813", null ],
     [ "_newLocalisations", "class_localisation_edit_i_d_window.html#a2f17006aae83aac93479c7fe8ff0c554", null ],
