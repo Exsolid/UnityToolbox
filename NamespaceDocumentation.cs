@@ -1,4 +1,6 @@
-using UnityEngine;
+
+using UnityToolbox.Events;
+using UnityToolbox.Item;
 
 /// <summary>
 /// The main namespace for item usage.
@@ -14,3 +16,13 @@ namespace UnityToolbox.Item { }
 /// The namespace for everything related to item management. It is not built to be used within scripts.
 /// </summary>
 namespace UnityToolbox.Item.Management { }
+
+/// <summary>
+/// All event related scripts are found here. The heart module would be <see cref="EventAggregator"/>.
+/// </summary>
+namespace UnityToolbox.Events { }
+
+/// <summary>
+/// All scripts related to the achievment system.
+/// </summary>
+namespace UnityToolbox.Achievments { }

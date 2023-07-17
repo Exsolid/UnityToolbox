@@ -158,7 +158,6 @@ public class MenuManager : Module, ISerializationCallbackReceiver
     {
         _menuList = MenuTypesForEditor;
         _menuTypes = MenuTypeNamesForEditor;
-
     }
 
     public void OnAfterDeserialize()

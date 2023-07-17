@@ -166,6 +166,6 @@ public class ColliderInfo : MonoBehaviour
     /// <returns>A list of current colliders.</returns>
     public List<Collider2D> GetAllCollisions2D()
     {
-        return _colliders == null ? new List<Collider2D>() : _colliders2D.ToList();
+        return _colliders2D == null ? new List<Collider2D>() : _colliders2D.ToList();
     }
 }
