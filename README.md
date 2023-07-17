@@ -11,6 +11,8 @@ Currently this includes:
 - Settings management (Controls, volume and languages) | See SettingsManager
 - Sound management | See AudioMixer
 - Inventory system (To be reworked soon)
+- Achievment system | See AchievmentManager
+- Event management | See EventAggregator
 
 The documentation for the inventory system will be added once reworked.
 
