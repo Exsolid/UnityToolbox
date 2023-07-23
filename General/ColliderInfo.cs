@@ -130,7 +130,7 @@ public class ColliderInfo : MonoBehaviour
         }
 
         List<Collider> result = new List<Collider>();
-        result.AddRange(_colliders.Where(col => layerMask == (layerMask | (1 << col.gameObject.layer))));
+        result.AddRange(_colliders.Where(col => col != null && layerMask == (layerMask | (1 << col.gameObject.layer))));
         return result;
     }
 
@@ -147,7 +147,7 @@ public class ColliderInfo : MonoBehaviour
         }
 
         List<Collider2D> result = new List<Collider2D>();
-        result.AddRange(_colliders2D.Where(col => layerMask == (layerMask | (1 << col.gameObject.layer))));
+        result.AddRange(_colliders2D.Where(col => col != null && layerMask == (layerMask | (1 << col.gameObject.layer))));
         return result;
     }
 

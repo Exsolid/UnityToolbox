@@ -1,16 +1,35 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
-/// A boid implementation which listens to the three rules cohesion, separation and alignment. Additionally, object attraction and avoidance can be set.
+/// An abstract boid implementation which listens to the three rules cohesion, separation and alignment. Additionally, object attraction and avoidance can be set.
 /// Requires <see cref="ColliderInfo"/> to work.
 /// </summary>
-public class Boid2D : MonoBehaviour
+public abstract class Boid2DBase : MonoBehaviour
 {
     [SerializeField] private ColliderInfo _detectionRange;
     [SerializeField] private LayerMask _boidMask;
+    public LayerMask BoidMask
+    {
+        get { return _boidMask; }
+        set { _boidMask = value; }
+    }
+
     [SerializeField] private LayerMask _avoidMask;
+    public LayerMask AvoidMask
+    {
+        get { return _avoidMask; }
+        set { _avoidMask = value; }
+    }
+
     [SerializeField] private LayerMask _attractMask;
+    public LayerMask AttractMask
+    {
+        get { return _attractMask; }
+        set { _attractMask = value; }
+    }
+
     [SerializeField] private float _minRangeBoids;
     [SerializeField] private float _minRangeObstacles;
     [SerializeField] private float _minRangeAttraction;
@@ -21,11 +40,11 @@ public class Boid2D : MonoBehaviour
     private Camera _camera;
     private Vector2 _bounds;
 
-    private GameObject _nearestBoid;
-    private GameObject _nearestAttraction;
+    public GameObject _nearestBoid;
+    public GameObject _nearestAttraction;
 
-    private GameObject _nearestObstacle;
-    private GameObject _secondNearestObstacle;
+    public GameObject _nearestObstacle;
+    public GameObject _secondNearestObstacle;
 
     private Vector3 _avgAlignment;
     private Vector3 _avgPos;
@@ -33,7 +52,7 @@ public class Boid2D : MonoBehaviour
     private void Start()
     {
         _camera = Camera.main;
-        _bounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, _camera.transform.position.z));
+        _bounds = _camera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, transform.position.z - _camera.transform.position.z + 1));
     }
 
     void Update()
@@ -55,6 +74,27 @@ public class Boid2D : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// An additional implementation which can filter the nearest object even further.
+    /// </summary>
+    /// <param name="nearest">The nearest found object to avoid.</param>
+    /// <returns>Whether the object should be taken into account.</returns>
+    protected abstract bool AdditionalAvoidanceCheck(Collider2D nearest);
+
+    /// <summary>
+    /// An additional implementation which can filter the nearest object even further.
+    /// </summary>
+    /// <param name="nearest">The nearest found object which attracts.</param>
+    /// <returns>Whether the object should be taken into account.</returns>
+    protected abstract bool AdditionalAttractionCheck(Collider2D nearest);
+
+    /// <summary>
+    /// An additional implementation which can filter the nearest boid even further.
+    /// </summary>
+    /// <param name="nearest">The nearest found boid.</param>
+    /// <returns>Whether the object should be taken into account.</returns>
+    protected abstract bool AdditionalBoidCheck(Collider2D nearest);
+
     private void MoveToRotation()
     {
         transform.position += transform.up * _speed * Time.deltaTime;
@@ -62,12 +102,13 @@ public class Boid2D : MonoBehaviour
 
     private void GetInformation()
     {
-        List<Collider2D> nearby = _detectionRange.GetAllCollisions2D(_avoidMask);
+        HashSet<Collider2D> nearby = new HashSet<Collider2D>();
+        nearby.AddRange(_detectionRange.GetAllCollisions2D(_avoidMask));
         nearby.AddRange(_detectionRange.GetAllCollisions2D(_boidMask));
         nearby.AddRange(_detectionRange.GetAllCollisions2D(_attractMask));
-
         ResetInformation(nearby);
 
+        int boidCounter = 0;
         foreach (Collider2D col in nearby)
         {
             if (gameObject.Equals(col.gameObject))
@@ -75,39 +116,56 @@ public class Boid2D : MonoBehaviour
                 continue;
             }
 
-            if ((1 << col.gameObject.layer).Equals(_boidMask))
+            if (((_boidMask & (1 << col.gameObject.layer)) != 0))
             {
-                _avgPos += col.transform.position;
-                _avgAlignment += col.transform.up;
-                if (Vector3.Distance(col.transform.position, transform.position) < _minRangeBoids && (_nearestBoid == null || Vector3.Distance(col.transform.position, transform.position) < Vector3.Distance(_nearestBoid.transform.position, transform.position)))
+                if (AdditionalBoidCheck(col))
                 {
-                    _nearestBoid = col.gameObject;
+                    float distance = Vector3.Distance(transform.position, col.transform.position);
+                    _avgPos += col.transform.position;
+                    _avgAlignment += col.transform.up;
+                    boidCounter++;
+
+                    if (distance < _minRangeBoids && (_nearestBoid == null || Vector3.Distance(col.transform.position, transform.position) < Vector3.Distance(_nearestBoid.transform.position, transform.position)))
+                    {
+                        _nearestBoid = col.gameObject;
+                    }
                 }
             }
-            else if ((1 << col.gameObject.layer).Equals(_avoidMask))
+
+            if (((_avoidMask & (1 << col.gameObject.layer)) != 0))
             {
                 float distance = Vector3.Distance(transform.position, col.GetComponent<Collider2D>().ClosestPoint(transform.position));
                 if (distance < _minRangeObstacles && (_nearestObstacle == null || Vector3.Distance(col.GetComponent<Collider2D>().ClosestPoint(transform.position), transform.position) < Vector3.Distance(_nearestObstacle.GetComponent<Collider2D>().ClosestPoint(transform.position), transform.position)))
                 {
-                    _secondNearestObstacle = _nearestObstacle;
-                    _nearestObstacle = col.gameObject;
+                    if (AdditionalAvoidanceCheck(col))
+                    {
+                        _secondNearestObstacle = _nearestObstacle;
+                        _nearestObstacle = col.gameObject;
+                    }
                 }
             }
-            else if ((1 << col.gameObject.layer).Equals(_attractMask))
+
+            if (((_attractMask & (1 << col.gameObject.layer)) != 0))
             {
                 float distance = Vector3.Distance(transform.position, col.GetComponent<Collider2D>().ClosestPoint(transform.position));
                 if (distance < _minRangeAttraction && (_nearestAttraction == null || Vector3.Distance(col.GetComponent<Collider2D>().ClosestPoint(transform.position), transform.position) < Vector3.Distance(_nearestAttraction.GetComponent<Collider2D>().ClosestPoint(transform.position), transform.position)))
                 {
-                    _nearestAttraction = col.gameObject;
+                    if (AdditionalAttractionCheck(col))
+                    {
+                        _nearestAttraction = col.gameObject;
+                    }
                 }
             }
         }
 
-        _avgPos *= 1f/nearby.Count;
-        _avgAlignment *= 1f/nearby.Count;
+        if(boidCounter != 0)
+        {
+            _avgPos /= boidCounter;
+            _avgAlignment /= boidCounter;
+        }
     }
 
-    private void ResetInformation(List<Collider2D> nearby)
+    private void ResetInformation(HashSet<Collider2D> nearby)
     {
         _avgPos = new Vector3(0, 0, 0);
         _avgAlignment = new Vector3(0, 0, 0);
