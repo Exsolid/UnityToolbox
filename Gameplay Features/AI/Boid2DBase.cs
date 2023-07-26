@@ -134,7 +134,7 @@ public abstract class Boid2DBase : MonoBehaviour
 
             if (((_avoidMask & (1 << col.gameObject.layer)) != 0))
             {
-                float distance = Vector3.Distance(transform.position, col.GetComponent<Collider2D>().ClosestPoint(transform.position));
+                float distance = Vector3.Distance(transform.position, col.GetComponent<Collider2D>().ClosestPoint(transform.position)) - transform.position.z;
                 if (distance < _minRangeObstacles && (_nearestObstacle == null || Vector3.Distance(col.GetComponent<Collider2D>().ClosestPoint(transform.position), transform.position) < Vector3.Distance(_nearestObstacle.GetComponent<Collider2D>().ClosestPoint(transform.position), transform.position)))
                 {
                     if (AdditionalAvoidanceCheck(col))
@@ -147,7 +147,8 @@ public abstract class Boid2DBase : MonoBehaviour
 
             if (((_attractMask & (1 << col.gameObject.layer)) != 0))
             {
-                float distance = Vector3.Distance(transform.position, col.GetComponent<Collider2D>().ClosestPoint(transform.position));
+                float distance = Vector3.Distance(transform.position, col.GetComponent<Collider2D>().ClosestPoint(transform.position)) - transform.position.z;
+                Debug.Log(distance);
                 if (distance < _minRangeAttraction && (_nearestAttraction == null || Vector3.Distance(col.GetComponent<Collider2D>().ClosestPoint(transform.position), transform.position) < Vector3.Distance(_nearestAttraction.GetComponent<Collider2D>().ClosestPoint(transform.position), transform.position)))
                 {
                     if (AdditionalAttractionCheck(col))
@@ -178,7 +179,7 @@ public abstract class Boid2DBase : MonoBehaviour
             }
             else
             {
-                float distance = Vector3.Distance(transform.position, _nearestObstacle.GetComponent<Collider2D>().ClosestPoint(transform.position));
+                float distance = Vector3.Distance(transform.position, _nearestObstacle.GetComponent<Collider2D>().ClosestPoint(transform.position)) - transform.position.z;
                 if (distance > _minRangeObstacles)
                 {
                     _nearestObstacle = null;
@@ -194,7 +195,7 @@ public abstract class Boid2DBase : MonoBehaviour
             }
             else
             {
-                float distance = Vector3.Distance(transform.position, _secondNearestObstacle.GetComponent<Collider2D>().ClosestPoint(transform.position));
+                float distance = Vector3.Distance(transform.position, _secondNearestObstacle.GetComponent<Collider2D>().ClosestPoint(transform.position)) - transform.position.z;
                 if (distance > _minRangeObstacles)
                 {
                     _secondNearestObstacle = null;
