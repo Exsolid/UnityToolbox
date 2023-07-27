@@ -40,14 +40,16 @@ public abstract class Boid2DBase : MonoBehaviour
     private Camera _camera;
     private Vector2 _bounds;
 
-    public GameObject _nearestBoid;
-    public GameObject _nearestAttraction;
+    protected GameObject _nearestBoid;
+    protected GameObject _nearestAttraction;
 
-    public GameObject _nearestObstacle;
-    public GameObject _secondNearestObstacle;
+    protected GameObject _nearestObstacle;
+    protected GameObject _secondNearestObstacle;
 
-    private Vector3 _avgAlignment;
-    private Vector3 _avgPos;
+    protected Vector3 _avgAlignment;
+    protected Vector3 _avgPos;
+
+    protected bool _disableBasicRotation;
 
     private void Start()
     {
@@ -55,16 +57,19 @@ public abstract class Boid2DBase : MonoBehaviour
         _bounds = _camera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, transform.position.z - _camera.transform.position.z + 1));
     }
 
-    void Update()
+    public void Update()
     {
         GetInformation();
 
-        Cohesion();
-        Alignment();
-        Seperation();
+        if (!_disableBasicRotation)
+        {
+            Cohesion();
+            Alignment();
+            Seperation();
 
-        ObjectAttraction();
-        ObjectAvoidance();
+            ObjectAttraction();
+            ObjectAvoidance();
+        }
 
         MoveToRotation();
 
@@ -148,7 +153,6 @@ public abstract class Boid2DBase : MonoBehaviour
             if (((_attractMask & (1 << col.gameObject.layer)) != 0))
             {
                 float distance = Vector3.Distance(transform.position, col.GetComponent<Collider2D>().ClosestPoint(transform.position)) - transform.position.z;
-                Debug.Log(distance);
                 if (distance < _minRangeAttraction && (_nearestAttraction == null || Vector3.Distance(col.GetComponent<Collider2D>().ClosestPoint(transform.position), transform.position) < Vector3.Distance(_nearestAttraction.GetComponent<Collider2D>().ClosestPoint(transform.position), transform.position)))
                 {
                     if (AdditionalAttractionCheck(col))
@@ -300,7 +304,7 @@ public abstract class Boid2DBase : MonoBehaviour
         return Mathf.Sign((B.x - A.x) * (C.y - A.y) - (B.y - A.y) * (C.x - A.x));
     }
 
-    private void MoveDirection(Vector3 position, bool away)
+    public void MoveDirection(Vector3 position, bool away)
     {
         float sgn = GetSide(transform.position, transform.position + transform.up, position);
         transform.Rotate(new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.x + _rotationSpeed * sgn * (away ? -1 : 1) * Time.deltaTime), Space.Self);
