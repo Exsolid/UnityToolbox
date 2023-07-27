@@ -141,7 +141,7 @@ public class AudioMixer : MonoBehaviour
     {
         _audioSource.volume = 0;
         _internalPause = false;
-        float value = PlayerPrefs.HasKey(ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.MUSIC_VOLUME)) ? PlayerPrefs.GetFloat(ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.MUSIC_VOLUME)) : 0.5f;
+        float value = GetComponent<AudioVolumeSetter>() == null ? 0.5f : GetComponent<AudioVolumeSetter>().GetSetVolume();
         foreach (Coroutine c in _coroutines)
         {
             if(c != null)

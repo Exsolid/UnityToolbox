@@ -5,5 +5,6 @@ using UnityEngine;
 public enum AudioType
 {
     Music,
-    Effects
+    Effects,
+    Ambience
 }

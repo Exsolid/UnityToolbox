@@ -29,6 +29,9 @@ public class AudioVolumeSetter : MonoBehaviour
             case AudioType.Music:
                 pref = ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.MUSIC_VOLUME);
                 break;
+            case AudioType.Ambience:
+                pref = ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.AMBIENCE_VOLUME);
+                break;
         }
 
         float value = PlayerPrefs.HasKey(pref) ? PlayerPrefs.GetFloat(pref) : 0.5f;
@@ -58,5 +61,24 @@ public class AudioVolumeSetter : MonoBehaviour
                 }
             }
         }
+    }
+
+    public float GetSetVolume()
+    {
+        string pref = "";
+        switch (_type)
+        {
+            case AudioType.Effects:
+                pref = ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.EFFECTS_VOLUME);
+                break;
+            case AudioType.Music:
+                pref = ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.MUSIC_VOLUME);
+                break;
+            case AudioType.Ambience:
+                pref = ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.AMBIENCE_VOLUME);
+                break;
+        }
+
+        return PlayerPrefs.HasKey(pref) ? PlayerPrefs.GetFloat(pref) : 0.5f;
     }
 }

@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class SliderSetting : MonoBehaviour
 {
     [SerializeField] private AudioMixer _clickSounds;
-    public enum SliderOption { Effects, Music, Mouse_Sensitivity}
+    public enum SliderOption { Effects, Music, Ambience, Mouse_Sensitivity}
 
     [SerializeField] private SliderOption _option;
 
@@ -41,6 +41,9 @@ public class SliderSetting : MonoBehaviour
                 break;
             case SliderOption.Effects:
                 _pref = ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.EFFECTS_VOLUME);
+                break;
+            case SliderOption.Ambience:
+                _pref = ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.AMBIENCE_VOLUME);
                 break;
         }
 
@@ -75,6 +78,9 @@ public class SliderSetting : MonoBehaviour
             case SliderOption.Effects:
                 ModuleManager.GetModule<SettingsManager>().SoundValueChanged(AudioType.Effects, _slider.value / _slider.maxValue);
                 break;
+            case SliderOption.Ambience:
+                ModuleManager.GetModule<SettingsManager>().SoundValueChanged(AudioType.Ambience, _slider.value / _slider.maxValue);
+                break;
         }
     }
 
@@ -100,6 +106,9 @@ public class SliderSetting : MonoBehaviour
                 break;
             case SliderOption.Effects:
                 ModuleManager.GetModule<SettingsManager>().SoundValueChanged(AudioType.Effects, _slider.value / _slider.maxValue);
+                break;
+            case SliderOption.Ambience:
+                ModuleManager.GetModule<SettingsManager>().SoundValueChanged(AudioType.Ambience, _slider.value / _slider.maxValue);
                 break;
         }
     }
