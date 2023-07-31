@@ -5,7 +5,7 @@ using System.Linq;
 
 /// <summary>
 /// This script sets the volume of a <see cref="AudioSource"/> and reads the data from the settings.
-/// For more information on volume settings see <see cref="SettingsManager"/> and <see cref="SliderSetting"/>.
+/// For more information on volume settings see <see cref="SettingsManager"/> and <see cref="UnitySilderSetting"/>.
 /// Requires <see cref="PlayerPrefKeys"/> and <see cref="PlayerPrefKeys"/>.
 /// </summary>
 [RequireComponent(typeof(AudioSource))]

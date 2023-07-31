@@ -7,7 +7,7 @@ using UnityEngine.UI;
 /// <summary>
 /// This script is placed on a slider and sets all changes for a given <see cref="SliderOption"/> to the <see cref="SettingsManager"/>.
 /// </summary>
-public class SliderSetting : MonoBehaviour
+public class UnitySilderSetting : MonoBehaviour
 {
     [SerializeField] private AudioMixer _clickSounds;
     public enum SliderOption { Effects, Music, Ambience, Mouse_Sensitivity}
