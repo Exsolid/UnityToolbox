@@ -27,8 +27,9 @@ public class ImageSliderHandle : MonoBehaviour, IPointerDownHandler, IPointerUpH
     public event Action<float> ValueUpdate;
 
     private float _scaling;
+    private float _prevScaling;
 
-    private void Awake()
+    private void Start()
     {
         Init();
     }
@@ -40,14 +41,23 @@ public class ImageSliderHandle : MonoBehaviour, IPointerDownHandler, IPointerUpH
         _scaledMinPos = transform.parent.transform.position.x - ((RectTransform)transform.parent.transform).sizeDelta.x / 2 * _scaling + GetComponent<Image>().rectTransform.sizeDelta.x * _scaling;
         _scaledMaxPos = transform.parent.transform.position.x + ((RectTransform)transform.parent.transform).sizeDelta.x / 2 * _scaling - GetComponent<Image>().rectTransform.sizeDelta.x * _scaling;
         _initialized = true;
-
+        _prevScaling = _scaling;
     }
 
     private void Update()
     {
         _scaling = _camera.scaledPixelWidth / _fillImage.GetComponentInParent<CanvasScaler>().referenceResolution.x;
+
         _scaledMinPos = transform.parent.transform.position.x - ((RectTransform)transform.parent.transform).sizeDelta.x / 2 * _scaling + GetComponent<Image>().rectTransform.sizeDelta.x * _scaling;
         _scaledMaxPos = transform.parent.transform.position.x + ((RectTransform)transform.parent.transform).sizeDelta.x / 2 * _scaling - GetComponent<Image>().rectTransform.sizeDelta.x * _scaling;
+
+        if (_prevScaling != _scaling)
+        {
+            float x = _fillImage.fillAmount == 0 ? _scaledMinPos : _scaledMinPos + (_scaledMaxPos - _scaledMinPos) * _fillImage.fillAmount;
+            transform.position = new Vector3(x, transform.position.y, transform.position.z);
+        }
+
+        _prevScaling = _scaling;
 
         if (_dragging && Enabled)
         {
