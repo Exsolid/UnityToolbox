@@ -79,7 +79,8 @@ public class DialogManager : Module
             _currentNode = sequence.First();
 
             ModuleManager.GetModule<UIEventManager>().DialogNodeChanged(_currentNode);
-        }else if (sequence.Count() < 1)
+        }
+        else if (sequence.Count() > 1)
         {
             throw new System.Exception("Multiple dialog nodes found for " + nameof(dialogID) + ": " + dialogID + " at the same gamestate.");
         }

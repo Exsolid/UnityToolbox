@@ -17,7 +17,7 @@ public class GamestateManager : Module
     private Dictionary<string, GamestateNodeData> _stateNodes;
     private HashSet<GamestateNodeData> _activeNodes;
 
-    private GamestateNodeData _startNode;
+    private List<GamestateNodeData> _startNodes;
 
     /// <summary>
     /// An event which is triggered once the gamestate with the given string ID is completed;
@@ -36,6 +36,7 @@ public class GamestateManager : Module
         }
         _stateNodeConnections = new Dictionary<GamestateNodeData, List<GamestateNodeData>>();
         _stateNodes = new Dictionary<string, GamestateNodeData>();
+        _startNodes = new List<GamestateNodeData>();
 
         List<GamestateNodeData> data = ResourcesUtil.GetFileData<List<GamestateNodeData>>(ProjectPrefKeys.GAMESTATEDATASAVEPATH, FILENAME);
         if (data != null)
@@ -46,7 +47,7 @@ public class GamestateManager : Module
                 _stateNodes.Add(node.Name, node);
                 if(node.InputIDs.Count == 0)
                 {
-                    _startNode = node;
+                    _startNodes.Add(node);
                 }
                 node.IsActive = _activeNodes.Contains(node);
             }
@@ -62,8 +63,11 @@ public class GamestateManager : Module
 
             if(_activeNodes.Count == 0)
             {
-                _startNode.IsActive = true;
-                _activeNodes.Add(_startNode);
+                foreach(GamestateNodeData startNode in _startNodes)
+                {
+                    startNode.IsActive = true;
+                    _activeNodes.Add(startNode);
+                }
             }
         }
     }
