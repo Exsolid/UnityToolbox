@@ -13,11 +13,19 @@ public class AudioVolumeSetter : MonoBehaviour
 {
     [SerializeField] private AudioType _type;
     private List<AudioSource> _audioSources;
+    private List<float> _originalVolume;
 
     // Start is called before the first frame update
     void Start()
     {
+        _originalVolume = new List<float>();
         _audioSources = GetComponents<AudioSource>().ToList();
+
+        foreach (AudioSource s in _audioSources)
+        {
+            _originalVolume.Add(s.volume);
+        }
+
         ModuleManager.GetModule<SettingsManager>().OnSoundValueChanged += OnSoundChanged;
 
         string pref = "";
@@ -35,12 +43,14 @@ public class AudioVolumeSetter : MonoBehaviour
         }
 
         float value = PlayerPrefs.HasKey(pref) ? PlayerPrefs.GetFloat(pref) : 0.5f;
+        int i = 0;
         foreach (AudioSource source in _audioSources)
         {
             if (source != null)
             {
-                source.volume = value;
+                source.volume = _originalVolume[i] * value;
             }
+            i++;
         }
     }
 
@@ -53,17 +63,19 @@ public class AudioVolumeSetter : MonoBehaviour
     {
         if (type == _type)
         {
+            int i = 0;
             foreach (AudioSource source in _audioSources)
             {
                 if(source != null)
                 {
-                    source.volume = newValue;
+                    source.volume = _originalVolume[i] * newValue;
                 }
+                i++;
             }
         }
     }
 
-    public float GetSetVolume()
+    public float GetSetVolume(AudioSource source)
     {
         string pref = "";
         switch (_type)
@@ -79,6 +91,6 @@ public class AudioVolumeSetter : MonoBehaviour
                 break;
         }
 
-        return PlayerPrefs.HasKey(pref) ? PlayerPrefs.GetFloat(pref) : 0.5f;
+        return (PlayerPrefs.HasKey(pref) ? PlayerPrefs.GetFloat(pref) : 0.5f) * _originalVolume[_audioSources.IndexOf(source)];
     }
 }

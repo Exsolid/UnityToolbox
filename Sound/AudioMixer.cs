@@ -141,7 +141,7 @@ public class AudioMixer : MonoBehaviour
     {
         _audioSource.volume = 0;
         _internalPause = false;
-        float value = GetComponent<AudioVolumeSetter>() == null ? 0.5f : GetComponent<AudioVolumeSetter>().GetSetVolume();
+        float value = GetComponent<AudioVolumeSetter>() == null ? 0.5f : GetComponent<AudioVolumeSetter>().GetSetVolume(_audioSource);
         foreach (Coroutine c in _coroutines)
         {
             if(c != null)
