@@ -11,6 +11,7 @@ using UnityEngine.EventSystems;
 public class NextDialogOptionButton: MonoBehaviour, IPointerDownHandler
 {
     [SerializeField] private int _optionID;
+    [SerializeField] private AudioMixer _soundToPlay;
     private bool _isEnabled;
 
     public void Awake()
@@ -25,6 +26,7 @@ public class NextDialogOptionButton: MonoBehaviour, IPointerDownHandler
     {
         if (_isEnabled)
         {
+            _soundToPlay?.PlayRandomSource();
             ModuleManager.GetModule<DialogManager>().NextNode(_optionID);
         }
     }

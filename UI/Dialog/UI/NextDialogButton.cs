@@ -14,6 +14,8 @@ public class NextDialogButton : MonoBehaviour, IPointerDownHandler
 
     private bool _isEnabled;
 
+    [SerializeField] private AudioMixer _soundToPlay;
+
     public void Awake()
     {
         GetComponentInParent<Menu>().OnActiveChanged += (isActive) => { _isEnabled = isActive; };
@@ -44,6 +46,7 @@ public class NextDialogButton : MonoBehaviour, IPointerDownHandler
     {
         if (!_areOptionsPresent && _isEnabled)
         {
+            _soundToPlay?.PlayRandomSource();
             ModuleManager.GetModule<DialogManager>().NextNode();
         }
     }

@@ -18,17 +18,21 @@ public class ToggleMenuInteraction : RaycastDetection
 
     public override void OnInteraction(RaycastHit raycastHit)
     {
-        if (raycastHit.collider.GetComponent<ToggleMenuInteractionInfo>() != null)
+        ToggleMenuInteractionInfo info = raycastHit.collider.GetComponent<ToggleMenuInteractionInfo>();
+        if (info != null)
         {
-            ModuleManager.GetModule<MenuManager>().ToggleMenu(raycastHit.collider.GetComponent<ToggleMenuInteractionInfo>().MenuType, raycastHit.collider.GetComponent<ToggleMenuInteractionInfo>().MenuOfType);
+            info.SoundToPlay?.PlayRandomSource();
+            ModuleManager.GetModule<MenuManager>().ToggleMenu(info.MenuType, info.MenuOfType);
         }
     }
 
     public override void OnInteraction(RaycastHit2D raycastHit)
     {
-        if (raycastHit.collider.GetComponent<ToggleMenuInteractionInfo>() != null)
+        ToggleMenuInteractionInfo info = raycastHit.collider.GetComponent<ToggleMenuInteractionInfo>();
+        if (info != null)
         {
-            ModuleManager.GetModule<MenuManager>().ToggleMenu(raycastHit.collider.GetComponent<ToggleMenuInteractionInfo>().MenuType, raycastHit.collider.GetComponent<ToggleMenuInteractionInfo>().MenuOfType);
+            info.SoundToPlay?.PlayRandomSource();
+            ModuleManager.GetModule<MenuManager>().ToggleMenu(info.MenuType, info.MenuOfType);
         }
     }
 }

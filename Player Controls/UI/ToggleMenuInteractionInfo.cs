@@ -10,6 +10,12 @@ public class ToggleMenuInteractionInfo : MonoBehaviour
 {
     [SerializeField] [DropDown(nameof(_menuTypes))] public int MenuType;
     [SerializeField] [DropDown(nameof(_menusOfType))] public int MenuOfType;
+    [SerializeField] private AudioMixer _soundToPlay;
+    public AudioMixer SoundToPlay
+    {
+        get { return _soundToPlay; }
+    }
+
     private List<string> _menuTypes;
     private List<string> _menusOfType;
 
