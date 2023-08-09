@@ -141,7 +141,6 @@ public class MenuManager : Module, ISerializationCallbackReceiver
     public void ToggleMenuManager()
     {
         _isEnabled = !_isEnabled;
-        _currentActivMenu.GetComponent<Canvas>().enabled = _isEnabled;
     }
 
     /// <summary>
@@ -151,7 +150,6 @@ public class MenuManager : Module, ISerializationCallbackReceiver
     public void ToggleMenuManager(bool isEnabled)
     {
         _isEnabled = isEnabled;
-        _currentActivMenu.GetComponent<Canvas>().enabled = _isEnabled;
     }
 
     public void OnBeforeSerialize()
