@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 using Newtonsoft.Json;
 using UnityToolbox.Item.Management;
 using System.Linq;
