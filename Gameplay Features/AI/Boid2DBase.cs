@@ -51,14 +51,26 @@ public abstract class Boid2DBase : MonoBehaviour
 
     protected bool _disableBasicRotation;
 
+    protected bool _paused;
+
     private void Start()
     {
         _camera = Camera.main;
         _bounds = _camera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, transform.position.z - _camera.transform.position.z + 1));
+
+        if (ModuleManager.ModuleRegistered<BoidManager>())
+        {
+            ModuleManager.GetModule<BoidManager>().OnPauseBoids += TogglePause;
+        }
     }
 
     public void Update()
     {
+        if (_paused)
+        {
+            return;
+        }
+
         GetInformation();
 
         if (!_disableBasicRotation)
@@ -77,6 +89,19 @@ public abstract class Boid2DBase : MonoBehaviour
         {
             StayInBordersTeleport();
         }
+    }
+
+    private void OnDestroy()
+    {
+        if (ModuleManager.ModuleRegistered<BoidManager>())
+        {
+            ModuleManager.GetModule<BoidManager>().OnPauseBoids -= TogglePause;
+        }
+    }
+
+    private void TogglePause(bool paused)
+    {
+        _paused = paused;
     }
 
     /// <summary>
