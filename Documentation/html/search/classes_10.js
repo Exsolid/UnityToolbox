@@ -6,8 +6,7 @@ var searchData=
   ['showcontrol_3',['ShowControl',['../class_show_control.html',1,'']]],
   ['showonhover_4',['ShowOnHover',['../class_show_on_hover.html',1,'']]],
   ['simplecamerafollow_5',['SimpleCameraFollow',['../class_simple_camera_follow.html',1,'']]],
-  ['slidersetting_6',['SliderSetting',['../class_slider_setting.html',1,'']]],
-  ['startdialoginteraction_7',['StartDialogInteraction',['../class_start_dialog_interaction.html',1,'']]],
-  ['subscriptiontoken_8',['SubscriptionToken',['../struct_subscription_token.html',1,'']]],
-  ['swaponhover_9',['SwapOnHover',['../class_swap_on_hover.html',1,'']]]
+  ['startdialoginteraction_6',['StartDialogInteraction',['../class_start_dialog_interaction.html',1,'']]],
+  ['subscriptiontoken_7',['SubscriptionToken',['../struct_subscription_token.html',1,'']]],
+  ['swaponhover_8',['SwapOnHover',['../class_swap_on_hover.html',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['useparentnestedforlist_0',['UseParentNestedForList',['../class_drop_down_attribute.html#af99d53308900b7bbe0c598690832802c',1,'DropDownAttribute']]]
+  ['variablenameforlist_0',['VariableNameForList',['../class_drop_down_attribute.html#afdd43569813670624861ffce29df582b',1,'DropDownAttribute']]]
 ];

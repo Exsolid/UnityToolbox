@@ -25,7 +25,8 @@
 var NAVTREE =
 [
   [ "UnityToolbox", "index.html", [
-    [ "UnityToolbox", "md__r_e_a_d_m_e.html", null ],
+    [ "Getting Started", "index.html", "index" ],
+    [ "Tutorials", "_tutorials.html", "_tutorials" ],
     [ "Packages", "namespaces.html", [
       [ "Package List", "namespaces.html", "namespaces_dup" ]
     ] ],
@@ -36,7 +37,7 @@ var NAVTREE =
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", "functions_dup" ],
         [ "Functions", "functions_func.html", "functions_func" ],
-        [ "Variables", "functions_vars.html", "functions_vars" ],
+        [ "Variables", "functions_vars.html", null ],
         [ "Enumerations", "functions_enum.html", null ],
         [ "Properties", "functions_prop.html", null ],
         [ "Events", "functions_evnt.html", null ]
@@ -55,13 +56,10 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_achievement_data_8cs.html",
-"class_dialog_graph_view.html#a7f355c855260f06c8fc7cef4591a328b",
-"class_held_inventory_manager.html",
-"class_menu_wheel.html#a544f8db9d645293ce82efe37715cea61",
-"class_saveable.html#aae2d584725962c2f0f173aba5b085f16",
-"class_u_i_event_manager.html#a90c39ae287bed950361fb017ff12f65c",
-"class_unity_toolbox_1_1_item_1_1_management_1_1_item_definition_error_window.html#a70b806c88ea80c3981cf0a44da592fff",
-"class_unity_toolbox_1_1_item_1_1_management_1_1_itemizer.html#a768321ddc02cf58bdba333ac7e3079a2"
+"class_dialog_manager.html#a68083f7d6276e3faecdf44036a8d3fdf",
+"class_movement3_d.html#ae3998638fcb37e4f3dcc25fa9ae11bc2",
+"class_unity_toolbox_1_1_achievments_1_1_achievement_data.html#ae518be01553d82d079ab78c0177d639d",
+"dir_43c70313ad3d167357220caa11afda31.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

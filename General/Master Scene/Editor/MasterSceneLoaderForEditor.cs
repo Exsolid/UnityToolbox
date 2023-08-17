@@ -3,6 +3,7 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System.Linq;
 
 /// <summary>
 /// Sets up the master scene to load initially while the game is running in editor.
@@ -12,11 +13,17 @@ public class MasterSceneLoaderForEditor
 {
     static MasterSceneLoaderForEditor()
     {
-        SceneAsset myWantedStartScene = AssetDatabase.LoadAssetAtPath<SceneAsset>("Assets/!Scenes/Master.unity");
-        if (myWantedStartScene != null)
+        string sceneGUID = AssetDatabase.FindAssets("Master t:Scene").FirstOrDefault();
+        SceneAsset masterScene = null;
+        if (sceneGUID != null && !sceneGUID.Equals(""))
         {
-            if (EditorSceneManager.playModeStartScene != null && EditorSceneManager.playModeStartScene.Equals(myWantedStartScene)) return;
-            EditorSceneManager.playModeStartScene = myWantedStartScene;
+            masterScene = AssetDatabase.LoadAssetAtPath<SceneAsset>(AssetDatabase.GUIDToAssetPath(sceneGUID));
+        }
+
+        if (masterScene != null)
+        {
+            if (EditorSceneManager.playModeStartScene != null && EditorSceneManager.playModeStartScene.Equals(masterScene)) return;
+            EditorSceneManager.playModeStartScene = masterScene;
             Debug.Log("Setting up 'Master' scene for load priority.");
         }
         else
@@ -28,8 +35,14 @@ public class MasterSceneLoaderForEditor
     [InitializeOnEnterPlayMode]
     static void OnEnterPlaymodeInEditor(EnterPlayModeOptions options)
     {
-        SceneAsset myWantedStartScene = AssetDatabase.LoadAssetAtPath<SceneAsset>("Assets/!Scenes/Master.unity");
-        if (myWantedStartScene != null && EditorSceneManager.playModeStartScene != null && EditorSceneManager.playModeStartScene.Equals(myWantedStartScene))
+        string sceneGUID = AssetDatabase.FindAssets("Master t:Scene").FirstOrDefault();
+        SceneAsset masterScene = null;
+        if (sceneGUID != null && !sceneGUID.Equals(""))
+        {
+            masterScene = AssetDatabase.LoadAssetAtPath<SceneAsset>(AssetDatabase.GUIDToAssetPath(sceneGUID));
+        }
+
+        if (masterScene != null && EditorSceneManager.playModeStartScene != null && EditorSceneManager.playModeStartScene.Equals(masterScene))
         {
             Debug.Log("'Master' scene has been set up.");
             Debug.Log("Setting up '" + EditorSceneManager.GetActiveScene().name + "' scene for load priority.");

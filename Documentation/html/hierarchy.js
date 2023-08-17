@@ -42,9 +42,6 @@ var hierarchy =
     [ "ICloneable", null, [
       [ "TerrainDecorationInformation", "class_terrain_decoration_information.html", null ]
     ] ],
-    [ "IEdgeConnectorListener", null, [
-      [ "DialogNode.ConnectionListener", "class_dialog_node_1_1_connection_listener.html", null ]
-    ] ],
     [ "InputSystemUIInputModule", null, [
       [ "FirstPersonMouseInput", "class_first_person_mouse_input.html", null ]
     ] ],
@@ -59,6 +56,7 @@ var hierarchy =
     ] ],
     [ "IPointerDownHandler", null, [
       [ "GotoSceneButton", "class_goto_scene_button.html", null ],
+      [ "ImageSliderHandle", "class_image_slider_handle.html", null ],
       [ "NextDialogButton", "class_next_dialog_button.html", null ],
       [ "NextDialogOptionButton", "class_next_dialog_option_button.html", null ],
       [ "QuitButton", "class_quit_button.html", null ],
@@ -75,6 +73,9 @@ var hierarchy =
       [ "SwapOnHover", "class_swap_on_hover.html", null ],
       [ "TintImageOnHover", "class_tint_image_on_hover.html", null ],
       [ "TintTextOnHover", "class_tint_text_on_hover.html", null ]
+    ] ],
+    [ "IPointerUpHandler", null, [
+      [ "ImageSliderHandle", "class_image_slider_handle.html", null ]
     ] ],
     [ "ISerializationCallbackReceiver", null, [
       [ "MenuManager", "class_menu_manager.html", null ],
@@ -93,7 +94,11 @@ var hierarchy =
     [ "MonoBehaviour", null, [
       [ "AudioMixer", "class_audio_mixer.html", null ],
       [ "AudioVolumeSetter", "class_audio_volume_setter.html", null ],
+      [ "Boid2DBase", "class_boid2_d_base.html", [
+        [ "Boid2DSimple", "class_boid2_d_simple.html", null ]
+      ] ],
       [ "ColliderInfo", "class_collider_info.html", null ],
+      [ "DelayedCameraFollow", "class_delayed_camera_follow.html", null ],
       [ "DisableMenuControl", "class_disable_menu_control.html", null ],
       [ "DisplayDialog", "class_display_dialog.html", null ],
       [ "DontDestroyObject", "class_dont_destroy_object.html", null ],
@@ -101,6 +106,8 @@ var hierarchy =
       [ "GotoMenuButton", "class_goto_menu_button.html", null ],
       [ "GotoSceneButton", "class_goto_scene_button.html", null ],
       [ "IDInitializer", "class_i_d_initializer.html", null ],
+      [ "ImageSliderHandle", "class_image_slider_handle.html", null ],
+      [ "ImageSliderSetting", "class_image_slider_setting.html", null ],
       [ "InventoryBase", "class_inventory_base.html", [
         [ "BoundInventory", "class_bound_inventory.html", null ],
         [ "HeldInventory", "class_held_inventory.html", null ]
@@ -117,6 +124,7 @@ var hierarchy =
       [ "MenuWheel", "class_menu_wheel.html", null ],
       [ "MenuWheelNavButton", "class_menu_wheel_nav_button.html", null ],
       [ "Module", "class_module.html", [
+        [ "BoidManager", "class_boid_manager.html", null ],
         [ "DialogManager", "class_dialog_manager.html", null ],
         [ "DontDestroyManager", "class_dont_destroy_manager.html", null ],
         [ "GamestateManager", "class_gamestate_manager.html", null ],
@@ -158,7 +166,6 @@ var hierarchy =
       [ "ShowControl", "class_show_control.html", null ],
       [ "ShowOnHover", "class_show_on_hover.html", null ],
       [ "SimpleCameraFollow", "class_simple_camera_follow.html", null ],
-      [ "SliderSetting", "class_slider_setting.html", null ],
       [ "SwapOnHover", "class_swap_on_hover.html", null ],
       [ "TerrainDecoration", "class_terrain_decoration.html", null ],
       [ "TerrainDecorationAnchorObject", "class_terrain_decoration_anchor_object.html", null ],
@@ -172,13 +179,13 @@ var hierarchy =
       [ "ToggleMenuControl", "class_toggle_menu_control.html", null ],
       [ "ToggleMenuInteractionInfo", "class_toggle_menu_interaction_info.html", null ],
       [ "TriggerDetection", "class_trigger_detection.html", null ],
+      [ "UnitySilderSetting", "class_unity_silder_setting.html", null ],
       [ "UnityToolbox.Achievments.AchievementTrigger", "class_unity_toolbox_1_1_achievments_1_1_achievement_trigger.html", null ]
     ] ],
     [ "Node", null, [
       [ "DialogNode", "class_dialog_node.html", null ],
       [ "GamestateNode", "class_gamestate_node.html", null ]
     ] ],
-    [ "TerrainGenerator.PlacementInformation", "struct_terrain_generator_1_1_placement_information.html", null ],
     [ "ProjectPrefs", "class_project_prefs.html", null ],
     [ "PropertyAttribute", null, [
       [ "DropDownAttribute", "class_drop_down_attribute.html", null ],

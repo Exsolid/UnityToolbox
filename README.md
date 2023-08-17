@@ -23,4 +23,4 @@ A few scripts underlay a naming convetion. These are:
 
 The documentation excludes private members and EditorWindow implementations.
 
-Dokumentation link: https://exsolid.github.io/UnityToolbox/
+Documentation link: https://exsolid.github.io/UnityToolbox/

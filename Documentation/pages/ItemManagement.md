@@ -1,0 +1,106 @@
+@page ItemManagement Item Management Tutorial
+
+@section ItemManagementOverview Overview
+
+- @ref ItemManagementSettings
+- @ref ItemManagementScopes
+- @ref ItemManagementItems
+	- @ref ItemManagementUsage
+	- @ref ItemManagementCustomItems
+	
+The @ref UnityToolbox.Item.ItemManager "ItemManager" is built to ease the creation and usage of items.\n
+There are a few prerequisites for being able to use the manager:
+- The @ref GeneralSetupManagerSystem.
+- Having an @ref UnityToolbox.Item.ItemManager "ItemManager" within a scene, ideally within the "Master" scene.
+- All assets which should be used, need to be stored within a "Resource" folder. 
+
+@section ItemManagementSettings Settings
+
+To use the manager, one can open the Item Manager via the menu bar "UnityToolbox" -> "Item Manager": 
+
+| Menu Bar |
+| :---- |
+| @image html ItemManagerMenuButton.png width=200px |
+
+Here you will be prompted to enter a directory, which will be used to store the required data.\n
+This directory must be within a "Resource" folder and can be changed via the "Settings" tab:
+
+| Settings Tab |
+| :---- |
+| @image html ItemManagerSettings.png width=400px |
+
+@section ItemManagementScopes Scopes
+
+To identify different item types, scopes can be used to further categorize.\n
+The first part of the dialog can be used to create new scopes.\n
+The second part can be used to edit (\*) and delete (-) existing scopes.\n
+When editing, all items scope will be changed to the new value.\n
+When deleting, all items scope will be changed to the default scope.\n
+
+| Scopes Tab |
+| :---- |
+| @image html ItemManagerScopes.png width=400px |
+
+@section ItemManagementItems Items
+
+The dialog is split into three parts, the first where one can create new items, the second where one can search via the name and the item type and \n
+lastly, the third where items are listed and can be edited (\*) and deleted (-).
+As mentioned before, all assets that are used here, have to be stored within a "Resource" folder. (Icon / Prefab)
+
+| Scopes Tab |
+| :---- |
+| @image html ItemManagerItems.png width=400px |
+
+@subsection ItemManagementUsage Usage
+
+To use the items in code, simply define a @ref UnityToolbox.Item.ItemDefinition "ItemDefinition" field, which can be accessed within the editor (public or as \[SerializeField]).
+~~~~~~~~~~~~~~~{.c} 
+public ItemDefinition ItemToSpawn;
+~~~~~~~~~~~~~~~
+The editor should now display a selection button, opening a window.\n
+The window is similar to the item tab, displaying the search and the item list.\n
+Apart from editing (\*) and deleting (-), one can now also select an item (^).\n
+**If a selected item is deleted, an error will only be thrown at runtime.**
+
+| Selection |
+| :---- |
+| @image html ItemManagerItemSelection.png width=500px |
+
+To spawn the selected item, the @ref UnityToolbox.Item.ItemManager "ItemManager" can be used. In this example we are working with the **ItemToSpawn** field from before:
+~~~~~~~~~~~~~~~{.c}
+ModuleManager.GetModule<ItemManager>().SpawnItemInstance(givenPosition, givenRotation, givenScale, ItemToSpawn.GetQualifiedName());
+~~~~~~~~~~~~~~~
+At runtime, the item then exists as an @ref UnityToolbox.Item.ItemInstance "ItemInstance".
+
+@subsection ItemManagementCustomItems Custom Item Definitions
+
+Lastly, one can create custom items, by inheriting from @ref UnityToolbox.Item.ItemDefinition "ItemDefinition". The "Item Manager" window, will automatically pick up the newly created item type, making it selectable for all features.\n
+One can now add additional **int, float, string, bool** fields, which can then also be filled out within the windows.
+~~~~~~~~~~~~~~~{.c} 
+public class Weapon : ItemDefinition
+{
+    public int Strength;
+    public float Beauty;
+    public string OwnerName;
+    public bool IsBroken;
+}
+~~~~~~~~~~~~~~~
+
+| Custom Item |
+| :---- |
+| @image html ItemManagerSelectedItem.png width=400px |
+| @image html ItemManagerSelectedItemFields.png width=400px |
+
+The spawned custom items are also generated as an @ref UnityToolbox.Item.ItemInstance "ItemInstance". To access the additional values one can do the following:
+
+~~~~~~~~~~~~~~~{.c} 
+ItemInstance instance = ModuleManager.GetModule<ItemManager>().SpawnItemInstance(givenPosition, givenRotation, givenScale, ItemToSpawn.GetQualifiedName()); 
+
+if(instance != null && instance.ItemType.Equals(typeof(Weapon)))
+{
+	string Strength =(int) instance.GetValueForField(nameof(Weapon.Strength));
+	string Beauty =(float) instance.GetValueForField(nameof(Weapon.Beauty));
+	string OwnerName =(string) instance.GetValueForField(nameof(Weapon.OwnerName));
+	string IsBroken =(bool) instance.GetValueForField(nameof(Weapon.IsBroken));
+}
+~~~~~~~~~~~~~~~ 

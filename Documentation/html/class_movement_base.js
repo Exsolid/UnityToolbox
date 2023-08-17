@@ -1,6 +1,5 @@
 var class_movement_base =
 [
-    [ "Awake", "class_movement_base.html#a0da629677d133e945e2d088d3a0f214a", null ],
     [ "GetCurrentVelocity", "class_movement_base.html#acc084e30135997182beaca17fb210ffb", null ],
     [ "Jump", "class_movement_base.html#ab2325b2d8e0d8bfff6ff9540c4adac82", null ],
     [ "Move", "class_movement_base.html#ab5454e2601173127e44e658f4312fd8d", null ],

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['valuechange_0',['ValueChange',['../class_dialog_node.html#a08ed1e44f882c02c4bce96080c8c1ed6',1,'DialogNode']]],
-  ['vectordata_1',['VectorData',['../class_vector_data.html#ae9853d2919e690c6f6cc6183a5bfef7e',1,'VectorData.VectorData()'],['../class_vector_data.html#a263cabfa53629b24714093b3c7bfe596',1,'VectorData.VectorData(Vector3 vector)'],['../class_vector_data.html#aac008afa2742f71edbbec5e6d8c1538f',1,'VectorData.VectorData(Vector2 vector)'],['../class_vector_data.html#a9347f8ab502c6a72f6d30d6ed2499826',1,'VectorData.VectorData(Vector4 vector)']]]
+  ['writedata_0',['WriteData',['../class_unity_toolbox_1_1_item_1_1_management_1_1_itemizer.html#a24b80bf9633f339bbd3e4d422c6161ee',1,'UnityToolbox.Item.Management.Itemizer.WriteData()'],['../class_localizer.html#a28cbb745e9fd54757846c5c394c65722',1,'Localizer.WriteData()']]],
+  ['writefile_1',['WriteFile',['../class_resources_util.html#a3f38382288a16b1af6dbdee0c68708f4',1,'ResourcesUtil']]]
 ];

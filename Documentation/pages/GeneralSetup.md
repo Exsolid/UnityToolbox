@@ -1,0 +1,66 @@
+@mainpage Getting Started
+
+If you are looking for an overview and tutorials of features head over to @ref Tutorials.
+Here the basic setup will be explained.
+
+@section GeneralSetupGitDefaultSetup Default Git Setup
+
+The first thing after creating a project is, importing the new InputSystem package from Unity as the toolbox is dependent on it.\n
+You can install it by opening the package manager under "Window" -> "Package Manager", looking for it in the "Unity Registry":
+
+| Package Manager |
+| :---- |
+| @image html GeneralSetupInputSystem.png width=450px |
+
+If this is not done before hand, the following error will be shown once the project is open. Do not panic though, you can ignore the warning and install it afterwards too.
+
+| Error |
+| :---- |
+| @image html GeneralSetupInputSystemError.png width=300px |
+
+Close your project and choose a location within your "Assets" folder and open Git-Bash or a console of your liking.\n
+Enter:
+``` git clone https://github.com/Exsolid/UnityToolbox ```
+
+The toolbox can now be used within your project.
+
+@subsection GeneralSetupGitSubmoduleSetup Setup As Submodule
+
+If you plan on using this tool as a submodule you will need to follow the previous steps up until cloning the repository.\n
+Instead of entering:
+``` git clone https://github.com/Exsolid/UnityToolbox ```
+Enter:
+``` git submodule add https://github.com/Exsolid/UnityToolbox ```
+
+If the folder is still empty after adding the submodule, you will have to initialize the repository manually:
+``` git submodule update --init ```
+
+In the case of someone freshly pulling your project, the update command has to be executed too, as the submodule will be empty otherwise.\n
+Lastly the project can be setup up to always pull the submodule, if the main repository is pulled. This can only be setup locally though.\n
+If this is wanted, you will need to open the Git-Bash/console window in your actual project (not the submodule) and enter: 
+``` git config --global alias.pullall '!git pull && git submodule update --init --recursive' ```
+Or the following if this setting should only be adjusted for this specific repository:
+``` git config --local alias.pullall '!git pull && git submodule update --init --recursive' ```
+
+The toolbox can now be used within your project.
+
+@section GeneralSetupManagerSystem Manager System
+
+The manager system refers to the system on which the toolbox is built on. The core would be the @ref ModuleManager which will be needed for mostly any feature.\n
+Therefore it needs to exist in multiple scenes. So that one is not required to add it in every single scene, it is advised to create a "Master" scene.\n
+Once created and the editor is reloaded (pressing play & stop), the scene should be recognized and setup up as such.
+
+You can now create an empty GameObject and add the "ModuleManager" script.
+
+If you are using the "Master" scene, you will need to add two more scripts.
+ - The @ref LoadFirstScene which is required to load the first scene within the actual build.
+ - The @ref LoadOriginalSceneForEditor which is required to load the current open scene in editor once the user presses play.
+This is due to the "Master" scene always being opened first to initialize all general scripts.
+
+| Master Scene Manager Setup |
+| :---- |
+| @image html GeneralSetupManagers.png width=400px |
+
+To understand the use case, every script can inherit from @ref Module which can then be called with the @ref ModuleManager as such, using the @ref SettingsManager as an example:
+``` ModuleManager.GetModule<SettingsManager>() ```
+Within the "Master" scene, these modules are persistent throughout the whole runtime of the game.
