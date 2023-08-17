@@ -1,6 +1,7 @@
 @mainpage Getting Started
 
-If you are looking for an overview and tutorials of features head over to @ref Tutorials.
+If you are looking for an overview and tutorials of features head over to @ref Tutorials.\n
+The actual source code can be found on the [Github-Page](https://github.com/Exsolid/UnityToolbox).\n
 Here the basic setup will be explained.
 
 @section GeneralSetupGitDefaultSetup Default Git Setup
@@ -20,7 +21,7 @@ If this is not done before hand, the following error will be shown once the proj
 
 Close your project and choose a location within your "Assets" folder and open Git-Bash or a console of your liking.\n
 Enter:
-``` git clone https://github.com/Exsolid/UnityToolbox ```
+``` git clone https://github.com/Exsolid/UnityToolbox.git ```
 
 The toolbox can now be used within your project.
 
@@ -28,9 +29,9 @@ The toolbox can now be used within your project.
 
 If you plan on using this tool as a submodule you will need to follow the previous steps up until cloning the repository.\n
 Instead of entering:
-``` git clone https://github.com/Exsolid/UnityToolbox ```
+``` git clone https://github.com/Exsolid/UnityToolbox.git ```
 Enter:
-``` git submodule add https://github.com/Exsolid/UnityToolbox ```
+``` git submodule add https://github.com/Exsolid/UnityToolbox.git ```
 
 If the folder is still empty after adding the submodule, you will have to initialize the repository manually:
 ``` git submodule update --init ```
@@ -62,5 +63,7 @@ This is due to the "Master" scene always being opened first to initialize all ge
 | @image html GeneralSetupManagers.png width=400px |
 
 To understand the use case, every script can inherit from @ref Module which can then be called with the @ref ModuleManager as such, using the @ref SettingsManager as an example:
-``` ModuleManager.GetModule<SettingsManager>() ```
+~~~~~~~~~~~~~~~{.c}
+ModuleManager.GetModule<SettingsManager>();
+~~~~~~~~~~~~~~~
 Within the "Master" scene, these modules are persistent throughout the whole runtime of the game.
