@@ -26,3 +26,13 @@ namespace UnityToolbox.Events { }
 /// All scripts related to the achievment system.
 /// </summary>
 namespace UnityToolbox.Achievments { }
+
+/// <summary>
+/// All AI related scripts.
+/// </summary>
+namespace UnityToolbox.AI { }
+
+/// <summary>
+/// This namespace contains everything used for boids. (bird-oid objects/swarm intelligence)
+/// </summary>
+namespace UnityToolbox.AI.Boids { }
