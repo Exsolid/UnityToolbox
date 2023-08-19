@@ -94,9 +94,6 @@ var hierarchy =
     [ "MonoBehaviour", null, [
       [ "AudioMixer", "class_audio_mixer.html", null ],
       [ "AudioVolumeSetter", "class_audio_volume_setter.html", null ],
-      [ "Boid2DBase", "class_boid2_d_base.html", [
-        [ "Boid2DSimple", "class_boid2_d_simple.html", null ]
-      ] ],
       [ "ColliderInfo", "class_collider_info.html", null ],
       [ "DelayedCameraFollow", "class_delayed_camera_follow.html", null ],
       [ "DisableMenuControl", "class_disable_menu_control.html", null ],
@@ -124,7 +121,6 @@ var hierarchy =
       [ "MenuWheel", "class_menu_wheel.html", null ],
       [ "MenuWheelNavButton", "class_menu_wheel_nav_button.html", null ],
       [ "Module", "class_module.html", [
-        [ "BoidManager", "class_boid_manager.html", null ],
         [ "DialogManager", "class_dialog_manager.html", null ],
         [ "DontDestroyManager", "class_dont_destroy_manager.html", null ],
         [ "GamestateManager", "class_gamestate_manager.html", null ],
@@ -138,6 +134,7 @@ var hierarchy =
         [ "SettingsManager", "class_settings_manager.html", null ],
         [ "TooltipManager", "class_tooltip_manager.html", null ],
         [ "UIEventManager", "class_u_i_event_manager.html", null ],
+        [ "UnityToolbox.AI.Boids.BoidManager", "class_unity_toolbox_1_1_a_i_1_1_boids_1_1_boid_manager.html", null ],
         [ "UnityToolbox.Achievments.AchievementManager", "class_unity_toolbox_1_1_achievments_1_1_achievement_manager.html", null ],
         [ "UnityToolbox.Events.EventAggregator", "class_unity_toolbox_1_1_events_1_1_event_aggregator.html", null ],
         [ "UnityToolbox.Item.ItemManager", "class_unity_toolbox_1_1_item_1_1_item_manager.html", null ]
@@ -180,6 +177,9 @@ var hierarchy =
       [ "ToggleMenuInteractionInfo", "class_toggle_menu_interaction_info.html", null ],
       [ "TriggerDetection", "class_trigger_detection.html", null ],
       [ "UnitySilderSetting", "class_unity_silder_setting.html", null ],
+      [ "UnityToolbox.AI.Boids.Boid2DBase", "class_unity_toolbox_1_1_a_i_1_1_boids_1_1_boid2_d_base.html", [
+        [ "UnityToolbox.AI.Boids.Boid2DSimple", "class_unity_toolbox_1_1_a_i_1_1_boids_1_1_boid2_d_simple.html", null ]
+      ] ],
       [ "UnityToolbox.Achievments.AchievementTrigger", "class_unity_toolbox_1_1_achievments_1_1_achievement_trigger.html", null ]
     ] ],
     [ "Node", null, [

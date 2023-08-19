@@ -9,6 +9,13 @@ var annotated_dup =
         [ "AchievementManagerEditor", "class_unity_toolbox_1_1_achievments_1_1_achievement_manager_editor.html", "class_unity_toolbox_1_1_achievments_1_1_achievement_manager_editor" ],
         [ "AchievementTrigger", "class_unity_toolbox_1_1_achievments_1_1_achievement_trigger.html", null ]
       ] ],
+      [ "AI", "namespace_unity_toolbox_1_1_a_i.html", [
+        [ "Boids", "namespace_unity_toolbox_1_1_a_i_1_1_boids.html", [
+          [ "Boid2DBase", "class_unity_toolbox_1_1_a_i_1_1_boids_1_1_boid2_d_base.html", "class_unity_toolbox_1_1_a_i_1_1_boids_1_1_boid2_d_base" ],
+          [ "Boid2DSimple", "class_unity_toolbox_1_1_a_i_1_1_boids_1_1_boid2_d_simple.html", "class_unity_toolbox_1_1_a_i_1_1_boids_1_1_boid2_d_simple" ],
+          [ "BoidManager", "class_unity_toolbox_1_1_a_i_1_1_boids_1_1_boid_manager.html", "class_unity_toolbox_1_1_a_i_1_1_boids_1_1_boid_manager" ]
+        ] ]
+      ] ],
       [ "Events", "namespace_unity_toolbox_1_1_events.html", [
         [ "EventAggregator", "class_unity_toolbox_1_1_events_1_1_event_aggregator.html", "class_unity_toolbox_1_1_events_1_1_event_aggregator" ],
         [ "PubSubEvent", "class_unity_toolbox_1_1_events_1_1_pub_sub_event.html", "class_unity_toolbox_1_1_events_1_1_pub_sub_event" ],
@@ -35,9 +42,6 @@ var annotated_dup =
     [ "AudioMixer", "class_audio_mixer.html", "class_audio_mixer" ],
     [ "AudioMixerItem", "class_audio_mixer_item.html", "class_audio_mixer_item" ],
     [ "AudioVolumeSetter", "class_audio_volume_setter.html", "class_audio_volume_setter" ],
-    [ "Boid2DBase", "class_boid2_d_base.html", "class_boid2_d_base" ],
-    [ "Boid2DSimple", "class_boid2_d_simple.html", "class_boid2_d_simple" ],
-    [ "BoidManager", "class_boid_manager.html", "class_boid_manager" ],
     [ "BoundInventory", "class_bound_inventory.html", "class_bound_inventory" ],
     [ "CellularAutomata", "class_cellular_automata.html", null ],
     [ "ColliderInfo", "class_collider_info.html", "class_collider_info" ],

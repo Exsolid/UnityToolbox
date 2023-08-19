@@ -13,6 +13,9 @@ namespace UnityToolbox.AI.Boids
     {
         [SerializeField] private ColliderInfo _detectionRange;
         [SerializeField] private LayerMask _boidMask;
+        /// <summary>
+        /// The layer mask which indentifies what the boid should see as other boids. These objects require an implementation of <see cref="Boid2DBase"/>.
+        /// </summary>
         public LayerMask BoidMask
         {
             get { return _boidMask; }
@@ -20,6 +23,9 @@ namespace UnityToolbox.AI.Boids
         }
 
         [SerializeField] private LayerMask _avoidMask;
+        /// <summary>
+        /// The layer mask which indentifies what the boid should see as obstacles.
+        /// </summary>
         public LayerMask AvoidMask
         {
             get { return _avoidMask; }
@@ -27,6 +33,9 @@ namespace UnityToolbox.AI.Boids
         }
 
         [SerializeField] private LayerMask _attractMask;
+        /// <summary>
+        /// The layer mask which indentifies what the boid should see as objects to be attracted to.
+        /// </summary>
         public LayerMask AttractMask
         {
             get { return _attractMask; }
@@ -43,17 +52,42 @@ namespace UnityToolbox.AI.Boids
         private Camera _camera;
         private Vector2 _bounds;
 
+        /// <summary>
+        /// The closest boid within the detection range.
+        /// </summary>
         protected GameObject _nearestBoid;
+        /// <summary>
+        /// The second closest boid within the detection range.
+        /// </summary>
         protected GameObject _nearestAttraction;
 
+
+        /// <summary>
+        /// The closest obstacle within the detection range.
+        /// </summary>
         protected GameObject _nearestObstacle;
+        /// <summary>
+        /// The second closest obstacle within the detection range.
+        /// </summary>
         protected GameObject _secondNearestObstacle;
 
+        /// <summary>
+        /// The average alignment of all boids within the detection range.
+        /// </summary>
         protected Vector3 _avgAlignment;
+        /// <summary>
+        /// The average position of all boids within the detection range.
+        /// </summary>
         protected Vector3 _avgPos;
 
+        /// <summary>
+        /// If set to true, disables all rotations calculated by the boid. The boid will now only move forward if not rotated by other means.
+        /// </summary>
         protected bool _disableBasicRotation;
 
+        /// <summary>
+        /// Is set to true, all rotations, movment and calculations of values will be disabled.
+        /// </summary>
         protected bool _paused;
 
         private void Start()

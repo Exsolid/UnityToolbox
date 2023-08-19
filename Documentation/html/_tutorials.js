@@ -10,5 +10,10 @@ var _tutorials =
         [ "Usage", "_item_management.html#ItemManagementUsage", null ],
         [ "Custom Item Definitions", "_item_management.html#ItemManagementCustomItems", null ]
       ] ]
+    ] ],
+    [ "Boids Tutorial", "_boids.html", [
+      [ "Overview", "_boids.html#BoidsOverview", null ],
+      [ "Simple Usage", "_boids.html#BoidsSimpleUsage", null ],
+      [ "Implementation of Boid2DBase", "_boids.html#BoidsImplementation", null ]
     ] ]
 ];

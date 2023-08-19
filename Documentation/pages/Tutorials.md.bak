@@ -29,3 +29,4 @@ The documentation excludes private members and EditorWindow implementations.\n
 @section TutorialsTutorialOverview Tutorial Overview
 
 Currently tutorials for the following features exist:
+- @subpage ItemManagement

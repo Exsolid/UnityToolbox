@@ -17,6 +17,6 @@ var searchData=
   ['onmenuwheelnext_14',['OnMenuWheelNext',['../class_u_i_event_manager.html#a3e0351c96fcbbe9a5d92bfdf1693f099',1,'UIEventManager']]],
   ['onmenuwheelprevious_15',['OnMenuWheelPrevious',['../class_u_i_event_manager.html#ada7c89f88ebe5902d9ce6780e74a249c',1,'UIEventManager']]],
   ['onmove_16',['OnMove',['../class_player_event_manager.html#a0e3b98bdbd6800943e758864d728f990',1,'PlayerEventManager']]],
-  ['onpauseboids_17',['OnPauseBoids',['../class_boid_manager.html#a96cae15425b953f136ee00aeaaf6909b',1,'BoidManager']]],
+  ['onpauseboids_17',['OnPauseBoids',['../class_unity_toolbox_1_1_a_i_1_1_boids_1_1_boid_manager.html#aae0bd55d6a41eca37f20175b3cb0597f',1,'UnityToolbox::AI::Boids::BoidManager']]],
   ['ontogglepaused_18',['OnTogglePaused',['../class_u_i_event_manager.html#a516af8fab885cece7627779377149bfc',1,'UIEventManager']]]
 ];

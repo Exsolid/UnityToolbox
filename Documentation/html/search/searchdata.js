@@ -10,7 +10,7 @@ var indexSectionsWithContent =
   7: "abcefjmnptw",
   8: "abcdfgilmos",
   9: "losv",
-  10: "git"
+  10: "bgit"
 };
 
 var indexSectionNames =

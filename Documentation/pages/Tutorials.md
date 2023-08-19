@@ -30,3 +30,4 @@ The documentation excludes private members and EditorWindow implementations.\n
 
 Currently tutorials for the following features exist:
 - @subpage ItemManagement
+- @subpage Boids
