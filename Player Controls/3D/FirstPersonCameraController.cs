@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine;
+using UnityToolbox.UI.Settings;
 
 /// <summary>
 /// A first person camera controller which moves with mouse movement. Can be set to only rotate to a certain degree.

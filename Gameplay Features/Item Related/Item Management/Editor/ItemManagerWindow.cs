@@ -7,8 +7,7 @@ using System.IO;
 using System;
 using System.Reflection;
 
-
-namespace UnityToolbox.Item.Management
+namespace UnityToolbox.Item.Management.Editor
 {
     public class ItemManagerWindow : EditorWindow
     {

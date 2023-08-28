@@ -4,53 +4,56 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-/// <summary>
-/// A script which tints an <see cref="Image"/> on hover.
-/// </summary>
-public class TintImageOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+namespace UnityToolbox.UI.Menus
 {
-    [SerializeField] private AudioMixer _hoverSounds;
-    [SerializeField] private Color _colorOnHover;
-    private Color _original;
-    private bool _isEnabled;
-
-    [Header("Optional")]
-    [SerializeField] private Image _toChange;
-    public void Awake()
+    /// <summary>
+    /// A script which tints an <see cref="Image"/> on hover.
+    /// </summary>
+    public class TintImageOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        if(_toChange == null)
+        [SerializeField] private AudioMixer _hoverSounds;
+        [SerializeField] private Color _colorOnHover;
+        private Color _original;
+        private bool _isEnabled;
+
+        [Header("Optional")]
+        [SerializeField] private Image _toChange;
+        public void Awake()
         {
-            _toChange = GetComponent<Image>();
+            if (_toChange == null)
+            {
+                _toChange = GetComponent<Image>();
+            }
+
+            GetComponentInParent<Menu>().OnActiveChanged += (isActive) =>
+            {
+                _isEnabled = isActive;
+            };
+            _original = _toChange.color;
         }
 
-        GetComponentInParent<Menu>().OnActiveChanged += (isActive) =>
+        public void OnPointerEnter(PointerEventData data)
         {
-            _isEnabled = isActive;
-        };
-        _original = _toChange.color;
-    }
+            if (_colorOnHover == null || !_isEnabled)
+            {
+                return;
+            }
 
-    public void OnPointerEnter(PointerEventData data)
-    {
-        if (_colorOnHover == null || !_isEnabled)
-        {
-            return;
+            if (_hoverSounds != null)
+            {
+                _hoverSounds.PlayRandomSource();
+            }
+
+            _toChange.color = _colorOnHover;
         }
 
-        if (_hoverSounds != null)
+        public void OnPointerExit(PointerEventData data)
         {
-            _hoverSounds.PlayRandomSource();
+            if (_colorOnHover == null)
+            {
+                return;
+            }
+            _toChange.color = _original;
         }
-
-        _toChange.color = _colorOnHover;
-    }
-
-    public void OnPointerExit(PointerEventData data)
-    {
-        if (_colorOnHover == null)
-        {
-            return;
-        }
-        _toChange.color = _original;
-    }
+    } 
 }

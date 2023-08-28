@@ -85,11 +85,11 @@ public class GamestateNode : Node
     /// </summary>
     public void Draw()
     {
-        _inputPort = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single, typeof(DialogNode));
+        _inputPort = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single, typeof(GamestateNode));
         _inputPort.portName = "Previous";
         inputContainer.Add(_inputPort);
 
-        _outputPort = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Multi, typeof(DialogNode));
+        _outputPort = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Multi, typeof(GamestateNode));
         _outputPort.portName = "Next";
         outputContainer.Add(_outputPort);
 

@@ -4,33 +4,36 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-/// <summary>
-/// A button which opens another menu and thereby closes the current.
-/// </summary>
-public class GotoMenuButton : MonoBehaviour, IPointerClickHandler
+namespace UnityToolbox.UI.Menus
 {
-    [SerializeField] private AudioMixer _clickSounds;
-    [SerializeField] private Menu _menu;
-    private bool _isEnabled;
-
-    public void Awake()
+    /// <summary>
+    /// A button which opens another menu and thereby closes the current.
+    /// </summary>
+    public class GotoMenuButton : MonoBehaviour, IPointerClickHandler
     {
-        GetComponentInParent<Menu>().OnActiveChanged += (isActive) =>
-        { 
-            _isEnabled = isActive; 
-        };
-    }
+        [SerializeField] private AudioMixer _clickSounds;
+        [SerializeField] private Menu _menu;
+        private bool _isEnabled;
 
-    public void OnPointerClick(PointerEventData data)
-    {
-        if (_isEnabled)
+        public void Awake()
         {
-            if (_clickSounds != null)
+            GetComponentInParent<Menu>().OnActiveChanged += (isActive) =>
             {
-                _clickSounds.PlayRandomSource();
-            }
-
-            ModuleManager.GetModule<MenuManager>().SetActiveMenu(_menu);
+                _isEnabled = isActive;
+            };
         }
-    }
+
+        public void OnPointerClick(PointerEventData data)
+        {
+            if (_isEnabled)
+            {
+                if (_clickSounds != null)
+                {
+                    _clickSounds.PlayRandomSource();
+                }
+
+                ModuleManager.GetModule<MenuManager>().SetActiveMenu(_menu);
+            }
+        }
+    } 
 }

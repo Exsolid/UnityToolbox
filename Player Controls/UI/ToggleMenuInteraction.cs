@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityToolbox.UI.Menus;
 
 /// <summary>
 /// This script toggles a menu. An object with the right layer needs the <see cref="ToggleMenuInteractionInfo"/> for this to work.

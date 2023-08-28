@@ -2,150 +2,155 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-/// <summary>
-/// Displays all relevant data on a canvas as soon as a dialog is triggered.
-/// Requires <see cref="DialogManager"/> and <see cref="UIEventManager"/> to work.
-/// </summary>
-public class DisplayDialog : MonoBehaviour
+using UnityToolbox.UI.Menus;
+
+namespace UnityToolbox.UI.Dialog
 {
-    [SerializeField] private Text _title;
-    [SerializeField] private Image _titleBackground;
-    [SerializeField] private Text _description;
-    [SerializeField] private Image _descriptionBackground;
-    [SerializeField] private Image _spriteToShow;
-    [SerializeField] private List<Text> _options;
-    [SerializeField] private List<Image> _optionBackgrounds;
-    [SerializeField] private Image _nextDialogBackground;
-
-    [SerializeField] [DropDown(nameof(_menuTypes))] private int _menuType;
-    [SerializeField] [DropDown(nameof(_menusOfType))] private int _menuOfType;
-    private List<string> _menuTypes;
-    private List<string> _menusOfType;
-    // Start is called before the first frame update
-    void Awake()
-    {
-        ModuleManager.GetModule<UIEventManager>().OnDialogNodeChanged += UpdateDialog;
-    }
-
     /// <summary>
-    /// Updates the UI elements to the information given by the <paramref name="currentNode"/>.
+    /// Displays all relevant data on a canvas as soon as a dialog is triggered.
+    /// Requires <see cref="DialogManager"/> and <see cref="UIEventManager"/> to work.
     /// </summary>
-    /// <param name="currentNode"></param>
-    public void UpdateDialog(DialogNodeData currentNode)
+    public class DisplayDialog : MonoBehaviour
     {
-        if(_title != null)
+        [SerializeField] private Text _title;
+        [SerializeField] private Image _titleBackground;
+        [SerializeField] private Text _description;
+        [SerializeField] private Image _descriptionBackground;
+        [SerializeField] private Image _spriteToShow;
+        [SerializeField] private List<Text> _options;
+        [SerializeField] private List<Image> _optionBackgrounds;
+        [SerializeField] private Image _nextDialogBackground;
+
+        [SerializeField][DropDown(nameof(_menuTypes))] private int _menuType;
+        [SerializeField][DropDown(nameof(_menusOfType))] private int _menuOfType;
+        private List<string> _menuTypes;
+        private List<string> _menusOfType;
+        // Start is called before the first frame update
+        void Awake()
         {
-            _title.text = "";
-            _titleBackground.enabled = false;
+            ModuleManager.GetModule<UIEventManager>().OnDialogNodeChanged += UpdateDialog;
         }
 
-        if (_titleBackground != null)
+        /// <summary>
+        /// Updates the UI elements to the information given by the <paramref name="currentNode"/>.
+        /// </summary>
+        /// <param name="currentNode"></param>
+        public void UpdateDialog(DialogNodeData currentNode)
         {
-            _titleBackground.enabled = false;
-        }
-
-        if (_description != null)
-        {
-            _description.text = "";
-        }
-
-        if (_descriptionBackground != null)
-        {
-            _descriptionBackground.enabled = false;
-        }
-
-        for (int i = 0; i < _options.Count; i++)
-        {
-            _options[i].text = "";
-
-            if (_optionBackgrounds[i] != null)
-            {
-                _optionBackgrounds[i].enabled = false;
-            }
-        }
-
-        if (_nextDialogBackground != null)
-        {
-            _nextDialogBackground.enabled = false;
-        }
-
-        if (_spriteToShow != null)
-        {
-            _spriteToShow.enabled = false;
-        }
-
-        if (currentNode != null)
-        {
-            if(ModuleManager.GetModule<MenuManager>().CurrentActiveMenuType.MenuTypeID != _menuType)
-            {
-                ModuleManager.GetModule<MenuManager>().ToggleMenu(_menuType, _menuOfType);
-            }
-
-            if (_spriteToShow != null && currentNode.Avatar != null)
-            {
-                _spriteToShow.enabled = true;
-                _spriteToShow.sprite = Sprite.Create(currentNode.Avatar, new Rect(0,0,currentNode.Avatar.width,currentNode.Avatar.height), new Vector2(0.5f, 0.5f));
-            }
-
             if (_title != null)
             {
-                _title.text = currentNode.Title;
+                _title.text = "";
+                _titleBackground.enabled = false;
             }
 
-            if (_titleBackground != null && _title != null && !_title.text.Trim().Equals(""))
+            if (_titleBackground != null)
             {
-                _titleBackground.enabled = true;
+                _titleBackground.enabled = false;
             }
 
             if (_description != null)
             {
-                _description.text = currentNode.Text;
+                _description.text = "";
             }
 
             if (_descriptionBackground != null)
             {
-                _descriptionBackground.enabled = true;
-            }
-
-            if (currentNode.Options != null && currentNode.Options.Count > _options.Count)
-            {
-                Debug.LogWarning("Not all options can be displayed! Missing sufficient textboxes.");
+                _descriptionBackground.enabled = false;
             }
 
             for (int i = 0; i < _options.Count; i++)
             {
-                if (currentNode.Options.Count > i)
+                _options[i].text = "";
+
+                if (_optionBackgrounds[i] != null)
                 {
-                    _options[i].text = currentNode.Options[i];
-                    _optionBackgrounds[i].enabled = true;
-                } 
+                    _optionBackgrounds[i].enabled = false;
+                }
             }
 
-            if(_nextDialogBackground != null && currentNode.Options.Count == 0)
+            if (_nextDialogBackground != null)
             {
-                _nextDialogBackground.enabled = true;
+                _nextDialogBackground.enabled = false;
             }
-        }
-        else
-        {
-            if (ModuleManager.GetModule<MenuManager>().CurrentActiveMenuType.MenuTypeID == _menuType)
+
+            if (_spriteToShow != null)
             {
-                ModuleManager.GetModule<MenuManager>().ToggleMenu(_menuType, _menuOfType);
+                _spriteToShow.enabled = false;
+            }
+
+            if (currentNode != null)
+            {
+                if (ModuleManager.GetModule<MenuManager>().CurrentActiveMenuType.MenuTypeID != _menuType)
+                {
+                    ModuleManager.GetModule<MenuManager>().ToggleMenu(_menuType, _menuOfType);
+                }
+
+                if (_spriteToShow != null && currentNode.Avatar != null)
+                {
+                    _spriteToShow.enabled = true;
+                    _spriteToShow.sprite = Sprite.Create(currentNode.Avatar, new Rect(0, 0, currentNode.Avatar.width, currentNode.Avatar.height), new Vector2(0.5f, 0.5f));
+                }
+
+                if (_title != null)
+                {
+                    _title.text = currentNode.Title;
+                }
+
+                if (_titleBackground != null && _title != null && !_title.text.Trim().Equals(""))
+                {
+                    _titleBackground.enabled = true;
+                }
+
+                if (_description != null)
+                {
+                    _description.text = currentNode.Text;
+                }
+
+                if (_descriptionBackground != null)
+                {
+                    _descriptionBackground.enabled = true;
+                }
+
+                if (currentNode.Options != null && currentNode.Options.Count > _options.Count)
+                {
+                    Debug.LogWarning("Not all options can be displayed! Missing sufficient textboxes.");
+                }
+
+                for (int i = 0; i < _options.Count; i++)
+                {
+                    if (currentNode.Options.Count > i)
+                    {
+                        _options[i].text = currentNode.Options[i];
+                        _optionBackgrounds[i].enabled = true;
+                    }
+                }
+
+                if (_nextDialogBackground != null && currentNode.Options.Count == 0)
+                {
+                    _nextDialogBackground.enabled = true;
+                }
+            }
+            else
+            {
+                if (ModuleManager.GetModule<MenuManager>().CurrentActiveMenuType.MenuTypeID == _menuType)
+                {
+                    ModuleManager.GetModule<MenuManager>().ToggleMenu(_menuType, _menuOfType);
+                }
             }
         }
-    }
 
-    private void OnDestroy()
-    {
-        if(ModuleManager.ModuleRegistered<UIEventManager>())
+        private void OnDestroy()
         {
-            ModuleManager.GetModule<UIEventManager>().OnDialogNodeChanged -= UpdateDialog;
+            if (ModuleManager.ModuleRegistered<UIEventManager>())
+            {
+                ModuleManager.GetModule<UIEventManager>().OnDialogNodeChanged -= UpdateDialog;
+            }
         }
-    }
 
-    private void OnValidate()
-    {
-        _menuTypes = MenuManager.MenuTypeNamesForEditor;
-        _menusOfType = MenuManager.GetAllMenusOfType(_menuType);
-    }
+        private void OnValidate()
+        {
+            _menuTypes = MenuManager.MenuTypeNamesForEditor;
+            _menusOfType = MenuManager.GetAllMenusOfType(_menuType);
+        }
+    } 
 }

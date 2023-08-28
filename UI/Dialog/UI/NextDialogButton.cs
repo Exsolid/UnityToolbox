@@ -3,51 +3,55 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Linq;
+using UnityToolbox.UI.Menus;
 
-/// <summary>
-/// A script which is placed on a UI element to act as a button. When triggered, the next dialog node will be displayed.
-/// Requires <see cref="DialogManager"/>, <see cref="DisplayDialog"/> and <see cref="UIEventManager"/> to work.
-/// </summary>
-public class NextDialogButton : MonoBehaviour, IPointerDownHandler
+namespace UnityToolbox.UI.Dialog
 {
-    private bool _areOptionsPresent;
-
-    private bool _isEnabled;
-
-    [SerializeField] private AudioMixer _soundToPlay;
-
-    public void Awake()
+    /// <summary>
+    /// A script which is placed on a UI element to act as a button. When triggered, the next dialog node will be displayed.
+    /// Requires <see cref="DialogManager"/>, <see cref="DisplayDialog"/> and <see cref="UIEventManager"/> to work.
+    /// </summary>
+    public class NextDialogButton : MonoBehaviour, IPointerDownHandler
     {
-        GetComponentInParent<Menu>().OnActiveChanged += (isActive) => { _isEnabled = isActive; };
-    }
+        private bool _areOptionsPresent;
 
-    private void Start()
-    {
-        ModuleManager.GetModule<UIEventManager>().OnDialogNodeChanged += ChangeOptionsPresent;
-    }
+        private bool _isEnabled;
 
-    private void OnDestroy()
-    {
-        if (ModuleManager.ModuleRegistered<UIEventManager>())
+        [SerializeField] private AudioMixer _soundToPlay;
+
+        public void Awake()
         {
-            ModuleManager.GetModule<UIEventManager>().OnDialogNodeChanged -= ChangeOptionsPresent;
+            GetComponentInParent<Menu>().OnActiveChanged += (isActive) => { _isEnabled = isActive; };
         }
-    }
 
-    private void ChangeOptionsPresent(DialogNodeData currentNode)
-    {
-        if(currentNode != null)
+        private void Start()
         {
-            _areOptionsPresent = currentNode.OutputIDs.Count > 1;
+            ModuleManager.GetModule<UIEventManager>().OnDialogNodeChanged += ChangeOptionsPresent;
         }
-    }
 
-    public void OnPointerDown(PointerEventData data)
-    {
-        if (!_areOptionsPresent && _isEnabled)
+        private void OnDestroy()
         {
-            _soundToPlay?.PlayRandomSource();
-            ModuleManager.GetModule<DialogManager>().NextNode();
+            if (ModuleManager.ModuleRegistered<UIEventManager>())
+            {
+                ModuleManager.GetModule<UIEventManager>().OnDialogNodeChanged -= ChangeOptionsPresent;
+            }
         }
-    }
+
+        private void ChangeOptionsPresent(DialogNodeData currentNode)
+        {
+            if (currentNode != null)
+            {
+                _areOptionsPresent = currentNode.OutputIDs.Count > 1;
+            }
+        }
+
+        public void OnPointerDown(PointerEventData data)
+        {
+            if (!_areOptionsPresent && _isEnabled)
+            {
+                _soundToPlay?.PlayRandomSource();
+                ModuleManager.GetModule<DialogManager>().NextNode();
+            }
+        }
+    } 
 }

@@ -4,32 +4,36 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-/// <summary>
-/// A button which quits the application to desktop.
-/// </summary>
-public class QuitButton : MonoBehaviour, IPointerDownHandler
+namespace UnityToolbox.UI.Menus
 {
-    private bool _isEnabled;
-    [SerializeField] private AudioMixer _clickSounds;
-
-    public void Awake()
+    /// <summary>
+    /// A button which quits the application to desktop.
+    /// </summary>
+    public class QuitButton : MonoBehaviour, IPointerDownHandler
     {
-        GetComponentInParent<Menu>().OnActiveChanged += (isActive) => 
-        {
-            _isEnabled = isActive;
-        };
-    }
+        private bool _isEnabled;
+        [SerializeField] private AudioMixer _clickSounds;
 
-    public void OnPointerDown(PointerEventData data)
-    {
-        if (_isEnabled)
+        public void Awake()
         {
-            if (_clickSounds != null)
+            GetComponentInParent<Menu>().OnActiveChanged += (isActive) =>
             {
-                _clickSounds.PlayRandomSource();
-            }
+                _isEnabled = isActive;
+            };
+        }
 
-            Application.Quit();
+        public void OnPointerDown(PointerEventData data)
+        {
+            if (_isEnabled)
+            {
+                if (_clickSounds != null)
+                {
+                    _clickSounds.PlayRandomSource();
+                }
+
+                Application.Quit();
+            }
         }
     }
+
 }

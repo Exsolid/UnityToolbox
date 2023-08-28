@@ -4,46 +4,49 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-/// <summary>
-/// A script which tints a <see cref="Text"/> on hover.
-/// </summary>
-public class TintTextOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+namespace UnityToolbox.UI.Menus
 {
-    [SerializeField] private AudioMixer _hoverSounds;
-    [SerializeField] private Color _colorOnHover;
-    private Color _original;
-    private bool _isEnabled;
-
-    public void Awake()
+    /// <summary>
+    /// A script which tints a <see cref="Text"/> on hover.
+    /// </summary>
+    public class TintTextOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        GetComponentInParent<Menu>().OnActiveChanged += (isActive) =>
-        {
-            _isEnabled = isActive;
-        };
-        _original = GetComponent<Text>().color;
-    }
+        [SerializeField] private AudioMixer _hoverSounds;
+        [SerializeField] private Color _colorOnHover;
+        private Color _original;
+        private bool _isEnabled;
 
-    public void OnPointerEnter(PointerEventData data)
-    {
-        if (_colorOnHover == null || !_isEnabled)
+        public void Awake()
         {
-            return;
+            GetComponentInParent<Menu>().OnActiveChanged += (isActive) =>
+            {
+                _isEnabled = isActive;
+            };
+            _original = GetComponent<Text>().color;
         }
 
-        if (_hoverSounds != null)
+        public void OnPointerEnter(PointerEventData data)
         {
-            _hoverSounds.PlayRandomSource();
+            if (_colorOnHover == null || !_isEnabled)
+            {
+                return;
+            }
+
+            if (_hoverSounds != null)
+            {
+                _hoverSounds.PlayRandomSource();
+            }
+
+            GetComponent<Text>().color = _colorOnHover;
         }
 
-        GetComponent<Text>().color = _colorOnHover;
-    }
-
-    public void OnPointerExit(PointerEventData data)
-    {
-        if (_colorOnHover == null)
+        public void OnPointerExit(PointerEventData data)
         {
-            return;
+            if (_colorOnHover == null)
+            {
+                return;
+            }
+            GetComponent<Text>().color = _original;
         }
-        GetComponent<Text>().color = _original;
     }
 }

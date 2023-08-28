@@ -18,6 +18,11 @@ namespace UnityToolbox.Item { }
 namespace UnityToolbox.Item.Management { }
 
 /// <summary>
+/// The namespace for everything related to item management required for the editor. It is not built to be used within scripts.
+/// </summary>
+namespace UnityToolbox.Item.Management.Editor { }
+
+/// <summary>
 /// All event related scripts are found here. The heart module would be <see cref="EventAggregator"/>.
 /// </summary>
 namespace UnityToolbox.Events { }
@@ -36,3 +41,38 @@ namespace UnityToolbox.AI { }
 /// This namespace contains everything used for boids. (bird-oid objects/swarm intelligence)
 /// </summary>
 namespace UnityToolbox.AI.Boids { }
+
+/// <summary>
+/// All UI related scripts can be found here.
+/// </summary>
+namespace UnityToolbox.UI { }
+
+/// <summary>
+/// All scripts which are used to display and interact with game settings are found here.
+/// </summary>
+namespace UnityToolbox.UI.Settings { }
+
+/// <summary>
+/// This namespace includes all scripts that are used for general interactable menus.
+/// </summary>
+namespace UnityToolbox.UI.Menus { }
+
+/// <summary>
+/// All dialog related UI scripts can be found here.
+/// </summary>
+namespace UnityToolbox.UI.Dialog { }
+
+/// <summary>
+/// All dialog related UI scripts, which are required for the editor can be found here.
+/// </summary>
+namespace UnityToolbox.UI.Dialog.Editor { }
+
+/// <summary>
+/// All localisation related UI scripts can be found here.
+/// </summary>
+namespace UnityToolbox.UI.Localisation { }
+
+/// <summary>
+/// All localisation related UI scripts can be found here.
+/// </summary>
+namespace UnityToolbox.UI.Localisation.Editor { }

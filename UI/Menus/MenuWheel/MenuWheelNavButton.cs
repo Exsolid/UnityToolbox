@@ -3,42 +3,45 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-/// <summary>
-/// A button which swaps to the next <see cref="MenuWheel"/> item.
-/// </summary>
-public class MenuWheelNavButton : MonoBehaviour, IPointerClickHandler
+namespace UnityToolbox.UI.Menus
 {
-    [SerializeField] MenuWheelNavigationTypes _direction;
-    [SerializeField] private AudioMixer _clickSounds;
-    private bool _isEnabled;
-
-    public void Awake()
+    /// <summary>
+    /// A button which swaps to the next <see cref="MenuWheel"/> item.
+    /// </summary>
+    public class MenuWheelNavButton : MonoBehaviour, IPointerClickHandler
     {
-        GetComponentInParent<Menu>().OnActiveChanged += (isActive) => { _isEnabled = isActive; };
-    }
+        [SerializeField] MenuWheelNavigationTypes _direction;
+        [SerializeField] private AudioMixer _clickSounds;
+        private bool _isEnabled;
 
-    public void OnPointerClick(PointerEventData data)
-    {
-        if (!_isEnabled) return;
-        switch (_direction)
+        public void Awake()
         {
-            case MenuWheelNavigationTypes.Next:
-                ModuleManager.GetModule<UIEventManager>().MenuWheelNext();
-                break;
-            case MenuWheelNavigationTypes.Previous:
-                ModuleManager.GetModule<UIEventManager>().MenuWheelPrevious();
-                break;
+            GetComponentInParent<Menu>().OnActiveChanged += (isActive) => { _isEnabled = isActive; };
         }
 
-        if (_clickSounds != null)
+        public void OnPointerClick(PointerEventData data)
         {
-            _clickSounds.PlayRandomSource();
+            if (!_isEnabled) return;
+            switch (_direction)
+            {
+                case MenuWheelNavigationTypes.Next:
+                    ModuleManager.GetModule<UIEventManager>().MenuWheelNext();
+                    break;
+                case MenuWheelNavigationTypes.Previous:
+                    ModuleManager.GetModule<UIEventManager>().MenuWheelPrevious();
+                    break;
+            }
+
+            if (_clickSounds != null)
+            {
+                _clickSounds.PlayRandomSource();
+            }
         }
     }
-}
 
-enum MenuWheelNavigationTypes
-{
-    Next,
-    Previous
+    enum MenuWheelNavigationTypes
+    {
+        Next,
+        Previous
+    } 
 }

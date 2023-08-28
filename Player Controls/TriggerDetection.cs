@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Linq;
+using UnityToolbox.UI;
+using UnityToolbox.UI.Menus;
+using UnityToolbox.UI.Settings;
 
 /// <summary>
 /// This script is used for interactions with objects with optional tooltips.

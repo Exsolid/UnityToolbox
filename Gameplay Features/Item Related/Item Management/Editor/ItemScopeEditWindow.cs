@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using System;
 
-namespace UnityToolbox.Item.Management
+namespace UnityToolbox.Item.Management.Editor
 {
     public class ItemScopeEditWindow : EditorWindow
     {

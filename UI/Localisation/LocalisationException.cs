@@ -3,10 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LocalisationException : Exception
+namespace UnityToolbox.UI.Localisation
 {
-    public LocalisationException(string message) : base(message)
+    public class LocalisationException : Exception
     {
+        public LocalisationException(string message) : base(message)
+        {
 
-    }
+        }
+    } 
 }

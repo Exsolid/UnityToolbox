@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityToolbox.UI.Settings;
 
 /// <summary>
 /// A camera controller which lets the camera follow the player, move it and react on collision.

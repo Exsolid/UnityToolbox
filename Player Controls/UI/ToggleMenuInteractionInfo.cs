@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityToolbox.UI.Menus;
 
 /// <summary>
 /// Information used for the <see cref="ToggleMenuInteraction"/>, to be able to read the required menu.

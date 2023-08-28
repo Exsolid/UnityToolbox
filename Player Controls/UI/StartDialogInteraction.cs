@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityToolbox.UI.Dialog;
 
 /// <summary>
 /// This script starts a dialog when interacted with the correct layer.

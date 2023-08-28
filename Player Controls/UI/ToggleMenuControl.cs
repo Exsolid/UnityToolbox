@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine;
+using UnityToolbox.UI;
+using UnityToolbox.UI.Menus;
 
 /// <summary>
 /// This script toggles a menu with the defined key (action name).

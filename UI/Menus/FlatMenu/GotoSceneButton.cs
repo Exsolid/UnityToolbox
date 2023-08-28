@@ -5,33 +5,36 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEditor;
 
-/// <summary>
-/// A button which loads a given scene with a scene name.
-/// </summary>
-public class GotoSceneButton : MonoBehaviour, IPointerDownHandler
+namespace UnityToolbox.UI.Menus
 {
-    [SerializeField] private AudioMixer _clickSounds;
-    [SerializeField] private string _sceneName;
-    private bool _isEnabled;
-
-    public void Awake()
+    /// <summary>
+    /// A button which loads a given scene with a scene name.
+    /// </summary>
+    public class GotoSceneButton : MonoBehaviour, IPointerDownHandler
     {
-        GetComponentInParent<Menu>().OnActiveChanged += (isActive) => 
-        { 
-            _isEnabled = isActive;
-        };
-    }
+        [SerializeField] private AudioMixer _clickSounds;
+        [SerializeField] private string _sceneName;
+        private bool _isEnabled;
 
-    public void OnPointerDown(PointerEventData data)
-    {
-        if (_isEnabled)
+        public void Awake()
         {
-            if (_clickSounds != null)
+            GetComponentInParent<Menu>().OnActiveChanged += (isActive) =>
             {
-                _clickSounds.PlayRandomSource();
-            }
-
-            SceneManager.LoadScene(_sceneName);
+                _isEnabled = isActive;
+            };
         }
-    }
+
+        public void OnPointerDown(PointerEventData data)
+        {
+            if (_isEnabled)
+            {
+                if (_clickSounds != null)
+                {
+                    _clickSounds.PlayRandomSource();
+                }
+
+                SceneManager.LoadScene(_sceneName);
+            }
+        }
+    } 
 }

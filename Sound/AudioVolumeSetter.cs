@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityToolbox.UI.Settings;
 
 /// <summary>
 /// This script sets the volume of a <see cref="AudioSource"/> and reads the data from the settings.
