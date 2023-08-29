@@ -5,7 +5,7 @@ using System;
 using System.Linq;
 
 /// <summary>
-/// The main componant of the terrain generation. It can generate one mesh, with defined settings using <see cref="CellularAutomata"/>.
+/// The main component of the terrain generation. It can generate one mesh, with defined settings using <see cref="CellularAutomata"/>.
 /// </summary>
 [RequireComponent(typeof(MeshRenderer))]
 [RequireComponent(typeof(MeshFilter))]
@@ -330,7 +330,7 @@ public class TerrainGenerator : MonoBehaviour
                 curve.Add(randomPos);
                 foreach (Vector2 point in curve)
                 {
-                    List<int[]> connectionPoints = Bresenham_Algorithm.Bresenham.RunLine((int)lastPoint.x, (int)lastPoint.y, (int)point.x, (int)point.y);
+                    List<int[]> connectionPoints = Bresenham.RunLine((int)lastPoint.x, (int)lastPoint.y, (int)point.x, (int)point.y);
 
                     foreach (int[] connectionPoint in connectionPoints)
                     {
