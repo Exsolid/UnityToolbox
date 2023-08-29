@@ -6,8 +6,12 @@ using System.Linq;
 using System.IO;
 using System;
 using System.Reflection;
+using UnityToolbox.GameplayFeatures.Items;
+using UnityToolbox.GameplayFeatures.Items.Management;
+using UnityToolbox.General.Management;
+using UnityToolbox.General.Preferences;
 
-namespace UnityToolbox.Item.Management.Editor
+namespace UnityToolbox.GameplayFeatures.Items.Management.Editor
 {
     public class ItemManagerWindow : EditorWindow
     {

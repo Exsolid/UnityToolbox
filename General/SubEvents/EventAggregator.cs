@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
+using UnityToolbox.General.Management;
 
 //TODO as static, generate when not existing
-namespace UnityToolbox.Events
+namespace UnityToolbox.General.SubEvents
 {
     /// <summary>
     /// The main module for all events.

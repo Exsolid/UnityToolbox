@@ -1,23 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityToolbox.General.Attributes;
 
-/// <summary>
-/// A script used to identify parents for the <see cref="SaveGameManager"/>.
-/// </summary>
-public class ParentIdentifier : MonoBehaviour
+namespace UnityToolbox.GameplayFeatures.SaveGame
 {
-    [SerializeField] [ReadOnly] private string id = "";
-    public string ID
+    /// <summary>
+    /// A script used to identify parents for the <see cref="SaveGameManager"/>.
+    /// </summary>
+    public class ParentIdentifier : MonoBehaviour
     {
-        get { return id; }
-    }
-
-    private void OnValidate()
-    {
-        if (id.Equals(""))
+        [SerializeField] [ReadOnly] private string id = "";
+        public string ID
         {
-            id = IDManager.GetUniqueID();
+            get { return id; }
+        }
+
+        private void OnValidate()
+        {
+            if (id.Equals(""))
+            {
+                id = IDManager.GetUniqueID();
+            }
         }
     }
 }

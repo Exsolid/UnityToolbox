@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityToolbox.General.Management;
 
-namespace UnityToolbox.UI.Dialog
+namespace UnityToolbox.UI.Dialog.UI
 {
     /// <summary>
     /// A simple script which starts a dialog on start of the scene.

@@ -1,33 +1,39 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityToolbox.Audio;
 
-namespace UnityToolbox.UI.Menus
+namespace UnityToolbox.UI.Menus.FlatMenu.OnHover
 {
     /// <summary>
-    /// A script which swapes the <see cref="Sprite"/> of an <see cref="Image"/> on hover.
+    /// A script which tints an <see cref="Image"/> on hover.
     /// </summary>
-    public class SwapOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public class TintImageOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] private AudioMixer _hoverSounds;
-        [SerializeField] private Sprite _spriteSwapOnHover;
-        private Sprite _original;
+        [SerializeField] private Color _colorOnHover;
+        private Color _original;
         private bool _isEnabled;
 
+        [Header("Optional")]
+        [SerializeField] private Image _toChange;
         public void Awake()
         {
+            if (_toChange == null)
+            {
+                _toChange = GetComponent<Image>();
+            }
+
             GetComponentInParent<Menu>().OnActiveChanged += (isActive) =>
             {
                 _isEnabled = isActive;
             };
-            _original = GetComponent<Image>().sprite;
+            _original = _toChange.color;
         }
 
         public void OnPointerEnter(PointerEventData data)
         {
-            if (_spriteSwapOnHover == null || !_isEnabled)
+            if (_colorOnHover == null || !_isEnabled)
             {
                 return;
             }
@@ -37,16 +43,16 @@ namespace UnityToolbox.UI.Menus
                 _hoverSounds.PlayRandomSource();
             }
 
-            GetComponent<Image>().sprite = _spriteSwapOnHover;
+            _toChange.color = _colorOnHover;
         }
 
         public void OnPointerExit(PointerEventData data)
         {
-            if (_spriteSwapOnHover == null)
+            if (_colorOnHover == null)
             {
                 return;
             }
-            GetComponent<Image>().sprite = _original;
+            _toChange.color = _original;
         }
     } 
 }

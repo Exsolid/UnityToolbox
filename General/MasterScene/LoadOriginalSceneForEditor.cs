@@ -1,18 +1,22 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityToolbox.General.Preferences;
 
-/// <summary>
-/// A script placed within the master scene. It loads the scene which was opened when pressing play in editor. This is required as the master scene is always loaded first.
-/// </summary>
-public class LoadOriginalSceneForEditor : MonoBehaviour
+namespace UnityToolbox.General.MasterScene
 {
-    void Start()
+    /// <summary>
+    /// A script placed within the master scene. It loads the scene which was opened when pressing play in editor. This is required as the master scene is always loaded first.
+    /// </summary>
+    public class LoadOriginalSceneForEditor : MonoBehaviour
     {
-        if (!Application.isEditor)
+        void Start()
         {
-            return;
+            if (!Application.isEditor)
+            {
+                return;
+            }
+            Debug.Log("Now loading scene '"+ PlayerPrefs.GetString(PlayerPrefKeys.DEBUG_ORIGINAL_SCENE) +"'");
+            SceneManager.LoadSceneAsync(PlayerPrefs.GetString(PlayerPrefKeys.DEBUG_ORIGINAL_SCENE));
         }
-        Debug.Log("Now loading scene '"+ PlayerPrefs.GetString(PlayerPrefKeys.DEBUG_ORIGINAL_SCENE) +"'");
-        SceneManager.LoadSceneAsync(PlayerPrefs.GetString(PlayerPrefKeys.DEBUG_ORIGINAL_SCENE));
     }
 }

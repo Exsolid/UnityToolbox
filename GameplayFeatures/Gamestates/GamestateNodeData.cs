@@ -1,18 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
+using System.Collections.Generic;
+using UnityToolbox.GameplayFeatures.Serialization_Data;
 
-/// <summary>
-/// The gamestate node data which is used at runtime and to serialize the gamestate graph.
-/// </summary>
-[Serializable]
-public class GamestateNodeData
+namespace UnityToolbox.GameplayFeatures.Gamestates
 {
-    public int ID;
-    public string Name;
-    public bool IsActive;
-    public List<int> InputIDs;
-    public List<int> OutputIDs;
-    public VectorData Position;
+    /// <summary>
+    /// The gamestate node data which is used at runtime and to serialize the gamestate graph.
+    /// </summary>
+    [Serializable]
+    public class GamestateNodeData
+    {
+        public int ID;
+        public string Name;
+        public bool IsActive;
+        public List<int> InputIDs;
+        public List<int> OutputIDs;
+        public VectorData Position;
+    }
 }

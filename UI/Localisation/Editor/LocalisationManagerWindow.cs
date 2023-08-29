@@ -4,6 +4,9 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using UnityToolbox.General.Management;
+using UnityToolbox.General.Preferences;
+using UnityToolbox.UI.Localisation;
 
 namespace UnityToolbox.UI.Localisation.Editor
 {

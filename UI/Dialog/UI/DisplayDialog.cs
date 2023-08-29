@@ -1,10 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityToolbox.General.Attributes;
+using UnityToolbox.General.Management;
 using UnityToolbox.UI.Menus;
 
-namespace UnityToolbox.UI.Dialog
+namespace UnityToolbox.UI.Dialog.UI
 {
     /// <summary>
     /// Displays all relevant data on a canvas as soon as a dialog is triggered.

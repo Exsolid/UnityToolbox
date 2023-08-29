@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using UnityToolbox.Audio;
+using UnityToolbox.GameplayFeatures.SaveGame;
+using UnityToolbox.General.Management;
 
-namespace UnityToolbox.UI.Menus
+namespace UnityToolbox.UI.Menus.FlatMenu
 {
     /// <summary>
     /// A button which clears all saved data.

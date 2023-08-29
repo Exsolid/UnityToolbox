@@ -1,31 +1,34 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using System;
 using System.Linq;
+using UnityEngine;
+using UnityToolbox.GameplayFeatures.Items.Inventory.Types;
+using UnityToolbox.General.Management;
 
-public class InventoryManager : Module
+namespace UnityToolbox.GameplayFeatures.Items.Inventory.Managers
 {
-    private List<BoundInventory> _allInventorys;
-
-    public override void Awake()
+    public class InventoryManager : Module
     {
-        base.Awake();
-        _allInventorys = new List<BoundInventory>();
-    }
+        private List<BoundInventory> _allInventorys;
 
-    public void RegisterInventory(BoundInventory inv)
-    {
-       _allInventorys.Add(inv);
-    }
-
-    public BoundInventory GetByID(string ID)
-    {
-        var invWithID = _allInventorys.Where(inv => inv.ID.Equals(ID));
-        if (!invWithID.Any())
+        public override void Awake()
         {
-            Debug.LogWarning("Inventory with ID " + ID + " not found");
+            base.Awake();
+            _allInventorys = new List<BoundInventory>();
         }
-        return invWithID.FirstOrDefault();
+
+        public void RegisterInventory(BoundInventory inv)
+        {
+            _allInventorys.Add(inv);
+        }
+
+        public BoundInventory GetByID(string ID)
+        {
+            var invWithID = _allInventorys.Where(inv => inv.ID.Equals(ID));
+            if (!invWithID.Any())
+            {
+                Debug.LogWarning("Inventory with ID " + ID + " not found");
+            }
+            return invWithID.FirstOrDefault();
+        }
     }
 }

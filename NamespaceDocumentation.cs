@@ -1,7 +1,3 @@
-
-using UnityToolbox.Events;
-using UnityToolbox.Item;
-
 /// <summary>
 /// The main namespace for item usage.
 /// All items are defined via the Item Manager Window found under the "UnityToolbox" dropdown.
@@ -10,69 +6,58 @@ using UnityToolbox.Item;
 /// Using the <see cref="ItemDefinition"/> as a variable in a seperate <see cref="MonoBehaviour"/> will present a selection field for all defined items.
 /// At runtime, the <see cref="ItemManager"/> is able to create item instances.
 /// </summary>
-namespace UnityToolbox.Item { }
 
-/// <summary>
-/// The namespace for everything related to item management. It is not built to be used within scripts.
-/// </summary>
-namespace UnityToolbox.Item.Management { }
+namespace UnityToolbox
+{
+    /// <summary>
+    /// The namespace for everything related to item management. It is not built to be used within scripts.
+    /// </summary>
 
-/// <summary>
-/// The namespace for everything related to item management required for the editor. It is not built to be used within scripts.
-/// </summary>
-namespace UnityToolbox.Item.Management.Editor { }
+    /// <summary>
+    /// The namespace for everything related to item management required for the editor. It is not built to be used within scripts.
+    /// </summary>
 
-/// <summary>
-/// All event related scripts are found here. The heart module would be <see cref="EventAggregator"/>.
-/// </summary>
-namespace UnityToolbox.Events { }
+    /// <summary>
+    /// All event related scripts are found here. The heart module would be <see cref="EventAggregator"/>.
+    /// </summary>
 
-/// <summary>
-/// All scripts related to the achievment system.
-/// </summary>
-namespace UnityToolbox.Achievments { }
+    /// <summary>
+    /// All scripts related to the achievment system.
+    /// </summary>
 
-/// <summary>
-/// All AI related scripts.
-/// </summary>
-namespace UnityToolbox.AI { }
+    /// <summary>
+    /// All AI related scripts.
+    /// </summary>
 
-/// <summary>
-/// This namespace contains everything used for boids. (bird-oid objects/swarm intelligence)
-/// </summary>
-namespace UnityToolbox.AI.Boids { }
+    /// <summary>
+    /// This namespace contains everything used for boids. (bird-oid objects/swarm intelligence)
+    /// </summary>
 
-/// <summary>
-/// All UI related scripts can be found here.
-/// </summary>
-namespace UnityToolbox.UI { }
+    /// <summary>
+    /// All UI related scripts can be found here.
+    /// </summary>
 
-/// <summary>
-/// All scripts which are used to display and interact with game settings are found here.
-/// </summary>
-namespace UnityToolbox.UI.Settings { }
+    /// <summary>
+    /// All scripts which are used to display and interact with game settings are found here.
+    /// </summary>
 
-/// <summary>
-/// This namespace includes all scripts that are used for general interactable menus.
-/// </summary>
-namespace UnityToolbox.UI.Menus { }
+    /// <summary>
+    /// This namespace includes all scripts that are used for general interactable menus.
+    /// </summary>
 
-/// <summary>
-/// All dialog related UI scripts can be found here.
-/// </summary>
-namespace UnityToolbox.UI.Dialog { }
+    /// <summary>
+    /// All dialog related UI scripts can be found here.
+    /// </summary>
 
-/// <summary>
-/// All dialog related UI scripts, which are required for the editor can be found here.
-/// </summary>
-namespace UnityToolbox.UI.Dialog.Editor { }
+    /// <summary>
+    /// All dialog related UI scripts, which are required for the editor can be found here.
+    /// </summary>
 
-/// <summary>
-/// All localisation related UI scripts can be found here.
-/// </summary>
-namespace UnityToolbox.UI.Localisation { }
+    /// <summary>
+    /// All localisation related UI scripts can be found here.
+    /// </summary>
 
-/// <summary>
-/// All localisation related UI scripts can be found here.
-/// </summary>
-namespace UnityToolbox.UI.Localisation.Editor { }
+    /// <summary>
+    /// All localisation related UI scripts can be found here.
+    /// </summary>
+}

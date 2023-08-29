@@ -1,13 +1,15 @@
-using System.Collections.Generic;
-using UnityEngine;
-using System.Linq;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
-using UnityToolbox.Item.Management;
+using UnityEngine;
+using UnityToolbox.GameplayFeatures.Items.Management;
+using UnityToolbox.GameplayFeatures.Serialization_Data;
+using Module = UnityToolbox.General.Management.Module;
 
-namespace UnityToolbox.Item
+namespace UnityToolbox.GameplayFeatures.Items
 {
-    public class ItemManager : Module
+    public class ItemManager : General.Management.Module
     {
         public override void Awake()
         {

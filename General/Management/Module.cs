@@ -1,36 +1,38 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// The base of a module. Required if you want anything to be called from the <see cref="ModuleManager"/>.
-/// </summary>
-public class Module : MonoBehaviour
+namespace UnityToolbox.General.Management
 {
-    public virtual void Awake()
+    /// <summary>
+    /// The base of a module. Required if you want anything to be called from the <see cref="ModuleManager"/>.
+    /// </summary>
+    public class Module : MonoBehaviour
     {
-        if(!ModuleManager.IsLoaded()) StartCoroutine(WaitTillMasterSceneLoaded());
-        else if(!ModuleManager.RegisterModul(this))
+        public virtual void Awake()
         {
-            throw new System.Exception(string.Format("An object of type {0} has already been registered.", this.GetType()));
-        }
-    }
-
-    IEnumerator WaitTillMasterSceneLoaded()
-    {
-        while (!ModuleManager.IsLoaded())
-        {
-            yield return null;
+            if(!ModuleManager.IsLoaded()) StartCoroutine(WaitTillMasterSceneLoaded());
+            else if(!ModuleManager.RegisterModul(this))
+            {
+                throw new System.Exception(string.Format("An object of type {0} has already been registered.", this.GetType()));
+            }
         }
 
-        if (!ModuleManager.RegisterModul(this))
+        IEnumerator WaitTillMasterSceneLoaded()
         {
-            throw new System.Exception(string.Format("An object of type {0} has already been registered.", this.GetType()));
-        }
-    }
+            while (!ModuleManager.IsLoaded())
+            {
+                yield return null;
+            }
 
-    private void OnDestroy()
-    {
-        ModuleManager.DeregisterModul(this);
+            if (!ModuleManager.RegisterModul(this))
+            {
+                throw new System.Exception(string.Format("An object of type {0} has already been registered.", this.GetType()));
+            }
+        }
+
+        private void OnDestroy()
+        {
+            ModuleManager.DeregisterModul(this);
+        }
     }
 }

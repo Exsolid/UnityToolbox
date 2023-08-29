@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using System.Reflection;
+using UnityToolbox.UI.Localisation;
 
 namespace UnityToolbox.UI.Localisation.Editor
 {

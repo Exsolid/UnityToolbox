@@ -1,11 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
+using System.Collections.Generic;
 using System.Linq;
-using UnityToolbox.Item.Management;
+using UnityEngine;
+using UnityToolbox.GameplayFeatures.Items.Inventory.Managers;
+using UnityToolbox.GameplayFeatures.Items.Inventory.Types;
+using UnityToolbox.GameplayFeatures.Items.Management;
+using UnityToolbox.GameplayFeatures.SaveGame;
+using UnityToolbox.GameplayFeatures.Serialization_Data;
+using UnityToolbox.General.Attributes;
+using UnityToolbox.General.Management;
 
-namespace UnityToolbox.Item
+namespace UnityToolbox.GameplayFeatures.Items
 {
     /// <summary>
     /// An instanciated item, created from an <see cref="ItemDefinition"/>.

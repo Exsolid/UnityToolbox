@@ -1,12 +1,12 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityToolbox.General.Attributes;
 
-namespace UnityToolbox.Achievments
+namespace UnityToolbox.GameplayFeatures.Achievements
 {
     /// <summary>
     /// The definition for an achievement.

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using System.Linq;
 using System;
+using UnityToolbox.UI.Localisation;
 
 namespace UnityToolbox.UI.Localisation.Editor
 {

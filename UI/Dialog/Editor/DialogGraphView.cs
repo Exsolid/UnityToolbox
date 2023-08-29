@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using System.IO;
 using System.Linq;
+using UnityToolbox.General.Preferences;
 
 namespace UnityToolbox.UI.Dialog.Editor
 {

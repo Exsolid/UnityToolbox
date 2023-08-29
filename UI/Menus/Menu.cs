@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+using UnityToolbox.General.Attributes;
+using UnityToolbox.General.Management;
 
 namespace UnityToolbox.UI.Menus
 {

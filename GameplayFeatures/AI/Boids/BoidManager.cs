@@ -1,6 +1,7 @@
 using System;
+using UnityToolbox.General.Management;
 
-namespace UnityToolbox.AI.Boids
+namespace UnityToolbox.GameplayFeatures.AI.Boids
 {
     /// <summary>
     /// Currently this manager only exists to be able send pause events to all existing boids.

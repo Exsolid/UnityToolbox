@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Linq;
+using UnityToolbox.General.Management;
 using UnityToolbox.UI.Menus;
 
-namespace UnityToolbox.UI.Settings
+namespace UnityToolbox.UI.Settings.Controls
 {
     /// <summary>
     /// This script displays the current setting for a control.

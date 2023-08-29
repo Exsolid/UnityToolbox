@@ -1,102 +1,105 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
-using Newtonsoft.Json;
 using System.IO;
 using System.Linq;
+using Newtonsoft.Json;
+using UnityEngine;
 
-/// <summary>
-/// Project preferences. Just like the <see cref="PlayerPrefs"/> but within the editor. These are stored within a created resource folder.
-/// </summary>
-public class ProjectPrefs
+namespace UnityToolbox.General.Preferences
 {
-    private static readonly string _projectSettingsPath = Path.GetFullPath(Application.dataPath + "/Resources/ProjectPrefs/");
-    private static readonly string _filename = "ProjectPrefs.txt";
-    private static readonly JsonSerializerSettings _settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
-
-
-    private static void InitializeFolder()
-    {
-        if (Directory.Exists(_projectSettingsPath))
-        {
-            return;
-        }
-        else
-        {
-            Directory.CreateDirectory(_projectSettingsPath);
-        }
-    }
-
     /// <summary>
-    /// Saves a string value to the project prefs.
+    /// Project preferences. Just like the <see cref="PlayerPrefs"/> but within the editor. These are stored within a created resource folder.
     /// </summary>
-    /// <param name="key">The key, which indentifies the value. See <see cref="ProjectPrefKeys"/> for UnityToolbox internal use.</param>
-    /// <param name="value">The value to save.</param>
-    /// <exception cref="ArgumentException"></exception>
-    public static void SetString(string key, string value)
+    public class ProjectPrefs
     {
-        InitializeFolder();
+        private static readonly string _projectSettingsPath = Path.GetFullPath(Application.dataPath + "/Resources/ProjectPrefs/");
+        private static readonly string _filename = "ProjectPrefs.txt";
+        private static readonly JsonSerializerSettings _settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
 
-        Dictionary<string, object> allExisting = new Dictionary<string, object>();
-        TextAsset json = Resources.Load<TextAsset>(_projectSettingsPath.Split(Path.GetFullPath(Application.dataPath + "/Resources/")).Last() + _filename.Replace(".txt", "")) as TextAsset;
-        if (json != null)
-        {
-            allExisting = JsonConvert.DeserializeObject<Dictionary<string, object>>(json.text, _settings);
-        }
 
-        if (allExisting.ContainsKey(key))
+        private static void InitializeFolder()
         {
-            if (allExisting[key].GetType().Equals(typeof(string)))
+            if (Directory.Exists(_projectSettingsPath))
             {
-                allExisting[key] = value;
+                return;
             }
             else
             {
-                throw new ArgumentException("The " + nameof(ProjectPrefs) + " cannot write a value of the type " + typeof(string) + " to an already existing value of type " + allExisting[key].GetType() + ".");
+                Directory.CreateDirectory(_projectSettingsPath);
             }
         }
-        else
+
+        /// <summary>
+        /// Saves a string value to the project prefs.
+        /// </summary>
+        /// <param name="key">The key, which indentifies the value. See <see cref="ProjectPrefKeys"/> for UnityToolbox internal use.</param>
+        /// <param name="value">The value to save.</param>
+        /// <exception cref="ArgumentException"></exception>
+        public static void SetString(string key, string value)
         {
-            allExisting.Add(key, value);
-        }
+            InitializeFolder();
 
-        string toWrite = JsonConvert.SerializeObject(allExisting, _settings);
-        File.WriteAllText(_projectSettingsPath + _filename, toWrite);
-    }
-
-    /// <summary>
-    /// Reads a string value from the project prefs.
-    /// </summary>
-    /// <param name="key">The key, which indentifies the value. See <see cref="ProjectPrefKeys"/> for UnityToolbox internal use.</param>
-    /// <returns>The read value.</returns>
-    /// <exception cref="ArgumentException"></exception>
-    public static string GetString(string key)
-    {
-        InitializeFolder();
-
-        Dictionary<string, object> allExisting = new Dictionary<string, object>();
-        TextAsset json = Resources.Load<TextAsset>(_projectSettingsPath.Split(Path.GetFullPath(Application.dataPath + "/Resources/")).Last() + _filename.Replace(".txt", "")) as TextAsset;
-        if(json != null)
-        {
-            allExisting = JsonConvert.DeserializeObject<Dictionary<string, object>>(json.text, _settings);
-        }
-
-        if (allExisting.ContainsKey(key))
-        {
-            if (allExisting[key].GetType().Equals(typeof(string)))
+            Dictionary<string, object> allExisting = new Dictionary<string, object>();
+            TextAsset json = Resources.Load<TextAsset>(_projectSettingsPath.Split(Path.GetFullPath(Application.dataPath + "/Resources/")).Last() + _filename.Replace(".txt", "")) as TextAsset;
+            if (json != null)
             {
-                return (string) allExisting[key];
+                allExisting = JsonConvert.DeserializeObject<Dictionary<string, object>>(json.text, _settings);
+            }
+
+            if (allExisting.ContainsKey(key))
+            {
+                if (allExisting[key].GetType().Equals(typeof(string)))
+                {
+                    allExisting[key] = value;
+                }
+                else
+                {
+                    throw new ArgumentException("The " + nameof(ProjectPrefs) + " cannot write a value of the type " + typeof(string) + " to an already existing value of type " + allExisting[key].GetType() + ".");
+                }
             }
             else
             {
-                throw new ArgumentException("The given key returns a value of type " + allExisting[key].GetType() + " and not of type " + typeof(string) + ".");
+                allExisting.Add(key, value);
+            }
+
+            string toWrite = JsonConvert.SerializeObject(allExisting, _settings);
+            File.WriteAllText(_projectSettingsPath + _filename, toWrite);
+        }
+
+        /// <summary>
+        /// Reads a string value from the project prefs.
+        /// </summary>
+        /// <param name="key">The key, which indentifies the value. See <see cref="ProjectPrefKeys"/> for UnityToolbox internal use.</param>
+        /// <returns>The read value.</returns>
+        /// <exception cref="ArgumentException"></exception>
+        public static string GetString(string key)
+        {
+            InitializeFolder();
+
+            Dictionary<string, object> allExisting = new Dictionary<string, object>();
+            TextAsset json = Resources.Load<TextAsset>(_projectSettingsPath.Split(Path.GetFullPath(Application.dataPath + "/Resources/")).Last() + _filename.Replace(".txt", "")) as TextAsset;
+            if(json != null)
+            {
+                allExisting = JsonConvert.DeserializeObject<Dictionary<string, object>>(json.text, _settings);
+            }
+
+            if (allExisting.ContainsKey(key))
+            {
+                if (allExisting[key].GetType().Equals(typeof(string)))
+                {
+                    return (string) allExisting[key];
+                }
+                else
+                {
+                    throw new ArgumentException("The given key returns a value of type " + allExisting[key].GetType() + " and not of type " + typeof(string) + ".");
+                }
+            }
+            else
+            {
+                return "";
             }
         }
-        else
-        {
-            return "";
-        }
-    }
 
-    //TODO bool int float
+        //TODO bool int float
+    }
 }

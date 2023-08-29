@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
+using UnityToolbox.Audio;
+using UnityToolbox.General.Management;
+using UnityToolbox.General.Preferences;
 using UnityToolbox.UI.Menus;
+using AudioType = UnityToolbox.Audio.AudioType;
 
-namespace UnityToolbox.UI.Settings
+namespace UnityToolbox.UI.Settings.Sliders
 {
     /// <summary>
     /// An alternative to the Unity <see cref="Slider"/>. The fill area of this is a cropped instead of scaled image.

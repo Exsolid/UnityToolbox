@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityToolbox.Audio;
+using UnityToolbox.General.Management;
 using UnityToolbox.UI.Menus;
 
-namespace UnityToolbox.UI.Dialog
+namespace UnityToolbox.UI.Dialog.UI
 {
     /// <summary>
     /// A script which is placed on a UI element to act as a button.

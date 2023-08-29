@@ -1,9 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace UnityToolbox.Achievments
+namespace UnityToolbox.GameplayFeatures.Achievements
 {
     /// <summary>
     /// Implement this to define a new trigger which can be selected for the <see cref="AchievementData"/>.

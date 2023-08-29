@@ -1,7 +1,11 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System;
+using UnityToolbox.Audio;
+using UnityToolbox.General.Management;
+using UnityToolbox.General.Preferences;
+using AudioType = UnityToolbox.Audio.AudioType;
 
 namespace UnityToolbox.UI.Settings
 {
@@ -20,7 +24,7 @@ namespace UnityToolbox.UI.Settings
         /// <summary>
         /// The event which is executed as soon as volumes are changed.
         /// </summary>
-        public Action<AudioType, float> OnSoundValueChanged;
+        public Action<Audio.AudioType, float> OnSoundValueChanged;
 
         /// <summary>
         /// The event which is executed as soon as the mouse sensitivity is changed.
@@ -131,9 +135,9 @@ namespace UnityToolbox.UI.Settings
         /// <summary>
         /// Executes the <see cref="SettingsManager.OnSoundValueChanged"/> event.
         /// </summary>
-        /// <param name="type">The sound type. (e.g. <see cref="AudioType.Music"/> or <see cref="AudioType.Effects"/>)</param>
+        /// <param name="type">The sound type. (e.g. <see cref="Audio.AudioType.Music"/> or <see cref="Audio.AudioType.Effects"/>)</param>
         /// <param name="newValue">The new value for the volume, must be between 0-1.</param>
-        public void SoundValueChanged(AudioType type, float newValue)
+        public void SoundValueChanged(Audio.AudioType type, float newValue)
         {
             OnSoundValueChanged?.Invoke(type, newValue);
         }

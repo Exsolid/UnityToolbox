@@ -1,28 +1,31 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
+using UnityToolbox.Audio;
+using UnityToolbox.General.Attributes;
 using UnityToolbox.UI.Menus;
 
-/// <summary>
-/// Information used for the <see cref="ToggleMenuInteraction"/>, to be able to read the required menu.
-/// </summary>
-public class ToggleMenuInteractionInfo : MonoBehaviour
+namespace UnityToolbox.PlayerControls.UI
 {
-    [SerializeField] [DropDown(nameof(_menuTypes))] public int MenuType;
-    [SerializeField] [DropDown(nameof(_menusOfType))] public int MenuOfType;
-    [SerializeField] private AudioMixer _soundToPlay;
-    public AudioMixer SoundToPlay
+    /// <summary>
+    /// Information used for the <see cref="ToggleMenuInteraction"/>, to be able to read the required menu.
+    /// </summary>
+    public class ToggleMenuInteractionInfo : MonoBehaviour
     {
-        get { return _soundToPlay; }
-    }
+        [SerializeField] [DropDown(nameof(_menuTypes))] public int MenuType;
+        [SerializeField] [DropDown(nameof(_menusOfType))] public int MenuOfType;
+        [SerializeField] private AudioMixer _soundToPlay;
+        public AudioMixer SoundToPlay
+        {
+            get { return _soundToPlay; }
+        }
 
-    private List<string> _menuTypes;
-    private List<string> _menusOfType;
+        private List<string> _menuTypes;
+        private List<string> _menusOfType;
 
-    private void OnValidate()
-    {
-        _menuTypes = MenuManager.MenuTypeNamesForEditor;
-        _menusOfType = MenuManager.GetAllMenusOfType(MenuType);
+        private void OnValidate()
+        {
+            _menuTypes = MenuManager.MenuTypeNamesForEditor;
+            _menusOfType = MenuManager.GetAllMenusOfType(MenuType);
+        }
     }
 }

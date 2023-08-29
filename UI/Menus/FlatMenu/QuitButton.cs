@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityToolbox.Audio;
 
-namespace UnityToolbox.UI.Menus
+namespace UnityToolbox.UI.Menus.FlatMenu
 {
     /// <summary>
     /// A button which quits the application to desktop.

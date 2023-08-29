@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using UnityEditor;
+using UnityToolbox.Audio;
 
-namespace UnityToolbox.UI.Menus
+namespace UnityToolbox.UI.Menus.FlatMenu
 {
     /// <summary>
     /// A button which loads a given scene with a scene name.

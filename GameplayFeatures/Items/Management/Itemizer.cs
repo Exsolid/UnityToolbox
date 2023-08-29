@@ -1,11 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.Linq;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
+using UnityEngine;
+using UnityToolbox.General.Management;
+using UnityToolbox.General.Preferences;
 
-namespace UnityToolbox.Item.Management
+namespace UnityToolbox.GameplayFeatures.Items.Management
 {
     /// <summary>
     /// The core of the item managment system. It takes care of the (de)serialization and changes to all data.

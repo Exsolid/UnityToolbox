@@ -1,6 +1,6 @@
 using System;
 
-namespace UnityToolbox.Item.Management
+namespace UnityToolbox.GameplayFeatures.Items.Management
 {
     /// <summary>
     /// A class summarizing a field by its type, name and value. Required for all classes inheriting <see cref="ItemDefinition"/>.

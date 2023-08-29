@@ -1,16 +1,17 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
-using System.IO;
-using Newtonsoft.Json;
-using UnityEditor;
+using UnityEngine;
+using UnityToolbox.GameplayFeatures.Gamestates;
+using UnityToolbox.GameplayFeatures.SaveGame;
+using UnityToolbox.General.Management;
+using UnityToolbox.General.Preferences;
+using UnityToolbox.UI.Dialog.UI;
 
 namespace UnityToolbox.UI.Dialog
 {
     /// <summary>
     /// The <see cref="DialogManager"/> is a <see cref="Module"/> which manages the existing dialogs saved by the dialog graph.
-    /// It requires <see cref="DisplayDialog"/> and <see cref="UIEventManager"/> to display the current dialog node on a canavas.
+    /// It requires <see cref="UIEventManager"/> and <see cref="DisplayDialog"/> to display the current dialog node on a canavas.
     /// Requires <see cref="SaveGameManager"/> if game states are used for the dialogs.
     /// </summary>
     public class DialogManager : Module

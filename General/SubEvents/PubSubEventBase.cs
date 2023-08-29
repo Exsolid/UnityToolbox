@@ -1,5 +1,5 @@
 
-namespace UnityToolbox.Events
+namespace UnityToolbox.General.SubEvents
 {
     /// <summary>
     /// The base class for all events.

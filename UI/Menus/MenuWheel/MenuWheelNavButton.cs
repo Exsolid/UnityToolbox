@@ -1,9 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityToolbox.Audio;
+using UnityToolbox.General.Management;
 
-namespace UnityToolbox.UI.Menus
+namespace UnityToolbox.UI.Menus.MenuWheel
 {
     /// <summary>
     /// A button which swaps to the next <see cref="MenuWheel"/> item.

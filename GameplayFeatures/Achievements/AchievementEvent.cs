@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityToolbox.Events;
+using UnityToolbox.General.SubEvents;
 
-namespace UnityToolbox.Achievments
+namespace UnityToolbox.GameplayFeatures.Achievements
 {
     /// <summary>
     /// An event which is used for achviement triggers.

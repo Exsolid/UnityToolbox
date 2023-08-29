@@ -1,23 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class DontDestroyObject : MonoBehaviour
+namespace UnityToolbox.General.Management
 {
-    [SerializeField] private string _identifier;
-    public string Identifier
+    public class DontDestroyObject : MonoBehaviour
     {
-        get { return _identifier; }
-    }
-
-    private void Start()
-    {
-        DontDestroyOnLoad(gameObject);
-        if (ModuleManager.GetModule<DontDestroyManager>().GetObject(_identifier) != null)
+        [SerializeField] private string _identifier;
+        public string Identifier
         {
-            Destroy(gameObject);
-            return;
+            get { return _identifier; }
         }
-        ModuleManager.GetModule<DontDestroyManager>().RegisterObject(this);
+
+        private void Start()
+        {
+            DontDestroyOnLoad(gameObject);
+            if (ModuleManager.GetModule<DontDestroyManager>().GetObject(_identifier) != null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            ModuleManager.GetModule<DontDestroyManager>().RegisterObject(this);
+        }
     }
 }

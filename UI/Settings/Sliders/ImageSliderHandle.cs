@@ -1,12 +1,10 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace UnityToolbox.UI.Settings
+namespace UnityToolbox.UI.Settings.Sliders
 {
     /// <summary>
     /// An alternative to the Unity <see cref="Slider"/>. The fill area of this is a cropped instead of scaled image.

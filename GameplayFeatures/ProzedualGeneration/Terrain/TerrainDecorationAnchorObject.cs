@@ -1,32 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Defines an achor object which can serve a specific purpose. (Spawnpoint, Merchant, ...)
-/// </summary>
-public class TerrainDecorationAnchorObject : MonoBehaviour
+namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Terrain
 {
-    private void OnValidate()
+    /// <summary>
+    /// Defines an achor object which can serve a specific purpose. (Spawnpoint, Merchant, ...)
+    /// </summary>
+    public class TerrainDecorationAnchorObject : MonoBehaviour
     {
-        foreach(Transform child in transform)
+        private void OnValidate()
         {
-            if(child.GetComponent<TerrainDecorationAnchorObject>() == null)
+            foreach(Transform child in transform)
             {
-                child.gameObject.AddComponent<TerrainDecorationAnchorObject>();
-                AddRecursive(child);
+                if(child.GetComponent<TerrainDecorationAnchorObject>() == null)
+                {
+                    child.gameObject.AddComponent<TerrainDecorationAnchorObject>();
+                    AddRecursive(child);
+                }
             }
         }
-    }
 
-    private void AddRecursive(Transform parent)
-    {
-        foreach (Transform child in parent)
+        private void AddRecursive(Transform parent)
         {
-            if (child.GetComponent<TerrainDecorationAnchorObject>() == null)
+            foreach (Transform child in parent)
             {
-                child.gameObject.AddComponent<TerrainDecorationAnchorObject>();
-                AddRecursive(child);
+                if (child.GetComponent<TerrainDecorationAnchorObject>() == null)
+                {
+                    child.gameObject.AddComponent<TerrainDecorationAnchorObject>();
+                    AddRecursive(child);
+                }
             }
         }
     }

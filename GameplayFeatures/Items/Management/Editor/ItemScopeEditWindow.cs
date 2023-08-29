@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System;
+using UnityToolbox.GameplayFeatures.Items.Management;
 
-namespace UnityToolbox.Item.Management.Editor
+namespace UnityToolbox.GameplayFeatures.Items.Management.Editor
 {
     public class ItemScopeEditWindow : EditorWindow
     {

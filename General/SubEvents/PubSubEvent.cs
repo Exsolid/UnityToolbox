@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace UnityToolbox.Events
+namespace UnityToolbox.General.SubEvents
 {
     /// <summary>
     /// A generic version for subscription events.

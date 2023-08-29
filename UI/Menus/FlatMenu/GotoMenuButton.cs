@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityToolbox.Audio;
+using UnityToolbox.General.Management;
 
-namespace UnityToolbox.UI.Menus
+namespace UnityToolbox.UI.Menus.FlatMenu
 {
     /// <summary>
     /// A button which opens another menu and thereby closes the current.

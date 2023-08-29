@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityToolbox.General;
+using UnityToolbox.General.Management;
 
-namespace UnityToolbox.AI.Boids
+namespace UnityToolbox.GameplayFeatures.AI.Boids
 {
     /// <summary>
     /// An abstract boid implementation which listens to the three rules cohesion, separation and alignment. Additionally, object attraction and avoidance can be set.

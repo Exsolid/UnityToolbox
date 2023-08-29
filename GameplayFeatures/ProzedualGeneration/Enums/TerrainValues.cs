@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public enum TerrainValues
+namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Enums
 {
-    Filler = 0,
-    Wall = 1,
-    Floor = 2
+    public enum TerrainValues
+    {
+        Filler = 0,
+        Wall = 1,
+        Floor = 2
+    }
 }

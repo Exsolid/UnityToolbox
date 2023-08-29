@@ -5,8 +5,10 @@ using UnityEditor;
 using System.Linq;
 using System;
 using System.Reflection;
+using UnityToolbox.GameplayFeatures.Items;
+using UnityToolbox.GameplayFeatures.Items.Management;
 
-namespace UnityToolbox.Item.Management.Editor
+namespace UnityToolbox.GameplayFeatures.Items.Management.Editor
 {
     public class ItemDefinitionSelectionWindow : EditorWindow
     {

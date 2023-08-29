@@ -1,12 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.Linq;
-using Unity.VisualScripting;
 using System;
-using UnityToolbox.Events;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using UnityToolbox.General.Attributes;
+using UnityToolbox.General.Management;
+using UnityToolbox.General.SubEvents;
 
-namespace UnityToolbox.Achievments
+namespace UnityToolbox.GameplayFeatures.Achievements
 {
     /// <summary>
     /// The manager for all achievments. Needs to be present if achievments are used.

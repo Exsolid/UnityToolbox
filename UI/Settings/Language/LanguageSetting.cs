@@ -1,11 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Linq;
+using UnityToolbox.General.Management;
+using UnityToolbox.General.Preferences;
 using UnityToolbox.UI.Localisation;
 
-namespace UnityToolbox.UI.Settings
+namespace UnityToolbox.UI.Settings.Language
 {
     /// <summary>
     /// A script which displays the language settings.

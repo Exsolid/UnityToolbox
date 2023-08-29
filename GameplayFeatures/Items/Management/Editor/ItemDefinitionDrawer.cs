@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using System.Reflection;
+using UnityToolbox.GameplayFeatures.Items;
+using UnityToolbox.GameplayFeatures.Items.Management;
 
 
-namespace UnityToolbox.Item.Management.Editor
+namespace UnityToolbox.GameplayFeatures.Items.Management.Editor
 {
     /// <summary>
     /// This class enables a selection field for the <see cref="ItemDefinition"/> within the inspector.

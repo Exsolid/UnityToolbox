@@ -1,12 +1,9 @@
 using System;
-using System.Collections.Generic;
-using UnityEngine;
 using Newtonsoft.Json;
-using UnityToolbox.Item.Management;
-using System.Linq;
-using System.IO;
+using UnityEngine;
+using UnityToolbox.GameplayFeatures.Items.Management;
 
-namespace UnityToolbox.Item { 
+namespace UnityToolbox.GameplayFeatures.Items { 
     /// <summary>
     /// The base definition for all items.
     /// </summary>

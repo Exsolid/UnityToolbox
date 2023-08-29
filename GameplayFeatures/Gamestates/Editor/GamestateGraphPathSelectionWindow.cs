@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.IO;
+using UnityToolbox.General.Management;
+using UnityToolbox.General.Preferences;
 
 public class GamestateGraphPathSelectionWindow : EditorWindow
 {

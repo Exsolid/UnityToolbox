@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
 
-namespace UnityToolbox.Item.Management
+namespace UnityToolbox.GameplayFeatures.Items.Management
 {
     /// <summary>
     /// The scope which is used to indentify and serialize item data.

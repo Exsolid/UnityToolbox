@@ -1,19 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityToolbox.Audio;
 
-namespace UnityToolbox.UI.Menus
+namespace UnityToolbox.UI.Menus.FlatMenu.OnHover
 {
     /// <summary>
-    /// A script which tints a <see cref="Text"/> on hover.
+    /// A script which swapes the <see cref="Sprite"/> of an <see cref="Image"/> on hover.
     /// </summary>
-    public class TintTextOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public class SwapOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] private AudioMixer _hoverSounds;
-        [SerializeField] private Color _colorOnHover;
-        private Color _original;
+        [SerializeField] private Sprite _spriteSwapOnHover;
+        private Sprite _original;
         private bool _isEnabled;
 
         public void Awake()
@@ -22,12 +21,12 @@ namespace UnityToolbox.UI.Menus
             {
                 _isEnabled = isActive;
             };
-            _original = GetComponent<Text>().color;
+            _original = GetComponent<Image>().sprite;
         }
 
         public void OnPointerEnter(PointerEventData data)
         {
-            if (_colorOnHover == null || !_isEnabled)
+            if (_spriteSwapOnHover == null || !_isEnabled)
             {
                 return;
             }
@@ -37,16 +36,16 @@ namespace UnityToolbox.UI.Menus
                 _hoverSounds.PlayRandomSource();
             }
 
-            GetComponent<Text>().color = _colorOnHover;
+            GetComponent<Image>().sprite = _spriteSwapOnHover;
         }
 
         public void OnPointerExit(PointerEventData data)
         {
-            if (_colorOnHover == null)
+            if (_spriteSwapOnHover == null)
             {
                 return;
             }
-            GetComponent<Text>().color = _original;
+            GetComponent<Image>().sprite = _original;
         }
-    }
+    } 
 }

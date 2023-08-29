@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public enum TerrainDecorationPositionType
+namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Enums
 {
-    Floor,
-    Wall,
-    CornerFloor,
-    CornerWall
+    public enum TerrainDecorationPositionType
+    {
+        Floor,
+        Wall,
+        CornerFloor,
+        CornerWall
+    }
 }

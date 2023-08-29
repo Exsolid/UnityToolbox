@@ -2,6 +2,7 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using System.IO;
+using UnityToolbox.General.Preferences;
 
 /// <summary>
 /// Defines the current path of the UnityToolbox within the project within the <see cref="ProjectPrefs"/>.

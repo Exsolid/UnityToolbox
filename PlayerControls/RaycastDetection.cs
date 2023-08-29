@@ -1,120 +1,122 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Linq;
+using UnityToolbox.General.Management;
 using UnityToolbox.UI;
 using UnityToolbox.UI.Menus;
 using UnityToolbox.UI.Settings;
 
-/// <summary>
-/// This script is used for interactions with objects with optional tooltips.
-/// </summary>
-public abstract class RaycastDetection : MonoBehaviour
+namespace UnityToolbox.PlayerControls
 {
-    [SerializeField] private bool _is2D;
-    [SerializeField] protected string _tooltip; //Todo loca?
-    protected string _appendedTooltip; //Todo loca?
-    [SerializeField] protected string _interactActionName;
-    [SerializeField] private LayerMask _layerMask;
-    [SerializeField] protected Transform _raycastLocation;
-    [SerializeField] protected PlayerInput _input;
-    [SerializeField] private float _maxDistance = 2;
     /// <summary>
-    /// Whether the tooltip module should be used to display text.
+    /// This script is used for interactions with objects with optional tooltips.
     /// </summary>
-    protected bool _tooltipEnabled;
-
-    private RaycastHit _raycastHit;
-    private RaycastHit2D _raycastHit2D;
-
-    protected bool _isBinding;
-
-    private bool _inputLocked;
-
-    public void Start()
+    public abstract class RaycastDetection : MonoBehaviour
     {
-        _tooltipEnabled = true;
-        ModuleManager.GetModule<UIEventManager>().OnBindingKey += (isSetting) =>
-        {
-            _isBinding = isSetting;
-        };
+        [SerializeField] private bool _is2D;
+        [SerializeField] protected string _tooltip; //Todo loca?
+        protected string _appendedTooltip; //Todo loca?
+        [SerializeField] protected string _interactActionName;
+        [SerializeField] private LayerMask _layerMask;
+        [SerializeField] protected Transform _raycastLocation;
+        [SerializeField] protected PlayerInput _input;
+        [SerializeField] private float _maxDistance = 2;
+        /// <summary>
+        /// Whether the tooltip module should be used to display text.
+        /// </summary>
+        protected bool _tooltipEnabled;
 
-        ModuleManager.GetModule<PlayerEventManager>().OnLockMove += (isLocked) =>
-        {
-            _inputLocked = isLocked;
-        };
-    }
+        private RaycastHit _raycastHit;
+        private RaycastHit2D _raycastHit2D;
 
-    public void Update()
-    {
-        if (_is2D)
+        protected bool _isBinding;
+
+        private bool _inputLocked;
+
+        public void Start()
         {
-            _raycastHit2D = Physics2D.Raycast(_raycastLocation.position, _raycastLocation.transform.right, _maxDistance, _layerMask);
+            _tooltipEnabled = true;
+            ModuleManager.GetModule<UIEventManager>().OnBindingKey += (isSetting) =>
+            {
+                _isBinding = isSetting;
+            };
+
+            ModuleManager.GetModule<PlayerEventManager>().OnLockMove += (isLocked) =>
+            {
+                _inputLocked = isLocked;
+            };
         }
-        else
-        {
-            Physics.Raycast(_raycastLocation.position, _raycastLocation.transform.forward, out _raycastHit, _maxDistance, _layerMask);
-        }
 
-        if (_raycastHit2D.collider != null || _raycastHit.collider != null)
+        public void Update()
         {
-            if (_tooltipEnabled && ModuleManager.ModuleRegistered<TooltipManager>())
+            if (_is2D)
             {
-                ModuleManager.GetModule<TooltipManager>().UpdateTooltip(ModuleManager.GetModule<SettingsManager>().CurrentValueOfControl("", _interactActionName).Split("/").Last().ToUpper(), _appendedTooltip == null || _appendedTooltip.Trim().Equals("") ? _tooltip : _tooltip + " " +_appendedTooltip, this);
+                _raycastHit2D = Physics2D.Raycast(_raycastLocation.position, _raycastLocation.transform.right, _maxDistance, _layerMask);
             }
-            else if (ModuleManager.ModuleRegistered<TooltipManager>())
+            else
             {
-                ModuleManager.GetModule<TooltipManager>().UpdateTooltip("", "", this);
+                Physics.Raycast(_raycastLocation.position, _raycastLocation.transform.forward, out _raycastHit, _maxDistance, _layerMask);
             }
 
-            if (_input != null && _input.actions[_interactActionName].triggered && !_isBinding && !_inputLocked)
+            if (_raycastHit2D.collider != null || _raycastHit.collider != null)
             {
-                if(_raycastHit.collider != null)
+                if (_tooltipEnabled && ModuleManager.ModuleRegistered<TooltipManager>())
                 {
-                    OnInteraction(_raycastHit);
+                    ModuleManager.GetModule<TooltipManager>().UpdateTooltip(ModuleManager.GetModule<SettingsManager>().CurrentValueOfControl("", _interactActionName).Split("/").Last().ToUpper(), _appendedTooltip == null || _appendedTooltip.Trim().Equals("") ? _tooltip : _tooltip + " " +_appendedTooltip, this);
+                }
+                else if (ModuleManager.ModuleRegistered<TooltipManager>())
+                {
+                    ModuleManager.GetModule<TooltipManager>().UpdateTooltip("", "", this);
+                }
+
+                if (_input != null && _input.actions[_interactActionName].triggered && !_isBinding && !_inputLocked)
+                {
+                    if(_raycastHit.collider != null)
+                    {
+                        OnInteraction(_raycastHit);
+                    }
+                    if (_raycastHit2D.collider != null)
+                    {
+                        OnInteraction(_raycastHit2D);
+                    }
+                }
+                if (_raycastHit.collider != null)
+                {
+                    OnHit(_raycastHit);
                 }
                 if (_raycastHit2D.collider != null)
                 {
-                    OnInteraction(_raycastHit2D);
+                    OnHit(_raycastHit2D);
                 }
             }
-            if (_raycastHit.collider != null)
+            else if(ModuleManager.ModuleRegistered<TooltipManager>())
             {
-                OnHit(_raycastHit);
-            }
-            if (_raycastHit2D.collider != null)
-            {
-                OnHit(_raycastHit2D);
+                ModuleManager.GetModule<TooltipManager>().UpdateTooltip("", "", this);
             }
         }
-        else if(ModuleManager.ModuleRegistered<TooltipManager>())
-        {
-            ModuleManager.GetModule<TooltipManager>().UpdateTooltip("", "", this);
-        }
+
+        /// <summary>
+        /// Execute whatever should happen when the raycast found a valid object to interact with.
+        /// </summary>
+        /// <param name="raycastHit">The raycast data.</param>
+        public abstract void OnInteraction(RaycastHit raycastHit);
+
+        /// <summary>
+        /// Execute whatever should happen when the raycast found a valid object to interact with.
+        /// </summary>
+        /// <param name="raycastHit">The raycast data.</param>
+        public abstract void OnInteraction(RaycastHit2D raycastHit);
+
+        /// <summary>
+        /// Execute whatever should happen when the raycast found a valid object.
+        /// </summary>
+        /// <param name="raycastHit">The raycast data.</param>
+        public abstract void OnHit(RaycastHit raycastHit);
+
+        /// <summary>
+        /// Execute whatever should happen when the raycast found a valid object.
+        /// </summary>
+        /// <param name="raycastHit">The raycast data.</param>
+        public abstract void OnHit(RaycastHit2D raycastHit);
     }
-
-    /// <summary>
-    /// Execute whatever should happen when the raycast found a valid object to interact with.
-    /// </summary>
-    /// <param name="raycastHit">The raycast data.</param>
-    public abstract void OnInteraction(RaycastHit raycastHit);
-
-    /// <summary>
-    /// Execute whatever should happen when the raycast found a valid object to interact with.
-    /// </summary>
-    /// <param name="raycastHit">The raycast data.</param>
-    public abstract void OnInteraction(RaycastHit2D raycastHit);
-
-    /// <summary>
-    /// Execute whatever should happen when the raycast found a valid object.
-    /// </summary>
-    /// <param name="raycastHit">The raycast data.</param>
-    public abstract void OnHit(RaycastHit raycastHit);
-
-    /// <summary>
-    /// Execute whatever should happen when the raycast found a valid object.
-    /// </summary>
-    /// <param name="raycastHit">The raycast data.</param>
-    public abstract void OnHit(RaycastHit2D raycastHit);
 }

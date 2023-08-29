@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityToolbox.General.Management;
 
-namespace UnityToolbox.UI.Settings
+namespace UnityToolbox.UI.Settings.Language
 {
     /// <summary>
     /// A script which handels the language settings. On click, the next language is set.

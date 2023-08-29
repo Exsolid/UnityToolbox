@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public enum AudioType
+namespace UnityToolbox.Audio
 {
-    Music,
-    Effects,
-    Ambience
+    public enum AudioType
+    {
+        Music,
+        Effects,
+        Ambience
+    }
 }

@@ -1,14 +1,18 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityToolbox.Audio;
+using UnityToolbox.General.Management;
+using UnityToolbox.General.Preferences;
 using UnityToolbox.UI.Menus;
+using AudioType = UnityToolbox.Audio.AudioType;
 
-namespace UnityToolbox.UI.Settings
+namespace UnityToolbox.UI.Settings.Sliders
 {
     /// <summary>
     /// This script is placed on a slider and sets all changes for a given <see cref="SliderOption"/> to the <see cref="SettingsManager"/>.
     /// </summary>
-    public class UnitySilderSetting : MonoBehaviour
+    public class UnitySliderSetting : MonoBehaviour
     {
         [SerializeField] private AudioMixer _clickSounds;
         public enum SliderOption { Effects, Music, Ambience, Mouse_Sensitivity }

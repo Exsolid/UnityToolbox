@@ -5,6 +5,7 @@ using UnityEngine;
 using System.Reflection;
 using System.Linq;
 using System;
+using UnityToolbox.General.Attributes;
 
 /// <summary>
 /// Defines a [DropDown(..)] attribute, which creates a drop down menu to select from. See <see cref="DropDownAttribute"/> for the usage.

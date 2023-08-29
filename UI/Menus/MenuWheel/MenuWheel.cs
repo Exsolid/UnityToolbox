@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
+using UnityToolbox.General.Management;
 
-namespace UnityToolbox.UI.Menus
+namespace UnityToolbox.UI.Menus.MenuWheel
 {
     /// <summary>
     /// A menu which is not in context of the <see cref="MenuManager"/>. Instead it works with 3D-GameObjects and rotates them around with given settings.

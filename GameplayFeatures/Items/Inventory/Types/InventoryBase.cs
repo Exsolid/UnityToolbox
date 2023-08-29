@@ -1,26 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityToolbox.Item;
+using UnityToolbox.GameplayFeatures.SaveGame;
+using UnityToolbox.General.Attributes;
 
-public abstract class InventoryBase: MonoBehaviour
+namespace UnityToolbox.GameplayFeatures.Items.Inventory.Types
 {
-    [SerializeField] [ReadOnly] private string id = "";
-    public string ID
+    public abstract class InventoryBase: MonoBehaviour
     {
-        get { return id; }
-    }
-
-    public abstract bool AddItem(ItemInstance item, int count);
-    public abstract void RemoveItem(ItemInstance item, int count);
-    public abstract void RemoveItem(ItemInstance item);
-    public abstract void UpdateItem(ItemInstance old, ItemInstance updated);
-
-    private void OnValidate()
-    {
-        if (id.Equals(""))
+        [SerializeField] [ReadOnly] private string id = "";
+        public string ID
         {
-            id = IDManager.GetUniqueID();
+            get { return id; }
+        }
+
+        public abstract bool AddItem(ItemInstance item, int count);
+        public abstract void RemoveItem(ItemInstance item, int count);
+        public abstract void RemoveItem(ItemInstance item);
+        public abstract void UpdateItem(ItemInstance old, ItemInstance updated);
+
+        private void OnValidate()
+        {
+            if (id.Equals(""))
+            {
+                id = IDManager.GetUniqueID();
+            }
         }
     }
 }

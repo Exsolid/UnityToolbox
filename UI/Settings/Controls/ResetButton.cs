@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityToolbox.Audio;
+using UnityToolbox.General.Management;
 using UnityToolbox.UI.Menus;
 
-namespace UnityToolbox.UI.Settings
+namespace UnityToolbox.UI.Settings.Controls
 {
     /// <summary>
     /// A script which is placed on a UI element and acts as a button. It will reset key controls to the last know setting.

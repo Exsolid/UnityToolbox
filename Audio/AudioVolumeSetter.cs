@@ -1,97 +1,102 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
+using UnityEngine;
+using UnityToolbox.General.Management;
+using UnityToolbox.General.Preferences;
 using UnityToolbox.UI.Settings;
+using UnityToolbox.UI.Settings.Sliders;
 
-/// <summary>
-/// This script sets the volume of a <see cref="AudioSource"/> and reads the data from the settings.
-/// For more information on volume settings see <see cref="SettingsManager"/> and <see cref="UnitySilderSetting"/>.
-/// Requires <see cref="PlayerPrefKeys"/> and <see cref="PlayerPrefKeys"/>.
-/// </summary>
-[RequireComponent(typeof(AudioSource))]
-public class AudioVolumeSetter : MonoBehaviour
+namespace UnityToolbox.Audio
 {
-    [SerializeField] private AudioType _type;
-    private List<AudioSource> _audioSources;
-    private List<float> _originalVolume;
-
-    // Start is called before the first frame update
-    void Start()
+    /// <summary>
+    /// This script sets the volume of a <see cref="AudioSource"/> and reads the data from the settings.
+    /// For more information on volume settings see <see cref="SettingsManager"/> and <see cref="PlayerPrefKeys"/>.
+    /// Requires <see cref="PlayerPrefKeys"/> and <see cref="UnitySliderSetting"/>.
+    /// </summary>
+    [RequireComponent(typeof(AudioSource))]
+    public class AudioVolumeSetter : MonoBehaviour
     {
-        _originalVolume = new List<float>();
-        _audioSources = GetComponents<AudioSource>().ToList();
+        [SerializeField] private AudioType _type;
+        private List<AudioSource> _audioSources;
+        private List<float> _originalVolume;
 
-        foreach (AudioSource s in _audioSources)
+        // Start is called before the first frame update
+        void Start()
         {
-            _originalVolume.Add(s.volume);
-        }
+            _originalVolume = new List<float>();
+            _audioSources = GetComponents<AudioSource>().ToList();
 
-        ModuleManager.GetModule<SettingsManager>().OnSoundValueChanged += OnSoundChanged;
-
-        string pref = "";
-        switch (_type)
-        {
-            case AudioType.Effects:
-                pref = ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.EFFECTS_VOLUME);
-                break;
-            case AudioType.Music:
-                pref = ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.MUSIC_VOLUME);
-                break;
-            case AudioType.Ambience:
-                pref = ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.AMBIENCE_VOLUME);
-                break;
-        }
-
-        float value = PlayerPrefs.HasKey(pref) ? PlayerPrefs.GetFloat(pref) : 0.5f;
-        int i = 0;
-        foreach (AudioSource source in _audioSources)
-        {
-            if (source != null)
+            foreach (AudioSource s in _audioSources)
             {
-                source.volume = _originalVolume[i] * value;
+                _originalVolume.Add(s.volume);
             }
-            i++;
-        }
-    }
 
-    private void OnDestroy()
-    {
-        ModuleManager.GetModule<SettingsManager>().OnSoundValueChanged -= OnSoundChanged;
-    }
+            ModuleManager.GetModule<SettingsManager>().OnSoundValueChanged += OnSoundChanged;
 
-    private void OnSoundChanged(AudioType type, float newValue)
-    {
-        if (type == _type)
-        {
+            string pref = "";
+            switch (_type)
+            {
+                case AudioType.Effects:
+                    pref = ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.EFFECTS_VOLUME);
+                    break;
+                case AudioType.Music:
+                    pref = ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.MUSIC_VOLUME);
+                    break;
+                case AudioType.Ambience:
+                    pref = ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.AMBIENCE_VOLUME);
+                    break;
+            }
+
+            float value = PlayerPrefs.HasKey(pref) ? PlayerPrefs.GetFloat(pref) : 0.5f;
             int i = 0;
             foreach (AudioSource source in _audioSources)
             {
-                if(source != null)
+                if (source != null)
                 {
-                    source.volume = _originalVolume[i] * newValue;
+                    source.volume = _originalVolume[i] * value;
                 }
                 i++;
             }
         }
-    }
 
-    public float GetSetVolume(AudioSource source)
-    {
-        string pref = "";
-        switch (_type)
+        private void OnDestroy()
         {
-            case AudioType.Effects:
-                pref = ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.EFFECTS_VOLUME);
-                break;
-            case AudioType.Music:
-                pref = ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.MUSIC_VOLUME);
-                break;
-            case AudioType.Ambience:
-                pref = ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.AMBIENCE_VOLUME);
-                break;
+            ModuleManager.GetModule<SettingsManager>().OnSoundValueChanged -= OnSoundChanged;
         }
 
-        return (PlayerPrefs.HasKey(pref) ? PlayerPrefs.GetFloat(pref) : 0.5f) * _originalVolume[_audioSources.IndexOf(source)];
+        private void OnSoundChanged(AudioType type, float newValue)
+        {
+            if (type == _type)
+            {
+                int i = 0;
+                foreach (AudioSource source in _audioSources)
+                {
+                    if(source != null)
+                    {
+                        source.volume = _originalVolume[i] * newValue;
+                    }
+                    i++;
+                }
+            }
+        }
+
+        public float GetSetVolume(AudioSource source)
+        {
+            string pref = "";
+            switch (_type)
+            {
+                case AudioType.Effects:
+                    pref = ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.EFFECTS_VOLUME);
+                    break;
+                case AudioType.Music:
+                    pref = ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.MUSIC_VOLUME);
+                    break;
+                case AudioType.Ambience:
+                    pref = ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.AMBIENCE_VOLUME);
+                    break;
+            }
+
+            return (PlayerPrefs.HasKey(pref) ? PlayerPrefs.GetFloat(pref) : 0.5f) * _originalVolume[_audioSources.IndexOf(source)];
+        }
     }
 }

@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-namespace UnityToolbox.Item.Management  
+namespace UnityToolbox.GameplayFeatures.Items.Management  
 {
     public class ItemDefinitionException : Exception
     {

@@ -1,8 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityToolbox.General.Management;
+using UnityToolbox.PlayerControls;
 
-namespace UnityToolbox.UI.Menus
+namespace UnityToolbox.UI.Menus.FlatMenu
 {
     /// <summary>
     /// A script which reads the status of the menu it is placed on. Disables movment when found active and vise versa.
