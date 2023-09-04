@@ -1,4 +1,4 @@
 var _player_event_manager_8cs =
 [
-    [ "PlayerEventManager", "class_player_event_manager.html", "class_player_event_manager" ]
+    [ "UnityToolbox.PlayerControls.PlayerEventManager", "class_unity_toolbox_1_1_player_controls_1_1_player_event_manager.html", "class_unity_toolbox_1_1_player_controls_1_1_player_event_manager" ]
 ];

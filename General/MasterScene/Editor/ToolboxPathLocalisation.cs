@@ -4,32 +4,35 @@ using UnityEngine;
 using System.IO;
 using UnityToolbox.General.Preferences;
 
-/// <summary>
-/// Defines the current path of the UnityToolbox within the project within the <see cref="ProjectPrefs"/>.
-/// </summary>
-[InitializeOnLoad]
-public class ToolboxPathLocalizer
+namespace UnityToolbox.General.MasterScene.Editor
 {
-    static ToolboxPathLocalizer()
+    /// <summary>
+    /// Defines the current path of the UnityToolbox within the project within the <see cref="ProjectPrefs"/>.
+    /// </summary>
+    [InitializeOnLoad]
+    public class ToolboxPathLocalizer
     {
-        EditorApplication.delayCall += Init;
-    }
-
-    private static void Init()
-    {
-        string[] assetPath = Directory.GetDirectories(Application.dataPath, "UnityToolbox", SearchOption.AllDirectories);
-        if (assetPath.Length > 0)
+        static ToolboxPathLocalizer()
         {
-            string path = assetPath[0].Replace(Application.dataPath, "");
-            if (!path.Equals(ProjectPrefs.GetString(ProjectPrefKeys.UNITYTOOLBOXPATH)))
-            {
-                ProjectPrefs.SetString(ProjectPrefKeys.UNITYTOOLBOXPATH, path);
-                AssetDatabase.Refresh();
-
-                Debug.Log("Registered UnityToolboxPath at: " + "[" + Application.dataPath + "] " + ProjectPrefs.GetString(ProjectPrefKeys.UNITYTOOLBOXPATH));
-            }
+            EditorApplication.delayCall += Init;
         }
 
-        EditorApplication.delayCall -= Init;
+        private static void Init()
+        {
+            string[] assetPath = Directory.GetDirectories(Application.dataPath, "UnityToolbox", SearchOption.AllDirectories);
+            if (assetPath.Length > 0)
+            {
+                string path = assetPath[0].Replace(Application.dataPath, "");
+                if (!path.Equals(ProjectPrefs.GetString(ProjectPrefKeys.UNITYTOOLBOXPATH)))
+                {
+                    ProjectPrefs.SetString(ProjectPrefKeys.UNITYTOOLBOXPATH, path);
+                    AssetDatabase.Refresh();
+
+                    Debug.Log("Registered UnityToolboxPath at: " + "[" + Application.dataPath + "] " + ProjectPrefs.GetString(ProjectPrefKeys.UNITYTOOLBOXPATH));
+                }
+            }
+
+            EditorApplication.delayCall -= Init;
+        }
     }
 }

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['scopeedited_0',['ScopeEdited',['../class_localizer.html#adc5d35dba2d5e5fed378c1bb3c4c9bee',1,'Localizer']]]
+  ['scopeedited_0',['ScopeEdited',['../class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_localizer.html#a66341fc72f349df250879cb9cb662573',1,'UnityToolbox::UI::Localisation::Localizer']]]
 ];

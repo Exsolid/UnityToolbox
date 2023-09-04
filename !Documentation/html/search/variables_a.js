@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['json_5fcontrols_0',['JSON_CONTROLS',['../class_player_pref_keys.html#a32a5c6313f910e88c42c708e728cc7c3',1,'PlayerPrefKeys']]]
+  ['json_5fcontrols_0',['JSON_CONTROLS',['../class_unity_toolbox_1_1_general_1_1_preferences_1_1_player_pref_keys.html#add6e43b89214d0a98b0b5969368dff83',1,'UnityToolbox::General::Preferences::PlayerPrefKeys']]]
 ];

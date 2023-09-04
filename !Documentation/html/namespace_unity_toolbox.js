@@ -1,7 +1,8 @@
 var namespace_unity_toolbox =
 [
-    [ "Achievments", "namespace_unity_toolbox_1_1_achievments.html", "namespace_unity_toolbox_1_1_achievments" ],
-    [ "AI", "namespace_unity_toolbox_1_1_a_i.html", "namespace_unity_toolbox_1_1_a_i" ],
-    [ "Events", "namespace_unity_toolbox_1_1_events.html", "namespace_unity_toolbox_1_1_events" ],
-    [ "Item", "namespace_unity_toolbox_1_1_item.html", "namespace_unity_toolbox_1_1_item" ]
+    [ "Audio", "namespace_unity_toolbox_1_1_audio.html", "namespace_unity_toolbox_1_1_audio" ],
+    [ "GameplayFeatures", "namespace_unity_toolbox_1_1_gameplay_features.html", "namespace_unity_toolbox_1_1_gameplay_features" ],
+    [ "General", "namespace_unity_toolbox_1_1_general.html", "namespace_unity_toolbox_1_1_general" ],
+    [ "PlayerControls", "namespace_unity_toolbox_1_1_player_controls.html", "namespace_unity_toolbox_1_1_player_controls" ],
+    [ "UI", "namespace_unity_toolbox_1_1_u_i.html", "namespace_unity_toolbox_1_1_u_i" ]
 ];

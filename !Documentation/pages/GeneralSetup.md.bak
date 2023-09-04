@@ -1,7 +1,7 @@
 @mainpage Getting Started
 
-If you are looking for an overview and tutorials of features head over to @ref Tutorials.\n
-The actual source code can be found on the ![Github-Page](https://github.com/Exsolid/UnityToolbox).\n
+If you are looking for an overview and tutorials of features head over to @ref Tutorials "Tutorials".\n
+The actual source code can be found on the [Github-Page](https://github.com/Exsolid/UnityToolbox).\n
 Here the basic setup will be explained.
 
 @section GeneralSetupGitDefaultSetup Default Git Setup
@@ -47,22 +47,22 @@ The toolbox can now be used within your project.
 
 @section GeneralSetupManagerSystem Manager System
 
-The manager system refers to the system on which the toolbox is built on. The core would be the @ref ModuleManager which will be needed for mostly any feature.\n
+The manager system refers to the system on which the toolbox is built on. The core would be the @ref UnityToolbox.General.Management.ModuleManager "ModuleManager" which will be needed for mostly any feature.\n
 Therefore it needs to exist in multiple scenes. So that one is not required to add it in every single scene, it is advised to create a "Master" scene.\n
 Once created and the editor is reloaded (pressing play & stop), the scene should be recognized and setup up as such.
 
 You can now create an empty GameObject and add the "ModuleManager" script.
 
 If you are using the "Master" scene, you will need to add two more scripts.
- - The @ref LoadFirstScene which is required to load the first scene within the actual build.
- - The @ref LoadOriginalSceneForEditor which is required to load the current open scene in editor once the user presses play.
+ - The @ref UnityToolbox.General.MasterScene.LoadFirstScene "LoadFirstScene" which is required to load the first scene within the actual build.
+ - The @ref UnityToolbox.General.MasterScene.LoadOriginalSceneForEditor "LoadOriginalSceneForEditor" which is required to load the current open scene in editor once the user presses play.
 This is due to the "Master" scene always being opened first to initialize all general scripts.
 
 | Master Scene Manager Setup |
 | :---- |
 | @image html GeneralSetupManagers.png width=400px |
 
-To understand the use case, every script can inherit from @ref Module which can then be called with the @ref ModuleManager as such, using the @ref SettingsManager as an example:
+To understand the use case, every script can inherit from @ref UnityToolbox.General.Management.Module "Module" which can then be called with the @ref ModuleManager as such, using the @ref SettingsManager as an example:
 ~~~~~~~~~~~~~~~{.c}
 ModuleManager.GetModule<SettingsManager>();
 ~~~~~~~~~~~~~~~

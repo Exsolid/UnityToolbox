@@ -1,24 +1,26 @@
-using UnityToolbox.GameplayFeatures.SaveGame;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
-/// <summary>
-/// Initializes the <see cref="IDManager"/> for scene changes in the editor.
-/// </summary>
-[InitializeOnLoad]
-public class IDInitializer: MonoBehaviour
+namespace UnityToolbox.GameplayFeatures.SaveGame.Editor
 {
-    static IDInitializer()
+    /// <summary>
+    /// Initializes the <see cref="IDManager"/> for scene changes in the editor.
+    /// </summary>
+    [InitializeOnLoad]
+    public class IDInitializer: MonoBehaviour
     {
-        EditorSceneManager.activeSceneChangedInEditMode += (sceneOne, sceneTwo) => 
+        static IDInitializer()
         {
-            IDManager.SceneChanged(sceneTwo); 
-        };
+            EditorSceneManager.activeSceneChangedInEditMode += (sceneOne, sceneTwo) => 
+            {
+                IDManager.SceneChanged(sceneTwo); 
+            };
 
-        AssemblyReloadEvents.afterAssemblyReload += () => 
-        { 
-            IDManager.SceneChanged(EditorSceneManager.GetActiveScene()); 
-        };
+            AssemblyReloadEvents.afterAssemblyReload += () => 
+            { 
+                IDManager.SceneChanged(EditorSceneManager.GetActiveScene()); 
+            };
+        }
     }
 }

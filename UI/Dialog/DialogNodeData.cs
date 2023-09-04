@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using UnityEngine;
-using UnityToolbox.GameplayFeatures.Serialization_Data;
+using UnityToolbox.GameplayFeatures.SerializationData;
 
 namespace UnityToolbox.UI.Dialog
 {

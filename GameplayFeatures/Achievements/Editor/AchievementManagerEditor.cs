@@ -7,13 +7,13 @@ using System.Linq;
 using System.Reflection;
 using UnityToolbox.GameplayFeatures.Achievements;
 
-namespace UnityToolbox.Achievments
+namespace UnityToolbox.GameplayFeatures.Achievements.Editor
 {
     /// <summary>
-    /// An editor which defines the button, to manually cache all achievments.
+    /// An editor which defines the button, to manually cache all achievements.
     /// </summary>
     [CustomEditor(typeof(AchievementManager))]
-    public class AchievementManagerEditor : Editor
+    public class AchievementManagerEditor : UnityEditor.Editor
     {
         public override void OnInspectorGUI()
         {

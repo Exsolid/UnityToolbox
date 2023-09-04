@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['languageedited_0',['LanguageEdited',['../class_localizer.html#aac0a3a38a69390c556d5dbb236b9843f',1,'Localizer']]],
-  ['localisationidedited_1',['LocalisationIDEdited',['../class_localizer.html#aa31b84acc42dd8bf67e97c5d00c80d4f',1,'Localizer']]]
+  ['languageedited_0',['LanguageEdited',['../class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_localizer.html#af4f7b8ea27d2b67cf32c5759ce046b08',1,'UnityToolbox::UI::Localisation::Localizer']]],
+  ['localisationidedited_1',['LocalisationIDEdited',['../class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_localizer.html#a5104f5d89a32f1dce70ca8035cb69844',1,'UnityToolbox::UI::Localisation::Localizer']]]
 ];

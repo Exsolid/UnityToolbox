@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['togglemoving_0',['ToggleMoving',['../_movement_base_8cs.html#ab5e9a2252870710908096f54ecb89c4aaf23e5132022583c97474859c1da5b32b',1,'MovementBase.cs']]]
+  ['togglemoving_0',['ToggleMoving',['../namespace_unity_toolbox_1_1_player_controls.html#a3763226b72f1ffb13e4d83716a2db23eaf23e5132022583c97474859c1da5b32b',1,'UnityToolbox::PlayerControls']]]
 ];

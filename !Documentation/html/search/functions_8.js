@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['jump_0',['Jump',['../class_movement2_d_side.html#afe5d43e138ad70e3eb18d6d5e5986df8',1,'Movement2DSide.Jump()'],['../class_movement2_d_top.html#aa910f044ac837057d8cae20dd6146ef1',1,'Movement2DTop.Jump()'],['../class_movement3_d.html#aa413cd352490598f2fefa7edb8074c70',1,'Movement3D.Jump()'],['../class_movement_base.html#ab2325b2d8e0d8bfff6ff9540c4adac82',1,'MovementBase.Jump()']]]
+  ['jump_0',['Jump',['../class_unity_toolbox_1_1_player_controls_1_1_movement_base.html#a10e63215e9dd80b89bed78284f3aad4c',1,'UnityToolbox.PlayerControls.MovementBase.Jump()'],['../class_unity_toolbox_1_1_player_controls_1_1_three_d_1_1_movement3_d.html#a42249076cf3022503154986bc55af544',1,'UnityToolbox.PlayerControls.ThreeD.Movement3D.Jump()'],['../class_unity_toolbox_1_1_player_controls_1_1_two_d_1_1_movement2_d_side.html#afb34897ece7012f4e5d340d2b6e699b5',1,'UnityToolbox.PlayerControls.TwoD.Movement2DSide.Jump()'],['../class_unity_toolbox_1_1_player_controls_1_1_two_d_1_1_movement2_d_top.html#aff988864752c76f0bac3b8b3ef894945',1,'UnityToolbox.PlayerControls.TwoD.Movement2DTop.Jump()']]]
 ];

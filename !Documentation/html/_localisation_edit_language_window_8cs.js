@@ -1,4 +1,4 @@
 var _localisation_edit_language_window_8cs =
 [
-    [ "LocalisationEditLanguageWindow", "class_localisation_edit_language_window.html", "class_localisation_edit_language_window" ]
+    [ "UnityToolbox.UI.Localisation.Editor.LocalisationEditLanguageWindow", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_editor_1_1_localisation_edit_language_window.html", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_editor_1_1_localisation_edit_language_window" ]
 ];

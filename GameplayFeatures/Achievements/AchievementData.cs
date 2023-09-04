@@ -25,7 +25,7 @@ namespace UnityToolbox.GameplayFeatures.Achievements
         public string Description;
 
         /// <summary>
-        /// the achievment icon.
+        /// The achievement icon.
         /// </summary>
         public Texture2D Icon;
 
@@ -36,7 +36,7 @@ namespace UnityToolbox.GameplayFeatures.Achievements
         /// <summary>
         /// The type data of the defined trigger. Is set within the custom editor and used for serialization.
         /// </summary>
-        [HideInInspector] public SerializationData OnTriggerData;
+        [HideInInspector] public Unity.VisualScripting.SerializationData OnTriggerData;
 
         [SerializeField][HideInInspector] private List<string> _triggers = new List<string>();
 

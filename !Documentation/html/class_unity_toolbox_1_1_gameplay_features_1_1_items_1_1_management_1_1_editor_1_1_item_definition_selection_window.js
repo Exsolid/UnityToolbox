@@ -1,0 +1,4 @@
+var class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_management_1_1_editor_1_1_item_definition_selection_window =
+[
+    [ "OnItemDefinitionSelected", "class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_management_1_1_editor_1_1_item_definition_selection_window.html#ad2cf35a2e45dccc7181fe00a4ccb368b", null ]
+];

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 using UnityToolbox.GameplayFeatures.Items.Management;
-using UnityToolbox.GameplayFeatures.Serialization_Data;
+using UnityToolbox.GameplayFeatures.SerializationData;
 using Module = UnityToolbox.General.Management.Module;
 
 namespace UnityToolbox.GameplayFeatures.Items

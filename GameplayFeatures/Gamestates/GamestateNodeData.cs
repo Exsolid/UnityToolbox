@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using UnityToolbox.GameplayFeatures.Serialization_Data;
+using UnityToolbox.GameplayFeatures.SerializationData;
 
 namespace UnityToolbox.GameplayFeatures.Gamestates
 {

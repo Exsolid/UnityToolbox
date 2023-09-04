@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityToolbox.GameplayFeatures.Serialization_Data;
+using UnityToolbox.GameplayFeatures.SerializationData;
 using UnityToolbox.General.Attributes;
 using UnityToolbox.General.Management;
 

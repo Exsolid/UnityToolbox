@@ -8,10 +8,10 @@
 	- @ref ItemManagementUsage
 	- @ref ItemManagementCustomItems
 	
-The @ref UnityToolbox.Item.ItemManager "ItemManager" is built to ease the creation and usage of items.\n
+The @ref UnityToolbox.GameplayFeatures.Items.ItemManager "ItemManager" is built to ease the creation and usage of items.\n
 There are a few prerequisites for being able to use the manager:
 - The @ref GeneralSetupManagerSystem.
-- Having an @ref UnityToolbox.Item.ItemManager "ItemManager" within a scene, ideally within the "Master" scene.
+- Having an @ref UnityToolbox.GameplayFeatures.Items.ItemManager "ItemManager" within a scene, ideally within the "Master" scene.
 - All assets which should be used, need to be stored within a "Resource" folder. 
 
 @section ItemManagementSettings Settings
@@ -53,7 +53,7 @@ As mentioned before, all assets that are used here, have to be stored within a "
 
 @subsection ItemManagementUsage Usage
 
-To use the items in code, simply define a @ref UnityToolbox.Item.ItemDefinition "ItemDefinition" field, which can be accessed within the editor (public or as \[SerializeField]).
+To use the items in code, simply define a @ref UnityToolbox.GameplayFeatures.Items.ItemDefinition "ItemDefinition" field, which can be accessed within the editor (public or as \[SerializeField]).
 ~~~~~~~~~~~~~~~{.c} 
 public ItemDefinition ItemToSpawn;
 ~~~~~~~~~~~~~~~
@@ -66,15 +66,15 @@ Apart from editing (\*) and deleting (-), one can now also select an item (^).\n
 | :---- |
 | @image html ItemManagerItemSelection.png width=500px |
 
-To spawn the selected item, the @ref UnityToolbox.Item.ItemManager "ItemManager" can be used. In this example we are working with the **ItemToSpawn** field from before:
+To spawn the selected item, the @ref UnityToolbox.GameplayFeatures.Items.ItemManager "ItemManager" can be used. In this example we are working with the **ItemToSpawn** field from before:
 ~~~~~~~~~~~~~~~{.c}
 ModuleManager.GetModule<ItemManager>().SpawnItemInstance(givenPosition, givenRotation, givenScale, ItemToSpawn.GetQualifiedName());
 ~~~~~~~~~~~~~~~
-At runtime, the item then exists as an @ref UnityToolbox.Item.ItemInstance "ItemInstance".
+At runtime, the item then exists as an @ref UnityToolbox.GameplayFeatures.Items.ItemInstance "ItemInstance".
 
 @subsection ItemManagementCustomItems Custom Item Definitions
 
-Lastly, one can create custom items, by inheriting from @ref UnityToolbox.Item.ItemDefinition "ItemDefinition". The "Item Manager" window, will automatically pick up the newly created item type, making it selectable for all features.\n
+Lastly, one can create custom items, by inheriting from @ref UnityToolbox.GameplayFeatures.Items.ItemDefinition "ItemDefinition". The "Item Manager" window, will automatically pick up the newly created item type, making it selectable for all features.\n
 One can now add additional **int, float, string, bool** fields, which can then also be filled out within the windows.
 ~~~~~~~~~~~~~~~{.c} 
 public class Weapon : ItemDefinition
@@ -91,7 +91,7 @@ public class Weapon : ItemDefinition
 | @image html ItemManagerSelectedItem.png width=400px |
 | @image html ItemManagerSelectedItemFields.png width=400px |
 
-The spawned custom items are also generated as an @ref UnityToolbox.Item.ItemInstance "ItemInstance". To access the additional values one can do the following:
+The spawned custom items are also generated as an @ref UnityToolbox.GameplayFeatures.Items.ItemInstance "ItemInstance". To access the additional values one can do the following:
 
 ~~~~~~~~~~~~~~~{.c} 
 ItemInstance instance = ModuleManager.GetModule<ItemManager>().SpawnItemInstance(givenPosition, givenRotation, givenScale, ItemToSpawn.GetQualifiedName()); 

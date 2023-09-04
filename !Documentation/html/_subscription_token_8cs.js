@@ -1,4 +1,4 @@
 var _subscription_token_8cs =
 [
-    [ "SubscriptionToken", "struct_subscription_token.html", "struct_subscription_token" ]
+    [ "UnityToolbox.General.SubscriptionToken", "struct_unity_toolbox_1_1_general_1_1_subscription_token.html", "struct_unity_toolbox_1_1_general_1_1_subscription_token" ]
 ];

@@ -1,0 +1,5 @@
+var class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_management_1_1_editor_1_1_item_definition_error_window =
+[
+    [ "Close", "class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_management_1_1_editor_1_1_item_definition_error_window.html#a86c3e8af28b431e9d304909050950d25", null ],
+    [ "OnClose", "class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_management_1_1_editor_1_1_item_definition_error_window.html#a2622eb5aaba79688163ad3d1129a589d", null ]
+];

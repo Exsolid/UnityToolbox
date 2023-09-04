@@ -4,26 +4,29 @@ using UnityToolbox.GameplayFeatures.ProzedualGeneration.Terrain;
 using UnityEngine;
 using UnityEditor;
 
-/// <summary>
-/// The editor for <see cref="TerrainDecoration"/>, which adds buttons for the generation.
-/// </summary>
-[CustomEditor(typeof(TerrainDecoration))]
-public class TerrainDecorationEditor : Editor
+namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor
 {
-    public override void OnInspectorGUI()
+    /// <summary>
+    /// The editor for <see cref="TerrainDecoration"/>, which adds buttons for the generation.
+    /// </summary>
+    [CustomEditor(typeof(TerrainDecoration))]
+    public class TerrainDecorationEditor : UnityEditor.Editor
     {
-        base.OnInspectorGUI();
-
-        TerrainDecoration decoGenerator = (TerrainDecoration)target;
-
-        if(GUILayout.Button("Generate Decoration"))
+        public override void OnInspectorGUI()
         {
-            decoGenerator.PlaceObjects();
-        }
+            base.OnInspectorGUI();
 
-        if (GUILayout.Button("Delete Decoration"))
-        {
-            decoGenerator.DeleteObjects();
+            TerrainDecoration decoGenerator = (TerrainDecoration)target;
+
+            if(GUILayout.Button("Generate Decoration"))
+            {
+                decoGenerator.PlaceObjects();
+            }
+
+            if (GUILayout.Button("Delete Decoration"))
+            {
+                decoGenerator.DeleteObjects();
+            }
         }
     }
 }

@@ -110,10 +110,10 @@ Overview</h1>
 </ul>
 </li>
 </ul>
-<p>The <a class="el" href="class_unity_toolbox_1_1_item_1_1_item_manager.html">ItemManager</a> is built to ease the creation and usage of items.<br  />
+<p>The <a class="el" href="class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_item_manager.html">ItemManager</a> is built to ease the creation and usage of items.<br  />
 There are a few prerequisites for being able to use the manager:</p><ul>
 <li>The <a class="el" href="index.html#GeneralSetupManagerSystem">Manager System</a>.</li>
-<li>Having an <a class="el" href="class_unity_toolbox_1_1_item_1_1_item_manager.html">ItemManager</a> within a scene, ideally within the "Master" scene.</li>
+<li>Having an <a class="el" href="class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_item_manager.html">ItemManager</a> within a scene, ideally within the "Master" scene.</li>
 <li>All assets which should be used, need to be stored within a "Resource" folder.</li>
 </ul>
 <h1><a class="anchor" id="ItemManagementSettings"></a>
@@ -170,7 +170,7 @@ lastly, the third where items are listed and can be edited (*) and deleted (-). 
 </table>
 <h2><a class="anchor" id="ItemManagementUsage"></a>
 Usage</h2>
-<p>To use the items in code, simply define a <a class="el" href="class_unity_toolbox_1_1_item_1_1_item_definition.html">ItemDefinition</a> field, which can be accessed within the editor (public or as [SerializeField]). </p><div class="fragment"><div class="line"><span class="keyword">public</span> ItemDefinition ItemToSpawn;</div>
+<p>To use the items in code, simply define a <a class="el" href="class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_item_definition.html">ItemDefinition</a> field, which can be accessed within the editor (public or as [SerializeField]). </p><div class="fragment"><div class="line"><span class="keyword">public</span> ItemDefinition ItemToSpawn;</div>
 </div><!-- fragment --><p> The editor should now display a selection button, opening a window.<br  />
 The window is similar to the item tab, displaying the search and the item list.<br  />
 Apart from editing (*) and deleting (-), one can now also select an item (^).<br  />
@@ -184,12 +184,11 @@ Apart from editing (*) and deleting (-), one can now also select an item (^).<br
 </div>
   </td></tr>
 </table>
-<p>To spawn the selected item, the <a class="el" href="class_unity_toolbox_1_1_item_1_1_item_manager.html">ItemManager</a> can be used. In this example we are working with the <b>ItemToSpawn</b> field from before: </p><div class="fragment"><div class="line"><a class="code hl_class" href="class_module_manager.html">ModuleManager</a>.GetModule&lt;ItemManager&gt;().SpawnItemInstance(givenPosition, givenRotation, givenScale, ItemToSpawn.GetQualifiedName());</div>
-<div class="ttc" id="aclass_module_manager_html"><div class="ttname"><a href="class_module_manager.html">ModuleManager</a></div><div class="ttdoc">The module manager (de)registeres implementations of the Module. All modules can be called from here,...</div><div class="ttdef"><b>Definition</b> ModuleManager.cs:12</div></div>
-</div><!-- fragment --><p> At runtime, the item then exists as an <a class="el" href="class_unity_toolbox_1_1_item_1_1_item_instance.html">ItemInstance</a>.</p>
+<p>To spawn the selected item, the <a class="el" href="class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_item_manager.html">ItemManager</a> can be used. In this example we are working with the <b>ItemToSpawn</b> field from before: </p><div class="fragment"><div class="line">ModuleManager.GetModule&lt;ItemManager&gt;().SpawnItemInstance(givenPosition, givenRotation, givenScale, ItemToSpawn.GetQualifiedName());</div>
+</div><!-- fragment --><p> At runtime, the item then exists as an <a class="el" href="class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_item_instance.html">ItemInstance</a>.</p>
 <h2><a class="anchor" id="ItemManagementCustomItems"></a>
 Custom Item Definitions</h2>
-<p>Lastly, one can create custom items, by inheriting from <a class="el" href="class_unity_toolbox_1_1_item_1_1_item_definition.html">ItemDefinition</a>. The "Item Manager" window, will automatically pick up the newly created item type, making it selectable for all features.<br  />
+<p>Lastly, one can create custom items, by inheriting from <a class="el" href="class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_item_definition.html">ItemDefinition</a>. The "Item Manager" window, will automatically pick up the newly created item type, making it selectable for all features.<br  />
 One can now add additional <b>int, float, string, bool</b> fields, which can then also be filled out within the windows. </p><div class="fragment"><div class="line"><span class="keyword">public</span> <span class="keyword">class </span>Weapon : ItemDefinition</div>
 <div class="line">{</div>
 <div class="line">    <span class="keyword">public</span> <span class="keywordtype">int</span> Strength;</div>
@@ -211,8 +210,8 @@ One can now add additional <b>int, float, string, bool</b> fields, which can the
 </div>
   </td></tr>
 </table>
-<p>The spawned custom items are also generated as an <a class="el" href="class_unity_toolbox_1_1_item_1_1_item_instance.html">ItemInstance</a>. To access the additional values one can do the following:</p>
-<div class="fragment"><div class="line">ItemInstance instance = <a class="code hl_class" href="class_module_manager.html">ModuleManager</a>.GetModule&lt;ItemManager&gt;().SpawnItemInstance(givenPosition, givenRotation, givenScale, ItemToSpawn.GetQualifiedName()); </div>
+<p>The spawned custom items are also generated as an <a class="el" href="class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_item_instance.html">ItemInstance</a>. To access the additional values one can do the following:</p>
+<div class="fragment"><div class="line">ItemInstance instance = ModuleManager.GetModule&lt;ItemManager&gt;().SpawnItemInstance(givenPosition, givenRotation, givenScale, ItemToSpawn.GetQualifiedName()); </div>
 <div class="line"> </div>
 <div class="line"><span class="keywordflow">if</span>(instance != null &amp;&amp; instance.ItemType.Equals(typeof(Weapon)))</div>
 <div class="line">{</div>
@@ -227,7 +226,7 @@ One can now add additional <b>int, float, string, bool</b> fields, which can the
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Aug 19 2023 for UnityToolbox by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
+    <li class="footer">Generated on Mon Sep 4 2023 for UnityToolbox by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>
 </body>

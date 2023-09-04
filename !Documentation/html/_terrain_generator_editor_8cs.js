@@ -1,4 +1,4 @@
 var _terrain_generator_editor_8cs =
 [
-    [ "TerrainGeneratorEditor", "class_terrain_generator_editor.html", "class_terrain_generator_editor" ]
+    [ "UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor.TerrainGeneratorEditor", "class_unity_toolbox_1_1_gameplay_features_1_1_prozedual_generation_1_1_editor_1_1_terrain_generator_editor.html", "class_unity_toolbox_1_1_gameplay_features_1_1_prozedual_generation_1_1_editor_1_1_terrain_generator_editor" ]
 ];

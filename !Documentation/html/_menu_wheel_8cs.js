@@ -1,4 +1,4 @@
 var _menu_wheel_8cs =
 [
-    [ "MenuWheel", "class_menu_wheel.html", "class_menu_wheel" ]
+    [ "UnityToolbox.UI.Menus.MenuWheel.MenuWheel", "class_unity_toolbox_1_1_u_i_1_1_menus_1_1_menu_wheel_1_1_menu_wheel.html", "class_unity_toolbox_1_1_u_i_1_1_menus_1_1_menu_wheel_1_1_menu_wheel" ]
 ];

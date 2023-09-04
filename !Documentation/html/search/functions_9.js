@@ -1,10 +1,10 @@
 var searchData=
 [
-  ['languagenext_0',['LanguageNext',['../class_u_i_event_manager.html#a96ad58929bafc571ae66ee5897e99a43',1,'UIEventManager']]],
-  ['languageprevious_1',['LanguagePrevious',['../class_u_i_event_manager.html#aa6edabc16716498180bba05e561139eb',1,'UIEventManager']]],
-  ['languageupdated_2',['LanguageUpdated',['../class_u_i_event_manager.html#af5839870241998118d8c8928d983c8b5',1,'UIEventManager']]],
-  ['load_3',['Load',['../class_saveable.html#ab9430e7e8e4b16bdcfa9724ff525cba3',1,'Saveable']]],
-  ['loaddata_4',['LoadData',['../class_unity_toolbox_1_1_item_1_1_item_instance.html#ad1e8f6d384055133b1a1922f6bb89550',1,'UnityToolbox.Item.ItemInstance.LoadData()'],['../class_saveable.html#a199176d938af89215edb2ecc6626b74c',1,'Saveable.LoadData()']]],
-  ['localisationexception_5',['LocalisationException',['../class_localisation_exception.html#ad08e5c2f7f8ad9ef2c469ffb8eddbfbf',1,'LocalisationException']]],
-  ['lockmove_6',['LockMove',['../class_player_event_manager.html#a277e530dc4edf6cecabcfdcf11d996c9',1,'PlayerEventManager']]]
+  ['languagenext_0',['LanguageNext',['../class_unity_toolbox_1_1_u_i_1_1_u_i_event_manager.html#aa4efa5f954d34007e5a0309e714176fd',1,'UnityToolbox::UI::UIEventManager']]],
+  ['languageprevious_1',['LanguagePrevious',['../class_unity_toolbox_1_1_u_i_1_1_u_i_event_manager.html#aae685393d38ad86a5d80cc3487b85f5b',1,'UnityToolbox::UI::UIEventManager']]],
+  ['languageupdated_2',['LanguageUpdated',['../class_unity_toolbox_1_1_u_i_1_1_u_i_event_manager.html#a87f9206ab94032653f09bc72fdd1d957',1,'UnityToolbox::UI::UIEventManager']]],
+  ['load_3',['Load',['../class_unity_toolbox_1_1_gameplay_features_1_1_save_game_1_1_saveable.html#a23f1aadb08465f09f012d553a3049d71',1,'UnityToolbox::GameplayFeatures::SaveGame::Saveable']]],
+  ['loaddata_4',['LoadData',['../class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_item_instance.html#abb7ba78d623a8d9bce9d761ce5304cd8',1,'UnityToolbox.GameplayFeatures.Items.ItemInstance.LoadData()'],['../class_unity_toolbox_1_1_gameplay_features_1_1_save_game_1_1_saveable.html#a0c3bea29e449cfcd81eaf4e6c67c4710',1,'UnityToolbox.GameplayFeatures.SaveGame.Saveable.LoadData()']]],
+  ['localisationexception_5',['LocalisationException',['../class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_localisation_exception.html#a98f147043d3f42055f75d51ddcac8738',1,'UnityToolbox::UI::Localisation::LocalisationException']]],
+  ['lockmove_6',['LockMove',['../class_unity_toolbox_1_1_player_controls_1_1_player_event_manager.html#a75ac29323ec7fe4aa437144611645224',1,'UnityToolbox::PlayerControls::PlayerEventManager']]]
 ];

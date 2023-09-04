@@ -3,18 +3,18 @@
 @section TutorialsFeatureOverview Feature Overview
 
 Currently the toolbox includes:
-- UI Management (Hierarchies, useful UI scripts) | See @ref MenuManager
-- Localisation system | See Localizer and the toolbar of Unity
-- Dialog system | See @ref DialogManager and the toolbar of Unity
-- Savegame management (Checkpoint data and saving of objects at runtime) | See @ref SaveGameManager
-- Gamestate management | See @ref GamestateManager
-- Procedual terrain generation | See TerrainGenerator
-- Player controls for 2D and 3D | See @ref MovementBase
-- Settings management (Controls, volume and languages) | See @ref SettingsManager
-- Sound management | See @ref AudioMixer
-- Inventory system **(Requires rework)**
-- Achievment system | See @ref AchievmentManager
-- Event management | See @ref EventAggregator
+- UI Management (Hierarchies, useful UI scripts)
+- Localisation system
+- Dialog system
+- Savegame management (Checkpoint data and saving of objects at runtime)
+- Gamestate management
+- Procedual terrain generation
+- Player controls for 2D and 3D
+- Settings management (Controls, volume and languages)
+- Sound management
+- Inventory system **Requires rework**
+- Achievment system
+- Event management
 
 A few scripts underlay a naming convention. These are:
 - ...Interaction.cs for player triggered interactions with GameObjects.
@@ -30,4 +30,5 @@ The documentation excludes private members and EditorWindow implementations.\n
 
 Currently tutorials for the following features exist:
 - @subpage ItemManagement
+- @subpage MenuManagement
 - @subpage Boids

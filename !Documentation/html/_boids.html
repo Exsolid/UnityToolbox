@@ -106,12 +106,12 @@ Overview</h1>
 <li><a class="el" href="_boids.html#BoidsImplementation">Implementation of Boid2DBase</a></li>
 </ul>
 <p>Boids refer to a swarm intelligence being named after "Bird-oid objects" and are first developed by <a href="https://en.wikipedia.org/wiki/Craig_Reynolds_(computer_graphics)">Craig Reynolds</a>.<br  />
-The scripts present in the toolbox aim to implement such with the possibility to add additional complexity to their rules. Currently only a version for 2D space exists. (See <a class="el" href="class_unity_toolbox_1_1_a_i_1_1_boids_1_1_boid2_d_base.html">Boid2DBase</a>)</p>
+The scripts present in the toolbox aim to implement such with the possibility to add additional complexity to their rules. Currently only a version for 2D space exists. (See <a class="el" href="class_unity_toolbox_1_1_gameplay_features_1_1_a_i_1_1_boids_1_1_boid2_d_base.html">Boid2DBase</a>)</p>
 <p>The only prerequisite is setting up the <a class="el" href="index.html#GeneralSetupManagerSystem">Manager System</a>.</p>
 <h1><a class="anchor" id="BoidsSimpleUsage"></a>
 Simple Usage</h1>
-<p><a class="el" href="class_unity_toolbox_1_1_a_i_1_1_boids_1_1_boid2_d_base.html">Boid2DBase</a> is an abstract script which is required to be implemented to be used.<br  />
-The toolbox provides a simple base implementation of the <a class="el" href="class_unity_toolbox_1_1_a_i_1_1_boids_1_1_boid2_d_base.html">Boid2DBase</a>, named <a class="el" href="class_unity_toolbox_1_1_a_i_1_1_boids_1_1_boid2_d_simple.html">Boid2DSimple</a>.<br  />
+<p><a class="el" href="class_unity_toolbox_1_1_gameplay_features_1_1_a_i_1_1_boids_1_1_boid2_d_base.html">Boid2DBase</a> is an abstract script which is required to be implemented to be used.<br  />
+The toolbox provides a simple base implementation of the <a class="el" href="class_unity_toolbox_1_1_gameplay_features_1_1_a_i_1_1_boids_1_1_boid2_d_base.html">Boid2DBase</a>, named <a class="el" href="class_unity_toolbox_1_1_gameplay_features_1_1_a_i_1_1_boids_1_1_boid2_d_simple.html">Boid2DSimple</a>.<br  />
 Create an object and add the script. Add a 2D collider and set it to "Is Trigger".</p>
 <p>Firstly, let us look at the fields, which need to be set:</p>
 <table class="markdownTable">
@@ -123,8 +123,8 @@ Create an object and add the script. Add a 2D collider and set it to "Is Trigger
 </div>
   </td></tr>
 </table>
-<p>The detection range is requires a <a class="el" href="class_collider_info.html">ColliderInfo</a> object. Create a child object of the boid and add the <a class="el" href="class_collider_info.html">ColliderInfo</a> script, as well as a 2D collider.<br  />
-Set the collider to "Is Trigger", and define that the <a class="el" href="class_collider_info.html">ColliderInfo</a> should "Look For Trigger". Additionally a Ridgidbody2D is required, add it and set the "Gravity Scale" to 0.<br  />
+<p>The detection range is requires a <a class="el" href="class_unity_toolbox_1_1_general_1_1_collider_info.html">ColliderInfo</a> object. Create a child object of the boid and add the <a class="el" href="class_unity_toolbox_1_1_general_1_1_collider_info.html">ColliderInfo</a> script, as well as a 2D collider.<br  />
+Set the collider to "Is Trigger", and define that the <a class="el" href="class_unity_toolbox_1_1_general_1_1_collider_info.html">ColliderInfo</a> should "Look For Trigger". Additionally a Ridgidbody2D is required, add it and set the "Gravity Scale" to 0.<br  />
 Now drag the object into the detection range field. The collider placed on this object now act as the eyes of the boid. Adjust the collider size, to increase the maximum vision range.</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -136,15 +136,15 @@ Now drag the object into the detection range field. The collider placed on this 
   </td></tr>
 </table>
 <p>The following three drop down menus define layer masks for what the boid sees as other boids, obstacles and attraction objects.<br  />
-All objects defined with the boid mask require an implementation of the <a class="el" href="class_unity_toolbox_1_1_a_i_1_1_boids_1_1_boid2_d_base.html">Boid2DBase</a> script for the evaluation to work.</p>
+All objects defined with the boid mask require an implementation of the <a class="el" href="class_unity_toolbox_1_1_gameplay_features_1_1_a_i_1_1_boids_1_1_boid2_d_base.html">Boid2DBase</a> script for the evaluation to work.</p>
 <p>Furthermore the following three values define the specific minimum range of the respective objects. If the object is closer than defined, the boid will take action.</p>
 <p>One can then set the rotation and movement speed.</p>
 <p>Lastly one can define whether the boid should teleport to stay within camera bounds. If this is set to true, the boid will pop up at the other side of the screen once it has left it on one.</p>
-<p>The <a class="el" href="class_unity_toolbox_1_1_a_i_1_1_boids_1_1_boid_manager.html">BoidManager</a> can be added for generalized boid management. Currently this only provides the option to pause all boids with an event.</p>
+<p>The <a class="el" href="class_unity_toolbox_1_1_gameplay_features_1_1_a_i_1_1_boids_1_1_boid_manager.html">BoidManager</a> can be added for generalized boid management. Currently this only provides the option to pause all boids with an event.</p>
 <p>The boid is now set up. One can now add obstacles and objects to be attracted to with the respective layer mask. Duplicate the boid or create some with other definitions and watch them move.</p>
 <h1><a class="anchor" id="BoidsImplementation"></a>
 Implementation of Boid2DBase</h1>
-<p>The <a class="el" href="class_unity_toolbox_1_1_a_i_1_1_boids_1_1_boid2_d_simple.html">Boid2DSimple</a> implementation from before looks like the following:</p>
+<p>The <a class="el" href="class_unity_toolbox_1_1_gameplay_features_1_1_a_i_1_1_boids_1_1_boid2_d_simple.html">Boid2DSimple</a> implementation from before looks like the following:</p>
 <div class="fragment"><div class="line"><span class="keyword">public</span> <span class="keyword">class </span>Boid2DSimple : Boid2DBase</div>
 <div class="line">{</div>
 <div class="line">    <span class="keyword">protected</span> <span class="keyword">override</span> <span class="keywordtype">bool</span> AdditionalAttractionCheck(Collider2D nearest)</div>
@@ -164,16 +164,16 @@ Implementation of Boid2DBase</h1>
 <div class="line">}</div>
 </div><!-- fragment --><p>This implementation does not add any additional functionality to the base implementation, and simply acts like a default boid.<br  />
 If required, each method can evaluate relevant objects further, to add the additional functionality.<br  />
-<a class="el" href="class_unity_toolbox_1_1_a_i_1_1_boids_1_1_boid2_d_base.html#a3948537730a4ad38e1466cf267535796">Boid2DBase.AdditionalAvoidanceCheck(..)</a> for example is called once the boid has found an object which it wants to avoid.<br  />
+<a class="el" href="class_unity_toolbox_1_1_gameplay_features_1_1_a_i_1_1_boids_1_1_boid2_d_base.html#a2645f1928f68a02fdc0808e47a6b1a0d">Boid2DBase.AdditionalAvoidanceCheck(..)</a> for example is called once the boid has found an object which it wants to avoid.<br  />
 Returning false means that the object is counted as an exception and the boid will ignore it. Returning true defines that the object should be avoided, as planed per default.<br  />
-The other two methods work in the same way. Implement <a class="el" href="class_unity_toolbox_1_1_a_i_1_1_boids_1_1_boid2_d_base.html">Boid2DBase</a> and try it out, and check out the code documentation for all protected members that you can use. </p>
+The other two methods work in the same way. Implement <a class="el" href="class_unity_toolbox_1_1_gameplay_features_1_1_a_i_1_1_boids_1_1_boid2_d_base.html">Boid2DBase</a> and try it out, and check out the code documentation for all protected members that you can use. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Aug 19 2023 for UnityToolbox by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
+    <li class="footer">Generated on Mon Sep 4 2023 for UnityToolbox by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>
 </body>

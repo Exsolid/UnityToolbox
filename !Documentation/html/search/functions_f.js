@@ -1,18 +1,18 @@
 var searchData=
 [
-  ['save_0',['Save',['../class_saveable.html#a89137f4a426b2524266e446d823ff7ac',1,'Saveable']]],
-  ['savedata_1',['SaveData',['../class_unity_toolbox_1_1_item_1_1_item_instance.html#a09d50c6c4a27e6afc5f49d11bd5f8bb1',1,'UnityToolbox.Item.ItemInstance.SaveData()'],['../class_saveable.html#a5d9f387d0a6f4d6f56f5bd7fbcbd894f',1,'Saveable.SaveData()']]],
-  ['scenechanged_2',['SceneChanged',['../class_i_d_manager.html#ad085ce80bd6a22d093687946ff04a980',1,'IDManager']]],
-  ['sensevaluechanged_3',['SenseValueChanged',['../class_settings_manager.html#a55b121f958f1f8b649dac9b87cce19b1',1,'SettingsManager']]],
-  ['setactivemenu_4',['SetActiveMenu',['../class_menu_manager.html#ac4a20d1f6ce5182503b3f2cd3ded0351',1,'MenuManager']]],
-  ['setdatatosave_5',['SetDataToSave',['../class_save_game_manager.html#a21c9437b480ae42e381646e7f93caacc',1,'SaveGameManager']]],
-  ['setkey_6',['SetKey',['../class_settings_manager.html#a07f8cad5d1d956e98b3c20618c9a85ff',1,'SettingsManager']]],
-  ['setstring_7',['SetString',['../class_project_prefs.html#a81449f98e582bc750ff8d10aa1458eaa',1,'ProjectPrefs']]],
-  ['setvalue_8',['SetValue',['../class_image_slider_handle.html#aa9634f0c02d67880b2328e1178b679a9',1,'ImageSliderHandle']]],
-  ['soundvaluechanged_9',['SoundValueChanged',['../class_settings_manager.html#a4502ae5a384cb42bf5d5610ba32a2d26',1,'SettingsManager']]],
-  ['spawniteminstance_10',['SpawnItemInstance',['../class_unity_toolbox_1_1_item_1_1_item_manager.html#a495a3d4735a07c4602a3846d7a38f43c',1,'UnityToolbox::Item::ItemManager']]],
-  ['start_11',['Start',['../class_gamestate_manager.html#a1449bd94de0e40da724580f4cef2cb9b',1,'GamestateManager.Start()'],['../class_raycast_detection.html#a6373712679ce46e8f1a02dbe8d81b43d',1,'RaycastDetection.Start()'],['../class_trigger_detection.html#acf9c3f0bdc01aeb473ac79d7a650e3ff',1,'TriggerDetection.Start()'],['../class_menu.html#a03cc1878d4f17fe540ded9fab03351d2',1,'Menu.Start()']]],
-  ['startdialog_12',['StartDialog',['../class_dialog_manager.html#a6fba7e3734d394f7dc85d782d802b69e',1,'DialogManager']]],
-  ['subscribe_13',['Subscribe',['../class_unity_toolbox_1_1_events_1_1_pub_sub_event.html#a0ad5471e2ee8937a134655885cd1447e',1,'UnityToolbox.Events.PubSubEvent.Subscribe(Action&lt; T &gt; action)'],['../class_unity_toolbox_1_1_events_1_1_pub_sub_event.html#a853e23ce1a5bd30aad3a466b725dc11a',1,'UnityToolbox.Events.PubSubEvent.Subscribe(Action action)']]],
-  ['subscriptiontoken_14',['SubscriptionToken',['../struct_subscription_token.html#a07d517b01490a8f933d2b98ce8c68596',1,'SubscriptionToken']]]
+  ['save_0',['Save',['../class_unity_toolbox_1_1_gameplay_features_1_1_save_game_1_1_saveable.html#ad2bd352b8c8a53d3c8c5dbe7482c5373',1,'UnityToolbox::GameplayFeatures::SaveGame::Saveable']]],
+  ['savedata_1',['SaveData',['../class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_item_instance.html#a8316e73087636d7b6eb7ad72905feb68',1,'UnityToolbox.GameplayFeatures.Items.ItemInstance.SaveData()'],['../class_unity_toolbox_1_1_gameplay_features_1_1_save_game_1_1_saveable.html#a004b52f06ac212f91b6feae3658e724e',1,'UnityToolbox.GameplayFeatures.SaveGame.Saveable.SaveData()']]],
+  ['scenechanged_2',['SceneChanged',['../class_unity_toolbox_1_1_gameplay_features_1_1_save_game_1_1_i_d_manager.html#a9d1e360fe4ed0cdefba0b2af756d03ec',1,'UnityToolbox::GameplayFeatures::SaveGame::IDManager']]],
+  ['sensevaluechanged_3',['SenseValueChanged',['../class_unity_toolbox_1_1_u_i_1_1_settings_1_1_settings_manager.html#a5169835ae93f44d9a072f64e351f5337',1,'UnityToolbox::UI::Settings::SettingsManager']]],
+  ['setactivemenu_4',['SetActiveMenu',['../class_unity_toolbox_1_1_u_i_1_1_menus_1_1_menu_manager.html#a893216b99e630e226c059693caf0e501',1,'UnityToolbox::UI::Menus::MenuManager']]],
+  ['setdatatosave_5',['SetDataToSave',['../class_unity_toolbox_1_1_gameplay_features_1_1_save_game_1_1_save_game_manager.html#a06ba98a8bd7be8be8388a60c8226c071',1,'UnityToolbox::GameplayFeatures::SaveGame::SaveGameManager']]],
+  ['setkey_6',['SetKey',['../class_unity_toolbox_1_1_u_i_1_1_settings_1_1_settings_manager.html#a28ff3aa9fb540a47f77bbe9e9cc45ab9',1,'UnityToolbox::UI::Settings::SettingsManager']]],
+  ['setstring_7',['SetString',['../class_unity_toolbox_1_1_general_1_1_preferences_1_1_project_prefs.html#ab1265e1da0091efdefbce819efa1e6ef',1,'UnityToolbox::General::Preferences::ProjectPrefs']]],
+  ['setvalue_8',['SetValue',['../class_unity_toolbox_1_1_u_i_1_1_settings_1_1_sliders_1_1_image_slider_handle.html#a169d304f42931d03028b1eaa0eb3d7e3',1,'UnityToolbox::UI::Settings::Sliders::ImageSliderHandle']]],
+  ['soundvaluechanged_9',['SoundValueChanged',['../class_unity_toolbox_1_1_u_i_1_1_settings_1_1_settings_manager.html#a60d3d2e108a73e81eb0ad5205d947820',1,'UnityToolbox::UI::Settings::SettingsManager']]],
+  ['spawniteminstance_10',['SpawnItemInstance',['../class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_item_manager.html#ac01436a41ea4e306fbe8d2338d376ed1',1,'UnityToolbox::GameplayFeatures::Items::ItemManager']]],
+  ['start_11',['Start',['../class_unity_toolbox_1_1_gameplay_features_1_1_gamestates_1_1_gamestate_manager.html#af9239e15dbaca2e8a0a44ada7977f58c',1,'UnityToolbox.GameplayFeatures.Gamestates.GamestateManager.Start()'],['../class_unity_toolbox_1_1_player_controls_1_1_raycast_detection.html#a20c0b8e5be699a4e8ddbd4978dd6e501',1,'UnityToolbox.PlayerControls.RaycastDetection.Start()'],['../class_unity_toolbox_1_1_player_controls_1_1_trigger_detection.html#a2b604c03c58e6a26a56188374b5b1d4c',1,'UnityToolbox.PlayerControls.TriggerDetection.Start()'],['../class_unity_toolbox_1_1_u_i_1_1_menus_1_1_menu.html#a4455fb4d0fbe3c43b1d45ed6e5d35653',1,'UnityToolbox.UI.Menus.Menu.Start()']]],
+  ['startdialog_12',['StartDialog',['../class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_dialog_manager.html#ad0da6941dbbe7c304cdb39be7e5c8420',1,'UnityToolbox::UI::Dialog::DialogManager']]],
+  ['subscribe_13',['Subscribe',['../class_unity_toolbox_1_1_general_1_1_sub_events_1_1_pub_sub_event.html#ace0d7663b7a1cac08e47f5ab83ab41d4',1,'UnityToolbox.General.SubEvents.PubSubEvent.Subscribe(Action&lt; T &gt; action)'],['../class_unity_toolbox_1_1_general_1_1_sub_events_1_1_pub_sub_event.html#a90dc6c56f459562fb35d68d5209349ca',1,'UnityToolbox.General.SubEvents.PubSubEvent.Subscribe(Action action)']]],
+  ['subscriptiontoken_14',['SubscriptionToken',['../struct_unity_toolbox_1_1_general_1_1_subscription_token.html#a9672e1e2384bfe49afaec9750268f05e',1,'UnityToolbox::General::SubscriptionToken']]]
 ];

@@ -4,21 +4,24 @@ using UnityToolbox.GameplayFeatures.ProzedualGeneration.Terrain;
 using UnityEngine;
 using UnityEditor;
 
-/// <summary>
-/// The editor for <see cref="TerrainGenerator"/>, which adds buttons for the generation.
-/// </summary>
-[CustomEditor(typeof(TerrainGenerator))]
-public class TerrainGeneratorEditor : Editor
+namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor
 {
-    public override void OnInspectorGUI()
+    /// <summary>
+    /// The editor for <see cref="TerrainGenerator"/>, which adds buttons for the generation.
+    /// </summary>
+    [CustomEditor(typeof(TerrainGenerator))]
+    public class TerrainGeneratorEditor : UnityEditor.Editor
     {
-        base.OnInspectorGUI();
-
-        TerrainGenerator meshGenerator = (TerrainGenerator)target;
-
-        if(GUILayout.Button("Generate Mesh"))
+        public override void OnInspectorGUI()
         {
-            meshGenerator.GenerateViaCellularAutomata();
+            base.OnInspectorGUI();
+
+            TerrainGenerator meshGenerator = (TerrainGenerator)target;
+
+            if(GUILayout.Button("Generate Mesh"))
+            {
+                meshGenerator.GenerateViaCellularAutomata();
+            }
         }
     }
 }

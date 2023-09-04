@@ -99,8 +99,8 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
   <div class="headertitle"><div class="title">Getting Started </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>If you are looking for an overview and tutorials of features head over to Tutorials.<br  />
- The actual source code can be found on the <a href="https://github.com/Exsolid/UnityToolbox">Github-Page</a>.<br  />
+<div class="textblock"><p>If you are looking for an overview and tutorials of features head over to <a class="el" href="_tutorials.html">Tutorials</a>.<br  />
+The actual source code can be found on the <a href="https://github.com/Exsolid/UnityToolbox">Github-Page</a>.<br  />
 Here the basic setup will be explained.</p>
 <h1><a class="anchor" id="GeneralSetupGitDefaultSetup"></a>
 Default Git Setup</h1>
@@ -141,13 +141,13 @@ If this is wanted, you will need to open the Git-Bash/console window in your act
 </div><!-- fragment --><p>The toolbox can now be used within your project.</p>
 <h1><a class="anchor" id="GeneralSetupManagerSystem"></a>
 Manager System</h1>
-<p>The manager system refers to the system on which the toolbox is built on. The core would be the <a class="el" href="class_module_manager.html">ModuleManager</a> which will be needed for mostly any feature.<br  />
+<p>The manager system refers to the system on which the toolbox is built on. The core would be the <a class="el" href="class_unity_toolbox_1_1_general_1_1_management_1_1_module_manager.html">ModuleManager</a> which will be needed for mostly any feature.<br  />
 Therefore it needs to exist in multiple scenes. So that one is not required to add it in every single scene, it is advised to create a "Master" scene.<br  />
 Once created and the editor is reloaded (pressing play &amp; stop), the scene should be recognized and setup up as such.</p>
-<p>You can now create an empty GameObject and add the "ModuleManager" script.</p>
+<p>You can now create an empty GameObject and add the <a class="el" href="class_unity_toolbox_1_1_general_1_1_management_1_1_module_manager.html">ModuleManager</a> script.</p>
 <p>If you are using the "Master" scene, you will need to add two more scripts.</p><ul>
-<li>The <a class="el" href="class_load_first_scene.html">LoadFirstScene</a> which is required to load the first scene within the actual build.</li>
-<li>The <a class="el" href="class_load_original_scene_for_editor.html">LoadOriginalSceneForEditor</a> which is required to load the current open scene in editor once the user presses play. This is due to the "Master" scene always being opened first to initialize all general scripts.</li>
+<li>The <a class="el" href="class_unity_toolbox_1_1_general_1_1_master_scene_1_1_load_first_scene.html">LoadFirstScene</a> which is required to load the first scene within the actual build.</li>
+<li>The <a class="el" href="class_unity_toolbox_1_1_general_1_1_master_scene_1_1_load_original_scene_for_editor.html">LoadOriginalSceneForEditor</a> which is required to load the current open scene in editor once the user presses play. This is due to the "Master" scene always being opened first to initialize all general scripts.</li>
 </ul>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -158,9 +158,7 @@ Once created and the editor is reloaded (pressing play &amp; stop), the scene sh
 </div>
   </td></tr>
 </table>
-<p>To understand the use case, every script can inherit from <a class="el" href="class_module.html">Module</a> which can then be called with the <a class="el" href="class_module_manager.html">ModuleManager</a> as such, using the <a class="el" href="class_settings_manager.html">SettingsManager</a> as an example: </p><div class="fragment"><div class="line"><a class="code hl_class" href="class_module_manager.html">ModuleManager</a>.GetModule&lt;<a class="code hl_class" href="class_settings_manager.html">SettingsManager</a>&gt;();</div>
-<div class="ttc" id="aclass_module_manager_html"><div class="ttname"><a href="class_module_manager.html">ModuleManager</a></div><div class="ttdoc">The module manager (de)registeres implementations of the Module. All modules can be called from here,...</div><div class="ttdef"><b>Definition</b> ModuleManager.cs:12</div></div>
-<div class="ttc" id="aclass_settings_manager_html"><div class="ttname"><a href="class_settings_manager.html">SettingsManager</a></div><div class="ttdoc">This manager controls all relevant information about settings, that is key, volume and sensitivity co...</div><div class="ttdef"><b>Definition</b> SettingsManager.cs:11</div></div>
+<p>To understand the use case, every script can inherit from <a class="el" href="class_unity_toolbox_1_1_general_1_1_management_1_1_module.html">Module</a> which can then be called with the <a class="el" href="class_unity_toolbox_1_1_general_1_1_management_1_1_module_manager.html">ModuleManager</a> as such, using the <a class="el" href="class_unity_toolbox_1_1_u_i_1_1_settings_1_1_settings_manager.html">SettingsManager</a> as an example: </p><div class="fragment"><div class="line">ModuleManager.GetModule&lt;SettingsManager&gt;();</div>
 </div><!-- fragment --><p> Within the "Master" scene, these modules are persistent throughout the whole runtime of the game. </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
@@ -168,7 +166,7 @@ Once created and the editor is reloaded (pressing play &amp; stop), the scene sh
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Aug 19 2023 for UnityToolbox by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
+    <li class="footer">Generated on Mon Sep 4 2023 for UnityToolbox by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>
 </body>

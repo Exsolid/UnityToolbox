@@ -4,31 +4,34 @@ using UnityToolbox.GameplayFeatures.ProzedualGeneration.Terrain;
 using UnityEngine;
 using UnityEditor;
 
-/// <summary>
-/// The editor for <see cref="TerrainGenerateAll"/>, which adds buttons for the generation.
-/// </summary>
-[CustomEditor(typeof(TerrainGenerateAll))]
-public class TerrainGenerateAllEditor : Editor
+namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor
 {
-    public override void OnInspectorGUI()
+    /// <summary>
+    /// The editor for <see cref="TerrainGenerateAll"/>, which adds buttons for the generation.
+    /// </summary>
+    [CustomEditor(typeof(TerrainGenerateAll))]
+    public class TerrainGenerateAllEditor : UnityEditor.Editor
     {
-        base.OnInspectorGUI();
-
-        TerrainGenerateAll generator = (TerrainGenerateAll)target;
-
-        if (GUILayout.Button("Generate Mesh And Decoration"))
+        public override void OnInspectorGUI()
         {
-            generator.GenerateAll();
-        }
+            base.OnInspectorGUI();
 
-        if (GUILayout.Button("Generate Mesh And Decoration With Anchors"))
-        {
-            generator.GenerateAllWithAnchors();
-        }
+            TerrainGenerateAll generator = (TerrainGenerateAll)target;
 
-        if (GUILayout.Button("Delete All Decoration"))
-        {
-            generator.DeleteAllDecoration();
+            if (GUILayout.Button("Generate Mesh And Decoration"))
+            {
+                generator.GenerateAll();
+            }
+
+            if (GUILayout.Button("Generate Mesh And Decoration With Anchors"))
+            {
+                generator.GenerateAllWithAnchors();
+            }
+
+            if (GUILayout.Button("Delete All Decoration"))
+            {
+                generator.DeleteAllDecoration();
+            }
         }
     }
 }

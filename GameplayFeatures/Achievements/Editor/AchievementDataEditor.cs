@@ -6,13 +6,13 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
-namespace UnityToolbox.Achievments
+namespace UnityToolbox.GameplayFeatures.Achievements.Editor
 {
     /// <summary>
     /// An editor, which takes care of the script file selection.
     /// </summary>
     [CustomEditor(typeof(AchievementData))]
-    public class AchievementDataEditor : Editor
+    public class AchievementDataEditor : UnityEditor.Editor
     {
         private MonoScript script = null;
 

@@ -1,4 +1,4 @@
 var _held_inventory_manager_8cs =
 [
-    [ "HeldInventoryManager", "class_held_inventory_manager.html", "class_held_inventory_manager" ]
+    [ "UnityToolbox.GameplayFeatures.Items.Inventory.Managers.HeldInventoryManager", "class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_inventory_1_1_managers_1_1_held_inventory_manager.html", "class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_inventory_1_1_managers_1_1_held_inventory_manager" ]
 ];

@@ -1,4 +1,4 @@
 var _trigger_detection_8cs =
 [
-    [ "TriggerDetection", "class_trigger_detection.html", "class_trigger_detection" ]
+    [ "UnityToolbox.PlayerControls.TriggerDetection", "class_unity_toolbox_1_1_player_controls_1_1_trigger_detection.html", "class_unity_toolbox_1_1_player_controls_1_1_trigger_detection" ]
 ];

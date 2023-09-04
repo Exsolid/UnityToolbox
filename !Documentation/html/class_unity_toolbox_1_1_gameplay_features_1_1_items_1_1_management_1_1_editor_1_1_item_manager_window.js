@@ -1,0 +1,4 @@
+var class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_management_1_1_editor_1_1_item_manager_window =
+[
+    [ "OnAfterAssemblyReload", "class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_management_1_1_editor_1_1_item_manager_window.html#ad7661467c2f6e27cb69048c614d0dcbf", null ]
+];

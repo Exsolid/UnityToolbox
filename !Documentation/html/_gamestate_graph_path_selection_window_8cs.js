@@ -1,4 +1,4 @@
 var _gamestate_graph_path_selection_window_8cs =
 [
-    [ "GamestateGraphPathSelectionWindow", "class_gamestate_graph_path_selection_window.html", "class_gamestate_graph_path_selection_window" ]
+    [ "UnityToolbox.GameplayFeatures.Gamestates.Editor.GamestateGraphPathSelectionWindow", "class_unity_toolbox_1_1_gameplay_features_1_1_gamestates_1_1_editor_1_1_gamestate_graph_path_selection_window.html", "class_unity_toolbox_1_1_gameplay_features_1_1_gamestates_1_1_editor_1_1_gamestate_graph_path_selection_window" ]
 ];

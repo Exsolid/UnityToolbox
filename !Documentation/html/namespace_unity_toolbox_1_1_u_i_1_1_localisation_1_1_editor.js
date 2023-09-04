@@ -1,0 +1,9 @@
+var namespace_unity_toolbox_1_1_u_i_1_1_localisation_1_1_editor =
+[
+    [ "LocalisationDrawer", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_editor_1_1_localisation_drawer.html", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_editor_1_1_localisation_drawer" ],
+    [ "LocalisationEditIDWindow", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_editor_1_1_localisation_edit_i_d_window.html", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_editor_1_1_localisation_edit_i_d_window" ],
+    [ "LocalisationEditLanguageWindow", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_editor_1_1_localisation_edit_language_window.html", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_editor_1_1_localisation_edit_language_window" ],
+    [ "LocalisationEditScopeWindow", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_editor_1_1_localisation_edit_scope_window.html", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_editor_1_1_localisation_edit_scope_window" ],
+    [ "LocalisationManagerWindow", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_editor_1_1_localisation_manager_window.html", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_editor_1_1_localisation_manager_window" ],
+    [ "LocalisationSelectionWindow", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_editor_1_1_localisation_selection_window.html", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_editor_1_1_localisation_selection_window" ]
+];
