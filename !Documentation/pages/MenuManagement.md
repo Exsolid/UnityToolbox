@@ -2,6 +2,11 @@
 
 @section MenuManagementOverview Overview
 
+- @ref MenuManagementMenuSetup
+- @ref MenuManagementButtons
+	- @ref MenuManagementSwitchingMenus
+	- @ref MenuManagementOtherMenuScripts
+	
 The namespace @ref UnityToolbox.UI includes everything that can be used within a canvas.\n
 In the following the @ref UnityToolbox.UI.Menus.MenuManager "MenuManager" and each sub namespace of @ref UnityToolbox.UI will be explained.\n
 The scripts found here are developed to ease the creation of menus and their structures.
@@ -11,7 +16,11 @@ The prerequisites for using this system are:
 - @ref GeneralSetupManagerSystem.
 - An EventSystem component somewhere in the scene.
 
-@section MenuManagementMenuUsage Menu Usage
+This system allows for more specific implementations which can be found here:
+
+- @subpage Dialog
+
+@section MenuManagementMenuSetup Menu Setup
 
 The menu system consists of two parts. The @ref UnityToolbox.UI.Menus.Menu "Menu" script which is placed on a canvas, and the @ref UnityToolbox.UI.Menus.MenuManager "MenuManager" which sorts them.\n
 First let us create a main canvas, which can be set up whatever. The actual @ref UnityToolbox.UI.Menus.Menu "Menu" scripts are now placed on a child canvas as following:
