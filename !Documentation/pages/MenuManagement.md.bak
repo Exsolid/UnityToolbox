@@ -18,7 +18,7 @@ The prerequisites for using this system are:
 
 This system allows for more specific implementations which can be found here:
 
-- @subpage Dialogs
+- @subpage Dialog
 
 @section MenuManagementMenuSetup Menu Setup
 
@@ -54,6 +54,9 @@ If the current Input Module which comes with the object says to replace it with 
 | New Input Module |
 | :---- |
 | @image html MenuManagementInputModule.png width=400px |
+| @image html MenuManagementInputModuleError.png width=400px |
+
+All UI scripts can be placed on an UI element within the canvas and will only be clickable and visible if the menu is active.
 
 @subsection MenuManagementSwitchingMenus Switching Menus
 
@@ -79,4 +82,6 @@ There are other basic buttons, which are self explanatory. The code documentatio
 - The @ref UnityToolbox.UI.Menus.FlatMenu.GotoSceneButton "GotoSceneButton" script switches scenes.
 - The @ref UnityToolbox.UI.Menus.FlatMenu.ResetSavegameButton "ResetSavegameButton" script resets the save game. (A SaveGameManager needs to be setup for this)
 
-Other than this, the @ref UnityToolbox.UI.Menus.FlatMenu.LockMovement "LockMovement" can lock movement for all @ref UnityToolbox.PlayerControls.MovementBase "MovementBase" implementations.
+Other than this, the @ref UnityToolbox.UI.Menus.FlatMenu.LockMovement "LockMovement" can lock movement for all @ref UnityToolbox.PlayerControls.MovementBase "MovementBase" implementations.\n
+Additionally, the scripts that are found within the @ref UnityToolbox.UI.Menus.FlatMenu.OnHover namespace, are features which react once the mouse hovers over the UI element.\n
+The names of the scripts should make the usage self explanatory too.

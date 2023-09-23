@@ -11,14 +11,7 @@ var _tutorials =
         [ "Custom Item Definitions", "_item_management.html#ItemManagementCustomItems", null ]
       ] ]
     ] ],
-    [ "Menu Management Tutorial", "_menu_management.html", [
-      [ "Overview", "_menu_management.html#MenuManagementOverview", null ],
-      [ "Menu Usage", "_menu_management.html#MenuManagementMenuUsage", null ],
-      [ "Button Usage", "_menu_management.html#MenuManagementButtons", [
-        [ "Switching Menus", "_menu_management.html#MenuManagementSwitchingMenus", null ],
-        [ "Other Menu Scripts", "_menu_management.html#MenuManagementOtherMenuScripts", null ]
-      ] ]
-    ] ],
+    [ "Menu Management Tutorial", "_menu_management.html", "_menu_management" ],
     [ "Boids Tutorial", "_boids.html", [
       [ "Overview", "_boids.html#BoidsOverview", null ],
       [ "Simple Usage", "_boids.html#BoidsSimpleUsage", null ],

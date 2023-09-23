@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['language_0',['Language',['../class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_editor_1_1_localisation_edit_language_window.html#a611ed264e49ce33d70df2c4e41df8eed',1,'UnityToolbox::UI::Localisation::Editor::LocalisationEditLanguageWindow']]],
-  ['language_1',['LANGUAGE',['../class_unity_toolbox_1_1_general_1_1_preferences_1_1_player_pref_keys.html#a03278bdfb440c2008b70d667cdb9896d',1,'UnityToolbox::General::Preferences::PlayerPrefKeys']]],
+  ['language_0',['LANGUAGE',['../class_unity_toolbox_1_1_general_1_1_preferences_1_1_player_pref_keys.html#a03278bdfb440c2008b70d667cdb9896d',1,'UnityToolbox::General::Preferences::PlayerPrefKeys']]],
+  ['language_1',['Language',['../class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_editor_1_1_localisation_edit_language_window.html#a611ed264e49ce33d70df2c4e41df8eed',1,'UnityToolbox::UI::Localisation::Editor::LocalisationEditLanguageWindow']]],
   ['languageedited_2',['LanguageEdited',['../class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_localizer.html#af4f7b8ea27d2b67cf32c5759ce046b08',1,'UnityToolbox::UI::Localisation::Localizer']]],
   ['languagenext_3',['LanguageNext',['../class_unity_toolbox_1_1_u_i_1_1_u_i_event_manager.html#aa4efa5f954d34007e5a0309e714176fd',1,'UnityToolbox::UI::UIEventManager']]],
   ['languageprevious_4',['LanguagePrevious',['../class_unity_toolbox_1_1_u_i_1_1_u_i_event_manager.html#aae685393d38ad86a5d80cc3487b85f5b',1,'UnityToolbox::UI::UIEventManager']]],

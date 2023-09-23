@@ -101,6 +101,14 @@ $(document).ready(function(){initNavTree('_menu_management.html',''); initResiza
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="MenuManagementOverview"></a>
 Overview</h1>
+<ul>
+<li><a class="el" href="_menu_management.html#MenuManagementMenuSetup">Menu Setup</a></li>
+<li><a class="el" href="_menu_management.html#MenuManagementButtons">Button Usage</a><ul>
+<li><a class="el" href="_menu_management.html#MenuManagementSwitchingMenus">Switching Menus</a></li>
+<li><a class="el" href="_menu_management.html#MenuManagementOtherMenuScripts">Other Menu Scripts</a></li>
+</ul>
+</li>
+</ul>
 <p>The namespace <a class="el" href="namespace_unity_toolbox_1_1_u_i.html">UnityToolbox.UI</a> includes everything that can be used within a canvas.<br  />
 In the following the <a class="el" href="class_unity_toolbox_1_1_u_i_1_1_menus_1_1_menu_manager.html">MenuManager</a> and each sub namespace of <a class="el" href="namespace_unity_toolbox_1_1_u_i.html">UnityToolbox.UI</a> will be explained.<br  />
 The scripts found here are developed to ease the creation of menus and their structures.</p>
@@ -109,8 +117,12 @@ The scripts found here are developed to ease the creation of menus and their str
 <li><a class="el" href="index.html#GeneralSetupManagerSystem">Manager System</a>.</li>
 <li>An EventSystem component somewhere in the scene.</li>
 </ul>
-<h1><a class="anchor" id="MenuManagementMenuUsage"></a>
-Menu Usage</h1>
+<p>This system allows for more specific implementations which can be found here:</p>
+<ul>
+<li><a class="el" href="_dialog.html">Dialog</a></li>
+</ul>
+<h1><a class="anchor" id="MenuManagementMenuSetup"></a>
+Menu Setup</h1>
 <p>The menu system consists of two parts. The <a class="el" href="class_unity_toolbox_1_1_u_i_1_1_menus_1_1_menu.html">Menu</a> script which is placed on a canvas, and the <a class="el" href="class_unity_toolbox_1_1_u_i_1_1_menus_1_1_menu_manager.html">MenuManager</a> which sorts them.<br  />
 First let us create a main canvas, which can be set up whatever. The actual <a class="el" href="class_unity_toolbox_1_1_u_i_1_1_menus_1_1_menu.html">Menu</a> scripts are now placed on a child canvas as following:</p>
 <table class="markdownTable">
@@ -156,10 +168,16 @@ For them and the other button scripts to work, one is required to have an EventS
 <th class="markdownTableHeadLeft">New Input Module    </th></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyLeft"><div class="image">
+<img src="MenuManagementInputModuleError.png" alt="" width="400px"/>
+</div>
+   </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyLeft"><div class="image">
 <img src="MenuManagementInputModule.png" alt="" width="400px"/>
 </div>
   </td></tr>
 </table>
+<p>All UI scripts can be placed on an UI element within the canvas and will only be clickable and visible if the menu is active.</p>
 <h2><a class="anchor" id="MenuManagementSwitchingMenus"></a>
 Switching Menus</h2>
 <p>First, let us look at two scripts for switching between menus.</p>
@@ -186,14 +204,16 @@ Other Menu Scripts</h2>
 <li>The <a class="el" href="class_unity_toolbox_1_1_u_i_1_1_menus_1_1_flat_menu_1_1_goto_scene_button.html">GotoSceneButton</a> script switches scenes.</li>
 <li>The <a class="el" href="class_unity_toolbox_1_1_u_i_1_1_menus_1_1_flat_menu_1_1_reset_savegame_button.html">ResetSavegameButton</a> script resets the save game. (A SaveGameManager needs to be setup for this)</li>
 </ul>
-<p>Other than this, the <a class="el" href="class_unity_toolbox_1_1_u_i_1_1_menus_1_1_flat_menu_1_1_lock_movement.html">LockMovement</a> can lock movement for all <a class="el" href="class_unity_toolbox_1_1_player_controls_1_1_movement_base.html">MovementBase</a> implementations. </p>
+<p>Other than this, the <a class="el" href="class_unity_toolbox_1_1_u_i_1_1_menus_1_1_flat_menu_1_1_lock_movement.html">LockMovement</a> can lock movement for all <a class="el" href="class_unity_toolbox_1_1_player_controls_1_1_movement_base.html">MovementBase</a> implementations.<br  />
+Additionally, the scripts that are found within the <a class="el" href="namespace_unity_toolbox_1_1_u_i_1_1_menus_1_1_flat_menu_1_1_on_hover.html">UnityToolbox.UI.Menus.FlatMenu.OnHover</a> namespace, are features which react once the mouse hovers over the UI element.<br  />
+The names of the scripts should make the usage self explanatory too. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Sep 4 2023 for UnityToolbox by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
+    <li class="footer">Generated on Sat Sep 23 2023 for UnityToolbox by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>
 </body>
