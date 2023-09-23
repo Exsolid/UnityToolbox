@@ -346,6 +346,17 @@ namespace UnityToolbox.UI.Dialog.Editor
 
         private void UpdateToRoot()
         {
+            if (_inputPort != null)
+            {
+                foreach (Edge edge in _inputPort.connections.ToList())
+                {
+                    ((DialogNode)edge.output.node).OutputIDs.Remove(ID);
+                    ((DialogNode)edge.output.node).OutputPort.Disconnect(edge);
+                    edge.output.node.RefreshPorts();
+                    edge.parent.Remove(edge);
+                }
+            }
+
             inputContainer.Clear();
             _inputIDs.Clear();
             _dialogIndentifierTextField = new TextField()
