@@ -16,6 +16,8 @@ namespace UnityToolbox.UI.Dialog.Editor
     /// </summary>
     public class DialogGraphView : GraphView
     {
+        private Vector2 _mousePos;
+
         private HashSet<int> _ids;
         public HashSet<int> IDS
         {
@@ -80,8 +82,7 @@ namespace UnityToolbox.UI.Dialog.Editor
         private IManipulator CreateNodeManipulator()
         {
             ContextualMenuManipulator contextualMenuManipulator = new ContextualMenuManipulator(
-                e => e.menu.AppendAction("Add Node", action => AddElement(CreateNode(action.eventInfo.localMousePosition)))
-                );
+                e => e.menu.AppendAction("Add Node", action => AddElement(CreateNode((action.eventInfo.mousePosition - new Vector2(viewTransform.position.x, viewTransform.position.y)) / scale))));
             return contextualMenuManipulator;
         }
 
