@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
@@ -64,6 +65,11 @@ namespace UnityToolbox.General.Management
             if (path == null)
             {
                 return null;
+            }
+
+            if (!path.Contains("Resources"))
+            {
+                throw new SystemException("The path " + Application.dataPath + "/" + path + "/" + " is not within a valid Resources directory.");
             }
 
             path = Path.GetFullPath(Application.dataPath + "/" + path + "/");
