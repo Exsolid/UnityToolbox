@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 using System.IO;
 using Newtonsoft.Json;
 using System.Linq;
+using UnityEditor.UIElements;
 using UnityToolbox.GameplayFeatures.SerializationData;
 using UnityToolbox.General.Management;
 using UnityToolbox.General.Preferences;
@@ -32,6 +33,32 @@ namespace UnityToolbox.UI.Dialog.Editor
             _graphView = new DialogGraphView();
             rootVisualElement.Add(_graphView);
             _graphView.StretchToParentSize();
+        }
+
+        private void AddToolbar()
+        {
+            Toolbar toolbar = new Toolbar();
+            rootVisualElement.Add(toolbar);
+
+            Button saveButton = new Button()
+            {
+                text = "Save"
+            };
+
+            saveButton.clicked += WriteData;
+
+            Button settingsButton = new Button()
+            {
+                text = "Directory Settings"
+            };
+
+            settingsButton.clicked += () => 
+            {
+                DialogGraphPathSelectionWindow.Open(this);
+            };
+
+            toolbar.Add(saveButton);
+            toolbar.Add(settingsButton);
         }
 
         public void UpdateData()
@@ -108,7 +135,9 @@ namespace UnityToolbox.UI.Dialog.Editor
 
         private void OnEnable()
         {
+            rootVisualElement.Clear();
             AddGraphView();
+            AddToolbar();
 
             if (ProjectPrefs.GetString(ProjectPrefKeys.DIALOGSAVEPATH) == null || ProjectPrefs.GetString(ProjectPrefKeys.DIALOGSAVEPATH).Equals(""))
             {
