@@ -33,23 +33,35 @@ namespace UnityToolbox.UI.Dialog.Editor
             this.graphViewChanged += OnGraphChange;
         }
 
-        private DialogNode CreateNode(Vector2 position)
+        private DialogNodeBase CreateLocalizedNode(Vector2 position)
         {
             do
             {
             } while (_ids.Add(UnityEngine.Random.Range(0, Int32.MaxValue)));
 
-            DialogNode dialogBaseNode = new DialogNode(position, _ids.ElementAt(_ids.Count - 1));
+            DialogNodeBase dialogBaseNode = new DialogNodeLocalized(position, _ids.ElementAt(_ids.Count - 1));
+            dialogBaseNode.Draw();
+
+            return dialogBaseNode;
+        }
+
+        private DialogNodeBase CreateNode(Vector2 position)
+        {
+            do
+            {
+            } while (_ids.Add(UnityEngine.Random.Range(0, Int32.MaxValue)));
+
+            DialogNodeBase dialogBaseNode = new DialogNode(position, _ids.ElementAt(_ids.Count - 1));
             dialogBaseNode.Draw();
 
             return dialogBaseNode;
         }
 
         /// <summary>
-        /// Adds a new <see cref="DialogNode"/> to the graph and draws it.
+        /// Adds a new <see cref="DialogNodeBase"/> to the graph and draws it.
         /// </summary>
         /// <param name="node"></param>
-        public void AddNode(DialogNode node)
+        public void AddNode(DialogNodeBase node)
         {
             _ids.Add(node.ID);
             AddElement(node);
@@ -74,6 +86,7 @@ namespace UnityToolbox.UI.Dialog.Editor
         {
             this.AddManipulator(new ContentDragger());
             this.AddManipulator(CreateNodeManipulator());
+            this.AddManipulator(CreateLocalizedNodeManipulator());
             this.AddManipulator(new SelectionDragger());
             this.AddManipulator(new RectangleSelector());
             SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale);
@@ -82,7 +95,14 @@ namespace UnityToolbox.UI.Dialog.Editor
         private IManipulator CreateNodeManipulator()
         {
             ContextualMenuManipulator contextualMenuManipulator = new ContextualMenuManipulator(
-                e => e.menu.AppendAction("Add Node", action => AddElement(CreateNode((action.eventInfo.mousePosition - new Vector2(viewTransform.position.x, viewTransform.position.y)) / scale))));
+                e => e.menu.AppendAction("Add Default Node", action => AddElement(CreateNode((action.eventInfo.mousePosition - new Vector2(viewTransform.position.x, viewTransform.position.y)) / scale))));
+            return contextualMenuManipulator;
+        }
+
+        private IManipulator CreateLocalizedNodeManipulator()
+        {
+            ContextualMenuManipulator contextualMenuManipulator = new ContextualMenuManipulator(
+                e => e.menu.AppendAction("Add Localized Node", action => AddElement(CreateLocalizedNode((action.eventInfo.mousePosition - new Vector2(viewTransform.position.x, viewTransform.position.y)) / scale))));
             return contextualMenuManipulator;
         }
 
@@ -143,12 +163,12 @@ namespace UnityToolbox.UI.Dialog.Editor
                     if (e.GetType() == typeof(Edge))
                     {
                         Edge edge = (Edge)e;
-                        ((DialogNode)edge.output.node).UpdateValues();
+                        ((DialogNodeBase)edge.output.node).UpdateValues();
 
-                        int id = ((DialogNode)edge.output.node).OutputIDs.IndexOf(((DialogNode)edge.input.node).ID);
+                        int id = ((DialogNodeBase)edge.output.node).OutputIDs.IndexOf(((DialogNodeBase)edge.input.node).ID);
                         foreach (Edge otherEdges in edge.output.connections)
                         {
-                            ((DialogNode)otherEdges.input.node).UpdateHigherInputConnectionLabel(id);
+                            ((DialogNodeBase)otherEdges.input.node).UpdateHigherInputConnectionLabel(id);
                         }
                     }
                 }

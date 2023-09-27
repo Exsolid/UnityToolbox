@@ -71,16 +71,25 @@ namespace UnityToolbox.UI.Dialog.Editor
             {
                 foreach (DialogNodeData node in nodes)
                 {
-                    DialogNode dNode = new DialogNode(node);
+                    DialogNodeBase dNode;
+                    if (node.IsLocalized)
+                    {
+                        dNode = new DialogNodeLocalized(node);
+                    }
+                    else
+                    {
+                        dNode = new DialogNode(node);
+                    }
+
                     _graphView.AddNode(dNode);
                 }
 
                 foreach (Node node in _graphView.nodes.ToList())
                 {
-                    DialogNode dNode = (DialogNode)node;
+                    DialogNodeBase dNode = (DialogNodeBase)node;
                     foreach (int i in dNode.OutputIDs)
                     {
-                        DialogNode nextNode = (DialogNode)_graphView.nodes.ToList().Where(n => ((DialogNode)n).ID == i).FirstOrDefault();
+                        DialogNodeBase nextNode = (DialogNodeBase)_graphView.nodes.ToList().Where(n => ((DialogNodeBase)n).ID == i).FirstOrDefault();
                         int number = dNode.OutputPort.connections.Count();
                         nextNode.UpdateInputConnectionLabel(number);
 
@@ -99,22 +108,39 @@ namespace UnityToolbox.UI.Dialog.Editor
 
                 foreach (Node node in _graphView.nodes.ToList())
                 {
-                    DialogNode dNode = (DialogNode)node;
+                    DialogNodeBase dNode = (DialogNodeBase) node;
                     dNode.UpdateValues();
 
-                    DialogNodeData data = new DialogNodeData();
-                    data.Title = dNode.DialogTitle;
-                    data.Text = dNode.DialogText;
-                    data.Position = new VectorData(dNode.GetPosition().position);
-                    data.Options = dNode.Options;
-                    data.ID = dNode.ID;
-                    data.InputIDs = dNode.InputIDs;
-                    data.OutputIDs = dNode.OutputIDs;
-                    data.DialogIndentifier = dNode.DialogIndentifier;
-                    data.StateForDialogIndentifier = dNode.StateForDialogIndentifier;
-                    data.GamestateToComplete = dNode.GamestateToComplete;
+                    DialogNodeData data = new DialogNodeData
+                    {
+                        Position = new VectorData(dNode.GetPosition().position),
+                        ID = dNode.ID,
+                        InputIDs = dNode.InputIDs,
+                        OutputIDs = dNode.OutputIDs,
+                        DialogIdentifier = dNode.dialogIdentifier,
+                        StateForDialogIdentifier = dNode.StateForDialogIndentifier,
+                        GamestateToComplete = dNode.GamestateToComplete,
 
-                    data.AvatarReference = AssetDatabase.GetAssetPath(dNode.Avatar);
+                        AvatarReference = AssetDatabase.GetAssetPath(dNode.Avatar)
+                    };
+
+                    if (dNode.GetType() == typeof(DialogNodeLocalized))
+                    {
+                        DialogNodeLocalized dNodeLocalized = (DialogNodeLocalized) node;
+
+                        data.IsLocalized = true;
+                        data.OptionsLocalized = dNodeLocalized.Options;
+                        data.TitleLocalized = dNodeLocalized.DialogTitle;
+                        data.TextLocalized = dNodeLocalized.DialogText;
+                    }
+                    else if (dNode.GetType() == typeof(DialogNode))
+                    {
+                        DialogNode dNodeDefault = (DialogNode) node;
+
+                        data.Options = dNodeDefault.Options;
+                        data.Title = dNodeDefault.DialogTitle;
+                        data.Text = dNodeDefault.DialogText;
+                    }
 
                     nodes.Add(data);
                 }

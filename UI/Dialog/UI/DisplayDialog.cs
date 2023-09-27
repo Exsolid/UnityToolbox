@@ -1,8 +1,13 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityToolbox.General.Attributes;
 using UnityToolbox.General.Management;
+using UnityToolbox.General.Preferences;
+using UnityToolbox.UI.Localisation;
 using UnityToolbox.UI.Menus;
 
 namespace UnityToolbox.UI.Dialog.UI
@@ -13,6 +18,9 @@ namespace UnityToolbox.UI.Dialog.UI
     /// </summary>
     public class DisplayDialog : MonoBehaviour
     {
+        private List<LocalisationLanguage> _allLanguages;
+        private string _languagePref;
+
         [SerializeField] private Text _title;
         [SerializeField] private Image _titleBackground;
         [SerializeField] private Text _description;
@@ -30,6 +38,14 @@ namespace UnityToolbox.UI.Dialog.UI
         void Awake()
         {
             ModuleManager.GetModule<UIEventManager>().OnDialogNodeChanged += UpdateDialog;
+            _languagePref = ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.LANGUAGE);
+
+            if (!Localizer.Instance.IsInitialized)
+            {
+                Localizer.Instance.Initialize();
+            }
+
+            _allLanguages = Localizer.Instance.LocalisationLanguages.ToList();
         }
 
         /// <summary>
@@ -41,7 +57,6 @@ namespace UnityToolbox.UI.Dialog.UI
             if (_title != null)
             {
                 _title.text = "";
-                _titleBackground.enabled = false;
             }
 
             if (_titleBackground != null)
@@ -63,7 +78,7 @@ namespace UnityToolbox.UI.Dialog.UI
             {
                 _options[i].text = "";
 
-                if (_optionBackgrounds[i] != null)
+                if (_optionBackgrounds.Count > i)
                 {
                     _optionBackgrounds[i].enabled = false;
                 }
@@ -81,6 +96,10 @@ namespace UnityToolbox.UI.Dialog.UI
 
             if (currentNode != null)
             {
+                int optionCount = currentNode.IsLocalized
+                    ? (currentNode.OptionsLocalized == null ? 0 : currentNode.OptionsLocalized.Count)
+                    : (currentNode.Options == null ? 0 : currentNode.Options.Count);
+
                 if (ModuleManager.GetModule<MenuManager>().CurrentActiveMenuType.MenuTypeID != _menuType)
                 {
                     ModuleManager.GetModule<MenuManager>().ToggleMenu(_menuType, _menuOfType);
@@ -94,7 +113,9 @@ namespace UnityToolbox.UI.Dialog.UI
 
                 if (_title != null)
                 {
-                    _title.text = currentNode.Title;
+                    _title.text = currentNode.IsLocalized
+                        ? GetLocalizedText(currentNode.TitleLocalized)
+                        : currentNode.Title;
                 }
 
                 if (_titleBackground != null && _title != null && !_title.text.Trim().Equals(""))
@@ -104,7 +125,9 @@ namespace UnityToolbox.UI.Dialog.UI
 
                 if (_description != null)
                 {
-                    _description.text = currentNode.Text;
+                    _description.text = currentNode.IsLocalized
+                        ? GetLocalizedText(currentNode.TextLocalized)
+                        : currentNode.Text;
                 }
 
                 if (_descriptionBackground != null)
@@ -112,17 +135,23 @@ namespace UnityToolbox.UI.Dialog.UI
                     _descriptionBackground.enabled = true;
                 }
 
-                if (currentNode.Options != null && currentNode.Options.Count > _options.Count)
+                if (optionCount > _options.Count)
                 {
                     Debug.LogWarning("Not all options can be displayed! Missing sufficient textboxes.");
                 }
 
                 for (int i = 0; i < _options.Count; i++)
                 {
-                    if (currentNode.Options.Count > i)
+                    if (optionCount > i)
                     {
-                        _options[i].text = currentNode.Options[i];
-                        _optionBackgrounds[i].enabled = true;
+                        _options[i].text = currentNode.IsLocalized
+                            ? GetLocalizedText(currentNode.OptionsLocalized[i])
+                            : currentNode.Options[i];
+
+                        if (_optionBackgrounds.Count > i)
+                        {
+                            _optionBackgrounds[i].enabled = true;
+                        }
                     }
                 }
 
@@ -138,6 +167,14 @@ namespace UnityToolbox.UI.Dialog.UI
                     ModuleManager.GetModule<MenuManager>().ToggleMenu(_menuType, _menuOfType);
                 }
             }
+        }
+
+        private string GetLocalizedText(LocalisationID localisationID)
+        {
+            KeyValuePair<LocalisationID, Dictionary<LocalisationLanguage, string>> temp = Localizer.Instance.LocalisationData.Where(e => e.Key.Equals(localisationID)).FirstOrDefault();
+            string displayString = temp.Value == null ? "LocalisationID not valid!" : temp.Value[_allLanguages.ElementAt(PlayerPrefs.GetInt(_languagePref))];
+
+            return displayString;
         }
 
         private void OnDestroy()

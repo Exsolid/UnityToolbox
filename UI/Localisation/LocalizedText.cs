@@ -17,7 +17,7 @@ namespace UnityToolbox.UI.Localisation
         [SerializeField][ReadOnly] private string _displayedString;
         private List<LocalisationLanguage> _allLanguages;
         private List<string> _allLanguagesString;
-        [SerializeField][DropDown(nameof(_allLanguagesString))] private int _selectedLanuage;
+        [SerializeField][DropDown(nameof(_allLanguagesString))] private int _selectedLanguage;
 
         private Text _textToDisplay;
 
@@ -81,12 +81,12 @@ namespace UnityToolbox.UI.Localisation
                 _allLanguagesString = Localizer.Instance.LocalisationLanguages.Select(x => x.Name).ToList();
             }
 
-            if (_selectedLanuage >= _allLanguages.Count)
+            if (_selectedLanguage >= _allLanguages.Count)
             {
-                _selectedLanuage = 0;
+                _selectedLanguage = 0;
             }
 
-            UpdateText(_selectedLanuage);
+            UpdateText(_selectedLanguage);
         }
     } 
 }

@@ -40,7 +40,7 @@ namespace UnityToolbox.UI.Dialog
                     string s = System.IO.Path.ChangeExtension(node.AvatarReference, null).Split("Resources/").Last();
                     node.Avatar = Resources.Load(s) as Texture2D;
 
-                    if (node.DialogIndentifier != null && !node.DialogIndentifier.Trim().Equals(""))
+                    if (node.DialogIdentifier != null && !node.DialogIdentifier.Trim().Equals(""))
                     {
                         _dialogStartNodes.Add(node);
                     }
@@ -68,15 +68,15 @@ namespace UnityToolbox.UI.Dialog
                 return;
             }
 
-            IEnumerable<DialogNodeData> sequence = _dialogStartNodes.Where(node => node.DialogIndentifier.Equals(dialogID));
+            IEnumerable<DialogNodeData> sequence = _dialogStartNodes.Where(node => node.DialogIdentifier.Equals(dialogID));
 
             if (sequence.Count() == 0)
             {
                 throw new System.Exception("No dialog node found for " + nameof(dialogID) + ": " + dialogID);
             }
 
-            sequence = sequence.Where(node => node.StateForDialogIndentifier == null || node.StateForDialogIndentifier.Equals("")
-                || ModuleManager.GetModule<GamestateManager>().IsStateActive(node.StateForDialogIndentifier));
+            sequence = sequence.Where(node => node.StateForDialogIdentifier == null || node.StateForDialogIdentifier.Equals("")
+                || ModuleManager.GetModule<GamestateManager>().IsStateActive(node.StateForDialogIdentifier));
             if (sequence.Count() == 1)
             {
                 _currentNode = sequence.First();

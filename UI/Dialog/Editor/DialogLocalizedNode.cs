@@ -7,6 +7,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 using UnityEditor;
+using UnityToolbox.UI.Localisation;
 using UnityToolbox.UI.Localisation.Editor;
 
 namespace UnityToolbox.UI.Dialog.Editor
@@ -14,13 +15,34 @@ namespace UnityToolbox.UI.Dialog.Editor
     /// <summary>
     /// The node which is used within the dialog graph.
     /// </summary>
-    public class DialogNode : DialogNodeBase
+    public class DialogLocalizedNode : Node
     {
-        private string _dialogTitle;
+        private string _dialogIndentifier;
+        public string DialogIndentifier
+        {
+            get { return _dialogIndentifier; }
+            set { _dialogIndentifier = value; }
+        }
+
+        private string _stateForDialogIndentifier;
+        public string StateForDialogIndentifier
+        {
+            get { return _stateForDialogIndentifier; }
+            set { _stateForDialogIndentifier = value; }
+        }
+
+        private string _gamestateToComplete;
+        public string GamestateToComplete
+        {
+            get { return _gamestateToComplete; }
+            set { _gamestateToComplete = value; }
+        }
+
+        private string _dialogTitel;
         public string DialogTitle
         {
-            get { return _dialogTitle; }
-            set { _dialogTitle = value; }
+            get { return _dialogTitel; }
+            set { _dialogTitel = value; }
         }
 
         private List<string> _options;
@@ -37,21 +59,60 @@ namespace UnityToolbox.UI.Dialog.Editor
             set { _dialogText = value; }
         }
 
-        private TextField _dialogTitelTextField;
-        private TextField _dialogTextTextField;
-        private List<TextField> _optionsTextFields;
-
-        public DialogNode(Vector2 position, int id) : base(position, id)
+        private Texture2D _avatar;
+        public Texture2D Avatar
         {
-            _dialogTitle = "Default Title";
-            _dialogText = "Default Text";
-            _options = new List<string>();
-            _optionsTextFields = new List<TextField>();
+            get { return _avatar; }
+            set { _avatar = value; }
         }
 
-        public DialogNode(DialogNodeData data) : base(data)
+        private int _id;
+        public int ID
         {
-            _dialogTitle = data.Title;
+            get { return _id; }
+        }
+
+        private List<int> _inputIDs;
+        public List<int> InputIDs
+        {
+            get { return _inputIDs.ToList(); }
+        }
+
+        private List<int> _outputIDs;
+        public List<int> OutputIDs
+        {
+            get { return _outputIDs.ToList(); }
+        }
+
+        private Foldout _optionFoldout;
+
+        private ObjectField _avatarObjectField;
+        private Label _optionNumberOfSelf;
+        private TextField _completionToSetTextField;
+        private TextField _dialogTitelTextField;
+        private TextField _dialogIndentifierTextField;
+        private TextField _stateForDialogIndentifierTextField;
+        private TextField _dialogTextTextField;
+        private List<TextField> _optionsTextFields;
+        private Port _inputPort;
+        public Port InputPort
+        {
+            get { return _inputPort; }
+        }
+
+        private Port _outputPort;
+        public Port OutputPort
+        {
+            get { return _outputPort; }
+        }
+
+        /// <summary>
+        /// Creates a new node based on a <see cref="DialogNodeData"/>.
+        /// </summary>
+        /// <param name="data"></param>
+        public DialogLocalizedNode(DialogNodeData data)
+        {
+            _dialogTitel = data.Title;
             _dialogText = data.Text;
 
             _options = new List<string>();
@@ -61,22 +122,50 @@ namespace UnityToolbox.UI.Dialog.Editor
             }
 
             _optionsTextFields = new List<TextField>();
+            _outputIDs = data.OutputIDs;
+            _inputIDs = data.InputIDs;
+            _id = data.ID;
+            _dialogIndentifier = data.DialogIdentifier;
+            _gamestateToComplete = data.GamestateToComplete;
+            _stateForDialogIndentifier = data.StateForDialogIdentifier;
+
+            _avatar = AssetDatabase.LoadAssetAtPath(data.AvatarReference, typeof(Texture2D)) as Texture2D;
+
+            SetPosition(new Rect(data.Position.x, data.Position.y, 0, 0));
+        }
+
+        /// <summary>
+        /// Creates a node based with a given <paramref name="position"/> within the graph and a given <paramref name="id"/>.
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="id"></param>
+        public DialogLocalizedNode(Vector2 position, int id)
+        {
+            _dialogTitel = "Default Titel";
+            _dialogText = "Default Text";
+            _options = new List<string>();
+            _optionsTextFields = new List<TextField>();
+            _outputIDs = new List<int>();
+            _inputIDs = new List<int>();
+            _id = id;
+
+            SetPosition(new Rect(position, Vector2.zero));
         }
 
         /// <summary>
         /// Creates all relevant UI elements to display its data.
         /// </summary>
-        public override void Draw()
+        public void Draw()
         {
             _dialogTitelTextField = new TextField()
             {
-                value = _dialogTitle
+                value = _dialogTitel
             };
 
             _dialogTitelTextField.StretchToParentWidth();
             titleContainer.Insert(0, _dialogTitelTextField);
 
-            if (_dialogIdentifier != null && !_dialogIdentifier.Trim().Equals(""))
+            if (_dialogIndentifier != null && !_dialogIndentifier.Trim().Equals(""))
             {
                 UpdateToRoot();
             }
@@ -201,19 +290,6 @@ namespace UnityToolbox.UI.Dialog.Editor
                 text = "-",
             };
             removeOption.clicked += RemoveOption;
-
-            int i = 0;
-            foreach (TextField field in _optionsTextFields)
-            {
-                if (i >= _options.Count)
-                {
-                    break;
-                }
-
-                _options[i] = field.value;
-                i++;
-            }
-
             _optionsTextFields.Clear();
             foreach (string option in _options)
             {
@@ -234,14 +310,14 @@ namespace UnityToolbox.UI.Dialog.Editor
         /// <summary>
         /// Updates all variables with the data written within the dialog node UI elements.
         /// </summary>
-        public override void UpdateValues()
+        public void UpdateValues()
         {
             _gamestateToComplete = _completionToSetTextField.value;
-            _dialogTitle = _dialogTitelTextField.value;
+            _dialogTitel = _dialogTitelTextField.value;
             _dialogText = _dialogTextTextField.value;
             if (_dialogIndentifierTextField != null)
             {
-                _dialogIdentifier = _dialogIndentifierTextField.value;
+                _dialogIndentifier = _dialogIndentifierTextField.value;
                 _stateForDialogIndentifier = _stateForDialogIndentifierTextField.value;
             }
 
@@ -259,14 +335,14 @@ namespace UnityToolbox.UI.Dialog.Editor
                 _inputIDs.Clear();
                 foreach (Edge edge in _inputPort.connections)
                 {
-                    _inputIDs.Add(((DialogNodeBase)edge.output.node).ID);
+                    _inputIDs.Add(((DialogNode)edge.output.node).ID);
                 }
             }
 
             _outputIDs.Clear();
             foreach (Edge edge in _outputPort.connections)
             {
-                _outputIDs.Add(((DialogNodeBase)edge.input.node).ID);
+                _outputIDs.Add(((DialogNode)edge.input.node).ID);
             }
         }
 
@@ -276,8 +352,8 @@ namespace UnityToolbox.UI.Dialog.Editor
             {
                 foreach (Edge edge in _inputPort.connections.ToList())
                 {
-                    ((DialogNodeBase)edge.output.node).OutputIDs.Remove(ID);
-                    ((DialogNodeBase)edge.output.node).OutputPort.Disconnect(edge);
+                    ((DialogNode)edge.output.node).OutputIDs.Remove(ID);
+                    ((DialogNode)edge.output.node).OutputPort.Disconnect(edge);
                     edge.output.node.RefreshPorts();
                     edge.parent.Remove(edge);
                 }
@@ -287,8 +363,8 @@ namespace UnityToolbox.UI.Dialog.Editor
             _inputIDs.Clear();
             _dialogIndentifierTextField = new TextField()
             {
-                value = _dialogIdentifier,
-                label = "Dialog Identifier: "
+                value = _dialogIndentifier,
+                label = "Dialog Indentifier: "
             };
 
             _stateForDialogIndentifierTextField = new TextField()
@@ -301,5 +377,56 @@ namespace UnityToolbox.UI.Dialog.Editor
             inputContainer.Add(_dialogIndentifierTextField);
             inputContainer.Add(_stateForDialogIndentifierTextField);
         }
-    } 
+
+        /// <summary>
+        /// Updates the label which informs the user which option of the pervious node the current is.
+        /// </summary>
+        /// <param name="optionNumber"></param>
+        public void UpdateInputConnectionLabel(int optionNumber)
+        {
+            _optionNumberOfSelf.text = "Is Option: " + optionNumber;
+        }
+
+        /// <summary>
+        /// Reduces the current <paramref name="optionNumber"/> by one. The usecase is the deletion of other nodes.
+        /// </summary>
+        /// <param name="optionNumber"></param>
+        public void UpdateHigherInputConnectionLabel(int optionNumber)
+        {
+            int oldID = int.Parse(_optionNumberOfSelf.text.Replace("Is Option: ", ""));
+
+            if (oldID > optionNumber)
+            {
+                oldID--;
+            }
+
+            _optionNumberOfSelf.text = "Is Option: " + oldID;
+        }
+
+        private void ValueChange(ChangeEvent<UnityEngine.Object> e)
+        {
+            if (e.newValue != null)
+            {
+                string path = AssetDatabase.GetAssetPath(e.newValue);
+                if (!path.Contains("Resources/"))
+                {
+                    _avatarObjectField.value = e.previousValue;
+                    Debug.LogError("The dialog node avatar cannot be set to values external to the resource folder.");
+                }
+            }
+        }
+
+        private class ConnectionListener : IEdgeConnectorListener
+        {
+            public void OnDrop(GraphView graphView, Edge edge)
+            {
+                ((DialogNode)edge.output.node).UpdateValues();
+                ((DialogNode)edge.input.node).UpdateInputConnectionLabel(((DialogNode)edge.output.node).OutputIDs.Count - 1);
+            }
+
+            public void OnDropOutsidePort(Edge edge, Vector2 position)
+            {
+            }
+        }
+    }
 }

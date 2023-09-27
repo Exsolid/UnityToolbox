@@ -432,6 +432,7 @@ namespace UnityToolbox.UI.Localisation
             _settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
             _localisationData = new Dictionary<LocalisationID, Dictionary<LocalisationLanguage, string>>();
             _localisationScopes = new HashSet<LocalisationScope>();
+            _localisationLanguages = new HashSet<LocalisationLanguage>();
 
             _defaultScope = new LocalisationScope();
             _defaultScope.Name = "DefaultScope";
