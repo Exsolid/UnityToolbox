@@ -68,10 +68,6 @@ namespace UnityToolbox.UI.Dialog.Editor
         public override void Draw()
         {
             _dialogTitelField = new LocalisationDrawer();
-            _dialogTitelField.OnIDChanged += (id) =>
-            {
-                _dialogTitle = id;
-            };
             VisualElement field = _dialogTitelField.CreateVisualElement(_dialogTitle);
 
             field.StretchToParentWidth();
@@ -132,11 +128,6 @@ namespace UnityToolbox.UI.Dialog.Editor
             container.Add(foldout);
 
             _dialogTextField = new LocalisationDrawer();
-            _dialogTextField.OnIDChanged += (id) =>
-            {
-                _dialogText = id;
-            };
-
             field = _dialogTextField.CreateVisualElement(_dialogText);
 
             foldout = new Foldout()
@@ -173,7 +164,7 @@ namespace UnityToolbox.UI.Dialog.Editor
 
         private void AddOption()
         {
-            _options.Add(new LocalisationID());
+            _options.Insert(0, new LocalisationID());
 
             UpdateOptionFoldout();
         }
@@ -182,7 +173,7 @@ namespace UnityToolbox.UI.Dialog.Editor
         {
             if (_options.Count != 0)
             {
-                _options.RemoveAt(_options.Count - 1);
+                _options.RemoveAt(0);
             }
 
             UpdateOptionFoldout();
@@ -205,22 +196,46 @@ namespace UnityToolbox.UI.Dialog.Editor
 
             removeOption.clicked += RemoveOption;
 
-            _optionsFields.Clear();
+            if (_optionsFields.Count <= _options.Count)
+            {
+                int i = _options.Count - _optionsFields.Count;
+                foreach (LocalisationDrawer field in _optionsFields)
+                {
+                    _options[i] = field.DrawerId;
+                    i++;
+                }
+            }
+            else
+            {
+                int j = 0;
+                for (int i = _optionsFields.Count - _options.Count; i < _optionsFields.Count; i++)
+                {
+                    _options[j] = _optionsFields[i].DrawerId;
+                    j++;
+                }
+            }
 
-            int i = 0;
+            _optionsFields.Clear();
+            int optionNum = _options.Count - 1;
+
             foreach (LocalisationID option in _options.ToList())
             {
-                LocalisationDrawer drawer = new LocalisationDrawer();
-                drawer.OnIDChanged += (id) =>
-                {
-                    _options[_options.IndexOf(option)] = id;
-                };
+                VisualElement container = new VisualElement();
+                container.style.flexDirection = FlexDirection.Row;
+                Label optionLabel = new Label();
+                optionLabel.text = "[Option: " + optionNum + "]";
+                optionLabel.style.alignSelf = Align.FlexStart;
 
+                container.Add(optionLabel);
+
+                LocalisationDrawer drawer = new LocalisationDrawer();
                 VisualElement field = drawer.CreateVisualElement(option);
 
+                container.Add(field);
+
                 _optionsFields.Add(drawer);
-                _optionFoldout.Insert(0, field);
-                i++;
+                _optionFoldout.Insert(0, container);
+                optionNum--;
             }
 
             _optionFoldout.Insert(0, addOption);

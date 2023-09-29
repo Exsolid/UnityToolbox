@@ -171,7 +171,7 @@ namespace UnityToolbox.UI.Dialog.Editor
 
         private void AddOption()
         {
-            _options.Add("Default Option");
+            _options.Insert(0,"Default Option");
 
             UpdateOptionFoldout();
         }
@@ -180,7 +180,7 @@ namespace UnityToolbox.UI.Dialog.Editor
         {
             if (_options.Count != 0)
             {
-                _options.RemoveAt(_options.Count - 1);
+                _options.RemoveAt(0);
             }
 
             UpdateOptionFoldout();
@@ -202,29 +202,50 @@ namespace UnityToolbox.UI.Dialog.Editor
             };
             removeOption.clicked += RemoveOption;
 
-            int i = 0;
-            foreach (TextField field in _optionsTextFields)
+            if (_optionsTextFields.Count <= _options.Count)
             {
-                if (i >= _options.Count)
+                int i = _options.Count - _optionsTextFields.Count;
+                foreach (TextField field in _optionsTextFields)
                 {
-                    break;
+                    _options[i] = field.value;
+                    i++;
                 }
-
-                _options[i] = field.value;
-                i++;
+            }
+            else
+            {
+                int j = 0;
+                for (int i = _optionsTextFields.Count - _options.Count; i < _optionsTextFields.Count; i++)
+                {
+                    _options[j] = _optionsTextFields[i].value;
+                    j++;
+                }
             }
 
             _optionsTextFields.Clear();
+            int optionNum = _options.Count-1;
             foreach (string option in _options)
             {
+                VisualElement container = new VisualElement();
+                container.style.flexDirection = FlexDirection.Row;
+                Label optionLabel = new Label();
+                optionLabel.text = "[Option: "+ optionNum + "]";
+                optionLabel.style.alignSelf = Align.FlexStart;
+
+                container.Add(optionLabel);
+
                 TextField dialogOptionText = new TextField()
                 {
                     value = option,
                     multiline = true
                 };
 
+                dialogOptionText.style.alignSelf = Align.Stretch;
+
+                container.Add(dialogOptionText);
+
                 _optionsTextFields.Add(dialogOptionText);
-                _optionFoldout.Insert(0, dialogOptionText);
+                _optionFoldout.Insert(0, container);
+                optionNum--;
             }
 
             _optionFoldout.Insert(0, addOption);

@@ -18,12 +18,11 @@ namespace UnityToolbox.UI.Localisation.Editor
 
         private Label _locaLabel;
         private LocalisationID _drawerId;
+
         public LocalisationID DrawerId
         {
             get { return _drawerId; }
         }
-
-        public event Action<LocalisationID> OnIDChanged;
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
@@ -83,7 +82,6 @@ namespace UnityToolbox.UI.Localisation.Editor
                 _locaLabel.text = _drawerId.GetQualifiedName();
                 _window.OnIDSelected -= IDSelectedUIElement;
                 _window.Close();
-                IDChanged();
             }
         }
 
@@ -120,11 +118,6 @@ namespace UnityToolbox.UI.Localisation.Editor
             };
 
             return container;
-        }
-
-        private void IDChanged()
-        {
-            OnIDChanged?.Invoke(_drawerId);
         }
     } 
 }
