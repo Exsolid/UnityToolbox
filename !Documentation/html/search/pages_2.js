@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['getting_20started_0',['Getting Started',['../index.html',1,'']]]
+  ['dialog_0',['Dialog',['../_dialog.html',1,'MenuManagement']]]
 ];

@@ -8,7 +8,10 @@ var _menu_management =
     ] ],
     [ "Dialog", "_dialog.html", [
       [ "Overview", "_dialog.html#DialogOverview", null ],
-      [ "Dialog Creation", "_dialog.html#DialogCreation", null ],
+      [ "Dialog Creation", "_dialog.html#DialogCreation", [
+        [ "Default Nodes", "_dialog.html#DialogDefaultNodes", null ],
+        [ "Localized Nodes", "_dialog.html#DialogLocalizedNodes", null ]
+      ] ],
       [ "Dialog Setup", "_dialog.html#DialogSetup", [
         [ "Dialog Buttons", "_dialog.html#DialogSetupButtons", null ]
       ] ]

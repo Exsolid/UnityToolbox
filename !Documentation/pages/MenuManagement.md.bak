@@ -53,8 +53,8 @@ If the current Input Module which comes with the object says to replace it with 
 
 | New Input Module |
 | :---- |
-| @image html MenuManagementInputModule.png width=400px |
 | @image html MenuManagementInputModuleError.png width=400px |
+| @image html MenuManagementInputModule.png width=400px |
 
 All UI scripts can be placed on an UI element within the canvas and will only be clickable and visible if the menu is active.
 

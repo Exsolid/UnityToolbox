@@ -11,10 +11,11 @@ var searchData=
   ['localisationexception_2ecs_8',['LocalisationException.cs',['../_localisation_exception_8cs.html',1,'']]],
   ['localisationid_2ecs_9',['LocalisationID.cs',['../_localisation_i_d_8cs.html',1,'']]],
   ['localisationlanguage_2ecs_10',['LocalisationLanguage.cs',['../_localisation_language_8cs.html',1,'']]],
-  ['localisationmanagerwindow_2ecs_11',['LocalisationManagerWindow.cs',['../_localisation_manager_window_8cs.html',1,'']]],
-  ['localisationscope_2ecs_12',['LocalisationScope.cs',['../_localisation_scope_8cs.html',1,'']]],
-  ['localisationselectionwindow_2ecs_13',['LocalisationSelectionWindow.cs',['../_localisation_selection_window_8cs.html',1,'']]],
-  ['localizedtext_2ecs_14',['LocalizedText.cs',['../_localized_text_8cs.html',1,'']]],
-  ['localizer_2ecs_15',['Localizer.cs',['../_localizer_8cs.html',1,'']]],
-  ['lockmovement_2ecs_16',['LockMovement.cs',['../_lock_movement_8cs.html',1,'']]]
+  ['localisationmanagement_2emd_11',['LocalisationManagement.md',['../_localisation_management_8md.html',1,'']]],
+  ['localisationmanagerwindow_2ecs_12',['LocalisationManagerWindow.cs',['../_localisation_manager_window_8cs.html',1,'']]],
+  ['localisationscope_2ecs_13',['LocalisationScope.cs',['../_localisation_scope_8cs.html',1,'']]],
+  ['localisationselectionwindow_2ecs_14',['LocalisationSelectionWindow.cs',['../_localisation_selection_window_8cs.html',1,'']]],
+  ['localizedtext_2ecs_15',['LocalizedText.cs',['../_localized_text_8cs.html',1,'']]],
+  ['localizer_2ecs_16',['Localizer.cs',['../_localizer_8cs.html',1,'']]],
+  ['lockmovement_2ecs_17',['LockMovement.cs',['../_lock_movement_8cs.html',1,'']]]
 ];

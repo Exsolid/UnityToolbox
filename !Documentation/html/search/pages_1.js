@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['dialog_0',['Dialog',['../_dialog.html',1,'MenuManagement']]]
+  ['boids_20tutorial_0',['Boids Tutorial',['../_boids.html',1,'Tutorials']]]
 ];

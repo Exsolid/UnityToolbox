@@ -61,7 +61,7 @@ PROJECT_BRIEF          = "Brief documentation for all existing scripts."
 # pixels and the maximum width should not exceed 200 pixels. Doxygen will copy
 # the logo to the output directory.
 
-PROJECT_LOGO           =
+PROJECT_LOGO           = D:/Repos/Unity/Toolbox/Assets/UnityToolbox/!Documentation/images/Logo-Scaled.PNG
 
 # The OUTPUT_DIRECTORY tag is used to specify the (relative or absolute) path
 # into which the generated documentation will be written. If a relative path is

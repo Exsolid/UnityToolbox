@@ -67,6 +67,9 @@ This script can only toggle a menu, if the current menu is of the same menu type
 If the menu to be opened and the current open menu are the same, the menu will be closed.\n
 The menu to be opened can be defined by a drop down. An @ref UnityToolbox.Audio.AudioMixer "AudioMixer" can also be added for click sounds.
 
+
+For further details of the audio management, please refer to the @ref AudioManagement page.
+
 | Toggle Button |
 | :---- |
 | @image html MenuManagementToggle.png width=400px |

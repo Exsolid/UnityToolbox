@@ -28,7 +28,10 @@ The documentation excludes private members and EditorWindow implementations.\n
 
 @section TutorialsTutorialOverview Tutorial Overview
 
-Currently tutorials for the following features exist:
+Currently tutorials for the following features exist (with some having further sub pages):
 - @subpage ItemManagement
 - @subpage MenuManagement
+- @subpage LocalizationManagement
+- @subpage GamestateManagement
+- @subpage AudioManagement
 - @subpage Boids

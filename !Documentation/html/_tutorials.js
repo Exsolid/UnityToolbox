@@ -12,6 +12,9 @@ var _tutorials =
       ] ]
     ] ],
     [ "Menu Management Tutorial", "_menu_management.html", "_menu_management" ],
+    [ "Localization Management Tutorial", "_localization_management.html", null ],
+    [ "Gamestate Management Tutorial", "_gamestate_management.html", null ],
+    [ "Audio Management Tutorial", "_audio_management.html", null ],
     [ "Boids Tutorial", "_boids.html", [
       [ "Overview", "_boids.html#BoidsOverview", null ],
       [ "Simple Usage", "_boids.html#BoidsSimpleUsage", null ],

@@ -5,5 +5,5 @@ var searchData=
   ['selectedtrigger_2',['SelectedTrigger',['../class_unity_toolbox_1_1_gameplay_features_1_1_achievements_1_1_achievement_data.html#ad01ff7757b78ed5b101b85619b7f84b0',1,'UnityToolbox::GameplayFeatures::Achievements::AchievementData']]],
   ['shortname_3',['ShortName',['../struct_unity_toolbox_1_1_u_i_1_1_localisation_1_1_localisation_language.html#a328707126c492b88dcea491173ce561d',1,'UnityToolbox::UI::Localisation::LocalisationLanguage']]],
   ['source_4',['Source',['../class_unity_toolbox_1_1_audio_1_1_audio_mixer_item.html#a4aacd0907086bfebc991581b5bee4831',1,'UnityToolbox::Audio::AudioMixerItem']]],
-  ['statefordialogindentifier_5',['StateForDialogIndentifier',['../class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_dialog_node_data.html#a0d6d6278cdc2fe83eabf3b6b09cac6eb',1,'UnityToolbox::UI::Dialog::DialogNodeData']]]
+  ['statefordialogidentifier_5',['StateForDialogIdentifier',['../class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_dialog_node_data.html#a3a0a4874d93599d768c1e80a6f445379',1,'UnityToolbox::UI::Dialog::DialogNodeData']]]
 ];

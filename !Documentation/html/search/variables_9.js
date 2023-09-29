@@ -9,6 +9,7 @@ var searchData=
   ['inventoryid_6',['InventoryID',['../class_unity_toolbox_1_1_gameplay_features_1_1_serialization_data_1_1_item_data.html#a5dcf72a6033ae919727c48c8e27f2bff',1,'UnityToolbox::GameplayFeatures::SerializationData::ItemData']]],
   ['inventoryofitem_7',['InventoryOfItem',['../class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_inventory_1_1_u_i_1_1_inventory_u_i_slot.html#a23cc8c8a1514c18e71f536c04f087f9e',1,'UnityToolbox::GameplayFeatures::Items::Inventory::UI::InventoryUISlot']]],
   ['isactive_8',['IsActive',['../class_unity_toolbox_1_1_gameplay_features_1_1_gamestates_1_1_gamestate_node_data.html#a2c724ed66d7c44782129a9cde86c826f',1,'UnityToolbox::GameplayFeatures::Gamestates::GamestateNodeData']]],
-  ['itemname_9',['ItemName',['../class_unity_toolbox_1_1_gameplay_features_1_1_serialization_data_1_1_item_data.html#ac6cbb9d7e78655f44b743feddaad2bdd',1,'UnityToolbox::GameplayFeatures::SerializationData::ItemData']]],
-  ['itemtype_10',['ItemType',['../class_unity_toolbox_1_1_gameplay_features_1_1_serialization_data_1_1_item_data.html#a364a58c0921665fbd71f1cb5d37d4361',1,'UnityToolbox::GameplayFeatures::SerializationData::ItemData']]]
+  ['islocalized_9',['IsLocalized',['../class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_dialog_node_data.html#a962a6809938332a41b64b6a7e277021b',1,'UnityToolbox::UI::Dialog::DialogNodeData']]],
+  ['itemname_10',['ItemName',['../class_unity_toolbox_1_1_gameplay_features_1_1_serialization_data_1_1_item_data.html#ac6cbb9d7e78655f44b743feddaad2bdd',1,'UnityToolbox::GameplayFeatures::SerializationData::ItemData']]],
+  ['itemtype_11',['ItemType',['../class_unity_toolbox_1_1_gameplay_features_1_1_serialization_data_1_1_item_data.html#a364a58c0921665fbd71f1cb5d37d4361',1,'UnityToolbox::GameplayFeatures::SerializationData::ItemData']]]
 ];

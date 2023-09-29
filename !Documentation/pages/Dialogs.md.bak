@@ -2,6 +2,12 @@
 
 @section DialogOverview Overview
 
+- @ref DialogCreation
+	- @ref DialogLocalizedNodes
+	- @ref DialogDefaultNodes
+- @ref DialogSetup
+	- @ref DialogSetupButtons
+	
 This feature adds a dialog node editor and scripts for their usage. 
 The prerequisites for using this system are:
 
@@ -25,11 +31,16 @@ If the data within the old directory is required, one will need to manually copy
 | :---- |
 | @image html DialogPathSetup.png width=500px |
 
+@subsection DialogDefaultNodes Default Nodes
+
 There are now two nodes which can be used. The default node, which can be created with the right click drop down and the root node, which can be created by converting the default node with the "To Root" button.\n
 The Root node only differs by the input parameters used. They are not called by another node, but by an ID and an optional gamestate.\n
 An ID can be used for the later mentioned scripts, to refer to a specific dialog. Therefore they must be unique and will be automatically renamed otherwise.\n
+
+
 The gamestate field defines, at which gamestate the dialog should be called. If left empty, the dialog will always be called.\n
-Multiple equal IDs are allowed if they are in combination with different gamestates.
+Multiple equal IDs are allowed if they are in combination with different gamestates.\n
+For detailed usage of the gamestate management, please refer to the @ref GamestateManagement page.
 
 | Root Node |
 | :---- |
@@ -39,14 +50,21 @@ The following fields are values used to be displayed within the UI. The only exc
 The "Avatar" is the texture used to display within the UI. This texture must also be stored within a "Resources" folder.\n
 The "Dialog Text" is the description. The title is the first field found at the top of the node.\n
 Lastly, the options are directly linked to the amount of next nodes. If only one next node is present, these fields are optional.\n
-Multiple next nodes require a dialog option field for each node. These fields are choice/answer buttons which are displayed within the UI.\n
-
-Looking at the following example, if "0" is clicked the node "Is Option: 0" will be called next.\n
-If "1" is clicked the node "Is Option: 1" will be called next. Having no "Dialog Options" will result in a default button to be displayed.
+Multiple next nodes require a dialog option field for each node. These fields define the text for the choice buttons, which are displayed within the UI.\n
 
 | Node Connections |
 | :---- |
 | @image html DialogNodeConnection.png width=500px |
+
+@subsection DialogLocalizedNodes Localized Nodes
+
+The localized nodes work similar to the default nodes, with the key difference that @ref UnityToolbox.UI.Localisation.LocalisationID "LocalisationIDs" are used to define the text values.
+
+| Localized Node |
+| :---- |
+| @image html DialogLocalizationNode.png width=200px |
+
+For detailed usage of the localization tool, please refer to the @ref LocalizationManagement page.
 
 @section DialogSetup Dialog Setup
 
@@ -66,4 +84,7 @@ The "Sprite To Show" is similar to the "Avatar" texture within the dialog graph,
 For the dialog to be intractable, two scripts are to be used. The @ref UnityToolbox.UI.Dialog.UI.NextDialogButton "NextDialogButton", which is the button that is displayed if no options are registered for the node.\n
 The button will always lead to the first next node and close the dialog if no node is found. An @ref UnityToolbox.Audio.AudioMixer "AudioMixer" can optionally be added to play on click.\n
 The other script is the @ref UnityToolbox.UI.Dialog.UI.NextDialogOptionButton "NextDialogOptionButton", which also has an optional @ref UnityToolbox.Audio.AudioMixer "AudioMixer" field and an additional field "Option ID" field.\n
-This field refers to the "Is Option: x" value within the node and is required to display the correct option text and next node once clicked. It will also close the dialog menu if no next node is found.
+This field refers to the "Is Option: x" value within the node and is required to display the correct option text and next node once clicked. It will also close the dialog menu if no next node is found.\n
+
+
+For further details of the audio management, please refer to the @ref AudioManagement page.\n

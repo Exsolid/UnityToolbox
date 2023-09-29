@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['tutorials_0',['Tutorials',['../_tutorials.html',1,'']]]
+  ['localization_20management_20tutorial_0',['Localization Management Tutorial',['../_localization_management.html',1,'Tutorials']]]
 ];

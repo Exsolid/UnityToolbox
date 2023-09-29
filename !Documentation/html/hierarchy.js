@@ -42,6 +42,9 @@ var hierarchy =
     [ "ICloneable", null, [
       [ "UnityToolbox.GameplayFeatures.ProzedualGeneration.Terrain.TerrainDecorationInformation", "class_unity_toolbox_1_1_gameplay_features_1_1_prozedual_generation_1_1_terrain_1_1_terrain_decoration_information.html", null ]
     ] ],
+    [ "IEdgeConnectorListener", null, [
+      [ "UnityToolbox.UI.Dialog.Editor.DialogNodeBase.ConnectionListener", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_editor_1_1_dialog_node_base_1_1_connection_listener.html", null ]
+    ] ],
     [ "InputSystemUIInputModule", null, [
       [ "UnityToolbox.PlayerControls.ThreeD.FirstPersonMouseInput", "class_unity_toolbox_1_1_player_controls_1_1_three_d_1_1_first_person_mouse_input.html", null ]
     ] ],
@@ -184,7 +187,11 @@ var hierarchy =
     ] ],
     [ "Node", null, [
       [ "UnityToolbox.GameplayFeatures.Gamestates.Editor.GamestateNode", "class_unity_toolbox_1_1_gameplay_features_1_1_gamestates_1_1_editor_1_1_gamestate_node.html", null ],
-      [ "UnityToolbox.UI.Dialog.Editor.DialogNode", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_editor_1_1_dialog_node.html", null ]
+      [ "UnityToolbox.UI.Dialog.Editor.DialogLocalizedNode", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_editor_1_1_dialog_localized_node.html", null ],
+      [ "UnityToolbox.UI.Dialog.Editor.DialogNodeBase", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_editor_1_1_dialog_node_base.html", [
+        [ "UnityToolbox.UI.Dialog.Editor.DialogNode", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_editor_1_1_dialog_node.html", null ],
+        [ "UnityToolbox.UI.Dialog.Editor.DialogNodeLocalized", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_editor_1_1_dialog_node_localized.html", null ]
+      ] ]
     ] ],
     [ "UnityToolbox.General.Preferences.ProjectPrefs", "class_unity_toolbox_1_1_general_1_1_preferences_1_1_project_prefs.html", null ],
     [ "PropertyAttribute", null, [
