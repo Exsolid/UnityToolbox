@@ -4,7 +4,7 @@
 
 Currently the toolbox includes:
 - UI Management (Hierarchies, useful UI scripts)
-- Localisation system
+- Localization system
 - Dialog system
 - Savegame management (Checkpoint data and saving of objects at runtime)
 - Gamestate management
@@ -13,7 +13,7 @@ Currently the toolbox includes:
 - Settings management (Controls, volume and languages)
 - Sound management
 - Inventory system **Requires rework**
-- Achievment system
+- Achievement system
 - Event management
 
 A few scripts underlay a naming convention. These are:

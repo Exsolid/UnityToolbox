@@ -19,7 +19,7 @@ namespace UnityToolbox.GameplayFeatures.Achievements.Editor
         {
             base.OnInspectorGUI();
             AchievementManager manager = (AchievementManager)target;
-            if (GUILayout.Button("Update Achievment Cache"))
+            if (GUILayout.Button("Update Achievement Cache"))
             {
                 List<AchievementData> data = new List<AchievementData>();
                 data.AddRange(
@@ -27,7 +27,7 @@ namespace UnityToolbox.GameplayFeatures.Achievements.Editor
                     (AchievementData)AssetDatabase.LoadAllAssetsAtPath
                     (AssetDatabase.GUIDToAssetPath(guid))
                     .FirstOrDefault()));
-                FieldInfo info = typeof(AchievementManager).GetField("_allAchievments", BindingFlags.NonPublic | BindingFlags.Instance);
+                FieldInfo info = typeof(AchievementManager).GetField("_allAchievements", BindingFlags.NonPublic | BindingFlags.Instance);
                 info.SetValue(target, data);
             }
         }

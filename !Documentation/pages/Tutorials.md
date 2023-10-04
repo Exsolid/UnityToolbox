@@ -8,12 +8,12 @@ Currently the toolbox includes:
 - Dialog system
 - Savegame management (Checkpoint data and saving of objects at runtime)
 - Gamestate management
-- Procedual terrain generation
+- Procedural terrain generation
 - Player controls for 2D and 3D
 - Settings management (Controls, volume and languages)
 - Sound management
 - Inventory system **Requires rework**
-- Achievment system
+- Achievement system
 - Event management
 
 A few scripts underlay a naming convention. These are:

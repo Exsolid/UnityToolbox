@@ -50,12 +50,12 @@ namespace UnityToolbox.GameplayFeatures.Items.Inventory.UI { }
 namespace UnityToolbox.GameplayFeatures.Items.Inventory.Types { }
 
 /// <summary>
-/// All scripts related to the achievment system.
+/// All scripts related to the Achievement system.
 /// </summary>
 namespace UnityToolbox.GameplayFeatures.Achievements { }
 
 /// <summary>
-/// All scripts related to the achievment system required for the editor.
+/// All scripts related to the Achievement system required for the editor.
 /// </summary>
 namespace UnityToolbox.GameplayFeatures.Achievements.Editor { }
 
@@ -81,22 +81,22 @@ namespace UnityToolbox.GameplayFeatures.Gamestates { }
 namespace UnityToolbox.GameplayFeatures.Gamestates.Editor { }
 
 /// <summary>
-/// This namespace contains everything used for procedual generation.
+/// This namespace contains everything used for Procedural generation.
 /// </summary>
 namespace UnityToolbox.GameplayFeatures.ProzedualGeneration { }
 
 /// <summary>
-/// This namespace contains everything used for procedual generation on the editor side.
+/// This namespace contains everything used for Procedural generation on the editor side.
 /// </summary>
 namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor { }
 
 /// <summary>
-/// This namespace contains all enums used for procedual generation.
+/// This namespace contains all enums used for Procedural generation.
 /// </summary>
 namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Enums { }
 
 /// <summary>
-/// This namespace contains all scripts used for procedual terrain generation.
+/// This namespace contains all scripts used for Procedural terrain generation.
 /// </summary>
 namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Terrain { }
 

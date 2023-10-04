@@ -9,7 +9,7 @@ using UnityToolbox.General.SubEvents;
 namespace UnityToolbox.GameplayFeatures.Achievements
 {
     /// <summary>
-    /// The manager for all achievments. Needs to be present if achievments are used.
+    /// The manager for all Achievements. Needs to be present if Achievements are used.
     /// The manager needs to be manually updated to cache all existing achievements in the project.
     /// </summary>
     public class AchievementManager : Module, ISerializationCallbackReceiver
@@ -21,11 +21,11 @@ namespace UnityToolbox.GameplayFeatures.Achievements
 
         [SerializeField][HideInInspector] private List<string> _triggersForEditor = new List<string>();
 
-        [ReadOnly][SerializeField] private List<AchievementData> _allAchievments;
+        [ReadOnly][SerializeField] private List<AchievementData> _allAchievements;
 
         private void Start()
         {
-            foreach (AchievementData data in _allAchievments)
+            foreach (AchievementData data in _allAchievements)
             {
                 ModuleManager.GetModule<EventAggregator>().GetEvent<PubSubEvent<Type>>().Subscribe
                     ((triggerType) =>
