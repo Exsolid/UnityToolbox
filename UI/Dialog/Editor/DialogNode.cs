@@ -7,7 +7,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 using UnityEditor;
-using UnityToolbox.UI.Localisation.Editor;
+using UnityToolbox.UI.Localization.Editor;
 
 namespace UnityToolbox.UI.Dialog.Editor
 {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using UnityEngine;
 using UnityToolbox.GameplayFeatures.SerializationData;
-using UnityToolbox.UI.Localisation;
+using UnityToolbox.UI.Localization;
 
 namespace UnityToolbox.UI.Dialog
 {
@@ -14,18 +14,18 @@ namespace UnityToolbox.UI.Dialog
     public class DialogNodeData
     {
         public int ID;
-        public bool IsLocalized;
+        public bool IsLocalizzed;
         public string DialogIdentifier;
         public string StateForDialogIdentifier;
         public string GamestateToComplete;
         public string AvatarReference;
         [JsonIgnore][NonSerialized] public Texture2D Avatar;
         public string Title;
-        public LocalisationID TitleLocalized;
+        public LocalizationID TitleLocalizzed;
         public string Text;
-        public LocalisationID TextLocalized;
+        public LocalizationID TextLocalizzed;
         public List<string> Options;
-        public List<LocalisationID> OptionsLocalized;
+        public List<LocalizationID> OptionsLocalizzed;
         public VectorData Position;
         public List<int> InputIDs;
         public List<int> OutputIDs;

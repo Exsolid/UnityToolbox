@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityToolbox.General.Management;
 using UnityToolbox.General.Preferences;
-using UnityToolbox.UI.Localisation;
+using UnityToolbox.UI.Localization;
 
 namespace UnityToolbox.UI.Menus
 {
@@ -13,7 +13,7 @@ namespace UnityToolbox.UI.Menus
     /// </summary>
     public class TooltipManager : Module
     {
-        private List<LocalisationLanguage> _allLanguages;
+        private List<LocalizationLanguage> _allLanguages;
         private string _languagePref;
 
         [SerializeField] private Text _tooltipText;
@@ -36,12 +36,12 @@ namespace UnityToolbox.UI.Menus
 
             _languagePref = ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.LANGUAGE);
 
-            if (!Localizer.Instance.IsInitialized)
+            if (!Localizzer.Instance.IsInitialized)
             {
-                Localizer.Instance.Initialize();
+                Localizzer.Instance.Initialize();
             }
 
-            _allLanguages = Localizer.Instance.LocalisationLanguages.ToList();
+            _allLanguages = Localizzer.Instance.LocalizationLanguages.ToList();
         }
 
         /// <summary>
@@ -89,11 +89,11 @@ namespace UnityToolbox.UI.Menus
         /// Updates the current tooltip. A new <paramref name="text"/> can only be set if the old has been updated to empty by the same <paramref name="callContext"/>.
         /// </summary>
         /// <param name="keyToDisplay">A key to display.)</param>
-        /// <param name="localisationID">The localized text to display.</param>
+        /// <param name="LocalizationID">The Localizzed text to display.</param>
         /// <param name="callContext">The caller which sets and is then allowed to reset the tooltip.</param>
-        public void UpdateTooltip(string keyToDisplay, LocalisationID localisationID, Object callContext)
+        public void UpdateTooltip(string keyToDisplay, LocalizationID LocalizationID, Object callContext)
         {
-            string text = GetLocalizedText(localisationID);
+            string text = GetLocalizzedText(LocalizationID);
             if (_tooltipText != null && text != "")
             {
                 _callContext = callContext;
@@ -127,10 +127,10 @@ namespace UnityToolbox.UI.Menus
             }
         }
 
-        private string GetLocalizedText(LocalisationID localisationID)
+        private string GetLocalizzedText(LocalizationID LocalizationID)
         {
-            KeyValuePair<LocalisationID, Dictionary<LocalisationLanguage, string>> temp = Localizer.Instance.LocalisationData.Where(e => e.Key.Equals(localisationID)).FirstOrDefault();
-            string displayString = temp.Value == null ? "LocalisationID not valid!" : temp.Value[_allLanguages.ElementAt(PlayerPrefs.GetInt(_languagePref))];
+            KeyValuePair<LocalizationID, Dictionary<LocalizationLanguage, string>> temp = Localizzer.Instance.LocalizationData.Where(e => e.Key.Equals(LocalizationID)).FirstOrDefault();
+            string displayString = temp.Value == null ? "LocalizationID not valid!" : temp.Value[_allLanguages.ElementAt(PlayerPrefs.GetInt(_languagePref))];
 
             return displayString;
         }

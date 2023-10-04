@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.Linq;
-using UnityToolbox.UI.Localisation;
+using UnityToolbox.UI.Localization;
 
-namespace UnityToolbox.UI.Localisation.Editor
+namespace UnityToolbox.UI.Localization.Editor
 {
-    public class LocalisationEditIDWindow : EditorWindow
+    public class LocalizationEditIDWindow : EditorWindow
     {
-        private LocalisationID _localisationID;
-        public LocalisationID LocalisationID
+        private LocalizationID _LocalizationID;
+        public LocalizationID LocalizationID
         {
             set
             {
-                _localisationID = value;
-                _newLocalisations = Localizer.Instance.LocalisationData[value].ToDictionary(entry => entry.Key, entry => entry.Value);
+                _LocalizationID = value;
+                _newLocalizations = Localizzer.Instance.LocalizationData[value].ToDictionary(entry => entry.Key, entry => entry.Value);
                 _newIDName = value.Name;
                 int i = 0;
-                foreach (LocalisationScope scope in Localizer.Instance.LocalisationScopes)
+                foreach (LocalizationScope scope in Localizzer.Instance.LocalizationScopes)
                 {
                     if (scope.Equals(value.Scope))
                     {
@@ -30,26 +30,26 @@ namespace UnityToolbox.UI.Localisation.Editor
             }
         }
 
-        private Dictionary<LocalisationLanguage, string> _newLocalisations;
+        private Dictionary<LocalizationLanguage, string> _newLocalizations;
         private string _newIDName;
         private int _newSelectedScope;
 
         private string _status;
 
-        public static void Open(LocalisationID localisationID)
+        public static void Open(LocalizationID LocalizationID)
         {
-            LocalisationEditIDWindow window = (LocalisationEditIDWindow)GetWindow(typeof(LocalisationEditIDWindow));
+            LocalizationEditIDWindow window = (LocalizationEditIDWindow)GetWindow(typeof(LocalizationEditIDWindow));
             window.titleContent = new GUIContent("Edit Language");
             window.ShowUtility();
             window.minSize = new Vector2(600, 120);
-            window.LocalisationID = localisationID;
+            window.LocalizationID = LocalizationID;
         }
 
         private void Awake()
         {
-            Localizer.Instance.LanguageEdited += LanguageEdited;
-            Localizer.Instance.ScopeEdited += ScopeEdited;
-            Localizer.Instance.LocalisationIDEdited += LocalisationIDEdited;
+            Localizzer.Instance.LanguageEdited += LanguageEdited;
+            Localizzer.Instance.ScopeEdited += ScopeEdited;
+            Localizzer.Instance.LocalizationIDEdited += LocalizationIDEdited;
             UpdateStatus("");
         }
 
@@ -61,24 +61,24 @@ namespace UnityToolbox.UI.Localisation.Editor
             DrawLine();
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Add localisation with ID: ");
+            GUILayout.Label("Add Localization with ID: ");
             _newIDName = GUILayout.TextField(_newIDName, GUILayout.Width(200));
-            GUILayout.Label(LocalisationID.DEVIDER.ToString(), GUILayout.Width(10));
-            string[] scopes = Localizer.Instance.LocalisationScopes.Select(x => x.Name).ToArray();
+            GUILayout.Label(LocalizationID.DEVIDER.ToString(), GUILayout.Width(10));
+            string[] scopes = Localizzer.Instance.LocalizationScopes.Select(x => x.Name).ToArray();
             _newSelectedScope = EditorGUILayout.Popup("", _newSelectedScope, scopes);
             GUILayout.EndHorizontal();
 
-            foreach (LocalisationLanguage language in Localizer.Instance.LocalisationLanguages)
+            foreach (LocalizationLanguage language in Localizzer.Instance.LocalizationLanguages)
             {
                 GUILayout.BeginHorizontal();
                 GUILayout.Label("Translate " + language.Name + ":");
-                if (_newLocalisations.ContainsKey(language))
+                if (_newLocalizations.ContainsKey(language))
                 {
-                    _newLocalisations[language] = GUILayout.TextField(_newLocalisations[language], GUILayout.Width(447));
+                    _newLocalizations[language] = GUILayout.TextField(_newLocalizations[language], GUILayout.Width(447));
                 }
                 else
                 {
-                    _newLocalisations.Add(language, GUILayout.TextField("", GUILayout.Width(200)));
+                    _newLocalizations.Add(language, GUILayout.TextField("", GUILayout.Width(200)));
                 }
                 GUILayout.EndHorizontal();
             }
@@ -95,21 +95,21 @@ namespace UnityToolbox.UI.Localisation.Editor
             {
                 try
                 {
-                    LocalisationID newID = new LocalisationID();
+                    LocalizationID newID = new LocalizationID();
                     newID.Name = _newIDName;
-                    newID.Scope = Localizer.Instance.LocalisationScopes.ElementAt(_newSelectedScope);
-                    if (!newID.Equals(_localisationID))
+                    newID.Scope = Localizzer.Instance.LocalizationScopes.ElementAt(_newSelectedScope);
+                    if (!newID.Equals(_LocalizationID))
                     {
-                        Localizer.Instance.EditLocalisationID(_localisationID, newID);
+                        Localizzer.Instance.EditLocalizationID(_LocalizationID, newID);
                     }
 
-                    Localizer.Instance.EditLocalisation(newID, _newLocalisations);
+                    Localizzer.Instance.EditLocalization(newID, _newLocalizations);
 
-                    Localizer.Instance.WriteData();
+                    Localizzer.Instance.WriteData();
                     AssetDatabase.Refresh();
                     Close();
                 }
-                catch (LocalisationException ex)
+                catch (LocalizationException ex)
                 {
                     UpdateStatus(ex.Message);
                 }
@@ -134,26 +134,26 @@ namespace UnityToolbox.UI.Localisation.Editor
             EditorGUILayout.Space();
         }
 
-        private void LanguageEdited(LocalisationLanguage language)
+        private void LanguageEdited(LocalizationLanguage language)
         {
             Close();
         }
 
-        private void ScopeEdited(LocalisationScope scope)
+        private void ScopeEdited(LocalizationScope scope)
         {
             Close();
         }
 
-        private void LocalisationIDEdited(LocalisationID ID)
+        private void LocalizationIDEdited(LocalizationID ID)
         {
             Close();
         }
 
         new public void Close()
         {
-            Localizer.Instance.LanguageEdited -= LanguageEdited;
-            Localizer.Instance.LocalisationIDEdited -= LocalisationIDEdited;
-            Localizer.Instance.ScopeEdited -= ScopeEdited;
+            Localizzer.Instance.LanguageEdited -= LanguageEdited;
+            Localizzer.Instance.LocalizationIDEdited -= LocalizationIDEdited;
+            Localizzer.Instance.ScopeEdited -= ScopeEdited;
             base.Close();
         }
     } 

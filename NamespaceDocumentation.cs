@@ -131,7 +131,7 @@ namespace UnityToolbox.UI.Settings { }
 namespace UnityToolbox.UI.Settings.Controls { }
 
 /// <summary>
-/// All scripts which are used to define the gameplay language are found here. (also see <see cref="UnityToolbox.UI.Localisation"/>.)
+/// All scripts which are used to define the gameplay language are found here. (also see <see cref="UnityToolbox.UI.Localization"/>.)
 /// </summary>
 namespace UnityToolbox.UI.Settings.Language { }
 
@@ -176,15 +176,15 @@ namespace UnityToolbox.UI.Dialog.UI { }
 namespace UnityToolbox.UI.Dialog.Editor { }
 
 /// <summary>
-/// All localisation related UI scripts can be found here.
-/// All localisations are defined via the Localisation Manager Window found under the "UnityToolbox" dropdown.
+/// All Localization related UI scripts can be found here.
+/// All Localizations are defined via the Localization Manager Window found under the "UnityToolbox" dropdown.
 /// </summary>
-namespace UnityToolbox.UI.Localisation { }
+namespace UnityToolbox.UI.Localization { }
 
 /// <summary>
-/// All localisation related UI scripts can be found here.
+/// All Localization related UI scripts can be found here.
 /// </summary>
-namespace UnityToolbox.UI.Localisation.Editor { }
+namespace UnityToolbox.UI.Localization.Editor { }
 
 /// <summary>
 /// This namespace includes all scripts that are used for player controls, such as movement or interactions.

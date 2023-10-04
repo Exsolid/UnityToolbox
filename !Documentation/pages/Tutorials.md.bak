@@ -32,6 +32,6 @@ Currently tutorials for the following features exist (with some having further s
 - @subpage ItemManagement
 - @subpage MenuManagement
 - @subpage LocalizationManagement
-- @subpage AudioManagement
 - @subpage GamestateManagement
+- @subpage AudioManagement
 - @subpage Boids

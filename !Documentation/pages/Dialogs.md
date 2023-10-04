@@ -58,7 +58,7 @@ Multiple next nodes require a dialog option field for each node. These fields de
 
 @subsection DialogLocalizedNodes Localized Nodes
 
-The localized nodes work similar to the default nodes, with the key difference that @ref UnityToolbox.UI.Localisation.LocalisationID "LocalisationIDs" are used to define the text values.
+The localized nodes work similar to the default nodes, with the key difference that @ref UnityToolbox.UI.Localization.LocalizationID "LocalizationIDs" are used to define the text values.
 
 | Localized Node |
 | :---- |

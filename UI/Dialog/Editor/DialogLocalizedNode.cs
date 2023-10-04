@@ -7,15 +7,15 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 using UnityEditor;
-using UnityToolbox.UI.Localisation;
-using UnityToolbox.UI.Localisation.Editor;
+using UnityToolbox.UI.Localization;
+using UnityToolbox.UI.Localization.Editor;
 
 namespace UnityToolbox.UI.Dialog.Editor
 {
     /// <summary>
     /// The node which is used within the dialog graph.
     /// </summary>
-    public class DialogLocalizedNode : Node
+    public class DialogLocalizzedNode : Node
     {
         private string _dialogIndentifier;
         public string DialogIndentifier
@@ -110,7 +110,7 @@ namespace UnityToolbox.UI.Dialog.Editor
         /// Creates a new node based on a <see cref="DialogNodeData"/>.
         /// </summary>
         /// <param name="data"></param>
-        public DialogLocalizedNode(DialogNodeData data)
+        public DialogLocalizzedNode(DialogNodeData data)
         {
             _dialogTitel = data.Title;
             _dialogText = data.Text;
@@ -139,7 +139,7 @@ namespace UnityToolbox.UI.Dialog.Editor
         /// </summary>
         /// <param name="position"></param>
         /// <param name="id"></param>
-        public DialogLocalizedNode(Vector2 position, int id)
+        public DialogLocalizzedNode(Vector2 position, int id)
         {
             _dialogTitel = "Default Titel";
             _dialogText = "Default Text";

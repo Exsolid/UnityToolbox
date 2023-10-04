@@ -72,9 +72,9 @@ namespace UnityToolbox.UI.Dialog.Editor
                 foreach (DialogNodeData node in nodes)
                 {
                     DialogNodeBase dNode;
-                    if (node.IsLocalized)
+                    if (node.IsLocalizzed)
                     {
-                        dNode = new DialogNodeLocalized(node);
+                        dNode = new DialogNodeLocalizzed(node);
                     }
                     else
                     {
@@ -124,14 +124,14 @@ namespace UnityToolbox.UI.Dialog.Editor
                         AvatarReference = AssetDatabase.GetAssetPath(dNode.Avatar)
                     };
 
-                    if (dNode.GetType() == typeof(DialogNodeLocalized))
+                    if (dNode.GetType() == typeof(DialogNodeLocalizzed))
                     {
-                        DialogNodeLocalized dNodeLocalized = (DialogNodeLocalized) node;
+                        DialogNodeLocalizzed dNodeLocalizzed = (DialogNodeLocalizzed) node;
 
-                        data.IsLocalized = true;
-                        data.OptionsLocalized = dNodeLocalized.Options;
-                        data.TitleLocalized = dNodeLocalized.DialogTitle;
-                        data.TextLocalized = dNodeLocalized.DialogText;
+                        data.IsLocalizzed = true;
+                        data.OptionsLocalizzed = dNodeLocalizzed.Options;
+                        data.TitleLocalizzed = dNodeLocalizzed.DialogTitle;
+                        data.TextLocalizzed = dNodeLocalizzed.DialogText;
                     }
                     else if (dNode.GetType() == typeof(DialogNode))
                     {

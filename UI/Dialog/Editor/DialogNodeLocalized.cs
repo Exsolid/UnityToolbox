@@ -7,59 +7,59 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 using UnityEditor;
-using UnityToolbox.UI.Localisation;
-using UnityToolbox.UI.Localisation.Editor;
+using UnityToolbox.UI.Localization;
+using UnityToolbox.UI.Localization.Editor;
 
 namespace UnityToolbox.UI.Dialog.Editor
 {
     /// <summary>
     /// The node which is used within the dialog graph.
     /// </summary>
-    public class DialogNodeLocalized : DialogNodeBase
+    public class DialogNodeLocalizzed : DialogNodeBase
     {
-        private LocalisationID _dialogTitle;
-        public LocalisationID DialogTitle
+        private LocalizationID _dialogTitle;
+        public LocalizationID DialogTitle
         {
             get { return _dialogTitle; }
             set { _dialogTitle = value; }
         }
 
-        private List<LocalisationID> _options;
-        public List<LocalisationID> Options
+        private List<LocalizationID> _options;
+        public List<LocalizationID> Options
         {
             get { return _options; }
             set { _options = value; }
         }
 
-        private LocalisationID _dialogText;
-        public LocalisationID DialogText
+        private LocalizationID _dialogText;
+        public LocalizationID DialogText
         {
             get { return _dialogText; }
             set { _dialogText = value; }
         }
 
-        private LocalisationDrawer _dialogTitelField;
-        private LocalisationDrawer _dialogTextField;
-        private List<LocalisationDrawer> _optionsFields;
+        private LocalizationDrawer _dialogTitelField;
+        private LocalizationDrawer _dialogTextField;
+        private List<LocalizationDrawer> _optionsFields;
 
-        public DialogNodeLocalized(Vector2 position, int id) : base(position, id)
+        public DialogNodeLocalizzed(Vector2 position, int id) : base(position, id)
         {
-            _options = new List<LocalisationID>();
-            _optionsFields = new List<LocalisationDrawer>();
+            _options = new List<LocalizationID>();
+            _optionsFields = new List<LocalizationDrawer>();
         }
 
-        public DialogNodeLocalized(DialogNodeData data) : base(data)
+        public DialogNodeLocalizzed(DialogNodeData data) : base(data)
         {
-            _dialogTitle = data.TitleLocalized;
-            _dialogText = data.TextLocalized;
+            _dialogTitle = data.TitleLocalizzed;
+            _dialogText = data.TextLocalizzed;
 
-            _options = new List<LocalisationID>();
-            for (int i = data.OptionsLocalized.Count - 1; i >= 0; i--)
+            _options = new List<LocalizationID>();
+            for (int i = data.OptionsLocalizzed.Count - 1; i >= 0; i--)
             {
-                _options.Add(data.OptionsLocalized[i]);
+                _options.Add(data.OptionsLocalizzed[i]);
             }
 
-            _optionsFields = new List<LocalisationDrawer>();
+            _optionsFields = new List<LocalizationDrawer>();
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace UnityToolbox.UI.Dialog.Editor
         /// </summary>
         public override void Draw()
         {
-            _dialogTitelField = new LocalisationDrawer();
+            _dialogTitelField = new LocalizationDrawer();
             VisualElement field = _dialogTitelField.CreateVisualElement(_dialogTitle);
 
             field.StretchToParentWidth();
@@ -127,7 +127,7 @@ namespace UnityToolbox.UI.Dialog.Editor
             foldout.Insert(0, _avatarObjectField);
             container.Add(foldout);
 
-            _dialogTextField = new LocalisationDrawer();
+            _dialogTextField = new LocalizationDrawer();
             field = _dialogTextField.CreateVisualElement(_dialogText);
 
             foldout = new Foldout()
@@ -164,7 +164,7 @@ namespace UnityToolbox.UI.Dialog.Editor
 
         private void AddOption()
         {
-            _options.Insert(0, new LocalisationID());
+            _options.Insert(0, new LocalizationID());
 
             UpdateOptionFoldout();
         }
@@ -199,7 +199,7 @@ namespace UnityToolbox.UI.Dialog.Editor
             if (_optionsFields.Count <= _options.Count)
             {
                 int i = _options.Count - _optionsFields.Count;
-                foreach (LocalisationDrawer field in _optionsFields)
+                foreach (LocalizationDrawer field in _optionsFields)
                 {
                     _options[i] = field.DrawerId;
                     i++;
@@ -218,7 +218,7 @@ namespace UnityToolbox.UI.Dialog.Editor
             _optionsFields.Clear();
             int optionNum = _options.Count - 1;
 
-            foreach (LocalisationID option in _options.ToList())
+            foreach (LocalizationID option in _options.ToList())
             {
                 VisualElement container = new VisualElement();
                 container.style.flexDirection = FlexDirection.Row;
@@ -228,7 +228,7 @@ namespace UnityToolbox.UI.Dialog.Editor
 
                 container.Add(optionLabel);
 
-                LocalisationDrawer drawer = new LocalisationDrawer();
+                LocalizationDrawer drawer = new LocalizationDrawer();
                 VisualElement field = drawer.CreateVisualElement(option);
 
                 container.Add(field);
@@ -260,7 +260,7 @@ namespace UnityToolbox.UI.Dialog.Editor
             _avatar = (Texture2D)_avatarObjectField.value;
 
             int i = _options.Count-1;
-            foreach (LocalisationDrawer drawer in _optionsFields)
+            foreach (LocalizationDrawer drawer in _optionsFields)
             {
                 _options[i] = drawer.DrawerId;
                 i--;

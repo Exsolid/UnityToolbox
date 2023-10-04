@@ -1,20 +1,20 @@
 using System;
 
-namespace UnityToolbox.UI.Localisation
+namespace UnityToolbox.UI.Localization
 {
     /// <summary>
-    /// The scope which is used to indentify and serialize localisation data.
+    /// The scope which is used to indentify and serialize Localization data.
     /// </summary>
     [Serializable]
-    public struct LocalisationScope
+    public struct LocalizationScope
     {
         public string Name;
 
         public override bool Equals(object obj)
         {
-            if (obj.GetType().Equals(typeof(LocalisationScope)))
+            if (obj.GetType().Equals(typeof(LocalizationScope)))
             {
-                LocalisationScope other = (LocalisationScope)obj;
+                LocalizationScope other = (LocalizationScope)obj;
                 return other.Name == Name;
             }
             else

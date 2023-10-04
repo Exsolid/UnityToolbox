@@ -87,4 +87,4 @@ The other script is the @ref UnityToolbox.UI.Dialog.UI.NextDialogOptionButton "N
 This field refers to the "Is Option: x" value within the node and is required to display the correct option text and next node once clicked. It will also close the dialog menu if no next node is found.\n
 
 
-For further details of the audio management, please refer to the @ref AudioManagement page.\n
+For further details of the audio management, please refer to the @ref AudioManagement page.

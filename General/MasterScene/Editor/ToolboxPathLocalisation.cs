@@ -10,9 +10,9 @@ namespace UnityToolbox.General.MasterScene.Editor
     /// Defines the current path of the UnityToolbox within the project within the <see cref="ProjectPrefs"/>.
     /// </summary>
     [InitializeOnLoad]
-    public class ToolboxPathLocalizer
+    public class ToolboxPathLocalizzer
     {
-        static ToolboxPathLocalizer()
+        static ToolboxPathLocalizzer()
         {
             EditorApplication.delayCall += Init;
         }

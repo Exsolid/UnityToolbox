@@ -33,13 +33,13 @@ namespace UnityToolbox.UI.Dialog.Editor
             this.graphViewChanged += OnGraphChange;
         }
 
-        private DialogNodeBase CreateLocalizedNode(Vector2 position)
+        private DialogNodeBase CreateLocalizzedNode(Vector2 position)
         {
             do
             {
             } while (_ids.Add(UnityEngine.Random.Range(0, Int32.MaxValue)));
 
-            DialogNodeBase dialogBaseNode = new DialogNodeLocalized(position, _ids.ElementAt(_ids.Count - 1));
+            DialogNodeBase dialogBaseNode = new DialogNodeLocalizzed(position, _ids.ElementAt(_ids.Count - 1));
             dialogBaseNode.Draw();
 
             return dialogBaseNode;
@@ -86,7 +86,7 @@ namespace UnityToolbox.UI.Dialog.Editor
         {
             this.AddManipulator(new ContentDragger());
             this.AddManipulator(CreateNodeManipulator());
-            this.AddManipulator(CreateLocalizedNodeManipulator());
+            this.AddManipulator(CreateLocalizzedNodeManipulator());
             this.AddManipulator(new SelectionDragger());
             this.AddManipulator(new RectangleSelector());
             SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale);
@@ -99,10 +99,10 @@ namespace UnityToolbox.UI.Dialog.Editor
             return contextualMenuManipulator;
         }
 
-        private IManipulator CreateLocalizedNodeManipulator()
+        private IManipulator CreateLocalizzedNodeManipulator()
         {
             ContextualMenuManipulator contextualMenuManipulator = new ContextualMenuManipulator(
-                e => e.menu.AppendAction("Add Localized Node", action => AddElement(CreateLocalizedNode((action.eventInfo.mousePosition - new Vector2(viewTransform.position.x, viewTransform.position.y)) / scale))));
+                e => e.menu.AppendAction("Add Localizzed Node", action => AddElement(CreateLocalizzedNode((action.eventInfo.mousePosition - new Vector2(viewTransform.position.x, viewTransform.position.y)) / scale))));
             return contextualMenuManipulator;
         }
 

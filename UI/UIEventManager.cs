@@ -1,7 +1,7 @@
 using System;
 using UnityToolbox.General.Management;
 using UnityToolbox.UI.Dialog;
-using UnityToolbox.UI.Localisation;
+using UnityToolbox.UI.Localization;
 
 namespace UnityToolbox.UI
 {
@@ -30,7 +30,7 @@ namespace UnityToolbox.UI
         /// <summary>
         /// Called once the current language is updated.
         /// </summary>
-        public event Action<LocalisationLanguage> OnLanguageUpdated;
+        public event Action<LocalizationLanguage> OnLanguageUpdated;
 
         /// <summary>
         /// Called once the game is paused by a menu. The int defines the menu type it is called from.
@@ -83,7 +83,7 @@ namespace UnityToolbox.UI
         /// Call to indicate that the language was updated.
         /// </summary>
         /// <param name="language">The new language.</param>
-        public void LanguageUpdated(LocalisationLanguage language)
+        public void LanguageUpdated(LocalizationLanguage language)
         {
             OnLanguageUpdated?.Invoke(language);
         }

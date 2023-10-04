@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using UnityToolbox.General.Attributes;
 using UnityToolbox.General.Management;
 using UnityToolbox.General.Preferences;
-using UnityToolbox.UI.Localisation;
+using UnityToolbox.UI.Localization;
 using UnityToolbox.UI.Menus;
 
 namespace UnityToolbox.UI.Dialog.UI
@@ -18,7 +18,7 @@ namespace UnityToolbox.UI.Dialog.UI
     /// </summary>
     public class DisplayDialog : MonoBehaviour
     {
-        private List<LocalisationLanguage> _allLanguages;
+        private List<LocalizationLanguage> _allLanguages;
         private string _languagePref;
 
         [SerializeField] private Text _title;
@@ -40,12 +40,12 @@ namespace UnityToolbox.UI.Dialog.UI
             ModuleManager.GetModule<UIEventManager>().OnDialogNodeChanged += UpdateDialog;
             _languagePref = ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.LANGUAGE);
 
-            if (!Localizer.Instance.IsInitialized)
+            if (!Localizzer.Instance.IsInitialized)
             {
-                Localizer.Instance.Initialize();
+                Localizzer.Instance.Initialize();
             }
 
-            _allLanguages = Localizer.Instance.LocalisationLanguages.ToList();
+            _allLanguages = Localizzer.Instance.LocalizationLanguages.ToList();
         }
 
         /// <summary>
@@ -96,8 +96,8 @@ namespace UnityToolbox.UI.Dialog.UI
 
             if (currentNode != null)
             {
-                int optionCount = currentNode.IsLocalized
-                    ? (currentNode.OptionsLocalized == null ? 0 : currentNode.OptionsLocalized.Count)
+                int optionCount = currentNode.IsLocalizzed
+                    ? (currentNode.OptionsLocalizzed == null ? 0 : currentNode.OptionsLocalizzed.Count)
                     : (currentNode.Options == null ? 0 : currentNode.Options.Count);
 
                 if (ModuleManager.GetModule<MenuManager>().CurrentActiveMenuType.MenuTypeID != _menuType)
@@ -113,8 +113,8 @@ namespace UnityToolbox.UI.Dialog.UI
 
                 if (_title != null)
                 {
-                    _title.text = currentNode.IsLocalized
-                        ? GetLocalizedText(currentNode.TitleLocalized)
+                    _title.text = currentNode.IsLocalizzed
+                        ? GetLocalizzedText(currentNode.TitleLocalizzed)
                         : currentNode.Title;
                 }
 
@@ -125,8 +125,8 @@ namespace UnityToolbox.UI.Dialog.UI
 
                 if (_description != null)
                 {
-                    _description.text = currentNode.IsLocalized
-                        ? GetLocalizedText(currentNode.TextLocalized)
+                    _description.text = currentNode.IsLocalizzed
+                        ? GetLocalizzedText(currentNode.TextLocalizzed)
                         : currentNode.Text;
                 }
 
@@ -144,8 +144,8 @@ namespace UnityToolbox.UI.Dialog.UI
                 {
                     if (optionCount > i)
                     {
-                        _options[i].text = currentNode.IsLocalized
-                            ? GetLocalizedText(currentNode.OptionsLocalized[i])
+                        _options[i].text = currentNode.IsLocalizzed
+                            ? GetLocalizzedText(currentNode.OptionsLocalizzed[i])
                             : currentNode.Options[i];
 
                         if (_optionBackgrounds.Count > i)
@@ -169,10 +169,10 @@ namespace UnityToolbox.UI.Dialog.UI
             }
         }
 
-        private string GetLocalizedText(LocalisationID localisationID)
+        private string GetLocalizzedText(LocalizationID LocalizationID)
         {
-            KeyValuePair<LocalisationID, Dictionary<LocalisationLanguage, string>> temp = Localizer.Instance.LocalisationData.Where(e => e.Key.Equals(localisationID)).FirstOrDefault();
-            string displayString = temp.Value == null ? "LocalisationID not valid!" : temp.Value[_allLanguages.ElementAt(PlayerPrefs.GetInt(_languagePref))];
+            KeyValuePair<LocalizationID, Dictionary<LocalizationLanguage, string>> temp = Localizzer.Instance.LocalizationData.Where(e => e.Key.Equals(LocalizationID)).FirstOrDefault();
+            string displayString = temp.Value == null ? "LocalizationID not valid!" : temp.Value[_allLanguages.ElementAt(PlayerPrefs.GetInt(_languagePref))];
 
             return displayString;
         }

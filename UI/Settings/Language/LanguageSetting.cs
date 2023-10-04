@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityToolbox.General.Management;
 using UnityToolbox.General.Preferences;
-using UnityToolbox.UI.Localisation;
+using UnityToolbox.UI.Localization;
 
 namespace UnityToolbox.UI.Settings.Language
 {
@@ -15,7 +15,7 @@ namespace UnityToolbox.UI.Settings.Language
     /// </summary>
     public class LanguageSetting : MonoBehaviour
     {
-        private HashSet<LocalisationLanguage> _localisationLanguages;
+        private HashSet<LocalizationLanguage> _LocalizationLanguages;
         private int _currentLanguage;
         private Text _displayText;
 
@@ -27,18 +27,18 @@ namespace UnityToolbox.UI.Settings.Language
             _displayText = GetComponent<Text>();
             _currentLanguage = PlayerPrefs.GetInt(_languagePref);
 
-            if (!Localizer.Instance.IsInitialized)
+            if (!Localizzer.Instance.IsInitialized)
             {
-                Localizer.Instance.Initialize();
+                Localizzer.Instance.Initialize();
             }
-            _localisationLanguages = Localizer.Instance.LocalisationLanguages;
+            _LocalizationLanguages = Localizzer.Instance.LocalizationLanguages;
 
-            if (_currentLanguage >= _localisationLanguages.Count)
+            if (_currentLanguage >= _LocalizationLanguages.Count)
             {
                 _currentLanguage = 0;
             }
 
-            _displayText.text = _localisationLanguages.ElementAt(_currentLanguage).Name;
+            _displayText.text = _LocalizationLanguages.ElementAt(_currentLanguage).Name;
             ModuleManager.GetModule<UIEventManager>().OnLanguageNext += NextLanguage;
             ModuleManager.GetModule<UIEventManager>().OnLanguagePrevious += PreviousLanguage;
         }
@@ -54,7 +54,7 @@ namespace UnityToolbox.UI.Settings.Language
 
         private void NextLanguage()
         {
-            if (_currentLanguage == _localisationLanguages.Count - 1)
+            if (_currentLanguage == _LocalizationLanguages.Count - 1)
             {
                 _currentLanguage = 0;
             }
@@ -63,8 +63,8 @@ namespace UnityToolbox.UI.Settings.Language
                 _currentLanguage++;
             }
 
-            _displayText.text = _localisationLanguages.ElementAt(_currentLanguage).Name;
-            ModuleManager.GetModule<UIEventManager>().LanguageUpdated(_localisationLanguages.ElementAt(_currentLanguage));
+            _displayText.text = _LocalizationLanguages.ElementAt(_currentLanguage).Name;
+            ModuleManager.GetModule<UIEventManager>().LanguageUpdated(_LocalizationLanguages.ElementAt(_currentLanguage));
             PlayerPrefs.SetInt(_languagePref, _currentLanguage);
         }
 
@@ -72,15 +72,15 @@ namespace UnityToolbox.UI.Settings.Language
         {
             if (_currentLanguage == 0)
             {
-                _currentLanguage = _localisationLanguages.Count - 1;
+                _currentLanguage = _LocalizationLanguages.Count - 1;
             }
             else
             {
                 _currentLanguage--;
             }
 
-            _displayText.text = _localisationLanguages.ElementAt(_currentLanguage).Name;
-            ModuleManager.GetModule<UIEventManager>().LanguageUpdated(_localisationLanguages.ElementAt(_currentLanguage));
+            _displayText.text = _LocalizationLanguages.ElementAt(_currentLanguage).Name;
+            ModuleManager.GetModule<UIEventManager>().LanguageUpdated(_LocalizationLanguages.ElementAt(_currentLanguage));
             PlayerPrefs.SetInt(_languagePref, _currentLanguage);
         }
     } 

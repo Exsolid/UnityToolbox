@@ -1,12 +1,12 @@
 using System;
 
-namespace UnityToolbox.UI.Localisation
+namespace UnityToolbox.UI.Localization
 {
     /// <summary>
-    /// The language which is used to indentify and serialize localisation data.
+    /// The language which is used to indentify and serialize Localization data.
     /// </summary>
     [Serializable]
-    public struct LocalisationLanguage
+    public struct LocalizationLanguage
     {
         public string ShortName;
         public string Name;
@@ -16,9 +16,9 @@ namespace UnityToolbox.UI.Localisation
 
         public override bool Equals(object obj)
         {
-            if (obj.GetType().Equals(typeof(LocalisationLanguage)))
+            if (obj.GetType().Equals(typeof(LocalizationLanguage)))
             {
-                LocalisationLanguage other = (LocalisationLanguage)obj;
+                LocalizationLanguage other = (LocalizationLanguage)obj;
                 return other.ShortName + DEVIDER + other.Name == ShortName + DEVIDER + Name;
             }
             else

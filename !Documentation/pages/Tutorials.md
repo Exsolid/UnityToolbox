@@ -4,7 +4,7 @@
 
 Currently the toolbox includes:
 - UI Management (Hierarchies, useful UI scripts)
-- Localisation system
+- Localization system
 - Dialog system
 - Savegame management (Checkpoint data and saving of objects at runtime)
 - Gamestate management

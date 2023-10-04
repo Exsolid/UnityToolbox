@@ -6,20 +6,20 @@ using UnityEngine;
 using System.Reflection;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
-using UnityToolbox.UI.Localisation;
+using UnityToolbox.UI.Localization;
 
-namespace UnityToolbox.UI.Localisation.Editor
+namespace UnityToolbox.UI.Localization.Editor
 {
-    [CustomPropertyDrawer(typeof(LocalisationID))]
-    public class LocalisationDrawer : PropertyDrawer
+    [CustomPropertyDrawer(typeof(LocalizationID))]
+    public class LocalizationDrawer : PropertyDrawer
     {
-        private LocalisationSelectionWindow _window;
+        private LocalizationSelectionWindow _window;
         private SerializedProperty _property;
 
         private Label _locaLabel;
-        private LocalisationID _drawerId;
+        private LocalizationID _drawerId;
 
-        public LocalisationID DrawerId
+        public LocalizationID DrawerId
         {
             get { return _drawerId; }
         }
@@ -38,9 +38,9 @@ namespace UnityToolbox.UI.Localisation.Editor
             position.width -= 20;
             position.height = 18;
 
-            SerializedProperty nameToEdit = _property.FindPropertyRelative(nameof(LocalisationID.Name));
-            SerializedProperty scopeToEdit = _property.FindPropertyRelative(nameof(LocalisationID.Scope));
-            EditorGUI.LabelField(position, scopeToEdit.FindPropertyRelative(nameof(LocalisationScope.Name)).stringValue + LocalisationID.DEVIDER + nameToEdit.stringValue);
+            SerializedProperty nameToEdit = _property.FindPropertyRelative(nameof(LocalizationID.Name));
+            SerializedProperty scopeToEdit = _property.FindPropertyRelative(nameof(LocalizationID.Scope));
+            EditorGUI.LabelField(position, scopeToEdit.FindPropertyRelative(nameof(LocalizationScope.Name)).stringValue + LocalizationID.DEVIDER + nameToEdit.stringValue);
 
             position.x += position.width + 2;
             position.width = 18;
@@ -48,14 +48,14 @@ namespace UnityToolbox.UI.Localisation.Editor
 
             if (GUI.Button(position, ">"))
             {
-                _window = LocalisationSelectionWindow.Open();
+                _window = LocalizationSelectionWindow.Open();
                 _window.OnIDSelected += IDSelectedInspector;
             }
 
             EditorGUI.EndProperty();
         }
 
-        public void IDSelectedInspector(LocalisationID ID)
+        public void IDSelectedInspector(LocalizationID ID)
         {
             if (_window != null)
             {
@@ -74,7 +74,7 @@ namespace UnityToolbox.UI.Localisation.Editor
             }
         }
 
-        public void IDSelectedUIElement(LocalisationID ID)
+        public void IDSelectedUIElement(LocalizationID ID)
         {
             if (_window != null)
             {
@@ -85,7 +85,7 @@ namespace UnityToolbox.UI.Localisation.Editor
             }
         }
 
-        public VisualElement CreateVisualElement(LocalisationID id)
+        public VisualElement CreateVisualElement(LocalizationID id)
         {
             _drawerId = id;
 
@@ -93,11 +93,11 @@ namespace UnityToolbox.UI.Localisation.Editor
             container.style.flexDirection = FlexDirection.Row;
 
             string nameToEdit = _drawerId.Name;
-            LocalisationScope scopeToEdit = _drawerId.Scope;
+            LocalizationScope scopeToEdit = _drawerId.Scope;
 
             _locaLabel = new Label()
             {
-                text = scopeToEdit.Name + LocalisationID.DEVIDER + nameToEdit
+                text = scopeToEdit.Name + LocalizationID.DEVIDER + nameToEdit
             };
             _locaLabel.style.alignSelf = Align.FlexStart;
 
@@ -113,7 +113,7 @@ namespace UnityToolbox.UI.Localisation.Editor
 
             button.clicked += () =>
             {
-                _window = LocalisationSelectionWindow.Open();
+                _window = LocalizationSelectionWindow.Open();
                 _window.OnIDSelected += IDSelectedUIElement;
             };
 

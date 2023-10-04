@@ -6,16 +6,16 @@ using UnityToolbox.General.Attributes;
 using UnityToolbox.General.Management;
 using UnityToolbox.General.Preferences;
 
-namespace UnityToolbox.UI.Localisation
+namespace UnityToolbox.UI.Localization
 {
     /// <summary>
-    /// This script is placed on a <see cref="Text"/> component and swaps out the localisation in editor and runtime.
+    /// This script is placed on a <see cref="Text"/> component and swaps out the Localization in editor and runtime.
     /// </summary>
-    public class LocalizedText : MonoBehaviour
+    public class LocalizzedText : MonoBehaviour
     {
-        [SerializeField] private LocalisationID _localisationID;
+        [SerializeField] private LocalizationID _LocalizationID;
         [SerializeField][ReadOnly] private string _displayedString;
-        private List<LocalisationLanguage> _allLanguages;
+        private List<LocalizationLanguage> _allLanguages;
         private List<string> _allLanguagesString;
         [SerializeField][DropDown(nameof(_allLanguagesString))] private int _selectedLanguage;
 
@@ -25,12 +25,12 @@ namespace UnityToolbox.UI.Localisation
 
         private void Start()
         {
-            if (!Localizer.Instance.IsInitialized)
+            if (!Localizzer.Instance.IsInitialized)
             {
-                Localizer.Instance.Initialize();
+                Localizzer.Instance.Initialize();
             }
 
-            _allLanguages = Localizer.Instance.LocalisationLanguages.ToList();
+            _allLanguages = Localizzer.Instance.LocalizationLanguages.ToList();
             _languagePref = ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.LANGUAGE);
             int currentIngameLanguage = PlayerPrefs.GetInt(_languagePref);
 
@@ -53,17 +53,17 @@ namespace UnityToolbox.UI.Localisation
 
         private void UpdateText(int atIndex)
         {
-            KeyValuePair<LocalisationID, Dictionary<LocalisationLanguage, string>> temp = Localizer.Instance.LocalisationData.Where(e => e.Key.Equals(_localisationID)).FirstOrDefault();
-            _displayedString = temp.Value == null ? "LocalisationID not valid!" : temp.Value[_allLanguages.ElementAt(atIndex)];
+            KeyValuePair<LocalizationID, Dictionary<LocalizationLanguage, string>> temp = Localizzer.Instance.LocalizationData.Where(e => e.Key.Equals(_LocalizationID)).FirstOrDefault();
+            _displayedString = temp.Value == null ? "LocalizationID not valid!" : temp.Value[_allLanguages.ElementAt(atIndex)];
 
             _textToDisplay = GetComponent<Text>();
             _textToDisplay.text = _displayedString;
         }
 
-        private void UpdateText(LocalisationLanguage language)
+        private void UpdateText(LocalizationLanguage language)
         {
-            KeyValuePair<LocalisationID, Dictionary<LocalisationLanguage, string>> temp = Localizer.Instance.LocalisationData.Where(e => e.Key.Equals(_localisationID)).FirstOrDefault();
-            _displayedString = temp.Value == null ? "LocalisationID not valid!" : temp.Value[language];
+            KeyValuePair<LocalizationID, Dictionary<LocalizationLanguage, string>> temp = Localizzer.Instance.LocalizationData.Where(e => e.Key.Equals(_LocalizationID)).FirstOrDefault();
+            _displayedString = temp.Value == null ? "LocalizationID not valid!" : temp.Value[language];
 
             _textToDisplay = GetComponent<Text>();
             _textToDisplay.text = _displayedString;
@@ -71,14 +71,14 @@ namespace UnityToolbox.UI.Localisation
 
         public void OnValidate()
         {
-            if (!Localizer.Instance.IsInitialized)
+            if (!Localizzer.Instance.IsInitialized)
             {
-                Localizer.Instance.Initialize();
+                Localizzer.Instance.Initialize();
             }
-            if (_allLanguages == null || Localizer.Instance.LocalisationLanguages.Count != _allLanguages.Count)
+            if (_allLanguages == null || Localizzer.Instance.LocalizationLanguages.Count != _allLanguages.Count)
             {
-                _allLanguages = Localizer.Instance.LocalisationLanguages.ToList();
-                _allLanguagesString = Localizer.Instance.LocalisationLanguages.Select(x => x.Name).ToList();
+                _allLanguages = Localizzer.Instance.LocalizationLanguages.ToList();
+                _allLanguagesString = Localizzer.Instance.LocalizationLanguages.Select(x => x.Name).ToList();
             }
 
             if (_selectedLanguage >= _allLanguages.Count)
