@@ -8,7 +8,7 @@ var searchData=
   ['ontriggerdata_5',['OnTriggerData',['../class_unity_toolbox_1_1_gameplay_features_1_1_achievements_1_1_achievement_data.html#a3e20225d9aaf5dff71fa9977a9b53eb0',1,'UnityToolbox::GameplayFeatures::Achievements::AchievementData']]],
   ['ontriggertype_6',['OnTriggerType',['../class_unity_toolbox_1_1_gameplay_features_1_1_achievements_1_1_achievement_data.html#af1b00322519bef897f93ce04d761cbd2',1,'UnityToolbox::GameplayFeatures::Achievements::AchievementData']]],
   ['options_7',['Options',['../class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_dialog_node_data.html#aca760b31648a23d31c6c38e839e8eed8',1,'UnityToolbox::UI::Dialog::DialogNodeData']]],
-  ['optionslocalized_8',['OptionsLocalized',['../class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_dialog_node_data.html#a4000cad521fe479421d79ce42ec029c5',1,'UnityToolbox::UI::Dialog::DialogNodeData']]],
+  ['optionslocalizzed_8',['OptionsLocalizzed',['../class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_dialog_node_data.html#ac9392294ca5253b49bea4133df961fdb',1,'UnityToolbox::UI::Dialog::DialogNodeData']]],
   ['outputids_9',['OutputIDs',['../class_unity_toolbox_1_1_gameplay_features_1_1_gamestates_1_1_gamestate_node_data.html#a89a78786ff23a59419af2f45662778eb',1,'UnityToolbox.GameplayFeatures.Gamestates.GamestateNodeData.OutputIDs'],['../class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_dialog_node_data.html#aaf938dbfdba7ce6e22e05aa7679907a2',1,'UnityToolbox.UI.Dialog.DialogNodeData.OutputIDs']]],
   ['overlaytype_10',['OverlayType',['../class_unity_toolbox_1_1_u_i_1_1_menus_1_1_menu_manager.html#a3d98dae8df5bd695c851228f87968418',1,'UnityToolbox::UI::Menus::MenuManager']]]
 ];

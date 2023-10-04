@@ -124,7 +124,7 @@ var annotated_dup =
         [ "MasterScene", "namespace_unity_toolbox_1_1_general_1_1_master_scene.html", [
           [ "Editor", "namespace_unity_toolbox_1_1_general_1_1_master_scene_1_1_editor.html", [
             [ "MasterSceneLoaderForEditor", "class_unity_toolbox_1_1_general_1_1_master_scene_1_1_editor_1_1_master_scene_loader_for_editor.html", null ],
-            [ "ToolboxPathLocalizer", "class_unity_toolbox_1_1_general_1_1_master_scene_1_1_editor_1_1_toolbox_path_localizer.html", null ]
+            [ "ToolboxPathLocalizzer", "class_unity_toolbox_1_1_general_1_1_master_scene_1_1_editor_1_1_toolbox_path_localizzer.html", null ]
           ] ],
           [ "LoadFirstScene", "class_unity_toolbox_1_1_general_1_1_master_scene_1_1_load_first_scene.html", null ],
           [ "LoadOriginalSceneForEditor", "class_unity_toolbox_1_1_general_1_1_master_scene_1_1_load_original_scene_for_editor.html", null ]
@@ -172,10 +172,10 @@ var annotated_dup =
             [ "DialogGraphPathSelectionWindow", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_editor_1_1_dialog_graph_path_selection_window.html", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_editor_1_1_dialog_graph_path_selection_window" ],
             [ "DialogGraphView", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_editor_1_1_dialog_graph_view.html", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_editor_1_1_dialog_graph_view" ],
             [ "DialogGraphWindow", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_editor_1_1_dialog_graph_window.html", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_editor_1_1_dialog_graph_window" ],
-            [ "DialogLocalizedNode", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_editor_1_1_dialog_localized_node.html", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_editor_1_1_dialog_localized_node" ],
+            [ "DialogLocalizzedNode", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_editor_1_1_dialog_localizzed_node.html", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_editor_1_1_dialog_localizzed_node" ],
             [ "DialogNode", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_editor_1_1_dialog_node.html", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_editor_1_1_dialog_node" ],
             [ "DialogNodeBase", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_editor_1_1_dialog_node_base.html", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_editor_1_1_dialog_node_base" ],
-            [ "DialogNodeLocalized", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_editor_1_1_dialog_node_localized.html", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_editor_1_1_dialog_node_localized" ]
+            [ "DialogNodeLocalizzed", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_editor_1_1_dialog_node_localizzed.html", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_editor_1_1_dialog_node_localizzed" ]
           ] ],
           [ "UI", "namespace_unity_toolbox_1_1_u_i_1_1_dialog_1_1_u_i.html", [
             [ "DisplayDialog", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_u_i_1_1_display_dialog.html", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_u_i_1_1_display_dialog" ],
@@ -186,21 +186,21 @@ var annotated_dup =
           [ "DialogManager", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_dialog_manager.html", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_dialog_manager" ],
           [ "DialogNodeData", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_dialog_node_data.html", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_dialog_node_data" ]
         ] ],
-        [ "Localisation", "namespace_unity_toolbox_1_1_u_i_1_1_localisation.html", [
-          [ "Editor", "namespace_unity_toolbox_1_1_u_i_1_1_localisation_1_1_editor.html", [
-            [ "LocalisationDrawer", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_editor_1_1_localisation_drawer.html", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_editor_1_1_localisation_drawer" ],
-            [ "LocalisationEditIDWindow", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_editor_1_1_localisation_edit_i_d_window.html", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_editor_1_1_localisation_edit_i_d_window" ],
-            [ "LocalisationEditLanguageWindow", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_editor_1_1_localisation_edit_language_window.html", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_editor_1_1_localisation_edit_language_window" ],
-            [ "LocalisationEditScopeWindow", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_editor_1_1_localisation_edit_scope_window.html", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_editor_1_1_localisation_edit_scope_window" ],
-            [ "LocalisationManagerWindow", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_editor_1_1_localisation_manager_window.html", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_editor_1_1_localisation_manager_window" ],
-            [ "LocalisationSelectionWindow", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_editor_1_1_localisation_selection_window.html", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_editor_1_1_localisation_selection_window" ]
+        [ "Localization", "namespace_unity_toolbox_1_1_u_i_1_1_localization.html", [
+          [ "Editor", "namespace_unity_toolbox_1_1_u_i_1_1_localization_1_1_editor.html", [
+            [ "LocalizationDrawer", "class_unity_toolbox_1_1_u_i_1_1_localization_1_1_editor_1_1_localization_drawer.html", "class_unity_toolbox_1_1_u_i_1_1_localization_1_1_editor_1_1_localization_drawer" ],
+            [ "LocalizationEditIDWindow", "class_unity_toolbox_1_1_u_i_1_1_localization_1_1_editor_1_1_localization_edit_i_d_window.html", "class_unity_toolbox_1_1_u_i_1_1_localization_1_1_editor_1_1_localization_edit_i_d_window" ],
+            [ "LocalizationEditLanguageWindow", "class_unity_toolbox_1_1_u_i_1_1_localization_1_1_editor_1_1_localization_edit_language_window.html", "class_unity_toolbox_1_1_u_i_1_1_localization_1_1_editor_1_1_localization_edit_language_window" ],
+            [ "LocalizationEditScopeWindow", "class_unity_toolbox_1_1_u_i_1_1_localization_1_1_editor_1_1_localization_edit_scope_window.html", "class_unity_toolbox_1_1_u_i_1_1_localization_1_1_editor_1_1_localization_edit_scope_window" ],
+            [ "LocalizationManagerWindow", "class_unity_toolbox_1_1_u_i_1_1_localization_1_1_editor_1_1_localization_manager_window.html", "class_unity_toolbox_1_1_u_i_1_1_localization_1_1_editor_1_1_localization_manager_window" ],
+            [ "LocalizationSelectionWindow", "class_unity_toolbox_1_1_u_i_1_1_localization_1_1_editor_1_1_localization_selection_window.html", "class_unity_toolbox_1_1_u_i_1_1_localization_1_1_editor_1_1_localization_selection_window" ]
           ] ],
-          [ "LocalisationException", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_localisation_exception.html", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_localisation_exception" ],
-          [ "LocalisationID", "struct_unity_toolbox_1_1_u_i_1_1_localisation_1_1_localisation_i_d.html", "struct_unity_toolbox_1_1_u_i_1_1_localisation_1_1_localisation_i_d" ],
-          [ "LocalisationLanguage", "struct_unity_toolbox_1_1_u_i_1_1_localisation_1_1_localisation_language.html", "struct_unity_toolbox_1_1_u_i_1_1_localisation_1_1_localisation_language" ],
-          [ "LocalisationScope", "struct_unity_toolbox_1_1_u_i_1_1_localisation_1_1_localisation_scope.html", "struct_unity_toolbox_1_1_u_i_1_1_localisation_1_1_localisation_scope" ],
-          [ "LocalizedText", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_localized_text.html", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_localized_text" ],
-          [ "Localizer", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_localizer.html", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_localizer" ]
+          [ "LocalizationException", "class_unity_toolbox_1_1_u_i_1_1_localization_1_1_localization_exception.html", "class_unity_toolbox_1_1_u_i_1_1_localization_1_1_localization_exception" ],
+          [ "LocalizationID", "struct_unity_toolbox_1_1_u_i_1_1_localization_1_1_localization_i_d.html", "struct_unity_toolbox_1_1_u_i_1_1_localization_1_1_localization_i_d" ],
+          [ "LocalizationLanguage", "struct_unity_toolbox_1_1_u_i_1_1_localization_1_1_localization_language.html", "struct_unity_toolbox_1_1_u_i_1_1_localization_1_1_localization_language" ],
+          [ "LocalizationScope", "struct_unity_toolbox_1_1_u_i_1_1_localization_1_1_localization_scope.html", "struct_unity_toolbox_1_1_u_i_1_1_localization_1_1_localization_scope" ],
+          [ "LocalizzedText", "class_unity_toolbox_1_1_u_i_1_1_localization_1_1_localizzed_text.html", "class_unity_toolbox_1_1_u_i_1_1_localization_1_1_localizzed_text" ],
+          [ "Localizzer", "class_unity_toolbox_1_1_u_i_1_1_localization_1_1_localizzer.html", "class_unity_toolbox_1_1_u_i_1_1_localization_1_1_localizzer" ]
         ] ],
         [ "Menus", "namespace_unity_toolbox_1_1_u_i_1_1_menus.html", [
           [ "FlatMenu", "namespace_unity_toolbox_1_1_u_i_1_1_menus_1_1_flat_menu.html", [

@@ -20,15 +20,15 @@ var hierarchy =
       [ "UnityToolbox.GameplayFeatures.Items.Management.Editor.ItemScopeEditWindow", "class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_management_1_1_editor_1_1_item_scope_edit_window.html", null ],
       [ "UnityToolbox.UI.Dialog.Editor.DialogGraphPathSelectionWindow", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_editor_1_1_dialog_graph_path_selection_window.html", null ],
       [ "UnityToolbox.UI.Dialog.Editor.DialogGraphWindow", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_editor_1_1_dialog_graph_window.html", null ],
-      [ "UnityToolbox.UI.Localisation.Editor.LocalisationEditIDWindow", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_editor_1_1_localisation_edit_i_d_window.html", null ],
-      [ "UnityToolbox.UI.Localisation.Editor.LocalisationEditLanguageWindow", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_editor_1_1_localisation_edit_language_window.html", null ],
-      [ "UnityToolbox.UI.Localisation.Editor.LocalisationEditScopeWindow", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_editor_1_1_localisation_edit_scope_window.html", null ],
-      [ "UnityToolbox.UI.Localisation.Editor.LocalisationManagerWindow", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_editor_1_1_localisation_manager_window.html", null ],
-      [ "UnityToolbox.UI.Localisation.Editor.LocalisationSelectionWindow", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_editor_1_1_localisation_selection_window.html", null ]
+      [ "UnityToolbox.UI.Localization.Editor.LocalizationEditIDWindow", "class_unity_toolbox_1_1_u_i_1_1_localization_1_1_editor_1_1_localization_edit_i_d_window.html", null ],
+      [ "UnityToolbox.UI.Localization.Editor.LocalizationEditLanguageWindow", "class_unity_toolbox_1_1_u_i_1_1_localization_1_1_editor_1_1_localization_edit_language_window.html", null ],
+      [ "UnityToolbox.UI.Localization.Editor.LocalizationEditScopeWindow", "class_unity_toolbox_1_1_u_i_1_1_localization_1_1_editor_1_1_localization_edit_scope_window.html", null ],
+      [ "UnityToolbox.UI.Localization.Editor.LocalizationManagerWindow", "class_unity_toolbox_1_1_u_i_1_1_localization_1_1_editor_1_1_localization_manager_window.html", null ],
+      [ "UnityToolbox.UI.Localization.Editor.LocalizationSelectionWindow", "class_unity_toolbox_1_1_u_i_1_1_localization_1_1_editor_1_1_localization_selection_window.html", null ]
     ] ],
     [ "Exception", null, [
       [ "UnityToolbox.GameplayFeatures.Items.Management.ItemDefinitionException", "class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_management_1_1_item_definition_exception.html", null ],
-      [ "UnityToolbox.UI.Localisation.LocalisationException", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_localisation_exception.html", null ]
+      [ "UnityToolbox.UI.Localization.LocalizationException", "class_unity_toolbox_1_1_u_i_1_1_localization_1_1_localization_exception.html", null ]
     ] ],
     [ "UnityToolbox.GameplayFeatures.SerializationData.GameData", "class_unity_toolbox_1_1_gameplay_features_1_1_serialization_data_1_1_game_data.html", [
       [ "UnityToolbox.GameplayFeatures.SerializationData.ItemData", "class_unity_toolbox_1_1_gameplay_features_1_1_serialization_data_1_1_item_data.html", null ],
@@ -88,10 +88,10 @@ var hierarchy =
     [ "UnityToolbox.GameplayFeatures.Items.Management.ItemField", "class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_management_1_1_item_field.html", null ],
     [ "UnityToolbox.GameplayFeatures.Items.Management.Itemizer", "class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_management_1_1_itemizer.html", null ],
     [ "UnityToolbox.GameplayFeatures.Items.Management.ItemScope", "class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_management_1_1_item_scope.html", null ],
-    [ "UnityToolbox.UI.Localisation.LocalisationID", "struct_unity_toolbox_1_1_u_i_1_1_localisation_1_1_localisation_i_d.html", null ],
-    [ "UnityToolbox.UI.Localisation.LocalisationLanguage", "struct_unity_toolbox_1_1_u_i_1_1_localisation_1_1_localisation_language.html", null ],
-    [ "UnityToolbox.UI.Localisation.LocalisationScope", "struct_unity_toolbox_1_1_u_i_1_1_localisation_1_1_localisation_scope.html", null ],
-    [ "UnityToolbox.UI.Localisation.Localizer", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_localizer.html", null ],
+    [ "UnityToolbox.UI.Localization.LocalizationID", "struct_unity_toolbox_1_1_u_i_1_1_localization_1_1_localization_i_d.html", null ],
+    [ "UnityToolbox.UI.Localization.LocalizationLanguage", "struct_unity_toolbox_1_1_u_i_1_1_localization_1_1_localization_language.html", null ],
+    [ "UnityToolbox.UI.Localization.LocalizationScope", "struct_unity_toolbox_1_1_u_i_1_1_localization_1_1_localization_scope.html", null ],
+    [ "UnityToolbox.UI.Localization.Localizzer", "class_unity_toolbox_1_1_u_i_1_1_localization_1_1_localizzer.html", null ],
     [ "UnityToolbox.General.MasterScene.Editor.MasterSceneLoaderForEditor", "class_unity_toolbox_1_1_general_1_1_master_scene_1_1_editor_1_1_master_scene_loader_for_editor.html", null ],
     [ "UnityToolbox.UI.Menus.MenuType", "class_unity_toolbox_1_1_u_i_1_1_menus_1_1_menu_type.html", null ],
     [ "MonoBehaviour", null, [
@@ -162,7 +162,7 @@ var hierarchy =
       [ "UnityToolbox.UI.Dialog.UI.NextDialogButton", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_u_i_1_1_next_dialog_button.html", null ],
       [ "UnityToolbox.UI.Dialog.UI.NextDialogOptionButton", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_u_i_1_1_next_dialog_option_button.html", null ],
       [ "UnityToolbox.UI.Dialog.UI.OnStartDialog", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_u_i_1_1_on_start_dialog.html", null ],
-      [ "UnityToolbox.UI.Localisation.LocalizedText", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_localized_text.html", null ],
+      [ "UnityToolbox.UI.Localization.LocalizzedText", "class_unity_toolbox_1_1_u_i_1_1_localization_1_1_localizzed_text.html", null ],
       [ "UnityToolbox.UI.Menus.FlatMenu.GotoMenuButton", "class_unity_toolbox_1_1_u_i_1_1_menus_1_1_flat_menu_1_1_goto_menu_button.html", null ],
       [ "UnityToolbox.UI.Menus.FlatMenu.GotoSceneButton", "class_unity_toolbox_1_1_u_i_1_1_menus_1_1_flat_menu_1_1_goto_scene_button.html", null ],
       [ "UnityToolbox.UI.Menus.FlatMenu.LockMovement", "class_unity_toolbox_1_1_u_i_1_1_menus_1_1_flat_menu_1_1_lock_movement.html", null ],
@@ -187,10 +187,10 @@ var hierarchy =
     ] ],
     [ "Node", null, [
       [ "UnityToolbox.GameplayFeatures.Gamestates.Editor.GamestateNode", "class_unity_toolbox_1_1_gameplay_features_1_1_gamestates_1_1_editor_1_1_gamestate_node.html", null ],
-      [ "UnityToolbox.UI.Dialog.Editor.DialogLocalizedNode", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_editor_1_1_dialog_localized_node.html", null ],
+      [ "UnityToolbox.UI.Dialog.Editor.DialogLocalizzedNode", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_editor_1_1_dialog_localizzed_node.html", null ],
       [ "UnityToolbox.UI.Dialog.Editor.DialogNodeBase", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_editor_1_1_dialog_node_base.html", [
         [ "UnityToolbox.UI.Dialog.Editor.DialogNode", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_editor_1_1_dialog_node.html", null ],
-        [ "UnityToolbox.UI.Dialog.Editor.DialogNodeLocalized", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_editor_1_1_dialog_node_localized.html", null ]
+        [ "UnityToolbox.UI.Dialog.Editor.DialogNodeLocalizzed", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_editor_1_1_dialog_node_localizzed.html", null ]
       ] ]
     ] ],
     [ "UnityToolbox.General.Preferences.ProjectPrefs", "class_unity_toolbox_1_1_general_1_1_preferences_1_1_project_prefs.html", null ],
@@ -202,7 +202,7 @@ var hierarchy =
       [ "UnityToolbox.GameplayFeatures.Items.Management.Editor.ItemDefinitionDrawer", "class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_management_1_1_editor_1_1_item_definition_drawer.html", null ],
       [ "UnityToolbox.General.Attributes.Editor.DropDownDrawer", "class_unity_toolbox_1_1_general_1_1_attributes_1_1_editor_1_1_drop_down_drawer.html", null ],
       [ "UnityToolbox.General.Attributes.Editor.ReadOnlyDrawer", "class_unity_toolbox_1_1_general_1_1_attributes_1_1_editor_1_1_read_only_drawer.html", null ],
-      [ "UnityToolbox.UI.Localisation.Editor.LocalisationDrawer", "class_unity_toolbox_1_1_u_i_1_1_localisation_1_1_editor_1_1_localisation_drawer.html", null ]
+      [ "UnityToolbox.UI.Localization.Editor.LocalizationDrawer", "class_unity_toolbox_1_1_u_i_1_1_localization_1_1_editor_1_1_localization_drawer.html", null ]
     ] ],
     [ "UnityToolbox.General.SubEvents.PubSubEventBase", "class_unity_toolbox_1_1_general_1_1_sub_events_1_1_pub_sub_event_base.html", [
       [ "UnityToolbox.General.SubEvents.PubSubEvent< T >", "class_unity_toolbox_1_1_general_1_1_sub_events_1_1_pub_sub_event.html", [
@@ -214,7 +214,7 @@ var hierarchy =
       [ "UnityToolbox.GameplayFeatures.Achievements.AchievementData", "class_unity_toolbox_1_1_gameplay_features_1_1_achievements_1_1_achievement_data.html", null ]
     ] ],
     [ "UnityToolbox.General.SubscriptionToken", "struct_unity_toolbox_1_1_general_1_1_subscription_token.html", null ],
-    [ "UnityToolbox.General.MasterScene.Editor.ToolboxPathLocalizer", "class_unity_toolbox_1_1_general_1_1_master_scene_1_1_editor_1_1_toolbox_path_localizer.html", null ],
+    [ "UnityToolbox.General.MasterScene.Editor.ToolboxPathLocalizzer", "class_unity_toolbox_1_1_general_1_1_master_scene_1_1_editor_1_1_toolbox_path_localizzer.html", null ],
     [ "GraphView", null, [
       [ "UnityToolbox.GameplayFeatures.Gamestates.Editor.GamestateGraphView", "class_unity_toolbox_1_1_gameplay_features_1_1_gamestates_1_1_editor_1_1_gamestate_graph_view.html", null ],
       [ "UnityToolbox.UI.Dialog.Editor.DialogGraphView", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_editor_1_1_dialog_graph_view.html", null ]

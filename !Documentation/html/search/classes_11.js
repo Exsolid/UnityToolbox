@@ -16,7 +16,7 @@ var searchData=
   ['togglemenucontrol_13',['ToggleMenuControl',['../class_unity_toolbox_1_1_player_controls_1_1_u_i_1_1_toggle_menu_control.html',1,'UnityToolbox::PlayerControls::UI']]],
   ['togglemenuinteraction_14',['ToggleMenuInteraction',['../class_unity_toolbox_1_1_player_controls_1_1_u_i_1_1_toggle_menu_interaction.html',1,'UnityToolbox::PlayerControls::UI']]],
   ['togglemenuinteractioninfo_15',['ToggleMenuInteractionInfo',['../class_unity_toolbox_1_1_player_controls_1_1_u_i_1_1_toggle_menu_interaction_info.html',1,'UnityToolbox::PlayerControls::UI']]],
-  ['toolboxpathlocalizer_16',['ToolboxPathLocalizer',['../class_unity_toolbox_1_1_general_1_1_master_scene_1_1_editor_1_1_toolbox_path_localizer.html',1,'UnityToolbox::General::MasterScene::Editor']]],
+  ['toolboxpathlocalizzer_16',['ToolboxPathLocalizzer',['../class_unity_toolbox_1_1_general_1_1_master_scene_1_1_editor_1_1_toolbox_path_localizzer.html',1,'UnityToolbox::General::MasterScene::Editor']]],
   ['tooltipmanager_17',['TooltipManager',['../class_unity_toolbox_1_1_u_i_1_1_menus_1_1_tooltip_manager.html',1,'UnityToolbox::UI::Menus']]],
   ['transformdata_18',['TransformData',['../class_unity_toolbox_1_1_gameplay_features_1_1_serialization_data_1_1_transform_data.html',1,'UnityToolbox::GameplayFeatures::SerializationData']]],
   ['triggerdetection_19',['TriggerDetection',['../class_unity_toolbox_1_1_player_controls_1_1_trigger_detection.html',1,'UnityToolbox::PlayerControls']]]
