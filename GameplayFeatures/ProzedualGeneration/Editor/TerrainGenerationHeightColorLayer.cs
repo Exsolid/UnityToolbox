@@ -10,7 +10,7 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor
 {
     public class TerrainGenerationHeightColorLayer: ISerializedDataContainer<TerrainGenerationHeightColorData>
     {
-        private TerrainGenerationHeightColorSettings _parent;
+        private TerrainGenerationHeightColorsWindow _parent;
 
         private TerrainGenerationHeightColorData _data;
         public TerrainGenerationHeightColorData Data
@@ -19,13 +19,13 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor
             set { _data = value; }
         }
 
-        public TerrainGenerationHeightColorLayer(TerrainGenerationHeightColorSettings parent, int currentPos)
+        public TerrainGenerationHeightColorLayer(TerrainGenerationHeightColorsWindow parent, int currentPos)
         {
             _parent = parent;
             _data.CurrentPos = currentPos;
         }
 
-        public TerrainGenerationHeightColorLayer(TerrainGenerationHeightColorSettings parent, int currentPos, bool isBaseLayer, string baseLayerName)
+        public TerrainGenerationHeightColorLayer(TerrainGenerationHeightColorsWindow parent, int currentPos, bool isBaseLayer, string baseLayerName)
         {
             _parent = parent;
             _data.IsBaseLayer = isBaseLayer;
@@ -71,13 +71,14 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor
         public void DrawDetails()
         {
             Color col = GUI.color;
-            GUI.color = new Color(245f / 255f, 132f / 255f, 66f / 255f, 0.4f);
+            GUI.color = new Color(82f / 255f, 33f / 255f, 37f / 255f, 0.2f);
             GUILayout.BeginVertical(new GUIStyle("window"), GUILayout.Height(180));
             GUI.color = col;
 
             DrawHeader();
 
             DrawLineHorizontal();
+
 
             DrawColorDetails();
 
@@ -86,6 +87,10 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor
 
         private void DrawColorDetails()
         {
+            Color col = GUI.color;
+            GUI.color = new Color(245f / 255f, 132f / 255f, 66f / 255f, 0.4f);
+            GUILayout.BeginVertical(new GUIStyle("window"), GUILayout.Height(180));
+            GUI.color = col;
             GUILayout.BeginHorizontal();
             GUILayout.Label("Starting Height PCT: ");
             _data.StartingHeightPCT = EditorGUILayout.Slider(_data.StartingHeightPCT, 0f, 1f, GUILayout.Width(200));
@@ -116,6 +121,7 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor
             GUILayout.Label("Texture Scale: ");
             _data.TextureScale = EditorGUILayout.FloatField(_data.TextureScale, GUILayout.Width(200));
             GUILayout.EndHorizontal();
+            GUILayout.EndVertical();
         }
 
         private void DrawHeader()

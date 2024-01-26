@@ -1,36 +1,60 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
+using UnityEditor;
 using UnityToolbox.GameplayFeatures.ProzedualGeneration.Data;
+using UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor;
 using UnityToolbox.GameplayFeatures.SerializationData;
-using static UnityEditor.Experimental.GraphView.GraphView;
+using System.Linq;
+using UnityToolbox.General;
 
 namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor
 {
-    public class TerrainGenerationHeightColorSettings: ISerializedDataContainer<List<TerrainGenerationHeightColorData>>
+    public class TerrainGenerationHeightColorsWindow : EditorWindow, ISerializedDataContainer<List<TerrainGenerationHeightColorData>>
     {
+
         private Vector2 _scrollPos;
         private List<TerrainGenerationHeightColorLayer> _layers;
         private List<TerrainGenerationHeightColorData> _layersData;
 
-        public TerrainGenerationHeightColorSettings()
+        public Action<StatusException> OnUpdateStatus;
+        public Action<List<TerrainGenerationHeightColorData>> OnClose;
+
+        private TerrainGenerationHeightColorsWindow()
+        {
+
+        }
+
+        public static TerrainGenerationHeightColorsWindow Open()
+        {
+            TerrainGenerationHeightColorsWindow window =
+                GetWindow<TerrainGenerationHeightColorsWindow>("Terrain Generation");
+            window.maxSize = new Vector2(500, 400);
+            window.minSize = new Vector2(500, 400);
+            return window;
+        }
+
+        private void Awake()
+        {
+            InitializeWindow();
+        }
+
+        public void InitializeWindow()
         {
             _layersData = new List<TerrainGenerationHeightColorData>();
             _layers = new List<TerrainGenerationHeightColorLayer>();
             _layers.Add(new TerrainGenerationHeightColorLayer(this, _layers.Count, true, "Base"));
         }
 
-        public void DrawDetails()
+        public void OnGUI()
         {
             Color col = GUI.color;
-            GUI.color = new Color(82f / 255f, 33f / 255f, 37f / 255f, 0.2f);
-            GUILayout.BeginVertical(new GUIStyle("window"), GUILayout.Height(200));
+            GUI.color = new Color(82f / 255f, 33f / 255f, 37f / 255f, 0.4f);
+            GUILayout.BeginVertical(new GUIStyle("window"));
             GUI.color = col;
-            
+
             GUILayout.BeginHorizontal();
             GUILayout.Label("Height Texturing");
             GUILayout.FlexibleSpace();
@@ -46,7 +70,14 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor
             temp.AddRange(_layers);
             foreach (TerrainGenerationHeightColorLayer layer in temp)
             {
-                layer.DrawDetails();
+                try
+                {
+                    layer.DrawDetails();
+                }
+                catch (StatusException ex)
+                {
+                    UpdateStatus(ex);
+                }
             }
             GUILayout.FlexibleSpace();
             DrawLineHorizontal();
@@ -99,23 +130,52 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor
 
         public void Deserialize(List<TerrainGenerationHeightColorData> data)
         {
-            _layers.Clear();
-            _layersData = data;
-            foreach (TerrainGenerationHeightColorData layer in _layersData)
+            if (data != null && data.Count != 0)
             {
-                _layers.Add(new TerrainGenerationHeightColorLayer(this, _layers.Count));
-                _layers.Last().Deserialize(layer);
+                _layers.Clear();
+                _layersData = data;
+                foreach (TerrainGenerationHeightColorData layer in _layersData)
+                {
+                    _layers.Add(new TerrainGenerationHeightColorLayer(this, _layers.Count));
+                    _layers.Last().Deserialize(layer);
+                }
             }
         }
 
         public List<TerrainGenerationHeightColorData> Serialize()
         {
+            _layersData.Clear();
             foreach (TerrainGenerationHeightColorLayer layer in _layers)
             {
                 _layersData.Add(layer.Serialize());
             }
 
             return _layersData;
+        }
+
+        void OnDestroy()
+        {
+            OnClose?.Invoke(Serialize());
+        }
+
+        void OnEnable()
+        {
+            AssemblyReloadEvents.afterAssemblyReload += OnAfterAssemblyReload;
+        }
+
+        void OnDisable()
+        {
+            AssemblyReloadEvents.afterAssemblyReload -= OnAfterAssemblyReload;
+        }
+
+        public void OnAfterAssemblyReload()
+        {
+            Close();
+        }
+
+        private void UpdateStatus(StatusException error)
+        {
+            OnUpdateStatus?.Invoke(error);
         }
     }
 }

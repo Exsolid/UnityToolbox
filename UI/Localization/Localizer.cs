@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using UnityEngine;
+using UnityToolbox.General;
 using UnityToolbox.General.Management;
 using UnityToolbox.General.Preferences;
 
@@ -77,7 +78,7 @@ namespace UnityToolbox.UI.Localization
         /// </summary>
         /// <param name="LocalizationID"></param>
         /// <param name="Localizations"></param>
-        /// <exception cref="LocalizationException"></exception>
+        /// <exception cref="StatusException"></exception>
         public void AddLocalization(LocalizationID LocalizationID, Dictionary<LocalizationLanguage, string> Localizations)
         {
             if (!_isInitialized)
@@ -87,24 +88,24 @@ namespace UnityToolbox.UI.Localization
 
             if (Localizations == null)
             {
-                throw new LocalizationException("The " + nameof(Localizer) + " cannot add null as " + nameof(Localizations));
+                throw new StatusException("The " + nameof(Localizer) + " cannot add null as " + nameof(Localizations));
             }
 
             if (_LocalizationLanguages.Count != Localizations.Count)
             {
-                throw new LocalizationException("The " + nameof(Localizer) + " knows " + _LocalizationLanguages.Count + " languages, but " + Localizations.Count + " were given.");
+                throw new StatusException("The " + nameof(Localizer) + " knows " + _LocalizationLanguages.Count + " languages, but " + Localizations.Count + " were given.");
             }
 
             if (_LocalizationData.ContainsKey(LocalizationID))
             {
-                throw new LocalizationException("The " + nameof(Localizer) + " already contains Localizations for the ID " + LocalizationID + ".");
+                throw new StatusException("The " + nameof(Localizer) + " already contains Localizations for the ID " + LocalizationID + ".");
             }
 
             foreach (LocalizationLanguage langInData in _LocalizationLanguages)
             {
                 if (!Localizations.ContainsKey(langInData) || Localizations[langInData] == null || Localizations[langInData].Trim().Equals(""))
                 {
-                    throw new LocalizationException("The Localization for the language \"" + langInData.Name + "\" cannot be empty!");
+                    throw new StatusException("The Localization for the language \"" + langInData.Name + "\" cannot be empty!");
                 }
             }
             _LocalizationData.Add(LocalizationID, Localizations);
@@ -114,7 +115,7 @@ namespace UnityToolbox.UI.Localization
         /// Adds a new <see cref="LocalizationScope"/> to the system.
         /// </summary>
         /// <param name="scopeName"></param>
-        /// <exception cref="LocalizationException"></exception>
+        /// <exception cref="StatusException"></exception>
         public void AddScope(string scopeName)
         {
             if (!_isInitialized)
@@ -124,7 +125,7 @@ namespace UnityToolbox.UI.Localization
 
             if (scopeName == null || scopeName.Trim() == "")
             {
-                throw new LocalizationException("The given scope cannot be empty!");
+                throw new StatusException("The given scope cannot be empty!");
             }
 
             LocalizationScope newScope = new LocalizationScope();
@@ -132,7 +133,7 @@ namespace UnityToolbox.UI.Localization
 
             if (newScope.Equals(_defaultScope) || _LocalizationScopes.Contains(newScope))
             {
-                throw new LocalizationException("The given scope already exists!");
+                throw new StatusException("The given scope already exists!");
             }
             else
             {
@@ -145,7 +146,7 @@ namespace UnityToolbox.UI.Localization
         /// </summary>
         /// <param name="languageName"></param>
         /// <param name="languageShortName"></param>
-        /// <exception cref="LocalizationException"></exception>
+        /// <exception cref="StatusException"></exception>
         public void AddLanguage(string languageName, string languageShortName)
         {
             if (!_isInitialized)
@@ -155,7 +156,7 @@ namespace UnityToolbox.UI.Localization
 
             if (languageName == null || languageName.Trim() == "" || languageShortName == null || languageShortName.Trim() == "")
             {
-                throw new LocalizationException("The given language name and shortname cannot be empty!");
+                throw new StatusException("The given language name and shortname cannot be empty!");
             }
 
             LocalizationLanguage newLang = new LocalizationLanguage();
@@ -164,7 +165,7 @@ namespace UnityToolbox.UI.Localization
 
             if (_LocalizationLanguages.Contains(newLang))
             {
-                throw new LocalizationException("The given language already exists!");
+                throw new StatusException("The given language already exists!");
             }
             else
             {
@@ -176,7 +177,7 @@ namespace UnityToolbox.UI.Localization
         /// Removes a <see cref="LocalizationLanguage"/> from the system.
         /// </summary>
         /// <param name="language"></param>
-        /// <exception cref="LocalizationException"></exception>
+        /// <exception cref="StatusException"></exception>
         public void RemoveLanguage(LocalizationLanguage language)
         {
             if (!_isInitialized)
@@ -186,7 +187,7 @@ namespace UnityToolbox.UI.Localization
 
             if (_LocalizationLanguages.Count <= 1)
             {
-                throw new LocalizationException("At least one language must persist!");
+                throw new StatusException("At least one language must persist!");
             }
 
             foreach (KeyValuePair<LocalizationID, Dictionary<LocalizationLanguage, string>> pair
@@ -202,7 +203,7 @@ namespace UnityToolbox.UI.Localization
         /// Removes a <see cref="LocalizationScope"/> from the system.
         /// </summary>
         /// <param name="scope"></param>
-        /// <exception cref="LocalizationException"></exception>
+        /// <exception cref="StatusException"></exception>
         public void RemoveScope(LocalizationScope scope)
         {
             if (!_isInitialized)
@@ -212,7 +213,7 @@ namespace UnityToolbox.UI.Localization
 
             if (scope.Equals(_defaultScope))
             {
-                throw new LocalizationException("The default scope cannot be removed.");
+                throw new StatusException("The default scope cannot be removed.");
             }
 
             foreach (KeyValuePair<LocalizationID, Dictionary<LocalizationLanguage, string>> pair
@@ -250,7 +251,7 @@ namespace UnityToolbox.UI.Localization
         /// </summary>
         /// <param name="oldID"></param>
         /// <param name="newID"></param>
-        /// <exception cref="LocalizationException"></exception>
+        /// <exception cref="StatusException"></exception>
         public void EditLocalizationID(LocalizationID oldID, LocalizationID newID)
         {
             if (!_isInitialized)
@@ -265,7 +266,7 @@ namespace UnityToolbox.UI.Localization
             }
             else
             {
-                throw new LocalizationException("The edited Localization ID already exists!");
+                throw new StatusException("The edited Localization ID already exists!");
             }
 
             OnLocalizationEdited(oldID);
@@ -276,7 +277,7 @@ namespace UnityToolbox.UI.Localization
         /// </summary>
         /// <param name="oldScope"></param>
         /// <param name="newScopeName"></param>
-        /// <exception cref="LocalizationException"></exception>
+        /// <exception cref="StatusException"></exception>
         public void EditScope(LocalizationScope oldScope, string newScopeName)
         {
             if (!_isInitialized)
@@ -286,7 +287,7 @@ namespace UnityToolbox.UI.Localization
 
             if (newScopeName == null || newScopeName.Trim() == "")
             {
-                throw new LocalizationException("The edited scope cannot be empty!");
+                throw new StatusException("The edited scope cannot be empty!");
             }
 
             LocalizationScope newScope = new LocalizationScope();
@@ -294,7 +295,7 @@ namespace UnityToolbox.UI.Localization
 
             if (newScope.Equals(_defaultScope) || _LocalizationScopes.Contains(newScope) || !_LocalizationScopes.Contains(oldScope))
             {
-                throw new LocalizationException("The edited scope already exists!");
+                throw new StatusException("The edited scope already exists!");
             }
             else
             {
@@ -320,7 +321,7 @@ namespace UnityToolbox.UI.Localization
         /// <param name="oldLanguage"></param>
         /// <param name="newLanguageName"></param>
         /// <param name="newLanguageShortName"></param>
-        /// <exception cref="LocalizationException"></exception>
+        /// <exception cref="StatusException"></exception>
         public void EditLanguage(LocalizationLanguage oldLanguage, string newLanguageName, string newLanguageShortName)
         {
             if (!_isInitialized)
@@ -330,7 +331,7 @@ namespace UnityToolbox.UI.Localization
 
             if (newLanguageName == null || newLanguageName.Trim() == "" || newLanguageShortName == null || newLanguageShortName.Trim() == "" || !_LocalizationLanguages.Contains(oldLanguage))
             {
-                throw new LocalizationException("The edited language name and shortname cannot be empty!");
+                throw new StatusException("The edited language name and shortname cannot be empty!");
             }
 
             LocalizationLanguage newLang = new LocalizationLanguage();
@@ -339,7 +340,7 @@ namespace UnityToolbox.UI.Localization
 
             if (_LocalizationLanguages.Contains(newLang))
             {
-                throw new LocalizationException("The edited language already exists!");
+                throw new StatusException("The edited language already exists!");
             }
             else
             {
@@ -361,7 +362,7 @@ namespace UnityToolbox.UI.Localization
         /// </summary>
         /// <param name="LocalizationID"></param>
         /// <param name="Localizations"></param>
-        /// <exception cref="LocalizationException"></exception>
+        /// <exception cref="StatusException"></exception>
         public void EditLocalization(LocalizationID LocalizationID, Dictionary<LocalizationLanguage, string> Localizations)
         {
             if (!_isInitialized)
@@ -371,24 +372,24 @@ namespace UnityToolbox.UI.Localization
 
             if (Localizations == null)
             {
-                throw new LocalizationException("The " + nameof(Localizer) + " cannot edit null as " + nameof(Localizations));
+                throw new StatusException("The " + nameof(Localizer) + " cannot edit null as " + nameof(Localizations));
             }
 
             if (_LocalizationLanguages.Count != Localizations.Count)
             {
-                throw new LocalizationException("The " + nameof(Localizer) + " knows " + _LocalizationLanguages.Count + " languages, but " + Localizations.Count + " were given.");
+                throw new StatusException("The " + nameof(Localizer) + " knows " + _LocalizationLanguages.Count + " languages, but " + Localizations.Count + " were given.");
             }
 
             if (!_LocalizationData.ContainsKey(LocalizationID))
             {
-                throw new LocalizationException("The " + nameof(Localizer) + " does not contain Localizations for the ID " + LocalizationID + ".");
+                throw new StatusException("The " + nameof(Localizer) + " does not contain Localizations for the ID " + LocalizationID + ".");
             }
 
             foreach (LocalizationLanguage langInData in _LocalizationLanguages)
             {
                 if (!Localizations.ContainsKey(langInData) || Localizations[langInData] == null || Localizations[langInData].Trim().Equals(""))
                 {
-                    throw new LocalizationException("The Localization for the language \"" + langInData.Name + "\" cannot be empty!");
+                    throw new StatusException("The Localization for the language \"" + langInData.Name + "\" cannot be empty!");
                 }
             }
 

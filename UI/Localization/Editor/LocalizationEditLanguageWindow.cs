@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityToolbox.UI.Localization;
 using UnityEngine;
 using UnityEditor;
+using UnityToolbox.General;
 
 namespace UnityToolbox.UI.Localization.Editor
 {
@@ -77,7 +78,7 @@ namespace UnityToolbox.UI.Localization.Editor
                     AssetDatabase.Refresh();
                     Close();
                 }
-                catch (LocalizationException ex)
+                catch (StatusException ex)
                 {
                     UpdateStatus(ex.Message);
                 }

@@ -1,17 +1,16 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
 using UnityToolbox.GameplayFeatures.Items;
 using UnityToolbox.GameplayFeatures.Items.Management;
 using UnityToolbox.GameplayFeatures.ProzedualGeneration.Data;
 using UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor.GenerationTypes;
 using UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor.GenerationTypes.Layered;
 using UnityToolbox.GameplayFeatures.ProzedualGeneration.Enums;
+using UnityToolbox.General;
 using UnityToolbox.General.Management;
 using UnityToolbox.General.Preferences;
 using Random = System.Random;
@@ -88,22 +87,29 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor
             {
                 _selectedTab = GUILayout.Toolbar(_selectedTab, new string[] { "Generation", "Mesh", "Settings" });
                 DrawLineHorizontal();
-                switch (_selectedTab)
+                try
                 {
-                    case GENERATION:
-                        DrawGenerationTab();
-                        DrawLineHorizontal();
-                        DrawEndButtons();
-                        break;
-                    case MESH:
-                        DrawMeshTab();
-                        DrawLineHorizontal();
-                        DrawEndButtons();
-                        break;
-                    case SETTINGS:
-                        DrawSettingsTab();
-                        break;
+                    switch (_selectedTab)
+                    {
+                        case GENERATION:
+                            DrawGenerationTab();
+                            DrawLineHorizontal();
+                            DrawEndButtons();
+                            break;
+                        case MESH:
+                            DrawMeshTab();
+                            DrawLineHorizontal();
+                            DrawEndButtons();
+                            break;
+                        case SETTINGS:
+                            DrawSettingsTab();
+                            break;
                     }
+                }
+                catch (StatusException ex)
+                {
+                    UpdateStatus(ex.Message);
+                }
             }
             else
             {
@@ -211,8 +217,6 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor
 
         private void DrawGeneralDetails()
         {
-
-
             GUILayout.BeginHorizontal();
             GUILayout.Label("Name of Generator: ");
             _selectedData.GeneratorName = GUILayout.TextField(_selectedData.GeneratorName, GUILayout.Width(180));
@@ -358,16 +362,6 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor
             EditorGUILayout.Space();
         }
 
-        void OnEnable()
-        {
-            AssemblyReloadEvents.afterAssemblyReload += OnAfterAssemblyReload;
-        }
-
-        void OnDisable()
-        {
-            AssemblyReloadEvents.afterAssemblyReload -= OnAfterAssemblyReload;
-        }
-
         public void OnAfterAssemblyReload()
         {
             InitializeWindow();
@@ -388,5 +382,22 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor
         {
             _status = "Status:     " + status;
         }
+
+        void OnEnable()
+        {
+            AssemblyReloadEvents.afterAssemblyReload += OnAfterAssemblyReload;
+        }
+
+        void OnDisable()
+        {
+            AssemblyReloadEvents.afterAssemblyReload -= OnAfterAssemblyReload;
+        }
+
+        void OnDestroy()
+        {
+            //TODO close all other windows and save
+        }
+
+
     }
 }

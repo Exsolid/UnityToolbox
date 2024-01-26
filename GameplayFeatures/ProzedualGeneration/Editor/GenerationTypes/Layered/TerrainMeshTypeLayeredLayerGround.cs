@@ -1,23 +1,24 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityToolbox.GameplayFeatures.ProzedualGeneration.Data;
+using UnityToolbox.General;
 
 namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor.GenerationTypes.Layered
 {
     public class TerrainMeshTypeLayeredLayerGround : TerrainMeshTypeLayeredLayer
     {
-        private TerrainGenerationHeightColorSettings _heightColors;
+        private TerrainGenerationHeightColorsWindow _heightColors;
 
         public TerrainMeshTypeLayeredLayerGround(TerrainMeshTypeLayered parent, int currentPos) : base(parent, currentPos, new TerrainMeshTypeLayeredLayerGroundData())
         {
-            _heightColors = new TerrainGenerationHeightColorSettings();
         }
 
         public TerrainMeshTypeLayeredLayerGround(TerrainMeshTypeLayered parent, int currentPos, bool isBaseLayer, string baseLayerName) : base(parent, currentPos, isBaseLayer, baseLayerName, new TerrainMeshTypeLayeredLayerGroundData())
         {
-            _heightColors = new TerrainGenerationHeightColorSettings();
         }
 
         protected override void DrawDetailsRest()
@@ -44,7 +45,24 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor.GenerationTyp
             data.NoiseGround = EditorGUILayout.Slider(data.NoiseGround, 0f, 1f, GUILayout.Width(200));
             GUILayout.EndHorizontal();
 
-            _heightColors.DrawDetails();
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Height Colors: ");
+            if (GUILayout.Button("+", GUILayout.Width(20)))
+            {
+                _heightColors = TerrainGenerationHeightColorsWindow.Open();
+                _heightColors.Deserialize(data.HeightData);
+
+                _heightColors.OnClose += (List<TerrainGenerationHeightColorData> heightData) =>
+                {
+                    TerrainMeshTypeLayeredLayerGroundData dataCurrent = _data as TerrainMeshTypeLayeredLayerGroundData;
+                    dataCurrent.HeightData = heightData;
+                    _heightColors = null;
+                };
+
+                _heightColors.OnUpdateStatus += (StatusException ex) => throw ex;
+            }
+            GUILayout.EndHorizontal();
+
             DrawLineHorizontal();
             DrawAssetPlacement();
 
@@ -54,15 +72,11 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor.GenerationTyp
         protected override void DeserializeRest(TerrainMeshTypeLayeredLayerBaseData obj)
         {
             _data = obj;
-            TerrainMeshTypeLayeredLayerGroundData data = _data as TerrainMeshTypeLayeredLayerGroundData;
-            _heightColors.Deserialize(data.HeightData);
         }
 
         protected override TerrainMeshTypeLayeredLayerBaseData SerializeRest()
         {
-            TerrainMeshTypeLayeredLayerGroundData data = _data as TerrainMeshTypeLayeredLayerGroundData;
-            data.HeightData = _heightColors.Serialize();
-            return data;
+            return _data;
         }
     }
 }

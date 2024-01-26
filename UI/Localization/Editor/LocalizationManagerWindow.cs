@@ -4,6 +4,7 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using UnityToolbox.General;
 using UnityToolbox.General.Management;
 using UnityToolbox.General.Preferences;
 using UnityToolbox.UI.Localization;
@@ -160,7 +161,7 @@ namespace UnityToolbox.UI.Localization.Editor
                     AssetDatabase.Refresh();
                     UpdateStatus("Successfully added a new scope.");
                 }
-                catch (LocalizationException ex)
+                catch (StatusException ex)
                 {
                     UpdateStatus(ex.Message);
                 }
@@ -217,7 +218,7 @@ namespace UnityToolbox.UI.Localization.Editor
                     AssetDatabase.Refresh();
                     UpdateStatus("Successfully added a new language.");
                 }
-                catch (LocalizationException ex)
+                catch (StatusException ex)
                 {
                     UpdateStatus(ex.Message);
                 }
@@ -249,7 +250,7 @@ namespace UnityToolbox.UI.Localization.Editor
                             AssetDatabase.Refresh();
                             UpdateStatus("Successfully removed the language \"" + language.Name + "\".");
                         }
-                        catch (LocalizationException ex)
+                        catch (StatusException ex)
                         {
                             UpdateStatus(ex.Message);
                         }
@@ -377,7 +378,7 @@ namespace UnityToolbox.UI.Localization.Editor
                             AssetDatabase.Refresh();
                             UpdateStatus("Successfully added a new Localization.");
                         }
-                        catch (LocalizationException ex)
+                        catch (StatusException ex)
                         {
                             UpdateStatus(ex.Message);
                         }
