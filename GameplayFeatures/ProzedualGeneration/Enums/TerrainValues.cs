@@ -2,8 +2,8 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Enums
 {
     public enum TerrainValues
     {
-        Filler = 0,
+        Floor = 0,
         Wall = 1,
-        Floor = 2
+        Filler = 2
     }
 }

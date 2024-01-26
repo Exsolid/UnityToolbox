@@ -25,12 +25,12 @@ namespace UnityToolbox.UI.Localization
 
         private void Start()
         {
-            if (!Localizzer.Instance.IsInitialized)
+            if (!Localizer.Instance.IsInitialized)
             {
-                Localizzer.Instance.Initialize();
+                Localizer.Instance.Initialize();
             }
 
-            _allLanguages = Localizzer.Instance.LocalizationLanguages.ToList();
+            _allLanguages = Localizer.Instance.LocalizationLanguages.ToList();
             _languagePref = ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.LANGUAGE);
             int currentIngameLanguage = PlayerPrefs.GetInt(_languagePref);
 
@@ -53,7 +53,7 @@ namespace UnityToolbox.UI.Localization
 
         private void UpdateText(int atIndex)
         {
-            KeyValuePair<LocalizationID, Dictionary<LocalizationLanguage, string>> temp = Localizzer.Instance.LocalizationData.Where(e => e.Key.Equals(_LocalizationID)).FirstOrDefault();
+            KeyValuePair<LocalizationID, Dictionary<LocalizationLanguage, string>> temp = Localizer.Instance.LocalizationData.Where(e => e.Key.Equals(_LocalizationID)).FirstOrDefault();
             _displayedString = temp.Value == null ? "LocalizationID not valid!" : temp.Value[_allLanguages.ElementAt(atIndex)];
 
             _textToDisplay = GetComponent<Text>();
@@ -62,7 +62,7 @@ namespace UnityToolbox.UI.Localization
 
         private void UpdateText(LocalizationLanguage language)
         {
-            KeyValuePair<LocalizationID, Dictionary<LocalizationLanguage, string>> temp = Localizzer.Instance.LocalizationData.Where(e => e.Key.Equals(_LocalizationID)).FirstOrDefault();
+            KeyValuePair<LocalizationID, Dictionary<LocalizationLanguage, string>> temp = Localizer.Instance.LocalizationData.Where(e => e.Key.Equals(_LocalizationID)).FirstOrDefault();
             _displayedString = temp.Value == null ? "LocalizationID not valid!" : temp.Value[language];
 
             _textToDisplay = GetComponent<Text>();
@@ -71,14 +71,14 @@ namespace UnityToolbox.UI.Localization
 
         public void OnValidate()
         {
-            if (!Localizzer.Instance.IsInitialized)
+            if (!Localizer.Instance.IsInitialized)
             {
-                Localizzer.Instance.Initialize();
+                Localizer.Instance.Initialize();
             }
-            if (_allLanguages == null || Localizzer.Instance.LocalizationLanguages.Count != _allLanguages.Count)
+            if (_allLanguages == null || Localizer.Instance.LocalizationLanguages.Count != _allLanguages.Count)
             {
-                _allLanguages = Localizzer.Instance.LocalizationLanguages.ToList();
-                _allLanguagesString = Localizzer.Instance.LocalizationLanguages.Select(x => x.Name).ToList();
+                _allLanguages = Localizer.Instance.LocalizationLanguages.ToList();
+                _allLanguagesString = Localizer.Instance.LocalizationLanguages.Select(x => x.Name).ToList();
             }
 
             if (_selectedLanguage >= _allLanguages.Count)

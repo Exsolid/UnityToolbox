@@ -63,8 +63,8 @@ namespace UnityToolbox.UI.Localization.Editor
 
         private void InitializeWindow()
         {
-            Localizzer.Instance.Initialize();
-            _assetPathInProject = ResourcesUtil.GetProjectPath(ProjectPrefKeys.LocalizATIONSAVEPATH);
+            Localizer.Instance.Initialize();
+            _assetPathInProject = ResourcesUtil.GetProjectPath(ProjectPrefKeys.LOCALIZATIONSAVEPATH);
             _status = "Status: -";
             _searchIDString = "";
             _scrollPosScope = Vector2.zero;
@@ -76,7 +76,7 @@ namespace UnityToolbox.UI.Localization.Editor
         private void Awake()
         {
             InitializeWindow();
-            Localizzer.Instance.Initialize();
+            Localizer.Instance.Initialize();
         }
 
         private void OnGUI()
@@ -87,7 +87,7 @@ namespace UnityToolbox.UI.Localization.Editor
             GUILayout.Label(_status);
             DrawLineHorizontal();
 
-            if (Localizzer.Instance.IsInitialized)
+            if (Localizer.Instance.IsInitialized)
             {
                 _selectedTab = GUILayout.Toolbar(_selectedTab, new string[] { "IDs", "Languages", "Scopes", "Settings" });
                 DrawLineHorizontal();
@@ -117,7 +117,7 @@ namespace UnityToolbox.UI.Localization.Editor
 
         private void DisplaySettingsTab()
         {
-            GUILayout.Label("To update the " + nameof(Localizzer) + " path. Please enter a valid path below. \nIt is required that it containes \"Resources\".");
+            GUILayout.Label("To update the " + nameof(Localizer) + " path. Please enter a valid path below. \nIt is required that it containes \"Resources\".");
             DrawLineHorizontal();
             GUILayout.BeginHorizontal();
             Vector2 textDimensions = GUI.skin.label.CalcSize(new GUIContent(Application.dataPath));
@@ -126,11 +126,11 @@ namespace UnityToolbox.UI.Localization.Editor
             GUILayout.EndHorizontal();
             if (GUILayout.Button("Refresh"))
             {
-                if (ResourcesUtil.TrySetValidPath(Application.dataPath + "/" + _assetPathInProject, ProjectPrefKeys.LocalizATIONSAVEPATH))
+                if (ResourcesUtil.TrySetValidPath(Application.dataPath + "/" + _assetPathInProject, ProjectPrefKeys.LOCALIZATIONSAVEPATH))
                 {
                     AssetDatabase.Refresh();
-                    Localizzer.Instance.Initialize();
-                    if (Localizzer.Instance.IsInitialized)
+                    Localizer.Instance.Initialize();
+                    if (Localizer.Instance.IsInitialized)
                     {
                         UpdateStatus("Path updated.");
                     }
@@ -155,8 +155,8 @@ namespace UnityToolbox.UI.Localization.Editor
             {
                 try
                 {
-                    Localizzer.Instance.AddScope(_scopeName);
-                    Localizzer.Instance.WriteData();
+                    Localizer.Instance.AddScope(_scopeName);
+                    Localizer.Instance.WriteData();
                     AssetDatabase.Refresh();
                     UpdateStatus("Successfully added a new scope.");
                 }
@@ -170,11 +170,11 @@ namespace UnityToolbox.UI.Localization.Editor
 
             GUILayout.BeginVertical();
             _scrollPosScope = GUILayout.BeginScrollView(_scrollPosScope);
-            foreach (LocalizationScope scope in Localizzer.Instance.LocalizationScopes)
+            foreach (LocalizationScope scope in Localizer.Instance.LocalizationScopes)
             {
                 GUILayout.BeginHorizontal("Box");
                 GUILayout.Label(scope.Name);
-                if (!scope.Equals(Localizzer.Instance.DefaultScope))
+                if (!scope.Equals(Localizer.Instance.DefaultScope))
                 {
                     if (GUILayout.Button("*", GUILayout.Width(20)))
                     {
@@ -185,8 +185,8 @@ namespace UnityToolbox.UI.Localization.Editor
                     {
                         if (EditorUtility.DisplayDialog("Remove Scope", "Are you sure you want to delete the scope \"" + scope.Name + "\"? \nIDs using this scope will have it replaced with the default scope.", "Yes"))
                         {
-                            Localizzer.Instance.RemoveScope(scope);
-                            Localizzer.Instance.WriteData();
+                            Localizer.Instance.RemoveScope(scope);
+                            Localizer.Instance.WriteData();
                             AssetDatabase.Refresh();
                             UpdateStatus("Successfully removed the scope \"" + scope.Name + "\".");
                         }
@@ -212,8 +212,8 @@ namespace UnityToolbox.UI.Localization.Editor
             {
                 try
                 {
-                    Localizzer.Instance.AddLanguage(_languageName, _languageShortName);
-                    Localizzer.Instance.WriteData();
+                    Localizer.Instance.AddLanguage(_languageName, _languageShortName);
+                    Localizer.Instance.WriteData();
                     AssetDatabase.Refresh();
                     UpdateStatus("Successfully added a new language.");
                 }
@@ -227,7 +227,7 @@ namespace UnityToolbox.UI.Localization.Editor
 
             GUILayout.BeginVertical();
             _scrollPosLanguage = GUILayout.BeginScrollView(_scrollPosLanguage);
-            foreach (LocalizationLanguage language in Localizzer.Instance.LocalizationLanguages)
+            foreach (LocalizationLanguage language in Localizer.Instance.LocalizationLanguages)
             {
                 GUILayout.BeginHorizontal("Box");
                 GUILayout.Label(language.Name);
@@ -244,8 +244,8 @@ namespace UnityToolbox.UI.Localization.Editor
                     {
                         try
                         {
-                            Localizzer.Instance.RemoveLanguage(language);
-                            Localizzer.Instance.WriteData();
+                            Localizer.Instance.RemoveLanguage(language);
+                            Localizer.Instance.WriteData();
                             AssetDatabase.Refresh();
                             UpdateStatus("Successfully removed the language \"" + language.Name + "\".");
                         }
@@ -274,7 +274,7 @@ namespace UnityToolbox.UI.Localization.Editor
             _foldoutSearch = EditorGUILayout.Foldout(_foldoutSearch, "Search");
             GUILayout.EndHorizontal();
 
-            string[] languages = Localizzer.Instance.LocalizationLanguages.Select(x => x.Name).ToArray();
+            string[] languages = Localizer.Instance.LocalizationLanguages.Select(x => x.Name).ToArray();
             string[] searchScopes = new string[] { "ID" };
             searchScopes = languages.Concat(searchScopes).ToArray();
 
@@ -293,7 +293,7 @@ namespace UnityToolbox.UI.Localization.Editor
             }
 
             DrawLineHorizontal();
-            Dictionary<LocalizationID, Dictionary<LocalizationLanguage, string>> filtered = Localizzer.Instance.LocalizationData.ToDictionary(entry => entry.Key, entry => entry.Value.ToDictionary(entry => entry.Key, entry => entry.Value));
+            Dictionary<LocalizationID, Dictionary<LocalizationLanguage, string>> filtered = Localizer.Instance.LocalizationData.ToDictionary(entry => entry.Key, entry => entry.Value.ToDictionary(entry => entry.Key, entry => entry.Value));
 
             if (_selectedSearch == searchScopes.Count() - 1)
             {
@@ -302,8 +302,8 @@ namespace UnityToolbox.UI.Localization.Editor
             else
             {
                 filtered = filtered.Where(entry =>
-                !entry.Value.ContainsKey(Localizzer.Instance.LocalizationLanguages.ElementAt(_selectedSearch))
-                || entry.Value[Localizzer.Instance.LocalizationLanguages.ElementAt(_selectedSearch)]
+                !entry.Value.ContainsKey(Localizer.Instance.LocalizationLanguages.ElementAt(_selectedSearch))
+                || entry.Value[Localizer.Instance.LocalizationLanguages.ElementAt(_selectedSearch)]
                 .Contains(_searchIDString)).ToDictionary(entry => entry.Key, entry => entry.Value);
             }
 
@@ -316,8 +316,8 @@ namespace UnityToolbox.UI.Localization.Editor
                 GUILayout.BeginHorizontal("Box");
 
                 GUILayout.Label(pair.Key.GetQualifiedName(), GUILayout.Width(EditorGUIUtility.currentViewWidth / 3));
-                GUILayout.Label(pair.Value.ContainsKey(Localizzer.Instance.LocalizationLanguages.ElementAt(_selectedLanguage)) ? pair.Value[Localizzer.Instance.LocalizationLanguages.ElementAt(_selectedLanguage)] : "", GUILayout.Width(EditorGUIUtility.currentViewWidth / 3));
-                if (pair.Value.Count != Localizzer.Instance.LocalizationLanguages.Count)
+                GUILayout.Label(pair.Value.ContainsKey(Localizer.Instance.LocalizationLanguages.ElementAt(_selectedLanguage)) ? pair.Value[Localizer.Instance.LocalizationLanguages.ElementAt(_selectedLanguage)] : "", GUILayout.Width(EditorGUIUtility.currentViewWidth / 3));
+                if (pair.Value.Count != Localizer.Instance.LocalizationLanguages.Count)
                 {
                     GUILayout.Label("[REQUIRES EDIT]", GUILayout.Width(EditorGUIUtility.currentViewWidth / 3 - 70));
                 }
@@ -335,8 +335,8 @@ namespace UnityToolbox.UI.Localization.Editor
                 {
                     if (EditorUtility.DisplayDialog("Remove Localization", "Are you sure you want to delete the Localization \"" + pair.Key.GetQualifiedName() + "\"?", "Yes"))
                     {
-                        Localizzer.Instance.RemoveLocalization(pair.Key);
-                        Localizzer.Instance.WriteData();
+                        Localizer.Instance.RemoveLocalization(pair.Key);
+                        Localizer.Instance.WriteData();
                         AssetDatabase.Refresh();
                         UpdateStatus("Successfully removed the scope \"" + pair.Key.GetQualifiedName() + "\".");
                     }
@@ -355,25 +355,25 @@ namespace UnityToolbox.UI.Localization.Editor
 
             if (_foldoutAdd)
             {
-                if (Localizzer.Instance.LocalizationLanguages.Count != 0)
+                if (Localizer.Instance.LocalizationLanguages.Count != 0)
                 {
                     GUILayout.BeginHorizontal();
                     GUILayout.Label("ID: ");
                     _IDName = GUILayout.TextField(_IDName, GUILayout.Width(189));
                     GUILayout.Label(LocalizationID.DEVIDER.ToString(), GUILayout.Width(10));
-                    string[] scopes = Localizzer.Instance.LocalizationScopes.Select(x => x.Name).ToArray();
+                    string[] scopes = Localizer.Instance.LocalizationScopes.Select(x => x.Name).ToArray();
                     _selectedScope = EditorGUILayout.Popup("", _selectedScope, scopes, GUILayout.Width(170));
 
                     if (GUILayout.Button("+", GUILayout.Width(20)))
                     {
                         LocalizationID newID = new LocalizationID();
                         newID.Name = _IDName;
-                        newID.Scope = Localizzer.Instance.LocalizationScopes.ElementAt(_selectedScope);
+                        newID.Scope = Localizer.Instance.LocalizationScopes.ElementAt(_selectedScope);
 
                         try
                         {
-                            Localizzer.Instance.AddLocalization(newID, _newLocalizations.ToDictionary(entry => entry.Key, entry => entry.Value));
-                            Localizzer.Instance.WriteData();
+                            Localizer.Instance.AddLocalization(newID, _newLocalizations.ToDictionary(entry => entry.Key, entry => entry.Value));
+                            Localizer.Instance.WriteData();
                             AssetDatabase.Refresh();
                             UpdateStatus("Successfully added a new Localization.");
                         }
@@ -385,7 +385,7 @@ namespace UnityToolbox.UI.Localization.Editor
                     GUILayout.EndHorizontal();
 
 
-                    foreach (LocalizationLanguage language in Localizzer.Instance.LocalizationLanguages)
+                    foreach (LocalizationLanguage language in Localizer.Instance.LocalizationLanguages)
                     {
                         GUILayout.BeginHorizontal();
                         GUILayout.Label("Translate " + language.Name + ":");

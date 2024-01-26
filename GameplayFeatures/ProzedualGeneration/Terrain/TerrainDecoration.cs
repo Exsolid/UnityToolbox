@@ -11,7 +11,7 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Terrain
     public class TerrainDecoration : MonoBehaviour
     {
         [SerializeField] [Range(0.1f, 1)] private float _pctForNone;
-        [SerializeField] private TerrainDecorationPositionType _positionType;
+        [SerializeField] private TerrainGenerationAssetPosition _positionType;
         [SerializeField] private bool _raycastPlacement;
         [SerializeField] private LayerMask _groundMask;
 
@@ -146,15 +146,15 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Terrain
             int[,] grid = _terrainGenerator.GeneratedGrid;
             switch (_positionType)
             {
-                case TerrainDecorationPositionType.Floor:
-                case TerrainDecorationPositionType.CornerFloor:
+                case TerrainGenerationAssetPosition.Ground:
+                case TerrainGenerationAssetPosition.CliffCornerBottom:
                     if (grid[x, y] != (int)TerrainValues.Floor)
                     {
                         return false;
                     }
                     break;
-                case TerrainDecorationPositionType.Wall:
-                case TerrainDecorationPositionType.CornerWall:
+                case TerrainGenerationAssetPosition.CliffGround:
+                case TerrainGenerationAssetPosition.CliffCornerTop:
                     if (grid[x, y] != (int)TerrainValues.Wall)
                     {
                         return false;
@@ -176,20 +176,20 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Terrain
 
             switch (_positionType)
             {
-                case TerrainDecorationPositionType.Floor:
+                case TerrainGenerationAssetPosition.Ground:
                     if (wallCount == 0)
                     {
                         return true;
                     }
                     break;
-                case TerrainDecorationPositionType.CornerFloor:
-                case TerrainDecorationPositionType.CornerWall:
+                case TerrainGenerationAssetPosition.CliffCornerBottom:
+                case TerrainGenerationAssetPosition.CliffCornerTop:
                     if (wallCount < 7 && wallCount > 0)
                     {
                         return true;
                     }
                     break;
-                case TerrainDecorationPositionType.Wall:
+                case TerrainGenerationAssetPosition.CliffGround:
                     if (wallCount >= 7)
                     {
                         return true;

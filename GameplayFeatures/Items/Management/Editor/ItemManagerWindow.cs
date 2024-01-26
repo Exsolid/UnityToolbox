@@ -247,7 +247,7 @@ namespace UnityToolbox.GameplayFeatures.Items.Management.Editor
 
         private void DisplaySettingsTab()
         {
-            GUILayout.Label("To update the " + nameof(Itemizer) + " path, please enter a valid path below. \nIt is required that it containes \"Resources\".");
+            GUILayout.Label("To update the " + nameof(Itemizer) + " path, please enter a valid path below. \nIt is required that it contains \"Resources\".");
             DrawLineHorizontal();
             GUILayout.BeginHorizontal();
             Vector2 textDimensions = GUI.skin.label.CalcSize(new GUIContent(Application.dataPath));

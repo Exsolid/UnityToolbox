@@ -29,14 +29,7 @@ namespace UnityToolbox.General.Algorithms
             {
                 for (int x = 0; x < gridToFill.GetLength(0); x++)
                 {
-                    if(x < borderSize || y < borderSize || x > gridToFill.GetLength(0) - borderSize - 1 || y > gridToFill.GetLength(1) - borderSize - 1)
-                    {
-                        gridToFill[y, x] = (int) TerrainValues.Wall;
-                    }
-                    else
-                    {
-                        gridToFill[y, x] = rand.NextDouble() < fillPercentage ? (int)TerrainValues.Wall : (int)TerrainValues.Floor;
-                    }
+                    gridToFill[x, y] = rand.NextDouble() < fillPercentage ? (int)TerrainValues.Wall : (int)TerrainValues.Floor;
                 }
             }
 
@@ -48,6 +41,12 @@ namespace UnityToolbox.General.Algorithms
                     for (int x = 0; x < newGrid.GetLength(0); x++)
                     {
                         int wallCount = 0;
+                        if (x < borderSize || y < borderSize || x > gridToFill.GetLength(0) - borderSize - 1 || y > gridToFill.GetLength(1) - borderSize - 1)
+                        {
+                            newGrid[x, y] = (int)TerrainValues.Wall;
+                            continue;
+                        }
+
                         for (int yN = -1; yN <= 1; yN++)
                         {
                             for (int xN = -1; xN <= 1; xN++)

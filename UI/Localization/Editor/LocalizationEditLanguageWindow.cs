@@ -36,7 +36,7 @@ namespace UnityToolbox.UI.Localization.Editor
 
         private void Awake()
         {
-            Localizzer.Instance.LanguageEdited += LanguageEdited;
+            Localizer.Instance.LanguageEdited += LanguageEdited;
             UpdateStatus("");
         }
 
@@ -63,7 +63,7 @@ namespace UnityToolbox.UI.Localization.Editor
             GUILayout.BeginHorizontal();
             if (GUILayout.Button("Cancel"))
             {
-                Localizzer.Instance.LanguageEdited -= LanguageEdited;
+                Localizer.Instance.LanguageEdited -= LanguageEdited;
                 Close();
             }
 
@@ -71,9 +71,9 @@ namespace UnityToolbox.UI.Localization.Editor
             {
                 try
                 {
-                    Localizzer.Instance.EditLanguage(_language, _newLanguageName, _newLanguageShort);
-                    Localizzer.Instance.LanguageEdited -= LanguageEdited;
-                    Localizzer.Instance.WriteData();
+                    Localizer.Instance.EditLanguage(_language, _newLanguageName, _newLanguageShort);
+                    Localizer.Instance.LanguageEdited -= LanguageEdited;
+                    Localizer.Instance.WriteData();
                     AssetDatabase.Refresh();
                     Close();
                 }
@@ -106,7 +106,7 @@ namespace UnityToolbox.UI.Localization.Editor
         {
             if (_language.Equals(language))
             {
-                Localizzer.Instance.LanguageEdited -= LanguageEdited;
+                Localizer.Instance.LanguageEdited -= LanguageEdited;
                 Close();
             }
         }

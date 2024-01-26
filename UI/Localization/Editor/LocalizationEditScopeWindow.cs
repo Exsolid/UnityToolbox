@@ -34,7 +34,7 @@ namespace UnityToolbox.UI.Localization.Editor
 
         private void Awake()
         {
-            Localizzer.Instance.ScopeEdited += ScopeEdited;
+            Localizer.Instance.ScopeEdited += ScopeEdited;
             UpdateStatus("");
         }
 
@@ -56,7 +56,7 @@ namespace UnityToolbox.UI.Localization.Editor
             GUILayout.BeginHorizontal();
             if (GUILayout.Button("Cancel"))
             {
-                Localizzer.Instance.ScopeEdited -= ScopeEdited;
+                Localizer.Instance.ScopeEdited -= ScopeEdited;
                 Close();
             }
 
@@ -64,9 +64,9 @@ namespace UnityToolbox.UI.Localization.Editor
             {
                 try
                 {
-                    Localizzer.Instance.EditScope(_scope, _newScopeName);
-                    Localizzer.Instance.ScopeEdited -= ScopeEdited;
-                    Localizzer.Instance.WriteData();
+                    Localizer.Instance.EditScope(_scope, _newScopeName);
+                    Localizer.Instance.ScopeEdited -= ScopeEdited;
+                    Localizer.Instance.WriteData();
                     AssetDatabase.Refresh();
                     Close();
                 }
@@ -99,7 +99,7 @@ namespace UnityToolbox.UI.Localization.Editor
         {
             if (_scope.Equals(scope))
             {
-                Localizzer.Instance.ScopeEdited -= ScopeEdited;
+                Localizer.Instance.ScopeEdited -= ScopeEdited;
                 Close();
             }
         }

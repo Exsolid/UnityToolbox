@@ -27,11 +27,11 @@ namespace UnityToolbox.UI.Settings.Language
             _displayText = GetComponent<Text>();
             _currentLanguage = PlayerPrefs.GetInt(_languagePref);
 
-            if (!Localizzer.Instance.IsInitialized)
+            if (!Localizer.Instance.IsInitialized)
             {
-                Localizzer.Instance.Initialize();
+                Localizer.Instance.Initialize();
             }
-            _LocalizationLanguages = Localizzer.Instance.LocalizationLanguages;
+            _LocalizationLanguages = Localizer.Instance.LocalizationLanguages;
 
             if (_currentLanguage >= _LocalizationLanguages.Count)
             {

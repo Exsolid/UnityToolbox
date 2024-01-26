@@ -33,7 +33,7 @@ namespace UnityToolbox.UI.Localization.Editor
 
         private void InitializeWindow()
         {
-            Localizzer.Instance.Initialize();
+            Localizer.Instance.Initialize();
             _searchIDString = "";
         }
 
@@ -52,7 +52,7 @@ namespace UnityToolbox.UI.Localization.Editor
 
             _scrollPos = GUILayout.BeginScrollView(_scrollPos);
 
-            string[] languages = Localizzer.Instance.LocalizationLanguages.Select(x => x.Name).ToArray();
+            string[] languages = Localizer.Instance.LocalizationLanguages.Select(x => x.Name).ToArray();
             string[] searchScopes = new string[] { "ID" };
             searchScopes = languages.Concat(searchScopes).ToArray();
 
@@ -71,7 +71,7 @@ namespace UnityToolbox.UI.Localization.Editor
 
             DrawLineHorizontal();
 
-            Dictionary<LocalizationID, Dictionary<LocalizationLanguage, string>> filtered = Localizzer.Instance.LocalizationData.ToDictionary(entry => entry.Key, entry => entry.Value.ToDictionary(entry => entry.Key, entry => entry.Value));
+            Dictionary<LocalizationID, Dictionary<LocalizationLanguage, string>> filtered = Localizer.Instance.LocalizationData.ToDictionary(entry => entry.Key, entry => entry.Value.ToDictionary(entry => entry.Key, entry => entry.Value));
 
             if (_selectedSearch == searchScopes.Count() - 1)
             {
@@ -80,8 +80,8 @@ namespace UnityToolbox.UI.Localization.Editor
             else
             {
                 filtered = filtered.Where(entry =>
-                !entry.Value.ContainsKey(Localizzer.Instance.LocalizationLanguages.ElementAt(_selectedSearch))
-                || entry.Value[Localizzer.Instance.LocalizationLanguages.ElementAt(_selectedSearch)]
+                !entry.Value.ContainsKey(Localizer.Instance.LocalizationLanguages.ElementAt(_selectedSearch))
+                || entry.Value[Localizer.Instance.LocalizationLanguages.ElementAt(_selectedSearch)]
                 .Contains(_searchIDString)).ToDictionary(entry => entry.Key, entry => entry.Value);
             }
 
@@ -91,9 +91,9 @@ namespace UnityToolbox.UI.Localization.Editor
                 GUILayout.BeginHorizontal("Box");
 
                 GUILayout.Label(pair.Key.GetQualifiedName(), GUILayout.Width(EditorGUIUtility.currentViewWidth / 3));
-                GUILayout.Label(pair.Value.ContainsKey(Localizzer.Instance.LocalizationLanguages.ElementAt(_selectedLanguage)) ? pair.Value[Localizzer.Instance.LocalizationLanguages.ElementAt(_selectedLanguage)] : "", GUILayout.Width(EditorGUIUtility.currentViewWidth / 3));
+                GUILayout.Label(pair.Value.ContainsKey(Localizer.Instance.LocalizationLanguages.ElementAt(_selectedLanguage)) ? pair.Value[Localizer.Instance.LocalizationLanguages.ElementAt(_selectedLanguage)] : "", GUILayout.Width(EditorGUIUtility.currentViewWidth / 3));
 
-                if (pair.Value.Count != Localizzer.Instance.LocalizationLanguages.Count)
+                if (pair.Value.Count != Localizer.Instance.LocalizationLanguages.Count)
                 {
                     GUILayout.Label("[REQUIRES EDIT]", GUILayout.Width(EditorGUIUtility.currentViewWidth / 3 - 95));
                 }
@@ -116,8 +116,8 @@ namespace UnityToolbox.UI.Localization.Editor
                 {
                     if (EditorUtility.DisplayDialog("Remove Localization", "Are you sure you want to delete the Localization '" + pair.Key.GetQualifiedName() + "'?", "Yes"))
                     {
-                        Localizzer.Instance.RemoveLocalization(pair.Key);
-                        Localizzer.Instance.WriteData();
+                        Localizer.Instance.RemoveLocalization(pair.Key);
+                        Localizer.Instance.WriteData();
                         AssetDatabase.Refresh();
                     }
                 }

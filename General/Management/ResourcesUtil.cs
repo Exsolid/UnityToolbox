@@ -139,6 +139,6 @@ namespace UnityToolbox.General.Management
             JsonSerializerSettings _settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
             string data = JsonConvert.SerializeObject(fileData, _settings);
             File.WriteAllText(GetLocalPath(key) + filename, data);
-        } 
+        }
     }
 }

@@ -15,10 +15,10 @@ namespace UnityToolbox.UI.Localization.Editor
             set
             {
                 _LocalizationID = value;
-                _newLocalizations = Localizzer.Instance.LocalizationData[value].ToDictionary(entry => entry.Key, entry => entry.Value);
+                _newLocalizations = Localizer.Instance.LocalizationData[value].ToDictionary(entry => entry.Key, entry => entry.Value);
                 _newIDName = value.Name;
                 int i = 0;
-                foreach (LocalizationScope scope in Localizzer.Instance.LocalizationScopes)
+                foreach (LocalizationScope scope in Localizer.Instance.LocalizationScopes)
                 {
                     if (scope.Equals(value.Scope))
                     {
@@ -47,9 +47,9 @@ namespace UnityToolbox.UI.Localization.Editor
 
         private void Awake()
         {
-            Localizzer.Instance.LanguageEdited += LanguageEdited;
-            Localizzer.Instance.ScopeEdited += ScopeEdited;
-            Localizzer.Instance.LocalizationIDEdited += LocalizationIDEdited;
+            Localizer.Instance.LanguageEdited += LanguageEdited;
+            Localizer.Instance.ScopeEdited += ScopeEdited;
+            Localizer.Instance.LocalizationIDEdited += LocalizationIDEdited;
             UpdateStatus("");
         }
 
@@ -64,11 +64,11 @@ namespace UnityToolbox.UI.Localization.Editor
             GUILayout.Label("Add Localization with ID: ");
             _newIDName = GUILayout.TextField(_newIDName, GUILayout.Width(200));
             GUILayout.Label(LocalizationID.DEVIDER.ToString(), GUILayout.Width(10));
-            string[] scopes = Localizzer.Instance.LocalizationScopes.Select(x => x.Name).ToArray();
+            string[] scopes = Localizer.Instance.LocalizationScopes.Select(x => x.Name).ToArray();
             _newSelectedScope = EditorGUILayout.Popup("", _newSelectedScope, scopes);
             GUILayout.EndHorizontal();
 
-            foreach (LocalizationLanguage language in Localizzer.Instance.LocalizationLanguages)
+            foreach (LocalizationLanguage language in Localizer.Instance.LocalizationLanguages)
             {
                 GUILayout.BeginHorizontal();
                 GUILayout.Label("Translate " + language.Name + ":");
@@ -97,15 +97,15 @@ namespace UnityToolbox.UI.Localization.Editor
                 {
                     LocalizationID newID = new LocalizationID();
                     newID.Name = _newIDName;
-                    newID.Scope = Localizzer.Instance.LocalizationScopes.ElementAt(_newSelectedScope);
+                    newID.Scope = Localizer.Instance.LocalizationScopes.ElementAt(_newSelectedScope);
                     if (!newID.Equals(_LocalizationID))
                     {
-                        Localizzer.Instance.EditLocalizationID(_LocalizationID, newID);
+                        Localizer.Instance.EditLocalizationID(_LocalizationID, newID);
                     }
 
-                    Localizzer.Instance.EditLocalization(newID, _newLocalizations);
+                    Localizer.Instance.EditLocalization(newID, _newLocalizations);
 
-                    Localizzer.Instance.WriteData();
+                    Localizer.Instance.WriteData();
                     AssetDatabase.Refresh();
                     Close();
                 }
@@ -151,9 +151,9 @@ namespace UnityToolbox.UI.Localization.Editor
 
         new public void Close()
         {
-            Localizzer.Instance.LanguageEdited -= LanguageEdited;
-            Localizzer.Instance.LocalizationIDEdited -= LocalizationIDEdited;
-            Localizzer.Instance.ScopeEdited -= ScopeEdited;
+            Localizer.Instance.LanguageEdited -= LanguageEdited;
+            Localizer.Instance.LocalizationIDEdited -= LocalizationIDEdited;
+            Localizer.Instance.ScopeEdited -= ScopeEdited;
             base.Close();
         }
     } 

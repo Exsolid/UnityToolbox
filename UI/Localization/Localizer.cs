@@ -11,20 +11,20 @@ namespace UnityToolbox.UI.Localization
     /// <summary>
     /// The heart of the Localization system. Every Localization, its serialisation and editing is managed here.
     /// </summary>
-    public class Localizzer
+    public class Localizer
     {
         public event Action<LocalizationScope> ScopeEdited;
         public event Action<LocalizationLanguage> LanguageEdited;
         public event Action<LocalizationID> LocalizationIDEdited;
 
-        private static Localizzer _instance;
-        public static Localizzer Instance
+        private static Localizer _instance;
+        public static Localizer Instance
         {
             get
             {
                 if (_instance == null)
                 {
-                    _instance = new Localizzer();
+                    _instance = new Localizer();
                 }
                 return _instance;
             }
@@ -87,17 +87,17 @@ namespace UnityToolbox.UI.Localization
 
             if (Localizations == null)
             {
-                throw new LocalizationException("The " + nameof(Localizzer) + " cannot add null as " + nameof(Localizations));
+                throw new LocalizationException("The " + nameof(Localizer) + " cannot add null as " + nameof(Localizations));
             }
 
             if (_LocalizationLanguages.Count != Localizations.Count)
             {
-                throw new LocalizationException("The " + nameof(Localizzer) + " knows " + _LocalizationLanguages.Count + " languages, but " + Localizations.Count + " were given.");
+                throw new LocalizationException("The " + nameof(Localizer) + " knows " + _LocalizationLanguages.Count + " languages, but " + Localizations.Count + " were given.");
             }
 
             if (_LocalizationData.ContainsKey(LocalizationID))
             {
-                throw new LocalizationException("The " + nameof(Localizzer) + " already contains Localizations for the ID " + LocalizationID + ".");
+                throw new LocalizationException("The " + nameof(Localizer) + " already contains Localizations for the ID " + LocalizationID + ".");
             }
 
             foreach (LocalizationLanguage langInData in _LocalizationLanguages)
@@ -371,17 +371,17 @@ namespace UnityToolbox.UI.Localization
 
             if (Localizations == null)
             {
-                throw new LocalizationException("The " + nameof(Localizzer) + " cannot edit null as " + nameof(Localizations));
+                throw new LocalizationException("The " + nameof(Localizer) + " cannot edit null as " + nameof(Localizations));
             }
 
             if (_LocalizationLanguages.Count != Localizations.Count)
             {
-                throw new LocalizationException("The " + nameof(Localizzer) + " knows " + _LocalizationLanguages.Count + " languages, but " + Localizations.Count + " were given.");
+                throw new LocalizationException("The " + nameof(Localizer) + " knows " + _LocalizationLanguages.Count + " languages, but " + Localizations.Count + " were given.");
             }
 
             if (!_LocalizationData.ContainsKey(LocalizationID))
             {
-                throw new LocalizationException("The " + nameof(Localizzer) + " does not contain Localizations for the ID " + LocalizationID + ".");
+                throw new LocalizationException("The " + nameof(Localizer) + " does not contain Localizations for the ID " + LocalizationID + ".");
             }
 
             foreach (LocalizationLanguage langInData in _LocalizationLanguages)
@@ -418,14 +418,14 @@ namespace UnityToolbox.UI.Localization
                         serializableDictionary[serializableDictionary.Count - 1].Value.Add(locaPair);
                     }
                 }
-                ResourcesUtil.WriteFile(ProjectPrefKeys.LocalizATIONSAVEPATH, _dataPath, serializableDictionary);
-                ResourcesUtil.WriteFile(ProjectPrefKeys.LocalizATIONSAVEPATH, _languagesDataPath, _LocalizationLanguages);
-                ResourcesUtil.WriteFile(ProjectPrefKeys.LocalizATIONSAVEPATH, _scopesDataPath, _LocalizationScopes);
+                ResourcesUtil.WriteFile(ProjectPrefKeys.LOCALIZATIONSAVEPATH, _dataPath, serializableDictionary);
+                ResourcesUtil.WriteFile(ProjectPrefKeys.LOCALIZATIONSAVEPATH, _languagesDataPath, _LocalizationLanguages);
+                ResourcesUtil.WriteFile(ProjectPrefKeys.LOCALIZATIONSAVEPATH, _scopesDataPath, _LocalizationScopes);
             }
         }
 
         /// <summary>
-        /// Initializes the <see cref="Localizzer"/>. This is required due to its dependency on a valid path.
+        /// Initializes the <see cref="Localizer"/>. This is required due to its dependency on a valid path.
         /// </summary>
         public void Initialize()
         {
@@ -438,8 +438,8 @@ namespace UnityToolbox.UI.Localization
             _defaultScope.Name = "DefaultScope";
             _LocalizationScopes.Add(_defaultScope);
 
-            if (ProjectPrefs.GetString(ProjectPrefKeys.LocalizATIONSAVEPATH) == null || ProjectPrefs.GetString(ProjectPrefKeys.LocalizATIONSAVEPATH).Equals("")
-                || (Application.isEditor && !ResourcesUtil.IsFullPathValid(Application.dataPath + "/" + ProjectPrefs.GetString(ProjectPrefKeys.LocalizATIONSAVEPATH))))
+            if (ProjectPrefs.GetString(ProjectPrefKeys.LOCALIZATIONSAVEPATH) == null || ProjectPrefs.GetString(ProjectPrefKeys.LOCALIZATIONSAVEPATH).Equals("")
+                || (Application.isEditor && !ResourcesUtil.IsFullPathValid(Application.dataPath + "/" + ProjectPrefs.GetString(ProjectPrefKeys.LOCALIZATIONSAVEPATH))))
             {
                 _isInitialized = false;
                 return;
@@ -447,7 +447,7 @@ namespace UnityToolbox.UI.Localization
 
             _isInitialized = true;
 
-            _LocalizationLanguages = ResourcesUtil.GetFileData<HashSet<LocalizationLanguage>>(ProjectPrefKeys.LocalizATIONSAVEPATH, _languagesDataPath);
+            _LocalizationLanguages = ResourcesUtil.GetFileData<HashSet<LocalizationLanguage>>(ProjectPrefKeys.LOCALIZATIONSAVEPATH, _languagesDataPath);
 
             if (_LocalizationLanguages == null)
             {
@@ -456,8 +456,8 @@ namespace UnityToolbox.UI.Localization
             }
 
             List<KeyValuePair<LocalizationID, List<KeyValuePair<LocalizationLanguage, string>>>> serializableDictionary
-                = ResourcesUtil.GetFileData<List<KeyValuePair<LocalizationID, List<KeyValuePair<LocalizationLanguage, string>>>>>(ProjectPrefKeys.LocalizATIONSAVEPATH, _dataPath);
-            _LocalizationScopes = ResourcesUtil.GetFileData<HashSet<LocalizationScope>>(ProjectPrefKeys.LocalizATIONSAVEPATH, _scopesDataPath);
+                = ResourcesUtil.GetFileData<List<KeyValuePair<LocalizationID, List<KeyValuePair<LocalizationLanguage, string>>>>>(ProjectPrefKeys.LOCALIZATIONSAVEPATH, _dataPath);
+            _LocalizationScopes = ResourcesUtil.GetFileData<HashSet<LocalizationScope>>(ProjectPrefKeys.LOCALIZATIONSAVEPATH, _scopesDataPath);
 
             foreach (KeyValuePair<LocalizationID, List<KeyValuePair<LocalizationLanguage, string>>> pair in serializableDictionary)
             {

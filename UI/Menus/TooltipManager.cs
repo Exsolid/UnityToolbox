@@ -36,12 +36,12 @@ namespace UnityToolbox.UI.Menus
 
             _languagePref = ModuleManager.GetModule<PlayerPrefKeys>().GetPrefereceKey(PlayerPrefKeys.LANGUAGE);
 
-            if (!Localizzer.Instance.IsInitialized)
+            if (!Localizer.Instance.IsInitialized)
             {
-                Localizzer.Instance.Initialize();
+                Localizer.Instance.Initialize();
             }
 
-            _allLanguages = Localizzer.Instance.LocalizationLanguages.ToList();
+            _allLanguages = Localizer.Instance.LocalizationLanguages.ToList();
         }
 
         /// <summary>
@@ -129,7 +129,7 @@ namespace UnityToolbox.UI.Menus
 
         private string GetLocalizzedText(LocalizationID LocalizationID)
         {
-            KeyValuePair<LocalizationID, Dictionary<LocalizationLanguage, string>> temp = Localizzer.Instance.LocalizationData.Where(e => e.Key.Equals(LocalizationID)).FirstOrDefault();
+            KeyValuePair<LocalizationID, Dictionary<LocalizationLanguage, string>> temp = Localizer.Instance.LocalizationData.Where(e => e.Key.Equals(LocalizationID)).FirstOrDefault();
             string displayString = temp.Value == null ? "LocalizationID not valid!" : temp.Value[_allLanguages.ElementAt(PlayerPrefs.GetInt(_languagePref))];
 
             return displayString;

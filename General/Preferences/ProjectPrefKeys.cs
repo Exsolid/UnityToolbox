@@ -6,9 +6,10 @@ namespace UnityToolbox.General.Preferences
     public static class ProjectPrefKeys
     {
         public readonly static string UNITYTOOLBOXPATH = "UnityToolboxPath";
-        public readonly static string LocalizATIONSAVEPATH = "LocalizationSavePath";
+        public readonly static string LOCALIZATIONSAVEPATH = "LocalizationSavePath";
         public readonly static string DIALOGSAVEPATH = "DialogSavePath";
         public readonly static string ITEMDATASAVEPATH = "ItemDataSavePath";
         public readonly static string GAMESTATEDATASAVEPATH = "GamestateDataSavePath";
+        public readonly static string PROCEDURALGENERATIONDATAPATH = "ProceduralGenerationDataPath";
     }
 }
