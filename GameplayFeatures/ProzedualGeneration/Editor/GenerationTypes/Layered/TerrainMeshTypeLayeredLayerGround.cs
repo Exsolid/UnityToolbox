@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityToolbox.GameplayFeatures.ProzedualGeneration.Data;
+using UnityToolbox.GameplayFeatures.SerializationData;
 using UnityToolbox.General;
 
 namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor.GenerationTypes.Layered
@@ -47,7 +48,7 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor.GenerationTyp
 
             GUILayout.BeginHorizontal();
             GUILayout.Label("Height Colors: ");
-            if (GUILayout.Button("+", GUILayout.Width(20)))
+            if (GUILayout.Button(">", GUILayout.Width(20)))
             {
                 _heightColors = TerrainGenerationHeightColorsWindow.Open();
                 _heightColors.Deserialize(data.HeightData);
@@ -69,9 +70,21 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor.GenerationTyp
             GUILayout.EndVertical();
         }
 
-        protected override void DeserializeRest(TerrainMeshTypeLayeredLayerBaseData obj)
+        protected override SerializedDataErrorDetails DeserializeRest(TerrainMeshTypeLayeredLayerBaseData obj, SerializedDataErrorDetails err)
         {
-            _data = obj;
+            _data = obj as TerrainMeshTypeLayeredLayerGroundData;
+            if (obj is TerrainMeshTypeLayeredLayerGroundData data)
+            {
+                SerializedDataErrorDetails temp = TerrainGenerationHeightColorsWindow.DummyDeserialize(data.HeightData);
+                if (temp.HasErrors)
+                {
+                    err.HasErrors = true;
+                    err.Traced.Add(temp);
+                    err.ErrorDescription = err.Traced.Count + " asset errors have been found in the asset layers.";
+                }
+            }
+
+            return err;
         }
 
         protected override TerrainMeshTypeLayeredLayerBaseData SerializeRest()

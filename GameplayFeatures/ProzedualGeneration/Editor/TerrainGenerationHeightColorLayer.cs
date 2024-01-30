@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 using UnityToolbox.GameplayFeatures.ProzedualGeneration.Data;
 using UnityToolbox.GameplayFeatures.SerializationData;
+using UnityToolbox.General;
 using UnityToolbox.General.Management.Editor;
 
 namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor
@@ -11,6 +14,7 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor
     public class TerrainGenerationHeightColorLayer: ISerializedDataContainer<TerrainGenerationHeightColorData>
     {
         private TerrainGenerationHeightColorsWindow _parent;
+        private bool _rewriteErrors;
 
         private TerrainGenerationHeightColorData _data;
         public TerrainGenerationHeightColorData Data
@@ -33,32 +37,47 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor
             _data.CurrentPos = currentPos;
         }
 
-        public void Deserialize(TerrainGenerationHeightColorData obj)
+        public SerializedDataErrorDetails Deserialize(TerrainGenerationHeightColorData obj)
         {
+            SerializedDataErrorDetails err = new SerializedDataErrorDetails();
             _data = obj;
             if (_data.TerrainTexturePath != null)
             {
-                try
+                _data.TerrainTexture = EditorResourceUtil.GetAssetWithResourcesPath<Texture2D>(_data.TerrainTexturePath);
+                if (_data.TerrainTexture == null)
                 {
-                    _data.TerrainTexture = EditorResourceUtil.GetAssetWithPath<Texture2D>(_data.TerrainTexturePath);
-                }
-                catch
-                {
-                    _data.TerrainTexture = EditorResourceUtil.GetAssetWithGUID<Texture2D>(_data.TerrainTextureGUID);
-                    _data.TerrainTexturePath = EditorResourceUtil.GetAssetPathWithAsset(_data.TerrainTexture);
+                    string prevPath = _data.TerrainTexturePath;
+                    try
+                    {
+                        _data.TerrainTexture = EditorResourceUtil.GetAssetWithGUID<Texture2D>(_data.TerrainTextureGUID);
+                        _data.TerrainTexturePath = EditorResourceUtil.GetResourcesPathWithAsset(_data.TerrainTexture);
+
+                        if (_data.TerrainTexture == null)
+                        {
+                            throw new SystemException();
+                        }
+                    }
+                    catch
+                    {
+                        err.HasErrors = true;
+                        err.ErrorDescription = "The asset at path: " + prevPath + " cannot be found anymore.";
+                        _data.TerrainTexturePath = prevPath;
+                    }
                 }
             }
             _data.TerrainColor = _data.TerrainColorData.GetColor();
+            _rewriteErrors = err.HasErrors;
+            return err;
         }
 
         public TerrainGenerationHeightColorData Serialize()
         {
             if (_data.TerrainTexture != null)
             {
-                _data.TerrainTexturePath = EditorResourceUtil.GetAssetPathWithAsset(_data.TerrainTexture);
+                _data.TerrainTexturePath = EditorResourceUtil.GetResourcesPathWithAsset(_data.TerrainTexture);
                 _data.TerrainTextureGUID = EditorResourceUtil.GetGUIDOfAsset(_data.TerrainTexture).ToString();
             }
-            else
+            else if(!_rewriteErrors)
             {
                 _data.TerrainTexturePath = null;
                 _data.TerrainTextureGUID = null;
@@ -78,7 +97,6 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor
             DrawHeader();
 
             DrawLineHorizontal();
-
 
             DrawColorDetails();
 
@@ -113,8 +131,24 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor
 
             GUILayout.BeginHorizontal();
             GUILayout.Label("Texture: ");
-            _data.TerrainTexture = (Texture2D)EditorGUILayout.ObjectField(_data.TerrainTexture, typeof(Texture2D), false, GUILayout.Width(70), GUILayout.Height(70));
-            //TODO Check if resource object and move
+            Texture2D prev = _data.TerrainTexture;
+            _data.TerrainTexture = (Texture2D)EditorGUILayout.ObjectField(_data.TerrainTexture, typeof(Texture2D), false, GUILayout.Width(70), GUILayout.Height(70));       
+            if (_data.TerrainTexture != null && !_data.TerrainTexture.Equals(prev))
+            {
+                if (!EditorResourceUtil.IsAssetValid(_data.TerrainTexture))
+                {
+                    _data.TerrainTexture = prev;
+                    TerrainGenerationEditorEvents.Instance.UpdateStatus("The path belonging to the terrain texture is not a \"Resource\" directory.");
+                }
+                else
+                {
+                    TerrainGenerationEditorEvents.Instance.UpdateStatus("Updated the terrain texture.");
+                }
+            }
+            else if (_data.TerrainTexture == null && prev != null)
+            {
+                TerrainGenerationEditorEvents.Instance.UpdateStatus("Updated the terrain texture.");
+            }
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();

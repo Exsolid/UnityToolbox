@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityToolbox.GameplayFeatures.ProzedualGeneration.Data;
+using UnityToolbox.GameplayFeatures.SerializationData;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
 namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor.GenerationTypes.Layered
@@ -15,6 +16,11 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor.GenerationTyp
         private Vector2 _scrollPos;
 
         public TerrainMeshTypeLayered()
+        {
+            Init();
+        }
+
+        private void Init()
         {
             _layers = new List<TerrainMeshTypeLayeredLayer>();
             _layers.Add(new TerrainMeshTypeLayeredLayerGround(this, _layers.Count, true, "Base Layer"));
@@ -91,22 +97,38 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor.GenerationTyp
             return true;
         }
 
-        public override void Deserialize(TerrainMeshTypeBaseData obj)
+        public override SerializedDataErrorDetails Deserialize(TerrainMeshTypeBaseData obj)
         {
-            _layers.Clear();
-            TerrainMeshTypeLayeredData layered = (TerrainMeshTypeLayeredData) obj;
-            foreach (TerrainMeshTypeLayeredLayerBaseData layer in layered.Layers)
+            SerializedDataErrorDetails err = new SerializedDataErrorDetails();
+            TerrainMeshTypeLayeredData layered = (TerrainMeshTypeLayeredData)obj;
+            if (layered.Layers != null && layered.Layers.Count != 0)
             {
-                if (layer.GetType() == typeof(TerrainMeshTypeLayeredLayerGroundData))
+                _layers.Clear();
+                foreach (TerrainMeshTypeLayeredLayerBaseData layer in layered.Layers)
                 {
-                    _layers.Insert(layer.CurrentPos, new TerrainMeshTypeLayeredLayerGround(this, layer.CurrentPos));
-                    _layers[layer.CurrentPos].Deserialize(layer);
-                }
-                else
-                {
-                    //TODO create void layer
+                    if (layer.GetType() == typeof(TerrainMeshTypeLayeredLayerGroundData))
+                    {
+                        _layers.Insert(layer.CurrentPos, new TerrainMeshTypeLayeredLayerGround(this, layer.CurrentPos));
+                        SerializedDataErrorDetails temp = _layers[layer.CurrentPos].Deserialize(layer);
+                        if (temp.HasErrors)
+                        {
+                            err.HasErrors = true;
+                            err.Traced.Add(temp);
+                            err.ErrorDescription = err.Traced.Count + " mesh layers contain asset errors.";
+                        }
+                    }
+                    else
+                    {
+                        //TODO create void layer
+                    }
                 }
             }
+            else
+            {
+                Init();
+            }
+
+            return err;
         }
 
         public override TerrainMeshTypeBaseData Serialize()

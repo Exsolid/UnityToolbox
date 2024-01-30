@@ -15,7 +15,7 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor.GenerationTyp
 
         public abstract int[,] GetExampleGeneration(int x, int y);
 
-        public abstract void Deserialize(TerrainGenerationTypeBaseData obj);
+        public abstract SerializedDataErrorDetails Deserialize(TerrainGenerationTypeBaseData obj);
         public abstract TerrainGenerationTypeBaseData Serialize();
     }
 }

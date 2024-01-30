@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -5,6 +6,7 @@ using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityToolbox.GameplayFeatures.ProzedualGeneration.Data;
 using UnityToolbox.GameplayFeatures.ProzedualGeneration.Enums;
+using UnityToolbox.GameplayFeatures.SerializationData;
 using UnityToolbox.General.Management.Editor;
 
 namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor.GenerationTypes.Layered
@@ -14,6 +16,11 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor.GenerationTyp
         private TerrainGenerationLayeredAssetClusterData _asset;
 
         public TerrainGenerationLayeredAssetLayerClustered(TerrainMeshTypeLayeredLayer parent) : base(parent)
+        {
+            Init();
+        }
+
+        private void Init()
         {
             _asset = new TerrainGenerationLayeredAssetClusterData();
             _asset.Assets = new List<TerrainGenerationLayeredAssetData>();
@@ -59,8 +66,24 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor.GenerationTyp
 
                 GUILayout.BeginHorizontal();
                 GUILayout.Label("Prefab: ");
+                GameObject prev = asset.Prefab;
                 asset.Prefab = (GameObject)EditorGUILayout.ObjectField(asset.Prefab, typeof(GameObject), false, GUILayout.Width(180));
-                //TODO Check if resource object and move
+                if (asset.Prefab != null && !asset.Prefab.Equals(prev))
+                {
+                    if (!EditorResourceUtil.IsAssetValid(asset.Prefab))
+                    {
+                        asset.Prefab = prev;
+                        TerrainGenerationEditorEvents.Instance.UpdateStatus("The path belonging to the prefab is not a \"Resource\" directory.");
+                    }
+                    else
+                    {
+                        TerrainGenerationEditorEvents.Instance.UpdateStatus( "Updated the prefab.");
+                    }
+                }
+                else if (asset.Prefab == null && prev != null)
+                {
+                    TerrainGenerationEditorEvents.Instance.UpdateStatus("Updated the prefab.");
+                }
                 GUILayout.EndHorizontal();
 
                 GUILayout.BeginHorizontal();
@@ -89,27 +112,55 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor.GenerationTyp
             _asset.Assets = assets;
         }
 
-        public override void Deserialize(TerrainGenerationLayeredAssetBaseData obj)
+        public override SerializedDataErrorDetails Deserialize(TerrainGenerationLayeredAssetBaseData obj)
         {
+            SerializedDataErrorDetails err = new SerializedDataErrorDetails();
             _asset = obj as TerrainGenerationLayeredAssetClusterData;
-            List<TerrainGenerationLayeredAssetData> assets = _asset.Assets;
-            for (int i = 0; i < _asset.Assets.Count; i++)
+            if (_asset != null && _asset.Assets != null && _asset.Assets.Count != 0)
             {
-                TerrainGenerationLayeredAssetData asset = _asset.Assets[i];
-                if (asset.PrefabPath != null)
+                List<TerrainGenerationLayeredAssetData> assets = _asset.Assets;
+                for (int i = 0; i < _asset.Assets.Count; i++)
                 {
-                    try
+                    TerrainGenerationLayeredAssetData asset = _asset.Assets[i];
+                    if (asset.PrefabPath != null)
                     {
-                        asset.Prefab = EditorResourceUtil.GetAssetWithPath<GameObject>(asset.PrefabPath);
-                    }
-                    catch
-                    {
-                        asset.Prefab = EditorResourceUtil.GetAssetWithGUID<GameObject>(asset.PrefabGUID);
-                        asset.PrefabPath = EditorResourceUtil.GetAssetPathWithAsset(asset.Prefab);
+                        asset.Prefab = EditorResourceUtil.GetAssetWithResourcesPath<GameObject>(asset.PrefabPath);
+                        if (asset.Prefab == null)
+                        {
+                            string prevPath = asset.PrefabPath;
+                            try
+                            {
+                                asset.Prefab = EditorResourceUtil.GetAssetWithGUID<GameObject>(asset.PrefabGUID);
+                                asset.PrefabPath = EditorResourceUtil.GetResourcesPathWithAsset(asset.Prefab);
+
+                                if (asset.Prefab == null)
+                                {
+                                    throw new SystemException();
+                                }
+                            }
+                            catch
+                            {
+                                SerializedDataErrorDetails temp = new SerializedDataErrorDetails();
+                                temp.HasErrors = true;
+                                temp.ErrorDescription = "The asset at path: " + prevPath + " cannot be found anymore.";
+                                err.ErrorDescription = "The clustered asset contains asset errors.";
+                                err.Traced.Add(temp);
+                                err.HasErrors = true;
+                                asset.PrefabPath = prevPath;
+                            }
+                        }
                     }
                 }
+                _asset.Assets = assets;
             }
-            _asset.Assets = assets;
+            else
+            {
+                Init();
+            }
+
+            _rewriteErrors = err.HasErrors;
+
+            return err;
         }
 
         public override TerrainGenerationLayeredAssetBaseData Serialize()
@@ -120,10 +171,10 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor.GenerationTyp
                 TerrainGenerationLayeredAssetData asset = _asset.Assets[i];
                 if (asset.Prefab != null)
                 {
-                    asset.PrefabPath = EditorResourceUtil.GetAssetPathWithAsset(asset.Prefab);
+                    asset.PrefabPath = EditorResourceUtil.GetResourcesPathWithAsset(asset.Prefab);
                     asset.PrefabGUID = EditorResourceUtil.GetGUIDOfAsset(asset.Prefab).ToString();
                 }
-                else
+                else if(!_rewriteErrors)
                 {
                     asset.PrefabPath = null;
                     asset.PrefabGUID = null;

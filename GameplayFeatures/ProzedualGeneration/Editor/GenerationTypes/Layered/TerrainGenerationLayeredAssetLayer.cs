@@ -10,8 +10,9 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor.GenerationTyp
     public abstract class TerrainGenerationLayeredAssetLayer : ISerializedDataContainer<TerrainGenerationLayeredAssetBaseData>
     {
         private TerrainMeshTypeLayeredLayer _parent;
+        protected bool _rewriteErrors;
 
-        public TerrainGenerationLayeredAssetLayer(TerrainMeshTypeLayeredLayer parent)
+        protected TerrainGenerationLayeredAssetLayer(TerrainMeshTypeLayeredLayer parent)
         {
             _parent = parent;
         }
@@ -20,7 +21,7 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor.GenerationTyp
         {
 
             Color col = GUI.color;
-            if (this.GetType().Equals(typeof(TerrainGenerationLayeredAssetLayerClustered)))
+            if (this.GetType() == typeof(TerrainGenerationLayeredAssetLayerClustered))
             {
                 GUI.color = new Color(245f / 255f, 132f / 255f, 66f / 255f, 0.4f);
             }
@@ -61,7 +62,7 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor.GenerationTyp
             EditorGUILayout.Space();
         }
 
-        public abstract void Deserialize(TerrainGenerationLayeredAssetBaseData obj);
+        public abstract SerializedDataErrorDetails Deserialize(TerrainGenerationLayeredAssetBaseData obj);
         public abstract TerrainGenerationLayeredAssetBaseData Serialize();
     }
 }

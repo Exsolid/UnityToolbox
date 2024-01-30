@@ -12,7 +12,7 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor.GenerationTyp
     public abstract class TerrainMeshTypeLayeredLayer: ISerializedDataContainer<TerrainMeshTypeLayeredLayerBaseData>
     {
         private TerrainMeshTypeLayered _parent;
-
+        public string GeneratorName;
 
         protected TerrainMeshTypeLayeredLayerBaseData _data;
 
@@ -164,24 +164,39 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor.GenerationTyp
             GUILayout.EndVertical();
         }
 
-        public void Deserialize(TerrainMeshTypeLayeredLayerBaseData obj)
+        public SerializedDataErrorDetails Deserialize(TerrainMeshTypeLayeredLayerBaseData obj)
         {
-            foreach (TerrainGenerationLayeredAssetBaseData layer in obj.AssetPlacements)
+            SerializedDataErrorDetails err = new SerializedDataErrorDetails();
+            if (obj.AssetPlacements != null && obj.AssetPlacements.Count != 0)
             {
-                if (layer.GetType() == typeof(TerrainGenerationLayeredAssetData))
+                foreach (TerrainGenerationLayeredAssetBaseData layer in obj.AssetPlacements)
                 {
-                    _assetPlacements.Add(new TerrainGenerationLayeredAssetLayerSingle(this));
+                    if (layer.GetType() == typeof(TerrainGenerationLayeredAssetData))
+                    {
+                        _assetPlacements.Add(new TerrainGenerationLayeredAssetLayerSingle(this));
+                    }
+                    else
+                    {
+                        _assetPlacements.Add(new TerrainGenerationLayeredAssetLayerClustered(this));
+                    }
+                    SerializedDataErrorDetails temp = _assetPlacements.Last().Deserialize(layer);
+                    if (temp.HasErrors)
+                    {
+                        err.HasErrors = true;
+                        err.Traced.Add(temp);
+                        err.ErrorDescription = err.Traced.Count + " asset errors have been found in the asset layers.";
+                    }
                 }
-                else
-                {
-                    _assetPlacements.Add(new TerrainGenerationLayeredAssetLayerClustered(this));
-                }
-                _assetPlacements.Last().Deserialize(layer);
             }
-            DeserializeRest(obj);
+            else
+            {
+                _assetPlacements = new List<TerrainGenerationLayeredAssetLayer>();
+            }
+            err = DeserializeRest(obj, err);
+            return err;
         }
 
-        protected abstract void DeserializeRest(TerrainMeshTypeLayeredLayerBaseData obj);
+        protected abstract SerializedDataErrorDetails DeserializeRest(TerrainMeshTypeLayeredLayerBaseData obj, SerializedDataErrorDetails err);
 
         public TerrainMeshTypeLayeredLayerBaseData Serialize()
         {

@@ -21,7 +21,7 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor.GenerationTyp
             EditorGUILayout.Space();
         }
 
-        public abstract void Deserialize(TerrainMeshTypeBaseData obj);
+        public abstract SerializedDataErrorDetails Deserialize(TerrainMeshTypeBaseData obj);
         public abstract TerrainMeshTypeBaseData Serialize();
     }
 }

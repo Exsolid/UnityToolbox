@@ -128,8 +128,31 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor
             return true;
         }
 
-        public void Deserialize(List<TerrainGenerationHeightColorData> data)
+        public static SerializedDataErrorDetails DummyDeserialize(List<TerrainGenerationHeightColorData> data)
         {
+            SerializedDataErrorDetails err = new SerializedDataErrorDetails();
+            if (data != null && data.Count != 0)
+            {
+                foreach (TerrainGenerationHeightColorData layer in data)
+                {
+                    TerrainGenerationHeightColorLayer temp = new TerrainGenerationHeightColorLayer(null, 0);
+                    SerializedDataErrorDetails tempErr = temp.Deserialize(layer);
+
+                    if (tempErr.HasErrors)
+                    {
+                        err.HasErrors = true;
+                        err.Traced.Add(tempErr);
+                        err.ErrorDescription = err.Traced.Count + " height color layers have asset errors.";
+                    }
+                }
+            }
+
+            return err;
+        }
+
+        public SerializedDataErrorDetails Deserialize(List<TerrainGenerationHeightColorData> data)
+        {
+            SerializedDataErrorDetails err = new SerializedDataErrorDetails();
             if (data != null && data.Count != 0)
             {
                 _layers.Clear();
@@ -137,9 +160,21 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor
                 foreach (TerrainGenerationHeightColorData layer in _layersData)
                 {
                     _layers.Add(new TerrainGenerationHeightColorLayer(this, _layers.Count));
-                    _layers.Last().Deserialize(layer);
+                    SerializedDataErrorDetails temp = _layers.Last().Deserialize(layer);
+                    if (temp.HasErrors)
+                    {
+                        err.HasErrors = true;
+                        err.Traced.Add(temp);
+                        err.ErrorDescription = err.Traced.Count + " height color layers have asset errors.";
+                    }
                 }
             }
+            else
+            {
+                InitializeWindow();
+            }
+
+            return err;
         }
 
         public List<TerrainGenerationHeightColorData> Serialize()
@@ -160,17 +195,12 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor
 
         void OnEnable()
         {
-            AssemblyReloadEvents.afterAssemblyReload += OnAfterAssemblyReload;
+            TerrainGenerationEditorEvents.Instance.OnClose += Close;
         }
 
         void OnDisable()
         {
-            AssemblyReloadEvents.afterAssemblyReload -= OnAfterAssemblyReload;
-        }
-
-        public void OnAfterAssemblyReload()
-        {
-            Close();
+            TerrainGenerationEditorEvents.Instance.OnClose -= Close;
         }
 
         private void UpdateStatus(StatusException error)

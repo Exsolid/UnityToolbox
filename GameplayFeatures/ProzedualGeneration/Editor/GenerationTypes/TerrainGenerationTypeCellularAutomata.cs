@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityToolbox.GameplayFeatures.ProzedualGeneration.Data;
+using UnityToolbox.GameplayFeatures.SerializationData;
 using UnityToolbox.General.Algorithms;
 
 namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor.GenerationTypes
@@ -47,9 +48,10 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor.GenerationTyp
             return CellularAutomata.Generate(new int[x, y], data.FillPct, data.IterationCount, data.BorderSize);
         }
 
-        public override void Deserialize(TerrainGenerationTypeBaseData obj)
+        public override SerializedDataErrorDetails Deserialize(TerrainGenerationTypeBaseData obj)
         {
             _data = (TerrainGenerationTypeCellularAutomataData) obj;
+            return new SerializedDataErrorDetails();
         }
 
         public override TerrainGenerationTypeBaseData Serialize()
