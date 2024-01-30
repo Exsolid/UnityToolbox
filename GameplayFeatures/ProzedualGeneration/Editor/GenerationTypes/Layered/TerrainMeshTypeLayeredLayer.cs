@@ -66,7 +66,7 @@ namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor.GenerationTyp
             }
             else
             {
-                _data.Name = GUILayout.TextField(_data.Name);
+                _data.Name = GUILayout.TextField(_data.Name, GUILayout.Width(200));
             }
             GUILayout.EndHorizontal();
 
