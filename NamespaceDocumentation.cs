@@ -83,22 +83,22 @@ namespace UnityToolbox.GameplayFeatures.Gamestates.Editor { }
 /// <summary>
 /// This namespace contains everything used for Procedural generation.
 /// </summary>
-namespace UnityToolbox.GameplayFeatures.ProzedualGeneration { }
+namespace UnityToolbox.GameplayFeatures.ProceduralGeneration { }
 
 /// <summary>
 /// This namespace contains everything used for Procedural generation on the editor side.
 /// </summary>
-namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor { }
+namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor { }
 
 /// <summary>
 /// This namespace contains all enums used for Procedural generation.
 /// </summary>
-namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Enums { }
+namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Enums { }
 
 /// <summary>
 /// This namespace contains all scripts used for Procedural terrain generation.
 /// </summary>
-namespace UnityToolbox.GameplayFeatures.ProzedualGeneration.Terrain { }
+namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain { }
 
 /// <summary>
 /// This namespace contains all scripts used for save games.
