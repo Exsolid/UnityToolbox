@@ -9,29 +9,34 @@ using UnityEngine.UIElements;
 using UnityToolbox.GameplayFeatures.ProceduralGeneration.Data;
 using UnityToolbox.GameplayFeatures.ProceduralGeneration.Enums;
 using UnityToolbox.General.Algorithms;
+using Object = UnityEngine.Object;
 
 namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain
 {
     public class TerrainGenerationLayered : TerrainGenerationGenerator
     {
+        private GameObject _terrainObject;
         private TerrainGenerationData _data;
         private TerrainMeshTypeLayeredData _meshData;
         private int[,] _grid;
         private TerrainMeshTypeLayeredLayerBaseData[,] _dataGrid;
 
-        public override void Generate(TerrainGenerationData data, GameObject terrainObject)
+        public override void SetData(TerrainGenerationData data, GameObject terrainObject)
         {
             _dataGrid = null;
             _grid = null;
             _data = data;
             _meshData = _data.MeshData as TerrainMeshTypeLayeredData;
-            CalculateHeights();
+            _terrainObject = terrainObject;
+        }
 
+        public override void Generate()
+        {
             GetInitialGrid();
             GenerateLayersForGrid();
             FillGridWithFillerValuesAndData();
             FillGridWithNoise();
-            GenerateMesh(terrainObject);
+            GenerateMesh();
         }
 
         private void FillGridWithNoise()
@@ -89,20 +94,6 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain
             }
         }
 
-        private void CalculateHeights()
-        {
-            float height = 0;
-            foreach (TerrainMeshTypeLayeredLayerBaseData layerData in _meshData.Layers)
-            {
-                if (layerData.GetType() == typeof(TerrainMeshTypeLayeredLayerGroundData))
-                {
-                    TerrainMeshTypeLayeredLayerGroundData ground = (TerrainMeshTypeLayeredLayerGroundData) layerData;
-                    height += ground.Height;
-                    ground.Height = height;
-                }
-            }
-        }
-
         private void GetInitialGrid()
         {
             _grid = null;
@@ -152,7 +143,6 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain
             int size = _grid.GetLength(0);
             int fillerCount = _meshData.FillerVertexCount;
             _dataGrid = new TerrainMeshTypeLayeredLayerBaseData[size * fillerCount, size * fillerCount];
-
 
             TerrainMeshTypeLayeredLayerGroundData prev = null;
             TerrainMeshTypeLayeredLayerGroundData next = null;
@@ -238,10 +228,6 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain
                 filledData.AssetPlacements.AddRange(prev.AssetPlacements);
                 filledData.AssetPlacements.AddRange(next.AssetPlacements);
             }
-            //filledData.Height = prev.Height;
-            //filledData.NoiseGround = prev.Height;
-            //filledData.NoiseCliff = prev.Height;
-            //filledData.AssetPlacements.AddRange(prev.AssetPlacements);
             return filledData;
         }
 
@@ -263,10 +249,14 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain
             }
         }
 
-        private void GenerateMesh(GameObject gameObject)
+        private void GenerateMesh()
         {
+            foreach (Transform child in _terrainObject.transform)
+            {
+                Object.DestroyImmediate(child.gameObject);
+            }
+
             float sizeBetweenNodes = 0.2f; //TODO auslagern
-            GameObject parent = new GameObject();
 
             int partSize = 50;
             int partsX = (int) MathF.Ceiling(_dataGrid.GetLength(0) / (float) partSize); //maybe ceil
@@ -282,11 +272,17 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain
                     int dataGridYEnd = (int) MathF.Min(_dataGrid.GetLength(1) - 1,partSize * currentPartY + partSize - 1);
                     int dataGridXEnd = (int) MathF.Min(_dataGrid.GetLength(0) - 1, (partSize * currentPartX + partSize) - 1);
 
-                    GameObject obj = UnityEngine.Object.Instantiate(gameObject);
-                    obj.name = currentPartY + " " + currentPartX;
-                    obj.transform.localPosition = objPos;
-                    obj.transform.parent = parent.transform;
+                    GameObject obj = new GameObject
+                    {
+                        name = currentPartY + " " + currentPartX,
+                        transform =
+                        {
+                            localPosition = objPos,
+                            parent = _terrainObject.transform
+                        }
+                    };
                     MeshFilter meshFilter = obj.AddComponent<MeshFilter>();
+                    MeshRenderer meshRenderer = obj.AddComponent<MeshRenderer>();
 
                     MeshCollider meshCollider = obj.AddComponent<MeshCollider>();
                     Vector3[] vertices = new Vector3[(int) (partSize * partSize + (partSize + 2) * 4 - 4)]; //Size = length * width + additional border for equal vertices
@@ -360,6 +356,7 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain
                     mesh.RecalculateNormals();
                     meshFilter.sharedMesh = mesh;
                     meshCollider.sharedMesh = mesh;
+                    meshRenderer.material = Mat;
                 }
             }
         }
@@ -435,6 +432,39 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain
             pos.y /= dataToAvg.Count;
 
             return pos;
+        }
+
+        public override List<TerrainGenerationHeightColorData> CalculateHeights()
+        {
+            List<TerrainGenerationHeightColorData> allHeightData = new List<TerrainGenerationHeightColorData>();
+            float currentHeight = 0;
+            float maxHeight = _meshData.Layers.Sum(x => (x as TerrainMeshTypeLayeredLayerGroundData).Height);
+            foreach (TerrainMeshTypeLayeredLayerBaseData layerData in _meshData.Layers)
+            {
+                if (layerData.GetType() == typeof(TerrainMeshTypeLayeredLayerGroundData))
+                {
+                    TerrainMeshTypeLayeredLayerGroundData ground = (TerrainMeshTypeLayeredLayerGroundData)layerData;
+
+                    for (var index = 0; index < ground.HeightData.Count; index++)
+                    {
+                        TerrainGenerationHeightColorData heightLayer = ground.HeightData[index];
+                        heightLayer.StartingHeightPCT = (heightLayer.StartingHeightPCT * ground.Height + currentHeight) / maxHeight;
+                        allHeightData.Add(heightLayer);
+                    }
+                    currentHeight += ground.Height;
+
+                    ground.Height = currentHeight;
+                }
+            }
+
+            return allHeightData;
+        }
+
+        public override float GetHighestHeight()
+        {
+            TerrainMeshTypeLayeredLayerGroundData
+                last = (_meshData.Layers.Last() as TerrainMeshTypeLayeredLayerGroundData);
+            return last.Height;
         }
     }
 }

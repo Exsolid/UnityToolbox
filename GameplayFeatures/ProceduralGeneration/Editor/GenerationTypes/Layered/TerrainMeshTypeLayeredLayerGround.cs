@@ -28,7 +28,14 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTy
             TerrainMeshTypeLayeredLayerGroundData data = _data as TerrainMeshTypeLayeredLayerGroundData;
             GUILayout.BeginHorizontal();
             GUILayout.Label("Cliff Height: ");
-            data.Height = EditorGUILayout.FloatField(data.Height, GUILayout.Width(200));
+            if (data.IsBaseLayer)
+            {
+                GUILayout.Label(data.Height + "", GUILayout.Width(200));
+            }
+            else
+            {
+                data.Height = EditorGUILayout.FloatField(data.Height, GUILayout.Width(200));
+            }
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
