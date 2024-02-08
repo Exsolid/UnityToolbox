@@ -14,7 +14,6 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Data
         [JsonIgnore]
         [NonSerialized]
         public GameObject Prefab;
-        public bool IsAnchor;
-        public bool RaycastPlacement;
+        public bool CanCollide;
     }
 }

@@ -45,20 +45,24 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTy
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Is Anchor: ");
+            GUILayout.Label("Check For Space On Placement: ");
             GUILayout.FlexibleSpace();
-            _asset.IsAnchor = EditorGUILayout.Toggle(_asset.IsAnchor, GUILayout.Width(20));
+            _asset.CanCollide = EditorGUILayout.Toggle(_asset.CanCollide, GUILayout.Width(20));
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Use Raycast Placement: ");
-            GUILayout.FlexibleSpace();
-            _asset.RaycastPlacement = EditorGUILayout.Toggle(_asset.RaycastPlacement, GUILayout.Width(20));
+            GUILayout.Label("Pre Iterate: ");
+            _asset.PreIterate = EditorGUILayout.Toggle(_asset.PreIterate, GUILayout.Width(20));
+            GUILayout.EndHorizontal();
+
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Height Offset: ");
+            _asset.HeightOffset = EditorGUILayout.FloatField(_asset.HeightOffset, GUILayout.Width(200));
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
             GUILayout.Label("Odds for Spawn: ");
-            _asset.OddsForSpawn = EditorGUILayout.Slider(_asset.OddsForSpawn, 0f, 1f, GUILayout.Width(200));
+            _asset.OddsForSpawn = EditorGUILayout.Slider(_asset.OddsForSpawn, 0.1f, 1f, GUILayout.Width(200));
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();

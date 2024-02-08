@@ -10,6 +10,8 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Data
         public int CurrentPos;
         public string Name;
         public bool IsBaseLayer;
+        public bool IsWeighted;
+        public float PctForNoAsset;
         public List<TerrainGenerationLayeredAssetBaseData> AssetPlacements;
 
         public object Clone()

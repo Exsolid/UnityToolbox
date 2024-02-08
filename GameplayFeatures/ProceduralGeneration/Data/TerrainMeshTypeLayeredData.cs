@@ -6,7 +6,9 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Data
 {
     public class TerrainMeshTypeLayeredData: TerrainMeshTypeBaseData
     {
-        public int FillerVertexCount;
+        public float SizeBetweenVertices;
+        public int VertexMultiplier;
+        public float AssetPositionNoise;
         public List<TerrainMeshTypeLayeredLayerBaseData> Layers;
     }
 }

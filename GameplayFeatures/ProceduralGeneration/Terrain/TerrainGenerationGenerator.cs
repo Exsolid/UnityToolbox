@@ -11,7 +11,7 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain
     {
         public Material Mat;
 
-        public abstract void SetData(TerrainGenerationData data, GameObject terrainObject);
+        public abstract void SetData(TerrainGenerationData data, GameObject terrainObject, LayerMask grounLayerMask);
         public abstract void Generate();
         public abstract float GetHighestHeight();
         public abstract List<TerrainGenerationHeightColorData> CalculateHeights();

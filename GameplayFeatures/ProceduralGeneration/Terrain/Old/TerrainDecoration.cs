@@ -146,20 +146,20 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain
             int[,] grid = _terrainGenerator.GeneratedGrid;
             switch (_positionType)
             {
-                case TerrainGenerationAssetPosition.Ground:
-                case TerrainGenerationAssetPosition.CliffCornerBottom:
-                    if (grid[x, y] != (int)TerrainValues.Floor)
-                    {
-                        return false;
-                    }
-                    break;
-                case TerrainGenerationAssetPosition.CliffGround:
-                case TerrainGenerationAssetPosition.CliffCornerTop:
-                    if (grid[x, y] != (int)TerrainValues.Wall)
-                    {
-                        return false;
-                    }
-                    break;
+                //case TerrainGenerationAssetPosition.Ground:
+                //case TerrainGenerationAssetPosition.CliffCornerBottom:
+                //    if (grid[x, y] != (int)TerrainValues.Floor)
+                //    {
+                //        return false;
+                //    }
+                //    break;
+                //case TerrainGenerationAssetPosition.CliffGround:
+                //case TerrainGenerationAssetPosition.CliffCornerTop:
+                //    if (grid[x, y] != (int)TerrainValues.Wall)
+                //    {
+                //        return false;
+                //    }
+                //    break;
             }
 
             int wallCount = 0;
@@ -176,25 +176,25 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain
 
             switch (_positionType)
             {
-                case TerrainGenerationAssetPosition.Ground:
-                    if (wallCount == 0)
-                    {
-                        return true;
-                    }
-                    break;
-                case TerrainGenerationAssetPosition.CliffCornerBottom:
-                case TerrainGenerationAssetPosition.CliffCornerTop:
-                    if (wallCount < 7 && wallCount > 0)
-                    {
-                        return true;
-                    }
-                    break;
-                case TerrainGenerationAssetPosition.CliffGround:
-                    if (wallCount >= 7)
-                    {
-                        return true;
-                    }
-                    break;
+                //case TerrainGenerationAssetPosition.Ground:
+                //    if (wallCount == 0)
+                //    {
+                //        return true;
+                //    }
+                //    break;
+                //case TerrainGenerationAssetPosition.CliffCornerBottom:
+                //case TerrainGenerationAssetPosition.CliffCornerTop:
+                //    if (wallCount < 7 && wallCount > 0)
+                //    {
+                //        return true;
+                //    }
+                //    break;
+                //case TerrainGenerationAssetPosition.CliffGround:
+                //    if (wallCount >= 7)
+                //    {
+                //        return true;
+                //    }
+                //    break;
             }
 
             return false;

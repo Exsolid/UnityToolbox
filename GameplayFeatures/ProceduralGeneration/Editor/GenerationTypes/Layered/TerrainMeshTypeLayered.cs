@@ -5,7 +5,6 @@ using UnityEditor;
 using UnityEngine;
 using UnityToolbox.GameplayFeatures.ProceduralGeneration.Data;
 using UnityToolbox.GameplayFeatures.SerializationData;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTypes.Layered
 {
@@ -35,23 +34,31 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTy
         public override void DrawDetails()
         {
             GUILayout.BeginVertical();
+
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Filler Vertex Count: ");
-            _data.FillerVertexCount = EditorGUILayout.IntField(_data.FillerVertexCount, GUILayout.Width(200));
+            GUILayout.Label("Size Between Vertices: ");
+            _data.SizeBetweenVertices = EditorGUILayout.FloatField(Mathf.Max(0.01f, _data.SizeBetweenVertices), GUILayout.Width(200));
+            GUILayout.EndHorizontal();
+
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Vertex Multiplier: ");
+            _data.VertexMultiplier = EditorGUILayout.IntField(Mathf.Max(1, _data.VertexMultiplier), GUILayout.Width(200));
+            GUILayout.EndHorizontal();
+
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Noise For Asset Position: ");
+            _data.AssetPositionNoise = EditorGUILayout.Slider(_data.AssetPositionNoise, 0f, 1f, GUILayout.Width(200));
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
-            _selectedLayer = EditorGUILayout.Popup(_selectedLayer, new string[] { "Ground", "Void"}, GUILayout.Width(180));
+            _selectedLayer = EditorGUILayout.Popup(_selectedLayer, new string[] { "Ground"}, GUILayout.Width(180));
             if (GUILayout.Button("+", GUILayout.Width(18)))
             {
                 switch (_selectedLayer)
                 {
                     case 0:
                         _layers.Add(new TerrainMeshTypeLayeredLayerGround(this, _layers.Count));
-                        break;
-                    case 1:
-                        //TODO create void layer
                         break;
                 }
             }
@@ -72,14 +79,15 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTy
 
         public bool MoveLayer(TerrainMeshTypeLayeredLayer layer, int currentPos, int goalPos)
         {
-            if (currentPos >= _layers.Count || currentPos < 0 || _layers[currentPos].IsBaseLayer)
+            if (currentPos >= _layers.Count || currentPos < 0 || _layers[currentPos].IsBaseLayer || goalPos < 1)
             {
-                //TODO log to status
+                TerrainGenerationEditorEvents.Instance.UpdateStatus("The layer could not be moved. Is the goal position at or before the base layer?");
                 return false;
             }
 
-            if (layer.GetType() == typeof(TerrainMeshTypeLayeredLayerGround) && goalPos == 0)
+            if (goalPos >= _layers.Count)
             {
+                TerrainGenerationEditorEvents.Instance.UpdateStatus("The layer could not be moved. The position cannot exceed " + (_layers.Count - 1));
                 return false;
             }
 
@@ -94,7 +102,7 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTy
         {
             if (currentPos >= _layers.Count || currentPos < 1 || _layers[currentPos].IsBaseLayer)
             {
-                //TODO log to status
+                TerrainGenerationEditorEvents.Instance.UpdateStatus("The layer could not be deleted. Is it the last or base layer?");
                 return false;
             }
 
@@ -103,7 +111,7 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTy
             {
                 _layers[i].CurrentPos--;
             }
-            //TODO with checks for all fixed layers
+
             return true;
         }
 
@@ -127,10 +135,6 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTy
                             err.Traced.Add(temp);
                             err.ErrorDescription = err.Traced.Count + " mesh layers contain asset errors.";
                         }
-                    }
-                    else
-                    {
-                        //TODO create void layer
                     }
                 }
             }

@@ -6,7 +6,7 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Data
 {
     public class TerrainGenerationTypeCellularAutomataData: TerrainGenerationTypeBaseData
     {
-        public int Size; //TODO generate clusters for bigger lengths (2, 125 max atm)
+        public int Size;
         public int IterationCount;
         public float FillPct;
         public int BorderSize;

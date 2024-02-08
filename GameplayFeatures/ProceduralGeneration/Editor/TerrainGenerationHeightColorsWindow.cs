@@ -97,8 +97,15 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor
 
         public void DeleteLayer(int currentPos)
         {
-            if (currentPos >= _layers.Count || currentPos < 1 || _layers[currentPos].Data.IsBaseLayer)
+            if (currentPos < 1 || _layers[currentPos].Data.IsBaseLayer)
             {
+                TerrainGenerationEditorEvents.Instance.UpdateStatus("The height layer could not be deleted. Is it the base layer?");
+                return;
+            }
+
+            if (currentPos >= _layers.Count)
+            {
+                TerrainGenerationEditorEvents.Instance.UpdateStatus("The height layer could not be deleted. The position cannot exceed: " + (_layers.Count - 1));
                 return;
             }
 
@@ -114,8 +121,15 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor
 
         public bool MoveLayer(TerrainGenerationHeightColorLayer terrainGenerationHeightColorLayer, int prev, int currentPos)
         {
-            if (currentPos >= _layers.Count || currentPos < 1 || _layers[prev].Data.IsBaseLayer)
+            if (currentPos < 1 || _layers[prev].Data.IsBaseLayer)
             {
+                TerrainGenerationEditorEvents.Instance.UpdateStatus("The height layer could not be moved. Is the goal position at or before the base layer?");
+                return false;
+            }
+
+            if (currentPos >= _layers.Count)
+            {
+                TerrainGenerationEditorEvents.Instance.UpdateStatus("The height layer could not be moved. The position cannot exceed: " + (_layers.Count - 1));
                 return false;
             }
 

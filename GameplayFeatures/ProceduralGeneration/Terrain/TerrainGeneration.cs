@@ -6,6 +6,7 @@ using System.Linq;
 using UnityEngine;
 using UnityToolbox.GameplayFeatures.ProceduralGeneration.Data;
 using UnityToolbox.GameplayFeatures.ProceduralGeneration.Enums;
+using UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain.Layered;
 using UnityToolbox.General.Management;
 
 namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain
@@ -26,6 +27,7 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain
         [SerializeField] private GameObject _terrainObject;
         public Dictionary<string, TerrainGenerationData> Data;
         [SerializeField][HideInInspector] public int SelectedData;
+        [SerializeField] private LayerMask _groundLayerMask;
 
         public void GenerateTerrain()
         {
@@ -49,7 +51,7 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain
                     _generator = new TerrainGenerationLayered();
                 }
 
-                _generator.SetData(dataToUse, _terrainObject);
+                _generator.SetData(dataToUse, _terrainObject, _groundLayerMask);
                 SetHeightColors();
                 UpdateMaterial();
                 _generator.Mat = _material;
@@ -81,8 +83,8 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain
 
             _allHeightData = _allHeightData.OrderBy(x => x.StartingHeightPCT).ToList();
 
-            _material.SetFloat("minHeight", 0);
-            _material.SetFloat("maxHeight", _generator.GetHighestHeight());
+            _material.SetFloat("_MinHeight", 0);
+            _material.SetFloat("_MaxHeight", _generator.GetHighestHeight());
 
             Color[] colors = new Color[_allHeightData.Count];
             float[] colStrengths = new float[_allHeightData.Count];
@@ -117,16 +119,16 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain
                 count++;
             }
 
-            _material.SetInt("layerCount", _allHeightData.Count);
+            _material.SetInt("_LayerCount", _allHeightData.Count);
 
-            _material.SetColorArray("baseColors", colors);
-            _material.SetFloatArray("baseColorStrengths", colStrengths);
+            _material.SetColorArray("_BaseColors", colors);
+            _material.SetFloatArray("_BaseColorStrengths", colStrengths);
 
-            _material.SetFloatArray("baseStartHeights", heights);
-            _material.SetFloatArray("baseBlends", blends);
+            _material.SetFloatArray("_BaseStartHeights", heights);
+            _material.SetFloatArray("_BaseBlends", blends);
 
-            _material.SetFloatArray("baseTextureScales", textureScales);
-            _material.SetTexture("baseTextures", GenerateTextureArray(textures));
+            _material.SetFloatArray("_BaseTextureScales", textureScales);
+            _material.SetTexture("_BaseTextures", GenerateTextureArray(textures));
         }
 
         private Texture2DArray GenerateTextureArray(Texture2D[] textures)

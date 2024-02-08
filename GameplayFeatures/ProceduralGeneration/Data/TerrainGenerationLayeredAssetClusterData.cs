@@ -7,6 +7,8 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Data
 {
     public class TerrainGenerationLayeredAssetClusterData : TerrainGenerationLayeredAssetBaseData
     {
+        public int MinVerticesBetweenPrefabs;
+        public float SpawnDecay;
         public List<TerrainGenerationLayeredAssetData> Assets;
     }
 }

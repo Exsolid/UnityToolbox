@@ -121,16 +121,11 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTy
             _assetPlacements.Remove(current);
         }
 
-        public void AddAssetPlacement(TerrainGenerationLayeredAssetLayer current)
-        {
-            _assetPlacements.Add(current);
-        }
-
         protected void DrawAssetPlacement()
         {
             Color col = GUI.color;
             GUI.color = new Color(82f / 255f, 33f / 255f, 37f / 255f, 0.2f);
-            GUILayout.BeginVertical(new GUIStyle("window"), GUILayout.Height(200));
+            GUILayout.BeginVertical(new GUIStyle("window"), GUILayout.Height(300));
             GUI.color = col;
 
             GUILayout.BeginHorizontal();
@@ -149,6 +144,11 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTy
                         break;
                 }
             }
+            GUILayout.EndHorizontal();
+
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Percentage For No Asset: ");
+            _data.PctForNoAsset = EditorGUILayout.Slider(_data.PctForNoAsset, 0f, 1f, GUILayout.Width(200));
             GUILayout.EndHorizontal();
 
             _assetScrollPos = GUILayout.BeginScrollView(_assetScrollPos);
