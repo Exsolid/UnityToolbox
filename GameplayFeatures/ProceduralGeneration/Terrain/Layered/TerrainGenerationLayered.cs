@@ -430,6 +430,8 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain.Layered
                     meshFilter.sharedMesh = mesh;
                     meshCollider.sharedMesh = mesh;
                     meshRenderer.material = Mat;
+                    meshRenderer.sharedMaterial = Mat;
+
                     obj.layer = Mathf.RoundToInt(Mathf.Log(_groundLayerMask.value, 2));
 
                     _meshes[currentPartX, currentPartY] = meshFilter;

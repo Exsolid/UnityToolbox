@@ -50,6 +50,89 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTy
             _data.AssetPositionNoise = EditorGUILayout.Slider(_data.AssetPositionNoise, 0f, 1f, GUILayout.Width(200));
             GUILayout.EndHorizontal();
 
+            bool prev = _data.EnabledNormal;
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Enable Normal Mapping:");
+            GUILayout.FlexibleSpace();
+            _data.EnabledNormal = EditorGUILayout.Toggle(_data.EnabledNormal, GUILayout.Width(20));
+            if (prev != _data.EnabledNormal)
+            {
+                for (int i = 0; i < _layers.Count; i++)
+                {
+                    ((TerrainMeshTypeLayeredLayerGround)_layers[i]).EnabledNormal = _data.EnabledNormal;
+                }
+            }
+            GUILayout.EndHorizontal();
+
+            prev = _data.EnabledEmission;
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Enable Emission Mapping:");
+            GUILayout.FlexibleSpace();
+            _data.EnabledEmission = EditorGUILayout.Toggle(_data.EnabledEmission, GUILayout.Width(20));
+            if (prev != _data.EnabledEmission)
+            {
+                for (int i = 0; i < _layers.Count; i++)
+                {
+                    ((TerrainMeshTypeLayeredLayerGround)_layers[i]).EnabledEmission = _data.EnabledEmission;
+                }
+            }
+            GUILayout.EndHorizontal();
+
+            prev = _data.EnabledOcclusion;
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Enable Occlusion Mapping:");
+            GUILayout.FlexibleSpace();
+            _data.EnabledOcclusion = EditorGUILayout.Toggle(_data.EnabledOcclusion, GUILayout.Width(20));
+            if (prev != _data.EnabledOcclusion)
+            {
+                for (int i = 0; i < _layers.Count; i++)
+                {
+                    ((TerrainMeshTypeLayeredLayerGround)_layers[i]).EnabledOcclusion = _data.EnabledOcclusion;
+                }
+            }
+            GUILayout.EndHorizontal();
+
+            prev = _data.EnabledMetallic;
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Enable Metallic Mapping:");
+            GUILayout.FlexibleSpace();
+            _data.EnabledMetallic = EditorGUILayout.Toggle(_data.EnabledMetallic, GUILayout.Width(20));
+            if (prev != _data.EnabledMetallic)
+            {
+                for (int i = 0; i < _layers.Count; i++)
+                {
+                    ((TerrainMeshTypeLayeredLayerGround)_layers[i]).EnabledMetallic = _data.EnabledMetallic;
+                }
+
+                if (prev == true)
+                {
+                    _data.EnabledRoughness = false;
+
+                    for (int i = 0; i < _layers.Count; i++)
+                    {
+                        ((TerrainMeshTypeLayeredLayerGround)_layers[i]).EnabledRoughness = _data.EnabledRoughness;
+                    }
+                }
+            }
+            GUILayout.EndHorizontal();
+
+            if (_data.EnabledMetallic)
+            {
+                prev = _data.EnabledRoughness;
+                GUILayout.BeginHorizontal();
+                GUILayout.Label("Enable Roughness Mapping:");
+                GUILayout.FlexibleSpace();
+                _data.EnabledRoughness = EditorGUILayout.Toggle(_data.EnabledRoughness, GUILayout.Width(20));
+                if (prev != _data.EnabledRoughness)
+                {
+                    for (int i = 0; i < _layers.Count; i++)
+                    {
+                        ((TerrainMeshTypeLayeredLayerGround)_layers[i]).EnabledRoughness = _data.EnabledRoughness;
+                    }
+                }
+                GUILayout.EndHorizontal();
+            }
+
             GUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
             _selectedLayer = EditorGUILayout.Popup(_selectedLayer, new string[] { "Ground"}, GUILayout.Width(180));
@@ -127,7 +210,16 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTy
                 {
                     if (layer.GetType() == typeof(TerrainMeshTypeLayeredLayerGroundData))
                     {
-                        _layers.Insert(layer.CurrentPos, new TerrainMeshTypeLayeredLayerGround(this, layer.CurrentPos));
+                        TerrainMeshTypeLayeredLayerGround gLayer =
+                            new TerrainMeshTypeLayeredLayerGround(this, layer.CurrentPos);
+
+                        gLayer.EnabledOcclusion = _data.EnabledOcclusion;
+                        gLayer.EnabledRoughness = _data.EnabledRoughness;
+                        gLayer.EnabledEmission = _data.EnabledEmission;
+                        gLayer.EnabledNormal = _data.EnabledNormal;
+                        gLayer.EnabledMetallic = _data.EnabledMetallic;
+
+                        _layers.Insert(layer.CurrentPos, gLayer);
                         SerializedDataErrorDetails temp = _layers[layer.CurrentPos].Deserialize(layer);
                         if (temp.HasErrors)
                         {
@@ -137,6 +229,7 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTy
                         }
                     }
                 }
+
             }
             else
             {

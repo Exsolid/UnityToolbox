@@ -9,6 +9,7 @@ using UnityToolbox.GameplayFeatures.SerializationData;
 using System.Linq;
 using UnityToolbox.GameplayFeatures.ProceduralGeneration.Data;
 using UnityToolbox.General;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor
 {
@@ -22,17 +23,24 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor
         public Action<StatusException> OnUpdateStatus;
         public Action<List<TerrainGenerationHeightColorData>> OnClose;
 
+        public bool EnableSettings;
+        private bool _enabledNormal;
+        private bool _enabledEmission;
+        private bool _enabledMetallic;
+        private bool _enabledOcclusion;
+        private bool _enabledRoughness;
+
         private TerrainGenerationHeightColorsWindow()
         {
-
         }
 
-        public static TerrainGenerationHeightColorsWindow Open()
+        public static TerrainGenerationHeightColorsWindow Open(bool enableSettings)
         {
             TerrainGenerationHeightColorsWindow window =
                 GetWindow<TerrainGenerationHeightColorsWindow>("Terrain Generation");
             window.maxSize = new Vector2(500, 400);
             window.minSize = new Vector2(500, 400);
+            window.EnableSettings = enableSettings;
             return window;
         }
 
@@ -46,6 +54,9 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor
             _layersData = new List<TerrainGenerationHeightColorData>();
             _layers = new List<TerrainGenerationHeightColorLayer>();
             _layers.Add(new TerrainGenerationHeightColorLayer(this, _layers.Count, true, "Base"));
+
+            TerrainGenerationEditorEvents.Instance.OnHeightColorsOpen += Close;
+            TerrainGenerationEditorEvents.Instance.OnClose += Close;
         }
 
         public void OnGUI()
@@ -54,6 +65,100 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor
             GUI.color = new Color(82f / 255f, 33f / 255f, 37f / 255f, 0.4f);
             GUILayout.BeginVertical(new GUIStyle("window"));
             GUI.color = col;
+
+            List<TerrainGenerationHeightColorLayer> temp = new List<TerrainGenerationHeightColorLayer>();
+
+            if (EnableSettings)
+            {
+                bool prev = _enabledNormal;
+                GUILayout.BeginHorizontal();
+                GUILayout.Label("Enable Normal Mapping:");
+                GUILayout.FlexibleSpace();
+                _enabledNormal = EditorGUILayout.Toggle(_enabledNormal, GUILayout.Width(20));
+                if (prev != _enabledNormal)
+                {
+                    temp = new List<TerrainGenerationHeightColorLayer>();
+                    temp.AddRange(_layers);
+                    for (int i = 0; i < _layers.Count; i++)
+                    {
+                        TerrainGenerationHeightColorData layer = _layers[i].Data;
+                        layer.NormalEnabled = _enabledNormal;
+                        _layers[i].Data = layer;
+                    }
+                }
+                GUILayout.EndHorizontal();
+
+                prev = _enabledEmission;
+                GUILayout.BeginHorizontal();
+                GUILayout.Label("Enable Emission Mapping:");
+                GUILayout.FlexibleSpace();
+                _enabledEmission = EditorGUILayout.Toggle(_enabledEmission, GUILayout.Width(20));
+                if (prev != _enabledEmission)
+                {
+                    temp = new List<TerrainGenerationHeightColorLayer>();
+                    temp.AddRange(_layers);
+                    for (int i = 0; i < _layers.Count; i++)
+                    {
+                        TerrainGenerationHeightColorData layer = _layers[i].Data;
+                        layer.MetallicEnabled = _enabledMetallic;
+                        _layers[i].Data = layer;
+                    }
+                }
+                GUILayout.EndHorizontal();
+
+                prev = _enabledMetallic;
+                GUILayout.BeginHorizontal();
+                GUILayout.Label("Enable Metallic Mapping:");
+                GUILayout.FlexibleSpace();
+                _enabledMetallic = EditorGUILayout.Toggle(_enabledMetallic, GUILayout.Width(20));
+                if (prev != _enabledMetallic)
+                {
+                    temp = new List<TerrainGenerationHeightColorLayer>();
+                    temp.AddRange(_layers);
+                    for (int i = 0; i < _layers.Count; i++)
+                    {
+                        TerrainGenerationHeightColorData layer = _layers[i].Data;
+                        layer.MetallicEnabled = _enabledMetallic;
+                        _layers[i].Data = layer;
+                    }
+                }
+                GUILayout.EndHorizontal();
+
+                prev = _enabledOcclusion;
+                GUILayout.BeginHorizontal();
+                GUILayout.Label("Enable Occlusion Mapping:");
+                GUILayout.FlexibleSpace();
+                _enabledOcclusion = EditorGUILayout.Toggle(_enabledOcclusion, GUILayout.Width(20));
+                if (prev != _enabledOcclusion)
+                {
+                    temp = new List<TerrainGenerationHeightColorLayer>();
+                    temp.AddRange(_layers);
+                    for (int i = 0; i < _layers.Count; i++)
+                    {
+                        TerrainGenerationHeightColorData layer = _layers[i].Data;
+                        layer.OcclusionEnabled = _enabledOcclusion;
+                        _layers[i].Data = layer;
+                    }
+                }
+
+                prev = _enabledRoughness;
+                GUILayout.BeginHorizontal();
+                GUILayout.Label("Enable Occlusion Mapping:");
+                GUILayout.FlexibleSpace();
+                _enabledRoughness = EditorGUILayout.Toggle(_enabledRoughness, GUILayout.Width(20));
+                if (prev != _enabledRoughness)
+                {
+                    temp = new List<TerrainGenerationHeightColorLayer>();
+                    temp.AddRange(_layers);
+                    for (int i = 0; i < _layers.Count; i++)
+                    {
+                        TerrainGenerationHeightColorData layer = _layers[i].Data;
+                        layer.RoughnessEnabled = _enabledRoughness;
+                        _layers[i].Data = layer;
+                    }
+                }
+                GUILayout.EndHorizontal();
+            }
 
             GUILayout.BeginHorizontal();
             GUILayout.Label("Height Texturing");
@@ -66,7 +171,7 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor
 
             _scrollPos = GUILayout.BeginScrollView(_scrollPos);
 
-            List<TerrainGenerationHeightColorLayer> temp = new List<TerrainGenerationHeightColorLayer>();
+            temp = new List<TerrainGenerationHeightColorLayer>();
             temp.AddRange(_layers);
             foreach (TerrainGenerationHeightColorLayer layer in temp)
             {
@@ -83,6 +188,20 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor
             DrawLineHorizontal();
             EditorGUILayout.EndScrollView();
             GUILayout.EndVertical();
+        }
+
+        public void DefineSettings(bool enableOcclusiom, bool enableNormal, bool enableMetallic, bool enableEmission, bool enableRoughness)
+        {
+            for (int i = 0; i < _layers.Count; i++)
+            {
+                TerrainGenerationHeightColorData layer = _layers[i].Data;
+                layer.OcclusionEnabled = enableOcclusiom;
+                layer.RoughnessEnabled = enableRoughness;
+                layer.NormalEnabled = enableNormal;
+                layer.MetallicEnabled = enableMetallic;
+                layer.EmissionEnabled = enableEmission;
+                _layers[i].Data = layer;
+            }
         }
 
         private void DrawLineHorizontal()
@@ -205,15 +324,7 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor
         void OnDestroy()
         {
             OnClose?.Invoke(Serialize());
-        }
-
-        void OnEnable()
-        {
-            TerrainGenerationEditorEvents.Instance.OnClose += Close;
-        }
-
-        void OnDisable()
-        {
+            TerrainGenerationEditorEvents.Instance.OnHeightColorsOpen -= Close;
             TerrainGenerationEditorEvents.Instance.OnClose -= Close;
         }
 

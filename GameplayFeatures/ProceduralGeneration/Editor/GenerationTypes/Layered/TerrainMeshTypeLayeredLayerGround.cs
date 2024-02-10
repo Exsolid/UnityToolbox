@@ -7,12 +7,84 @@ using UnityEngine;
 using UnityToolbox.GameplayFeatures.ProceduralGeneration.Data;
 using UnityToolbox.GameplayFeatures.SerializationData;
 using UnityToolbox.General;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTypes.Layered
 {
     public class TerrainMeshTypeLayeredLayerGround : TerrainMeshTypeLayeredLayer
     {
         private TerrainGenerationHeightColorsWindow _heightColors;
+
+        private bool _enabledNormals;
+        private bool _enabledEmission;
+        private bool _enabledMetallic;
+        private bool _enabledOcclusion;
+        private bool _enabledRoughness;
+
+        public bool EnabledNormal
+        {
+            set
+            {
+                _enabledNormals = value;
+                SetOptionalTextures();
+            }
+            get
+            {
+                return _enabledNormals;
+            }
+        }
+
+        public bool EnabledEmission
+        {
+            set
+            {
+                _enabledEmission = value;
+                SetOptionalTextures();
+            }
+            get
+            {
+                return _enabledEmission;
+            }
+        }
+
+        public bool EnabledMetallic
+        {
+            set
+            {
+                _enabledMetallic = value;
+                SetOptionalTextures();
+            }
+            get
+            {
+                return _enabledMetallic;
+            }
+        }
+
+        public bool EnabledOcclusion
+        {
+            set
+            {
+                _enabledOcclusion = value;
+                SetOptionalTextures();
+            }
+            get
+            {
+                return _enabledOcclusion;
+            }
+        }
+
+        public bool EnabledRoughness
+        {
+            set
+            {
+                _enabledRoughness = value;
+                SetOptionalTextures();
+            }
+            get
+            {
+                return _enabledRoughness;
+            }
+        }
 
         public TerrainMeshTypeLayeredLayerGround(TerrainMeshTypeLayered parent, int currentPos) : base(parent, currentPos, new TerrainMeshTypeLayeredLayerGroundData())
         {
@@ -47,8 +119,10 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTy
             GUILayout.Label("Height Colors: ");
             if (GUILayout.Button(">", GUILayout.Width(20)))
             {
-                _heightColors = TerrainGenerationHeightColorsWindow.Open();
+                TerrainGenerationEditorEvents.Instance.HeightColorsOpen();
+                _heightColors = TerrainGenerationHeightColorsWindow.Open(false);
                 _heightColors.Deserialize(data.HeightData);
+                _heightColors.DefineSettings(EnabledOcclusion, EnabledNormal, EnabledMetallic, EnabledEmission, EnabledRoughness);
 
                 _heightColors.OnClose += (List<TerrainGenerationHeightColorData> heightData) =>
                 {
@@ -87,6 +161,28 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTy
         protected override TerrainMeshTypeLayeredLayerBaseData SerializeRest()
         {
             return _data;
+        }
+
+        private void SetOptionalTextures()
+        {
+            if (_heightColors != null)
+            {
+                _heightColors.DefineSettings(EnabledOcclusion, EnabledNormal, EnabledMetallic, EnabledEmission, EnabledRoughness);
+            }
+            else if((_data as TerrainMeshTypeLayeredLayerGroundData).HeightData != null)
+            {
+                for (var index = 0; index < (_data as TerrainMeshTypeLayeredLayerGroundData).HeightData.Count; index++)
+                {
+                    TerrainGenerationHeightColorData heightData = (_data as TerrainMeshTypeLayeredLayerGroundData).HeightData[index];
+                    heightData.OcclusionEnabled = EnabledOcclusion;
+                    heightData.RoughnessEnabled = EnabledRoughness;
+                    heightData.NormalEnabled = EnabledNormal;
+                    heightData.MetallicEnabled = EnabledMetallic;
+                    heightData.EmissionEnabled = EnabledEmission;
+
+                    (_data as TerrainMeshTypeLayeredLayerGroundData).HeightData[index] = heightData;
+                }
+            }
         }
     }
 }

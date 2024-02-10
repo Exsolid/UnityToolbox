@@ -26,6 +26,7 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor
         }
 
         public Action OnClose;
+        public Action OnHeightColorsOpen;
         public Action<string> OnUpdateStatus;
 
         public void UpdateStatus(string status)
@@ -36,6 +37,11 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor
         public void Close()
         {
             OnClose?.Invoke();
+        }
+
+        public void HeightColorsOpen()
+        {
+            OnHeightColorsOpen?.Invoke();
         }
     }
 }

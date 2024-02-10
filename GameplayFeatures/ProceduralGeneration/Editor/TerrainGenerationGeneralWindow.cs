@@ -57,8 +57,8 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor
         public static void Open()
         {
             TerrainGenerationGeneralWindow window = GetWindow<TerrainGenerationGeneralWindow>("Terrain Generation");
-            window.maxSize = new Vector2(600, 600);
-            window.minSize = new Vector2(600, 600);
+            window.maxSize = new Vector2(500, 700);
+            window.minSize = new Vector2(500, 700);
         }
 
         private void InitializeWindow()

@@ -27,6 +27,8 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor
         {
             _parent = parent;
             _data.CurrentPos = currentPos;
+            _data.TerrainColor = Color.white;
+            _data.TextureScale = 20;
         }
 
         public TerrainGenerationHeightColorLayer(TerrainGenerationHeightColorsWindow parent, int currentPos, bool isBaseLayer, string baseLayerName)
@@ -35,6 +37,8 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor
             _data.IsBaseLayer = isBaseLayer;
             _data.Name = baseLayerName;
             _data.CurrentPos = currentPos;
+            _data.TerrainColor = Color.white;
+            _data.TextureScale = 20;
         }
 
         public SerializedDataErrorDetails Deserialize(TerrainGenerationHeightColorData obj)
@@ -65,6 +69,132 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor
                     }
                 }
             }
+
+            if (_data.NormalTexturePath != null)
+            {
+                _data.NormalTexture = EditorResourceUtil.GetAssetWithResourcesPath<Texture2D>(_data.NormalTexturePath);
+                if (_data.NormalTexture == null)
+                {
+                    string prevPath = _data.NormalTexturePath;
+                    try
+                    {
+                        _data.NormalTexture = EditorResourceUtil.GetAssetWithGUID<Texture2D>(_data.NormalTextureGUID);
+                        _data.NormalTexturePath = EditorResourceUtil.GetResourcesPathWithAsset(_data.NormalTexture);
+
+                        if (_data.NormalTexture == null)
+                        {
+                            throw new SystemException();
+                        }
+                    }
+                    catch
+                    {
+                        err.HasErrors = true;
+                        err.ErrorDescription = "The asset at path: " + prevPath + " cannot be found anymore.";
+                        _data.NormalTexturePath = prevPath;
+                    }
+                }
+            }
+
+            if (_data.EmissionTexturePath != null)
+            {
+                _data.EmissionTexture = EditorResourceUtil.GetAssetWithResourcesPath<Texture2D>(_data.EmissionTexturePath);
+                if (_data.EmissionTexture == null)
+                {
+                    string prevPath = _data.EmissionTexturePath;
+                    try
+                    {
+                        _data.EmissionTexture = EditorResourceUtil.GetAssetWithGUID<Texture2D>(_data.EmissionTextureGUID);
+                        _data.EmissionTexturePath = EditorResourceUtil.GetResourcesPathWithAsset(_data.EmissionTexture);
+
+                        if (_data.EmissionTexture == null)
+                        {
+                            throw new SystemException();
+                        }
+                    }
+                    catch
+                    {
+                        err.HasErrors = true;
+                        err.ErrorDescription = "The asset at path: " + prevPath + " cannot be found anymore.";
+                        _data.EmissionTexturePath = prevPath;
+                    }
+                }
+            }
+
+            if (_data.MetallicTexturePath != null)
+            {
+                _data.MetallicTexture = EditorResourceUtil.GetAssetWithResourcesPath<Texture2D>(_data.MetallicTexturePath);
+                if (_data.MetallicTexture == null)
+                {
+                    string prevPath = _data.MetallicTexturePath;
+                    try
+                    {
+                        _data.MetallicTexture = EditorResourceUtil.GetAssetWithGUID<Texture2D>(_data.MetallicTextureGUID);
+                        _data.MetallicTexturePath = EditorResourceUtil.GetResourcesPathWithAsset(_data.MetallicTexture);
+
+                        if (_data.MetallicTexture == null)
+                        {
+                            throw new SystemException();
+                        }
+                    }
+                    catch
+                    {
+                        err.HasErrors = true;
+                        err.ErrorDescription = "The asset at path: " + prevPath + " cannot be found anymore.";
+                        _data.MetallicTexturePath = prevPath;
+                    }
+                }
+            }
+
+            if (_data.OcclusionTexturePath != null)
+            {
+                _data.OcclusionTexture = EditorResourceUtil.GetAssetWithResourcesPath<Texture2D>(_data.OcclusionTexturePath);
+                if (_data.OcclusionTexture == null)
+                {
+                    string prevPath = _data.OcclusionTexturePath;
+                    try
+                    {
+                        _data.OcclusionTexture = EditorResourceUtil.GetAssetWithGUID<Texture2D>(_data.OcclusionTextureGUID);
+                        _data.OcclusionTexturePath = EditorResourceUtil.GetResourcesPathWithAsset(_data.OcclusionTexture);
+
+                        if (_data.OcclusionTexture == null)
+                        {
+                            throw new SystemException();
+                        }
+                    }
+                    catch
+                    {
+                        err.HasErrors = true;
+                        err.ErrorDescription = "The asset at path: " + prevPath + " cannot be found anymore.";
+                        _data.OcclusionTexturePath = prevPath;
+                    }
+                }
+            }
+
+            if (_data.RoughnessTexturePath != null)
+            {
+                _data.RoughnessTexture = EditorResourceUtil.GetAssetWithResourcesPath<Texture2D>(_data.RoughnessTexturePath);
+                if (_data.RoughnessTexture == null)
+                {
+                    string prevPath = _data.RoughnessTexturePath;
+                    try
+                    {
+                        _data.RoughnessTexture = EditorResourceUtil.GetAssetWithGUID<Texture2D>(_data.RoughnessTextureGUID);
+                        _data.RoughnessTexturePath = EditorResourceUtil.GetResourcesPathWithAsset(_data.RoughnessTexture);
+
+                        if (_data.RoughnessTexture == null)
+                        {
+                            throw new SystemException();
+                        }
+                    }
+                    catch
+                    {
+                        err.HasErrors = true;
+                        err.ErrorDescription = "The asset at path: " + prevPath + " cannot be found anymore.";
+                        _data.RoughnessTexturePath = prevPath;
+                    }
+                }
+            }
+
             _data.TerrainColor = _data.TerrainColorData.GetColor();
             _rewriteErrors = err.HasErrors;
             return err;
@@ -83,6 +213,60 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor
                 _data.TerrainTextureGUID = null;
             }
 
+            if (_data.NormalTexture != null)
+            {
+                _data.NormalTexturePath = EditorResourceUtil.GetResourcesPathWithAsset(_data.NormalTexture);
+                _data.NormalTextureGUID = EditorResourceUtil.GetGUIDOfAsset(_data.NormalTexture).ToString();
+            }
+            else if (!_rewriteErrors)
+            {
+                _data.NormalTexturePath = null;
+                _data.NormalTextureGUID = null;
+            }
+
+            if (_data.EmissionTexture != null)
+            {
+                _data.EmissionTexturePath = EditorResourceUtil.GetResourcesPathWithAsset(_data.EmissionTexture);
+                _data.EmissionTextureGUID = EditorResourceUtil.GetGUIDOfAsset(_data.EmissionTexture).ToString();
+            }
+            else if (!_rewriteErrors)
+            {
+                _data.EmissionTexturePath = null;
+                _data.EmissionTextureGUID = null;
+            }
+
+            if (_data.MetallicTexture != null)
+            {
+                _data.MetallicTexturePath = EditorResourceUtil.GetResourcesPathWithAsset(_data.MetallicTexture);
+                _data.MetallicTextureGUID = EditorResourceUtil.GetGUIDOfAsset(_data.MetallicTexture).ToString();
+            }
+            else if (!_rewriteErrors)
+            {
+                _data.MetallicTexturePath = null;
+                _data.MetallicTextureGUID = null;
+            }
+
+            if (_data.OcclusionTexture != null)
+            {
+                _data.OcclusionTexturePath = EditorResourceUtil.GetResourcesPathWithAsset(_data.OcclusionTexture);
+                _data.OcclusionTextureGUID = EditorResourceUtil.GetGUIDOfAsset(_data.OcclusionTexture).ToString();
+            }
+            else if (!_rewriteErrors)
+            {
+                _data.OcclusionTexturePath = null;
+                _data.OcclusionTextureGUID = null;
+            }
+
+            if (_data.RoughnessTexture != null)
+            {
+                _data.RoughnessTexturePath = EditorResourceUtil.GetResourcesPathWithAsset(_data.RoughnessTexture);
+                _data.RoughnessTextureGUID = EditorResourceUtil.GetGUIDOfAsset(_data.RoughnessTexture).ToString();
+            }
+            else if (!_rewriteErrors)
+            {
+                _data.RoughnessTexturePath = null;
+                _data.RoughnessTextureGUID = null;
+            }
             _data.TerrainColorData = new ColorData(_data.TerrainColor);
             return _data;
         }
@@ -125,11 +309,6 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Color Strength PCT: ");
-            _data.ColorStrengthPCT = EditorGUILayout.Slider(_data.ColorStrengthPCT, 0f, 1f, GUILayout.Width(200));
-            GUILayout.EndHorizontal();
-
-            GUILayout.BeginHorizontal();
             GUILayout.Label("Texture: ");
             Texture2D prev = _data.TerrainTexture;
             _data.TerrainTexture = (Texture2D)EditorGUILayout.ObjectField(_data.TerrainTexture, typeof(Texture2D), false, GUILayout.Width(70), GUILayout.Height(70));       
@@ -151,9 +330,152 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor
             }
             GUILayout.EndHorizontal();
 
+            if (_data.NormalEnabled)
+            {
+                GUILayout.BeginHorizontal();
+                GUILayout.Label("Normal Map: ");
+                prev = _data.NormalTexture;
+                _data.NormalTexture = (Texture2D)EditorGUILayout.ObjectField(_data.NormalTexture, typeof(Texture2D), false, GUILayout.Width(70), GUILayout.Height(70));
+                if (_data.NormalTexture != null && !_data.NormalTexture.Equals(prev))
+                {
+                    if (!EditorResourceUtil.IsAssetValid(_data.NormalTexture))
+                    {
+                        _data.NormalTexture = prev;
+                        TerrainGenerationEditorEvents.Instance.UpdateStatus("The path belonging to the Normal texture is not a \"Resource\" directory.");
+                    }
+                    else
+                    {
+                        TerrainGenerationEditorEvents.Instance.UpdateStatus("Updated the Normal texture.");
+                    }
+                }
+                else if (_data.NormalTexture == null && prev != null)
+                {
+                    TerrainGenerationEditorEvents.Instance.UpdateStatus("Updated the Normal texture.");
+                }
+                GUILayout.EndHorizontal();
+            }
+
+
+            if (_data.EmissionEnabled)
+            {
+                GUILayout.BeginHorizontal();
+                GUILayout.Label("Emission Map: ");
+                prev = _data.EmissionTexture;
+                _data.EmissionTexture = (Texture2D)EditorGUILayout.ObjectField(_data.EmissionTexture, typeof(Texture2D),
+                    false, GUILayout.Width(70), GUILayout.Height(70));
+                if (_data.EmissionTexture != null && !_data.EmissionTexture.Equals(prev))
+                {
+                    if (!EditorResourceUtil.IsAssetValid(_data.EmissionTexture))
+                    {
+                        _data.EmissionTexture = prev;
+                        TerrainGenerationEditorEvents.Instance.UpdateStatus(
+                            "The path belonging to the Emission texture is not a \"Resource\" directory.");
+                    }
+                    else
+                    {
+                        TerrainGenerationEditorEvents.Instance.UpdateStatus("Updated the Emission texture.");
+                    }
+                }
+                else if (_data.EmissionTexture == null && prev != null)
+                {
+                    TerrainGenerationEditorEvents.Instance.UpdateStatus("Updated the Emission texture.");
+                }
+
+                GUILayout.EndHorizontal();
+            }
+
+            if (_data.MetallicEnabled)
+            {
+                GUILayout.BeginHorizontal();
+                GUILayout.Label("Metallic Map: ");
+                prev = _data.MetallicTexture;
+                _data.MetallicTexture = (Texture2D)EditorGUILayout.ObjectField(_data.MetallicTexture, typeof(Texture2D),
+                    false, GUILayout.Width(70), GUILayout.Height(70));
+                if (_data.MetallicTexture != null && !_data.MetallicTexture.Equals(prev))
+                {
+                    if (!EditorResourceUtil.IsAssetValid(_data.MetallicTexture))
+                    {
+                        _data.MetallicTexture = prev;
+                        TerrainGenerationEditorEvents.Instance.UpdateStatus(
+                            "The path belonging to the Metallic texture is not a \"Resource\" directory.");
+                    }
+                    else
+                    {
+                        TerrainGenerationEditorEvents.Instance.UpdateStatus("Updated the Metallic texture.");
+                    }
+                }
+                else if (_data.MetallicTexture == null && prev != null)
+                {
+                    TerrainGenerationEditorEvents.Instance.UpdateStatus("Updated the Metallic texture.");
+                }
+
+                GUILayout.EndHorizontal();
+
+                if (_data.RoughnessEnabled)
+                {
+                    GUILayout.BeginHorizontal();
+                    GUILayout.Label("Roughness Map: ");
+                    prev = _data.RoughnessTexture;
+                    _data.RoughnessTexture = (Texture2D)EditorGUILayout.ObjectField(_data.RoughnessTexture,
+                        typeof(Texture2D), false, GUILayout.Width(70), GUILayout.Height(70));
+                    if (_data.RoughnessTexture != null && !_data.RoughnessTexture.Equals(prev))
+                    {
+                        if (!EditorResourceUtil.IsAssetValid(_data.RoughnessTexture))
+                        {
+                            _data.RoughnessTexture = prev;
+                            TerrainGenerationEditorEvents.Instance.UpdateStatus(
+                                "The path belonging to the Roughness texture is not a \"Resource\" directory.");
+                        }
+                        else
+                        {
+                            TerrainGenerationEditorEvents.Instance.UpdateStatus("Updated the Roughness texture.");
+                        }
+                    }
+                    else if (_data.RoughnessTexture == null && prev != null)
+                    {
+                        TerrainGenerationEditorEvents.Instance.UpdateStatus("Updated the Roughness texture.");
+                    }
+
+                    GUILayout.EndHorizontal();
+                }
+
+                GUILayout.BeginHorizontal();
+                GUILayout.Label("Smoothness: ");
+                _data.Smoothness = EditorGUILayout.Slider(_data.Smoothness, 0f, 1f, GUILayout.Width(200));
+                GUILayout.EndHorizontal();
+            }
+
+            if (_data.OcclusionEnabled)
+            {
+                GUILayout.BeginHorizontal();
+                GUILayout.Label("Occlusion Map: ");
+                prev = _data.OcclusionTexture;
+                _data.OcclusionTexture = (Texture2D)EditorGUILayout.ObjectField(_data.OcclusionTexture,
+                    typeof(Texture2D), false, GUILayout.Width(70), GUILayout.Height(70));
+                if (_data.OcclusionTexture != null && !_data.OcclusionTexture.Equals(prev))
+                {
+                    if (!EditorResourceUtil.IsAssetValid(_data.OcclusionTexture))
+                    {
+                        _data.OcclusionTexture = prev;
+                        TerrainGenerationEditorEvents.Instance.UpdateStatus(
+                            "The path belonging to the Occlusion texture is not a \"Resource\" directory.");
+                    }
+                    else
+                    {
+                        TerrainGenerationEditorEvents.Instance.UpdateStatus("Updated the Occlusion texture.");
+                    }
+                }
+                else if (_data.OcclusionTexture == null && prev != null)
+                {
+                    TerrainGenerationEditorEvents.Instance.UpdateStatus("Updated the Occlusion texture.");
+                }
+
+                GUILayout.EndHorizontal();
+            }
+
             GUILayout.BeginHorizontal();
             GUILayout.Label("Texture Scale: ");
-            _data.TextureScale = EditorGUILayout.FloatField(_data.TextureScale, GUILayout.Width(200));
+            _data.TextureScale = EditorGUILayout.Slider(_data.TextureScale,1,255, GUILayout.Width(200));
             GUILayout.EndHorizontal();
             GUILayout.EndVertical();
         }
