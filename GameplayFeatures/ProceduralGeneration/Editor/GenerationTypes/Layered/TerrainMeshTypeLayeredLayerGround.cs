@@ -88,10 +88,12 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTy
 
         public TerrainMeshTypeLayeredLayerGround(TerrainMeshTypeLayered parent, int currentPos) : base(parent, currentPos, new TerrainMeshTypeLayeredLayerGroundData())
         {
+            TerrainMeshTypeLayeredLayerGroundData data = _data as TerrainMeshTypeLayeredLayerGroundData;
         }
 
         public TerrainMeshTypeLayeredLayerGround(TerrainMeshTypeLayered parent, int currentPos, bool isBaseLayer, string baseLayerName) : base(parent, currentPos, isBaseLayer, baseLayerName, new TerrainMeshTypeLayeredLayerGroundData())
         {
+            TerrainMeshTypeLayeredLayerGroundData data = _data as TerrainMeshTypeLayeredLayerGroundData;
         }
 
         protected override void DrawDetailsRest()
@@ -106,7 +108,7 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTy
             }
             else
             {
-                data.Height = EditorGUILayout.FloatField(data.Height, GUILayout.Width(200));
+                data.Height = EditorGUILayout.FloatField(MathF.Max(0, data.Height), GUILayout.Width(200));
             }
             GUILayout.EndHorizontal();
 

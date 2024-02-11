@@ -173,11 +173,11 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _LayerCount: 6
+    - _LayerCount: 3
     - _MapScale: 1
-    - _MaxHeight: 6
+    - _MaxHeight: 1.5
     - _Metallic: 0
-    - _MinHeight: 0
+    - _MinHeight: 0.41
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueOffset: 0

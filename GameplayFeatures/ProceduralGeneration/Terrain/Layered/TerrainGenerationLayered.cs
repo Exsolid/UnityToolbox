@@ -516,7 +516,7 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain.Layered
         {
             List<TerrainGenerationHeightColorData> allHeightData = new List<TerrainGenerationHeightColorData>();
             float currentHeight = 0;
-            float maxHeight = _meshData.Layers.Sum(x => (x as TerrainMeshTypeLayeredLayerGroundData).Height);
+            float maxHeight = _meshData.Layers.Sum(x => (x as TerrainMeshTypeLayeredLayerGroundData).Height) + 0.5f;
             foreach (TerrainMeshTypeLayeredLayerBaseData layerData in _meshData.Layers)
             {
                 if (layerData.GetType() == typeof(TerrainMeshTypeLayeredLayerGroundData))
@@ -532,7 +532,14 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain.Layered
                     for (var index = 0; index < ground.HeightData.Count; index++)
                     {
                         TerrainGenerationHeightColorData heightLayer = ground.HeightData[index];
-                        heightLayer.StartingHeightPCT = (heightLayer.StartingHeightPCT * ground.Height + currentHeight) / maxHeight;
+                        if (layerData.Equals(_meshData.Layers.First()))
+                        {
+                            heightLayer.StartingHeightPCT = (heightLayer.StartingHeightPCT * 0.5f + currentHeight) / maxHeight;
+                        }
+                        else
+                        {
+                            heightLayer.StartingHeightPCT = (heightLayer.StartingHeightPCT * ground.Height + currentHeight) / maxHeight;
+                        }
                         allHeightData.Add(heightLayer);
 
                         if (heightLayer.TerrainTexturePath is null or "")
@@ -540,13 +547,26 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain.Layered
                             Debug.LogWarning("The a height data layer for layer " + layerData.Name + " is not defined.");
                         }
                     }
-                    currentHeight += ground.Height;
+
+                    if (layerData.Equals(_meshData.Layers.First()))
+                    {
+                        currentHeight +=0.5f;
+                    }
+                    else
+                    {
+                        currentHeight += ground.Height;
+                    }
 
                     ground.Height = currentHeight;
                 }
             }
 
             return allHeightData;
+        }
+
+        public override float GetLowestHeight()
+        {
+            return 0.41f;
         }
 
         public override float GetHighestHeight()

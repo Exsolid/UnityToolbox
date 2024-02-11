@@ -98,7 +98,7 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain
 
             _allHeightData = _allHeightData.OrderBy(x => x.StartingHeightPCT).ToList();
 
-            TerrainMaterial.SetFloat("_MinHeight", 0);
+            TerrainMaterial.SetFloat("_MinHeight", _generator.GetLowestHeight());
             TerrainMaterial.SetFloat("_MaxHeight", _generator.GetHighestHeight());
 
             Color[] colors = new Color[_allHeightData.Count];
