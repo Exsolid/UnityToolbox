@@ -36,7 +36,7 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTy
 
             GUILayout.BeginHorizontal();
             GUILayout.Label("Odds for Spawn: ");
-            _asset.OddsForSpawn = EditorGUILayout.Slider(_asset.OddsForSpawn, 0.1f, 1f, GUILayout.Width(200));
+            _asset.OddsForSpawn = EditorGUILayout.Slider(_asset.OddsForSpawn, 0.01f, 10f, GUILayout.Width(200));
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
@@ -115,7 +115,7 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTy
 
                 GUILayout.BeginHorizontal();
                 GUILayout.Label("Odds for Spawn: ");
-                asset.OddsForSpawn = EditorGUILayout.Slider(asset.OddsForSpawn, 0.1f, 1f, GUILayout.Width(200));
+                asset.OddsForSpawn = EditorGUILayout.Slider(asset.OddsForSpawn, 0.01f, 10f, GUILayout.Width(200));
                 GUILayout.EndHorizontal();
 
                 GUILayout.BeginHorizontal();

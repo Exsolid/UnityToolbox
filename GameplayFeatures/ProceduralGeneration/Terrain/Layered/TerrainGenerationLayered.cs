@@ -42,7 +42,10 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain.Layered
             FillGridWithFillerValuesAndData();
             FillGridWithNoise();
             GenerateMesh();
-            _assetPlacement.SetAssets(_dataGrid, _meshData, _meshes, _groundLayerMask);
+            if (_meshData.EnabledAssets)
+            {
+                _assetPlacement.SetAssets(_dataGrid, _meshData, _meshes, _groundLayerMask);
+            }
         }
 
         private void FillGridWithNoise()
@@ -214,11 +217,26 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain.Layered
             }
             else
             {
+                filledData.AssetPlacements = new List<TerrainGenerationLayeredAssetBaseData>();
                 float posPct = pos % fillerCount / (float) fillerCount;
 
                 if ((prev.Height - next.Height) > 0)
                 {
                     posPct = 1 - posPct;
+
+                    filledData.PctForNoAsset = next.PctForNoAsset;
+                    foreach (TerrainGenerationLayeredAssetBaseData asset in next.AssetPlacements)
+                    {
+                        filledData.AssetPlacements.Add((TerrainGenerationLayeredAssetBaseData)asset.Clone());
+                    }
+                }
+                else
+                {
+                    filledData.PctForNoAsset = prev.PctForNoAsset;
+                    foreach (TerrainGenerationLayeredAssetBaseData asset in prev.AssetPlacements)
+                    {
+                        filledData.AssetPlacements.Add((TerrainGenerationLayeredAssetBaseData)asset.Clone());
+                    }
                 }
 
                 float range = MathF.Abs(prev.Height - next.Height);
@@ -230,23 +248,6 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain.Layered
                 min = MathF.Min(prev.NoiseGround, next.NoiseGround);
 
                 filledData.NoiseGround = min + range * posPct;
-
-                range = MathF.Abs(prev.PctForNoAsset - next.PctForNoAsset);
-                min = MathF.Min(prev.PctForNoAsset, next.PctForNoAsset);
-
-                filledData.PctForNoAsset = min + range * posPct;
-
-                filledData.AssetPlacements = new List<TerrainGenerationLayeredAssetBaseData>();
-
-                foreach (TerrainGenerationLayeredAssetBaseData asset in prev.AssetPlacements)
-                {
-                    filledData.AssetPlacements.Add((TerrainGenerationLayeredAssetBaseData) asset.Clone());
-                }
-
-                foreach (TerrainGenerationLayeredAssetBaseData asset in next.AssetPlacements)
-                {
-                    filledData.AssetPlacements.Add((TerrainGenerationLayeredAssetBaseData)asset.Clone());
-                }
 
                 if (prev.AssetPositionType == next.AssetPositionType)
                 {
@@ -432,7 +433,7 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain.Layered
                     meshRenderer.material = Mat;
                     meshRenderer.sharedMaterial = Mat;
 
-                    obj.layer = Mathf.RoundToInt(Mathf.Log(_groundLayerMask.value, 2));
+                    obj.layer = (int) MathF.Min(31,MathF.Max(0,Mathf.RoundToInt(Mathf.Log(_groundLayerMask.value, 2))));
 
                     _meshes[currentPartX, currentPartY] = meshFilter;
                 }

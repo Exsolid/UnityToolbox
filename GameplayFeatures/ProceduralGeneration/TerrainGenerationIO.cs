@@ -42,9 +42,17 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration
 
         public Dictionary<string, TerrainGenerationData> ReadData()
         {
-            Dictionary<string, TerrainGenerationData> data =
-                ResourcesUtil.GetFileData<Dictionary<string, TerrainGenerationData>>(ProjectPrefKeys.PROCEDURALGENERATIONDATAPATH, FILENAME);
-            return data ?? new Dictionary<string, TerrainGenerationData>();
+            try
+            {
+                Dictionary<string, TerrainGenerationData> data =
+                    ResourcesUtil.GetFileData<Dictionary<string, TerrainGenerationData>>(
+                        ProjectPrefKeys.PROCEDURALGENERATIONDATAPATH, FILENAME);
+                return data ?? new Dictionary<string, TerrainGenerationData>();
+            }
+            catch
+            {
+                return new Dictionary<string, TerrainGenerationData>();
+            }
         }
 
         public bool Initialize()

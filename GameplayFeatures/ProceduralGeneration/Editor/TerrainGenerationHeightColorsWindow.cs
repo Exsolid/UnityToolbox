@@ -165,7 +165,18 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor
             GUILayout.FlexibleSpace();
             if (GUILayout.Button("+", GUILayout.Width(18)))
             {
-                _layers.Add(new TerrainGenerationHeightColorLayer(this, _layers.Count));
+                TerrainGenerationHeightColorLayer layer = new TerrainGenerationHeightColorLayer(this, _layers.Count);
+                TerrainGenerationHeightColorData data = layer.Data;
+
+                data.OcclusionEnabled = _enabledOcclusion;
+                data.RoughnessEnabled = _enabledRoughness;
+                data.NormalEnabled = _enabledNormal;
+                data.MetallicEnabled = _enabledMetallic;
+                data.EmissionEnabled = _enabledEmission;
+
+                layer.Data = data;
+
+                _layers.Add(layer);
             }
             GUILayout.EndHorizontal();
 
@@ -190,18 +201,24 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor
             GUILayout.EndVertical();
         }
 
-        public void DefineSettings(bool enableOcclusiom, bool enableNormal, bool enableMetallic, bool enableEmission, bool enableRoughness)
+        public void DefineSettings(bool enableOcclusion, bool enableNormal, bool enableMetallic, bool enableEmission, bool enableRoughness)
         {
             for (int i = 0; i < _layers.Count; i++)
             {
                 TerrainGenerationHeightColorData layer = _layers[i].Data;
-                layer.OcclusionEnabled = enableOcclusiom;
+                layer.OcclusionEnabled = enableOcclusion;
                 layer.RoughnessEnabled = enableRoughness;
                 layer.NormalEnabled = enableNormal;
                 layer.MetallicEnabled = enableMetallic;
                 layer.EmissionEnabled = enableEmission;
                 _layers[i].Data = layer;
             }
+
+            _enabledEmission = enableEmission;
+            _enabledRoughness = enableRoughness;
+            _enabledNormal = enableNormal;
+            _enabledMetallic = enableMetallic;
+            _enabledOcclusion = enableOcclusion;
         }
 
         private void DrawLineHorizontal()

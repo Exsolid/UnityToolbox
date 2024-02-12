@@ -6,5 +6,6 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Data
 {
     public class TerrainMeshTypeBaseData
     {
+        public bool EnabledAssets;
     }
 }

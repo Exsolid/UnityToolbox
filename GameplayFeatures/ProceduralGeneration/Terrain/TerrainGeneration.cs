@@ -20,7 +20,6 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain
 
         [Header("Material Settings")]
         [SerializeField] public Material TerrainMaterial;
-        [SerializeField] protected bool _autoUpdate;
         [SerializeField] protected TextureSizes _textureSize;
         [SerializeField] protected TextureFormat _textureFormat;
         protected List<TerrainGenerationHeightColorData> _allHeightData;
@@ -32,8 +31,8 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain
         [SerializeField] private LayerMask _groundLayerMask;
 
 
-        public List<Texture2DArray> Texture2DArrays;
-        public List<Texture2D> Texture2Ds;
+        [HideInInspector] public List<Texture2DArray> Texture2DArrays;
+        [HideInInspector] public List<Texture2D> Texture2Ds;
 
         public void GenerateTerrain()
         {

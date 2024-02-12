@@ -301,7 +301,7 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain.Layered
                     {
                         foreach (Collider col in collisions)
                         {
-                            if (!col.gameObject.layer.Equals(Mathf.RoundToInt(Mathf.Log(_groundLayerMask.value, 2))) && !col.gameObject.Equals(parent.gameObject))
+                            if (!col.gameObject.layer.Equals((int)MathF.Min(31, MathF.Max(0, Mathf.RoundToInt(Mathf.Log(_groundLayerMask.value, 2))))) && !col.gameObject.Equals(parent.gameObject))
                             {
                                 GameObject.DestroyImmediate(parent);
                                 return;
@@ -412,7 +412,7 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain.Layered
                         {
                             foreach (Collider col in collisions)
                             {
-                                if (!col.gameObject.layer.Equals(Mathf.RoundToInt(Mathf.Log(_groundLayerMask.value, 2))))
+                                if (!col.gameObject.layer.Equals((int)MathF.Min(31, MathF.Max(0, Mathf.RoundToInt(Mathf.Log(_groundLayerMask.value, 2))))))
                                 {
                                     GameObject.DestroyImmediate(transform.gameObject);
                                     return;
