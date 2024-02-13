@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityToolbox.GameplayFeatures.ProceduralGeneration.Data;
+using UnityToolbox.GameplayFeatures.ProceduralGeneration.Data.Layered;
 using UnityToolbox.GameplayFeatures.SerializationData;
 
 namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTypes.Layered
@@ -184,7 +185,6 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTy
                     {
                         err.HasErrors = true;
                         err.Traced.Add(temp);
-                        err.ErrorDescription = err.Traced.Count + " asset errors have been found in the asset layers.";
                     }
                 }
             }
@@ -192,7 +192,14 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTy
             {
                 _assetPlacements = new List<TerrainGenerationLayeredAssetLayer>();
             }
+
             err = DeserializeRest(obj, err);
+
+            if (err.HasErrors)
+            {
+                err.ErrorDescription = err.Traced.Count + " asset errors have been found in the mesh layer \"" + _data.Name + "\".";
+            }
+
             return err;
         }
 

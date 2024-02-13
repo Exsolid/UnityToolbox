@@ -45,7 +45,7 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTy
         public override int[,] GetExampleGeneration(int x, int y)
         {
             TerrainGenerationTypeCellularAutomataData data = _data as TerrainGenerationTypeCellularAutomataData;
-            return CellularAutomata.Generate(new int[x, y], data.FillPct, data.IterationCount, data.BorderSize);
+            return CellularAutomata.Generate(new int[x, y], data.FillPct, data.IterationCount, 2);
         }
 
         public override SerializedDataErrorDetails Deserialize(TerrainGenerationTypeBaseData obj)

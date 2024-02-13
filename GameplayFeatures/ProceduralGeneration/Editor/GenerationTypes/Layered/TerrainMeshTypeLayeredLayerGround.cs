@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityToolbox.GameplayFeatures.ProceduralGeneration.Data;
+using UnityToolbox.GameplayFeatures.ProceduralGeneration.Data.Layered;
 using UnityToolbox.GameplayFeatures.SerializationData;
 using UnityToolbox.General;
 using static UnityEditor.Experimental.GraphView.GraphView;
@@ -153,7 +154,6 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTy
                 {
                     err.HasErrors = true;
                     err.Traced.Add(temp);
-                    err.ErrorDescription = err.Traced.Count + " asset errors have been found in the asset layers.";
                 }
             }
 

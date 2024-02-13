@@ -7,6 +7,9 @@ using UnityToolbox.GameplayFeatures.SerializationData;
 
 namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Data
 {
+    /// <summary>
+    /// The data for a height color layer.
+    /// </summary>
     public struct TerrainGenerationHeightColorData
     {
         public bool IsBaseLayer;

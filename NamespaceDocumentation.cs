@@ -81,24 +81,49 @@ namespace UnityToolbox.GameplayFeatures.Gamestates { }
 namespace UnityToolbox.GameplayFeatures.Gamestates.Editor { }
 
 /// <summary>
-/// This namespace contains everything used for Procedural generation.
+/// This namespace contains everything used for procedural generation.
 /// </summary>
 namespace UnityToolbox.GameplayFeatures.ProceduralGeneration { }
 
 /// <summary>
-/// This namespace contains everything used for Procedural generation on the editor side.
+/// This namespace contains everything used for procedural generation on the editor side.
 /// </summary>
 namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor { }
 
 /// <summary>
-/// This namespace contains all enums used for Procedural generation.
+/// This namespace contains all generation type editor scripts.
+/// </summary>
+namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTypes { }
+
+/// <summary>
+/// This namespace contains all layered mesh generation type editor scripts.
+/// </summary>
+namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTypes.Layered { }
+
+/// <summary>
+/// This namespace contains all enums used for procedural generation.
 /// </summary>
 namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Enums { }
 
 /// <summary>
-/// This namespace contains all scripts used for Procedural terrain generation.
+/// This namespace contains all scripts used for procedural terrain generation.
 /// </summary>
 namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain { }
+
+/// <summary>
+/// This namespace contains all scripts used for layered procedural terrain generation.
+/// </summary>
+namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain.Layered { }
+
+/// <summary>
+/// This namespace contains all data used to serialize the procedural generation settings.
+/// </summary>
+namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Data { }
+
+/// <summary>
+/// This namespace contains all data used to serialize the layered mesh procedural generation settings.
+/// </summary>
+namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Data.Layered { }
 
 /// <summary>
 /// This namespace contains all scripts used for save games.

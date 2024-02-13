@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityToolbox.GameplayFeatures.ProceduralGeneration.Data;
+using UnityToolbox.GameplayFeatures.ProceduralGeneration.Data.Layered;
 using UnityToolbox.GameplayFeatures.ProceduralGeneration.Enums;
 using UnityToolbox.GameplayFeatures.SerializationData;
 using UnityToolbox.General.Management.Editor;
@@ -48,6 +49,12 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTy
             GUILayout.Label("Check For Space On Placement: ");
             GUILayout.FlexibleSpace();
             _asset.CanCollide = EditorGUILayout.Toggle(_asset.CanCollide, GUILayout.Width(20));
+            GUILayout.EndHorizontal();
+
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Disable Raycast Placement: ");
+            GUILayout.FlexibleSpace();
+            _asset.DisableRaycastPlacement = EditorGUILayout.Toggle(_asset.DisableRaycastPlacement, GUILayout.Width(20));
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();

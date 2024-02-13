@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityToolbox.GameplayFeatures.Items;
 using UnityToolbox.GameplayFeatures.Items.Management;
 using UnityToolbox.GameplayFeatures.ProceduralGeneration.Data;
+using UnityToolbox.GameplayFeatures.ProceduralGeneration.Data.Layered;
 using UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTypes;
 using UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTypes.Layered;
 using UnityToolbox.GameplayFeatures.ProceduralGeneration.Enums;
@@ -169,7 +170,7 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor
             GUILayout.BeginHorizontal();
             Vector2 textDimensions = GUI.skin.label.CalcSize(new GUIContent(Application.dataPath));
             GUILayout.Label(Application.dataPath + "/");
-            _assetPathInProject = GUILayout.TextField(_assetPathInProject, GUILayout.Width(585 - textDimensions.x));
+            _assetPathInProject = GUILayout.TextField(_assetPathInProject, GUILayout.Width(485 - textDimensions.x));
             GUILayout.EndHorizontal();
             if (GUILayout.Button("Refresh"))
             {

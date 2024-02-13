@@ -6,7 +6,7 @@ using System.Numerics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityToolbox.GameplayFeatures.ProceduralGeneration.Data;
+using UnityToolbox.GameplayFeatures.ProceduralGeneration.Data.Layered;
 using Quaternion = UnityEngine.Quaternion;
 using Random = UnityEngine.Random;
 using Vector2 = UnityEngine.Vector2;
@@ -14,6 +14,9 @@ using Vector3 = UnityEngine.Vector3;
 
 namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain.Layered
 {
+    /// <summary>
+    /// The asset placement logic of the layered terrain mesh generator. Only useful within the <see cref="TerrainGeneration"/> class.
+    /// </summary>
     public class TerrainGenerationLayeredAssetPlacement
     {
         private TerrainMeshTypeLayeredLayerBaseData[,] _dataGrid;
@@ -21,12 +24,26 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain.Layered
         private MeshFilter[,] _meshes;
         private TerrainMeshTypeLayeredData _meshData;
 
-        public void SetAssets(TerrainMeshTypeLayeredLayerBaseData[,] dataGrid, TerrainMeshTypeLayeredData meshData, MeshFilter[,] meshes, LayerMask groundLayerMask)
+        /// <summary>
+        /// Sets the relevant data for the asset placement.
+        /// </summary>
+        /// <param name="dataGrid">The created data grid with all layers.</param>
+        /// <param name="meshData">The mesh data.</param>
+        /// <param name="meshes">The meshes created beforehand.</param>
+        /// <param name="groundLayerMask">The ground layer mask for raycast placement.</param>
+        public void SetData(TerrainMeshTypeLayeredLayerBaseData[,] dataGrid, TerrainMeshTypeLayeredData meshData, MeshFilter[,] meshes, LayerMask groundLayerMask)
         {
             _dataGrid = dataGrid;
             _groundLayerMask = groundLayerMask;
             _meshes = meshes;
             _meshData = meshData;
+        }
+
+        /// <summary>
+        /// Places all assets.
+        /// </summary>
+        public void PlaceAssets()
+        {
 
             int partSize = 50;
 
@@ -35,7 +52,7 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain.Layered
                 for (int x = 0; x < _dataGrid.GetLength(0); x++)
                 {
 
-                    MeshFilter currentMesh = meshes[x / partSize, y / partSize];
+                    MeshFilter currentMesh = _meshes[x / partSize, y / partSize];
 
                     TerrainMeshTypeLayeredLayerGroundData groundData =
                         _dataGrid[x, y] as TerrainMeshTypeLayeredLayerGroundData;
@@ -80,7 +97,7 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain.Layered
                 for (int x = 0; x < _dataGrid.GetLength(0); x++)
                 {
 
-                    MeshFilter currentMesh = meshes[x / partSize, y / partSize];
+                    MeshFilter currentMesh = _meshes[x / partSize, y / partSize];
 
                     TerrainMeshTypeLayeredLayerGroundData groundData =
                         _dataGrid[x, y] as TerrainMeshTypeLayeredLayerGroundData;
@@ -172,12 +189,58 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain.Layered
                 return;
             }
 
-            GameObject obj = GameObject.Instantiate(selected.Prefab, position + Vector3.up * 2 + Vector3.right * xPos + Vector3.forward * zPos,
-                Quaternion.Euler(0, Random.Range(0, 350), 0));
 
-            obj.transform.parent = currentMesh.transform;
+            if (selected.DisableRaycastPlacement)
+            {
+                GameObject obj = GameObject.Instantiate(selected.Prefab, position + Vector3.up * selected.HeightOffset + Vector3.right * xPos + Vector3.forward * zPos,
+                    Quaternion.Euler(0, Random.Range(0, 350), 0));
+                TerrainGenerationLayeredAssetDataHolder dataHolder = obj.AddComponent<TerrainGenerationLayeredAssetDataHolder>();
+                dataHolder.AssetData = selected;
 
-            RotationPlacementForChildren(obj, selected.HeightOffset, false, currentMesh, selected.CanCollide);
+                obj.transform.parent = currentMesh.transform;
+                Physics.SyncTransforms();
+
+                if (obj.GetComponent<Collider>() != null && selected.CanCollide)
+                {
+                    Collider[] collisions = Physics.OverlapBox(obj.transform.position, obj.GetComponent<Collider>().bounds.extents, obj.transform.rotation);
+
+                    if (collisions.Length > 0)
+                    {
+                        foreach (Collider col in collisions)
+                        {
+                            if (!col.gameObject.layer.Equals((int)MathF.Min(31, MathF.Max(0, Mathf.RoundToInt(Mathf.Log(_groundLayerMask.value, 2))))) && !col.gameObject.Equals(obj.gameObject))
+                            {
+                                if (col.GetComponent<TerrainGenerationLayeredAssetDataHolder>() != null)
+                                {
+                                    TerrainGenerationLayeredAssetDataHolder dataHolderOther =
+                                        col.GetComponent<TerrainGenerationLayeredAssetDataHolder>();
+                                    if (dataHolderOther.AssetData.CanCollide)
+                                    {
+                                        GameObject.DestroyImmediate(obj);
+                                        return;
+                                    }
+                                }
+                                else
+                                {
+                                    GameObject.DestroyImmediate(obj);
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                GameObject obj = GameObject.Instantiate(selected.Prefab, position + Vector3.up * 2 + Vector3.right * xPos + Vector3.forward * zPos,
+                    Quaternion.Euler(0, Random.Range(0, 350), 0));
+
+                TerrainGenerationLayeredAssetDataHolder dataHolder = obj.AddComponent<TerrainGenerationLayeredAssetDataHolder>();
+                dataHolder.AssetData = selected;
+
+                obj.transform.parent = currentMesh.transform;
+                RotationPlacementForChildren(obj, selected.HeightOffset, false, currentMesh, selected.CanCollide);
+            }
         }
 
         private void InitAssets(TerrainMeshTypeLayeredLayerBaseData groundData)
@@ -203,10 +266,13 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain.Layered
                 }
                 else
                 {
+                    float currentClusteredWeight = 0;
                     TerrainGenerationLayeredAssetClusterData clustered = (TerrainGenerationLayeredAssetClusterData) assetData;
                     foreach (TerrainGenerationLayeredAssetData asset in clustered.Assets)
                     {
                         asset.Prefab = Resources.Load<GameObject>(asset.PrefabPath);
+                        currentClusteredWeight += asset.OddsForSpawn;
+                        asset.OddsForSpawn = currentClusteredWeight;
 
                         if (asset.Prefab == null)
                         {
@@ -303,8 +369,21 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain.Layered
                         {
                             if (!col.gameObject.layer.Equals((int)MathF.Min(31, MathF.Max(0, Mathf.RoundToInt(Mathf.Log(_groundLayerMask.value, 2))))) && !col.gameObject.Equals(parent.gameObject))
                             {
-                                GameObject.DestroyImmediate(parent);
-                                return;
+                                if (col.GetComponent<TerrainGenerationLayeredAssetDataHolder>() != null)
+                                {
+                                    TerrainGenerationLayeredAssetDataHolder dataHolder =
+                                        col.GetComponent<TerrainGenerationLayeredAssetDataHolder>();
+                                    if (dataHolder.AssetData.CanCollide)
+                                    {
+                                        GameObject.DestroyImmediate(parent);
+                                        return;
+                                    }
+                                }
+                                else
+                                {
+                                    GameObject.DestroyImmediate(parent);
+                                    return;
+                                }
                             }
                         }
                     }
@@ -414,8 +493,21 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain.Layered
                             {
                                 if (!col.gameObject.layer.Equals((int)MathF.Min(31, MathF.Max(0, Mathf.RoundToInt(Mathf.Log(_groundLayerMask.value, 2))))))
                                 {
-                                    GameObject.DestroyImmediate(transform.gameObject);
-                                    return;
+                                    if (col.GetComponent<TerrainGenerationLayeredAssetDataHolder>() != null)
+                                    {
+                                        TerrainGenerationLayeredAssetDataHolder dataHolder =
+                                            col.GetComponent<TerrainGenerationLayeredAssetDataHolder>();
+                                        if (dataHolder.AssetData.CanCollide)
+                                        {
+                                            GameObject.DestroyImmediate(parent);
+                                            return;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        GameObject.DestroyImmediate(parent);
+                                        return;
+                                    }
                                 }
                             }
                         }

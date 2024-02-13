@@ -35,3 +35,4 @@ Currently tutorials for the following features exist (with some having further s
 - @subpage GamestateManagement
 - @subpage AudioManagement
 - @subpage Boids
+- @subpage TerrainGeneration

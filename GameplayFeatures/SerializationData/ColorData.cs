@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace UnityToolbox.GameplayFeatures.SerializationData
 {
+    /// <summary>
+    /// The data for colors.
+    /// </summary>
     public class ColorData : GameData
     {
         public float R;

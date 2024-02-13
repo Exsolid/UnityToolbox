@@ -1,5 +1,8 @@
 namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Enums
 {
+    /// <summary>
+    /// An enum used to define generated grids before being turned into mesh data.
+    /// </summary>
     public enum TerrainValues
     {
         Floor = 0,

@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Data
 {
+    /// <summary>
+    /// The generation type data for cellular automata.
+    /// </summary>
     public class TerrainGenerationTypeCellularAutomataData: TerrainGenerationTypeBaseData
     {
         public int Size;

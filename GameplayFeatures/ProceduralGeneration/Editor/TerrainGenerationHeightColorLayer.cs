@@ -63,8 +63,11 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor
                     }
                     catch
                     {
+                        SerializedDataErrorDetails errInternal = new SerializedDataErrorDetails();
                         err.HasErrors = true;
-                        err.ErrorDescription = "The asset at path: " + prevPath + " cannot be found anymore.";
+                        errInternal.HasErrors = true;
+                        errInternal.ErrorDescription = "The asset at path: " + prevPath + " cannot be found anymore.";
+                        err.Traced.Add(errInternal);
                         _data.TerrainTexturePath = prevPath;
                     }
                 }
@@ -88,8 +91,11 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor
                     }
                     catch
                     {
+                        SerializedDataErrorDetails errInternal = new SerializedDataErrorDetails();
                         err.HasErrors = true;
-                        err.ErrorDescription = "The asset at path: " + prevPath + " cannot be found anymore.";
+                        errInternal.HasErrors = true;
+                        errInternal.ErrorDescription = "The asset at path: " + prevPath + " cannot be found anymore.";
+                        err.Traced.Add(errInternal);
                         _data.NormalTexturePath = prevPath;
                     }
                 }
@@ -113,8 +119,11 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor
                     }
                     catch
                     {
+                        SerializedDataErrorDetails errInternal = new SerializedDataErrorDetails();
                         err.HasErrors = true;
-                        err.ErrorDescription = "The asset at path: " + prevPath + " cannot be found anymore.";
+                        errInternal.HasErrors = true;
+                        errInternal.ErrorDescription = "The asset at path: " + prevPath + " cannot be found anymore.";
+                        err.Traced.Add(errInternal);
                         _data.EmissionTexturePath = prevPath;
                     }
                 }
@@ -128,6 +137,7 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor
                     string prevPath = _data.MetallicTexturePath;
                     try
                     {
+                        SerializedDataErrorDetails errInternal = new SerializedDataErrorDetails();
                         _data.MetallicTexture = EditorResourceUtil.GetAssetWithGUID<Texture2D>(_data.MetallicTextureGUID);
                         _data.MetallicTexturePath = EditorResourceUtil.GetResourcesPathWithAsset(_data.MetallicTexture);
 
@@ -138,8 +148,11 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor
                     }
                     catch
                     {
+                        SerializedDataErrorDetails errInternal = new SerializedDataErrorDetails();
                         err.HasErrors = true;
-                        err.ErrorDescription = "The asset at path: " + prevPath + " cannot be found anymore.";
+                        errInternal.HasErrors = true;
+                        errInternal.ErrorDescription = "The asset at path: " + prevPath + " cannot be found anymore.";
+                        err.Traced.Add(errInternal);
                         _data.MetallicTexturePath = prevPath;
                     }
                 }
@@ -163,8 +176,11 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor
                     }
                     catch
                     {
+                        SerializedDataErrorDetails errInternal = new SerializedDataErrorDetails();
                         err.HasErrors = true;
-                        err.ErrorDescription = "The asset at path: " + prevPath + " cannot be found anymore.";
+                        errInternal.HasErrors = true;
+                        errInternal.ErrorDescription = "The asset at path: " + prevPath + " cannot be found anymore.";
+                        err.Traced.Add(errInternal);
                         _data.OcclusionTexturePath = prevPath;
                     }
                 }
@@ -188,11 +204,19 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor
                     }
                     catch
                     {
+                        SerializedDataErrorDetails errInternal = new SerializedDataErrorDetails();
                         err.HasErrors = true;
-                        err.ErrorDescription = "The asset at path: " + prevPath + " cannot be found anymore.";
+                        errInternal.HasErrors = true;
+                        errInternal.ErrorDescription = "The asset at path: " + prevPath + " cannot be found anymore.";
+                        err.Traced.Add(errInternal);
                         _data.RoughnessTexturePath = prevPath;
                     }
                 }
+            }
+
+            if (err.HasErrors)
+            {
+                err.ErrorDescription = "The height data layer \"" + _data.Name + "\" has asset errors.";
             }
 
             _data.TerrainColor = _data.TerrainColorData.GetColor();

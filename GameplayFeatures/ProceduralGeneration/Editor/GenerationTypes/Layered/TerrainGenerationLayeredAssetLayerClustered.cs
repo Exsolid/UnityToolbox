@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityToolbox.GameplayFeatures.ProceduralGeneration.Data;
+using UnityToolbox.GameplayFeatures.ProceduralGeneration.Data.Layered;
 using UnityToolbox.GameplayFeatures.ProceduralGeneration.Enums;
 using UnityToolbox.GameplayFeatures.SerializationData;
 using UnityToolbox.General.Management.Editor;
@@ -109,8 +110,14 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTy
                 GUILayout.EndHorizontal();
 
                 GUILayout.BeginHorizontal();
+                GUILayout.Label("Disable Raycast Placement: ");
+                GUILayout.FlexibleSpace();
+                asset.DisableRaycastPlacement = EditorGUILayout.Toggle(asset.DisableRaycastPlacement, GUILayout.Width(20));
+                GUILayout.EndHorizontal();
+
+                GUILayout.BeginHorizontal();
                 GUILayout.Label("Height Offset: ");
-                _asset.HeightOffset = EditorGUILayout.FloatField(_asset.HeightOffset, GUILayout.Width(200));
+                asset.HeightOffset = EditorGUILayout.FloatField(asset.HeightOffset, GUILayout.Width(200));
                 GUILayout.EndHorizontal();
 
                 GUILayout.BeginHorizontal();

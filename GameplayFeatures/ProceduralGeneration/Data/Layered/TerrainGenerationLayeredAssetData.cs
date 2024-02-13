@@ -5,8 +5,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityToolbox.GameplayFeatures.ProceduralGeneration.Enums;
 
-namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Data
+namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Data.Layered
 {
+    /// <summary>
+    /// The data for single asset placement.
+    /// </summary>
     public class TerrainGenerationLayeredAssetData : TerrainGenerationLayeredAssetBaseData
     {
         public string PrefabGUID;
@@ -15,5 +18,6 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Data
         [NonSerialized]
         public GameObject Prefab;
         public bool CanCollide;
+        public bool DisableRaycastPlacement;
     }
 }

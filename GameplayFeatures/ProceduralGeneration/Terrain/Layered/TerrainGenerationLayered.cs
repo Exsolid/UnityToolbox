@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityToolbox.GameplayFeatures.ProceduralGeneration.Data.Layered;
 using UnityToolbox.GameplayFeatures.ProceduralGeneration.Data;
 using UnityToolbox.GameplayFeatures.ProceduralGeneration.Enums;
 using UnityToolbox.General.Algorithms;
@@ -13,6 +14,9 @@ using Object = UnityEngine.Object;
 
 namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain.Layered
 {
+    /// <summary>
+    /// The generator for the layered mesh. Only useful within the <see cref="TerrainGeneration"/> class.
+    /// </summary>
     public class TerrainGenerationLayered : TerrainGenerationGenerator
     {
         private GameObject _terrainObject;
@@ -44,7 +48,8 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain.Layered
             GenerateMesh();
             if (_meshData.EnabledAssets)
             {
-                _assetPlacement.SetAssets(_dataGrid, _meshData, _meshes, _groundLayerMask);
+                _assetPlacement.SetData(_dataGrid, _meshData, _meshes, _groundLayerMask);
+                _assetPlacement.PlaceAssets();
             }
         }
 
@@ -206,7 +211,6 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain.Layered
         {
             int fillerCount = _meshData.VertexMultiplier;
             TerrainMeshTypeLayeredLayerGroundData filledData = new TerrainMeshTypeLayeredLayerGroundData();
-            //TODO height data
             if (next == null)
             {
                 filledData.Height = prev.Height;

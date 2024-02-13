@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Data
+namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Data.Layered
 {
+    /// <summary>
+    /// The data for the layered mesh generation type.
+    /// </summary>
     public class TerrainMeshTypeLayeredData: TerrainMeshTypeBaseData
     {
         public float SizeBetweenVertices;

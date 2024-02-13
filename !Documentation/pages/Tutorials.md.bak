@@ -8,7 +8,7 @@ Currently the toolbox includes:
 - Dialog system
 - Savegame management (Checkpoint data and saving of objects at runtime)
 - Gamestate management
-- Procedual terrain generation
+- Procedural terrain generation
 - Player controls for 2D and 3D
 - Settings management (Controls, volume and languages)
 - Sound management

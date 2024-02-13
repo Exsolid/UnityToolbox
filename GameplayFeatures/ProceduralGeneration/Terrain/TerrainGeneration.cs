@@ -1,19 +1,20 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering;
 using UnityEngine.Rendering;
-using UnityEngine.UIElements;
 using UnityToolbox.GameplayFeatures.ProceduralGeneration.Data;
+using UnityToolbox.GameplayFeatures.ProceduralGeneration.Data.Layered;
 using UnityToolbox.GameplayFeatures.ProceduralGeneration.Enums;
 using UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain.Layered;
 using UnityToolbox.General.Management;
 
 namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain
 {
+    /// <summary>
+    /// The main terrain generation component within a scene.
+    /// </summary>
     public class TerrainGeneration : Module
     {
         private TerrainGenerationGenerator _generator;
@@ -34,6 +35,10 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain
         [HideInInspector] public List<Texture2DArray> Texture2DArrays;
         [HideInInspector] public List<Texture2D> Texture2Ds;
 
+        /// <summary>
+        /// Generates the terrain with selected settings.
+        /// </summary>
+        /// <exception cref="DataException">Thrown either no data can be found or the terrain generation has encountered errors with its data.</exception>
         public void GenerateTerrain()
         {
             Data = TerrainGenerationIO.Instance.ReadData();
@@ -64,7 +69,7 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain
             }
             catch (Exception ex)
             {
-                throw new Exception("The terrain generation has encountered an error. Is the data still valid?", ex);
+                throw new DataException("The terrain generation has encountered an error. Is the data still valid?", ex);
             }
         }
 
