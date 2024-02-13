@@ -1,0 +1,8 @@
+var class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_terc9557b37477f52b44858fa452d25c9bc =
+[
+    [ "CanCollide", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_terc9557b37477f52b44858fa452d25c9bc.html#a1cdd508ce4d9da319f707ef48c03cf07", null ],
+    [ "DisableRaycastPlacement", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_terc9557b37477f52b44858fa452d25c9bc.html#a6e34dd423d119e66d2c580ff9077b70d", null ],
+    [ "Prefab", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_terc9557b37477f52b44858fa452d25c9bc.html#a556d3123c976bc70daed361d86d8d2f5", null ],
+    [ "PrefabGUID", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_terc9557b37477f52b44858fa452d25c9bc.html#a1bc659af0e463403b8513c1afd83c9dd", null ],
+    [ "PrefabPath", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_terc9557b37477f52b44858fa452d25c9bc.html#aa2906b92b60f2b4d7de4395504c6f6c2", null ]
+];

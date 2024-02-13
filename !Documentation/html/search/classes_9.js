@@ -8,13 +8,12 @@ var searchData=
   ['localizationeditidwindow_5',['LocalizationEditIDWindow',['../class_unity_toolbox_1_1_u_i_1_1_localization_1_1_editor_1_1_localization_edit_i_d_window.html',1,'UnityToolbox::UI::Localization::Editor']]],
   ['localizationeditlanguagewindow_6',['LocalizationEditLanguageWindow',['../class_unity_toolbox_1_1_u_i_1_1_localization_1_1_editor_1_1_localization_edit_language_window.html',1,'UnityToolbox::UI::Localization::Editor']]],
   ['localizationeditscopewindow_7',['LocalizationEditScopeWindow',['../class_unity_toolbox_1_1_u_i_1_1_localization_1_1_editor_1_1_localization_edit_scope_window.html',1,'UnityToolbox::UI::Localization::Editor']]],
-  ['localizationexception_8',['LocalizationException',['../class_unity_toolbox_1_1_u_i_1_1_localization_1_1_localization_exception.html',1,'UnityToolbox::UI::Localization']]],
-  ['localizationid_9',['LocalizationID',['../struct_unity_toolbox_1_1_u_i_1_1_localization_1_1_localization_i_d.html',1,'UnityToolbox::UI::Localization']]],
-  ['localizationlanguage_10',['LocalizationLanguage',['../struct_unity_toolbox_1_1_u_i_1_1_localization_1_1_localization_language.html',1,'UnityToolbox::UI::Localization']]],
-  ['localizationmanagerwindow_11',['LocalizationManagerWindow',['../class_unity_toolbox_1_1_u_i_1_1_localization_1_1_editor_1_1_localization_manager_window.html',1,'UnityToolbox::UI::Localization::Editor']]],
-  ['localizationscope_12',['LocalizationScope',['../struct_unity_toolbox_1_1_u_i_1_1_localization_1_1_localization_scope.html',1,'UnityToolbox::UI::Localization']]],
-  ['localizationselectionwindow_13',['LocalizationSelectionWindow',['../class_unity_toolbox_1_1_u_i_1_1_localization_1_1_editor_1_1_localization_selection_window.html',1,'UnityToolbox::UI::Localization::Editor']]],
+  ['localizationid_8',['LocalizationID',['../struct_unity_toolbox_1_1_u_i_1_1_localization_1_1_localization_i_d.html',1,'UnityToolbox::UI::Localization']]],
+  ['localizationlanguage_9',['LocalizationLanguage',['../struct_unity_toolbox_1_1_u_i_1_1_localization_1_1_localization_language.html',1,'UnityToolbox::UI::Localization']]],
+  ['localizationmanagerwindow_10',['LocalizationManagerWindow',['../class_unity_toolbox_1_1_u_i_1_1_localization_1_1_editor_1_1_localization_manager_window.html',1,'UnityToolbox::UI::Localization::Editor']]],
+  ['localizationscope_11',['LocalizationScope',['../struct_unity_toolbox_1_1_u_i_1_1_localization_1_1_localization_scope.html',1,'UnityToolbox::UI::Localization']]],
+  ['localizationselectionwindow_12',['LocalizationSelectionWindow',['../class_unity_toolbox_1_1_u_i_1_1_localization_1_1_editor_1_1_localization_selection_window.html',1,'UnityToolbox::UI::Localization::Editor']]],
+  ['localizer_13',['Localizer',['../class_unity_toolbox_1_1_u_i_1_1_localization_1_1_localizer.html',1,'UnityToolbox::UI::Localization']]],
   ['localizzedtext_14',['LocalizzedText',['../class_unity_toolbox_1_1_u_i_1_1_localization_1_1_localizzed_text.html',1,'UnityToolbox::UI::Localization']]],
-  ['localizzer_15',['Localizzer',['../class_unity_toolbox_1_1_u_i_1_1_localization_1_1_localizzer.html',1,'UnityToolbox::UI::Localization']]],
-  ['lockmovement_16',['LockMovement',['../class_unity_toolbox_1_1_u_i_1_1_menus_1_1_flat_menu_1_1_lock_movement.html',1,'UnityToolbox::UI::Menus::FlatMenu']]]
+  ['lockmovement_15',['LockMovement',['../class_unity_toolbox_1_1_u_i_1_1_menus_1_1_flat_menu_1_1_lock_movement.html',1,'UnityToolbox::UI::Menus::FlatMenu']]]
 ];

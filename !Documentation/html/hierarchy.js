@@ -6,10 +6,9 @@ var hierarchy =
     [ "UnityEditor.Editor", null, [
       [ "UnityToolbox.GameplayFeatures.Achievements.Editor.AchievementDataEditor", "class_unity_toolbox_1_1_gameplay_features_1_1_achievements_1_1_editor_1_1_achievement_data_editor.html", null ],
       [ "UnityToolbox.GameplayFeatures.Achievements.Editor.AchievementManagerEditor", "class_unity_toolbox_1_1_gameplay_features_1_1_achievements_1_1_editor_1_1_achievement_manager_editor.html", null ],
-      [ "UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor.TerrainDecorationEditor", "class_unity_toolbox_1_1_gameplay_features_1_1_prozedual_generation_1_1_editor_1_1_terrain_decoration_editor.html", null ],
-      [ "UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor.TerrainGenerateAllEditor", "class_unity_toolbox_1_1_gameplay_features_1_1_prozedual_generation_1_1_editor_1_1_terrain_generate_all_editor.html", null ],
-      [ "UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor.TerrainGeneratorEditor", "class_unity_toolbox_1_1_gameplay_features_1_1_prozedual_generation_1_1_editor_1_1_terrain_generator_editor.html", null ]
+      [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.TerrainGenerationEditor", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_editor_1_1_terrain_generation_editor.html", null ]
     ] ],
+    [ "UnityToolbox.General.Management.Editor.EditorResourceUtil", "class_unity_toolbox_1_1_general_1_1_management_1_1_editor_1_1_editor_resource_util.html", null ],
     [ "EditorWindow", null, [
       [ "UnityToolbox.GameplayFeatures.Gamestates.Editor.GamestateGraphPathSelectionWindow", "class_unity_toolbox_1_1_gameplay_features_1_1_gamestates_1_1_editor_1_1_gamestate_graph_path_selection_window.html", null ],
       [ "UnityToolbox.GameplayFeatures.Gamestates.Editor.GamestateGraphWindow", "class_unity_toolbox_1_1_gameplay_features_1_1_gamestates_1_1_editor_1_1_gamestate_graph_window.html", null ],
@@ -18,6 +17,9 @@ var hierarchy =
       [ "UnityToolbox.GameplayFeatures.Items.Management.Editor.ItemDefinitionSelectionWindow", "class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_management_1_1_editor_1_1_item_definition_selection_window.html", null ],
       [ "UnityToolbox.GameplayFeatures.Items.Management.Editor.ItemManagerWindow", "class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_management_1_1_editor_1_1_item_manager_window.html", null ],
       [ "UnityToolbox.GameplayFeatures.Items.Management.Editor.ItemScopeEditWindow", "class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_management_1_1_editor_1_1_item_scope_edit_window.html", null ],
+      [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.TerrainGenerationErrorWindow", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_editor_1_1_terrain_generation_error_window.html", null ],
+      [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.TerrainGenerationGeneralWindow", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_editor_1_1_terrain_generation_general_window.html", null ],
+      [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.TerrainGenerationHeightColorsWindow", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_editor_1_1_terrain_generation_height_colors_window.html", null ],
       [ "UnityToolbox.UI.Dialog.Editor.DialogGraphPathSelectionWindow", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_editor_1_1_dialog_graph_path_selection_window.html", null ],
       [ "UnityToolbox.UI.Dialog.Editor.DialogGraphWindow", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_editor_1_1_dialog_graph_window.html", null ],
       [ "UnityToolbox.UI.Localization.Editor.LocalizationEditIDWindow", "class_unity_toolbox_1_1_u_i_1_1_localization_1_1_editor_1_1_localization_edit_i_d_window.html", null ],
@@ -28,9 +30,10 @@ var hierarchy =
     ] ],
     [ "Exception", null, [
       [ "UnityToolbox.GameplayFeatures.Items.Management.ItemDefinitionException", "class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_management_1_1_item_definition_exception.html", null ],
-      [ "UnityToolbox.UI.Localization.LocalizationException", "class_unity_toolbox_1_1_u_i_1_1_localization_1_1_localization_exception.html", null ]
+      [ "UnityToolbox.General.StatusException", "class_unity_toolbox_1_1_general_1_1_status_exception.html", null ]
     ] ],
     [ "UnityToolbox.GameplayFeatures.SerializationData.GameData", "class_unity_toolbox_1_1_gameplay_features_1_1_serialization_data_1_1_game_data.html", [
+      [ "UnityToolbox.GameplayFeatures.SerializationData.ColorData", "class_unity_toolbox_1_1_gameplay_features_1_1_serialization_data_1_1_color_data.html", null ],
       [ "UnityToolbox.GameplayFeatures.SerializationData.ItemData", "class_unity_toolbox_1_1_gameplay_features_1_1_serialization_data_1_1_item_data.html", null ],
       [ "UnityToolbox.GameplayFeatures.SerializationData.ParentData", "class_unity_toolbox_1_1_gameplay_features_1_1_serialization_data_1_1_parent_data.html", null ],
       [ "UnityToolbox.GameplayFeatures.SerializationData.ResourceData", "class_unity_toolbox_1_1_gameplay_features_1_1_serialization_data_1_1_resource_data.html", null ],
@@ -38,9 +41,14 @@ var hierarchy =
       [ "UnityToolbox.GameplayFeatures.SerializationData.VectorData", "class_unity_toolbox_1_1_gameplay_features_1_1_serialization_data_1_1_vector_data.html", null ]
     ] ],
     [ "UnityToolbox.GameplayFeatures.Gamestates.GamestateNodeData", "class_unity_toolbox_1_1_gameplay_features_1_1_gamestates_1_1_gamestate_node_data.html", null ],
-    [ "UnityToolbox.GameplayFeatures.ProzedualGeneration.Terrain.HeightColorTypes", "class_unity_toolbox_1_1_gameplay_features_1_1_prozedual_generation_1_1_terrain_1_1_height_color_types.html", null ],
     [ "ICloneable", null, [
-      [ "UnityToolbox.GameplayFeatures.ProzedualGeneration.Terrain.TerrainDecorationInformation", "class_unity_toolbox_1_1_gameplay_features_1_1_prozedual_generation_1_1_terrain_1_1_terrain_decoration_information.html", null ]
+      [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Data.Layered.TerrainGenerationLayeredAssetBaseData", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_terabf7857b1e49ae6ddb3144db199786e1.html", [
+        [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Data.Layered.TerrainGenerationLayeredAssetClusterData", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_terc95d06b1e0f63211a129361e43939ef7.html", null ],
+        [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Data.Layered.TerrainGenerationLayeredAssetData", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_terc9557b37477f52b44858fa452d25c9bc.html", null ]
+      ] ],
+      [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Data.Layered.TerrainMeshTypeLayeredLayerBaseData", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_ter73b49a4dbfc3679c4153eb522511597d.html", [
+        [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Data.Layered.TerrainMeshTypeLayeredLayerGroundData", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_ter33332ed7a7ee378c0937afc5583339c5.html", null ]
+      ] ]
     ] ],
     [ "IEdgeConnectorListener", null, [
       [ "UnityToolbox.UI.Dialog.Editor.DialogNodeBase.ConnectionListener", "class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_editor_1_1_dialog_node_base_1_1_connection_listener.html", null ]
@@ -84,6 +92,34 @@ var hierarchy =
       [ "UnityToolbox.GameplayFeatures.Achievements.AchievementManager", "class_unity_toolbox_1_1_gameplay_features_1_1_achievements_1_1_achievement_manager.html", null ],
       [ "UnityToolbox.UI.Menus.MenuManager", "class_unity_toolbox_1_1_u_i_1_1_menus_1_1_menu_manager.html", null ]
     ] ],
+    [ "UnityToolbox.GameplayFeatures.SerializationData.ISerializedDataContainer< T >", "interface_unity_toolbox_1_1_gameplay_features_1_1_serialization_data_1_1_i_serialized_data_container.html", null ],
+    [ "UnityToolbox.GameplayFeatures.SerializationData.ISerializedDataContainer< List< TerrainGenerationHeightColorData > >", "interface_unity_toolbox_1_1_gameplay_features_1_1_serialization_data_1_1_i_serialized_data_container.html", [
+      [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.TerrainGenerationHeightColorsWindow", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_editor_1_1_terrain_generation_height_colors_window.html", null ]
+    ] ],
+    [ "UnityToolbox.GameplayFeatures.SerializationData.ISerializedDataContainer< TerrainGenerationHeightColorData >", "interface_unity_toolbox_1_1_gameplay_features_1_1_serialization_data_1_1_i_serialized_data_container.html", [
+      [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.TerrainGenerationHeightColorLayer", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_editor_1_1_terrain_generation_height_color_layer.html", null ]
+    ] ],
+    [ "UnityToolbox.GameplayFeatures.SerializationData.ISerializedDataContainer< TerrainGenerationLayeredAssetBaseData >", "interface_unity_toolbox_1_1_gameplay_features_1_1_serialization_data_1_1_i_serialized_data_container.html", [
+      [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTypes.Layered.TerrainGenerationLayeredAssetLayer", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_editor_1_1_generation_ty2e36727a9595f9698ec0465243c733aa.html", [
+        [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTypes.Layered.TerrainGenerationLayeredAssetLayerClustered", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_editor_1_1_generation_ty977a0508f8129d7e1ccd40964e8d0808.html", null ],
+        [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTypes.Layered.TerrainGenerationLayeredAssetLayerSingle", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_editor_1_1_generation_ty8cb45a05d3f4cdf15065ae9ef990b03f.html", null ]
+      ] ]
+    ] ],
+    [ "UnityToolbox.GameplayFeatures.SerializationData.ISerializedDataContainer< TerrainGenerationTypeBaseData >", "interface_unity_toolbox_1_1_gameplay_features_1_1_serialization_data_1_1_i_serialized_data_container.html", [
+      [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTypes.TerrainGenerationType", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_editor_1_1_generation_types_1_1_terrain_generation_type.html", [
+        [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTypes.TerrainGenerationTypeCellularAutomata", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_editor_1_1_generation_ty11e8deffe2da63816457622cfb7c5cc9.html", null ]
+      ] ]
+    ] ],
+    [ "UnityToolbox.GameplayFeatures.SerializationData.ISerializedDataContainer< TerrainMeshTypeBaseData >", "interface_unity_toolbox_1_1_gameplay_features_1_1_serialization_data_1_1_i_serialized_data_container.html", [
+      [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTypes.TerrainMeshType", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_editor_1_1_generation_types_1_1_terrain_mesh_type.html", [
+        [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTypes.Layered.TerrainMeshTypeLayered", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_editor_1_1_generation_tyb407df59d005a013c30032dd0ce4b747.html", null ]
+      ] ]
+    ] ],
+    [ "UnityToolbox.GameplayFeatures.SerializationData.ISerializedDataContainer< TerrainMeshTypeLayeredLayerBaseData >", "interface_unity_toolbox_1_1_gameplay_features_1_1_serialization_data_1_1_i_serialized_data_container.html", [
+      [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTypes.Layered.TerrainMeshTypeLayeredLayer", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_editor_1_1_generation_ty75d6d60161c7b170ef021b6bb5daff10.html", [
+        [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTypes.Layered.TerrainMeshTypeLayeredLayerGround", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_editor_1_1_generation_tyac1b5b8795c693610f628067923f9165.html", null ]
+      ] ]
+    ] ],
     [ "UnityToolbox.GameplayFeatures.Items.ItemDefinition", "class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_item_definition.html", null ],
     [ "UnityToolbox.GameplayFeatures.Items.Management.ItemField", "class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_management_1_1_item_field.html", null ],
     [ "UnityToolbox.GameplayFeatures.Items.Management.Itemizer", "class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_management_1_1_itemizer.html", null ],
@@ -91,7 +127,7 @@ var hierarchy =
     [ "UnityToolbox.UI.Localization.LocalizationID", "struct_unity_toolbox_1_1_u_i_1_1_localization_1_1_localization_i_d.html", null ],
     [ "UnityToolbox.UI.Localization.LocalizationLanguage", "struct_unity_toolbox_1_1_u_i_1_1_localization_1_1_localization_language.html", null ],
     [ "UnityToolbox.UI.Localization.LocalizationScope", "struct_unity_toolbox_1_1_u_i_1_1_localization_1_1_localization_scope.html", null ],
-    [ "UnityToolbox.UI.Localization.Localizzer", "class_unity_toolbox_1_1_u_i_1_1_localization_1_1_localizzer.html", null ],
+    [ "UnityToolbox.UI.Localization.Localizer", "class_unity_toolbox_1_1_u_i_1_1_localization_1_1_localizer.html", null ],
     [ "UnityToolbox.General.MasterScene.Editor.MasterSceneLoaderForEditor", "class_unity_toolbox_1_1_general_1_1_master_scene_1_1_editor_1_1_master_scene_loader_for_editor.html", null ],
     [ "UnityToolbox.UI.Menus.MenuType", "class_unity_toolbox_1_1_u_i_1_1_menus_1_1_menu_type.html", null ],
     [ "MonoBehaviour", null, [
@@ -107,11 +143,7 @@ var hierarchy =
       ] ],
       [ "UnityToolbox.GameplayFeatures.Items.Inventory.UI.InventoryUI", "class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_inventory_1_1_u_i_1_1_inventory_u_i.html", null ],
       [ "UnityToolbox.GameplayFeatures.Items.Inventory.UI.InventoryUISlot", "class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_inventory_1_1_u_i_1_1_inventory_u_i_slot.html", null ],
-      [ "UnityToolbox.GameplayFeatures.ProzedualGeneration.Terrain.TerrainDecoration", "class_unity_toolbox_1_1_gameplay_features_1_1_prozedual_generation_1_1_terrain_1_1_terrain_decoration.html", null ],
-      [ "UnityToolbox.GameplayFeatures.ProzedualGeneration.Terrain.TerrainDecorationAnchorObject", "class_unity_toolbox_1_1_gameplay_features_1_1_prozedual_generation_1_1_terrain_1_1_terrain_decoration_anchor_object.html", null ],
-      [ "UnityToolbox.GameplayFeatures.ProzedualGeneration.Terrain.TerrainDecorationChildInfo", "class_unity_toolbox_1_1_gameplay_features_1_1_prozedual_generation_1_1_terrain_1_1_terrain_decoration_child_info.html", null ],
-      [ "UnityToolbox.GameplayFeatures.ProzedualGeneration.Terrain.TerrainGenerateAll", "class_unity_toolbox_1_1_gameplay_features_1_1_prozedual_generation_1_1_terrain_1_1_terrain_generate_all.html", null ],
-      [ "UnityToolbox.GameplayFeatures.ProzedualGeneration.Terrain.TerrainGenerator", "class_unity_toolbox_1_1_gameplay_features_1_1_prozedual_generation_1_1_terrain_1_1_terrain_generator.html", null ],
+      [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain.Layered.TerrainGenerationLayeredAssetDataHolder", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_terrain_1_1_layered_1_1_efd9d3f6c647c790a4d1c0eead639b95.html", null ],
       [ "UnityToolbox.GameplayFeatures.SaveGame.Editor.IDInitializer", "class_unity_toolbox_1_1_gameplay_features_1_1_save_game_1_1_editor_1_1_i_d_initializer.html", null ],
       [ "UnityToolbox.GameplayFeatures.SaveGame.ParentIdentifier", "class_unity_toolbox_1_1_gameplay_features_1_1_save_game_1_1_parent_identifier.html", null ],
       [ "UnityToolbox.GameplayFeatures.SaveGame.Saveable", "class_unity_toolbox_1_1_gameplay_features_1_1_save_game_1_1_saveable.html", [
@@ -126,6 +158,7 @@ var hierarchy =
         [ "UnityToolbox.GameplayFeatures.Items.Inventory.Managers.HeldInventoryManager", "class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_inventory_1_1_managers_1_1_held_inventory_manager.html", null ],
         [ "UnityToolbox.GameplayFeatures.Items.Inventory.Managers.InventoryManager", "class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_inventory_1_1_managers_1_1_inventory_manager.html", null ],
         [ "UnityToolbox.GameplayFeatures.Items.ItemManager", "class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_item_manager.html", null ],
+        [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain.TerrainGeneration", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_terrain_1_1_terrain_generation.html", null ],
         [ "UnityToolbox.GameplayFeatures.SaveGame.IDManager", "class_unity_toolbox_1_1_gameplay_features_1_1_save_game_1_1_i_d_manager.html", null ],
         [ "UnityToolbox.GameplayFeatures.SaveGame.SaveGameManager", "class_unity_toolbox_1_1_gameplay_features_1_1_save_game_1_1_save_game_manager.html", null ],
         [ "UnityToolbox.General.Management.DontDestroyManager", "class_unity_toolbox_1_1_general_1_1_management_1_1_dont_destroy_manager.html", null ],
@@ -213,7 +246,22 @@ var hierarchy =
     [ "ScriptableObject", null, [
       [ "UnityToolbox.GameplayFeatures.Achievements.AchievementData", "class_unity_toolbox_1_1_gameplay_features_1_1_achievements_1_1_achievement_data.html", null ]
     ] ],
+    [ "UnityToolbox.GameplayFeatures.SerializationData.SerializedDataErrorDetails", "class_unity_toolbox_1_1_gameplay_features_1_1_serialization_data_1_1_serialized_data_error_details.html", null ],
     [ "UnityToolbox.General.SubscriptionToken", "struct_unity_toolbox_1_1_general_1_1_subscription_token.html", null ],
+    [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Data.TerrainGenerationData", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_terrain_generation_data.html", null ],
+    [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.TerrainGenerationEditorEvents", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_editor_1_1_terrain_generation_editor_events.html", null ],
+    [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain.TerrainGenerationGenerator", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_terrain_1_1_terrain_generation_generator.html", [
+      [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain.Layered.TerrainGenerationLayered", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_terrain_1_1_layered_1_1_terrain_generation_layered.html", null ]
+    ] ],
+    [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Data.TerrainGenerationHeightColorData", "struct_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_terrain_generation_height_color_data.html", null ],
+    [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.TerrainGenerationIO", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_terrain_generation_i_o.html", null ],
+    [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain.Layered.TerrainGenerationLayeredAssetPlacement", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_terrain_1_1_layered_1_1_c9f256d6944bfcde6ee9e6b01132ec86.html", null ],
+    [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Data.TerrainGenerationTypeBaseData", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_terrain_generation_type_base_data.html", [
+      [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Data.TerrainGenerationTypeCellularAutomataData", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_terrain_generation_type_cellular_automata_data.html", null ]
+    ] ],
+    [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Data.TerrainMeshTypeBaseData", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_terrain_mesh_type_base_data.html", [
+      [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Data.Layered.TerrainMeshTypeLayeredData", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_terrain_mesh_type_layered_data.html", null ]
+    ] ],
     [ "UnityToolbox.General.MasterScene.Editor.ToolboxPathLocalizzer", "class_unity_toolbox_1_1_general_1_1_master_scene_1_1_editor_1_1_toolbox_path_localizzer.html", null ],
     [ "GraphView", null, [
       [ "UnityToolbox.GameplayFeatures.Gamestates.Editor.GamestateGraphView", "class_unity_toolbox_1_1_gameplay_features_1_1_gamestates_1_1_editor_1_1_gamestate_graph_view.html", null ],

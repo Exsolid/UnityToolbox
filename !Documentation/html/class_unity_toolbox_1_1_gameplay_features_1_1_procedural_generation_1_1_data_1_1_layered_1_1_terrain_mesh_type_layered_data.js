@@ -1,0 +1,12 @@
+var class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_terrain_mesh_type_layered_data =
+[
+    [ "AssetPositionNoise", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_terrain_mesh_type_layered_data.html#a466d82dce055180afc74ace161f6f227", null ],
+    [ "EnabledEmission", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_terrain_mesh_type_layered_data.html#a516cf2564f5a7b0d9ab314e551bb1612", null ],
+    [ "EnabledMetallic", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_terrain_mesh_type_layered_data.html#ad504934d068847c36d6cdf2b76aa9baf", null ],
+    [ "EnabledNormal", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_terrain_mesh_type_layered_data.html#ab4fae98debb8f42b2b7a36048c7132dd", null ],
+    [ "EnabledOcclusion", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_terrain_mesh_type_layered_data.html#a16a611ddd5ff7cc22ae4d883abafe2f6", null ],
+    [ "EnabledRoughness", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_terrain_mesh_type_layered_data.html#a2f25e4d0a4550b7e2294a38021ac8890", null ],
+    [ "Layers", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_terrain_mesh_type_layered_data.html#aaf879c253f34f372f295f0436ce055fe", null ],
+    [ "SizeBetweenVertices", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_terrain_mesh_type_layered_data.html#a9aa13e22fca069d3146c6a81908191d9", null ],
+    [ "VertexMultiplier", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_terrain_mesh_type_layered_data.html#a95cd3c81e8528a3469c6704128ec87c5", null ]
+];

@@ -1,0 +1,8 @@
+var class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_terrain_generation_layered_asset_data =
+[
+    [ "CanCollide", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_terrain_generation_layered_asset_data.html#a45462e35b3bb3653c5baacf301eeddbb", null ],
+    [ "DisableRaycastPlacement", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_terrain_generation_layered_asset_data.html#a5c8d7df6b301adc3539c98b40b6731bc", null ],
+    [ "Prefab", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_terrain_generation_layered_asset_data.html#afe392b335bc7e843cbf239598a5c0c77", null ],
+    [ "PrefabGUID", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_terrain_generation_layered_asset_data.html#abbc69882a8603f9329b211ec407366af", null ],
+    [ "PrefabPath", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_terrain_generation_layered_asset_data.html#a45bbfb847efb4275649cd9827fb46a35", null ]
+];

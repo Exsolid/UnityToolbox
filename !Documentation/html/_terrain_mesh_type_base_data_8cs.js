@@ -1,0 +1,4 @@
+var _terrain_mesh_type_base_data_8cs =
+[
+    [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Data.TerrainMeshTypeBaseData", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_terrain_mesh_type_base_data.html", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_terrain_mesh_type_base_data" ]
+];

@@ -1,0 +1,7 @@
+var class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_terc95d06b1e0f63211a129361e43939ef7 =
+[
+    [ "Clone", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_terc95d06b1e0f63211a129361e43939ef7.html#aeb9f58d3e6037b5cf9c180a055389ffd", null ],
+    [ "Assets", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_terc95d06b1e0f63211a129361e43939ef7.html#a8b76cc1375f7cd0c716f872ce00f492b", null ],
+    [ "MinVerticesBetweenPrefabs", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_terc95d06b1e0f63211a129361e43939ef7.html#a23fed7e8a1ca0ca7eaeeabd16c23f54f", null ],
+    [ "SpawnDecay", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_terc95d06b1e0f63211a129361e43939ef7.html#a1092e75a266e8b7812fd6ff6344a8243", null ]
+];

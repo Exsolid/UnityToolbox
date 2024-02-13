@@ -1,0 +1,4 @@
+var _terrain_generation_type_cellular_automata_8cs =
+[
+    [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTypes.TerrainGenerationTypeCellularAutomata", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_editor_1_1_generation_ty11e8deffe2da63816457622cfb7c5cc9.html", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_editor_1_1_generation_ty11e8deffe2da63816457622cfb7c5cc9" ]
+];

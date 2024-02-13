@@ -7,5 +7,6 @@ var dir_31c2500c25d0b570f9d116670e5783cb =
     [ "Preferences", "dir_de34a743e3f2cb92cba76cfd55b3f685.html", "dir_de34a743e3f2cb92cba76cfd55b3f685" ],
     [ "SubEvents", "dir_5ebac41b979e00b94f99b8faf838ac44.html", "dir_5ebac41b979e00b94f99b8faf838ac44" ],
     [ "ColliderInfo.cs", "_collider_info_8cs.html", "_collider_info_8cs" ],
+    [ "StatusException.cs", "_status_exception_8cs.html", "_status_exception_8cs" ],
     [ "SubscriptionToken.cs", "_subscription_token_8cs.html", "_subscription_token_8cs" ]
 ];

@@ -1,0 +1,4 @@
+var _terrain_generation_layered_asset_base_data_8cs =
+[
+    [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Data.Layered.TerrainGenerationLayeredAssetBaseData", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_terabf7857b1e49ae6ddb3144db199786e1.html", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_terabf7857b1e49ae6ddb3144db199786e1" ]
+];

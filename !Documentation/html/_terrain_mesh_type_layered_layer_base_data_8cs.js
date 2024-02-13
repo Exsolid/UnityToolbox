@@ -1,0 +1,4 @@
+var _terrain_mesh_type_layered_layer_base_data_8cs =
+[
+    [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Data.Layered.TerrainMeshTypeLayeredLayerBaseData", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_ter73b49a4dbfc3679c4153eb522511597d.html", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_ter73b49a4dbfc3679c4153eb522511597d" ]
+];

@@ -1,0 +1,10 @@
+var class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_ter73b49a4dbfc3679c4153eb522511597d =
+[
+    [ "Clone", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_ter73b49a4dbfc3679c4153eb522511597d.html#a950b1072733a3e9ae44fd5bbe55a4eda", null ],
+    [ "AssetPlacements", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_ter73b49a4dbfc3679c4153eb522511597d.html#ae55e66dc1a4a74dd1bb2406a7305122b", null ],
+    [ "CurrentPos", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_ter73b49a4dbfc3679c4153eb522511597d.html#a245cac0ca80a40206c0968e63b08e811", null ],
+    [ "IsBaseLayer", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_ter73b49a4dbfc3679c4153eb522511597d.html#a56760e8cde5200c1b37c156eb082dbed", null ],
+    [ "IsWeighted", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_ter73b49a4dbfc3679c4153eb522511597d.html#ae8ada18da9c7fad8d462ff39278cc7cd", null ],
+    [ "Name", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_ter73b49a4dbfc3679c4153eb522511597d.html#a6234167f0c5a1ef6cd3025f3a4dfa70a", null ],
+    [ "PctForNoAsset", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_ter73b49a4dbfc3679c4153eb522511597d.html#af71c351835b28261d1d72f409ebb7be8", null ]
+];

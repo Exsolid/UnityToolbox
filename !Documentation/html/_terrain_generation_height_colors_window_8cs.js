@@ -1,0 +1,4 @@
+var _terrain_generation_height_colors_window_8cs =
+[
+    [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.TerrainGenerationHeightColorsWindow", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_editor_1_1_terrain_generation_height_colors_window.html", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_editor_1_1_terrain_generation_height_colors_window" ]
+];

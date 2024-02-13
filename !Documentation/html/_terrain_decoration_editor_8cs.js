@@ -1,4 +1,4 @@
 var _terrain_decoration_editor_8cs =
 [
-    [ "UnityToolbox.GameplayFeatures.ProzedualGeneration.Editor.TerrainDecorationEditor", "class_unity_toolbox_1_1_gameplay_features_1_1_prozedual_generation_1_1_editor_1_1_terrain_decoration_editor.html", "class_unity_toolbox_1_1_gameplay_features_1_1_prozedual_generation_1_1_editor_1_1_terrain_decoration_editor" ]
+    [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.TerrainDecorationEditor", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_editor_1_1_terrain_decoration_editor.html", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_editor_1_1_terrain_decoration_editor" ]
 ];

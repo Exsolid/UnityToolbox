@@ -1,0 +1,4 @@
+var _terrain_generation_height_color_data_8cs =
+[
+    [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Data.TerrainGenerationHeightColorData", "struct_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_terrain_generation_height_color_data.html", "struct_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_terrain_generation_height_color_data" ]
+];

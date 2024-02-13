@@ -19,5 +19,18 @@ var _tutorials =
       [ "Overview", "_boids.html#BoidsOverview", null ],
       [ "Simple Usage", "_boids.html#BoidsSimpleUsage", null ],
       [ "Implementation of Boid2DBase", "_boids.html#BoidsImplementation", null ]
+    ] ],
+    [ "Terrain Generation", "_terrain_generation.html", [
+      [ "Overview", "_terrain_generation.html#TerrainGenerationOverview", null ],
+      [ "Settings", "_terrain_generation.html#TerrainGenerationSettings", null ],
+      [ "General Usage", "_terrain_generation.html#TerrainGenerationGeneral", [
+        [ "Height Data", "_terrain_generation.html#TerrainGenerationGeneralHeightData", null ]
+      ] ],
+      [ "Procedural Generation Types", "_terrain_generation.html#TerrainGenerationTypes", [
+        [ "Cellular Automata", "_terrain_generation.html#TerrainGenerationCA", null ]
+      ] ],
+      [ "Mesh Generation Types", "_terrain_generation.html#TerrainGenerationMeshTypes", [
+        [ "Layered Mesh Generation", "_terrain_generation.html#TerrainGenerationLayered", null ]
+      ] ]
     ] ]
 ];

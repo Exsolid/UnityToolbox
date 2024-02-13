@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['languageedited_0',['LanguageEdited',['../class_unity_toolbox_1_1_u_i_1_1_localization_1_1_localizzer.html#acab490da834b891c8129d71a161fc8fc',1,'UnityToolbox::UI::Localization::Localizzer']]],
-  ['localizationidedited_1',['LocalizationIDEdited',['../class_unity_toolbox_1_1_u_i_1_1_localization_1_1_localizzer.html#aff228a025ebac7fb79747be6891e2797',1,'UnityToolbox::UI::Localization::Localizzer']]]
+  ['languageedited_0',['LanguageEdited',['../class_unity_toolbox_1_1_u_i_1_1_localization_1_1_localizer.html#ab366dd2f12611caf00c911f3cfd5d0e9',1,'UnityToolbox::UI::Localization::Localizer']]],
+  ['localizationidedited_1',['LocalizationIDEdited',['../class_unity_toolbox_1_1_u_i_1_1_localization_1_1_localizer.html#ac11db93b4e5dbfd386bf32052bc4c976',1,'UnityToolbox::UI::Localization::Localizer']]]
 ];

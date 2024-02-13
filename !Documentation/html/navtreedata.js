@@ -41,7 +41,7 @@ var NAVTREE =
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", "functions_dup" ],
         [ "Functions", "functions_func.html", "functions_func" ],
-        [ "Variables", "functions_vars.html", null ],
+        [ "Variables", "functions_vars.html", "functions_vars" ],
         [ "Enumerations", "functions_enum.html", null ],
         [ "Properties", "functions_prop.html", null ],
         [ "Events", "functions_evnt.html", null ]
@@ -60,13 +60,15 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_achievement_data_8cs.html",
-"class_unity_toolbox_1_1_gameplay_features_1_1_a_i_1_1_boids_1_1_boid2_d_base.html#a8520b16d9fe2713b0f2ec6932bdc57e2",
-"class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_item_instance.html#a3d6763f8f3d27858c7f37c31620a1efb",
-"class_unity_toolbox_1_1_gameplay_features_1_1_save_game_1_1_saveable.html#a004b52f06ac212f91b6feae3658e724e",
-"class_unity_toolbox_1_1_player_controls_1_1_player_event_manager.html#a595e75a6e27470a40ae39c30b0f9a80a",
-"class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_editor_1_1_dialog_node.html#aff80fa7a0bb1bbb61653d33ef47ebb96",
-"class_unity_toolbox_1_1_u_i_1_1_menus_1_1_flat_menu_1_1_quit_button.html#abdc24b063d8f6ecd615bacaf2e3a74e3",
-"functions_func_b.html"
+"_unity_slider_setting_8cs.html#ab9ddb8c355894da6b6488bfe88021837",
+"class_unity_toolbox_1_1_gameplay_features_1_1_items_1_1_inventory_1_1_u_i_1_1_inventory_u_i_slot.html#a23cc8c8a1514c18e71f536c04f087f9e",
+"class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_layered_1_1_terrain_mesh_type_layered_data.html#a2f25e4d0a4550b7e2294a38021ac8890",
+"class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_terrain_1_1_layered_1_1_efd9d3f6c647c790a4d1c0eead639b95.html#a49bc3dbe1577e28dbd80de539855c4e6",
+"class_unity_toolbox_1_1_general_1_1_preferences_1_1_player_pref_keys.html#af7ef32cf9fc1cbea7c7f7f02712ab1da",
+"class_unity_toolbox_1_1_u_i_1_1_dialog_1_1_dialog_manager.html#ad0da6941dbbe7c304cdb39be7e5c8420",
+"class_unity_toolbox_1_1_u_i_1_1_localization_1_1_editor_1_1_localization_manager_window.html",
+"class_unity_toolbox_1_1_u_i_1_1_settings_1_1_sliders_1_1_unity_slider_setting.html#a3773511293cd3dd274a2f255555e7313a527e4752a2eecd45e2d54bad52433916",
+"namespace_unity_toolbox_1_1_player_controls.html#a3763226b72f1ffb13e4d83716a2db23eaf23e5132022583c97474859c1da5b32b"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

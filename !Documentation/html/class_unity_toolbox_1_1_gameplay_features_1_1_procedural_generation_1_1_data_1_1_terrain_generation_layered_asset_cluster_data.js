@@ -1,0 +1,7 @@
+var class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_terrain_generation_layered_asset_cluster_data =
+[
+    [ "Clone", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_terrain_generation_layered_asset_cluster_data.html#ac843435389dccc66c301bb4396b4e041", null ],
+    [ "Assets", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_terrain_generation_layered_asset_cluster_data.html#aa4c6f07cc2ac4cdc597476d9c93cf255", null ],
+    [ "MinVerticesBetweenPrefabs", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_terrain_generation_layered_asset_cluster_data.html#a4eae4a26f7f6892dde34c06336c651a3", null ],
+    [ "SpawnDecay", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_terrain_generation_layered_asset_cluster_data.html#aea2a00bc74d37890e60b71eceae3f8e3", null ]
+];

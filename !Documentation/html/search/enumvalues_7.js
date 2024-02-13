@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['next_0',['Next',['../namespace_unity_toolbox_1_1_u_i_1_1_menus_1_1_menu_wheel.html#a5c9faa55fd3e230255a2d48070f80bd2a10ac3d04253ef7e1ddc73e6091c0cd55',1,'UnityToolbox::UI::Menus::MenuWheel']]]
+  ['mouse_5fsensitivity_0',['Mouse_Sensitivity',['../class_unity_toolbox_1_1_u_i_1_1_settings_1_1_sliders_1_1_image_slider_setting.html#a8bec456d1beeaba05429f956996bfa7ca153e6a75cf8ba625cbb0f526b659a0b5',1,'UnityToolbox.UI.Settings.Sliders.ImageSliderSetting.Mouse_Sensitivity'],['../class_unity_toolbox_1_1_u_i_1_1_settings_1_1_sliders_1_1_unity_slider_setting.html#a3773511293cd3dd274a2f255555e7313a153e6a75cf8ba625cbb0f526b659a0b5',1,'UnityToolbox.UI.Settings.Sliders.UnitySliderSetting.Mouse_Sensitivity']]],
+  ['moving_1',['Moving',['../namespace_unity_toolbox_1_1_player_controls.html#a3763226b72f1ffb13e4d83716a2db23eadefe967ad0373b2274fc298f19125ca7',1,'UnityToolbox::PlayerControls']]],
+  ['music_2',['Music',['../class_unity_toolbox_1_1_u_i_1_1_settings_1_1_sliders_1_1_image_slider_setting.html#a8bec456d1beeaba05429f956996bfa7ca47dcbd834e669233d7eb8a51456ed217',1,'UnityToolbox.UI.Settings.Sliders.ImageSliderSetting.Music'],['../class_unity_toolbox_1_1_u_i_1_1_settings_1_1_sliders_1_1_unity_slider_setting.html#a3773511293cd3dd274a2f255555e7313a47dcbd834e669233d7eb8a51456ed217',1,'UnityToolbox.UI.Settings.Sliders.UnitySliderSetting.Music'],['../namespace_unity_toolbox_1_1_audio.html#a8dcc55e00b2417c79753dc5ad85a0509a47dcbd834e669233d7eb8a51456ed217',1,'UnityToolbox.Audio.Music']]]
 ];

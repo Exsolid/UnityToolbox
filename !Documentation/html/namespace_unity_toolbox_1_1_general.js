@@ -7,5 +7,6 @@ var namespace_unity_toolbox_1_1_general =
     [ "Preferences", "namespace_unity_toolbox_1_1_general_1_1_preferences.html", "namespace_unity_toolbox_1_1_general_1_1_preferences" ],
     [ "SubEvents", "namespace_unity_toolbox_1_1_general_1_1_sub_events.html", "namespace_unity_toolbox_1_1_general_1_1_sub_events" ],
     [ "ColliderInfo", "class_unity_toolbox_1_1_general_1_1_collider_info.html", "class_unity_toolbox_1_1_general_1_1_collider_info" ],
+    [ "StatusException", "class_unity_toolbox_1_1_general_1_1_status_exception.html", "class_unity_toolbox_1_1_general_1_1_status_exception" ],
     [ "SubscriptionToken", "struct_unity_toolbox_1_1_general_1_1_subscription_token.html", "struct_unity_toolbox_1_1_general_1_1_subscription_token" ]
 ];

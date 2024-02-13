@@ -1,0 +1,10 @@
+var class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_terrain_mesh_type_layered_layer_base_data =
+[
+    [ "Clone", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_terrain_mesh_type_layered_layer_base_data.html#aa30d0788069a4f33f9c4b8f3e5b0af48", null ],
+    [ "AssetPlacements", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_terrain_mesh_type_layered_layer_base_data.html#a3918642840bf6a62a15e80b8ddebc38f", null ],
+    [ "CurrentPos", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_terrain_mesh_type_layered_layer_base_data.html#adb3aee94f5f50d5f5881d6ce1cc74e3f", null ],
+    [ "IsBaseLayer", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_terrain_mesh_type_layered_layer_base_data.html#a098eeb8fd8d26af7c72ffdd7198453d0", null ],
+    [ "IsWeighted", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_terrain_mesh_type_layered_layer_base_data.html#ab3b9a918c2dd0aeb50618892596b3810", null ],
+    [ "Name", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_terrain_mesh_type_layered_layer_base_data.html#a429a107c2796211501e8394dca67cbb3", null ],
+    [ "PctForNoAsset", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_data_1_1_terrain_mesh_type_layered_layer_base_data.html#a62641a9aae09fd6259cfbd072c0b6d16", null ]
+];

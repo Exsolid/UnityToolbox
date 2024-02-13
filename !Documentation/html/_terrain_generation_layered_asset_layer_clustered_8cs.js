@@ -1,0 +1,4 @@
+var _terrain_generation_layered_asset_layer_clustered_8cs =
+[
+    [ "UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor.GenerationTypes.Layered.TerrainGenerationLayeredAssetLayerClustered", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_editor_1_1_generation_ty977a0508f8129d7e1ccd40964e8d0808.html", "class_unity_toolbox_1_1_gameplay_features_1_1_procedural_generation_1_1_editor_1_1_generation_ty977a0508f8129d7e1ccd40964e8d0808" ]
+];
