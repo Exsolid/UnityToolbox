@@ -32,14 +32,20 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor
 
                 if (GUILayout.Button("Refresh Data"))
                 {
-                    gen.Data = TerrainGenerationIO.Instance.ReadData();
+                    if (TerrainGenerationIO.Instance.Initialize())
+                    {
+                        gen.Data = TerrainGenerationIO.Instance.ReadData();
+                    }
                 }
             }
             else
             {
                 if (GUILayout.Button("Refresh Data"))
                 {
-                    gen.Data = TerrainGenerationIO.Instance.ReadData();
+                    if (TerrainGenerationIO.Instance.Initialize())
+                    {
+                        gen.Data = TerrainGenerationIO.Instance.ReadData();
+                    }
                 }
                 GUILayout.BeginHorizontal();
                 GUILayout.Label("Generation data: ");
