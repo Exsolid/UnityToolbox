@@ -405,15 +405,8 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Terrain.Layered
                     continue;
                 }
 
-                if (transform.GetComponent<TerrainDecorationChildInfo>() == null || !transform.GetComponent<TerrainDecorationChildInfo>().RelativeToParent)
-                {
-                    RotationPlacementForChildrenRecursiv(transform.gameObject, heightOffset, widthPlacement, currentMeshObject, canCollide);
-                    transform.parent = currentMeshObject.transform;
-                }
-                else
-                {
-                    continue;
-                }
+                RotationPlacementForChildrenRecursiv(transform.gameObject, heightOffset, widthPlacement, currentMeshObject, canCollide);
+                transform.parent = currentMeshObject.transform;
 
                 RaycastHit hit;
                 Physics.Raycast(transform.position, Vector3.down, out hit, 10, _groundLayerMask);
