@@ -24,7 +24,10 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor
 
             if (gen.Data == null)
             {
-                gen.Data = TerrainGenerationIO.Instance.ReadData();
+                if (TerrainGenerationIO.Instance.Initialize())
+                {
+                    gen.Data = TerrainGenerationIO.Instance.ReadData();
+                }
             }
             else if(gen.Data.Count == 0)
             {
@@ -67,6 +70,8 @@ namespace UnityToolbox.GameplayFeatures.ProceduralGeneration.Editor
                     {
                         AssetDatabase.CreateAsset(texture2D, assetPath + texture2D.name + ".asset");
                     }
+
+                    EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
                     EditorUtility.SetDirty(gen.TerrainMaterial);
                     AssetDatabase.SaveAssetIfDirty(gen.TerrainMaterial);
                 }
