@@ -61,12 +61,13 @@ namespace UnityToolbox.General.Management
         public static string GetLocalPath(string key)
         {
             string path = ProjectPrefs.GetString(key);
-
+            Debug.Log(path);
             if (path == null)
             {
                 return null;
             }
 
+            Debug.Log(path);
             if (!path.Contains("Resources"))
             {
                 throw new SystemException("The path " + Application.dataPath + "/" + path + "/" + " is not within a valid Resources directory.");
@@ -120,6 +121,10 @@ namespace UnityToolbox.General.Management
             {
                 return default(T);
             }
+
+            path = GetResourcesPath(key) + filename;
+            path.Replace("\\", "/");
+            path.Replace("//", "/");
 
             TextAsset textAsset = Resources.Load(path.Replace(".txt", "")) as TextAsset;
             JsonSerializerSettings _settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
