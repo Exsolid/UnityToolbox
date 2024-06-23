@@ -112,16 +112,19 @@ namespace UnityToolbox.General.Management
         /// <returns>The cast values of the file.</returns>
         public static T GetFileData<T>(string key, string filename)
         {
-            if(!File.Exists(GetLocalPath(key) + filename) && Application.isEditor)
+            String path = GetLocalPath(key) + filename;
+            path.Replace("\\", "/");
+
+            if (!File.Exists(path) && Application.isEditor)
             {
                 return default(T);
             }
-            else if(!File.Exists(GetLocalPath(key) + filename))
+            else if(!File.Exists(path)
             {
                 throw new FileNotFoundException("The file: " + GetResourcesPath(key) + filename.Replace(".txt", "") + " cannot be found.");
             }
 
-            TextAsset textAsset = Resources.Load(GetResourcesPath(key) + filename.Replace(".txt", "")) as TextAsset;
+            TextAsset textAsset = Resources.Load(path.Replace(".txt", "")) as TextAsset;
             JsonSerializerSettings _settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
         
             return JsonConvert.DeserializeObject<T>(textAsset.text, _settings);
