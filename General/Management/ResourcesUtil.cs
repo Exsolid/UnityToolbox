@@ -119,7 +119,7 @@ namespace UnityToolbox.General.Management
             {
                 return default(T);
             }
-            else if(!File.Exists(path)
+            else if(!File.Exists(path))
             {
                 throw new FileNotFoundException("The file: " + GetResourcesPath(key) + filename.Replace(".txt", "") + " cannot be found.");
             }
