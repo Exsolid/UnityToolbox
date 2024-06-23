@@ -74,6 +74,10 @@ namespace UnityToolbox.General.Management
             }
 
             path = Path.GetFullPath(Application.dataPath + "/" + path + "/");
+
+            path = path.Replace("\\", "/");
+            path = path.Replace("//", "/");
+
             return path;
         }
 
@@ -92,6 +96,10 @@ namespace UnityToolbox.General.Management
             }
 
             path = Path.GetFullPath(Application.dataPath + "/" + path + "/").Split("Resources\\").Last();
+
+            path = path.Replace("\\", "/");
+            path = path.Replace("//", "/");
+
             return path;
         }
 
@@ -114,17 +122,12 @@ namespace UnityToolbox.General.Management
         public static T GetFileData<T>(string key, string filename)
         {
             String path = GetLocalPath(key) + filename;
-            path.Replace("\\", "/");
-            path.Replace("//", "/");
-
             if (!File.Exists(path) && Application.isEditor)
             {
                 return default(T);
             }
 
             path = GetResourcesPath(key) + filename;
-            path.Replace("\\", "/");
-            path.Replace("//", "/");
 
             TextAsset textAsset = Resources.Load(path.Replace(".txt", "")) as TextAsset;
             JsonSerializerSettings _settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
