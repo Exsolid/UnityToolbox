@@ -116,6 +116,10 @@ namespace UnityToolbox.General.Management
             {
                 return default(T);
             }
+            else if(!File.Exists(GetLocalPath(key) + filename))
+            {
+                throw new FileNotFoundException("The file: " + GetResourcesPath(key) + filename.Replace(".txt", "") + " cannot be found.");
+            }
 
             TextAsset textAsset = Resources.Load(GetResourcesPath(key) + filename.Replace(".txt", "")) as TextAsset;
             JsonSerializerSettings _settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
