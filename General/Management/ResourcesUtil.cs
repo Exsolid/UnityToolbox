@@ -114,6 +114,7 @@ namespace UnityToolbox.General.Management
         {
             String path = GetLocalPath(key) + filename;
             path.Replace("\\", "/");
+            path.Replace("//", "/");
 
             if (!File.Exists(path) && Application.isEditor)
             {
@@ -122,7 +123,12 @@ namespace UnityToolbox.General.Management
 
             TextAsset textAsset = Resources.Load(path.Replace(".txt", "")) as TextAsset;
             JsonSerializerSettings _settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
-        
+
+            if (textAsset == null)
+            {
+                throw new FileNotFoundException("The file \"" + path.Replace(".txt", "") + "\" cannot be found.");
+            }
+
             return JsonConvert.DeserializeObject<T>(textAsset.text, _settings);
         }
 
