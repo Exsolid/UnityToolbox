@@ -123,11 +123,13 @@ namespace UnityToolbox.GameplayFeatures.Items.Management
         /// <returns>Whether initializing was successful.</returns>
         public bool Initialize()
         {
+            Debug.Log("Starting " + nameof(Itemizer) + " initialization.");
             _initialized = false;
 
             if (ProjectPrefs.GetString(ProjectPrefKeys.ITEMDATASAVEPATH) == null || ProjectPrefs.GetString(ProjectPrefKeys.ITEMDATASAVEPATH).Equals("")
                 || (Application.isEditor && !ResourcesUtil.IsFullPathValid(Application.dataPath + "/" + ProjectPrefs.GetString(ProjectPrefKeys.ITEMDATASAVEPATH))))
             {
+                Debug.Log(nameof(Itemizer) + " initialization aborted due to missing projects preferences or it being in debug mode.");
                 return _initialized;
             }
 
@@ -135,8 +137,13 @@ namespace UnityToolbox.GameplayFeatures.Items.Management
 
             if (_itemDefinitions == null)
             {
+                Debug.Log(nameof(Itemizer) + " initialization successful with default data.");
                 _itemDefinitions = new HashSet<ItemDefinition>();
                 _itemScopes = new HashSet<ItemScope>();
+            }
+            else
+            {
+                Debug.Log(nameof(Itemizer) + " initialization successful with read data.");
             }
 
             _defaultScope = new ItemScope();
