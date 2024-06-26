@@ -24,6 +24,7 @@ namespace UnityToolbox.UI.Menus
         public static List<string> MenuTypeNamesForEditor = new List<string>();
 
         [DropDown(nameof(_menuTypes))] public int OverlayType;
+        [DropDown(nameof(_menuTypes))] public int InitialMenu;
 
         [SerializeField] private bool _hideOverlayOnOtherMenus;
 
@@ -34,6 +35,7 @@ namespace UnityToolbox.UI.Menus
         }
 
         private Menu _currentActivMenu;
+        private Menu _initialMenu;
         private MenuType _overlayMenuType;
         private MenuType _currentActivMenuType;
         public MenuType CurrentActiveMenuType
@@ -53,6 +55,10 @@ namespace UnityToolbox.UI.Menus
                 {
                     _overlayMenuType = menuList;
                 }
+                if(menuList.MenuTypeID.Equals(InitialMenu))
+                {
+                    _initialMenu = menuList.Menus.FirstOrDefault();
+                }
                 foreach (Menu menu in menuList.Menus)
                 {
                     menu.IsActive = false;
@@ -60,7 +66,14 @@ namespace UnityToolbox.UI.Menus
                 }
             }
 
-            SetActiveMenu(null);
+            if(_initialMenu != null)
+            {
+                SetActiveMenu(_initialMenu);
+            }
+            else
+            {
+                SetActiveMenu(null);
+            }
         }
 
         /// <summary>
