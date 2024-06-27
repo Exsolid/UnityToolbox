@@ -61,13 +61,10 @@ namespace UnityToolbox.General.Management
         public static string GetLocalPath(string key)
         {
             string path = ProjectPrefs.GetString(key);
-            Debug.Log(path);
             if (path == null)
             {
                 return null;
             }
-
-            Debug.Log(path);
             if (!path.Contains("Resources"))
             {
                 throw new SystemException("The path " + Application.dataPath + "/" + path + "/" + " is not within a valid Resources directory.");

@@ -8,7 +8,14 @@ namespace UnityToolbox.General.Preferences
     /// </summary>
     public class PlayerPrefKeys : Module
     {
-        [SerializeField] private string keyword;
+        [SerializeField] private string _keyword;
+        public string Keyword
+        {
+            get
+            {
+                return _keyword + "_";
+            }
+        }
 
         public static string JSON_CONTROLS = "JSON_CONTROLS";
         public static string MOUSE_SENSITIVITY = "MOUSE_SENSITIVITY";
@@ -35,7 +42,7 @@ namespace UnityToolbox.General.Preferences
         /// <returns>The combined player pref key, that can be used for the <see cref="PlayerPrefs"/>.</returns>
         public string GetPrefereceKey(string id)
         {
-            return keyword + "_" + this.GetType().GetField(id).GetValue(this);
+            return _keyword + "_" + this.GetType().GetField(id).GetValue(this);
         }
     }
 }

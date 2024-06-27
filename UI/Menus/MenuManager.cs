@@ -66,7 +66,8 @@ namespace UnityToolbox.UI.Menus
                 }
             }
 
-            if(_initialMenu != null)
+            SetActiveMenu(null);
+            if (_initialMenu != null)
             {
                 SetActiveMenu(_initialMenu);
             }
@@ -113,7 +114,7 @@ namespace UnityToolbox.UI.Menus
         /// <param name="type">The ID which references to a type.</param>
         public void ToggleMenu(int type, int menuIndex)
         {
-            MenuType menuTypeToCall = _menuList[type];
+            MenuType menuTypeToCall = _menuList.Where(menuType => menuType.MenuTypeID.Equals(type)).FirstOrDefault();
             if (menuTypeToCall == null || !(_currentActivMenuType.MenuTypeID.Equals(0) || _currentActivMenuType.MenuTypeID.Equals(_overlayMenuType.MenuTypeID)) && !menuTypeToCall.Equals(_currentActivMenuType))
             {
                 return;
