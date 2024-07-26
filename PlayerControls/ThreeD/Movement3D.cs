@@ -16,10 +16,12 @@ namespace UnityToolbox.PlayerControls.ThreeD
         [SerializeField] private float _maxSlopeAngle;
         private RaycastHit _onSlope;
         [SerializeField] private bool _firstPerson;
+        private PlayerEventManager _eventManager;
 
         void Start()
         {
             _rb = GetComponent<Rigidbody>();
+            _eventManager = ModuleManager.GetModule<PlayerEventManager>();
         }
 
         // Update is called once per frame
@@ -31,7 +33,7 @@ namespace UnityToolbox.PlayerControls.ThreeD
                 Move(new Vector3(vector2.x,0, vector2.y));
             }
 
-            ModuleManager.GetModule<PlayerEventManager>().Move(GetCurrentVelocity(), _currentMovementState);
+            _eventManager.Move(GetCurrentVelocity(), _currentMovementState);
         }
 
         private void Update()

@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Linq;
 using UnityToolbox.General.Preferences;
+using UnityToolbox.General.Management;
+using UnityToolbox.General.Management.Logging;
+using Logger = UnityToolbox.General.Management.Logging.Logger;
 
 namespace UnityToolbox.General.MasterScene.Editor
 {
@@ -27,11 +30,11 @@ namespace UnityToolbox.General.MasterScene.Editor
             {
                 if (EditorSceneManager.playModeStartScene != null && EditorSceneManager.playModeStartScene.Equals(masterScene)) return;
                 EditorSceneManager.playModeStartScene = masterScene;
-                Debug.Log("Setting up 'Master' scene for load priority.");
+                Logger.Log(LogLevel.INF, typeof(MasterSceneLoaderForEditor), "Setting up 'Master' scene for load priority.");
             }
             else
             {
-                Debug.Log("No scene called 'Master' has been found. It is needed for scene overlapping managers.");
+                Logger.Log(LogLevel.INF, typeof(MasterSceneLoaderForEditor), "No scene called 'Master' has been found. It is needed for scene overlapping managers.");
             }
         }
 
@@ -47,8 +50,8 @@ namespace UnityToolbox.General.MasterScene.Editor
 
             if (masterScene != null && EditorSceneManager.playModeStartScene != null && EditorSceneManager.playModeStartScene.Equals(masterScene))
             {
-                Debug.Log("'Master' scene has been set up.");
-                Debug.Log("Setting up '" + EditorSceneManager.GetActiveScene().name + "' scene for load priority.");
+                Logger.Log(LogLevel.INF, typeof(MasterSceneLoaderForEditor), "'Master' scene has been set up.");
+                Logger.Log(LogLevel.INF, typeof(ModuleManager), "Setting up '" + EditorSceneManager.GetActiveScene().name + "' scene for load priority.");
                 PlayerPrefs.SetString(PlayerPrefKeys.DEBUG_ORIGINAL_SCENE, EditorSceneManager.GetActiveScene().name);
             }
         }

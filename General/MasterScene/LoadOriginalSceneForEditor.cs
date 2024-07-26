@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityToolbox.General.Management;
 using UnityToolbox.General.Preferences;
+using UnityToolbox.General.Management.Logging;
+using Logger = UnityToolbox.General.Management.Logging.Logger;
 
 namespace UnityToolbox.General.MasterScene
 {
@@ -15,7 +18,7 @@ namespace UnityToolbox.General.MasterScene
             {
                 return;
             }
-            Debug.Log("Now loading scene '"+ PlayerPrefs.GetString(PlayerPrefKeys.DEBUG_ORIGINAL_SCENE) +"'");
+            Logger.Log(LogLevel.INF, typeof(LoadOriginalSceneForEditor), "Now loading scene '" + PlayerPrefs.GetString(PlayerPrefKeys.DEBUG_ORIGINAL_SCENE) +"'");
             SceneManager.LoadSceneAsync(PlayerPrefs.GetString(PlayerPrefKeys.DEBUG_ORIGINAL_SCENE));
         }
     }

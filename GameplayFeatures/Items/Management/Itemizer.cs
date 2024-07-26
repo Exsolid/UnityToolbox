@@ -5,6 +5,8 @@ using System.Reflection;
 using UnityEngine;
 using UnityToolbox.General.Management;
 using UnityToolbox.General.Preferences;
+using UnityToolbox.General.Management.Logging;
+using Logger = UnityToolbox.General.Management.Logging.Logger;
 
 namespace UnityToolbox.GameplayFeatures.Items.Management
 {
@@ -123,7 +125,7 @@ namespace UnityToolbox.GameplayFeatures.Items.Management
         /// <returns>Whether initializing was successful.</returns>
         public bool Initialize()
         {
-            Debug.Log("Starting " + nameof(Itemizer) + " initialization.");
+            Logger.Log(LogLevel.INF, typeof(Itemizer), "Starting " + nameof(Itemizer) + " initialization.");
             _initialized = false;
 
             if (ProjectPrefs.GetString(ProjectPrefKeys.ITEMDATASAVEPATH) == null || ProjectPrefs.GetString(ProjectPrefKeys.ITEMDATASAVEPATH).Equals("")
@@ -143,7 +145,7 @@ namespace UnityToolbox.GameplayFeatures.Items.Management
             }
             else
             {
-                Debug.Log(nameof(Itemizer) + " initialization successful with read data.");
+                Logger.Log(LogLevel.INF, typeof(Itemizer), nameof(Itemizer) + " initialization successful with read data.");
             }
 
             _defaultScope = new ItemScope();

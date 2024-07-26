@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+using UnityToolbox.General.Management.Logging;
+using Logger = UnityToolbox.General.Management.Logging.Logger;
+
 namespace UnityToolbox.General.Management
 {
     /// <summary>
@@ -39,11 +42,11 @@ namespace UnityToolbox.General.Management
             bool isTypeAlreadyRegistered = _instance.Moduls.Where(mod => mod.GetType().IsEquivalentTo(module.GetType())).Any();
             if (isTypeAlreadyRegistered)
             {
-                Debug.LogError("Module of type '" + module.GetType().Name + "' already registered.");
+                Logger.Log(LogLevel.WAR, typeof(ModuleManager), "Module of type [<color=" + Logger.CONTEXTCOLOR + ">" + module.GetType().Name + "</color>] already registered.");
                 return false;
             }
             _instance.Moduls.Add(module);
-            Debug.Log("Registered module '" + module.GetType().Name + "'");
+            Logger.Log(LogLevel.INF, typeof(ModuleManager), "Registered module [<color=" + Logger.CONTEXTCOLOR + ">" + module.GetType().Name + "</color>]");
             return true;
         }
 
@@ -55,7 +58,7 @@ namespace UnityToolbox.General.Management
         public static void DeregisterModul<T>(T module) where T : Module
         {
             _instance.Moduls.Remove(module);
-            Debug.Log("Deregistered module '" + module.GetType().Name + "'");
+            Logger.Log(LogLevel.INF, typeof(ModuleManager), "Deregistered module [<color=" + Logger.CONTEXTCOLOR + ">" + module.GetType().Name + "</color>]");
         }
 
         /// <summary>
@@ -77,7 +80,11 @@ namespace UnityToolbox.General.Management
         public static T GetModule<T>() where T : Module
         {
             var toReturn = _instance.Moduls.Where(modul => modul.GetType() == typeof(T));
-            if (!toReturn.Any()) throw new Exception("Module of type " + typeof(T).Name + " not registered!");
+            if (!toReturn.Any())
+            {
+                throw new Exception("Module of type " + typeof(T).Name + " not registered!");
+            }
+            Logger.Log(LogLevel.INF, typeof(ModuleManager), "Module of type [<color=" + Logger.CONTEXTCOLOR + ">" + typeof(T).Name + "</color>] has been accessed.");
             return (T)toReturn.First();
         }
 
