@@ -43,6 +43,8 @@ namespace UnityToolbox.UI.Menus
             get { return _currentActivMenuType; }
         }
 
+        public static int MenuTypeIDNone = 0;
+
         private const string NONETYPENAME = "None";
 
         // Start is called before the first frame update
@@ -112,18 +114,18 @@ namespace UnityToolbox.UI.Menus
         /// A menu can only be activated if there is no current already active.
         /// </summary>
         /// <param name="type">The ID which references to a type.</param>
-        public void ToggleMenu(int type, int menuIndex)
+        public bool ToggleMenu(int type, int menuIndex)
         {
             MenuType menuTypeToCall = _menuList.Where(menuType => menuType.MenuTypeID.Equals(type)).FirstOrDefault();
             if (menuTypeToCall == null || !(_currentActivMenuType.MenuTypeID.Equals(0) || _currentActivMenuType.MenuTypeID.Equals(_overlayMenuType.MenuTypeID)) && !menuTypeToCall.Equals(_currentActivMenuType))
             {
-                return;
+                return false;
             }
 
             Menu menuToCall = menuTypeToCall.Menus[menuIndex];
             if (menuToCall == null)
             {
-                return;
+                return false;
             }
 
             if (!menuToCall.Equals(_currentActivMenu))
@@ -137,6 +139,7 @@ namespace UnityToolbox.UI.Menus
             }
 
             ModuleManager.GetModule<UIEventManager>().TogglePaused(_currentActivMenuType == _overlayMenuType, type);
+            return true;
         }
 
         public static List<string> GetAllMenusOfType(int type)
