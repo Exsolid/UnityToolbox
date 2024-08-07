@@ -82,7 +82,7 @@ namespace UnityToolbox.General.Management
             var toReturn = _instance.Moduls.Where(modul => modul.GetType() == typeof(T));
             if (!toReturn.Any())
             {
-                throw new Exception("Module of type " + typeof(T).Name + " not registered!");
+                throw new Exception("Module of type [<color=" + Logger.CONTEXTCOLOR + ">" + typeof(T).Name + "</color>] not registered!");
             }
             Logger.Log(LogLevel.INF, typeof(ModuleManager), "Module of type [<color=" + Logger.CONTEXTCOLOR + ">" + typeof(T).Name + "</color>] has been accessed.");
             return (T)toReturn.First();

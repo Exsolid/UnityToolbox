@@ -16,9 +16,18 @@ namespace UnityToolbox.General.Management.Logging
 
         private const string identityHash = "b0dc9699-7181-472b-abd4-efd617e60dab";
 
+        private string _logPrefix;
         public ToolboxLogHandler()
         {
-            string filePath = Application.persistentDataPath + "/ClientLogs.txt";
+            if (Application.isBatchMode)
+            {
+                _logPrefix = "Server";
+            }
+            else
+            {
+                _logPrefix = "Client";
+            }
+            string filePath = Application.persistentDataPath + "/"+ _logPrefix+"Logs.txt";
             m_StreamWriter = new StreamWriter(filePath, true);
             m_StreamWriter.AutoFlush = true;
             CleanUpLogs();
@@ -102,8 +111,8 @@ namespace UnityToolbox.General.Management.Logging
 
         public void CleanUpLogs()
         {
-            string filePath = Application.persistentDataPath + "/ClientLogs.txt";
-            string filePathOld = Application.persistentDataPath + "/ClientLogs_prev.txt";
+            string filePath = Application.persistentDataPath + "/" + _logPrefix + "Logs.txt";
+            string filePathOld = Application.persistentDataPath + "/" + _logPrefix + "Logs_prev.txt";
             long length = new System.IO.FileInfo(filePath).Length;
             if (length != 0)
             {
