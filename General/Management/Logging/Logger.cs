@@ -21,7 +21,75 @@ namespace UnityToolbox.General.Management.Logging
             }
 
             string logMessage = "[" + level.ToString() + "] [" + callCOntext.Name + "] " + message.Trim();
-            Debug.Log(identityHash+BuildLogColor(level, callCOntext.Name, message));
+
+            if (!Debug.unityLogger.logHandler.GetType().Equals(typeof(ToolboxLogHandler)))
+            {
+                Debug.Log(BuildLogColor(level, callCOntext.Name, message));
+            }
+            else
+            {
+                Debug.Log(identityHash + BuildLogColor(level, callCOntext.Name, message));
+            }
+        }
+
+        public static void LogWar(Type callCOntext, string message)
+        {
+            LogLevel level = LogLevel.WAR;
+            if (!Debug.unityLogger.logHandler.GetType().Equals(typeof(ToolboxLogHandler)))
+            {
+                new ToolboxLogHandler();
+            }
+
+            string logMessage = "[" + level.ToString() + "] [" + callCOntext.Name + "] " + message.Trim();
+
+            if (!Debug.unityLogger.logHandler.GetType().Equals(typeof(ToolboxLogHandler)))
+            {
+                Debug.Log(BuildLogColor(level, callCOntext.Name, message));
+            }
+            else
+            {
+                Debug.Log(identityHash + BuildLogColor(level, callCOntext.Name, message));
+            }
+        }
+
+        public static void LogErr(Type callCOntext, string message)
+        {
+            LogLevel level = LogLevel.ERR;
+            if (!Debug.unityLogger.logHandler.GetType().Equals(typeof(ToolboxLogHandler)))
+            {
+                new ToolboxLogHandler();
+            }
+
+            string logMessage = "[" + level.ToString() + "] [" + callCOntext.Name + "] " + message.Trim();
+
+            if (!Debug.unityLogger.logHandler.GetType().Equals(typeof(ToolboxLogHandler)))
+            {
+                Debug.Log(BuildLogColor(level, callCOntext.Name, message));
+            }
+            else
+            {
+                Debug.Log(identityHash + BuildLogColor(level, callCOntext.Name, message));
+            }
+        }
+
+        public static void LogInf(Type callCOntext, string message)
+        {
+            LogLevel level = LogLevel.INF;
+            if (!Debug.unityLogger.logHandler.GetType().Equals(typeof(ToolboxLogHandler)))
+            {
+                new ToolboxLogHandler();
+            }
+
+            string logMessage = "[" + level.ToString() + "] [" + callCOntext.Name + "] " + message.Trim();
+
+            if (!Debug.unityLogger.logHandler.GetType().Equals(typeof(ToolboxLogHandler)))
+            {
+                Debug.Log(BuildLogColor(level, callCOntext.Name, message));
+            }
+            else
+            {
+                Debug.Log(identityHash + BuildLogColor(level, callCOntext.Name, message));
+            }
         }
 
         public static string BuildLog(LogLevel level, string callCOntext, string message)

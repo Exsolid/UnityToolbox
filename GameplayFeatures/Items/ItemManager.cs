@@ -52,6 +52,7 @@ namespace UnityToolbox.GameplayFeatures.Items
 
             ItemInstance itemInstance = instance.AddComponent<ItemInstance>();
             itemInstance.ItemName = itemDefinition.Name;
+            itemInstance.ItemQualifiedName = itemDefinition.GetQualifiedName();
             itemInstance.PrefabData = new ResourceData()
             {
                 ResourcePath = itemDefinition.PrefabPath,

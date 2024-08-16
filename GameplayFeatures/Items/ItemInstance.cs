@@ -24,6 +24,13 @@ namespace UnityToolbox.GameplayFeatures.Items
             set { _inventoryOfItem = value; }
         }
 
+        protected string _itemQualifiedName;
+        public string ItemQualifiedName
+        {
+            get { return _itemQualifiedName; }
+            set { _itemQualifiedName = value; }
+        }
+
         protected string _itemName;
         public string ItemName
         {

@@ -19,24 +19,26 @@ namespace UnityToolbox.General.Management.Logging
         private string _logPrefix;
         public ToolboxLogHandler()
         {
-            if (Application.isBatchMode)
+            try
             {
-                _logPrefix = "Server";
+                if (Application.isBatchMode)
+                {
+                    _logPrefix = "Server";
+                }
+                else
+                {
+                    _logPrefix = "Client";
+                }
+                string filePath = Application.persistentDataPath + "/" + _logPrefix + "Logs.txt";
+                m_StreamWriter = new StreamWriter(filePath, true);
+                m_StreamWriter.AutoFlush = true;
+                CleanUpLogs(); m_StreamWriter.WriteLine("[" + GetTimestamp(DateTime.Now) + "] " + Logger.BuildLog(LogLevel.INF, "ToolboxLogHandler", "--------------------------------------------LOGGING INIT--------------------------------------------"));
+                // Replace the default debug log handler
+                Debug.unityLogger.logHandler = this;
             }
-            else
+            catch (Exception ex)
             {
-                _logPrefix = "Client";
             }
-            string filePath = Application.persistentDataPath + "/"+ _logPrefix+"Logs.txt";
-            m_StreamWriter = new StreamWriter(filePath, true);
-            m_StreamWriter.AutoFlush = true;
-            CleanUpLogs();
-            if (!Application.isEditor)
-            {
-                m_StreamWriter.WriteLine("[" + GetTimestamp(DateTime.Now) + "] " + Logger.BuildLog(LogLevel.INF, "ToolboxLogHandler", "--------------------------------------------LOGGING INIT--------------------------------------------"));
-            }
-            // Replace the default debug log handler
-            Debug.unityLogger.logHandler = this;
         }
 
         public void LogFormat(LogType logType, UnityEngine.Object context, string format, params object[] args)
@@ -45,12 +47,8 @@ namespace UnityToolbox.General.Management.Logging
             string log = args[0].ToString();
             if (log.Contains(identityHash))
             {
-                //TODO save in game files
                 m_DefaultLogHandler.LogFormat(logType, context, log.Split(identityHash).LastOrDefault(), args);
-                if (!Application.isEditor)
-                {
-                    m_StreamWriter.WriteLine("[" + GetTimestamp(DateTime.Now) + "] " + Logger.BuildLogUncolor(log.Split(identityHash).LastOrDefault()));
-                }
+                m_StreamWriter.WriteLine("[" + GetTimestamp(DateTime.Now) + "] " + Logger.BuildLogUncolor(log.Split(identityHash).LastOrDefault()));
                 return;
             }
 
@@ -73,12 +71,8 @@ namespace UnityToolbox.General.Management.Logging
                     level = LogLevel.ERR;
                     break;
             }
-            if (!Application.isEditor)
-            {
-                //TODO edit log
-                m_StreamWriter.WriteLine("[" + GetTimestamp(DateTime.Now) + "] " + Logger.BuildLog(level, context == null ? "Unknown" : context.name, log));
-            }
-            //TODO save in game files
+
+            m_StreamWriter.WriteLine("[" + GetTimestamp(DateTime.Now) + "] " + Logger.BuildLog(level, context == null ? "Unknown" : context.name, log));
             m_DefaultLogHandler.LogFormat(logType, context, Logger.BuildLogColor(level, context == null ? "Unknown" : context.name, log), args);
         }
 

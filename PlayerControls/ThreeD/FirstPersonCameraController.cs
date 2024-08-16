@@ -125,7 +125,7 @@ namespace UnityToolbox.PlayerControls.ThreeD
         {
             _lockRotation = locked;
             Cursor.lockState = locked ? CursorLockMode.Confined : CursorLockMode.Locked;
-            Cursor.visible = !locked;
+            Cursor.visible = locked;
         }
 
         private void UpdateMouseSense(float newValue)

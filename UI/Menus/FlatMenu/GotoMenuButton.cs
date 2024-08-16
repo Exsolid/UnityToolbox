@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityToolbox.Audio;
+using UnityToolbox.General.Attributes;
 using UnityToolbox.General.Management;
 
 namespace UnityToolbox.UI.Menus.FlatMenu
@@ -10,8 +12,11 @@ namespace UnityToolbox.UI.Menus.FlatMenu
     /// </summary>
     public class GotoMenuButton : MonoBehaviour, IPointerClickHandler
     {
+        [SerializeField][DropDown(nameof(_menuTypes))] private int _menuType;
+        [SerializeField][DropDown(nameof(_menusOfType))] private int _menuOfType;
+        private List<string> _menuTypes;
+        private List<string> _menusOfType;
         [SerializeField] private AudioMixer _clickSounds;
-        [SerializeField] private Menu _menu;
         private bool _isEnabled;
 
         public void Awake()
@@ -31,8 +36,14 @@ namespace UnityToolbox.UI.Menus.FlatMenu
                     _clickSounds.PlayRandomSource();
                 }
 
-                ModuleManager.GetModule<MenuManager>().SetActiveMenu(_menu);
+                ModuleManager.GetModule<MenuManager>().SetActiveMenu(null);
+                ModuleManager.GetModule<MenuManager>().ToggleMenu(_menuType, _menuOfType);
             }
+        }
+        private void OnValidate()
+        {
+            _menuTypes = MenuManager.MenuTypeNamesForEditor;
+            _menusOfType = MenuManager.GetAllMenusOfType(_menuType);
         }
     } 
 }
