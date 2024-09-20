@@ -38,5 +38,8 @@ namespace UnityToolbox.PlayerControls.UI
                 ModuleManager.GetModule<DialogManager>().StartDialog(_referenceID);
             }
         }
+        public override void OnNull()
+        {
+        }
     }
 }

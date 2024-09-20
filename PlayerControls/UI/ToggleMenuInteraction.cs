@@ -37,5 +37,8 @@ namespace UnityToolbox.PlayerControls.UI
                 ModuleManager.GetModule<MenuManager>().ToggleMenu(info.MenuType, info.MenuOfType);
             }
         }
+        public override void OnNull()
+        {
+        }
     }
 }

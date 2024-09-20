@@ -24,7 +24,7 @@ namespace UnityToolbox.PlayerControls
         /// <summary>
         /// Whether the tooltip module should be used to display text.
         /// </summary>
-        protected bool _tooltipEnabled;
+        [SerializeField] protected bool _tooltipEnabled = true;
 
         private RaycastHit _raycastHit;
         private RaycastHit2D _raycastHit2D;
@@ -33,9 +33,10 @@ namespace UnityToolbox.PlayerControls
 
         private bool _inputLocked;
 
+        private TooltipManager _tooltipManager;
+        private SettingsManager _settingsManager;
         public void Start()
         {
-            _tooltipEnabled = true;
             ModuleManager.GetModule<UIEventManager>().OnBindingKey += (isSetting) =>
             {
                 _isBinding = isSetting;
@@ -45,6 +46,8 @@ namespace UnityToolbox.PlayerControls
             {
                 _inputLocked = isLocked;
             };
+            _tooltipManager = ModuleManager.GetModule<TooltipManager>();
+            _settingsManager = ModuleManager.GetModule<SettingsManager>();
         }
 
         public void Update()
@@ -60,13 +63,13 @@ namespace UnityToolbox.PlayerControls
 
             if (_raycastHit2D.collider != null || _raycastHit.collider != null)
             {
-                if (_tooltipEnabled && ModuleManager.ModuleRegistered<TooltipManager>())
+                if (_tooltipEnabled && _tooltipManager != null)
                 {
-                    ModuleManager.GetModule<TooltipManager>().UpdateTooltip(ModuleManager.GetModule<SettingsManager>().CurrentValueOfControl("", _interactActionName).Split("/").Last().ToUpper(), _appendedTooltip == null || _appendedTooltip.Trim().Equals("") ? _tooltip : _tooltip + " " +_appendedTooltip, this);
+                    _tooltipManager.UpdateTooltip(_settingsManager.CurrentValueOfControl("", _interactActionName).Split("/").Last().ToUpper(), _appendedTooltip == null || _appendedTooltip.Trim().Equals("") ? _tooltip : _tooltip + " " +_appendedTooltip, this);
                 }
-                else if (ModuleManager.ModuleRegistered<TooltipManager>())
+                else if (_tooltipManager != null)
                 {
-                    ModuleManager.GetModule<TooltipManager>().UpdateTooltip("", "", this);
+                    _tooltipManager.UpdateTooltip("", "", this);
                 }
 
                 if (_input != null && _input.actions[_interactActionName].triggered && !_isBinding && !_inputLocked)
@@ -89,11 +92,21 @@ namespace UnityToolbox.PlayerControls
                     OnHit(_raycastHit2D);
                 }
             }
-            else if(ModuleManager.ModuleRegistered<TooltipManager>())
+            else if(_tooltipManager != null)
             {
-                ModuleManager.GetModule<TooltipManager>().UpdateTooltip("", "", this);
+                _tooltipManager.UpdateTooltip("", "", this);
+                OnNull();
+            }
+            else
+            {
+                OnNull();
             }
         }
+
+        /// <summary>
+        /// Execute whatever should happen when the raycast has found nothing.
+        /// </summary>
+        public abstract void OnNull();
 
         /// <summary>
         /// Execute whatever should happen when the raycast found a valid object to interact with.

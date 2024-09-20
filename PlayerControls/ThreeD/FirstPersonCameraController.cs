@@ -27,6 +27,7 @@ namespace UnityToolbox.PlayerControls.ThreeD
         [SerializeField] private Camera _camera;
 
         private Vector3 _rotateToPosition;
+        private bool _toRotate;
 
         [SerializeField] private bool _lockRotation;
 
@@ -67,15 +68,16 @@ namespace UnityToolbox.PlayerControls.ThreeD
         // Update is called once per frame
         void FixedUpdate()
         {
-            if (!_lockRotation)
+            if (!_lockRotation && !_toRotate)
             {
                 TurnView();
             }
-            else if (!_rotateToPosition.Equals(Vector3.zero))
+            else if (_toRotate)
             {
-                _camera.transform.LookAt(_rotateToPosition);
-                _playerToRotateInstead.transform.rotation = Quaternion.Euler(_playerToRotateInstead.transform.rotation.eulerAngles.x, _camera.transform.rotation.eulerAngles.y, _playerToRotateInstead.transform.rotation.eulerAngles.z);
-                _rotateToPosition = Vector3.zero;
+                _toRotate = false;
+                _rotation.x = _rotateToPosition.y;
+                _rotation.y = _rotateToPosition.x;
+                TurnView();
             }
         }
 
@@ -112,12 +114,9 @@ namespace UnityToolbox.PlayerControls.ThreeD
             }
         }
 
-        /// <summary>
-        /// Rotates the camera to look at a given position.
-        /// </summary>
-        /// <param name="position">The position to look at.</param>
-        public void RotateTo(Vector3 position)
+        public void RotateToEuler(Vector3 position)
         {
+            _toRotate = true;
             _rotateToPosition = position;
         }
 
