@@ -18,6 +18,8 @@ namespace UnityToolbox.PlayerControls.ThreeD
         [SerializeField] private bool _firstPerson;
         private PlayerEventManager _eventManager;
 
+        [SerializeField] [Tooltip("Adjusts the speed by the look direction of the camera.")] private bool _useCameraInfluence;
+
         void Start()
         {
             _rb = GetComponent<Rigidbody>();
@@ -101,8 +103,16 @@ namespace UnityToolbox.PlayerControls.ThreeD
                 }
                 else if (!_isMovementLocked)
                 {
-                    _rb.AddForce(Vector3.Scale(new Vector3(direction.z * _speed, direction.y * _speed, direction.z * _speed), new Vector3(Camera.main.transform.forward.x, Camera.main.transform.forward.y, Camera.main.transform.forward.z).normalized));
-                    _rb.AddForce(Vector3.Scale(new Vector3(direction.x * _speed, direction.y * _speed, direction.x * _speed), new Vector3(Camera.main.transform.right.x, Camera.main.transform.right.y, Camera.main.transform.right.z).normalized));
+                    if (_useCameraInfluence)
+                    {
+                        _rb.AddForce(Vector3.Scale(new Vector3(direction.z * _speed, direction.y * _speed, direction.z * _speed), new Vector3(Camera.main.transform.forward.x, Camera.main.transform.forward.y, Camera.main.transform.forward.z).normalized));
+                        _rb.AddForce(Vector3.Scale(new Vector3(direction.x * _speed, direction.y * _speed, direction.x * _speed), new Vector3(Camera.main.transform.right.x, Camera.main.transform.right.y, Camera.main.transform.right.z).normalized));
+                    }
+                    else
+                    {
+                        _rb.AddForce(new Vector3(direction.x * _speed, 0, direction.z * _speed));
+                    }
+                    
                 }
 
                 if (direction.x != 0 || direction.z != 0)
