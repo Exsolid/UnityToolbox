@@ -23,12 +23,25 @@ namespace UnityToolbox.UI.Menus.FlatMenu.OnHover
             {
                 _toChange = GetComponent<Image>();
             }
+            try
+            {
+                GetComponentInParent<Menu>().OnActiveChanged += (isActive) =>
+                {
+                    _isEnabled = isActive;
+                };
+            }
+            catch
+            {
 
+            }
+            _original = _toChange.color;
+        }
+        public void Init()
+        {
             GetComponentInParent<Menu>().OnActiveChanged += (isActive) =>
             {
                 _isEnabled = isActive;
             };
-            _original = _toChange.color;
         }
 
         public void OnPointerEnter(PointerEventData data)

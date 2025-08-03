@@ -23,6 +23,7 @@ namespace UnityToolbox.General.Preferences
         public static string MUSIC_VOLUME = "MUSIC_VOLUME";
         public static string AMBIENCE_VOLUME = "AMBIENCE_VOLUME";
         public static string LANGUAGE = "LANGUAGE";
+        public static string PLAYER_NAME = "PLAYER_NAME";
 
         public static string GAMEPLAY_SAVEGAME = "GAMEPLAY_SAVEGAME";
         public static string GAMEPLAY_STATE = "GAMEPLAY_STATE";

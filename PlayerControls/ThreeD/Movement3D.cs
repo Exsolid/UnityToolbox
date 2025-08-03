@@ -29,6 +29,7 @@ namespace UnityToolbox.PlayerControls.ThreeD
         // Update is called once per frame
         void FixedUpdate()
         {
+            _isToggledMoving = _input.actions[_toggleSpeedActionName].IsPressed();
             if (!_isMovementLocked)
             {
                 Vector2 vector2 = _input.actions[_movementActionName].ReadValue<Vector2>();
@@ -94,23 +95,24 @@ namespace UnityToolbox.PlayerControls.ThreeD
                 direction = GetSlopeDirection(direction);
             }
 
+            float speed = _isToggledMoving ? _toggledSpeed : _speed;
             if (!_firstPerson)
             {
                 if (_climbing && !IsClimbingLocked)
                 {
-                    _rb.AddForce(Vector3.Scale(new Vector3(0, direction.z * -_speed, 0), new Vector3(0, Camera.main.transform.forward.y, 0)));
-                    _rb.AddForce(Vector3.Scale(new Vector3(direction.x * _speed, 0, direction.x * _speed), new Vector3(Camera.main.transform.right.x, 0, Camera.main.transform.right.z).normalized));
+                    _rb.AddForce(Vector3.Scale(new Vector3(0, direction.z * -speed, 0), new Vector3(0, Camera.main.transform.forward.y, 0)));
+                    _rb.AddForce(Vector3.Scale(new Vector3(direction.x * speed, 0, direction.x * speed), new Vector3(Camera.main.transform.right.x, 0, Camera.main.transform.right.z).normalized));
                 }
                 else if (!_isMovementLocked)
                 {
                     if (_useCameraInfluence)
                     {
-                        _rb.AddForce(Vector3.Scale(new Vector3(direction.z * _speed, direction.y * _speed, direction.z * _speed), new Vector3(Camera.main.transform.forward.x, Camera.main.transform.forward.y, Camera.main.transform.forward.z).normalized));
-                        _rb.AddForce(Vector3.Scale(new Vector3(direction.x * _speed, direction.y * _speed, direction.x * _speed), new Vector3(Camera.main.transform.right.x, Camera.main.transform.right.y, Camera.main.transform.right.z).normalized));
+                        _rb.AddForce(Vector3.Scale(new Vector3(direction.z * speed, direction.y * speed, direction.z * speed), new Vector3(Camera.main.transform.forward.x, Camera.main.transform.forward.y, Camera.main.transform.forward.z).normalized));
+                        _rb.AddForce(Vector3.Scale(new Vector3(direction.x * speed, direction.y * speed, direction.x * speed), new Vector3(Camera.main.transform.right.x, Camera.main.transform.right.y, Camera.main.transform.right.z).normalized));
                     }
                     else
                     {
-                        _rb.AddForce(new Vector3(direction.x * _speed, 0, direction.z * _speed));
+                        _rb.AddForce(new Vector3(direction.x * speed, 0, direction.z * speed));
                     }
                     
                 }
@@ -128,13 +130,13 @@ namespace UnityToolbox.PlayerControls.ThreeD
             {
                 if (_climbing && !IsClimbingLocked)
                 {
-                    _rb.AddForce(Vector3.Scale(new Vector3(0, direction.z * -_speed, 0), new Vector3(0, transform.forward.y, 0)));
-                    _rb.AddForce(Vector3.Scale(new Vector3(direction.x * _speed, 0, direction.x * _speed), new Vector3(transform.right.x, 0, transform.right.z).normalized));
+                    _rb.AddForce(Vector3.Scale(new Vector3(0, direction.z * -speed, 0), new Vector3(0, transform.forward.y, 0)));
+                    _rb.AddForce(Vector3.Scale(new Vector3(direction.x * speed, 0, direction.x * speed), new Vector3(transform.right.x, 0, transform.right.z).normalized));
                 }
                 else if (!_isMovementLocked)
                 {
-                    _rb.AddForce(Vector3.Scale(new Vector3(direction.z * _speed, direction.y * _speed, direction.z * _speed), new Vector3(transform.forward.x, transform.forward.y, transform.forward.z).normalized));
-                    _rb.AddForce(Vector3.Scale(new Vector3(direction.x * _speed, direction.y * _speed, direction.x * _speed), new Vector3(transform.right.x, transform.right.y, transform.right.z).normalized));
+                    _rb.AddForce(Vector3.Scale(new Vector3(direction.z * speed, direction.y * speed, direction.z * speed), new Vector3(transform.forward.x, transform.forward.y, transform.forward.z).normalized));
+                    _rb.AddForce(Vector3.Scale(new Vector3(direction.x * speed, direction.y * speed, direction.x * speed), new Vector3(transform.right.x, transform.right.y, transform.right.z).normalized));
                 }
             }
         }

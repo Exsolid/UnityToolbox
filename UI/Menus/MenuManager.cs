@@ -138,7 +138,7 @@ namespace UnityToolbox.UI.Menus
                 SetActiveMenu(null);
             }
 
-            ModuleManager.GetModule<UIEventManager>().TogglePaused(_currentActivMenuType == _overlayMenuType, type);
+            ModuleManager.GetModule<UIEventManager>().TogglePaused(_currentActivMenuType != _overlayMenuType, type);
             return true;
         }
 
